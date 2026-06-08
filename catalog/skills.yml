@@ -15,8 +15,55 @@ external_sources:
     mirrored_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
     local_package_path: "skills/oss-investment-scorecard"
     license_note: "Upstream README states MIT; GitHub licenseInfo was null because no standalone LICENSE file was detected."
+  greensock_gsap_skills:
+    repo: "https://github.com/greensock/gsap-skills"
+    mirrored_commit: "aed9cfd3277740755f6bfc1155c7aa645403b760"
+    local_package_path: "skills/greensock-gsap-skills"
+    license_note: "MIT license copied from upstream LICENSE."
+    migrated_scope:
+      - "upstream skills/ directory"
+      - "upstream README.md"
+      - "upstream LICENSE"
+    excluded_scope:
+      - "examples/"
+      - "plugin packaging directories"
+      - "assets/"
+  awesome_design_skills:
+    repo: "https://github.com/bergside/awesome-design-skills"
+    mirrored_commit: "53c9fe6d8be161e48bcdaa0130d9bd542b1ff755"
+    local_package_path: "skills/awesome-design-skills"
+    license_note: "MIT license copied from upstream LICENSE."
+    migrated_scope:
+      - "skills/dashboard"
+      - "skills/shadcn"
+      - "skills/bento"
+      - "skills/premium"
+      - "skills/minimal"
+      - "skills/index.json"
+      - "upstream README.md"
+      - "upstream LICENSE"
+    excluded_scope:
+      - "all other style directories until separately validated"
+  typeui_fundamentals:
+    repo: "https://github.com/bergside/typeui"
+    mirrored_commit: "d4f7713589aa8d4e1486d1d2054eda64929d2be4"
+    local_package_path: "skills/typeui-fundamentals"
+    license_note: "MIT text copied from upstream LICENSE.md."
+    migrated_scope:
+      - "skills/fundamentals/SKILL.md"
+      - "skills/fundamentals/accessibility.md"
+      - "skills/fundamentals/typography-principles.md"
+      - "skills/fundamentals/ui-principles.md"
+      - "skills/fundamentals/ux-principles.md"
+    excluded_scope:
+      - "CLI"
+      - "plugins/"
+      - "MCP server"
+      - "registry client implementation"
   frontend_design_candidate_sources:
     research_note: "docs/frontend-design-sources.md"
+    prompt_index: "docs/frontend-prompt-index.md"
+    call_chain: "docs/frontend-ui-call-chain.md"
     reviewed_at: "2026-06-08"
     minimum_stars_for_main_list: 1000
     candidates:
@@ -153,3 +200,75 @@ skills:
       - "这个产品是好案例、反面教材，还是待观察"
     copy_policy: "vendored_internal_skill_package"
     notes: "从 product-hunter 的 .claude/skills/ai-product-analyzer 迁移；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。"
+  - id: greensock-gsap-skills
+    title: "GSAP Skills"
+    section: frontend-design
+    status: vendored
+    source_type: external_skill_collection
+    package_path: "skills/greensock-gsap-skills/skills"
+    package_support:
+      - "skills/greensock-gsap-skills/skills/gsap-core/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-frameworks/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-performance/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-plugins/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-react/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-scrolltrigger/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-timeline/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/gsap-utils/SKILL.md"
+      - "skills/greensock-gsap-skills/skills/llms.txt"
+    upstream_source:
+      repo: "https://github.com/greensock/gsap-skills"
+      commit: "aed9cfd3277740755f6bfc1155c7aa645403b760"
+    trigger_examples:
+      - "这个前端流程需要 GSAP 动效"
+      - "给这个 dashboard 增加可解释的状态转场"
+      - "用 GSAP React 做产品流程演示"
+    copy_policy: "vendored_external_skill_collection"
+    notes: "只迁移官方 skills 目录；examples、plugin 包装和 assets 暂不进入正式库。"
+  - id: awesome-design-skills-selected-styles
+    title: "Awesome Design Skills Selected Styles"
+    section: frontend-design
+    status: vendored_partial
+    source_type: external_style_skill_collection
+    package_path: "skills/awesome-design-skills/skills"
+    package_support:
+      - "skills/awesome-design-skills/skills/dashboard/SKILL.md"
+      - "skills/awesome-design-skills/skills/dashboard/DESIGN.md"
+      - "skills/awesome-design-skills/skills/shadcn/SKILL.md"
+      - "skills/awesome-design-skills/skills/shadcn/DESIGN.md"
+      - "skills/awesome-design-skills/skills/bento/SKILL.md"
+      - "skills/awesome-design-skills/skills/bento/DESIGN.md"
+      - "skills/awesome-design-skills/skills/premium/SKILL.md"
+      - "skills/awesome-design-skills/skills/premium/DESIGN.md"
+      - "skills/awesome-design-skills/skills/minimal/SKILL.md"
+      - "skills/awesome-design-skills/skills/minimal/DESIGN.md"
+      - "skills/awesome-design-skills/skills/index.json"
+    upstream_source:
+      repo: "https://github.com/bergside/awesome-design-skills"
+      commit: "53c9fe6d8be161e48bcdaa0130d9bd542b1ff755"
+    trigger_examples:
+      - "先判断这个页面应该用什么视觉风格"
+      - "这个 PRD-to-product console 用 dashboard 还是 shadcn 风格"
+      - "给 landing page 选 premium 或 bento 方向"
+    copy_policy: "vendored_partial_external_style_skills"
+    notes: "只迁移本地实验验证过的 5 个风格目录；其他风格目录继续留在候选源中。"
+  - id: typeui-fundamentals
+    title: "TypeUI Fundamentals"
+    section: frontend-design
+    status: vendored_partial
+    source_type: external_ui_ux_principles_skill
+    package_path: "skills/typeui-fundamentals/SKILL.md"
+    package_support:
+      - "skills/typeui-fundamentals/accessibility.md"
+      - "skills/typeui-fundamentals/typography-principles.md"
+      - "skills/typeui-fundamentals/ui-principles.md"
+      - "skills/typeui-fundamentals/ux-principles.md"
+    upstream_source:
+      repo: "https://github.com/bergside/typeui"
+      commit: "d4f7713589aa8d4e1486d1d2054eda64929d2be4"
+    trigger_examples:
+      - "检查这个 UI 是否符合基础 UX 原则"
+      - "评估这个组件库的可访问性和排版"
+      - "给前端设计做基础原则审查"
+    copy_policy: "vendored_partial_external_skill"
+    notes: "只迁移 TypeUI skills/fundamentals；CLI、插件、MCP、registry 实现只做 reference，不进入正式技能包。该包是原则层，使用前应先有项目设计系统或 DESIGN.md 上下文。"

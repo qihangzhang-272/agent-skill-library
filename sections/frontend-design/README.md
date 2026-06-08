@@ -13,12 +13,26 @@
 已开板块：
 
 - 候选来源清单：`docs/frontend-design-sources.md`
+- 调用链说明：`docs/frontend-ui-call-chain.md`
+- 网页 prompt 索引：`docs/frontend-prompt-index.md`
 
-待收录方向：
+已收录：
 
-- GSAP 官方 AI skills
-- 高星前端设计原则 skill
-- UI/UX 审查 skill
-- 风格提示词 reference
-- 设计系统 / DESIGN.md 模板
-- shadcn / Tailwind / lucide 生成质量约束
+- `skills/greensock-gsap-skills/`：保守迁移 `greensock/gsap-skills` 的官方 `skills/` 目录，用于动效层。
+- `skills/awesome-design-skills/`：只迁移 `dashboard`、`shadcn`、`bento`、`premium`、`minimal` 五个风格 skill，用于设计策略层。
+- `skills/typeui-fundamentals/`：只迁移 TypeUI `skills/fundamentals`，用于 UI/UX 基础原则层；它需要搭配项目设计系统或 `DESIGN.md` 使用。
+
+继续作为引用，不直接复制正文：
+
+- `https://21st.dev`
+- `https://www.designprompts.dev/`
+- `shadcn-ui/ui`
+- `tailwindlabs/tailwindcss`
+- `magicuidesign/magicui`
+- `motiondivision/motion`
+
+待评估方向：
+
+- shadcn / Tailwind / lucide 生成质量约束是否需要单独沉淀为 reference。
+- Motion 与 GSAP 的分工边界。
+- Magic UI 是否只用于 landing polish，还是进入组件复用 registry。

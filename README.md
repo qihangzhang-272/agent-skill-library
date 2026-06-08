@@ -26,10 +26,15 @@
 | --- | --- | --- | --- |
 | `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
 | `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已从 `product-hunter/.claude/skills/` 迁移为自包含技能包 |
+| `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
+| `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
+| `typeui-fundamentals` | frontend-design | `skills/typeui-fundamentals/` | 已迁移 TypeUI 基础 UI/UX 原则 skill |
 
 ## 候选来源
 
 - 前端设计与 UI/UX 候选来源见 [docs/frontend-design-sources.md](docs/frontend-design-sources.md)。
+- 前端设计调用链见 [docs/frontend-ui-call-chain.md](docs/frontend-ui-call-chain.md)。
+- 网页 prompt 来源只做索引，见 [docs/frontend-prompt-index.md](docs/frontend-prompt-index.md)。
 
 ## 维护规则
 
@@ -46,3 +51,5 @@
 `product-hunter/03_Resources/Frameworks/AI产品分析框架.md` 仍作为本地产品研究框架源，不再和这个外部 VC 评分技能混写。
 
 `ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，迁移后不依赖 `product-hunter` 的 Obsidian 路径或 wikilink。
+
+`frontend-design` 板块当前采用“保守迁移 + 引用索引”策略：GSAP 官方 skills、Awesome Design Skills 的已验证风格目录、TypeUI fundamentals 可以进入 `skills/`；21st.dev、designprompts.dev 等网页 prompt 只记录入口，不复制 prompt 正文。

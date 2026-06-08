@@ -6,13 +6,14 @@
 
 | 目录 | 用途 | 当前文件 |
 | --- | --- | --- |
-| `governance/` | 仓库级原则、架构边界、引用策略 | `README.md`、`architecture.md`、`reference-policy.md` |
+| `governance/` | 仓库级原则、架构边界、引用策略、索引规范 | `README.md`、`architecture.md`、`project-purpose.md`、`reference-policy.md`、`library-constitution.md`、`catalog-schema.md` |
 | `workflows/` | 可重复执行的收录、审查、Linear 协作流程和跨板块调用链 | `README.md`、`linear-workflow.md`、`investment-product-to-research-report.md`、`prd-to-frontend.md` |
 | `sections/` | 各业务/能力板块自己的来源清单、调用链、prompt 索引 | `README.md`、`frontend-design/`、`writing` 入口 |
 
 ## 放置规则
 
 - 仓库级原则放 `docs/governance/`，例如“框架不复制进技能”“何时允许 vendored 外部包”。
+- 技能库宪法、索引 schema 和 Claude Code plugin 分发约束放 `docs/governance/`。
 - 操作流程放 `docs/workflows/`，例如 Linear 管理、技能收录、审查和同步流程。
 - 某个板块自己的资料放 `docs/sections/<section>/`，例如前端设计的候选来源、网页 prompt 索引和 UI 调用链。
 - 临时实验、网页运行结果和人工评审记录不放正式 `docs/`，默认放 `local-experiments/`。
@@ -22,6 +23,8 @@
 - [governance/architecture.md](governance/architecture.md)：技能库架构和分层。
 - [governance/project-purpose.md](governance/project-purpose.md)：仓库目的、边界和运行库定位。
 - [governance/reference-policy.md](governance/reference-policy.md)：引用式技能库规则和外部包迁移例外。
+- [governance/library-constitution.md](governance/library-constitution.md)：长期约束、收录问题、复制边界和插件分发规则。
+- [governance/catalog-schema.md](governance/catalog-schema.md)：`catalog/skills.yml` 与 `catalog/claude-plugins.json` 的记录方式。
 - [workflows/linear-workflow.md](workflows/linear-workflow.md)：Linear 项目和 Issue 工作流。
 - [workflows/investment-product-to-research-report.md](workflows/investment-product-to-research-report.md)：投资 / 产品问题到研报的调用链。
 - [workflows/prd-to-frontend.md](workflows/prd-to-frontend.md)：PRD 到前端实现的调用链。

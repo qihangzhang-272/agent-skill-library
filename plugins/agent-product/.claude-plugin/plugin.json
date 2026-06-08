@@ -1,0 +1,17 @@
+{
+  "name": "agent-product",
+  "displayName": "Agent Product",
+  "version": "0.1.0",
+  "description": "Product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
+  "author": {
+    "name": "Private Agent Skill Library"
+  },
+  "repository": "https://github.com/qihangzhang-272/agent-skill-library.git",
+  "keywords": [
+    "product",
+    "ai-product",
+    "case-analysis",
+    "business-model"
+  ],
+  "skills": "./skills"
+}

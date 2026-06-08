@@ -1,0 +1,36 @@
+# GitHub Labels Configuration
+# Apply via: gh label create --force from this file
+# Or manually create in Settings → Labels
+
+labels:
+  - name: evaluation
+    color: "0075ca"
+    description: Community-submitted project evaluation
+
+  - name: framework-change
+    color: "e4e669"
+    description: Proposed change to scoring weights, thresholds or rules
+
+  - name: case-study
+    color: "d73a4a"
+    description: New or updated case study in /cases/
+
+  - name: needs-review
+    color: "cfd3d7"
+    description: Awaiting Lucy's review
+
+  - name: accepted
+    color: "0e8a16"
+    description: Accepted — will be merged / added to README table
+
+  - name: needs-evidence
+    color: "e99695"
+    description: Missing required data sources or citations
+
+  - name: conflict-of-interest
+    color: "f9d0c4"
+    description: Submitter has disclosed a conflict of interest
+
+  - name: discussion
+    color: "d876e3"
+    description: Open for community discussion before decision

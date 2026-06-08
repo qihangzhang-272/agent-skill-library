@@ -2,6 +2,13 @@ version: 1
 library: agent-skill-library
 principle: "catalog records reusable agent capabilities, source indexes, call chains, and project-init selection guidance"
 
+distribution:
+  claude_code_marketplace_manifest: ".claude-plugin/marketplace.json"
+  claude_code_plugin_index: "catalog/claude-plugins.json"
+  claude_code_plugin_root: "plugins/"
+  build_script: "scripts/build-claude-plugins.ps1"
+  source_of_truth: "skills/ and catalog/; plugins/ is generated distribution output"
+
 external_sources:
   chinese_natural_voice_revision:
     original_archive: "chinese-natural-voice-revision-universal.zip"

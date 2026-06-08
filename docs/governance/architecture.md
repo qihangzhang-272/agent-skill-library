@@ -25,6 +25,8 @@
 | `sections/` | 分板块入口、优先级、已收录能力、待补方向 | 具体技能包正文 |
 | `docs/` | 治理规则、收录流程、组合搭配、调用链 | 一次性实验页面或临时运行结果 |
 | `skills/` | 可复用技能包或保守迁移的外部 skill 子集 | 未验证来源、网页 prompt 原文、UI 库源码 |
+| `plugins/` | Claude Code 可安装插件分发结果 | 源技能正文的手工维护副本 |
+| `.claude-plugin/` | Claude Code marketplace manifest | 技能正文、agents、hooks、commands |
 | `orchestrations/` | 跨技能工作流定义、节点顺序、输入输出、验收标准 | 具体项目产物、技能正文 |
 | `apps/` | 本地辅助界面，例如技能可视化编排台 | 业务项目源码、自动 runner |
 | `local-experiments/` | 本地实验、人工评审、一次性 demo | 正式技能库内容 |
@@ -38,6 +40,7 @@
 - `docs/sections/frontend-design/ui-call-chain.md` 保存从模糊需求到前端实现的调用链。
 - `docs/sections/frontend-design/prompt-index.md` 只保存网页 prompt 入口，不复制正文。
 - `orchestrations/` 保存跨技能链路，`apps/skill-orchestrator/` 将链路可视化并生成整条链 handoff prompt。
+- `catalog/claude-plugins.json` 决定哪些源技能进入 Claude Code 插件，`plugins/` 和 `.claude-plugin/` 是分发结果。
 - `local-experiments/` 保存本地网页实验，不进入正式库。
 
 这种分层保证 agent 在项目初始化时能先判断要用哪些能力，再选择是否拉取、配置或调用对应 skill。

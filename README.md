@@ -22,6 +22,27 @@
 | `sections/development-paradigms/` | AI Agent Native 开发范式、TDD、review、调试 |
 | `sections/operations/` | 自动化、工作流、知识库同步、投稿与治理 |
 
+## Claude Code 插件市场
+
+本仓库现在同时提供 Claude Code plugin marketplace 分发层：
+
+- Marketplace manifest：`.claude-plugin/marketplace.json`
+- 插件分发目录：`plugins/`
+- 插件分发索引：`catalog/claude-plugins.json`
+- 生成脚本：`scripts/build-claude-plugins.ps1`
+
+`plugins/` 不是源内容目录。源技能仍维护在 `skills/`，分发映射维护在 `catalog/claude-plugins.json`。每次改变技能进入哪个插件后，运行：
+
+```powershell
+.\scripts\build-claude-plugins.ps1
+```
+
+然后用 Claude Code 验证：
+
+```powershell
+claude plugin validate .
+```
+
 ## 当前种子技能
 
 | 技能 | 板块 | 来源 | 状态 |
@@ -52,6 +73,8 @@
 
 - 文档总目录见 [docs/README.md](docs/README.md)。
 - 仓库治理和引用原则见 [docs/governance/](docs/governance/)。
+- 技能库宪法见 [docs/governance/library-constitution.md](docs/governance/library-constitution.md)。
+- 索引和记录方式见 [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md)。
 - 收录、协作、Linear 和跨板块调用链见 [docs/workflows/](docs/workflows/)。
 - 各板块的来源、调用链和索引见 [docs/sections/](docs/sections/)。
 

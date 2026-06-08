@@ -1,0 +1,18 @@
+{
+  "name": "agent-frontend-design",
+  "displayName": "Agent Frontend Design",
+  "version": "0.1.0",
+  "description": "Frontend design, UI/UX fundamentals, visual style skills, and GSAP motion skills for PRD-to-frontend workflows.",
+  "author": {
+    "name": "Private Agent Skill Library"
+  },
+  "repository": "https://github.com/qihangzhang-272/agent-skill-library.git",
+  "keywords": [
+    "frontend",
+    "ui",
+    "ux",
+    "design",
+    "gsap"
+  ],
+  "skills": "./skills"
+}

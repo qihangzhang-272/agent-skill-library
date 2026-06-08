@@ -1,0 +1,17 @@
+{
+  "name": "agent-writing",
+  "displayName": "Agent Writing",
+  "version": "0.1.0",
+  "description": "Writing and revision skills for Chinese natural voice, tone preservation, and manuscript polish.",
+  "author": {
+    "name": "Private Agent Skill Library"
+  },
+  "repository": "https://github.com/qihangzhang-272/agent-skill-library.git",
+  "keywords": [
+    "writing",
+    "chinese",
+    "voice",
+    "revision"
+  ],
+  "skills": "./skills"
+}

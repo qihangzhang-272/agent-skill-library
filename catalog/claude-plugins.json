@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "marketplace": {
+    "name": "agent-skill-library",
+    "displayName": "Agent Skill Library",
+    "description": "Private Claude Code marketplace for reusable agent skills and workflow capabilities.",
+    "owner": {
+      "name": "Private Agent Skill Library"
+    }
+  },
+  "plugins": [
+    {
+      "name": "agent-product",
+      "displayName": "Agent Product",
+      "description": "Product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
+      "version": "0.1.0",
+      "section": "product",
+      "keywords": [
+        "product",
+        "ai-product",
+        "case-analysis",
+        "business-model"
+      ],
+      "distributionStatus": "active",
+      "releasePolicy": "manual_semver",
+      "skills": [
+        {
+          "id": "ai-product-analyzer",
+          "sourcePath": "skills/ai-product-analyzer",
+          "targetName": "ai-product-analyzer"
+        }
+      ]
+    },
+    {
+      "name": "agent-writing",
+      "displayName": "Agent Writing",
+      "description": "Writing and revision skills for Chinese natural voice, tone preservation, and manuscript polish.",
+      "version": "0.1.0",
+      "section": "writing",
+      "keywords": [
+        "writing",
+        "chinese",
+        "voice",
+        "revision"
+      ],
+      "distributionStatus": "active",
+      "releasePolicy": "manual_semver",
+      "skills": [
+        {
+          "id": "chinese-natural-voice-revision",
+          "sourcePath": "skills/chinese-natural-voice-revision",
+          "targetName": "chinese-natural-voice-revision"
+        }
+      ]
+    },
+    {
+      "name": "agent-frontend-design",
+      "displayName": "Agent Frontend Design",
+      "description": "Frontend design, UI/UX fundamentals, visual style skills, and GSAP motion skills for PRD-to-frontend workflows.",
+      "version": "0.1.0",
+      "section": "frontend-design",
+      "keywords": [
+        "frontend",
+        "ui",
+        "ux",
+        "design",
+        "gsap"
+      ],
+      "distributionStatus": "active",
+      "releasePolicy": "manual_semver",
+      "skills": [
+        {
+          "id": "frontend-design",
+          "sourcePath": "skills/frontend-design",
+          "targetName": "frontend-design"
+        },
+        {
+          "id": "typeui-fundamentals",
+          "sourcePath": "skills/typeui-fundamentals",
+          "targetName": "typeui-fundamentals"
+        },
+        {
+          "id": "dashboard",
+          "sourcePath": "skills/awesome-design-skills/skills/dashboard",
+          "targetName": "dashboard"
+        },
+        {
+          "id": "shadcn",
+          "sourcePath": "skills/awesome-design-skills/skills/shadcn",
+          "targetName": "shadcn"
+        },
+        {
+          "id": "bento",
+          "sourcePath": "skills/awesome-design-skills/skills/bento",
+          "targetName": "bento"
+        },
+        {
+          "id": "premium",
+          "sourcePath": "skills/awesome-design-skills/skills/premium",
+          "targetName": "premium"
+        },
+        {
+          "id": "minimal",
+          "sourcePath": "skills/awesome-design-skills/skills/minimal",
+          "targetName": "minimal"
+        },
+        {
+          "id": "gsap-core",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-core",
+          "targetName": "gsap-core"
+        },
+        {
+          "id": "gsap-frameworks",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-frameworks",
+          "targetName": "gsap-frameworks"
+        },
+        {
+          "id": "gsap-performance",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-performance",
+          "targetName": "gsap-performance"
+        },
+        {
+          "id": "gsap-plugins",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-plugins",
+          "targetName": "gsap-plugins"
+        },
+        {
+          "id": "gsap-react",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-react",
+          "targetName": "gsap-react"
+        },
+        {
+          "id": "gsap-scrolltrigger",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-scrolltrigger",
+          "targetName": "gsap-scrolltrigger"
+        },
+        {
+          "id": "gsap-timeline",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-timeline",
+          "targetName": "gsap-timeline"
+        },
+        {
+          "id": "gsap-utils",
+          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-utils",
+          "targetName": "gsap-utils"
+        }
+      ]
+    },
+    {
+      "name": "agent-investment",
+      "displayName": "Agent Investment",
+      "description": "Investment evaluation skills for OSS company scoring, VC questions, diligence, and research-report workflows.",
+      "version": "0.1.0",
+      "section": "investment",
+      "keywords": [
+        "investment",
+        "vc",
+        "oss",
+        "diligence"
+      ],
+      "distributionStatus": "active",
+      "releasePolicy": "manual_semver",
+      "skills": [
+        {
+          "id": "oss-investment-scorecard",
+          "sourcePath": "skills/oss-investment-scorecard",
+          "targetName": "oss-investment-scorecard"
+        }
+      ]
+    }
+  ]
+}

@@ -20,6 +20,7 @@
 ## 当前入口
 
 - [governance/architecture.md](governance/architecture.md)：技能库架构和分层。
+- [governance/project-purpose.md](governance/project-purpose.md)：仓库目的、边界和运行库定位。
 - [governance/reference-policy.md](governance/reference-policy.md)：引用式技能库规则和外部包迁移例外。
 - [workflows/linear-workflow.md](workflows/linear-workflow.md)：Linear 项目和 Issue 工作流。
 - [sections/README.md](sections/README.md)：板块文档放置规则。

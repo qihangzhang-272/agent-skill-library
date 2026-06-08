@@ -2,38 +2,39 @@
 
 ## 核心判断
 
-技能和框架不是同一个东西。
+收藏和运行不是同一个东西。
 
-- 框架：解释世界的理论、分类、原则、案例和判断标准。
-- 技能：让 Agent 在具体任务中按流程执行、调用框架、输出结果。
+- 收藏：记录一个技能、repo、prompt 或资料入口可能有用。
+- 运行：Agent 在具体项目里能按调用链选择、配置并使用对应能力。
 
-如果把框架正文复制进技能，会形成双写：
+本仓库的目标是运行能力库，不是资料仓库。它既可以承担收藏职能，但收藏必须服务于后续可调用、可配置、可验证的 Agent 工作流。
 
-1. `03_Resources/Frameworks/` 更新了；
-2. `.claude/skills/` 里的旧理论没有同步；
-3. 同一个商业模式判断出现两个版本；
-4. Agent 运行时引用了过期版本。
+## 基本区分
 
-所以本仓库只做技能资产管理，不做框架正文搬运。
+- 调用链清楚比技能数量多更重要。
+- `skills/` 里可以放完整迁移包，也可以放保守迁移的外部 skill 子集。
+- 没有确认迁移边界的内容先做索引，不急着复制。
+- 网页 prompt、UI 库源码、项目资料和一次性实验不进入正式技能包。
+- 历史本地目录只作为导入 provenance，不构成本仓库的上游关系。
 
 ## 分层
 
 | 层 | 保存什么 | 不保存什么 |
 | --- | --- | --- |
-| `catalog/` | 技能索引、来源路径、引用关系、状态 | 长篇框架正文 |
-| `sections/` | 分板块 README、技能卡片、收录优先级 | 重复的理论内容 |
-| `docs/` | 收录标准、Linear 工作流、引用规则 | 某个技能的完整运行框架 |
-| 来源 vault | 真正的技能实现和框架理论 | 本仓库的管理元信息 |
+| `catalog/` | 技能索引、来源路径、状态、触发场景、迁移边界 | 长篇资料正文 |
+| `sections/` | 分板块入口、优先级、已收录能力、待补方向 | 具体技能包正文 |
+| `docs/` | 治理规则、收录流程、组合搭配、调用链 | 一次性实验页面或临时运行结果 |
+| `skills/` | 可复用技能包或保守迁移的外部 skill 子集 | 未验证来源、网页 prompt 原文、UI 库源码 |
+| `local-experiments/` | 本地实验、人工评审、一次性 demo | 正式技能库内容 |
 
 ## 引用关系
 
-以 `oss-investment-scorecard` 为例：
+以 `frontend-design` 为例：
 
-- 本仓库技能包：`skills/oss-investment-scorecard/SKILL.md`
-- 上游来源：`https://github.com/lucy-cxy/oss-investment-scorecard`
-- 迁移 commit：`28a210d0a194ba0f31fe59edaf413abfafa2008e`
-- 原本临时整理的本地技能：`skills/vc-investment-evaluator/`，已删除
-- 本地产品总框架：`product-hunter/03_Resources/Frameworks/AI产品分析框架.md`
-- 本地案例输入：`product-hunter/03_Resources/Good Cases/`
+- `skills/awesome-design-skills/` 保存已验证风格 skill 子集。
+- `skills/greensock-gsap-skills/` 保存官方 GSAP skills。
+- `docs/sections/frontend-design/ui-call-chain.md` 保存从模糊需求到前端实现的调用链。
+- `docs/sections/frontend-design/prompt-index.md` 只保存网页 prompt 入口，不复制正文。
+- `local-experiments/` 保存本地网页实验，不进入正式库。
 
-本仓库把 `oss-investment-scorecard` 作为完整外部技能包迁移。它是投资板块的正式 VC/OSS 投资评估技能；本地 `AI产品分析框架.md` 仍作为产品研究框架源，不与上游技能混写。
+这种分层保证 agent 在项目初始化时能先判断要用哪些能力，再选择是否拉取、配置或调用对应 skill。

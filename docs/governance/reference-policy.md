@@ -2,9 +2,9 @@
 
 ## 原则
 
-技能里不复制框架内容，只写执行逻辑和引用路径。
+正式库里不默认复制大段资料、网页 prompt 或 UI 库源码。优先保存索引、来源、调用方式和验证状态。
 
-这条规则优先级高于“让技能自包含”。自包含会带来短期方便，但长期会造成框架漂移。
+这条规则优先级高于“先搬进来再说”。复制会带来短期方便，但会增加授权、同步和维护成本。
 
 ## 允许写入技能卡片的内容
 
@@ -12,15 +12,17 @@
 - 什么时候触发。
 - 输入需要什么。
 - 输出是什么格式。
-- 依赖哪些框架路径。
+- 依赖哪些来源、工具或项目配置。
 - 依赖哪些模板、案例、脚本。
 - 当前状态：已收录、待审查、待迁移、废弃。
 
 ## 不允许复制的内容
 
-- `03_Resources/Frameworks/` 下的大段理论正文。
-- 某个框架的完整表格和长案例。
-- 仍在快速演进的商业模式、产品判断、技术判断理论。
+- 网页 prompt 原文。
+- UI 库源码。
+- 项目资料正文。
+- 未验证技能包的大段内容。
+- 仍在快速演进、没有稳定边界的判断理论。
 
 ## 允许复制的例外
 
@@ -52,15 +54,14 @@ upstream_source:
 copy_policy: "vendored_external_skill"
 ```
 
-这种迁移不再遵循“只写执行逻辑”的轻量规则；它是外部技能包归档和复用。
+这种迁移不再遵循“只做索引”的轻量规则；它是外部技能包归档和复用。
 
 ## 推荐写法
 
 ```yaml
-framework_references:
-  - path: "03_Resources/Frameworks/AI产品分析框架.md"
-    anchors:
-      - "VC 投资评估框架"
-      - "维度 5: 商业模式"
-copy_policy: "do_not_copy_framework_body"
+upstream_source:
+  repo: "https://github.com/example/agent-skill"
+  commit: "abcdef123"
+copy_policy: "source_index_first"
+selection_role: "used during project initialization when this capability is needed"
 ```

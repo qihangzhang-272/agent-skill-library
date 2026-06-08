@@ -5,7 +5,8 @@
 ## 当前文件
 
 - `architecture.md`：技能库整体架构、分层和边界。
-- `reference-policy.md`：引用式技能库规则、框架正文不复制原则、外部包迁移例外。
+- `project-purpose.md`：仓库为什么存在、给谁用、和外部资料源的边界。
+- `reference-policy.md`：引用式技能库规则、资料正文不复制原则、外部包迁移例外。
 
 ## 放置标准
 

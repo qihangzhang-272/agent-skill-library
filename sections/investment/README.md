@@ -22,16 +22,11 @@
 - 迁移 commit：`28a210d0a194ba0f31fe59edaf413abfafa2008e`
 - 上游 skill 名：`oss-investment-scorecard`
 
-框架引用：
-
-- `product-hunter/03_Resources/Frameworks/AI产品分析框架.md`
-- `product-hunter/03_Resources/Good Cases/`
-
 维护原则：
 
 - `oss-investment-scorecard` 作为上游完整技能包维护。
-- 本地 `AI产品分析框架.md` 和 Good Cases 可作为补充输入，但不反向混写进上游迁移包。
 - 后续同步上游时记录 commit，不自行优化改写。
+- 投资板块后续重点是“投资问题 -> 研报 / 判断材料”的端到端链路，而不是只做单点打分。
 
 ## 待补充方向
 

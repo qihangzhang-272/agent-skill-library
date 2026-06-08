@@ -30,12 +30,19 @@ skills:
   - id: vc-investment-evaluator
     title: "VC 投资评估框架"
     section: investment
-    status: indexed
-    source_type: local_skill
-    source_path: ".claude/skills/vc-investment-evaluator/SKILL.md"
-    source_support:
-      - ".claude/skills/vc-investment-evaluator/references/scored-examples.md"
-      - ".claude/skills/vc-investment-evaluator/template/evaluation-template.md"
+    status: packaged
+    source_type: standalone_skill
+    package_path: "skills/vc-investment-evaluator/SKILL.md"
+    package_support:
+      - "skills/vc-investment-evaluator/references/scorecard.md"
+      - "skills/vc-investment-evaluator/references/calibration-examples.md"
+      - "skills/vc-investment-evaluator/references/source-map.md"
+      - "skills/vc-investment-evaluator/templates/evaluation-template.md"
+    original_source:
+      skill_path: ".claude/skills/vc-investment-evaluator/SKILL.md"
+      support:
+        - ".claude/skills/vc-investment-evaluator/references/scored-examples.md"
+        - ".claude/skills/vc-investment-evaluator/template/evaluation-template.md"
     framework_references:
       - path: "03_Resources/Frameworks/AI产品分析框架.md"
         anchors:
@@ -49,6 +56,5 @@ skills:
       - "这个项目值得投吗"
       - "给这个 AI 开源项目打分"
       - "评估这个项目的投资价值"
-    copy_policy: "do_not_copy_framework_body"
-    notes: "种子技能；后续可抽成更轻的执行壳，框架理论保留在 Frameworks。"
-
+    copy_policy: "skill_packaged_framework_body_not_copied"
+    notes: "已从 product-hunter 中抽成单独 skill 包；保留 VC 投资评分契约，框架理论仍引用 Frameworks。"

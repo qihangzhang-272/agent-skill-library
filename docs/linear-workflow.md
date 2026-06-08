@@ -29,7 +29,6 @@ Linear 用于跟踪技能库的收录、审查、去重和重构。
 ## 对 `vc-investment-evaluator` 的当前动作
 
 1. 作为投资板块种子技能收录。
-2. 保持 `.claude/skills/vc-investment-evaluator/` 为源实现。
+2. 已在本仓库创建独立 skill 包：`skills/vc-investment-evaluator/`。
 3. 保持 `03_Resources/Frameworks/AI产品分析框架.md` 为产品/商业模式理论源。
-4. 后续审查是否抽成更轻的执行壳。
-
+4. 后续审查是否需要继续压缩 `references/scorecard.md` 或补自动化脚本。

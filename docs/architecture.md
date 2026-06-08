@@ -29,11 +29,11 @@
 
 以 `vc-investment-evaluator` 为例：
 
-- 技能源：`product-hunter/.claude/skills/vc-investment-evaluator/SKILL.md`
-- 校准案例：`product-hunter/.claude/skills/vc-investment-evaluator/references/scored-examples.md`
-- 手动模板：`product-hunter/.claude/skills/vc-investment-evaluator/template/evaluation-template.md`
+- 本仓库技能包：`skills/vc-investment-evaluator/SKILL.md`
+- 本仓库评分契约：`skills/vc-investment-evaluator/references/scorecard.md`
+- 本仓库手动模板：`skills/vc-investment-evaluator/templates/evaluation-template.md`
+- 原始技能来源：`product-hunter/.claude/skills/vc-investment-evaluator/SKILL.md`
 - 产品总框架：`product-hunter/03_Resources/Frameworks/AI产品分析框架.md`
 - 案例输入：`product-hunter/03_Resources/Good Cases/`
 
-本仓库记录以上引用关系。后续如果要把技能迁移成通用版，先创建 Linear 任务，明确哪些内容可以复制、哪些只能引用。
-
+本仓库保存 `vc-investment-evaluator` 的独立执行 skill 包，但不复制产品总框架和案例正文。后续如果框架文件路径变化，更新 `catalog/skills.yml` 和技能包中的 source map。

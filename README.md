@@ -22,7 +22,7 @@
 
 | 技能 | 板块 | 来源 | 状态 |
 | --- | --- | --- | --- |
-| `vc-investment-evaluator` | investment | `product-hunter/.claude/skills/vc-investment-evaluator/` | 已建索引，不复制全文 |
+| `vc-investment-evaluator` | investment | `skills/vc-investment-evaluator/` | 已独立成标准 skill 包 |
 
 ## 维护规则
 
@@ -32,3 +32,6 @@
 4. 每次收录都更新 `catalog/skills.yml`。
 5. Linear 项目用于跟踪收录、审查、去重和重构任务。
 
+## 重要边界
+
+`vc-investment-evaluator` 已经作为单独 skill 包放在本仓库中；但 `AI产品分析框架.md` 这样的框架理论不复制进来，只在技能中引用来源路径。

@@ -8,7 +8,13 @@
 
 用途：从 VC 视角评估 AI 产品或开源项目的投资价值。
 
-来源：
+本仓库技能包：
+
+- `skills/vc-investment-evaluator/SKILL.md`
+- `skills/vc-investment-evaluator/references/scorecard.md`
+- `skills/vc-investment-evaluator/templates/evaluation-template.md`
+
+原始来源：
 
 - 技能：`product-hunter/.claude/skills/vc-investment-evaluator/SKILL.md`
 - 校准案例：`product-hunter/.claude/skills/vc-investment-evaluator/references/scored-examples.md`
@@ -23,7 +29,7 @@
 
 - 不复制 `AI产品分析框架.md` 的商业模式理论。
 - 不复制 Good Cases 正文。
-- 技能卡片只维护触发方式、执行流程、输出格式和引用关系。
+- 独立 skill 包维护触发方式、执行流程、评分契约、输出格式和引用关系。
 
 ## 待补充方向
 
@@ -32,4 +38,3 @@
 - IC memo 结构化生成
 - DD 问题树
 - 开源项目投资风险监控
-

@@ -1,6 +1,6 @@
 # Agent Skill Library
 
-这是 Penn 的私有高质量技能库，用来收集、分类和维护可复用的 Agent skills。
+私有高质量技能库，用来收集、分类和维护可复用的 Agent skills。
 
 本仓库采用“引用式技能库”架构：
 

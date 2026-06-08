@@ -18,31 +18,56 @@ external_sources:
   frontend_design_candidate_sources:
     research_note: "docs/frontend-design-sources.md"
     reviewed_at: "2026-06-08"
+    minimum_stars_for_main_list: 1000
     candidates:
       - repo: "https://github.com/bergside/awesome-design-skills"
         license: "MIT"
+        stars: 1168
         role: "design skill index and style-skill discovery source"
-      - repo: "https://github.com/joshuadavidthomas/agent-skills"
-        license: "MIT"
-        role: "clean frontend-design-principles skill candidate"
-      - repo: "https://github.com/saifyxpro/ui-ux-design-pro-skill"
-        license: "MIT"
-        role: "comprehensive UI/UX skill package candidate"
       - repo: "https://github.com/bergside/typeui"
         license: "MIT text in LICENSE.md; GitHub API reports Other"
+        stars: 1081
         role: "design skill CLI and registry candidate"
-      - repo: "https://github.com/spencergoldade/cursor-designer"
-        license: "GPL-3.0"
-        role: "UX/UI/IA rules reference only unless GPL obligations are acceptable"
+      - repo: "https://github.com/greensock/gsap-skills"
+        license: "MIT"
+        stars: 8479
+        role: "official GSAP AI skills; first direct migration candidate"
+      - repo: "https://github.com/shadcn-ui/ui"
+        license: "MIT"
+        stars: 115953
+        role: "shadcn/ui component and design-system reference"
+      - repo: "https://github.com/tailwindlabs/tailwindcss"
+        license: "MIT"
+        stars: 95441
+        role: "Tailwind layout, spacing, responsive, and utility-class reference"
+      - repo: "https://github.com/mui/material-ui"
+        license: "MIT"
+        stars: 98399
+        role: "enterprise React UI and Material Design reference"
+      - repo: "https://github.com/ant-design/ant-design"
+        license: "MIT"
+        stars: 98297
+        role: "B2B SaaS, dashboard, and enterprise design reference"
+      - repo: "https://github.com/motiondivision/motion"
+        license: "MIT"
+        stars: 32263
+        role: "React and JavaScript animation reference"
+      - repo: "https://github.com/magicuidesign/magicui"
+        license: "MIT"
+        stars: 21201
+        role: "animated landing-page and design-engineering component reference"
       - repo: "https://github.com/0xeb/TheBigPromptLibrary"
         license: "MIT"
+        stars: 5111
         role: "v0 and UI system prompt reference source"
-      - repo: "https://github.com/ZeroLu/awesome-gemini-ai"
+      - repo: "https://github.com/BehiSecc/awesome-claude-skills"
         license: "No license detected"
-        role: "design prompt inspiration link only"
-      - repo: "https://github.com/devanshug2307/Awesome-AI-Image-Prompts"
+        stars: 9425
+        role: "Claude Skills discovery index; reference only"
+      - repo: "https://github.com/2-fly-4-ai/V0-system-prompt"
         license: "No license detected"
-        role: "visual style prompt inspiration link only"
+        stars: 1812
+        role: "v0 system prompt reference link only"
 
 sections:
   investment:

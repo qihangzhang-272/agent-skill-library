@@ -42,7 +42,6 @@ function Infer-Section {
 
 $repo = Resolve-Path $RepoRoot
 $skillsRoot = Join-Path $repo.Path 'skills'
-$orchestrationsRoot = Join-Path $repo.Path 'orchestrations'
 
 $skillFiles = Get-ChildItem -Path $skillsRoot -Recurse -Filter 'SKILL.md' | Sort-Object FullName
 $skills = foreach ($file in $skillFiles) {
@@ -64,11 +63,6 @@ $skills = foreach ($file in $skillFiles) {
   }
 }
 
-$orchestrationFiles = Get-ChildItem -Path $orchestrationsRoot -Filter '*.json' | Sort-Object Name
-$orchestrations = foreach ($file in $orchestrationFiles) {
-  Get-Content -LiteralPath $file.FullName -Raw | ConvertFrom-Json -Depth 30
-}
-
 $payload = [ordered]@{
   generatedAt = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
   repository = [ordered]@{
@@ -76,7 +70,6 @@ $payload = [ordered]@{
     root = '.'
   }
   skills = @($skills)
-  orchestrations = @($orchestrations)
 }
 
 $json = $payload | ConvertTo-Json -Depth 50
@@ -86,4 +79,3 @@ Set-Content -LiteralPath $OutputPath -Value "window.SKILL_ORCHESTRATOR_DATA = $j
 
 Write-Output "Generated $OutputPath"
 Write-Output "Skills: $($skills.Count)"
-Write-Output "Orchestrations: $($orchestrations.Count)"

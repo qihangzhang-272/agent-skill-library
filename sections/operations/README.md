@@ -4,13 +4,9 @@
 
 当前工具：
 
-- `apps/skill-orchestrator/index.html`：本地技能可视化编排台，用于展示工作流、技能可用性、人工状态和整条链 Claude handoff prompt。
-- `scripts/build-skill-orchestrator-data.ps1`：扫描 `skills/` 和 `orchestrations/`，生成编排台使用的 `apps/skill-orchestrator/data.js`。
-
-当前编排定义：
-
-- `orchestrations/product-bp-visual-report.json`
-- `orchestrations/prd-to-frontend-console.json`
+- `apps/skill-orchestrator/index.html`：本地技能可视化编排台，用于从当前技能库拖拽拼链，并生成整条链 Claude handoff prompt。
+- `scripts/build-skill-orchestrator-data.ps1`：扫描 `skills/`，生成编排台使用的 `apps/skill-orchestrator/data.js`。
+- `orchestrations/`：只保存从编排台导出的、已经验证值得沉淀的链路 JSON。
 
 待收录方向：
 

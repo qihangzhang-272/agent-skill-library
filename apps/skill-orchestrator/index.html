@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agent Skill Orchestrator</title>
+    <title>Agent Skill Composer</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
@@ -11,104 +11,115 @@
       <header class="topbar">
         <div>
           <p class="eyebrow">Agent Skill Library</p>
-          <h1>技能可视化编排台</h1>
+          <h1>动态技能链编排</h1>
         </div>
         <div class="topbar-meta">
           <span id="generatedAt">未生成数据</span>
           <span id="skillCount">0 skills</span>
+          <button id="clearChainBtn" type="button">清空链路</button>
         </div>
       </header>
 
-      <section class="workspace">
-        <aside class="sidebar" aria-label="Workflow and skill selection">
-          <div class="panel-block">
-            <div class="block-heading">
-              <h2>运行链</h2>
-              <span id="workflowCount">0</span>
-            </div>
-            <div id="workflowList" class="workflow-list"></div>
-          </div>
-
-          <div class="panel-block">
-            <div class="block-heading">
+      <section class="layout">
+        <aside class="skill-panel" aria-label="Skill catalog">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Drag Skills</p>
               <h2>技能库</h2>
-              <span id="availableCount">0</span>
             </div>
-            <input id="skillSearch" class="search-input" type="search" placeholder="搜索 skill / section / path">
-            <div id="skillList" class="skill-list"></div>
+            <span id="visibleSkillCount">0</span>
           </div>
+          <input id="skillSearch" class="search-input" type="search" placeholder="搜索 skill / section / path">
+          <div id="skillList" class="skill-list"></div>
         </aside>
 
-        <section class="main-panel">
-          <div class="run-header">
-            <div>
-              <p class="eyebrow">Selected Workflow</p>
-              <h2 id="workflowTitle">未选择</h2>
-              <p id="workflowPurpose" class="muted"></p>
+        <section class="composer-panel">
+          <section class="brief-panel" aria-label="Workflow brief">
+            <div class="field-row">
+              <label>
+                <span>链路名称</span>
+                <input id="chainTitle" type="text" placeholder="例如：AI 产品 -> 研报 -> 可视化 BP">
+              </label>
+              <label>
+                <span>最终成果</span>
+                <input id="finalOutput" type="text" placeholder="例如：可阅读研报、HTML BP 页面、PDF">
+              </label>
             </div>
-            <div class="run-actions">
-              <button id="copyPromptBtn" class="primary-button" type="button">复制整条链 Prompt</button>
-              <button id="resetStateBtn" class="secondary-button" type="button">重置状态</button>
-            </div>
-          </div>
-
-          <section class="input-band" aria-label="Workflow inputs">
-            <div class="block-heading">
-              <h2>输入槽</h2>
-              <span>一次填写，整条链复用</span>
-            </div>
-            <div id="entryInputs" class="input-grid"></div>
+            <label>
+              <span>项目背景 / 输入材料</span>
+              <textarea id="chainContext" placeholder="把产品、项目、PRD、资料链接、约束和目标读者写在这里。"></textarea>
+            </label>
           </section>
 
-          <section class="graph-band" aria-label="Workflow graph">
-            <div class="block-heading">
-              <h2>节点编排</h2>
-              <span id="progressText">0 / 0 done</span>
+          <section id="dropZone" class="canvas-panel" aria-label="Dynamic workflow chain">
+            <div class="canvas-heading">
+              <div>
+                <p class="eyebrow">Workflow Canvas</p>
+                <h2>把技能拖到这里，按顺序拼链</h2>
+              </div>
+              <span id="chainCount">0 nodes</span>
             </div>
-            <div class="progress-track">
-              <div id="progressFill" class="progress-fill"></div>
+            <div id="emptyState" class="empty-state">
+              <strong>拖一个 skill 进来开始编排</strong>
+              <span>也可以点击技能卡片上的 “+” 加入链路。节点顺序就是 Claude 执行顺序。</span>
             </div>
-            <div id="nodeGraph" class="node-graph"></div>
+            <div class="canvas-scroll">
+              <svg id="linkLayer" class="link-layer" aria-hidden="true"></svg>
+              <div id="chainNodes" class="chain-nodes"></div>
+            </div>
           </section>
 
-          <section class="detail-band">
-            <div class="node-detail">
-              <div class="detail-heading">
-                <div>
-                  <p class="eyebrow">Node</p>
-                  <h2 id="nodeTitle">选择一个节点</h2>
-                </div>
-                <div id="statusControls" class="status-controls"></div>
+          <section class="detail-panel" aria-label="Selected node">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Selected Node</p>
+                <h2 id="selectedTitle">未选择节点</h2>
               </div>
-              <dl class="detail-grid">
-                <div>
-                  <dt>输入</dt>
-                  <dd id="nodeInput">-</dd>
-                </div>
-                <div>
-                  <dt>输出</dt>
-                  <dd id="nodeOutput">-</dd>
-                </div>
-                <div>
-                  <dt>依赖技能</dt>
-                  <dd id="nodeSkills">-</dd>
-                </div>
-                <div>
-                  <dt>验收</dt>
-                  <dd id="nodeAcceptance">-</dd>
-                </div>
-              </dl>
+              <div class="node-actions">
+                <button id="moveLeftBtn" type="button">上移</button>
+                <button id="moveRightBtn" type="button">下移</button>
+                <button id="removeNodeBtn" type="button">删除</button>
+              </div>
             </div>
-
-            <div class="prompt-panel">
-              <div class="block-heading">
-                <h2>整条链 Prompt</h2>
-                <span id="copyStatus">待复制</span>
-              </div>
-              <textarea id="promptPreview" spellcheck="false"></textarea>
+            <div class="detail-grid">
+              <label>
+                <span>节点职责</span>
+                <textarea id="nodeRole" placeholder="这个 skill 在整条链里负责什么。"></textarea>
+              </label>
+              <label>
+                <span>节点输入</span>
+                <textarea id="nodeInput" placeholder="Claude 执行这个节点时应该吃什么。"></textarea>
+              </label>
+              <label>
+                <span>节点输出</span>
+                <textarea id="nodeOutput" placeholder="这个节点必须产出什么。"></textarea>
+              </label>
+              <label>
+                <span>验收要求</span>
+                <textarea id="nodeAcceptance" placeholder="判断这个节点跑完的标准。"></textarea>
+              </label>
             </div>
           </section>
         </section>
+
+        <aside class="prompt-panel" aria-label="Full chain prompt">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Claude Handoff</p>
+              <h2>整条链 Prompt</h2>
+            </div>
+            <button id="copyPromptBtn" class="primary" type="button">复制</button>
+          </div>
+          <textarea id="promptPreview" spellcheck="false"></textarea>
+          <div class="prompt-actions">
+            <button id="exportChainBtn" type="button">导出链路 JSON</button>
+            <label class="import-button">
+              导入链路 JSON
+              <input id="importChainInput" type="file" accept="application/json,.json">
+            </label>
+          </div>
+          <p id="copyStatus" class="muted">链路变化会实时刷新 prompt。</p>
+        </aside>
       </section>
     </main>
 

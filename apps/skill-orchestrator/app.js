@@ -1,371 +1,516 @@
 const data = window.SKILL_ORCHESTRATOR_DATA || {
   generatedAt: null,
   skills: [],
-  orchestrations: [],
 };
 
-const stateOptions = ["pending", "running", "blocked", "done", "failed"];
-const stateLabels = {
-  pending: "待跑",
-  running: "运行中",
-  blocked: "卡住",
-  done: "完成",
-  failed: "失败",
-  missing: "缺技能",
-};
-
+const storageKey = "agent-skill-composer-state";
 const skillById = new Map((data.skills || []).map((skill) => [skill.id, skill]));
 
-let selectedWorkflowId = data.orchestrations?.[0]?.id || null;
-let selectedNodeId = null;
-let inputState = loadJson("skill-orchestrator-inputs", {});
-let runState = loadJson("skill-orchestrator-run-state", {});
+let composer = loadComposer();
+let selectedNodeId = composer.nodes[0]?.id || null;
 
 const elements = {
   generatedAt: document.querySelector("#generatedAt"),
   skillCount: document.querySelector("#skillCount"),
-  workflowCount: document.querySelector("#workflowCount"),
-  availableCount: document.querySelector("#availableCount"),
-  workflowList: document.querySelector("#workflowList"),
-  skillList: document.querySelector("#skillList"),
+  visibleSkillCount: document.querySelector("#visibleSkillCount"),
   skillSearch: document.querySelector("#skillSearch"),
-  workflowTitle: document.querySelector("#workflowTitle"),
-  workflowPurpose: document.querySelector("#workflowPurpose"),
-  entryInputs: document.querySelector("#entryInputs"),
-  progressText: document.querySelector("#progressText"),
-  progressFill: document.querySelector("#progressFill"),
-  nodeGraph: document.querySelector("#nodeGraph"),
-  nodeTitle: document.querySelector("#nodeTitle"),
+  skillList: document.querySelector("#skillList"),
+  chainTitle: document.querySelector("#chainTitle"),
+  finalOutput: document.querySelector("#finalOutput"),
+  chainContext: document.querySelector("#chainContext"),
+  dropZone: document.querySelector("#dropZone"),
+  chainCount: document.querySelector("#chainCount"),
+  emptyState: document.querySelector("#emptyState"),
+  chainNodes: document.querySelector("#chainNodes"),
+  linkLayer: document.querySelector("#linkLayer"),
+  selectedTitle: document.querySelector("#selectedTitle"),
+  nodeRole: document.querySelector("#nodeRole"),
   nodeInput: document.querySelector("#nodeInput"),
   nodeOutput: document.querySelector("#nodeOutput"),
-  nodeSkills: document.querySelector("#nodeSkills"),
   nodeAcceptance: document.querySelector("#nodeAcceptance"),
-  statusControls: document.querySelector("#statusControls"),
+  moveLeftBtn: document.querySelector("#moveLeftBtn"),
+  moveRightBtn: document.querySelector("#moveRightBtn"),
+  removeNodeBtn: document.querySelector("#removeNodeBtn"),
   promptPreview: document.querySelector("#promptPreview"),
   copyPromptBtn: document.querySelector("#copyPromptBtn"),
-  resetStateBtn: document.querySelector("#resetStateBtn"),
+  clearChainBtn: document.querySelector("#clearChainBtn"),
+  exportChainBtn: document.querySelector("#exportChainBtn"),
+  importChainInput: document.querySelector("#importChainInput"),
   copyStatus: document.querySelector("#copyStatus"),
 };
 
 init();
 
 function init() {
-  elements.generatedAt.textContent = data.generatedAt
-    ? `数据生成：${data.generatedAt}`
-    : "请先生成 data.js";
+  elements.generatedAt.textContent = data.generatedAt ? `数据生成：${data.generatedAt}` : "请先生成 data.js";
   elements.skillCount.textContent = `${data.skills?.length || 0} skills`;
-  elements.workflowCount.textContent = String(data.orchestrations?.length || 0);
-  elements.availableCount.textContent = `${data.skills?.length || 0}`;
 
-  elements.skillSearch.addEventListener("input", renderSkills);
-  elements.copyPromptBtn.addEventListener("click", copyFullPrompt);
-  elements.resetStateBtn.addEventListener("click", resetCurrentWorkflow);
+  elements.chainTitle.value = composer.title;
+  elements.finalOutput.value = composer.finalOutput;
+  elements.chainContext.value = composer.context;
 
-  renderWorkflows();
-  renderSkills();
-  selectWorkflow(selectedWorkflowId);
+  elements.skillSearch.addEventListener("input", renderSkillList);
+  elements.chainTitle.addEventListener("input", updateBrief);
+  elements.finalOutput.addEventListener("input", updateBrief);
+  elements.chainContext.addEventListener("input", updateBrief);
+
+  elements.dropZone.addEventListener("dragover", handleCanvasDragOver);
+  elements.dropZone.addEventListener("drop", handleCanvasDrop);
+  elements.dropZone.addEventListener("dragleave", () => elements.dropZone.classList.remove("is-over"));
+  elements.chainNodes.addEventListener("dragover", handleNodeDragOver);
+  elements.chainNodes.addEventListener("drop", handleNodeDrop);
+
+  for (const field of [elements.nodeRole, elements.nodeInput, elements.nodeOutput, elements.nodeAcceptance]) {
+    field.addEventListener("input", updateSelectedNodeFromFields);
+  }
+
+  elements.moveLeftBtn.addEventListener("click", () => moveSelected(-1));
+  elements.moveRightBtn.addEventListener("click", () => moveSelected(1));
+  elements.removeNodeBtn.addEventListener("click", removeSelectedNode);
+  elements.copyPromptBtn.addEventListener("click", copyPrompt);
+  elements.clearChainBtn.addEventListener("click", clearChain);
+  elements.exportChainBtn.addEventListener("click", exportChain);
+  elements.importChainInput.addEventListener("change", importChain);
+
+  window.addEventListener("resize", drawLinks);
+
+  render();
 }
 
-function loadJson(key, fallback) {
+function loadComposer() {
   try {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : fallback;
+    const stored = localStorage.getItem(storageKey);
+    if (stored) return normalizeComposer(JSON.parse(stored));
   } catch {
-    return fallback;
+    localStorage.removeItem(storageKey);
   }
+
+  return normalizeComposer({
+    title: "",
+    context: "",
+    finalOutput: "",
+    nodes: [],
+  });
 }
 
-function saveJson(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+function normalizeComposer(value) {
+  return {
+    title: value.title || "",
+    context: value.context || "",
+    finalOutput: value.finalOutput || "",
+    nodes: Array.isArray(value.nodes) ? value.nodes.map(normalizeNode) : [],
+  };
 }
 
-function selectedWorkflow() {
-  return data.orchestrations.find((workflow) => workflow.id === selectedWorkflowId);
+function normalizeNode(node) {
+  const skill = skillById.get(node.skillId);
+  return {
+    id: node.id || createNodeId(node.skillId || "node"),
+    skillId: node.skillId || "",
+    title: node.title || skill?.id || node.skillId || "未命名节点",
+    role: node.role || defaultRole(skill),
+    input: node.input || "",
+    output: node.output || "",
+    acceptance: node.acceptance || "",
+  };
 }
 
-function renderWorkflows() {
-  elements.workflowList.innerHTML = "";
-
-  for (const workflow of data.orchestrations || []) {
-    const button = document.createElement("button");
-    button.className = "workflow-button";
-    if (workflow.id === selectedWorkflowId) button.classList.add("is-active");
-    button.type = "button";
-    button.innerHTML = `
-      <strong>${escapeHtml(workflow.title)}</strong>
-      <span>${escapeHtml(workflow.purpose || "")}</span>
-    `;
-    button.addEventListener("click", () => selectWorkflow(workflow.id));
-    elements.workflowList.appendChild(button);
-  }
+function persist() {
+  localStorage.setItem(storageKey, JSON.stringify(composer));
 }
 
-function renderSkills() {
+function render() {
+  renderSkillList();
+  renderChain();
+  renderSelectedNode();
+  renderPrompt();
+  persist();
+}
+
+function renderSkillList() {
   const query = elements.skillSearch.value.trim().toLowerCase();
-  elements.skillList.innerHTML = "";
-
-  const filtered = (data.skills || []).filter((skill) => {
-    const haystack = `${skill.id} ${skill.section} ${skill.path} ${skill.description}`.toLowerCase();
+  const skills = (data.skills || []).filter((skill) => {
+    const haystack = `${skill.id} ${skill.title} ${skill.section} ${skill.path} ${skill.description}`.toLowerCase();
     return !query || haystack.includes(query);
   });
 
-  for (const skill of filtered) {
-    const row = document.createElement("div");
-    row.className = "skill-row";
-    row.innerHTML = `
-      <strong>${escapeHtml(skill.id)}</strong>
-      <span>${escapeHtml(skill.section || "unknown")} · <code>${escapeHtml(skill.path || "")}</code></span>
-    `;
-    elements.skillList.appendChild(row);
-  }
-}
+  elements.visibleSkillCount.textContent = String(skills.length);
+  elements.skillList.innerHTML = "";
 
-function selectWorkflow(workflowId) {
-  selectedWorkflowId = workflowId;
-  const workflow = selectedWorkflow();
-  selectedNodeId = workflow?.nodes?.[0]?.id || null;
-
-  renderWorkflows();
-  renderWorkflow();
-}
-
-function renderWorkflow() {
-  const workflow = selectedWorkflow();
-  if (!workflow) return;
-
-  elements.workflowTitle.textContent = workflow.title;
-  elements.workflowPurpose.textContent = workflow.purpose || "";
-
-  renderInputs(workflow);
-  renderGraph(workflow);
-  renderNodeDetail(workflow);
-  updatePromptPreview(workflow);
-}
-
-function renderInputs(workflow) {
-  elements.entryInputs.innerHTML = "";
-  const workflowInputs = inputState[workflow.id] || {};
-
-  for (const input of workflow.entryInputs || []) {
-    const wrapper = document.createElement("label");
-    wrapper.className = "input-group";
-
-    const field = input.type === "textarea"
-      ? document.createElement("textarea")
-      : document.createElement("input");
-
-    field.className = "input-field";
-    field.placeholder = input.placeholder || "";
-    field.value = workflowInputs[input.id] || "";
-    if (input.type !== "textarea") field.type = input.type || "text";
-
-    field.addEventListener("input", () => {
-      inputState[workflow.id] = {
-        ...(inputState[workflow.id] || {}),
-        [input.id]: field.value,
-      };
-      saveJson("skill-orchestrator-inputs", inputState);
-      updatePromptPreview(workflow);
-    });
-
-    const caption = document.createElement("span");
-    caption.textContent = input.label;
-
-    wrapper.appendChild(caption);
-    wrapper.appendChild(field);
-    elements.entryInputs.appendChild(wrapper);
-  }
-}
-
-function renderGraph(workflow) {
-  elements.nodeGraph.innerHTML = "";
-  const nodes = workflow.nodes || [];
-  const doneCount = nodes.filter((node) => nodeStatus(workflow.id, node) === "done").length;
-  const total = nodes.length;
-  const progress = total ? Math.round((doneCount / total) * 100) : 0;
-
-  elements.progressText.textContent = `${doneCount} / ${total} done`;
-  elements.progressFill.style.width = `${progress}%`;
-
-  nodes.forEach((node, index) => {
-    const status = nodeStatus(workflow.id, node);
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = `node-card status-${status}`;
-    if (node.id === selectedNodeId) card.classList.add("is-active");
+  for (const skill of skills) {
+    const card = document.createElement("article");
+    card.className = "skill-card";
+    card.draggable = true;
+    card.dataset.skillId = skill.id;
     card.innerHTML = `
-      <span class="node-index">${index + 1}</span>
+      <div>
+        <strong>${escapeHtml(skill.id)}</strong>
+        <span>${escapeHtml(skill.section || "unknown")}</span>
+      </div>
+      <p>${escapeHtml(shortText(skill.description || skill.path || "", 110))}</p>
+      <div class="skill-card-footer">
+        <code>${escapeHtml(skill.path || "")}</code>
+        <button type="button" aria-label="Add ${escapeHtml(skill.id)}">+</button>
+      </div>
+    `;
+    card.addEventListener("dragstart", (event) => {
+      event.dataTransfer.setData("text/plain", skill.id);
+      event.dataTransfer.effectAllowed = "copy";
+    });
+    card.querySelector("button").addEventListener("click", () => addSkillNode(skill.id));
+    elements.skillList.appendChild(card);
+  }
+}
+
+function renderChain() {
+  elements.chainNodes.innerHTML = "";
+  elements.chainCount.textContent = `${composer.nodes.length} nodes`;
+  elements.emptyState.hidden = composer.nodes.length > 0;
+
+  composer.nodes.forEach((node, index) => {
+    const skill = skillById.get(node.skillId);
+    const card = document.createElement("article");
+    card.className = "chain-node";
+    if (node.id === selectedNodeId) card.classList.add("is-active");
+    card.draggable = true;
+    card.dataset.nodeId = node.id;
+    card.innerHTML = `
+      <div class="node-topline">
+        <span class="node-index">${index + 1}</span>
+        <span class="node-section">${escapeHtml(skill?.section || "missing")}</span>
+      </div>
       <strong>${escapeHtml(node.title)}</strong>
-      <span>${escapeHtml(node.output || "")}</span>
-      <span class="status-badge status-${status}">${stateLabels[status] || status}</span>
-      <span>${skillSummary(node.skills || [])}</span>
+      <p>${escapeHtml(node.role || defaultRole(skill))}</p>
+      <code>${escapeHtml(skill?.path || "skill missing")}</code>
     `;
     card.addEventListener("click", () => {
       selectedNodeId = node.id;
-      renderWorkflow();
+      render();
     });
-    elements.nodeGraph.appendChild(card);
+    card.addEventListener("dragstart", (event) => {
+      event.dataTransfer.setData("application/x-node-id", node.id);
+      event.dataTransfer.effectAllowed = "move";
+      card.classList.add("is-dragging");
+    });
+    card.addEventListener("dragend", () => {
+      card.classList.remove("is-dragging");
+    });
+    elements.chainNodes.appendChild(card);
   });
+
+  requestAnimationFrame(drawLinks);
 }
 
-function renderNodeDetail(workflow) {
-  const node = workflow.nodes?.find((item) => item.id === selectedNodeId) || workflow.nodes?.[0];
+function renderSelectedNode() {
+  const node = selectedNode();
+  const disabled = !node;
+
+  elements.selectedTitle.textContent = node ? node.title : "未选择节点";
+  for (const control of [
+    elements.nodeRole,
+    elements.nodeInput,
+    elements.nodeOutput,
+    elements.nodeAcceptance,
+    elements.moveLeftBtn,
+    elements.moveRightBtn,
+    elements.removeNodeBtn,
+  ]) {
+    control.disabled = disabled;
+  }
+
+  elements.nodeRole.value = node?.role || "";
+  elements.nodeInput.value = node?.input || "";
+  elements.nodeOutput.value = node?.output || "";
+  elements.nodeAcceptance.value = node?.acceptance || "";
+}
+
+function renderPrompt() {
+  elements.promptPreview.value = buildPrompt();
+}
+
+function updateBrief() {
+  composer.title = elements.chainTitle.value;
+  composer.finalOutput = elements.finalOutput.value;
+  composer.context = elements.chainContext.value;
+  renderPrompt();
+  persist();
+}
+
+function updateSelectedNodeFromFields() {
+  const node = selectedNode();
   if (!node) return;
 
-  elements.nodeTitle.textContent = node.title;
-  elements.nodeInput.textContent = node.input || "-";
-  elements.nodeOutput.textContent = node.output || "-";
-  elements.nodeAcceptance.innerHTML = listHtml(node.acceptance || []);
-  elements.nodeSkills.innerHTML = skillPillsHtml(node.skills || []);
+  node.role = elements.nodeRole.value;
+  node.input = elements.nodeInput.value;
+  node.output = elements.nodeOutput.value;
+  node.acceptance = elements.nodeAcceptance.value;
+  renderChain();
+  renderPrompt();
+  persist();
+}
 
-  elements.statusControls.innerHTML = "";
-  const current = nodeStatus(workflow.id, node);
-  for (const option of stateOptions) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "status-button";
-    if (option === current) button.classList.add("is-active");
-    button.textContent = stateLabels[option];
-    button.addEventListener("click", () => setNodeStatus(workflow.id, node.id, option));
-    elements.statusControls.appendChild(button);
+function selectedNode() {
+  return composer.nodes.find((node) => node.id === selectedNodeId);
+}
+
+function addSkillNode(skillId, index = composer.nodes.length) {
+  const skill = skillById.get(skillId);
+  if (!skill) return;
+
+  const node = normalizeNode({
+    id: createNodeId(skillId),
+    skillId,
+    title: skill.id,
+    role: defaultRole(skill),
+    input: defaultInput(skill),
+    output: defaultOutput(skill),
+    acceptance: "完成后先输出本节点产物摘要，再进入下一节点。",
+  });
+
+  composer.nodes.splice(index, 0, node);
+  selectedNodeId = node.id;
+  render();
+}
+
+function handleCanvasDragOver(event) {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = "copy";
+  elements.dropZone.classList.add("is-over");
+}
+
+function handleCanvasDrop(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  elements.dropZone.classList.remove("is-over");
+  const skillId = event.dataTransfer.getData("text/plain");
+  if (skillId) addSkillNode(skillId);
+}
+
+function handleNodeDragOver(event) {
+  event.preventDefault();
+  const types = Array.from(event.dataTransfer.types || []);
+  event.dataTransfer.dropEffect = types.includes("application/x-node-id") ? "move" : "copy";
+}
+
+function handleNodeDrop(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  const targetCard = event.target.closest(".chain-node");
+  const targetIndex = targetCard
+    ? composer.nodes.findIndex((node) => node.id === targetCard.dataset.nodeId)
+    : composer.nodes.length;
+
+  const movedNodeId = event.dataTransfer.getData("application/x-node-id");
+  if (movedNodeId) {
+    moveNodeToIndex(movedNodeId, targetIndex);
+    return;
   }
+
+  const skillId = event.dataTransfer.getData("text/plain");
+  if (skillId) addSkillNode(skillId, targetIndex < 0 ? composer.nodes.length : targetIndex);
 }
 
-function nodeStatus(workflowId, node) {
-  const stored = runState[workflowId]?.[node.id];
-  if (stored) return stored;
-  const hasMissingSkill = (node.skills || []).some((skillId) => !skillById.has(skillId));
-  return hasMissingSkill ? "missing" : "pending";
+function moveNodeToIndex(nodeId, targetIndex) {
+  const currentIndex = composer.nodes.findIndex((node) => node.id === nodeId);
+  if (currentIndex < 0 || targetIndex < 0) return;
+  const [node] = composer.nodes.splice(currentIndex, 1);
+  const normalizedTarget = currentIndex < targetIndex ? targetIndex - 1 : targetIndex;
+  composer.nodes.splice(Math.max(0, normalizedTarget), 0, node);
+  selectedNodeId = node.id;
+  render();
 }
 
-function setNodeStatus(workflowId, nodeId, status) {
-  runState[workflowId] = {
-    ...(runState[workflowId] || {}),
-    [nodeId]: status,
-  };
-  saveJson("skill-orchestrator-run-state", runState);
-  renderWorkflow();
+function moveSelected(delta) {
+  const index = composer.nodes.findIndex((node) => node.id === selectedNodeId);
+  const target = index + delta;
+  if (index < 0 || target < 0 || target >= composer.nodes.length) return;
+  const [node] = composer.nodes.splice(index, 1);
+  composer.nodes.splice(target, 0, node);
+  selectedNodeId = node.id;
+  render();
 }
 
-function resetCurrentWorkflow() {
-  if (!selectedWorkflowId) return;
-  delete runState[selectedWorkflowId];
-  delete inputState[selectedWorkflowId];
-  saveJson("skill-orchestrator-run-state", runState);
-  saveJson("skill-orchestrator-inputs", inputState);
-  renderWorkflow();
+function removeSelectedNode() {
+  const index = composer.nodes.findIndex((node) => node.id === selectedNodeId);
+  if (index < 0) return;
+  composer.nodes.splice(index, 1);
+  selectedNodeId = composer.nodes[Math.min(index, composer.nodes.length - 1)]?.id || null;
+  render();
 }
 
-function updatePromptPreview(workflow) {
-  elements.promptPreview.value = buildFullPrompt(workflow);
+function clearChain() {
+  composer = normalizeComposer({
+    title: "",
+    context: "",
+    finalOutput: "",
+    nodes: [],
+  });
+  selectedNodeId = null;
+  elements.chainTitle.value = "";
+  elements.finalOutput.value = "";
+  elements.chainContext.value = "";
+  render();
 }
 
-async function copyFullPrompt() {
+async function copyPrompt() {
   const prompt = elements.promptPreview.value;
   try {
     await navigator.clipboard.writeText(prompt);
-    elements.copyStatus.textContent = "已复制";
+    elements.copyStatus.textContent = "已复制整条链 prompt。";
   } catch {
     elements.promptPreview.focus();
     elements.promptPreview.select();
     document.execCommand("copy");
-    elements.copyStatus.textContent = "已选中并复制";
+    elements.copyStatus.textContent = "已选中并复制整条链 prompt。";
   }
-  window.setTimeout(() => {
-    elements.copyStatus.textContent = "待复制";
+  setTimeout(() => {
+    elements.copyStatus.textContent = "链路变化会实时刷新 prompt。";
   }, 1800);
 }
 
-function buildFullPrompt(workflow) {
-  if (!workflow) return "";
-  const workflowInputs = inputState[workflow.id] || {};
-  const missingSkills = collectMissingSkills(workflow);
+function exportChain() {
+  const blob = new Blob([JSON.stringify(composer, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${slugify(composer.title || "skill-chain")}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
 
-  const inputLines = (workflow.entryInputs || []).map((input) => {
-    const value = workflowInputs[input.id] || `[未填写：${input.label}]`;
-    return `- ${input.label}：${value}`;
-  });
+function importChain(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
 
-  const nodeLines = (workflow.nodes || []).map((node, index) => {
-    const skills = (node.skills || []).map((skillId) => {
-      const skill = skillById.get(skillId);
-      return skill ? `${skillId} (${skill.path})` : `${skillId} (missing, 按节点说明降级)`;
-    });
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      composer = normalizeComposer(JSON.parse(String(reader.result)));
+      selectedNodeId = composer.nodes[0]?.id || null;
+      elements.chainTitle.value = composer.title;
+      elements.finalOutput.value = composer.finalOutput;
+      elements.chainContext.value = composer.context;
+      render();
+    } catch {
+      elements.copyStatus.textContent = "导入失败：JSON 不可解析。";
+    }
+    event.target.value = "";
+  };
+  reader.readAsText(file);
+}
 
+function buildPrompt() {
+  if (!composer.nodes.length) {
+    return [
+      "请先在左侧把需要的 skills 拖到中间链路。",
+      "链路生成后，这里会实时出现给 Claude 的整条链 handoff prompt。",
+    ].join("\n");
+  }
+
+  const title = composer.title || "未命名技能链";
+  const finalOutput = composer.finalOutput || "按节点定义产出完整成果";
+  const context = composer.context || "[这里填写项目背景、输入材料、约束和目标读者]";
+
+  const nodeBlocks = composer.nodes.map((node, index) => {
+    const skill = skillById.get(node.skillId);
     return [
       `${index + 1}. ${node.title}`,
-      `   - 参考技能：${skills.join("；") || "无"}`,
-      `   - 输入：${node.input || "-"}`,
-      `   - 输出：${node.output || "-"}`,
-      `   - 执行要点：`,
-      ...(node.instructions || []).map((item) => `     - ${item}`),
-      `   - 验收标准：`,
-      ...(node.acceptance || []).map((item) => `     - ${item}`),
+      `   - 使用技能：${node.skillId}`,
+      `   - 技能路径：${skill?.path || "未在当前技能库中找到"}`,
+      `   - 技能定位：${skill?.description || "请按节点职责降级执行，不要编造技能正文。"}`,
+      `   - 节点职责：${node.role || "[未填写]"}`,
+      `   - 节点输入：${node.input || "[承接上一节点输出或全局输入]"}`,
+      `   - 节点输出：${node.output || "[未填写]"}`,
+      `   - 验收要求：${node.acceptance || "完成后先输出本节点产物摘要，再进入下一节点。"}`,
     ].join("\n");
   });
 
-  const rules = workflow.handoffRules || [];
-  const artifacts = workflow.finalArtifacts || [];
-
   return [
-    `你现在要按 agent-skill-library 的工作流执行一整条技能链。`,
-    ``,
-    `# 工作流`,
-    `- ID：${workflow.id}`,
-    `- 名称：${workflow.title}`,
-    `- 目的：${workflow.purpose || "-"}`,
-    ``,
-    `# 输入`,
-    ...inputLines,
-    ``,
-    `# 可用性`,
-    missingSkills.length
-      ? `以下技能当前没有在本仓库 skills/**/SKILL.md 中找到：${missingSkills.join("、")}。遇到这些节点时，不要编造技能正文；按节点说明和已有技能降级执行，并明确标记缺口。`
-      : `本链路引用的技能当前都能在本仓库 skills/**/SKILL.md 中找到。`,
-    ``,
-    `# 执行顺序`,
-    ...nodeLines,
-    ``,
-    `# 最终产物`,
-    ...artifacts.map((artifact) => `- ${artifact}`),
-    ``,
-    `# 执行规则`,
-    ...rules.map((rule) => `- ${rule}`),
-    ``,
-    `请从第 1 个节点开始，严格顺序执行。每完成一个节点，先输出该节点产物摘要和下一节点输入，再继续。最后汇总所有产物、缺失信息、风险和下一步。`,
+    "你现在要按 agent-skill-library 中由人工拖拽编排出来的技能链执行任务。",
+    "",
+    "# 链路目标",
+    `- 名称：${title}`,
+    `- 最终成果：${finalOutput}`,
+    "",
+    "# 全局输入和背景",
+    context,
+    "",
+    "# 执行顺序",
+    ...nodeBlocks,
+    "",
+    "# 执行规则",
+    "- 严格按上面的节点顺序执行，不要跳过前置节点。",
+    "- 每个节点必须显式说明：输入是什么、调用了哪个 skill、产出了什么。",
+    "- 如果某个 skill 在当前环境不可用，不要编造 skill 内容；按该节点职责和已有上下文降级执行，并标记缺口。",
+    "- 每完成一个节点，先输出该节点产物摘要，再进入下一节点。",
+    "- 事实、判断、推断和待确认问题必须分开。",
+    "- 最终汇总所有产物、未完成项、风险和下一步。",
   ].join("\n");
 }
 
-function collectMissingSkills(workflow) {
-  const missing = new Set();
-  for (const node of workflow.nodes || []) {
-    for (const skillId of node.skills || []) {
-      if (!skillById.has(skillId)) missing.add(skillId);
-    }
+function drawLinks() {
+  const cards = [...elements.chainNodes.querySelectorAll(".chain-node")];
+  const svg = elements.linkLayer;
+  svg.innerHTML = "";
+  if (cards.length < 2) return;
+
+  const canvasRect = elements.chainNodes.getBoundingClientRect();
+  svg.setAttribute("viewBox", `0 0 ${canvasRect.width} ${canvasRect.height}`);
+  svg.setAttribute("width", canvasRect.width);
+  svg.setAttribute("height", canvasRect.height);
+
+  for (let index = 0; index < cards.length - 1; index += 1) {
+    const from = cards[index].getBoundingClientRect();
+    const to = cards[index + 1].getBoundingClientRect();
+    const x1 = from.right - canvasRect.left;
+    const y1 = from.top + from.height / 2 - canvasRect.top;
+    const x2 = to.left - canvasRect.left;
+    const y2 = to.top + to.height / 2 - canvasRect.top;
+    const mid = Math.max(24, (x2 - x1) / 2);
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", `M ${x1} ${y1} C ${x1 + mid} ${y1}, ${x2 - mid} ${y2}, ${x2} ${y2}`);
+    path.setAttribute("class", "link-path");
+    svg.appendChild(path);
   }
-  return [...missing];
 }
 
-function skillSummary(skills) {
-  const available = skills.filter((skillId) => skillById.has(skillId)).length;
-  const total = skills.length;
-  if (!total) return "0 skills";
-  return `${available}/${total} skills available`;
+function defaultRole(skill) {
+  if (!skill) return "";
+  return `参考 ${skill.id}，完成本节点在整条链中的专业判断或生成任务。`;
 }
 
-function skillPillsHtml(skills) {
-  if (!skills.length) return "-";
-  return `<div class="skill-pills">${skills.map((skillId) => {
-    const skill = skillById.get(skillId);
-    const status = skill ? "done" : "missing";
-    const label = skill ? skill.path : "missing";
-    return `<span class="skill-pill status-${status}"><code>${escapeHtml(skillId)}</code> ${escapeHtml(label)}</span>`;
-  }).join("")}</div>`;
+function defaultInput(skill) {
+  if (!skill) return "";
+  if (skill.section === "product") return "全局输入材料、产品信息、上一节点输出。";
+  if (skill.section === "investment") return "产品判断、公开事实、GitHub / 融资 / 商业化线索。";
+  if (skill.section === "frontend-design") return "上一节点产物、页面目标、视觉约束、组件需求。";
+  return "全局输入材料和上一节点输出。";
 }
 
-function listHtml(items) {
-  if (!items.length) return "-";
-  return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+function defaultOutput(skill) {
+  if (!skill) return "";
+  if (skill.section === "product") return "结构化产品分析、关键判断、最强论点、最弱缺口。";
+  if (skill.section === "investment") return "投资判断、评分或 DD 问题树。";
+  if (skill.section === "frontend-design") return "设计策略、页面结构、组件计划或可视化产物。";
+  return "本节点可交付产物。";
+}
+
+function createNodeId(seed) {
+  return `${seed}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+function slugify(value) {
+  return String(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "skill-chain";
+}
+
+function shortText(value, maxLength) {
+  const normalized = String(value).replace(/\s+/g, " ").trim();
+  return normalized.length > maxLength ? `${normalized.slice(0, maxLength - 1)}...` : normalized;
 }
 
 function escapeHtml(value) {

@@ -41,10 +41,9 @@
 ## 可视化编排
 
 - 本地编排台：`apps/skill-orchestrator/index.html`
-- 编排定义：`orchestrations/`
 - 数据生成：运行 `.\scripts\build-skill-orchestrator-data.ps1`
 
-编排台不运行 Claude，也不做本地 runner。它展示当前技能库、工作流节点、技能可用性和人工状态，并生成整条链的 Claude handoff prompt。
+编排台不运行 Claude，也不做本地 runner。它从当前 `skills/` 扫描技能，支持拖拽拼出动态技能链，实时生成整条链的 Claude handoff prompt。只有反复验证后值得沉淀的链路，才从页面导出 JSON 放进 `orchestrations/`。
 
 ## 文档入口
 

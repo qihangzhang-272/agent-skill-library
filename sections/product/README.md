@@ -13,6 +13,11 @@
 
 - `ai-product-analyzer`：从 BP / Pitch Deck 商业判断逻辑评估 AI 产品，输出好案例 / 反面教材 / 待观察判断。
 
+跨板块调用链：
+
+- `docs/workflows/investment-product-to-research-report.md`：产品分析与投资判断合并到研报、case memo 或 DD 问题树。
+- `docs/workflows/prd-to-frontend.md`：把产品需求推进到前端 brief、页面结构和实现验收。
+
 待收录方向：
 
 - AI 产品六维分析

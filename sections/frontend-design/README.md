@@ -15,6 +15,7 @@
 - 候选来源清单：`docs/sections/frontend-design/sources.md`
 - 调用链说明：`docs/sections/frontend-design/ui-call-chain.md`
 - 网页 prompt 索引：`docs/sections/frontend-design/prompt-index.md`
+- PRD 到前端跨板块调用链：`docs/workflows/prd-to-frontend.md`
 
 已收录：
 

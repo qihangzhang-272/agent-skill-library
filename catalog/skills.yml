@@ -109,6 +109,40 @@ external_sources:
         stars: 1812
         role: "v0 system prompt reference link only"
 
+pipelines:
+  investment_product_to_research_report:
+    title: "投资 / 产品问题到研报"
+    workflow_doc: "docs/workflows/investment-product-to-research-report.md"
+    sections:
+      - investment
+      - product
+    primary_skills:
+      - oss-investment-scorecard
+      - ai-product-analyzer
+    output_artifacts:
+      - "quick note"
+      - "case memo"
+      - "research report"
+      - "IC memo"
+      - "DD priority list"
+  prd_to_frontend:
+    title: "PRD 到前端实现"
+    workflow_doc: "docs/workflows/prd-to-frontend.md"
+    sections:
+      - product
+      - frontend-design
+      - development-paradigms
+    primary_skills:
+      - awesome-design-skills-selected-styles
+      - typeui-fundamentals
+      - greensock-gsap-skills
+    output_artifacts:
+      - "frontend brief"
+      - "page type decision"
+      - "design strategy"
+      - "component plan"
+      - "browser acceptance record"
+
 sections:
   investment:
     title: "投资"

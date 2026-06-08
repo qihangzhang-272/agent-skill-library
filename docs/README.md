@@ -7,7 +7,7 @@
 | 目录 | 用途 | 当前文件 |
 | --- | --- | --- |
 | `governance/` | 仓库级原则、架构边界、引用策略 | `README.md`、`architecture.md`、`reference-policy.md` |
-| `workflows/` | 可重复执行的收录、审查、Linear 协作流程 | `README.md`、`linear-workflow.md` |
+| `workflows/` | 可重复执行的收录、审查、Linear 协作流程和跨板块调用链 | `README.md`、`linear-workflow.md`、`investment-product-to-research-report.md`、`prd-to-frontend.md` |
 | `sections/` | 各业务/能力板块自己的来源清单、调用链、prompt 索引 | `README.md`、`frontend-design/` |
 
 ## 放置规则
@@ -23,6 +23,8 @@
 - [governance/project-purpose.md](governance/project-purpose.md)：仓库目的、边界和运行库定位。
 - [governance/reference-policy.md](governance/reference-policy.md)：引用式技能库规则和外部包迁移例外。
 - [workflows/linear-workflow.md](workflows/linear-workflow.md)：Linear 项目和 Issue 工作流。
+- [workflows/investment-product-to-research-report.md](workflows/investment-product-to-research-report.md)：投资 / 产品问题到研报的调用链。
+- [workflows/prd-to-frontend.md](workflows/prd-to-frontend.md)：PRD 到前端实现的调用链。
 - [sections/README.md](sections/README.md)：板块文档放置规则。
 - [sections/frontend-design/sources.md](sections/frontend-design/sources.md)：前端设计候选来源和收录结果。
 - [sections/frontend-design/ui-call-chain.md](sections/frontend-design/ui-call-chain.md)：前端 UI 规划和开发调用链。

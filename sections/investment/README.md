@@ -28,6 +28,10 @@
 - 后续同步上游时记录 commit，不自行优化改写。
 - 投资板块后续重点是“投资问题 -> 研报 / 判断材料”的端到端链路，而不是只做单点打分。
 
+跨板块调用链：
+
+- `docs/workflows/investment-product-to-research-report.md`：把投资问题、产品判断和 DD 问题树整理成研报或 IC memo。
+
 ## 待补充方向
 
 - 私募/成长股项目快速筛选

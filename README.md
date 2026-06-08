@@ -31,11 +31,18 @@
 | `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
 | `typeui-fundamentals` | frontend-design | `skills/typeui-fundamentals/` | 已迁移 TypeUI 基础 UI/UX 原则 skill |
 
+## 当前运行链
+
+| 调用链 | 文档 | 作用 |
+| --- | --- | --- |
+| 投资 / 产品问题到研报 | `docs/workflows/investment-product-to-research-report.md` | 把产品判断、投资评分、DD 问题树整理成研报、case memo 或 IC memo |
+| PRD 到前端实现 | `docs/workflows/prd-to-frontend.md` | 把模糊需求或 PRD 推进到页面结构、组件计划、前端实现和浏览器验收 |
+
 ## 文档入口
 
 - 文档总目录见 [docs/README.md](docs/README.md)。
 - 仓库治理和引用原则见 [docs/governance/](docs/governance/)。
-- 收录、协作和 Linear 流程见 [docs/workflows/](docs/workflows/)。
+- 收录、协作、Linear 和跨板块调用链见 [docs/workflows/](docs/workflows/)。
 - 各板块的来源、调用链和索引见 [docs/sections/](docs/sections/)。
 
 ## 维护规则

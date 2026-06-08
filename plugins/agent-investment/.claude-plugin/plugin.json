@@ -1,17 +1,17 @@
 {
-  "name": "agent-investment",
-  "displayName": "Agent Investment",
-  "version": "0.1.0",
-  "description": "Investment evaluation skills for OSS company scoring, VC questions, diligence, and research-report workflows.",
-  "author": {
-    "name": "Private Agent Skill Library"
-  },
-  "repository": "https://github.com/qihangzhang-272/agent-skill-library.git",
-  "keywords": [
-    "investment",
-    "vc",
-    "oss",
-    "diligence"
-  ],
-  "skills": "./skills"
+    "name":  "agent-investment",
+    "displayName":  "Agent Investment",
+    "version":  "0.1.0",
+    "description":  "Investment evaluation skills for OSS company scoring, VC questions, diligence, and research-report workflows.",
+    "author":  {
+                   "name":  "Private Agent Skill Library"
+               },
+    "repository":  "https://github.com/qihangzhang-272/agent-skill-library.git",
+    "keywords":  [
+                     "investment",
+                     "vc",
+                     "oss",
+                     "diligence"
+                 ],
+    "skills":  "./skills"
 }

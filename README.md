@@ -54,6 +54,8 @@ claude plugin validate .
 | `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
 | `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
 | `typeui-fundamentals` | frontend-design | `skills/typeui-fundamentals/` | 已迁移 TypeUI 基础 UI/UX 原则 skill |
+| `taste-skill` | frontend-design | `skills/taste-skill/` | 已保守迁移核心 `skills/` 目录 |
+| `impeccable-index` | frontend-design | `skills/impeccable/` | 已归档核心包并以 wrapper/index 收录 |
 
 ## 当前运行链
 
@@ -96,6 +98,8 @@ claude plugin validate .
 
 `frontend-design` 是 Anthropic 官方 skills repo 的前端设计技能独立迁移包，用于提升前端页面和组件的视觉质量。
 
-`frontend-design` 板块当前采用“保守迁移 + 引用索引”策略：GSAP 官方 skills、Awesome Design Skills 的已验证风格目录、TypeUI fundamentals 可以进入 `skills/`；21st.dev、designprompts.dev 等网页 prompt 只记录入口，不复制 prompt 正文。
+`frontend-design` 板块当前采用“保守迁移 + 引用索引”策略：GSAP 官方 skills、Awesome Design Skills 的已验证风格目录、TypeUI fundamentals、Taste Skill 核心 skills 可以进入 `skills/`；21st.dev、designprompts.dev 等网页 prompt 只记录入口，不复制 prompt 正文。
+
+`impeccable-index` 只作为 Impeccable 的本地索引和核心归档，不把上游完整仓库的 CLI、站点、扩展和多平台适配层作为正式源内容迁入。
 
 本仓库和 Product Hunter 没有长期关系。历史上从某个本地目录借用过内容，只作为导入 provenance，不构成本仓库的上游、资料源或同步关系。

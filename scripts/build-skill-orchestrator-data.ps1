@@ -39,16 +39,38 @@ function Infer-Section {
   if ($RelativePath -like '*awesome-design-skills*') { return 'frontend-design' }
   if ($RelativePath -like '*greensock-gsap-skills*') { return 'frontend-design' }
   if ($RelativePath -like '*typeui-fundamentals*') { return 'frontend-design' }
+  if ($RelativePath -like '*taste-skill*') { return 'frontend-design' }
+  if ($RelativePath -like '*impeccable*') { return 'frontend-design' }
   return 'unknown'
+}
+
+function Get-RelativePathCompat {
+  param(
+    [Parameter(Mandatory = $true)][string]$BasePath,
+    [Parameter(Mandatory = $true)][string]$TargetPath
+  )
+
+  $baseFullPath = [System.IO.Path]::GetFullPath($BasePath)
+  if (-not $baseFullPath.EndsWith([System.IO.Path]::DirectorySeparatorChar)) {
+    $baseFullPath += [System.IO.Path]::DirectorySeparatorChar
+  }
+
+  $targetFullPath = [System.IO.Path]::GetFullPath($TargetPath)
+  $baseUri = New-Object System.Uri($baseFullPath)
+  $targetUri = New-Object System.Uri($targetFullPath)
+
+  [System.Uri]::UnescapeDataString($baseUri.MakeRelativeUri($targetUri).ToString()).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
 }
 
 $repo = Resolve-Path $RepoRoot
 $skillsRoot = Join-Path $repo.Path 'skills'
 
-$skillFiles = Get-ChildItem -Path $skillsRoot -Recurse -Filter 'SKILL.md' | Sort-Object FullName
+$skillFiles = Get-ChildItem -Path $skillsRoot -Recurse -Filter 'SKILL.md' |
+  Where-Object { $_.FullName -notmatch '[\\/](upstream)[\\/]' } |
+  Sort-Object FullName
 $skills = foreach ($file in $skillFiles) {
   $content = Get-Content -LiteralPath $file.FullName -Raw
-  $relativePath = [System.IO.Path]::GetRelativePath($repo.Path, $file.FullName).Replace('\', '/')
+  $relativePath = (Get-RelativePathCompat -BasePath $repo.Path -TargetPath $file.FullName).Replace('\', '/')
   $skillDir = [System.IO.Path]::GetDirectoryName($relativePath).Replace('\', '/')
   $name = Get-FrontMatterValue -Content $content -Key 'name'
   if (-not $name) { $name = ($skillDir -split '/')[-1] }

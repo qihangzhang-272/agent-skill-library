@@ -10,6 +10,16 @@ function ConvertTo-PrettyJson {
   $Value | ConvertTo-Json -Depth 32
 }
 
+function Write-Utf8NoBom {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [Parameter(Mandatory = $true)][string]$Value
+  )
+
+  $encoding = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllText($Path, $Value, $encoding)
+}
+
 function Assert-ChildPath {
   param(
     [Parameter(Mandatory = $true)][string]$Parent,
@@ -109,7 +119,7 @@ foreach ($plugin in $config.plugins) {
   }
 
   $manifestPath = Join-Path $pluginManifestDir "plugin.json"
-  ConvertTo-PrettyJson $manifest | Set-Content -LiteralPath $manifestPath -Encoding UTF8
+  Write-Utf8NoBom -Path $manifestPath -Value (ConvertTo-PrettyJson $manifest)
 
   $marketplacePlugin = [ordered]@{
     name = $plugin.name
@@ -131,7 +141,7 @@ $marketplace = [ordered]@{
 }
 
 $marketplacePath = Join-Path $marketplaceRoot "marketplace.json"
-ConvertTo-PrettyJson $marketplace | Set-Content -LiteralPath $marketplacePath -Encoding UTF8
+Write-Utf8NoBom -Path $marketplacePath -Value (ConvertTo-PrettyJson $marketplace)
 
 Write-Host "Generated Claude marketplace: $marketplacePath"
 Write-Host "Generated plugins: $($marketplacePlugins.Count)"

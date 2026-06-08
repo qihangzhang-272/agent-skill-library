@@ -56,15 +56,18 @@
     {
       "name": "agent-frontend-design",
       "displayName": "Agent Frontend Design",
-      "description": "Frontend design, UI/UX fundamentals, visual style skills, and GSAP motion skills for PRD-to-frontend workflows.",
-      "version": "0.1.0",
+      "description": "Frontend design, UI/UX fundamentals, visual style skills, Taste anti-slop skills, Impeccable index, and GSAP motion skills for PRD-to-frontend workflows.",
+      "version": "0.2.0",
       "section": "frontend-design",
       "keywords": [
         "frontend",
         "ui",
         "ux",
         "design",
-        "gsap"
+        "gsap",
+        "taste",
+        "anti-slop",
+        "impeccable"
       ],
       "distributionStatus": "active",
       "releasePolicy": "manual_semver",
@@ -78,6 +81,76 @@
           "id": "typeui-fundamentals",
           "sourcePath": "skills/typeui-fundamentals",
           "targetName": "typeui-fundamentals"
+        },
+        {
+          "id": "brandkit",
+          "sourcePath": "skills/taste-skill/skills/brandkit",
+          "targetName": "brandkit"
+        },
+        {
+          "id": "brutalist-skill",
+          "sourcePath": "skills/taste-skill/skills/brutalist-skill",
+          "targetName": "brutalist-skill"
+        },
+        {
+          "id": "gpt-tasteskill",
+          "sourcePath": "skills/taste-skill/skills/gpt-tasteskill",
+          "targetName": "gpt-tasteskill"
+        },
+        {
+          "id": "image-to-code-skill",
+          "sourcePath": "skills/taste-skill/skills/image-to-code-skill",
+          "targetName": "image-to-code-skill"
+        },
+        {
+          "id": "imagegen-frontend-mobile",
+          "sourcePath": "skills/taste-skill/skills/imagegen-frontend-mobile",
+          "targetName": "imagegen-frontend-mobile"
+        },
+        {
+          "id": "imagegen-frontend-web",
+          "sourcePath": "skills/taste-skill/skills/imagegen-frontend-web",
+          "targetName": "imagegen-frontend-web"
+        },
+        {
+          "id": "minimalist-skill",
+          "sourcePath": "skills/taste-skill/skills/minimalist-skill",
+          "targetName": "minimalist-skill"
+        },
+        {
+          "id": "output-skill",
+          "sourcePath": "skills/taste-skill/skills/output-skill",
+          "targetName": "output-skill"
+        },
+        {
+          "id": "redesign-skill",
+          "sourcePath": "skills/taste-skill/skills/redesign-skill",
+          "targetName": "redesign-skill"
+        },
+        {
+          "id": "soft-skill",
+          "sourcePath": "skills/taste-skill/skills/soft-skill",
+          "targetName": "soft-skill"
+        },
+        {
+          "id": "stitch-skill",
+          "sourcePath": "skills/taste-skill/skills/stitch-skill",
+          "targetName": "stitch-skill"
+        },
+        {
+          "id": "taste-skill",
+          "sourcePath": "skills/taste-skill/skills/taste-skill",
+          "targetName": "taste-skill"
+        },
+        {
+          "id": "taste-skill-v1",
+          "sourcePath": "skills/taste-skill/skills/taste-skill-v1",
+          "targetName": "taste-skill-v1"
+        },
+        {
+          "id": "impeccable-index",
+          "sourcePath": "skills/impeccable",
+          "targetName": "impeccable-index"
         },
         {
           "id": "dashboard",

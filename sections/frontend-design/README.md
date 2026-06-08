@@ -23,6 +23,8 @@
 - `skills/greensock-gsap-skills/`：保守迁移 `greensock/gsap-skills` 的官方 `skills/` 目录，用于动效层。
 - `skills/awesome-design-skills/`：只迁移 `dashboard`、`shadcn`、`bento`、`premium`、`minimal` 五个风格 skill，用于设计策略层。
 - `skills/typeui-fundamentals/`：只迁移 TypeUI `skills/fundamentals`，用于 UI/UX 基础原则层；它需要搭配项目设计系统或 `DESIGN.md` 使用。
+- `skills/taste-skill/`：保守迁移 `leonxlnx/taste-skill` 的核心 `skills/` 目录，用于 anti-slop、风格判断、redesign、image-to-code 和输出质量约束。
+- `skills/impeccable/`：归档 `pbakaus/impeccable` 的 `.agents/skills/impeccable` 核心包，并用 `impeccable-index` 做入口；真正运行脚本前要安装到项目级 `.agents/skills/impeccable/`。
 
 继续作为引用，不直接复制正文：
 

@@ -24,7 +24,7 @@ plugins/<plugin-name>/
 | --- | --- | --- |
 | `agent-product` | product | AI 产品分析、商业模式、叙事审计和研报前置判断 |
 | `agent-writing` | writing | 中文自然语气、保留作者声音和文稿润色 |
-| `agent-frontend-design` | frontend-design | 前端设计、UI/UX、视觉风格和 GSAP 动效 |
+| `agent-frontend-design` | frontend-design | 前端设计、UI/UX、视觉风格、Taste anti-slop、Impeccable 索引和 GSAP 动效 |
 | `agent-investment` | investment | OSS 投资评分、VC 问题和 DD 判断 |
 
 ## 安装测试

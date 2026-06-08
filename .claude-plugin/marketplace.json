@@ -1,49 +1,49 @@
 {
-  "name": "agent-skill-library",
-  "description": "Private Claude Code marketplace for reusable agent skills and workflow capabilities.",
-  "owner": {
-    "name": "Private Agent Skill Library"
-  },
-  "plugins": [
-    {
-      "name": "agent-product",
-      "source": "./plugins/agent-product",
-      "description": "Product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
-      "version": "0.1.0",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    },
-    {
-      "name": "agent-writing",
-      "source": "./plugins/agent-writing",
-      "description": "Writing and revision skills for Chinese natural voice, tone preservation, and manuscript polish.",
-      "version": "0.1.0",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    },
-    {
-      "name": "agent-frontend-design",
-      "source": "./plugins/agent-frontend-design",
-      "description": "Frontend design, UI/UX fundamentals, visual style skills, and GSAP motion skills for PRD-to-frontend workflows.",
-      "version": "0.1.0",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    },
-    {
-      "name": "agent-investment",
-      "source": "./plugins/agent-investment",
-      "description": "Investment evaluation skills for OSS company scoring, VC questions, diligence, and research-report workflows.",
-      "version": "0.1.0",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    }
-  ]
+    "name":  "agent-skill-library",
+    "description":  "Private Claude Code marketplace for reusable agent skills and workflow capabilities.",
+    "owner":  {
+                  "name":  "Private Agent Skill Library"
+              },
+    "plugins":  [
+                    {
+                        "name":  "agent-product",
+                        "source":  "./plugins/agent-product",
+                        "description":  "Product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
+                        "version":  "0.1.0",
+                        "author":  {
+                                       "name":  "Private Agent Skill Library"
+                                   },
+                        "strict":  true
+                    },
+                    {
+                        "name":  "agent-writing",
+                        "source":  "./plugins/agent-writing",
+                        "description":  "Writing and revision skills for Chinese natural voice, tone preservation, and manuscript polish.",
+                        "version":  "0.1.0",
+                        "author":  {
+                                       "name":  "Private Agent Skill Library"
+                                   },
+                        "strict":  true
+                    },
+                    {
+                        "name":  "agent-frontend-design",
+                        "source":  "./plugins/agent-frontend-design",
+                        "description":  "Frontend design, UI/UX fundamentals, visual style skills, Taste anti-slop skills, Impeccable index, and GSAP motion skills for PRD-to-frontend workflows.",
+                        "version":  "0.2.0",
+                        "author":  {
+                                       "name":  "Private Agent Skill Library"
+                                   },
+                        "strict":  true
+                    },
+                    {
+                        "name":  "agent-investment",
+                        "source":  "./plugins/agent-investment",
+                        "description":  "Investment evaluation skills for OSS company scoring, VC questions, diligence, and research-report workflows.",
+                        "version":  "0.1.0",
+                        "author":  {
+                                       "name":  "Private Agent Skill Library"
+                                   },
+                        "strict":  true
+                    }
+                ]
 }

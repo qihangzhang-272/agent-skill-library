@@ -80,6 +80,50 @@ external_sources:
       - "plugins/"
       - "MCP server"
       - "registry client implementation"
+  taste_skill:
+    repo: "https://github.com/leonxlnx/taste-skill"
+    mirrored_commit: "3c7017d636c3a4aad378433ea6d0cfa6c921da4a"
+    local_package_path: "skills/taste-skill"
+    license_note: "MIT license copied from upstream LICENSE."
+    stars_at_review: 38108
+    migrated_scope:
+      - "skills/"
+      - "README.md"
+      - "CHANGELOG.md"
+      - "LICENSE"
+      - "skill.sh"
+    excluded_scope:
+      - ".github/"
+      - "assets/"
+      - "examples/"
+      - "research/"
+    vetting:
+      risk_level: "low"
+      note: "Migrated core is mostly markdown skill content; reviewed install command examples and external URLs are informational."
+  impeccable:
+    repo: "https://github.com/pbakaus/impeccable"
+    mirrored_commit: "1aedbcf538e3fa6694ccbf00294cc18e59ba1f21"
+    local_package_path: "skills/impeccable"
+    license_note: "Apache-2.0 LICENSE and NOTICE.md copied from upstream."
+    stars_at_review: 36057
+    migrated_scope:
+      - ".agents/skills/impeccable archived under upstream/.agents/skills/impeccable"
+      - "README.md"
+      - "LICENSE"
+      - "NOTICE.md"
+      - "wrapper SKILL.md"
+    excluded_scope:
+      - "platform adapter directories"
+      - "CLI"
+      - "site"
+      - "extension"
+      - "demos"
+      - "tests"
+      - "tools"
+      - "functions"
+    vetting:
+      risk_level: "medium"
+      note: "Includes executable Node scripts, local server/browser tooling, update check, and file-editing flows; wrapper prevents treating the archive as a path-ready install."
   frontend_design_candidate_sources:
     research_note: "docs/sections/frontend-design/sources.md"
     prompt_index: "docs/sections/frontend-design/prompt-index.md"
@@ -99,6 +143,14 @@ external_sources:
         license: "MIT"
         stars: 8479
         role: "official GSAP AI skills; first direct migration candidate"
+      - repo: "https://github.com/leonxlnx/taste-skill"
+        license: "MIT"
+        stars: 38108
+        role: "anti-slop frontend skill collection; direct core migration candidate"
+      - repo: "https://github.com/pbakaus/impeccable"
+        license: "Apache-2.0"
+        stars: 36057
+        role: "high-craft frontend design skill with runtime scripts; archive plus wrapper/index candidate"
       - repo: "https://github.com/shadcn-ui/ui"
         license: "MIT"
         stars: 115953
@@ -162,6 +214,8 @@ pipelines:
     primary_skills:
       - awesome-design-skills-selected-styles
       - typeui-fundamentals
+      - taste-skill
+      - impeccable-index
       - greensock-gsap-skills
     output_artifacts:
       - "frontend brief"
@@ -366,3 +420,67 @@ skills:
       - "给前端设计做基础原则审查"
     copy_policy: "vendored_partial_external_skill"
     notes: "只迁移 TypeUI skills/fundamentals；CLI、插件、MCP、registry 实现只做 reference，不进入正式技能包。该包是原则层，使用前应先有项目设计系统或 DESIGN.md 上下文。"
+  - id: taste-skill
+    title: "Taste Skill"
+    section: frontend-design
+    status: vendored_partial
+    source_type: external_frontend_skill_collection
+    package_path: "skills/taste-skill/skills"
+    package_support:
+      - "skills/taste-skill/skills/brandkit/SKILL.md"
+      - "skills/taste-skill/skills/brutalist-skill/SKILL.md"
+      - "skills/taste-skill/skills/gpt-tasteskill/SKILL.md"
+      - "skills/taste-skill/skills/image-to-code-skill/SKILL.md"
+      - "skills/taste-skill/skills/imagegen-frontend-mobile/SKILL.md"
+      - "skills/taste-skill/skills/imagegen-frontend-web/SKILL.md"
+      - "skills/taste-skill/skills/minimalist-skill/SKILL.md"
+      - "skills/taste-skill/skills/output-skill/SKILL.md"
+      - "skills/taste-skill/skills/redesign-skill/SKILL.md"
+      - "skills/taste-skill/skills/soft-skill/SKILL.md"
+      - "skills/taste-skill/skills/stitch-skill/SKILL.md"
+      - "skills/taste-skill/skills/stitch-skill/DESIGN.md"
+      - "skills/taste-skill/skills/taste-skill/SKILL.md"
+      - "skills/taste-skill/skills/taste-skill-v1/SKILL.md"
+      - "skills/taste-skill/skills/llms.txt"
+    upstream_source:
+      repo: "https://github.com/leonxlnx/taste-skill"
+      commit: "3c7017d636c3a4aad378433ea6d0cfa6c921da4a"
+    pipeline_role: "prd_to_frontend_design_strategy_and_anti_slop_layer"
+    trigger_examples:
+      - "这个 landing page 不要 AI 味"
+      - "用更强的设计品味重做这个页面"
+      - "把截图还原成高质量前端"
+      - "判断这个页面应该走什么设计方向"
+    copy_policy: "vendored_partial_external_skill_collection"
+    notes: "只迁移核心 skills 目录和必要上游说明；assets、examples、research 不进入正式源。"
+  - id: impeccable-index
+    title: "Impeccable Index"
+    section: frontend-design
+    status: vendored_partial_index
+    source_type: external_frontend_design_skill_with_runtime_scripts
+    package_path: "skills/impeccable/SKILL.md"
+    package_support:
+      - "skills/impeccable/upstream/.agents/skills/impeccable/SKILL.md"
+      - "skills/impeccable/upstream/.agents/skills/impeccable/reference/"
+      - "skills/impeccable/upstream/.agents/skills/impeccable/scripts/"
+      - "skills/impeccable/README.md"
+      - "skills/impeccable/LICENSE"
+      - "skills/impeccable/NOTICE.md"
+      - "skills/impeccable/UPSTREAM.md"
+    upstream_source:
+      repo: "https://github.com/pbakaus/impeccable"
+      commit: "1aedbcf538e3fa6694ccbf00294cc18e59ba1f21"
+    package_traits:
+      - runtime_path_coupled
+      - executable_scripts
+      - local_browser_tooling
+      - wrapper_required
+    vetting:
+      risk_level: "medium"
+    pipeline_role: "prd_to_frontend_design_audit_polish_and_live_iteration_layer"
+    trigger_examples:
+      - "用 Impeccable 审查这个前端"
+      - "做前端 polish 和 anti-pattern detection"
+      - "让 Claude 按 Impeccable live 流程迭代页面"
+    copy_policy: "vendored_partial_external_skill_archive_with_wrapper"
+    notes: "不把上游完整仓库当作普通 skill 迁入；保留核心包供索引和项目级安装参考，真正运行脚本前应安装到目标项目的 .agents/skills/impeccable/。"

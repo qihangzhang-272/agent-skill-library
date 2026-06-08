@@ -1,5 +1,5 @@
 window.SKILL_ORCHESTRATOR_DATA = {
-  "generatedAt": "2026-06-08 08:57:07",
+  "generatedAt": "2026-06-08 09:02:08",
   "repository": {
     "name": "agent-skill-library",
     "root": "."
@@ -57,6 +57,24 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "path": "skills/awesome-design-skills/skills/shadcn/SKILL.md",
       "directory": "skills/awesome-design-skills/skills/shadcn",
       "description": "Shadcn/ui-inspired design with minimal, clean components, monochrome palette, and utility-first patterns.",
+      "status": "available"
+    },
+    {
+      "id": "chinese-natural-voice-revision",
+      "title": "chinese natural voice revision",
+      "section": "writing",
+      "path": "skills/chinese-natural-voice-revision/SKILL.md",
+      "directory": "skills/chinese-natural-voice-revision",
+      "description": "修改中文文章中空泛、模板化、过度顺滑、AI味明显的表达，使其更像作者本人真实写出的中文稿。用于中文作文、读后感、课程论文、申请文书、心得体会、发言稿等需要降低AI腔、增强个人声音、补足真实细节、保留原意并优化自然度的任务；当缺少个人素材时，必须反问用户提供自己的具体经历，而不是代编例子或承诺规避检测。",
+      "status": "available"
+    },
+    {
+      "id": "frontend-design",
+      "title": "frontend design",
+      "section": "frontend-design",
+      "path": "skills/frontend-design/SKILL.md",
+      "directory": "skills/frontend-design",
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
       "status": "available"
     },
     {

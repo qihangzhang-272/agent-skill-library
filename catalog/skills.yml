@@ -3,6 +3,26 @@ library: agent-skill-library
 principle: "catalog records reusable agent capabilities, source indexes, call chains, and project-init selection guidance"
 
 external_sources:
+  chinese_natural_voice_revision:
+    original_archive: "chinese-natural-voice-revision-universal.zip"
+    captured_at: "2026-06-08"
+    local_package_path: "skills/chinese-natural-voice-revision"
+    license_note: "No standalone license file detected in the supplied archive."
+    migrated_scope:
+      - "SKILL.md"
+      - "AGENTS.md"
+      - "skill.json"
+      - "agents/openai.yaml"
+    vetting:
+      risk_level: "low"
+      red_flags: "none detected"
+      note: "No shell commands, network calls, credential access, eval/exec, base64, or destructive file operations detected."
+  anthropic_frontend_design:
+    repo: "https://github.com/anthropics/skills"
+    mirrored_commit: "c30d329f5814647c1e2f071020c1e8c1c9893ef1"
+    upstream_path: "skills/frontend-design"
+    local_package_path: "skills/frontend-design"
+    license_note: "Apache-2.0 LICENSE.txt copied with the skill package; upstream source is Anthropic's official skills repository."
   oss_investment_scorecard:
     repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
     mirrored_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
@@ -150,6 +170,9 @@ sections:
   product:
     title: "产品"
     purpose: "产品分析、案例研究、场景边界、商业模式和竞争定位"
+  writing:
+    title: "写作"
+    purpose: "中文写作、改写、语气修订、作者声音和文稿自然化"
   frontend-design:
     title: "前端设计"
     purpose: "前端设计、UI/UX、视觉风格、设计提示词和界面生成质量控制"
@@ -218,6 +241,32 @@ skills:
       - "这个产品是好案例、反面教材，还是待观察"
     copy_policy: "vendored_internal_skill_package"
     notes: "从本地 seed skill 迁移；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。原始本地目录只作为导入 provenance，不代表本仓库存在上游依赖。"
+  - id: chinese-natural-voice-revision
+    title: "Chinese Natural Voice Revision"
+    section: writing
+    status: vendored
+    source_type: user_supplied_complete_skill_package
+    package_path: "skills/chinese-natural-voice-revision/SKILL.md"
+    package_support:
+      - "skills/chinese-natural-voice-revision/AGENTS.md"
+      - "skills/chinese-natural-voice-revision/skill.json"
+      - "skills/chinese-natural-voice-revision/agents/openai.yaml"
+    original_source:
+      type: "user_supplied_zip"
+      archive_name: "chinese-natural-voice-revision-universal.zip"
+      captured_at: "2026-06-08"
+    package_traits:
+      - complete_package
+      - no_external_path_dependency
+      - no_command_execution
+    trigger_examples:
+      - "中文文章降AI味"
+      - "中文稿降AIGC"
+      - "中文作文更像人写"
+      - "读后感自然化修改"
+      - "保留作者声音润色"
+    copy_policy: "vendored_user_supplied_complete_skill_package"
+    notes: "按用户要求迁入完全体；安全检查未发现命令、网络、凭据、eval/base64 或破坏性文件操作。"
   - id: greensock-gsap-skills
     title: "GSAP Skills"
     section: frontend-design
@@ -270,6 +319,26 @@ skills:
       - "给 landing page 选 premium 或 bento 方向"
     copy_policy: "vendored_partial_external_style_skills"
     notes: "只迁移本地实验验证过的 5 个风格目录；其他风格目录继续留在候选源中。"
+  - id: frontend-design
+    title: "Anthropic Frontend Design"
+    section: frontend-design
+    status: vendored
+    source_type: official_anthropic_skill
+    package_path: "skills/frontend-design/SKILL.md"
+    package_support:
+      - "skills/frontend-design/LICENSE.txt"
+    upstream_source:
+      repo: "https://github.com/anthropics/skills"
+      commit: "c30d329f5814647c1e2f071020c1e8c1c9893ef1"
+      path: "skills/frontend-design"
+    trigger_examples:
+      - "做一个高质量前端页面"
+      - "这个页面设计得更有质感"
+      - "构建一个 landing page"
+      - "优化 dashboard UI"
+      - "frontend design"
+    copy_policy: "vendored_official_anthropic_skill"
+    notes: "Anthropic 官方 skills repo 中的 frontend-design skill，作为 frontend-design 板块的通用设计质量提升技能。"
   - id: typeui-fundamentals
     title: "TypeUI Fundamentals"
     section: frontend-design

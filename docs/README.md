@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `governance/` | 仓库级原则、架构边界、引用策略 | `README.md`、`architecture.md`、`reference-policy.md` |
 | `workflows/` | 可重复执行的收录、审查、Linear 协作流程和跨板块调用链 | `README.md`、`linear-workflow.md`、`investment-product-to-research-report.md`、`prd-to-frontend.md` |
-| `sections/` | 各业务/能力板块自己的来源清单、调用链、prompt 索引 | `README.md`、`frontend-design/` |
+| `sections/` | 各业务/能力板块自己的来源清单、调用链、prompt 索引 | `README.md`、`frontend-design/`、`writing` 入口 |
 
 ## 放置规则
 
@@ -29,6 +29,7 @@
 - [sections/frontend-design/sources.md](sections/frontend-design/sources.md)：前端设计候选来源和收录结果。
 - [sections/frontend-design/ui-call-chain.md](sections/frontend-design/ui-call-chain.md)：前端 UI 规划和开发调用链。
 - [sections/frontend-design/prompt-index.md](sections/frontend-design/prompt-index.md)：前端网页 prompt 索引。
+- [../sections/writing/README.md](../sections/writing/README.md)：写作板块入口。
 
 ## 辅助工具
 

@@ -34,6 +34,8 @@ function Infer-Section {
 
   if ($RelativePath -like '*oss-investment-scorecard*') { return 'investment' }
   if ($RelativePath -like '*ai-product-analyzer*') { return 'product' }
+  if ($RelativePath -like '*chinese-natural-voice-revision*') { return 'writing' }
+  if ($RelativePath -like '*skills/frontend-design/SKILL.md') { return 'frontend-design' }
   if ($RelativePath -like '*awesome-design-skills*') { return 'frontend-design' }
   if ($RelativePath -like '*greensock-gsap-skills*') { return 'frontend-design' }
   if ($RelativePath -like '*typeui-fundamentals*') { return 'frontend-design' }

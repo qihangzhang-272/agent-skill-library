@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chinese Natural Voice Revision"
+  short_description: "把中文稿改得更真实自然，保留作者声音"
+  default_prompt: "使用 $chinese-natural-voice-revision 帮我修改这篇中文稿，让它更自然、更具体，并保留我的真实表达。"

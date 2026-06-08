@@ -7,6 +7,7 @@
 | 板块 | 文档路径 | 当前内容 |
 | --- | --- | --- |
 | frontend-design | `docs/sections/frontend-design/` | 来源清单、网页 prompt 索引、前端 UI 调用链 |
+| writing | `sections/writing/README.md` | 中文自然语气改写和文稿修订技能入口 |
 
 ## 未来板块
 
@@ -14,6 +15,7 @@
 
 - `docs/sections/investment/`
 - `docs/sections/product/`
+- `docs/sections/writing/`
 - `docs/sections/technology/`
 - `docs/sections/development-paradigms/`
 - `docs/sections/operations/`

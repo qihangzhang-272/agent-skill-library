@@ -19,6 +19,7 @@
 
 已收录：
 
+- `skills/frontend-design/`：Anthropic 官方 skills repo 的 frontend-design skill，用于提升页面和组件的视觉质量。
 - `skills/greensock-gsap-skills/`：保守迁移 `greensock/gsap-skills` 的官方 `skills/` 目录，用于动效层。
 - `skills/awesome-design-skills/`：只迁移 `dashboard`、`shadcn`、`bento`、`premium`、`minimal` 五个风格 skill，用于设计策略层。
 - `skills/typeui-fundamentals/`：只迁移 TypeUI `skills/fundamentals`，用于 UI/UX 基础原则层；它需要搭配项目设计系统或 `DESIGN.md` 使用。

@@ -16,6 +16,7 @@
 | --- | --- |
 | `sections/investment/` | VC、投资评估、融资判断、IC 论述、DD 问题 |
 | `sections/product/` | 产品分析、案例研究、用户/场景/商业模式判断 |
+| `sections/writing/` | 中文写作、改写、语气修订、作者声音和文稿自然化 |
 | `sections/frontend-design/` | 前端设计、UI/UX、视觉风格、设计提示词和界面生成质量控制 |
 | `sections/technology/` | 技术架构、AI 基础设施、工程可行性 |
 | `sections/development-paradigms/` | AI Agent Native 开发范式、TDD、review、调试 |
@@ -27,6 +28,8 @@
 | --- | --- | --- | --- |
 | `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
 | `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已迁移为自包含技能包 |
+| `chinese-natural-voice-revision` | writing | `skills/chinese-natural-voice-revision/` | 已从用户提供 zip 完全体迁移 |
+| `frontend-design` | frontend-design | `skills/frontend-design/` | 已迁移 Anthropic 官方 skills repo 的 frontend-design skill |
 | `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
 | `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
 | `typeui-fundamentals` | frontend-design | `skills/typeui-fundamentals/` | 已迁移 TypeUI 基础 UI/UX 原则 skill |
@@ -65,6 +68,10 @@
 `oss-investment-scorecard` 已经作为单独 skill 包放在本仓库中，替代之前临时整理的 `vc-investment-evaluator`。
 
 `ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，可独立复制到项目或用户级 skills 目录。
+
+`chinese-natural-voice-revision` 按完整包保留 `SKILL.md`、`AGENTS.md`、`skill.json` 和 `agents/openai.yaml`，用于中文自然语气改写，不承诺检测规避，也不伪造个人经历。
+
+`frontend-design` 是 Anthropic 官方 skills repo 的前端设计技能独立迁移包，用于提升前端页面和组件的视觉质量。
 
 `frontend-design` 板块当前采用“保守迁移 + 引用索引”策略：GSAP 官方 skills、Awesome Design Skills 的已验证风格目录、TypeUI fundamentals 可以进入 `skills/`；21st.dev、designprompts.dev 等网页 prompt 只记录入口，不复制 prompt 正文。
 

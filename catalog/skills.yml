@@ -61,9 +61,9 @@ external_sources:
       - "MCP server"
       - "registry client implementation"
   frontend_design_candidate_sources:
-    research_note: "docs/frontend-design-sources.md"
-    prompt_index: "docs/frontend-prompt-index.md"
-    call_chain: "docs/frontend-ui-call-chain.md"
+    research_note: "docs/sections/frontend-design/sources.md"
+    prompt_index: "docs/sections/frontend-design/prompt-index.md"
+    call_chain: "docs/sections/frontend-design/ui-call-chain.md"
     reviewed_at: "2026-06-08"
     minimum_stars_for_main_list: 1000
     candidates:

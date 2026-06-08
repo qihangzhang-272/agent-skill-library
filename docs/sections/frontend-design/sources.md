@@ -83,7 +83,7 @@
 | [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) | `skills/awesome-design-skills/` | 只迁移 `dashboard`、`shadcn`、`bento`、`premium`、`minimal` 五个风格目录 |
 | [bergside/typeui](https://github.com/bergside/typeui) | `skills/typeui-fundamentals/` | 只迁移 `skills/fundamentals`，不迁移 CLI、插件、MCP 和 registry 实现；使用前需要项目设计系统或 `DESIGN.md` 上下文 |
 
-网页 prompt 来源只做索引，不复制正文。见 `docs/frontend-prompt-index.md`。
+网页 prompt 来源只做索引，不复制正文。见 `docs/sections/frontend-design/prompt-index.md`。
 
 ## 拿过来的标准流程
 

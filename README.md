@@ -30,11 +30,12 @@
 | `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
 | `typeui-fundamentals` | frontend-design | `skills/typeui-fundamentals/` | 已迁移 TypeUI 基础 UI/UX 原则 skill |
 
-## 候选来源
+## 文档入口
 
-- 前端设计与 UI/UX 候选来源见 [docs/frontend-design-sources.md](docs/frontend-design-sources.md)。
-- 前端设计调用链见 [docs/frontend-ui-call-chain.md](docs/frontend-ui-call-chain.md)。
-- 网页 prompt 来源只做索引，见 [docs/frontend-prompt-index.md](docs/frontend-prompt-index.md)。
+- 文档总目录见 [docs/README.md](docs/README.md)。
+- 仓库治理和引用原则见 [docs/governance/](docs/governance/)。
+- 收录、协作和 Linear 流程见 [docs/workflows/](docs/workflows/)。
+- 各板块的来源、调用链和索引见 [docs/sections/](docs/sections/)。
 
 ## 维护规则
 

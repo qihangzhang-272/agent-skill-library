@@ -12,9 +12,9 @@
 
 已开板块：
 
-- 候选来源清单：`docs/frontend-design-sources.md`
-- 调用链说明：`docs/frontend-ui-call-chain.md`
-- 网页 prompt 索引：`docs/frontend-prompt-index.md`
+- 候选来源清单：`docs/sections/frontend-design/sources.md`
+- 调用链说明：`docs/sections/frontend-design/ui-call-chain.md`
+- 网页 prompt 索引：`docs/sections/frontend-design/prompt-index.md`
 
 已收录：
 

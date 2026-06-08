@@ -24,6 +24,7 @@
 | 技能 | 板块 | 来源 | 状态 |
 | --- | --- | --- | --- |
 | `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
+| `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已从 `product-hunter/.claude/skills/` 迁移为自包含技能包 |
 
 ## 维护规则
 
@@ -38,3 +39,5 @@
 `oss-investment-scorecard` 已经作为单独 skill 包放在本仓库中，替代之前临时整理的 `vc-investment-evaluator`。
 
 `product-hunter/03_Resources/Frameworks/AI产品分析框架.md` 仍作为本地产品研究框架源，不再和这个外部 VC 评分技能混写。
+
+`ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，迁移后不依赖 `product-hunter` 的 Obsidian 路径或 wikilink。

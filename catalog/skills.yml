@@ -67,3 +67,33 @@ skills:
       - "score this open source company"
     copy_policy: "vendored_external_skill"
     notes: "直接迁移 lucy-cxy/oss-investment-scorecard，替代本地临时整理的 vc-investment-evaluator。"
+  - id: ai-product-analyzer
+    title: "AI Product Analyzer"
+    section: product
+    status: vendored
+    source_type: internal_product_hunter_skill
+    package_path: "skills/ai-product-analyzer/SKILL.md"
+    package_support:
+      - "skills/ai-product-analyzer/references/business-model.md"
+      - "skills/ai-product-analyzer/references/data-agent.md"
+      - "skills/ai-product-analyzer/references/narrative-audit.md"
+    original_source:
+      vault: product_hunter
+      path: ".claude/skills/ai-product-analyzer"
+      captured_at: "2026-06-08"
+      source_worktree_state: "untracked"
+    package_traits:
+      - self_contained
+      - no_obsidian_wikilinks
+      - no_product_hunter_path_dependency
+    framework_references:
+      - path: "03_Resources/Frameworks/AI产品分析框架.md"
+        role: "来源框架语境，不是迁移包运行时依赖"
+    trigger_examples:
+      - "分析一下这个 AI 产品"
+      - "这个 AI 产品值得关注吗"
+      - "从 BP 逻辑评估这个产品"
+      - "帮我看看这个产品的商业模式和叙事"
+      - "这个产品是好案例、反面教材，还是待观察"
+    copy_policy: "vendored_internal_skill_package"
+    notes: "从 product-hunter 的 .claude/skills/ai-product-analyzer 迁移；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。"

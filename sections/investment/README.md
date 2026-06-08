@@ -4,21 +4,23 @@
 
 ## 已收录
 
-### `vc-investment-evaluator`
+### `oss-investment-scorecard`
 
-用途：从 VC 视角评估 AI 产品或开源项目的投资价值。
+用途：从 VC 视角评估开源 AI 项目或开源公司是否具备投资价值。
 
 本仓库技能包：
 
-- `skills/vc-investment-evaluator/SKILL.md`
-- `skills/vc-investment-evaluator/references/scorecard.md`
-- `skills/vc-investment-evaluator/templates/evaluation-template.md`
+- `skills/oss-investment-scorecard/SKILL.md`
+- `skills/oss-investment-scorecard/references/scored-examples.md`
+- `skills/oss-investment-scorecard/template/evaluation-template.md`
+- `skills/oss-investment-scorecard/cases/`
+- `skills/oss-investment-scorecard/llms.txt`
 
 原始来源：
 
-- 技能：`product-hunter/.claude/skills/vc-investment-evaluator/SKILL.md`
-- 校准案例：`product-hunter/.claude/skills/vc-investment-evaluator/references/scored-examples.md`
-- 手动模板：`product-hunter/.claude/skills/vc-investment-evaluator/template/evaluation-template.md`
+- 仓库：`https://github.com/lucy-cxy/oss-investment-scorecard`
+- 迁移 commit：`28a210d0a194ba0f31fe59edaf413abfafa2008e`
+- 上游 skill 名：`oss-investment-scorecard`
 
 框架引用：
 
@@ -27,9 +29,9 @@
 
 维护原则：
 
-- 不复制 `AI产品分析框架.md` 的商业模式理论。
-- 不复制 Good Cases 正文。
-- 独立 skill 包维护触发方式、执行流程、评分契约、输出格式和引用关系。
+- `oss-investment-scorecard` 作为上游完整技能包维护。
+- 本地 `AI产品分析框架.md` 和 Good Cases 可作为补充输入，但不反向混写进上游迁移包。
+- 后续同步上游时记录 commit，不自行优化改写。
 
 ## 待补充方向
 

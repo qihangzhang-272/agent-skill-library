@@ -31,6 +31,29 @@
 3. `catalog/skills.yml` 中记录迁移原因。
 4. Linear 中有对应审查任务。
 
+## 外部完整技能迁移
+
+如果用户明确要求“直接迁移”某个外部技能，并且该项目允许复用，可以把它作为完整 skill 包放进 `skills/`。
+
+迁移时必须记录：
+
+- 上游仓库 URL。
+- 上游 commit。
+- 许可说明。
+- 是否替代了本地旧技能。
+
+示例：
+
+```yaml
+upstream_source:
+  repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
+  commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
+  replaced_local_skill: "vc-investment-evaluator"
+copy_policy: "vendored_external_skill"
+```
+
+这种迁移不再遵循“只写执行逻辑”的轻量规则；它是外部技能包归档和复用。
+
 ## 推荐写法
 
 ```yaml
@@ -41,4 +64,3 @@ framework_references:
       - "维度 5: 商业模式"
 copy_policy: "do_not_copy_framework_body"
 ```
-

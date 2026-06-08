@@ -26,9 +26,9 @@ Linear 用于跟踪技能库的收录、审查、去重和重构。
 - 是否复制正文
 - 下一步动作
 
-## 对 `vc-investment-evaluator` 的当前动作
+## 对投资评估技能的当前动作
 
-1. 作为投资板块种子技能收录。
-2. 已在本仓库创建独立 skill 包：`skills/vc-investment-evaluator/`。
-3. 保持 `03_Resources/Frameworks/AI产品分析框架.md` 为产品/商业模式理论源。
-4. 后续审查是否需要继续压缩 `references/scorecard.md` 或补自动化脚本。
+1. 删除本地临时整理的 `skills/vc-investment-evaluator/`。
+2. 完整迁移 `lucy-cxy/oss-investment-scorecard` 到 `skills/oss-investment-scorecard/`。
+3. 保持 `03_Resources/Frameworks/AI产品分析框架.md` 为本地产品/商业模式理论源。
+4. 后续如果上游更新，按 commit 记录同步，不自行混合改写。

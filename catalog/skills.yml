@@ -9,6 +9,13 @@ source_vaults:
     framework_root: "03_Resources/Frameworks"
     skill_root: ".claude/skills"
 
+external_sources:
+  oss_investment_scorecard:
+    repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
+    mirrored_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
+    local_package_path: "skills/oss-investment-scorecard"
+    license_note: "Upstream README states MIT; GitHub licenseInfo was null because no standalone LICENSE file was detected."
+
 sections:
   investment:
     title: "投资"
@@ -27,22 +34,22 @@ sections:
     purpose: "自动化、知识库同步、投稿、治理和协作流程"
 
 skills:
-  - id: vc-investment-evaluator
-    title: "VC 投资评估框架"
+  - id: oss-investment-scorecard
+    title: "OSS Investment Scorecard"
     section: investment
-    status: packaged
-    source_type: standalone_skill
-    package_path: "skills/vc-investment-evaluator/SKILL.md"
+    status: vendored
+    source_type: external_skill_repo
+    package_path: "skills/oss-investment-scorecard/SKILL.md"
     package_support:
-      - "skills/vc-investment-evaluator/references/scorecard.md"
-      - "skills/vc-investment-evaluator/references/calibration-examples.md"
-      - "skills/vc-investment-evaluator/references/source-map.md"
-      - "skills/vc-investment-evaluator/templates/evaluation-template.md"
-    original_source:
-      skill_path: ".claude/skills/vc-investment-evaluator/SKILL.md"
-      support:
-        - ".claude/skills/vc-investment-evaluator/references/scored-examples.md"
-        - ".claude/skills/vc-investment-evaluator/template/evaluation-template.md"
+      - "skills/oss-investment-scorecard/references/scored-examples.md"
+      - "skills/oss-investment-scorecard/template/evaluation-template.md"
+      - "skills/oss-investment-scorecard/cases/"
+      - "skills/oss-investment-scorecard/llms.txt"
+    upstream_source:
+      repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
+      commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
+      original_skill_name: "oss-investment-scorecard"
+      replaced_local_skill: "vc-investment-evaluator"
     framework_references:
       - path: "03_Resources/Frameworks/AI产品分析框架.md"
         anchors:
@@ -50,11 +57,13 @@ skills:
           - "维度 5: 商业模式"
           - "互补工具"
       - path: "03_Resources/Good Cases/"
-        role: "案例库输入"
+        role: "本地产品案例输入，可辅助但不是上游技能的一部分"
     trigger_examples:
       - "从 VC 视角看这个项目"
       - "这个项目值得投吗"
       - "给这个 AI 开源项目打分"
       - "评估这个项目的投资价值"
-    copy_policy: "skill_packaged_framework_body_not_copied"
-    notes: "已从 product-hunter 中抽成单独 skill 包；保留 VC 投资评分契约，框架理论仍引用 Frameworks。"
+      - "这个开源项目值得投吗"
+      - "score this open source company"
+    copy_policy: "vendored_external_skill"
+    notes: "直接迁移 lucy-cxy/oss-investment-scorecard，替代本地临时整理的 vc-investment-evaluator。"

@@ -7,6 +7,7 @@
 - 技能仓库只保存分类、索引、执行边界、维护规则和必要的轻量技能卡片。
 - 框架理论继续保存在来源知识库，例如 `product-hunter/03_Resources/Frameworks/`。
 - 技能只写执行逻辑和引用路径，不复制框架正文，避免“框架更新了但技能没同步”。
+- 对于明确要完整迁移、且允许复用的外部技能，可以作为独立 skill 包 vendored 进 `skills/`。
 
 ## 分类
 
@@ -22,7 +23,7 @@
 
 | 技能 | 板块 | 来源 | 状态 |
 | --- | --- | --- | --- |
-| `vc-investment-evaluator` | investment | `skills/vc-investment-evaluator/` | 已独立成标准 skill 包 |
+| `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
 
 ## 维护规则
 
@@ -34,4 +35,6 @@
 
 ## 重要边界
 
-`vc-investment-evaluator` 已经作为单独 skill 包放在本仓库中；但 `AI产品分析框架.md` 这样的框架理论不复制进来，只在技能中引用来源路径。
+`oss-investment-scorecard` 已经作为单独 skill 包放在本仓库中，替代之前临时整理的 `vc-investment-evaluator`。
+
+`product-hunter/03_Resources/Frameworks/AI产品分析框架.md` 仍作为本地产品研究框架源，不再和这个外部 VC 评分技能混写。

@@ -27,13 +27,13 @@
 
 ## 引用关系
 
-以 `vc-investment-evaluator` 为例：
+以 `oss-investment-scorecard` 为例：
 
-- 本仓库技能包：`skills/vc-investment-evaluator/SKILL.md`
-- 本仓库评分契约：`skills/vc-investment-evaluator/references/scorecard.md`
-- 本仓库手动模板：`skills/vc-investment-evaluator/templates/evaluation-template.md`
-- 原始技能来源：`product-hunter/.claude/skills/vc-investment-evaluator/SKILL.md`
-- 产品总框架：`product-hunter/03_Resources/Frameworks/AI产品分析框架.md`
-- 案例输入：`product-hunter/03_Resources/Good Cases/`
+- 本仓库技能包：`skills/oss-investment-scorecard/SKILL.md`
+- 上游来源：`https://github.com/lucy-cxy/oss-investment-scorecard`
+- 迁移 commit：`28a210d0a194ba0f31fe59edaf413abfafa2008e`
+- 原本临时整理的本地技能：`skills/vc-investment-evaluator/`，已删除
+- 本地产品总框架：`product-hunter/03_Resources/Frameworks/AI产品分析框架.md`
+- 本地案例输入：`product-hunter/03_Resources/Good Cases/`
 
-本仓库保存 `vc-investment-evaluator` 的独立执行 skill 包，但不复制产品总框架和案例正文。后续如果框架文件路径变化，更新 `catalog/skills.yml` 和技能包中的 source map。
+本仓库把 `oss-investment-scorecard` 作为完整外部技能包迁移。它是投资板块的正式 VC/OSS 投资评估技能；本地 `AI产品分析框架.md` 仍作为产品研究框架源，不与上游技能混写。

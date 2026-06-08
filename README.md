@@ -38,6 +38,14 @@
 | 投资 / 产品问题到研报 | `docs/workflows/investment-product-to-research-report.md` | 把产品判断、投资评分、DD 问题树整理成研报、case memo 或 IC memo |
 | PRD 到前端实现 | `docs/workflows/prd-to-frontend.md` | 把模糊需求或 PRD 推进到页面结构、组件计划、前端实现和浏览器验收 |
 
+## 可视化编排
+
+- 本地编排台：`apps/skill-orchestrator/index.html`
+- 编排定义：`orchestrations/`
+- 数据生成：运行 `.\scripts\build-skill-orchestrator-data.ps1`
+
+编排台不运行 Claude，也不做本地 runner。它展示当前技能库、工作流节点、技能可用性和人工状态，并生成整条链的 Claude handoff prompt。
+
 ## 文档入口
 
 - 文档总目录见 [docs/README.md](docs/README.md)。

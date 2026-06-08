@@ -30,6 +30,11 @@
 - [sections/frontend-design/ui-call-chain.md](sections/frontend-design/ui-call-chain.md)：前端 UI 规划和开发调用链。
 - [sections/frontend-design/prompt-index.md](sections/frontend-design/prompt-index.md)：前端网页 prompt 索引。
 
+## 辅助工具
+
+- [../apps/skill-orchestrator/index.html](../apps/skill-orchestrator/index.html)：本地技能可视化编排台。
+- [../orchestrations/README.md](../orchestrations/README.md)：编排定义格式和维护规则。
+
 ## 后续扩展
 
 新增板块文档时按 `docs/sections/<section>/` 扩展，例如：

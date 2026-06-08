@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Skill Orchestrator</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Agent Skill Library</p>
+          <h1>技能可视化编排台</h1>
+        </div>
+        <div class="topbar-meta">
+          <span id="generatedAt">未生成数据</span>
+          <span id="skillCount">0 skills</span>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <aside class="sidebar" aria-label="Workflow and skill selection">
+          <div class="panel-block">
+            <div class="block-heading">
+              <h2>运行链</h2>
+              <span id="workflowCount">0</span>
+            </div>
+            <div id="workflowList" class="workflow-list"></div>
+          </div>
+
+          <div class="panel-block">
+            <div class="block-heading">
+              <h2>技能库</h2>
+              <span id="availableCount">0</span>
+            </div>
+            <input id="skillSearch" class="search-input" type="search" placeholder="搜索 skill / section / path">
+            <div id="skillList" class="skill-list"></div>
+          </div>
+        </aside>
+
+        <section class="main-panel">
+          <div class="run-header">
+            <div>
+              <p class="eyebrow">Selected Workflow</p>
+              <h2 id="workflowTitle">未选择</h2>
+              <p id="workflowPurpose" class="muted"></p>
+            </div>
+            <div class="run-actions">
+              <button id="copyPromptBtn" class="primary-button" type="button">复制整条链 Prompt</button>
+              <button id="resetStateBtn" class="secondary-button" type="button">重置状态</button>
+            </div>
+          </div>
+
+          <section class="input-band" aria-label="Workflow inputs">
+            <div class="block-heading">
+              <h2>输入槽</h2>
+              <span>一次填写，整条链复用</span>
+            </div>
+            <div id="entryInputs" class="input-grid"></div>
+          </section>
+
+          <section class="graph-band" aria-label="Workflow graph">
+            <div class="block-heading">
+              <h2>节点编排</h2>
+              <span id="progressText">0 / 0 done</span>
+            </div>
+            <div class="progress-track">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div id="nodeGraph" class="node-graph"></div>
+          </section>
+
+          <section class="detail-band">
+            <div class="node-detail">
+              <div class="detail-heading">
+                <div>
+                  <p class="eyebrow">Node</p>
+                  <h2 id="nodeTitle">选择一个节点</h2>
+                </div>
+                <div id="statusControls" class="status-controls"></div>
+              </div>
+              <dl class="detail-grid">
+                <div>
+                  <dt>输入</dt>
+                  <dd id="nodeInput">-</dd>
+                </div>
+                <div>
+                  <dt>输出</dt>
+                  <dd id="nodeOutput">-</dd>
+                </div>
+                <div>
+                  <dt>依赖技能</dt>
+                  <dd id="nodeSkills">-</dd>
+                </div>
+                <div>
+                  <dt>验收</dt>
+                  <dd id="nodeAcceptance">-</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="prompt-panel">
+              <div class="block-heading">
+                <h2>整条链 Prompt</h2>
+                <span id="copyStatus">待复制</span>
+              </div>
+              <textarea id="promptPreview" spellcheck="false"></textarea>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

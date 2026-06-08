@@ -1,0 +1,128 @@
+{
+  "id": "product-bp-visual-report",
+  "title": "AI 产品到可视化 BP 报告",
+  "section": "product",
+  "purpose": "把一个 AI 产品、deck 或公开材料转成产品判断、写作稿、可视化 BP 页面和 PDF 交付物。",
+  "entryInputs": [
+    {
+      "id": "product_name",
+      "label": "产品 / 公司名",
+      "type": "text",
+      "placeholder": "例如：某个 AI Agent 产品"
+    },
+    {
+      "id": "source_material",
+      "label": "输入材料",
+      "type": "textarea",
+      "placeholder": "官网、GitHub、deck、访谈、客户案例、你自己的观察。可以贴链接或摘要。"
+    },
+    {
+      "id": "audience",
+      "label": "目标读者",
+      "type": "text",
+      "placeholder": "例如：自己阅读、客户咨询、投资讨论、团队复盘"
+    },
+    {
+      "id": "output_folder",
+      "label": "建议输出目录",
+      "type": "text",
+      "placeholder": "例如：runs/product-bp-visual-report/<date>-<product>"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ai-product-analysis",
+      "title": "AI 产品 BP 逻辑分析",
+      "skills": [
+        "ai-product-analyzer"
+      ],
+      "input": "产品名、公开材料、deck、官网、用户场景、商业模式线索。",
+      "output": "bp-analysis.md",
+      "instructions": [
+        "按 AI Product Analyzer 的 BP 逻辑链输出 11 段判断。",
+        "显式区分事实、判断和信息不足。",
+        "给出好案例 / 反面教材 / 待观察判定。",
+        "写出最强 BP 论点、最弱 BP 缺口和建议叙事线。"
+      ],
+      "acceptance": [
+        "不能只有产品功能复述。",
+        "必须有最强论点和最弱缺口。",
+        "无法确认的信息必须标记为信息不足。"
+      ]
+    },
+    {
+      "id": "research-writing",
+      "title": "研报写作和叙事整理",
+      "skills": [
+        "writing-synthesis"
+      ],
+      "input": "bp-analysis.md 和补充事实材料。",
+      "output": "research-note.md",
+      "instructions": [
+        "把 BP 逻辑分析整理成可阅读的研究稿。",
+        "使用结论先行结构：verdict、thesis、关键证据、风险、下一步。",
+        "保留关键不确定性，不把推断写成事实。"
+      ],
+      "acceptance": [
+        "读者能在开头看到明确结论。",
+        "正文能追溯到前一节点的事实和判断。",
+        "保留 DD 问题或后续验证项。"
+      ]
+    },
+    {
+      "id": "bp-frontend-visualizer",
+      "title": "BP 前端可视化",
+      "skills": [
+        "bp-frontend-visualizer",
+        "dashboard",
+        "shadcn",
+        "typeui-fundamentals"
+      ],
+      "input": "research-note.md、核心 thesis、产品定位、关键证据、风险和 DD 问题。",
+      "output": "bp-visual.html",
+      "instructions": [
+        "把研究稿转成单页可视化 BP 页面。",
+        "优先展示结论、商业逻辑链、关键证据、风险和下一步。",
+        "组件结构要可维护，不做一次性巨型页面。",
+        "如果没有专门 BP 前端技能，先参考 dashboard、shadcn 和 TypeUI 基础原则。"
+      ],
+      "acceptance": [
+        "首屏能看懂研究对象和 verdict。",
+        "页面不是普通文章排版，必须体现 BP 逻辑结构。",
+        "移动端不应出现文字溢出或内容遮挡。"
+      ]
+    },
+    {
+      "id": "html-pdf-export",
+      "title": "HTML / PDF 交付",
+      "skills": [
+        "html-pdf-exporter"
+      ],
+      "input": "bp-visual.html 和 research-note.md。",
+      "output": "bp-visual.pdf",
+      "instructions": [
+        "把 HTML 页面整理成适合阅读和分享的 PDF。",
+        "保留来源、不确定性和 DD 问题。",
+        "如果缺少 PDF 技能，先输出浏览器打印友好的 HTML 和导出说明。"
+      ],
+      "acceptance": [
+        "PDF 或可打印 HTML 能独立阅读。",
+        "页面分页或打印样式不破坏关键内容。",
+        "交付物包含来源和不确定性说明。"
+      ]
+    }
+  ],
+  "finalArtifacts": [
+    "bp-analysis.md",
+    "research-note.md",
+    "bp-visual.html",
+    "bp-visual.pdf 或打印友好的 HTML"
+  ],
+  "handoffRules": [
+    "严格按节点顺序执行，不要跳过前置分析直接做可视化。",
+    "每个节点完成后先写出产物摘要，再进入下一节点。",
+    "缺失技能时不要编造技能内容；使用当前仓库已有技能和节点说明降级执行。",
+    "所有事实、判断和推断必须分开。",
+    "最终回答要列出每个产物的位置、未完成项和下一步建议。"
+  ]
+}

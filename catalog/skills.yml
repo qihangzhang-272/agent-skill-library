@@ -15,6 +15,34 @@ external_sources:
     mirrored_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
     local_package_path: "skills/oss-investment-scorecard"
     license_note: "Upstream README states MIT; GitHub licenseInfo was null because no standalone LICENSE file was detected."
+  frontend_design_candidate_sources:
+    research_note: "docs/frontend-design-sources.md"
+    reviewed_at: "2026-06-08"
+    candidates:
+      - repo: "https://github.com/bergside/awesome-design-skills"
+        license: "MIT"
+        role: "design skill index and style-skill discovery source"
+      - repo: "https://github.com/joshuadavidthomas/agent-skills"
+        license: "MIT"
+        role: "clean frontend-design-principles skill candidate"
+      - repo: "https://github.com/saifyxpro/ui-ux-design-pro-skill"
+        license: "MIT"
+        role: "comprehensive UI/UX skill package candidate"
+      - repo: "https://github.com/bergside/typeui"
+        license: "MIT text in LICENSE.md; GitHub API reports Other"
+        role: "design skill CLI and registry candidate"
+      - repo: "https://github.com/spencergoldade/cursor-designer"
+        license: "GPL-3.0"
+        role: "UX/UI/IA rules reference only unless GPL obligations are acceptable"
+      - repo: "https://github.com/0xeb/TheBigPromptLibrary"
+        license: "MIT"
+        role: "v0 and UI system prompt reference source"
+      - repo: "https://github.com/ZeroLu/awesome-gemini-ai"
+        license: "No license detected"
+        role: "design prompt inspiration link only"
+      - repo: "https://github.com/devanshug2307/Awesome-AI-Image-Prompts"
+        license: "No license detected"
+        role: "visual style prompt inspiration link only"
 
 sections:
   investment:
@@ -23,6 +51,9 @@ sections:
   product:
     title: "产品"
     purpose: "产品分析、案例研究、场景边界、商业模式和竞争定位"
+  frontend-design:
+    title: "前端设计"
+    purpose: "前端设计、UI/UX、视觉风格、设计提示词和界面生成质量控制"
   technology:
     title: "技术"
     purpose: "技术可行性、AI 基础设施、架构判断、工程风险"

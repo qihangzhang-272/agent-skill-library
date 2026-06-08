@@ -15,6 +15,7 @@
 | --- | --- |
 | `sections/investment/` | VC、投资评估、融资判断、IC 论述、DD 问题 |
 | `sections/product/` | 产品分析、案例研究、用户/场景/商业模式判断 |
+| `sections/frontend-design/` | 前端设计、UI/UX、视觉风格、设计提示词和界面生成质量控制 |
 | `sections/technology/` | 技术架构、AI 基础设施、工程可行性 |
 | `sections/development-paradigms/` | AI Agent Native 开发范式、TDD、review、调试 |
 | `sections/operations/` | 自动化、工作流、知识库同步、投稿与治理 |
@@ -25,6 +26,10 @@
 | --- | --- | --- | --- |
 | `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
 | `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已从 `product-hunter/.claude/skills/` 迁移为自包含技能包 |
+
+## 候选来源
+
+- 前端设计与 UI/UX 候选来源见 [docs/frontend-design-sources.md](docs/frontend-design-sources.md)。
 
 ## 维护规则
 

@@ -1,0 +1,54 @@
+version: 1
+library: agent-skill-library
+principle: "skills contain execution logic and references; frameworks remain in source framework files"
+
+source_vaults:
+  product_hunter:
+    local_path: "C:/Users/Administrator/Desktop/AI/codex/产品/产品第二大脑/product-hunter"
+    remote: "https://github.com/Autopia-Atelier/product-hunter"
+    framework_root: "03_Resources/Frameworks"
+    skill_root: ".claude/skills"
+
+sections:
+  investment:
+    title: "投资"
+    purpose: "VC 投资评估、融资可行性、IC 论述、DD 优先级"
+  product:
+    title: "产品"
+    purpose: "产品分析、案例研究、场景边界、商业模式和竞争定位"
+  technology:
+    title: "技术"
+    purpose: "技术可行性、AI 基础设施、架构判断、工程风险"
+  development-paradigms:
+    title: "开发范式"
+    purpose: "AI Agent Native 开发流程、TDD、review、调试与收敛机制"
+  operations:
+    title: "运营"
+    purpose: "自动化、知识库同步、投稿、治理和协作流程"
+
+skills:
+  - id: vc-investment-evaluator
+    title: "VC 投资评估框架"
+    section: investment
+    status: indexed
+    source_type: local_skill
+    source_path: ".claude/skills/vc-investment-evaluator/SKILL.md"
+    source_support:
+      - ".claude/skills/vc-investment-evaluator/references/scored-examples.md"
+      - ".claude/skills/vc-investment-evaluator/template/evaluation-template.md"
+    framework_references:
+      - path: "03_Resources/Frameworks/AI产品分析框架.md"
+        anchors:
+          - "VC 投资评估框架"
+          - "维度 5: 商业模式"
+          - "互补工具"
+      - path: "03_Resources/Good Cases/"
+        role: "案例库输入"
+    trigger_examples:
+      - "从 VC 视角看这个项目"
+      - "这个项目值得投吗"
+      - "给这个 AI 开源项目打分"
+      - "评估这个项目的投资价值"
+    copy_policy: "do_not_copy_framework_body"
+    notes: "种子技能；后续可抽成更轻的执行壳，框架理论保留在 Frameworks。"
+

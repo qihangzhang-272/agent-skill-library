@@ -24,6 +24,23 @@ external_sources:
       risk_level: "low"
       red_flags: "none detected"
       note: "No shell commands, network calls, credential access, eval/exec, base64, or destructive file operations detected."
+  humanizer_zh:
+    repo: "https://github.com/op7418/Humanizer-zh"
+    mirrored_commit: "91f3d394db8419c20d67ebe22a96cf8fee0a404b"
+    local_package_path: "skills/humanizer-zh"
+    license_note: "MIT license copied from upstream LICENSE."
+    stars_at_review: "about 9.7k"
+    migrated_scope:
+      - "SKILL.md"
+      - "README.md"
+      - "LICENSE"
+    excluded_scope:
+      - ".gitignore"
+      - "git metadata"
+    vetting:
+      risk_level: "low"
+      red_flags: "none detected"
+      note: "Markdown-only skill package; README installation commands are documentation only."
   anthropic_frontend_design:
     repo: "https://github.com/anthropics/skills"
     mirrored_commit: "c30d329f5814647c1e2f071020c1e8c1c9893ef1"
@@ -328,6 +345,29 @@ skills:
       - "保留作者声音润色"
     copy_policy: "vendored_user_supplied_complete_skill_package"
     notes: "按用户要求迁入完全体；安全检查未发现命令、网络、凭据、eval/base64 或破坏性文件操作。"
+  - id: humanizer-zh
+    title: "Humanizer-zh"
+    section: writing
+    status: vendored
+    source_type: external_chinese_writing_skill
+    package_path: "skills/humanizer-zh/SKILL.md"
+    package_support:
+      - "skills/humanizer-zh/README.md"
+      - "skills/humanizer-zh/LICENSE"
+      - "skills/humanizer-zh/UPSTREAM.md"
+    upstream_source:
+      repo: "https://github.com/op7418/Humanizer-zh"
+      commit: "91f3d394db8419c20d67ebe22a96cf8fee0a404b"
+    package_traits:
+      - markdown_only
+      - no_external_path_dependency
+      - no_command_execution
+    trigger_examples:
+      - "用 humanizer-zh 改写这段中文"
+      - "清理这篇文章的 AI 写作痕迹"
+      - "把这段话改得更自然、更像真人写"
+    copy_policy: "vendored_external_skill_package"
+    notes: "迁移 op7418/Humanizer-zh 核心文件；用于中文写作自然化和常见 AI 模式清理，不承诺检测规避。"
   - id: greensock-gsap-skills
     title: "GSAP Skills"
     section: frontend-design

@@ -50,6 +50,7 @@ claude plugin validate .
 | `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
 | `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已迁移为自包含技能包 |
 | `chinese-natural-voice-revision` | writing | `skills/chinese-natural-voice-revision/` | 已从用户提供 zip 完全体迁移 |
+| `humanizer-zh` | writing | `skills/humanizer-zh/` | 已迁移中文 AI 写作痕迹清理 skill |
 | `frontend-design` | frontend-design | `skills/frontend-design/` | 已迁移 Anthropic 官方 skills repo 的 frontend-design skill |
 | `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
 | `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
@@ -95,6 +96,8 @@ claude plugin validate .
 `ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，可独立复制到项目或用户级 skills 目录。
 
 `chinese-natural-voice-revision` 按完整包保留 `SKILL.md`、`AGENTS.md`、`skill.json` 和 `agents/openai.yaml`，用于中文自然语气改写，不承诺检测规避，也不伪造个人经历。
+
+`humanizer-zh` 是 MIT 授权的中文写作自然化 skill，按上游核心文件保留，用于识别和清理常见 AI 写作模式；本仓库不把它表述为检测规避保证。
 
 `frontend-design` 是 Anthropic 官方 skills repo 的前端设计技能独立迁移包，用于提升前端页面和组件的视觉质量。
 

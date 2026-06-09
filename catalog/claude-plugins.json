@@ -34,14 +34,15 @@
     {
       "name": "agent-writing",
       "displayName": "Agent Writing",
-      "description": "Writing and revision skills for Chinese natural voice, tone preservation, and manuscript polish.",
-      "version": "0.1.0",
+      "description": "Writing and revision skills for Chinese natural voice, tone preservation, AI writing pattern cleanup, and manuscript polish.",
+      "version": "0.2.0",
       "section": "writing",
       "keywords": [
         "writing",
         "chinese",
         "voice",
-        "revision"
+        "revision",
+        "humanizer"
       ],
       "distributionStatus": "active",
       "releasePolicy": "manual_semver",
@@ -50,6 +51,11 @@
           "id": "chinese-natural-voice-revision",
           "sourcePath": "skills/chinese-natural-voice-revision",
           "targetName": "chinese-natural-voice-revision"
+        },
+        {
+          "id": "humanizer-zh",
+          "sourcePath": "skills/humanizer-zh",
+          "targetName": "humanizer-zh"
         }
       ]
     },

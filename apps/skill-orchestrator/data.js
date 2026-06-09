@@ -1,5 +1,5 @@
 ﻿window.SKILL_ORCHESTRATOR_DATA = {
-    "generatedAt":  "2026-06-08 10:39:06",
+    "generatedAt":  "2026-06-08 21:52:07",
     "repository":  {
                        "name":  "agent-skill-library",
                        "root":  "."
@@ -147,6 +147,15 @@
                        "path":  "skills/greensock-gsap-skills/skills/gsap-utils/SKILL.md",
                        "directory":  "skills/greensock-gsap-skills/skills/gsap-utils",
                        "description":  "Official GSAP skill for gsap.utils â€” clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.",
+                       "status":  "available"
+                   },
+                   {
+                       "id":  "humanizer-zh",
+                       "title":  "humanizer zh",
+                       "section":  "writing",
+                       "path":  "skills/humanizer-zh/SKILL.md",
+                       "directory":  "skills/humanizer-zh",
+                       "description":  "|",
                        "status":  "available"
                    },
                    {

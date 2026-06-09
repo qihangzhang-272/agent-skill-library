@@ -11,18 +11,33 @@ function Get-FrontMatterValue {
     [string]$Key
   )
 
-  $singleLine = "(?m)^$([regex]::Escape($Key)):\s*(.+)$"
-  if ($Content -match $singleLine) {
-    $value = $Matches[1].Trim()
-    if ($value -eq '>') {
-      $blockPattern = "(?ms)^$([regex]::Escape($Key)):\s*>\s*\r?\n(?<block>(?:\s{2}.+?\r?\n)+)"
-      if ($Content -match $blockPattern) {
-        return (($Matches['block'] -split "\r?\n") |
-          ForEach-Object { $_.Trim() } |
-          Where-Object { $_ }) -join ' '
-      }
-      return ''
+  $escapedKey = [regex]::Escape($Key)
+  $lines = $Content -split "\r?\n"
+
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    if ($lines[$i] -notmatch "^$escapedKey`:\s*(.+)$") {
+      continue
     }
+
+    $value = $Matches[1].Trim()
+    if ($value -eq '>' -or $value -eq '|') {
+      $blockLines = @()
+      for ($j = $i + 1; $j -lt $lines.Count; $j++) {
+        if ($lines[$j] -match '^\s{2,}(.+)$') {
+          $blockLines += $Matches[1].Trim()
+          continue
+        }
+
+        if ($lines[$j] -match '^\s*$') {
+          continue
+        }
+
+        break
+      }
+
+      return ($blockLines | Where-Object { $_ }) -join ' '
+    }
+
     return $value.Trim('"').Trim("'")
   }
 
@@ -70,7 +85,7 @@ $skillFiles = Get-ChildItem -Path $skillsRoot -Recurse -Filter 'SKILL.md' |
   Where-Object { $_.FullName -notmatch '[\\/](upstream)[\\/]' } |
   Sort-Object FullName
 $skills = foreach ($file in $skillFiles) {
-  $content = Get-Content -LiteralPath $file.FullName -Raw
+  $content = Get-Content -LiteralPath $file.FullName -Raw -Encoding UTF8
   $relativePath = (Get-RelativePathCompat -BasePath $repo.Path -TargetPath $file.FullName).Replace('\', '/')
   $skillDir = [System.IO.Path]::GetDirectoryName($relativePath).Replace('\', '/')
   $name = Get-FrontMatterValue -Content $content -Key 'name'

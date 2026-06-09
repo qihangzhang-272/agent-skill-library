@@ -8,8 +8,8 @@
                     {
                         "name":  "agent-product",
                         "source":  "./plugins/agent-product",
-                        "description":  "Product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
-                        "version":  "0.1.0",
+                        "description":  "Reference-aware product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
+                        "version":  "0.2.0",
                         "author":  {
                                        "name":  "Private Agent Skill Library"
                                    },

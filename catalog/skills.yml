@@ -310,6 +310,7 @@ skills:
     package_traits:
       - self_contained
       - no_external_path_dependency
+      - reference_routed
     pipeline_role: "product_analysis_for_investment_and_research_report_chain"
     trigger_examples:
       - "分析一下这个 AI 产品"
@@ -318,7 +319,7 @@ skills:
       - "帮我看看这个产品的商业模式和叙事"
       - "这个产品是好案例、反面教材，还是待观察"
     copy_policy: "vendored_internal_skill_package"
-    notes: "从本地 seed skill 迁移；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。原始本地目录只作为导入 provenance，不代表本仓库存在上游依赖。"
+    notes: "从本地 seed skill 迁移；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。SKILL.md 已明确要求先做 Reference 路由，深度分析需读取对应 references 后再输出判断。原始本地目录只作为导入 provenance，不代表本仓库存在上游依赖。"
   - id: chinese-natural-voice-revision
     title: "Chinese Natural Voice Revision"
     section: writing

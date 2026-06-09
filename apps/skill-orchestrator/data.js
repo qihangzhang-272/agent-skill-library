@@ -1,5 +1,5 @@
 ﻿window.SKILL_ORCHESTRATOR_DATA = {
-    "generatedAt":  "2026-06-08 22:04:01",
+    "generatedAt":  "2026-06-09 01:49:40",
     "repository":  {
                        "name":  "agent-skill-library",
                        "root":  "."
@@ -11,7 +11,7 @@
                        "section":  "product",
                        "path":  "skills/ai-product-analyzer/SKILL.md",
                        "directory":  "skills/ai-product-analyzer",
-                       "description":  "从 BP / Pitch Deck 商业判断逻辑出发，对 AI 产品进行完整评估。 触发方式：- \"分析一下 [产品名]\" - \"评估 [产品]\" - \"[产品名] 怎么样\" - \"帮我看看这个 AI 产品\" - \"这个产品值得关注吗\" 输出：11 段 BP 逻辑链评估 → 综合判定（好案例/反面教材/待观察）+ 最强论点 + 最弱缺口 + 建议叙事线。 内置 AI 产品分析框架全部知识。深度内容按需从 references/ 加载。",
+                       "description":  "从 BP / Pitch Deck 商业判断逻辑出发，对 AI 产品进行完整评估。 触发方式：- \"分析一下 [产品名]\" - \"评估 [产品]\" - \"[产品名] 怎么样\" - \"帮我看看这个 AI 产品\" - \"这个产品值得关注吗\" 输出：11 段 BP 逻辑链评估 → 综合判定（好案例/反面教材/待观察）+ 最强论点 + 最弱缺口 + 建议叙事线。 分析前必须判断是否需要读取 references/；命中商业模式、Data Agent、叙事审计等场景时先读取对应 reference，再输出判断。",
                        "status":  "available"
                    },
                    {

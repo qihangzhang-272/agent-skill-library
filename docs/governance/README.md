@@ -9,6 +9,7 @@
 - `reference-policy.md`：引用式技能库规则、资料正文不复制原则、外部包迁移例外。
 - `library-constitution.md`：技能库长期约束、收录问题、复制边界和插件分发规则。
 - `catalog-schema.md`：技能总账和 Claude Code plugin 分发映射的记录方式。
+- `classification-policy.md`：大类索引和小技能迁入的分类治理规则。
 
 ## 放置标准
 

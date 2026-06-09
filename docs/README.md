@@ -6,7 +6,7 @@
 
 | 目录 | 用途 | 当前文件 |
 | --- | --- | --- |
-| `governance/` | 仓库级原则、架构边界、引用策略、索引规范 | `README.md`、`architecture.md`、`project-purpose.md`、`reference-policy.md`、`library-constitution.md`、`catalog-schema.md` |
+| `governance/` | 仓库级原则、架构边界、引用策略、索引规范 | `README.md`、`architecture.md`、`project-purpose.md`、`reference-policy.md`、`library-constitution.md`、`catalog-schema.md`、`classification-policy.md` |
 | `workflows/` | 可重复执行的收录、审查、Linear 协作流程和跨板块调用链 | `README.md`、`linear-workflow.md`、`investment-product-to-research-report.md`、`prd-to-frontend.md` |
 | `sections/` | 各业务/能力板块自己的来源清单、调用链、prompt 索引 | `README.md`、`frontend-design/`、`writing` 入口 |
 
@@ -25,6 +25,7 @@
 - [governance/reference-policy.md](governance/reference-policy.md)：引用式技能库规则和外部包迁移例外。
 - [governance/library-constitution.md](governance/library-constitution.md)：长期约束、收录问题、复制边界和插件分发规则。
 - [governance/catalog-schema.md](governance/catalog-schema.md)：`catalog/skills.yml` 与 `catalog/claude-plugins.json` 的记录方式。
+- [governance/classification-policy.md](governance/classification-policy.md)：大类索引和小技能迁入的分类治理规则。
 - [workflows/linear-workflow.md](workflows/linear-workflow.md)：Linear 项目和 Issue 工作流。
 - [workflows/investment-product-to-research-report.md](workflows/investment-product-to-research-report.md)：投资 / 产品问题到研报的调用链。
 - [workflows/prd-to-frontend.md](workflows/prd-to-frontend.md)：PRD 到前端实现的调用链。

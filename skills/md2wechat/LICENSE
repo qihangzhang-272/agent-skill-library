@@ -1,0 +1,236 @@
+md2wechat Source Available License
+Based on Business Source License 1.1
+
+===========================================================
+PARAMETERS
+===========================================================
+
+Licensor:             geekjourneyx
+
+Licensed Work:        md2wechat
+                      The Licensed Work is (c) 2024-2026 geekjourneyx.
+                      "Licensed Work" includes the CLI source code, themes,
+                      layout modules, prompt templates, skill definitions,
+                      and all associated documentation and assets in this
+                      repository.
+
+Additional Use Grant: You may make production use of the Licensed Work
+                      solely for the following Personal Non-Commercial
+                      Purposes, free of charge and without further
+                      authorization:
+
+                      (a) Individual content creation: creating and
+                          publishing articles, posts, or media for your own
+                          personal WeChat Official Account, social media,
+                          blogs, or other personal channels, provided you
+                          do not receive direct commercial compensation for
+                          that specific content. Passive income such as
+                          platform advertising revenue shares (e.g., WeChat
+                          Traffic Owner program) does not constitute direct
+                          commercial compensation under this clause.
+
+                      (b) Learning and research: reading, modifying, or
+                          adapting the Licensed Work for your own
+                          understanding or for academic/educational purposes.
+
+                      (c) Evaluation: testing and evaluating the Licensed
+                          Work for your own non-commercial assessment.
+
+                      (d) Non-profit use: use by registered non-profit
+                          organizations for non-commercial activities.
+
+                      (e) Contributions: submitting modifications,
+                          improvements, or bug fixes back to this project.
+
+                      Any use not listed above — including any Commercial
+                      Purpose as defined below — requires a separate written
+                      commercial license from the Licensor.
+
+                      "Commercial Purpose" means:
+
+                      (i)   offering the Licensed Work, or any product or
+                            service substantially derived from or powered by
+                            the Licensed Work (including its themes, layout
+                            modules, or prompt templates), to third parties
+                            for a fee or other commercial consideration;
+
+                      (ii)  using the Licensed Work internally within any
+                            for-profit organization in connection with
+                            revenue-generating activities;
+
+                      (iii) incorporating the Licensed Work or its assets
+                            (themes, layout modules, prompt templates) into
+                            any paid software product, paid template, paid
+                            subscription service, paid training course, or
+                            paid private community;
+
+                      (iv)  using the Licensed Work to deliver services to
+                            paying clients (design, formatting, publishing,
+                            consulting, or similar services);
+
+                      (v)   rebranding, white-labeling, or redistributing
+                            the Licensed Work or any substantially similar
+                            product under a different name or brand, whether
+                            or not the underlying code is modified, for any
+                            commercial purpose;
+
+                      (vi)  using the Licensed Work, its documentation,
+                            prompt templates, layout module definitions, or
+                            theme assets as training data or fine-tuning
+                            data for any machine learning or artificial
+                            intelligence model intended for commercial use.
+
+Change Date:          2030-01-01
+
+Change License:       Apache License, Version 2.0
+
+Commercial Licensing: For commercial use authorization, please contact:
+                      Email:   skrphper@gmail.com
+                      Website: https://jieni.ai
+                      X:       https://x.com/seekjourney
+                      WeChat:  search "极客杰尼", leave a message stating
+                               "商业授权 / Commercial License"
+
+===========================================================
+NOTICE
+===========================================================
+
+Business Source License 1.1
+
+License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
+"Business Source License" is a trademark of MariaDB Corporation Ab.
+
+This License does not grant you any right in any trademark, logo, or trade
+name of the Licensor or its affiliates, including "md2wechat" and "极客杰尼".
+
+===========================================================
+TERMS
+===========================================================
+
+The Licensor hereby grants you the right to copy, modify, create derivative
+works, redistribute, and make non-production use of the Licensed Work. The
+Licensor may make an Additional Use Grant, above, permitting limited
+production use.
+
+Effective on the Change Date, or the fourth anniversary of the first
+publicly available distribution of a specific version of the Licensed Work
+under this License, whichever comes first, the Licensor hereby grants you
+rights under the terms of the Change License, and the rights granted in the
+paragraph above terminate.
+
+If your use of the Licensed Work does not comply with the requirements
+currently in effect as described in this License, you must purchase a
+commercial license from the Licensor, its affiliated entities, or authorized
+resellers, or you must refrain from using the Licensed Work.
+
+All copies of the original and modified Licensed Work, and derivative works
+of the Licensed Work, are subject to this License. This License applies
+separately for each version of the Licensed Work and the Change Date may
+vary for each version of the Licensed Work released by Licensor.
+
+You must conspicuously display this License on each original or modified
+copy of the Licensed Work. If you receive the Licensed Work in original or
+modified form from a third party, the terms and conditions set forth in this
+License apply to your use of that work.
+
+Any use of the Licensed Work in violation of this License will automatically
+terminate your rights under this License for the current and all other
+versions of the Licensed Work.
+
+This License does not grant you any right in any trademark or logo of
+Licensor or its affiliates (provided that you may use a trademark or logo of
+Licensor as expressly required by this License).
+
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE LICENSED WORK IS PROVIDED ON
+AN "AS IS" BASIS. LICENSOR HEREBY DISCLAIMS ALL WARRANTIES AND CONDITIONS,
+EXPRESS OR IMPLIED, INCLUDING (WITHOUT LIMITATION) WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND
+TITLE.
+
+===========================================================
+中文说明（Chinese Summary）
+===========================================================
+
+本许可证基于 Business Source License 1.1（BUSL-1.1），并附加个人使用扩展条款。
+如本中文说明与上方英文条款存在歧义，以英文条款为准。
+
+本作品（"Licensed Work"）包含 md2wechat 的 CLI 源代码、主题、高级排版模块、
+Prompt 模板、Skill 定义，及本仓库中全部相关文档与资产。
+
+版权所有 © 2024–2026 geekjourneyx
+
+─────────────────────────────────────────
+一、允许的使用（个人免费，无需授权）
+─────────────────────────────────────────
+
+以下场景无需申请授权，可免费使用：
+
+  • 个人内容创作：将 md2wechat 用于为自己的微信公众号、小红书、B站、
+    YouTube、个人博客等渠道创作内容，前提是该内容不直接产生商业收益。
+    注：通过微信流量主、平台创作者激励计划获得的广告分成或打赏收入，
+    视为非直接商业报酬，个人创作者可免费使用。若账号以企业或品牌名义
+    运营并产生直接商业收益，则属于商业用途，须获得授权。
+
+  • 学习与研究：阅读源码、修改代码用于自我学习，或用于学术/教育目的。
+
+  • 评估与测试：非商业目的的功能体验和测试。
+
+  • 非营利组织：已登记注册的非营利组织用于非商业活动。
+
+  • 贡献代码：向本项目提交修改、改进或 Bug 修复。
+
+─────────────────────────────────────────
+二、禁止的使用（须事先获得书面商业授权）
+─────────────────────────────────────────
+
+以下场景属于商业用途，未经授权不得使用：
+
+  • 将本作品（或基于本作品的主题、排版模块、Prompt 模板等衍生成果）作为
+    产品或服务对第三方收费提供；
+
+  • 在任何营利性组织中将本作品用于与商业运营直接相关的内部工作流；
+
+  • 基于本作品构建付费软件产品、付费模板、付费订阅服务、付费培训课程或
+    付费私享社群；
+
+  • 使用本作品为付费客户提供设计、排版、发布等交付服务（外包、咨询等）；
+
+  • 对本作品进行改名（Rebrand）、贴牌（White-label）或以不同品牌名义
+    重新分发，无论底层代码是否经过修改，均须获得商业授权；
+
+  • 将本作品的源代码、文档、Prompt 模板、排版模块定义或主题资产用作任何
+    以商业为目的的机器学习或人工智能模型的训练数据或微调数据。
+
+违反以上任一条款，即视为侵权，将自动终止你在本许可证下的全部权利。
+
+─────────────────────────────────────────
+三、自动开源日期（Change Date）
+─────────────────────────────────────────
+
+2030 年 1 月 1 日之后，本作品各版本将自动以 Apache License 2.0 授权发布。
+在此日期之前，上述商业用途限制持续有效。
+
+─────────────────────────────────────────
+四、商业授权联系方式
+─────────────────────────────────────────
+
+如需获得商业授权，请通过以下任一方式联系作者：
+
+  邮件：skrphper@gmail.com
+  官网：https://jieni.ai
+  X / Twitter：https://x.com/seekjourney
+  微信公众号：极客杰尼（搜索「极客杰尼」，留言备注「商业授权」）
+
+─────────────────────────────────────────
+五、关于历史版本
+─────────────────────────────────────────
+
+本项目在此许可证生效前的历史版本以 MIT 许可证发布，该授权不受本许可证
+影响。本许可证自其生效提交（commit）起，适用于所有后续版本。
+
+─────────────────────────────────────────
+六、免责声明
+─────────────────────────────────────────
+
+本作品按「现状」提供，不附带任何明示或默示担保。作者不对因使用本作品
+造成的任何直接或间接损失承担责任。

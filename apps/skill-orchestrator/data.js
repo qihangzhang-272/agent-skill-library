@@ -1,5 +1,5 @@
 ﻿window.SKILL_ORCHESTRATOR_DATA = {
-    "generatedAt":  "2026-06-09 01:49:40",
+    "generatedAt":  "2026-06-09 09:39:31",
     "repository":  {
                        "name":  "agent-skill-library",
                        "root":  "."
@@ -168,12 +168,30 @@
                        "status":  "available"
                    },
                    {
+                       "id":  "md2wechat",
+                       "title":  "md2wechat",
+                       "section":  "writing",
+                       "path":  "skills/md2wechat/SKILL.md",
+                       "directory":  "skills/md2wechat",
+                       "description":  "Convert Markdown to WeChat Official Account HTML. Use this whenever the user wants WeChat article formatting, article preview, WeChat draft upload, image generation for articles, cover or infographic generation, image-post creation, writer-style drafting, AI trace removal, or current discovery of supported providers, themes, prompts, and layout modules.",
+                       "status":  "available"
+                   },
+                   {
                        "id":  "oss-investment-scorecard",
                        "title":  "oss investment scorecard",
                        "section":  "investment",
                        "path":  "skills/oss-investment-scorecard/SKILL.md",
                        "directory":  "skills/oss-investment-scorecard",
                        "description":  "Evaluate whether an open source project / company is investable by a USD-denominated VC fund in the current AI cycle. ALWAYS use this skill when the user asks any of the following: - \"evaluate [project] for investment\" - \"can we invest in [project]\" - \"score this open source company\" - \"投资评估 [项目]\" - \"这个开源项目值得投吗\" - \"给 [公司] 打分\" - Any request to assess, rate, or rank an open source startup\u0027s investability - Any comparison of two or more open source companies from an investment perspective The skill produces a structured 5-dimension weighted scorecard (max 10 pts), a pass/recommend/watch verdict, and an IC-ready one-paragraph thesis. It also flags one-vote-veto conditions that cause an immediate Pass regardless of total score.",
+                       "status":  "available"
+                   },
+                   {
+                       "id":  "qihang-writing-style",
+                       "title":  "qihang writing style",
+                       "section":  "writing",
+                       "path":  "skills/qihang-writing-style/SKILL.md",
+                       "directory":  "skills/qihang-writing-style",
+                       "description":  "Use when drafting or revising Qihang\u0027s Chinese public-account essays. Triggers on: \"公众号文章\", \"不像我的风格\", \"按我的节奏改\", \"写一篇产品分析\", \"写 Skill 相关文章\", \"写一篇深度文章\", \"帮我分析一下这个选题\", or when a draft feels too slogan-like, too AI-polished, overuses short punchy sentences, or uses \"不是…而是…\" / \"如果…那么…\" patterns. Also triggers when the user wants structured thinking around a topic before writing.",
                        "status":  "available"
                    },
                    {

@@ -41,6 +41,23 @@ external_sources:
       risk_level: "low"
       red_flags: "none detected"
       note: "Markdown-only skill package; README installation commands are documentation only."
+  md2wechat:
+    repo: "https://github.com/geekjourneyx/md2wechat-skill"
+    mirrored_commit: "f905ed61111df9c58e6898da104efe7a862cf258"
+    upstream_path: "skills/md2wechat"
+    local_package_path: "skills/md2wechat"
+    license_note: "Business Source License 1.1; personal non-commercial content creation is allowed by upstream additional grant, commercial use requires separate authorization before the Change Date."
+    migrated_scope:
+      - "skills/md2wechat/SKILL.md"
+      - "LICENSE"
+    excluded_scope:
+      - "CLI source code"
+      - "themes"
+      - "layout module source definitions"
+      - "docs"
+      - "examples"
+      - "assets"
+      - "platform adapters"
   anthropic_frontend_design:
     repo: "https://github.com/anthropics/skills"
     mirrored_commit: "c30d329f5814647c1e2f071020c1e8c1c9893ef1"
@@ -369,6 +386,51 @@ skills:
       - "把这段话改得更自然、更像真人写"
     copy_policy: "vendored_external_skill_package"
     notes: "迁移 op7418/Humanizer-zh 核心文件；用于中文写作自然化和常见 AI 模式清理，不承诺检测规避。"
+  - id: qihang-writing-style
+    title: "Qihang Writing Style"
+    section: writing
+    status: internal
+    source_type: user_calibrated_writing_skill
+    package_path: "skills/qihang-writing-style/SKILL.md"
+    package_support:
+      - "skills/qihang-writing-style/references/style-rhythm.md"
+      - "skills/qihang-writing-style/references/skill-methodology-writing.md"
+    package_traits:
+      - reference_routed
+      - user_style_calibrated
+      - lightweight_style_guidance
+    trigger_examples:
+      - "按我的公众号风格写"
+      - "这篇不像我的风格"
+      - "按这篇文章的节奏改"
+      - "写一篇 Skill 方法论文章"
+      - "这篇太方、短句太多、太像 AI"
+    copy_policy: "internal_user_calibrated_skill"
+    notes: "基于用户提供的 Skill 主题文章和尼采随笔沉淀；不复制长篇样本文本到 SKILL.md，采用轻量 references 降低上下文负担，不用脚本机械检查写作风格。"
+  - id: md2wechat
+    title: "md2wechat"
+    section: writing
+    status: vendored_partial
+    source_type: external_wechat_formatting_skill
+    package_path: "skills/md2wechat/SKILL.md"
+    package_support:
+      - "skills/md2wechat/LICENSE"
+      - "skills/md2wechat/UPSTREAM.md"
+    upstream_source:
+      repo: "https://github.com/geekjourneyx/md2wechat-skill"
+      commit: "f905ed61111df9c58e6898da104efe7a862cf258"
+      path: "skills/md2wechat"
+    package_traits:
+      - cli_runtime_protocol
+      - publishing_side_effects
+      - credentials_required_for_wechat_draft
+    trigger_examples:
+      - "把这篇 Markdown 转成微信公众号格式"
+      - "预览一下公众号排版"
+      - "推送到微信公众号草稿箱"
+      - "用 md2wechat 检查 layout 模块"
+    copy_policy: "vendored_partial_external_skill"
+    notes: "只迁移 md2wechat skill runtime protocol；CLI 源码、主题和 layout 模块定义不进入本仓库。上游为 BUSL-1.1，个人内容创作可用，商业用途需单独授权。"
   - id: greensock-gsap-skills
     title: "GSAP Skills"
     section: frontend-design

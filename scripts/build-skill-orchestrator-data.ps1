@@ -51,6 +51,8 @@ function Infer-Section {
   if ($RelativePath -like '*ai-product-analyzer*') { return 'product' }
   if ($RelativePath -like '*chinese-natural-voice-revision*') { return 'writing' }
   if ($RelativePath -like '*humanizer-zh*') { return 'writing' }
+  if ($RelativePath -like '*md2wechat*') { return 'writing' }
+  if ($RelativePath -like '*qihang-writing-style*') { return 'writing' }
   if ($RelativePath -like '*skills/frontend-design/SKILL.md') { return 'frontend-design' }
   if ($RelativePath -like '*awesome-design-skills*') { return 'frontend-design' }
   if ($RelativePath -like '*greensock-gsap-skills*') { return 'frontend-design' }

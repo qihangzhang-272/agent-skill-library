@@ -38,6 +38,40 @@
 - 用作中文写作自然化和编辑检查，不承诺检测规避。
 - 若缺少事实来源，优先要求补充素材，不编造具体经历或数据。
 
+### `qihang-writing-style`
+
+用途：按用户当前偏好的公众号写作节奏生成或修改中文长文，尤其适合 AI 工具、Skill 方法论、产品分析和写作系统相关文章。
+
+本仓库技能包：
+
+- `skills/qihang-writing-style/SKILL.md`
+- `skills/qihang-writing-style/references/style-rhythm.md`
+- `skills/qihang-writing-style/references/skill-methodology-writing.md`
+
+维护原则：
+
+- `SKILL.md` 只保留路由和流程，不塞全文风样本。
+- 具体风格观察放入 references，按需读取。
+- 写作风格保持轻量，不用脚本做机械检查，除非用户明确要求。
+- 该技能定义作者声音；`humanizer-zh` 和 `agent-style` 只作为发布前清理器。
+
+### `md2wechat`
+
+用途：把 Markdown 文章转换为微信公众号格式，支持本地预览、主题排版、封面/配图、图片上传和推送草稿箱。
+
+本仓库技能包：
+
+- `skills/md2wechat/SKILL.md`
+- `skills/md2wechat/LICENSE`
+- `skills/md2wechat/UPSTREAM.md`
+
+维护原则：
+
+- 只迁入上游 `skills/md2wechat/SKILL.md`，不复制 CLI 源码、主题源码、文档、示例和平台适配层。
+- 使用前以本机 `md2wechat` CLI discovery 输出为准，不凭记忆猜主题、模块和 provider。
+- `convert --draft`、`upload_image` 等命令有微信接口副作用，必须用户明确要求后再执行。
+- 上游许可证为 BUSL-1.1，个人内容创作可用；商业用途需要单独授权。
+
 ## 待补充方向
 
 - 长文结构编辑

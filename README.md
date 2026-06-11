@@ -51,6 +51,7 @@ claude plugin validate .
 | `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已迁移为自包含技能包 |
 | `chinese-natural-voice-revision` | writing | `skills/chinese-natural-voice-revision/` | 已从用户提供 zip 完全体迁移 |
 | `humanizer-zh` | writing | `skills/humanizer-zh/` | 已迁移中文 AI 写作痕迹清理 skill |
+| `topic-research-deposition` | writing | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
 | `frontend-design` | frontend-design | `skills/frontend-design/` | 已迁移 Anthropic 官方 skills repo 的 frontend-design skill |
 | `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
 | `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |

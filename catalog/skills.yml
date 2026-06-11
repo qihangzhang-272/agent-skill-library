@@ -407,6 +407,28 @@ skills:
       - "这篇太方、短句太多、太像 AI"
     copy_policy: "internal_user_calibrated_skill"
     notes: "基于用户提供的 Skill 主题文章和尼采随笔沉淀；不复制长篇样本文本到 SKILL.md，采用轻量 references 降低上下文负担，不用脚本机械检查写作风格。"
+  - id: topic-research-deposition
+    title: "Topic Research Deposition"
+    section: writing
+    status: internal
+    source_type: internal_writing_workflow_skill
+    package_path: "skills/topic-research-deposition/SKILL.md"
+    package_support:
+      - "skills/topic-research-deposition/references/platform-commands.md"
+    package_traits:
+      - multi_platform_research
+      - source_deposition_only
+      - screenshot_evidence
+      - handoff_to_qihang_writing_style
+    pipeline_role: "wechat_topic_research_step_zero"
+    trigger_examples:
+      - "搜一下这个选题"
+      - "开始搜索这个话题"
+      - "第 0 步，先沉淀素材"
+      - "帮我看看 loop engineering 这个话题"
+      - "把这个主题的 Twitter、Reddit、网页和公众号资料拉下来"
+    copy_policy: "internal_workflow_skill"
+    notes: "公众号写作第 0 步，只负责跨平台搜索、全文素材落盘和截图留证；不做文章判断、不进入 SCQA。搜索完成后等待用户确认，再交给 qihang-writing-style。"
   - id: md2wechat
     title: "md2wechat"
     section: writing

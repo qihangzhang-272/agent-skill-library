@@ -55,6 +55,22 @@
 - 写作风格保持轻量，不用脚本做机械检查，除非用户明确要求。
 - 该技能定义作者声音；`humanizer-zh` 和 `agent-style` 只作为发布前清理器。
 
+### `topic-research-deposition`
+
+用途：公众号写作第 0 步，围绕一个选题并行搜索 Twitter/X、Reddit、网页和微信公众号，把原始素材按平台沉淀为 Markdown，并为有 URL 的素材截图留证。
+
+本仓库技能包：
+
+- `skills/topic-research-deposition/SKILL.md`
+- `skills/topic-research-deposition/references/platform-commands.md`
+
+维护原则：
+
+- 只做素材沉淀，不提前消化成观点或文章结构。
+- 每条素材单独落盘，保留作者、时间、原始链接和抓取方式。
+- 有 URL 的素材尽量截图，截图作为页面证据和公众号候选配图，不能替代正文全文。
+- 概览汇报后等待用户确认，再进入 `qihang-writing-style` 的 SCQA framing。
+
 ### `md2wechat`
 
 用途：把 Markdown 文章转换为微信公众号格式，支持本地预览、主题排版、封面/配图、图片上传和推送草稿箱。

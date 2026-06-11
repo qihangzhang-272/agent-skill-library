@@ -45,6 +45,9 @@
 本仓库技能包：
 
 - `skills/qihang-writing-style/SKILL.md`
+- `skills/qihang-writing-style/references/writing-process.md`
+- `skills/qihang-writing-style/references/voice-quality.md`
+- `skills/qihang-writing-style/references/ai-flavor-checklist.md`
 - `skills/qihang-writing-style/references/style-rhythm.md`
 - `skills/qihang-writing-style/references/skill-methodology-writing.md`
 

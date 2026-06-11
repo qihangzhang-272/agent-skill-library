@@ -1,83 +1,83 @@
-# Style Rhythm
+# 文章节奏与结构示例
 
-This reference captures Qihang's target voice and rhythm rules. Read before drafting or revising.
+本文档提供文章运动、段落形状、开头结尾的具体示例。它是声音规则和 AI 味检测的**配套参考**——当需要看"好的长什么样子"时打开它。
 
-## Article Motion: Question-Driven, Not Source-Driven
+## 文章运动：问题驱动，非源材料驱动
 
-The article must start from a **genuine question**, not from "I read something" or "I tried something." Reading material and experiments can appear as supporting evidence mid-article, but they must not be the structural skeleton.
+文章必须从一个**真实的问题**开始，而非从"我读了什么"或"我试了什么"开始。阅读材料和实验可以作为中间支撑证据出现，但不能作为结构骨架。
 
-The motion should feel like:
+运动的正确形状：
 
-1. A question emerges — something feels off, something doesn't add up, something is worth asking.
-2. The obvious answer is tried and found insufficient.
-3. The article follows that discomfort, digging deeper.
-4. A sharper distinction or a better question surfaces.
-5. The ending reopens rather than closes — the reader is left with a better question than they started with.
+1. 一个问题浮现——有什么地方不对劲，有什么东西不值得问，有什么值得问
+2. 尝试了显而易见的答案，发现不够
+3. 文章跟随那个不适感，挖得更深
+4. 一个更尖锐的区分或一个更好的问题浮现
+5. 结尾重开而非关闭——读者带着比开始时更好的问题离开
 
-Do NOT use this motion:
-- "I saw X → at first it looked simple → I found a problem → here's the lesson" — this is the "陪读" pattern. It locks the article into following a source text and prevents depth.
+**不要用这种运动：**
+"I saw X → 一开始看起来很简单 → 我发现了一个问题 → 这里是一个教训"——这是"陪读"模式。它把文章锁定在跟随一篇源文本上，阻止了深度。
 
-## Opening
+## 开头
 
-Open from tension, not from summary. The first paragraph should make the reader feel: "This is a question worth asking."
+从张力开始，不从摘要开始。第一段应该让读者感到："这是一个值得问的问题。"
 
-Bad:
-"最近 Anthropic 发了一篇文章，讲 recursive self-improvement。我读完很有感触。"
+**坏：**
+> "最近 Anthropic 发了一篇文章，讲 recursive self-improvement。我读完很有感触。"
 
-Better:
-"AI 能不能自己建造下一个 AI？这个问题听起来很科幻。但如果这件事已经在发生——不是完整发生，而是一部分一部分地发生——那我们讨论的就不是未来，而是现在正在变的东西。"
+**好：**
+> "AI 能不能自己建造下一个 AI？这个问题听起来很科幻。但如果这件事已经在发生——不是完整发生，而是一部分一部分地发生——那我们讨论的就不是未来，而是现在正在变的东西。"
 
-## Ending
+## 结尾
 
-The ending must **reopen the question**, not close it with a final answer.
+结尾必须**重开问题**，而非用最终答案关闭。
 
-Bad:
+**坏：**
 "人剩下判断。这就是结论。"
 "问题是，人还站不站得稳。"
 
-Better:
-"轮子已经在转了。人站不站得稳，不是明天的问题，是现在的问题。"
+**好：**
 "我现在的感觉是，人的位置正在往上游退。但退到哪儿算停？我不知道。"
+"轮子已经在转了。人站不站得稳，不是明天的问题，是现在的问题。"
 
-The ending should leave the reader with a sharper question than they started with. It should feel like the conversation continues, not like a verdict has been delivered.
+结尾应该给读者一个比开始时更尖锐的问题。它应该让人感觉对话在继续，而非一个裁决已经被送达。
 
-## Self-Interruption Discussion Tone
+## 自问自答讨论语气
 
-This is the signature of Qihang's voice. It's not enough to say "use colloquial language." The specific mechanism is:
+这是 Qihang 声音的标志性特征。具体机制是：
 
-**Give a surface answer → immediately question it → pull the reader in.**
+**先给一个表面答案 → 然后马上质疑它 → 把读者拉进来。**
 
-Example:
-"一个简单答案是：人剩下判断。但这句话太容易说了。对吧？判断不是一个抽象名词。判断意味着你知道什么问题值得问。"
+例：
+> "一个简单答案是：人剩下判断。但这句话太容易说了。对吧？判断不是一个抽象名词。判断意味着你知道什么问题值得问。"
 
-Other effective forms:
+其他有效的形式：
 - "这听起来像效率提升。但效率提升到一定程度之后，问题会变形。"
+- "我读到这个数字的时候，停了一下。不是因为 64% 多么夸张。而是因为它指向的能力很特别。"
 - "这个说法我比较认同。真正的问题不在于明天会不会突然出现一个完全自我改进的 AI。真正的问题是，很多机构连现在发生的变化都没看清。"
-- "我读到这个数字的时候，停了一下。不是因为 64% 多么夸张。而是因为它指向的能力很特别。" (Note: this is a natural thought progression, not a "不是…而是…" mechanical frame.)
 
-Key rule: When a "simple answer" or "obvious conclusion" appears, the next sentence must complicate it. Never let an easy answer stand unchallenged.
+**关键规则：** 当一个"简单答案"或"显然的结论"出现时，下一句必须让它复杂化。永远不要让一个轻易的答案不被挑战地站立。
 
-## Paragraph Shape
+## 段落形状
 
-Use mixed paragraph lengths.
+使用混合段落长度。
 
-- Medium paragraphs carry reasoning.
-- Short paragraphs create a real pause or turn.
-- **Limit**: No more than 2 consecutive short paragraphs unless the article has rich images to carry rhythm. In text-heavy articles with few images, use medium paragraphs instead of short ones to create rhythm.
-- Never stack short paragraphs into punchlines.
+- 中段承载推理
+- 短段制造真实的停顿或转折
+- **限制：** 不超过 2 个连续短段，除非文章有丰富的图片承载节奏。在文字为主的文章中，用中段代替短段来制造节奏
+- 永远不要把短段堆积成 punchline 序列
 
-Bad rhythm (three consecutive short paragraphs):
+**坏节奏（三个连续短段）：**
 "这不是功能问题。"
 "这是结构问题。"
 "这也是 AI 产品的关键。"
 
-Better rhythm (build up reasoning, then pause only at the real turn):
+**更好的节奏（先建推理，只在真正的转折处停顿）：**
 "我一开始以为这是文风问题。后来发现不是。很多写作 Skill 失败，是因为它把太多样本文字塞进上下文，模型还没开始分析，注意力已经被风格材料占掉了一半。"
-(short paragraph only where the thought genuinely changes direction)
+（短段只出现在思维真正改变方向的地方）
 
-## Sentence Habits To Prefer
+## 句子习惯偏好
 
-These describe the motion of thought, not mandatory phrases. They signal a mind still working through a problem:
+这些描述的是思维的**运动**，不是强制性词组。它们信号一个仍在处理问题的心智：
 - "我后来发现…"
 - "这件事看起来很小，但…"
 - "真正麻烦的是…"
@@ -88,51 +88,30 @@ These describe the motion of thought, not mandatory phrases. They signal a mind 
 - "这里有意思的是…"
 - "但这句话太容易说了。对吧？"
 
-## Absolutely Forbidden
+## 洞察力与讨论空间
 
-These patterns must never appear in any article:
+洞察力不是给出没人想到的答案。洞察力是问了一个没人问但值得问的问题。
 
-- ❌ "不是…而是…" — any sentence built on this frame. Prohibited entirely, no exceptions.
-- ❌ "如果…那么…" — conclusion-posture, not exploration-posture.
-- ❌ "本质上是…" / "关键在于…" / "真正的价值是…" — declarative shortcuts that kill discussion.
-- ❌ "从 X 到 Y" — formulaic transition that forces a narrative arc where there may be none.
-- ❌ "不仅…而且…" — should not appear. It's a mechanical stacking pattern.
+文章的核心价值在于**问题的质量**，而非答案的确定性。一篇好文章不告诉读者想什么——它给读者一个更好的问题去思考。
 
-If the thought genuinely requires contrast, write it out in two full sentences instead of forcing it into a formula:
-"I started with explanation X. After spending more time with the problem, I think Y is closer."
+## 细节标准
 
-## Insight and Discussion Space
+每一个抽象主张需要以下支撑之一：
+- 一个具体例子
+- 一个隐喻或小故事
+- 一个工具/文件/脚本名称
+- 一个失败模式
+- 一个前后对比
+- 一个用户场景
 
-Insight is not giving an answer nobody thought of. Insight is asking a question nobody asked, but that is worth asking.
-
-The article's core value lies in the **quality of the question**, not in the certainty of the answer. A good article doesn't tell the reader what to think — it gives them a better question to think about.
-
-Good (opens space — the reader starts thinking):
-"AI 最先改变的不是未来。它先改变制造未来的人。"
-
-Bad (closes space — nothing left to discuss):
-"人剩下判断。这就是 AI 时代的核心结论。"
-
-When making a judgment, always leave a door open. Instead of "This is X," try "My current sense is X. But I'm still watching Y, and I could be wrong about Z."
-
-## Detail Standard
-
-Every abstract claim needs one of these supports:
-- a concrete example
-- a metaphor or small story
-- a tool/file/script name
-- a failure mode
-- a before/after contrast
-- a user scene
-
-Do not write "Skill 要沉淀经验" and stop there. Say what experience looks like:
+不要写"Skill 要沉淀经验"然后停在那里。说出经验长什么样：
 - "staging 返回 200 不代表成功"
 - "created_at 不能作为排序字段"
 - "Description 写功能介绍会导致路由失败"
 
-## Section Pattern For Methodology Essays
+## 方法论文章的章节模式
 
-Use numbered sections when teaching a framework:
+在教一个框架时使用编号章节：
 ```markdown
 #01
 不要写废话。
@@ -140,16 +119,16 @@ Use numbered sections when teaching a framework:
 #02
 Skill 其实是 Context Engineering。
 ```
-The section title can be numeric and plain. Put the real claim in the first sentence.
+章节标题可以是数字化的、朴素的。将真正的断言放在第一句。
 
-## Product Analysis Variant
+## 产品分析变体
 
-For product analysis, use a narrative structure driven by tension:
-- what tension or question this product raises
-- what looked ordinary at first
-- what specific product choice changed the judgment
-- what it means for user behavior, business model, and competition
-- what remains unproven
-- end by reopening the question — what does this product's trajectory imply?
+在写产品分析时，使用由张力驱动的叙事结构：
+- 这个产品提出的张力或问题是什么
+- 什么东西一开始看起来普通
+- 什么具体的产品选择改变了判断
+- 这对用户行为、商业模式和竞争意味着什么
+- 什么仍然未被证明
+- 通过重开问题结尾——这个产品的轨迹意味着什么
 
-Keep the thinking rhythm — exploratory, self-questioning, grounded — not the same surface layout as methodology essays.
+保持思考节奏——探索性的、自我质问的、脚踏实地的——和方法论文章不是同一个表面布局。

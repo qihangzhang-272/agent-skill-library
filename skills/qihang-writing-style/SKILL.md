@@ -56,10 +56,46 @@ Integrate everything into a full article:
 
 - **Title**: Engaging, contains the core benefit or tension
 - **Opening**: SCQA storytelling introduction
-- **Body**: Sub-headline + core sentence + detailed exposition
+- **Body**: Sub-headline + core sentence + detailed exposition. Every major section carries an inline picture cue (see below).
 - **Ending**: Reopen the question. Do not close it with a maxim.
 
 After delivering the draft, note the main structural and style choices made.
+
+## Picture Cues Inside the Draft
+
+During Step 4 drafting, weave picture cues directly into the body. A picture cue is a single bracketed line dropped at the natural visual break of a section — right after the core argument lands and before the next paragraph picks up.
+
+Format:
+```
+[📷 配图建议：这里放 X 的截图/生成图，承接上文的 Y 论证点，视觉上突出 Z]
+```
+
+A good cue answers three questions in one breath:
+- **What image?** Twitter screenshot / product page / generated concept art / figure from the original source
+- **Which argument does it serve?** It bridges a specific claim just made to the reader's mental image
+- **What should the image visually emphasize?** The data point, the contrast, the scale, the person, the tension
+
+Examples:
+```
+[📷 配图建议：Peter Steinberger 推文截图（19K likes / 7.8M views），
+ 承接"这个 idea 一共三句话但引爆了整个开发者圈"的判断，视觉上突出互动数据]
+```
+
+```
+[📷 配图建议：Boris Cherny 在 Acquired Unplugged 演讲的分镜图，
+ 承接"他去年 11 月卸载了 IDE"的故事线，突出"从写代码到写循环"的转变]
+```
+
+```
+[📷 配图建议：生成概念图——一个人站在工厂控制室里透过玻璃看上千个 Agent 在跑步机上跑，
+ 承接"你不再是站在流水线上的人，你是设计工厂的人"这个隐喻]
+```
+
+Rules:
+- Never lean on the cue as a crutch for weak prose. The text must carry the argument on its own.
+- One cue per major section or pivotal turn; don't carpet-bomb every two paragraphs.
+- Only suggest images that actually exist in the research folder, OR a generated concept that a human can picture from the description. Don't hallucinate screenshots that were never captured.
+- Cues written in Chinese, matching the draft language. They stay inline; don't hoist them into a separate appendix or make the reader cross-reference.
 
 ## Working Rules
 

@@ -20,9 +20,32 @@ description: >
 8. **搜索完做概览汇报。** 列出各平台素材数量、核心发现摘要（2-3 句事实，不是观点）、覆盖盲区。然后停下来等用户发令。
 9. **不压缩交互回合。** 概览汇报后用户说"继续"或"进入 SCQA"之前，绝不自动推进到写作。
 
+## 执行架构：全部搜索走 general-purpose（强制）
+
+**所有搜索操作必须通过 `general-purpose` 子代理执行，主对话不直接搜。** 这是本 skill 的核心规则。主对话只负责调度、写文件和汇报；`general-purpose` 负责在各平台执行实际搜索、内容抓取和结果返回。
+
+```
+主对话（调度层）                    general-purpose（执行层）
+  │                                    │
+  ├─ 发令：搜索关键词 X ──────────────→│ twitter search
+  │                                    │ rdt search
+  │                                    │ exa.web_search_exa
+  │                                    │ exa.web_fetch_exa
+  │← 返回：清洁后的素材 ──────────────┤
+  │                                    │
+  ├─ 写入 md 文件                      │
+  ├─ 发令：下一轮搜索 ────────────────→│ ...
+```
+
+**调度规则：**
+- 每轮搜索派一个独立的 `general-purpose`，给明确的搜索指令：平台、关键词、返回字段、是否需要全文抓取。
+- `general-purpose` 返回后，主对话立即将结果写入 md 文件。
+- 每轮可以有多个 `general-purpose` 并行跑，各平台互不等待。
+- `general-purpose` 不写文件、不做选题判断、不进入 SCQA，只返回可落盘的原始内容和必要元数据。
+
 ## 环境准备（自动处理，不问用户）
 
-每次开始搜索前，自动完成以下配置：
+每次开始搜索前，主对话自动完成以下配置，然后将搜索命令交给 `general-purpose`：
 
 ```bash
 # Twitter/X 认证（token 写在 ~/.bash_profile 中，直接加载）
@@ -36,18 +59,29 @@ alias rdt='python -m rdt_cli'
 #           mcporter call 'exa.web_fetch_exa(...)'
 ```
 
-这些是搜索命令的前置条件，在 skill 中自动执行，不作为交互点。
+这些是搜索命令的前置条件，在 skill 中自动执行，不作为交互点。派发 `general-purpose` 时，要把这些前置条件写进任务说明，避免子代理缺少环境。
 
 ## 递进搜索策略（3-4 轮）
 
+**每轮搜索全部派发 `general-purpose` 执行。** 主对话不亲自搜，只负责发令、收结果、写文件和调下一轮方向。
+
 每搜完一轮，基于该轮发现调整下一轮角度。不要四轮搜同一个关键词。
 
-| 轮次 | 搜索目标 | 典型关键词/方向 |
-|------|---------|---------------|
-| **第 1 轮** | 关键词 + 现象全貌 | 话题核心关键词，覆盖中文和英文 |
-| **第 2 轮** | 火爆现象的源头 | 找到第 1 轮中出现的关键人物、账号、推文 ID，追到源头内容 |
-| **第 3 轮** | 概念定义 + 反对质疑 | 搜"XX 是什么"、"XX vs YY"、"质疑 XX"、反对声音、社区批评 |
-| **第 4 轮** | 理性论述 + 开源项目 | 搜深度技术博客、学术论文、GitHub 项目、系统化文章 |
+| 轮次 | 搜索目标 | 典型关键词/方向 | general-purpose 派发方式 |
+|------|---------|---------------|---------------------|
+| **第 1 轮** | 关键词 + 现象全貌 | 话题核心关键词，覆盖中文和英文 | 并行派 3-4 个 `general-purpose`：Twitter 一个、Reddit 一个、Exa 全网一个、微信公众号一个 |
+| **第 2 轮** | 火爆现象的源头 | 找到第 1 轮中出现的关键人物、账号、推文 ID，追到源头内容 | 派 `general-purpose` 追具体人物、账号、子版块或原文链接，必要时用 `exa.web_fetch_exa` 拉全文 |
+| **第 3 轮** | 概念定义 + 反对质疑 | 搜"XX 是什么"、"XX vs YY"、"质疑 XX"、反对声音、社区批评 | 派 `general-purpose` 搜批评、质疑和替代概念，中文和英文都要搜 |
+| **第 4 轮** | 理性论述 + 开源项目 | 搜深度技术博客、学术论文、GitHub 项目、系统化文章 | 派 `general-purpose` 搜 GitHub、论文、技术博客和生产实践案例 |
+
+**general-purpose 派发示例：**
+
+```text
+Agent(subagent_type="general-purpose", prompt="
+第 1 轮 Twitter 搜索：搜索关键词 'XXX' 和 'XXX'，各返回 10 条，JSON 格式。
+返回每条推文的 text、author、createdAt、metrics、urls。不要概括，返回原始内容。
+")
+```
 
 **当素材覆盖以下五个维度时，认为"够了"：**
 - [ ] 现象本身（有什么？谁在说？多火？）
@@ -79,7 +113,7 @@ writing/wechat/drafts/YYYY-MM-DD-{topic-slug}/
 │   ├── 01-addy-osmani-loop-engineering-full.md
 │   ├── 02-reza-rezvani-most-not-build-loop.md
 │   └── ...
-└── wechat/
+├── wechat/
     ├── 01-claude-code-while-loop-source.md
     ├── 02-8-mechanisms-chat-to-agent.md
     └── ...

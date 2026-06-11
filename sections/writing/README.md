@@ -66,6 +66,9 @@
 
 - `skills/topic-research-deposition/SKILL.md`
 - `skills/topic-research-deposition/references/platform-commands.md`
+- `skills/topic-research-deposition/references/agent-constraints.md`
+- `skills/topic-research-deposition/references/wechat-extraction.md`
+- `skills/topic-research-deposition/references/quality-checklist.md`
 
 维护原则：
 

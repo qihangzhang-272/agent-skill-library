@@ -317,7 +317,7 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "section": "writing",
       "path": "skills/topic-research-deposition/SKILL.md",
       "directory": "skills/topic-research-deposition",
-      "description": "公众号写作第 0 步——跨平台选题搜索与原始素材沉淀。当用户提到\"搜一下选题\"、\"开始搜索\"、\"第 0 步\"、\"选题搜索\"、\"帮我搜一下 XX\"、\"看看 XX 话题\"时触发。在四个平台（Twitter/X、Reddit、Exa 全网、微信公众号）并行执行 3-4 轮递进搜索，将原始素材按平台归档为 md 文档，不做信息消化或预判。搜索完成做概览汇报，等待用户发令才进入下一步。",
+      "description": "公众号写作第 0 步——跨平台选题搜索与原始素材沉淀。当用户提到\"搜一下选题\"、\"开始搜索\"、\"第 0 步\"、\"选题搜索\"、\"帮我搜一下 XX\"、\"看看 XX 话题\"、\"素材沉淀\"或\"补截图\"时触发。在四个平台（Twitter/X、Reddit、Exa 全网、微信公众号）并行执行 3-4 轮递进搜索，将原始素材按平台归档为 md 文档，并截图留证。不做信息消化或预判。搜索完成后做概览汇报，等待用户发令才进入下一步。",
       "status": "available"
     },
     {

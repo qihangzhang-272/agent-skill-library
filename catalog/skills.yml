@@ -418,6 +418,9 @@ skills:
     package_path: "skills/topic-research-deposition/SKILL.md"
     package_support:
       - "skills/topic-research-deposition/references/platform-commands.md"
+      - "skills/topic-research-deposition/references/agent-constraints.md"
+      - "skills/topic-research-deposition/references/wechat-extraction.md"
+      - "skills/topic-research-deposition/references/quality-checklist.md"
     package_traits:
       - multi_platform_research
       - subagent_orchestrated

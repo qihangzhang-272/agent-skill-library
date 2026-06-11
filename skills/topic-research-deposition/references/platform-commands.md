@@ -90,8 +90,7 @@ shot-scraper "<URL>" -o "<screenshots-path>/<filename>.png" --width 1200 --heigh
 
 **截图规则：**
 - 每完成一轮搜索的 md 文件写入后，立即对该文件的原始 URL 截图
-- 优先使用当前 agent 环境可用的截图能力：Chrome / Playwright / Codex 浏览器
-- `shot-scraper` 只是可选命令，不要把它当成唯一依赖
+- 优先使用当前可用的截图能力；`shot-scraper` 是推荐工具，但不是唯一依赖
 - Twitter 推文：`https://x.com/{screenName}/status/{tweetId}`
 - 公众号文章：`https://mp.weixin.qq.com/s/{articleId}`
 - 网页/Substack/Medium：直接截 URL

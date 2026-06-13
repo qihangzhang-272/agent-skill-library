@@ -418,12 +418,12 @@ skills:
     package_path: "skills/topic-research-deposition/SKILL.md"
     package_support:
       - "skills/topic-research-deposition/references/platform-commands.md"
-      - "skills/topic-research-deposition/references/agent-constraints.md"
+      - "skills/topic-research-deposition/references/wechat-viral-logic.md"
       - "skills/topic-research-deposition/references/wechat-extraction.md"
       - "skills/topic-research-deposition/references/quality-checklist.md"
     package_traits:
       - multi_platform_research
-      - subagent_orchestrated
+      - serial_platform_search
       - source_deposition_only
       - screenshot_evidence
       - handoff_to_qihang_writing_style
@@ -435,7 +435,7 @@ skills:
       - "帮我看看 loop engineering 这个话题"
       - "把这个主题的 Twitter、Reddit、网页和公众号资料拉下来"
     copy_policy: "internal_workflow_skill"
-    notes: "公众号写作第 0 步，只负责跨平台搜索、全文素材落盘和截图留证；搜索由 general-purpose 子代理执行，主对话只调度、落盘和汇报；不做文章判断、不进入 SCQA。搜索完成后等待用户确认，再交给 qihang-writing-style。"
+    notes: "公众号写作第 0 步，只负责跨平台搜索、全文素材落盘和截图留证；搜索由主对话按 Twitter/X、Reddit、Exa 全网、微信公众号串行执行，避免子代理概括、截断或落盘散乱；不做文章判断、不进入 SCQA。搜索完成后等待用户确认，再交给 qihang-writing-style。"
   - id: md2wechat
     title: "md2wechat"
     section: writing

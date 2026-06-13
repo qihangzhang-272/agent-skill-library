@@ -76,6 +76,7 @@ These patterns are FORBIDDEN in all Qihang articles. Scan for them before delive
 | "如果…那么…" | Conclusion-posture, not exploration-posture. |
 | "本质上是…" / "关键在于…" / "真正的价值是…" | Declarative shortcuts that kill discussion. |
 | "它不是 A，而是 B" | Semantic substitution that looks like thinking but stays in place. |
+| Parallelism / tricolon / enumerated triplets in prose | Statistical model signature. At most one instance per article, and only when the rhythm is genuinely earned. |
 | Arrow chains in prose ("A → B → C") | PPT logic. Narrate the causality instead of diagramming it. |
 | Meta-narration ("到这儿其实可以停了", "这里卡住了") | Never explain your writing decisions to the reader. |
 | Frame words ("暴露了一件事", "这段分析放在X身上也成立") | Enter the analysis directly, don't announce it. |
@@ -91,6 +92,7 @@ These patterns are FORBIDDEN in all Qihang articles. Scan for them before delive
 - **Colloquial precision**: Use "你看" / "这里有意思的是" / "我后来发现" / "真正麻烦的是" instead of conclusion-connectors.
 - **Start from a question, not from "I read something".** Reading material supports your argument; it is not the structural skeleton.
 - **Hypothesis-driven**: Have a point of view first, then find evidence.
+- **Ground every source in a lived scene**: When citing a source, place it in a concrete viewing/reading context. "我前阵子读到一个人类学家访谈" / "我也是在一次播客里听到..." / "后来我又翻到他在 The Atlantic 上的一篇文章". Never introduce a source as a floating authority; always attach it to where and how you encountered it.
 
 ## English-to-Chinese Translation Rule
 

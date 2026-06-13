@@ -60,20 +60,20 @@
 
 ### `topic-research-deposition`
 
-用途：公众号写作第 0 步，围绕一个选题并行搜索 Twitter/X、Reddit、网页和微信公众号，把原始素材按平台沉淀为 Markdown，并为有 URL 的素材截图留证。
+用途：公众号写作第 0 步，围绕一个选题串行搜索 Twitter/X、Reddit、网页和微信公众号，把原始素材按平台沉淀为 Markdown，并为有 URL 的素材截图留证。
 
 本仓库技能包：
 
 - `skills/topic-research-deposition/SKILL.md`
 - `skills/topic-research-deposition/references/platform-commands.md`
-- `skills/topic-research-deposition/references/agent-constraints.md`
+- `skills/topic-research-deposition/references/wechat-viral-logic.md`
 - `skills/topic-research-deposition/references/wechat-extraction.md`
 - `skills/topic-research-deposition/references/quality-checklist.md`
 
 维护原则：
 
 - 只做素材沉淀，不提前消化成观点或文章结构。
-- 搜索由 `general-purpose` 子代理执行，主对话只做调度、落盘和概览汇报。
+- 搜索由主对话直接串行执行，主对话负责搜索、落盘、截图和概览汇报。
 - 每条素材单独落盘，保留作者、时间、原始链接和抓取方式。
 - 有 URL 的素材尽量截图，截图作为页面证据和公众号候选配图，不能替代正文全文。
 - 概览汇报后等待用户确认，再进入 `qihang-writing-style` 的 SCQA framing。

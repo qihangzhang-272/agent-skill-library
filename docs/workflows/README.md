@@ -8,6 +8,8 @@
 - `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。
 - `investment-product-to-research-report.md`：从 AI-native 产品判断到 `agent-investment` IC Memo，再到可选前端自生成可视化研报页的调用链。
 
+稳定写作发布链在 `orchestrations/topic-writing-md2wechat.json` 和 `skills/qihang-workflow-orchestrator/references/topic-writing-md2wechat.md`：agent-reach 搜索沉淀 -> 启航写作 -> Codex 排版准备 -> md2wechat/公众号草稿箱。
+
 ## 放置标准
 
 适合放这里的内容包括：

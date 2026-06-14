@@ -1,5 +1,5 @@
 window.SKILL_ORCHESTRATOR_DATA = {
-  "generatedAt": "2026-06-14 08:12:45",
+  "generatedAt": "2026-06-14 08:36:29",
   "repository": {
     "name": "agent-skill-library",
     "root": "."
@@ -98,7 +98,7 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "title": "qihang workflow orchestrator",
       "path": "skills/qihang-workflow-orchestrator/SKILL.md",
       "directory": "skills/qihang-workflow-orchestrator",
-      "description": "Route Qihang's proven workflows. Use when Qihang asks to run, package, choose, or maintain workflows for topic-to-WeChat publishing, product-to-frontend, product-to-investment IC memo / visual report, or skill-library maintenance. This skill only routes; workflow details live in references.",
+      "description": "Route Qihang's proven workflows. Use when Qihang asks to run, package, choose, or maintain workflows for agent-reach research to Qihang writing to Codex/md2wechat layout, product-to-frontend, product-to-investment IC memo / visual report, or skill-library maintenance. This skill only routes; workflow details live in references.",
       "status": "available"
     },
     {

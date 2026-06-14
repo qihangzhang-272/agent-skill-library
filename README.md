@@ -21,7 +21,7 @@ Claude Code plugin 只作为自培养技能和轻量索引的分发层。目前�
 
 - `agent-product`：`ai-product-analyzer`
 - `agent-writing`：`topic-research-deposition`、`qihang-writing-style`
-- `qihang-skill-pack`：`qihang-skill-index`、`qihang-workflow-orchestrator`
+- `qihang-skill-pack`：`qihang-skill-index`、`qihang-workflow-orchestrator`，负责 marketplace 里的稳定工作流路由
 - `agent-investment`：启航 AI 投资 IC Memo 工作包，包含研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪和成稿节点
 
 ## 索引入口
@@ -64,13 +64,13 @@ claude plugin validate .
 | `topic-research-deposition` | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
 | `qihang-ic-memo-writer` | `skills/qihang-ic-memo-writer/` | 投资节点产出后的最终 IC Memo 写作技能，进入 `agent-investment` 插件 |
 | `qihang-skill-index` | `skills/qihang-skill-index/` | 启航外部 GitHub 技能源索引，进入 `qihang-skill-pack` 插件 |
-| `qihang-workflow-orchestrator` | `skills/qihang-workflow-orchestrator/` | 已跑通工作流的统一路由入口，具体链路压缩在 references，进入 `qihang-skill-pack` 插件 |
+| `qihang-workflow-orchestrator` | `skills/qihang-workflow-orchestrator/` | 已跑通工作流的统一路由入口，具体链路压缩在 references，进入 marketplace 的 `qihang-skill-pack` 插件 |
 
 ## 当前运行链
 
 | 调用链 | 文档 | 作用 |
 | --- | --- | --- |
-| topic -> writing -> md2wechat | `skills/qihang-workflow-orchestrator/` | 从选题素材沉淀到启航风格正文，再通过 `qihang-skill-index` 查 md2wechat 并进入公众号排版/草稿箱 |
+| agent-reach search -> Qihang writing -> Codex layout -> md2wechat | `skills/qihang-workflow-orchestrator/references/topic-writing-md2wechat.md` | Claude Code 先用 agent-reach 沉淀素材，再按启航写作技能成稿，最后由 Codex 做排版准备并通过 `qihang-skill-index` 解析 md2wechat 进入公众号排版/草稿箱 |
 | product -> frontend-design | `docs/workflows/prd-to-frontend.md` | 从产品洞察推进到前端 brief、设计来源选择、实现计划和浏览器验收 |
 | product -> investment IC memo -> visual report | `docs/workflows/investment-product-to-research-report.md` | 从 AI-native 产品判断进入启航投资工作包，产出 IC Memo、DD 问题树、watch triggers，并可继续做全展开可视化研报 |
 
@@ -105,5 +105,7 @@ claude plugin validate .
 `qihang-skill-index` 是外部技能的统一收纳入口。`humanizer-zh`、`md2wechat`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等外部来源只保留 GitHub 索引，不再把完整文件堆进 `skills/`。
 
 `oss-investment-scorecard` 已从独立默认技能降级为 `agent-investment` 内部 reference。运行时不要直接调用旧入口；产品投资链由 `qihang-workflow-orchestrator` 路由，再通过 `qihang-investment-scorecard` 使用其结构。
+
+投资工作包只暴露研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪和成稿节点；不要在 `agent-investment` 里再放第二个投资调度器。
 
 本仓库和 Product Hunter 没有长期关系。历史上从某个本地目录借用过内容，只作为导入 provenance，不构成本仓库的上游、资料源或同步关系。

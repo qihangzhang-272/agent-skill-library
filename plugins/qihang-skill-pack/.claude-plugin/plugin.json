@@ -1,8 +1,8 @@
 {
   "name": "qihang-skill-pack",
   "displayName": "Qihang Skill Pack",
-  "version": "0.3.1",
-  "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities.",
+  "version": "0.3.2",
+  "description": "Qihang's lightweight GitHub skill/source index and stable workflow router: agent-reach research to Qihang writing to Codex/md2wechat layout, product-to-frontend, product-to-investment IC memo, and skill-library maintenance.",
   "author": {
     "name": "Private Agent Skill Library"
   },

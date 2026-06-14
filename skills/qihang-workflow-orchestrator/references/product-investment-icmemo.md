@@ -2,7 +2,7 @@
 
 Use when the user asks whether an AI product, AI company, open-source AI project, infrastructure layer, or case is worth investing in, tracking, passing, or turning into an IC memo / investment memo / visual research report.
 
-This is the only investment workflow route. Do not call a separate investment orchestrator.
+This is the only investment workflow route. Do not call a separate investment orchestrator. `agent-investment` contains investment node skills, not another router.
 
 ## Chain
 
@@ -24,6 +24,7 @@ research object
 ## Execution Rules
 
 - Do not write the IC memo before facts are collected.
+- Do not add or keep a domain-specific investment orchestrator. Put investment workflow sequencing here and keep detailed methods inside each node's references.
 - Do not search during `qihang-ic-memo-writer`; search belongs in research/fact-pack nodes.
 - Do not load all investment references in one step. Each node reads only its own `SKILL.md` and relevant references.
 - Do not call old `oss-investment-scorecard` directly. It is a reference inside `qihang-investment-scorecard`.

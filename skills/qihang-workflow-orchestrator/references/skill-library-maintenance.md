@@ -19,6 +19,8 @@ user request
 - Source of truth is `skills/` and `catalog/`; `plugins/` and `apps/skill-orchestrator/data.js` are generated outputs.
 - `SKILL.md` should route and expose only essential rules. Detailed workflows belong in `references/`.
 - Do not create a new plugin package when an existing marketplace category can hold the capability.
+- Keep one workflow router in `qihang-skill-pack`. Domain plugins such as `agent-investment` should expose node skills, not duplicate orchestrators.
+- Remove empty or obsolete skill directories after their contents are absorbed into references or node skills.
 - External sources default to `qihang-skill-index` as repo-root URLs. Promote only when Qihang explicitly wants a reusable local skill package.
 - If an external skill is absorbed into a Qihang skill, keep upstream content as reference and remove the old runtime entry.
 - Rebuild plugins with `scripts/build-claude-plugins.ps1`.

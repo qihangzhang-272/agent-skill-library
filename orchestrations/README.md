@@ -8,7 +8,9 @@
 
 | 工作流 | 文件 | 用途 |
 | --- | --- | --- |
-| topic -> writing -> md2wechat | `topic-writing-md2wechat.json` | 连接选题素材沉淀、启航写作风格和公众号排版发布 |
+| agent-reach search -> Qihang writing -> Codex layout -> md2wechat | `topic-writing-md2wechat.json` | 连接 agent-reach 素材沉淀、启航写作风格、Codex 排版准备和公众号草稿箱发布 |
+
+Claude Code 运行时的压缩入口是 `skills/qihang-workflow-orchestrator/references/topic-writing-md2wechat.md`；本目录的 JSON 只保留可视化编排台和 Git 管理所需的稳定链路定义。
 
 ## 文件格式
 

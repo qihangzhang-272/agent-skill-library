@@ -50,7 +50,7 @@ external_index:
 
 pipelines:
   topic_writing_md2wechat:
-    title: "选题沉淀到公众号草稿箱"
+    title: "agent-reach 搜索到启航写作、Codex 排版和公众号草稿箱"
     workflow_doc: "orchestrations/topic-writing-md2wechat.json"
     primary_skills:
       - topic-research-deposition
@@ -63,6 +63,7 @@ pipelines:
     output_artifacts:
       - "research deposition folder"
       - "Qihang-style WeChat article"
+      - "Codex layout artifact"
       - "WeChat layout artifact"
       - "WeChat draft status"
   product_analysis:
@@ -476,9 +477,10 @@ skills:
     trigger_examples:
       - "跑一下写作发布工作流"
       - "topic 到 writing 到 md2wechat"
+      - "agent-reach 搜索完按我的风格写，再用 Codex 排版推草稿箱"
       - "产品分析后做前端设计"
       - "产品分析后做投资研报"
       - "产品分析后做 IC memo"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "总调度器只保留路由表；具体 workflow 下沉到 references。当前覆盖 topic-writing-md2wechat、product-frontend-design、product-investment-icmemo 和 skill-library-maintenance。"
+    notes: "总调度器只保留路由表；具体 workflow 下沉到 references。当前覆盖 agent-reach 搜索 -> 启航写作 -> Codex/md2wechat 排版发布、product-frontend-design、product-investment-icmemo 和 skill-library-maintenance。"

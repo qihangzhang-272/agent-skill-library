@@ -40,13 +40,11 @@
 
 ## 3. 设计策略层
 
-已迁移来源：
+外部来源由 `qihang-skill-index` 统一查询：
 
-- `skills/awesome-design-skills/skills/dashboard/`
-- `skills/awesome-design-skills/skills/shadcn/`
-- `skills/awesome-design-skills/skills/bento/`
-- `skills/awesome-design-skills/skills/premium/`
-- `skills/awesome-design-skills/skills/minimal/`
+- `bergside/awesome-design-skills`
+- `leonxlnx/taste-skill`
+- `anthropics/skills`
 
 使用方式：
 
@@ -72,13 +70,10 @@
 
 ## 5. 动效层
 
-已迁移来源：
+外部来源由 `qihang-skill-index` 统一查询：
 
-- `skills/greensock-gsap-skills/skills/gsap-core/`
-- `skills/greensock-gsap-skills/skills/gsap-react/`
-- `skills/greensock-gsap-skills/skills/gsap-scrolltrigger/`
-- `skills/greensock-gsap-skills/skills/gsap-timeline/`
-- `skills/greensock-gsap-skills/skills/gsap-performance/`
+- `greensock/gsap-skills`
+- `motiondivision/motion`
 
 引用源：
 
@@ -93,9 +88,9 @@
 
 ## 6. 资产治理层
 
-已迁移来源：
+外部来源由 `qihang-skill-index` 统一查询：
 
-- `skills/typeui-fundamentals/`
+- `bergside/typeui`
 
 引用源：
 

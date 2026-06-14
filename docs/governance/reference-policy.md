@@ -35,9 +35,9 @@
 
 ## 外部完整技能迁移
 
-如果用户明确要求“直接迁移”某个外部技能，并且该项目允许复用，可以把它作为完整 skill 包放进 `skills/`。
+如果用户明确要求“直接迁移”某个外部技能，先把它加入 `qihang-skill-index`。不要直接把完整 skill 包放进 `skills/`。
 
-迁移时必须记录：
+只有当它被反复使用，并且启航要把其中稳定判断重写成自己的能力时，才新增本地技能包。新增时必须记录：
 
 - 上游仓库 URL。
 - 上游 commit。
@@ -51,10 +51,10 @@ upstream_source:
   repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
   commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
   replaced_local_skill: "vc-investment-evaluator"
-copy_policy: "vendored_external_skill"
+copy_policy: "promoted_to_self_cultivated_skill"
 ```
 
-这种迁移不再遵循“只做索引”的轻量规则；它是外部技能包归档和复用。
+这种新增不是外部技能包归档，而是“吸收后重写”。外部原仓库仍只作为来源索引。
 
 ## 推荐写法
 

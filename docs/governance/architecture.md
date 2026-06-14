@@ -12,7 +12,7 @@
 ## 基本区分
 
 - 调用链清楚比技能数量多更重要。
-- `skills/` 里可以放完整迁移包，也可以放保守迁移的外部 skill 子集。
+- `skills/` 里只放启航自培养技能和启航维护的轻量索引。
 - 没有确认迁移边界的内容先做索引，不急着复制。
 - 网页 prompt、UI 库源码、项目资料和一次性实验不进入正式技能包。
 - 历史本地目录只作为导入 provenance，不构成本仓库的上游关系。
@@ -24,7 +24,7 @@
 | `catalog/` | 技能索引、来源路径、状态、触发场景、迁移边界 | 长篇资料正文 |
 | `sections/` | 分板块入口、优先级、已收录能力、待补方向 | 具体技能包正文 |
 | `docs/` | 治理规则、收录流程、组合搭配、调用链 | 一次性实验页面或临时运行结果 |
-| `skills/` | 可复用技能包或保守迁移的外部 skill 子集 | 未验证来源、网页 prompt 原文、UI 库源码 |
+| `skills/` | 启航自培养技能、轻量外部 GitHub 索引 | 外部完整 skill、未验证来源、网页 prompt 原文、UI 库源码 |
 | `plugins/` | Claude Code 可安装插件分发结果 | 源技能正文的手工维护副本 |
 | `.claude-plugin/` | Claude Code marketplace manifest | 技能正文、agents、hooks、commands |
 | `orchestrations/` | 跨技能工作流定义、节点顺序、输入输出、验收标准 | 具体项目产物、技能正文 |
@@ -35,8 +35,7 @@
 
 以 `frontend-design` 为例：
 
-- `skills/awesome-design-skills/` 保存已验证风格 skill 子集。
-- `skills/greensock-gsap-skills/` 保存官方 GSAP skills。
+- `skills/qihang-skill-index/` 保存外部设计技能的 GitHub 来源索引。
 - `docs/sections/frontend-design/ui-call-chain.md` 保存从模糊需求到前端实现的调用链。
 - `docs/sections/frontend-design/prompt-index.md` 只保存网页 prompt 入口，不复制正文。
 - `orchestrations/` 保存跨技能链路，`apps/skill-orchestrator/` 将链路可视化并生成整条链 handoff prompt。

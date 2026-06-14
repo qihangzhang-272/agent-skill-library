@@ -2,7 +2,7 @@
   "id": "wechat-product-research-writing-publish",
   "title": "产品洞察 / 选题调研 -> 启航写作 -> 公众号排版发布",
   "goal": "把一个 AI 产品、技术话题、外部文章或公众号选题，从素材沉淀推进到启航风格文章，再进入微信公众号排版和草稿箱发布。",
-  "context": "这条链是人工工作流定义，不是自动 runner。Claude 需要按节点顺序读取对应 skill；其中 ai-product-analyzer、topic-research-deposition、qihang-writing-style 是自培养能力并进入 Claude Code 插件分发层，md2wechat 是外部排版发布适配技能，只在本仓库索引和项目流程中引用。",
+  "context": "这条链是人工工作流定义，不是自动 runner。Claude 需要按节点顺序读取对应 skill；其中 ai-product-analyzer、topic-research-deposition、qihang-writing-style 是自培养能力，qihang-skill-index 用于查找 md2wechat、agent-reach 等外部能力来源。",
   "finalOutput": "完成一篇可发布的公众号文章，包含正文、图文节奏、配图提示或已沉淀图片、Markdown 排版结果、草稿箱推送状态和未完成风险。",
   "pluginScope": {
     "distributedSkills": [
@@ -11,7 +11,7 @@
       "agent-writing:qihang-writing-style"
     ],
     "libraryOnlySkills": [
-      "md2wechat"
+      "qihang-skill-index"
     ]
   },
   "nodes": [
@@ -44,9 +44,9 @@
     },
     {
       "id": "wechat-layout-publish",
-      "skillId": "md2wechat",
+      "skillId": "qihang-skill-index",
       "title": "微信公众号排版与草稿箱发布",
-      "role": "把最终 Markdown 做公众号排版、图片素材处理和草稿箱推送。该节点引用外部 md2wechat 技能，不进入默认 Claude Code 插件包。",
+      "role": "通过启航外部技能索引查找 md2wechat 上游来源和运行边界，再按当前项目环境调用实际 CLI 做公众号排版、图片素材处理和草稿箱推送。",
       "input": "最终正文 Markdown、封面图、正文图片、图片说明、公众号 AppID/Secret 和发布约束。",
       "output": "公众号排版 HTML/Markdown、素材上传结果、草稿箱 draft 状态和可人工复核的预览信息。",
       "acceptance": "封面遵守写作排版宪法；正文图片与段落论证对应；草稿标题、摘要、封面和正文图片都经过人工可复核记录。"
@@ -56,6 +56,6 @@
     "这条链描述稳定人工流程，不复制各技能正文。",
     "如果只是写作修改，不需要强行执行 topic-research 或 product-insight。",
     "如果只是技能库维护，不进入 md2wechat 发布节点。",
-    "外部收藏技能默认只作为索引或工具适配器引用，除非明确被提升为自培养核心技能。"
+    "外部收藏技能默认只通过 qihang-skill-index 引用，除非明确被提升为自培养核心技能。"
   ]
 }

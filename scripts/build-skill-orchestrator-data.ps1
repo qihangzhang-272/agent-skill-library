@@ -47,19 +47,10 @@ function Get-FrontMatterValue {
 function Infer-Section {
   param([string]$RelativePath)
 
-  if ($RelativePath -like '*oss-investment-scorecard*') { return 'investment' }
   if ($RelativePath -like '*ai-product-analyzer*') { return 'product' }
-  if ($RelativePath -like '*chinese-natural-voice-revision*') { return 'writing' }
-  if ($RelativePath -like '*humanizer-zh*') { return 'writing' }
-  if ($RelativePath -like '*md2wechat*') { return 'writing' }
   if ($RelativePath -like '*qihang-writing-style*') { return 'writing' }
   if ($RelativePath -like '*topic-research-deposition*') { return 'writing' }
-  if ($RelativePath -like '*skills/frontend-design/SKILL.md') { return 'frontend-design' }
-  if ($RelativePath -like '*awesome-design-skills*') { return 'frontend-design' }
-  if ($RelativePath -like '*greensock-gsap-skills*') { return 'frontend-design' }
-  if ($RelativePath -like '*typeui-fundamentals*') { return 'frontend-design' }
-  if ($RelativePath -like '*taste-skill*') { return 'frontend-design' }
-  if ($RelativePath -like '*impeccable*') { return 'frontend-design' }
+  if ($RelativePath -like '*qihang-skill-index*') { return 'operations' }
   return 'unknown'
 }
 

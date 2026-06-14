@@ -11,7 +11,7 @@
 - 从一句模糊需求开始，产出可执行 PRD 和前端实现计划。
 - 从已有 PRD 生成页面结构、组件拆分和前端任务。
 - 为客户项目、内部工具、agent workspace、landing page、dashboard 做前端首版。
-- 比较多个 UI skill / prompt / 组件库，决定项目初始化时拉取哪些能力。
+- 比较多个外部 UI skill / prompt / 组件库，决定项目初始化时拉取哪些能力。
 
 不适用场景：
 
@@ -75,12 +75,12 @@
 
 ## 2. 页面类型判断
 
-先判断页面类型，再决定使用哪些设计技能。
+先判断页面类型，再通过 `qihang-skill-index` 决定参考哪些外部设计来源。
 
 | 页面类型 | 判断标准 | 主路线 |
 | --- | --- | --- |
-| Landing page | 需要转化、首屏叙事、品牌表达 | `awesome-design-skills/premium` 或 `bento` + prompt index |
-| SaaS dashboard | 需要高频操作、状态总览、筛选、表格 | `awesome-design-skills/dashboard` + shadcn/Tailwind reference |
+| Landing page | 需要转化、首屏叙事、品牌表达 | Awesome Design Skills / Taste Skill / Magic UI 索引 |
+| SaaS dashboard | 需要高频操作、状态总览、筛选、表格 | shadcn / Tailwind / Ant Design / MUI 索引 |
 | Agent workspace | 人要操控 agent、审查任务、查看执行链 | dashboard / shadcn + 明确任务队列和审查面板 |
 | Onboarding / flow | 需要步骤解释、状态转场、进度感 | shadcn + GSAP/Motion 动效层 |
 | Component registry | 管理组件、来源、成熟度、采纳决策 | TypeUI fundamentals + registry reference |
@@ -111,14 +111,13 @@
 
 ## 4. 设计策略选择
 
-优先使用已迁移技能：
+外部设计来源统一从 `qihang-skill-index` 查询，不再假设本仓库有本地 skill 目录：
 
-- `skills/awesome-design-skills/skills/dashboard/`
-- `skills/awesome-design-skills/skills/shadcn/`
-- `skills/awesome-design-skills/skills/bento/`
-- `skills/awesome-design-skills/skills/premium/`
-- `skills/awesome-design-skills/skills/minimal/`
-- `skills/typeui-fundamentals/`
+- Anthropic `frontend-design`
+- Awesome Design Skills
+- TypeUI
+- Taste Skill
+- Impeccable
 
 选择规则：
 
@@ -154,13 +153,10 @@
 
 只有动效能提升理解或反馈时才启用。
 
-已迁移技能：
+外部动效来源统一从 `qihang-skill-index` 查询：
 
-- `skills/greensock-gsap-skills/skills/gsap-core/`
-- `skills/greensock-gsap-skills/skills/gsap-react/`
-- `skills/greensock-gsap-skills/skills/gsap-scrolltrigger/`
-- `skills/greensock-gsap-skills/skills/gsap-timeline/`
-- `skills/greensock-gsap-skills/skills/gsap-performance/`
+- GSAP Skills
+- Motion
 
 使用边界：
 
@@ -219,7 +215,7 @@
 项目完成后，只把可复用判断沉淀回本仓库：
 
 - 有效的技能组合 -> 更新 workflow 或 section README。
-- 高质量外部 skill -> 先加入来源索引或 `catalog/skills.yml` 候选。
+- 高质量外部 skill -> 加入 `qihang-skill-index`，不复制正文。
 - 可复用组件模式 -> 写成调用策略或验收规则。
 - 具体项目源码 -> 不进入本仓库。
 - 一次性网页实验 -> `local-experiments/`。

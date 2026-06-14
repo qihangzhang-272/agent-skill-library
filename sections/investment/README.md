@@ -1,41 +1,17 @@
 # 投资
 
-投资板块收集面向 VC、融资、IC、DD 和退出路径判断的技能。
+投资板块当前不保留外部投资技能包。投资判断主要由自培养的 `ai-product-analyzer` 先做产品和 BP 逻辑判断，外部投资框架通过索引引用。
 
-## 已收录
+## 本地正式技能
 
-### `oss-investment-scorecard`
+- `skills/ai-product-analyzer/`：用于产品成立性、商业模式、叙事和 BP 逻辑判断。
 
-用途：从 VC 视角评估开源 AI 项目或开源公司是否具备投资价值。
+## 外部索引
 
-本仓库技能包：
+以下来源统一见 `skills/qihang-skill-index/references/github-skill-index.md`：
 
-- `skills/oss-investment-scorecard/SKILL.md`
-- `skills/oss-investment-scorecard/references/scored-examples.md`
-- `skills/oss-investment-scorecard/template/evaluation-template.md`
-- `skills/oss-investment-scorecard/cases/`
-- `skills/oss-investment-scorecard/llms.txt`
+- `oss-investment-scorecard`
 
-原始来源：
+## 调用链
 
-- 仓库：`https://github.com/lucy-cxy/oss-investment-scorecard`
-- 迁移 commit：`28a210d0a194ba0f31fe59edaf413abfafa2008e`
-- 上游 skill 名：`oss-investment-scorecard`
-
-维护原则：
-
-- `oss-investment-scorecard` 作为上游完整技能包维护。
-- 后续同步上游时记录 commit，不自行优化改写。
-- 投资板块后续重点是“投资问题 -> 研报 / 判断材料”的端到端链路，而不是只做单点打分。
-
-跨板块调用链：
-
-- `docs/workflows/investment-product-to-research-report.md`：把投资问题、产品判断和 DD 问题树整理成研报或 IC memo。
-
-## 待补充方向
-
-- 私募/成长股项目快速筛选
-- 融资材料审查
-- IC memo 结构化生成
-- DD 问题树
-- 开源项目投资风险监控
+- `docs/workflows/investment-product-to-research-report.md`

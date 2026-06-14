@@ -62,6 +62,30 @@
           "targetName": "qihang-writing-style"
         }
       ]
+    },
+    {
+      "name": "qihang-skill-pack",
+      "displayName": "Qihang Skill Pack",
+      "description": "Qihang's lightweight external GitHub skill/source index for selecting useful upstream skills without vendoring their contents.",
+      "version": "0.1.0",
+      "section": "operations",
+      "keywords": [
+        "qihang",
+        "skill-index",
+        "github",
+        "external-skills",
+        "curation"
+      ],
+      "distributionStatus": "active",
+      "distributionScope": "curated_index",
+      "releasePolicy": "manual_semver",
+      "skills": [
+        {
+          "id": "qihang-skill-index",
+          "sourcePath": "skills/qihang-skill-index",
+          "targetName": "qihang-skill-index"
+        }
+      ]
     }
   ]
 }

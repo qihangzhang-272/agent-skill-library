@@ -1,17 +1,17 @@
-version: 1
+version: 2
 library: agent-skill-library
-principle: "catalog records reusable agent capabilities, source indexes, call chains, and project-init selection guidance"
+principle: "self-cultivated skills stay local; external skills stay as GitHub indexes unless explicitly promoted"
 
 distribution:
   claude_code_marketplace_manifest: ".claude-plugin/marketplace.json"
   claude_code_plugin_index: "catalog/claude-plugins.json"
   claude_code_plugin_root: "plugins/"
   build_script: "scripts/build-claude-plugins.ps1"
-  source_of_truth: "skills/ and catalog/; plugins/ is generated distribution output for self-cultivated skills"
+  source_of_truth: "skills/ and catalog/; plugins/ is generated distribution output"
 
 plugin_policy:
-  default_scope: "self_cultivated"
-  rule: "Only Qihang-cultivated, high-frequency operational skills enter Claude Code plugin distribution by default."
+  default_scope: "self_cultivated_or_curated_index"
+  rule: "Only Qihang-cultivated operational skills and Qihang's lightweight external index enter Claude Code plugin distribution."
   current_plugins:
     agent-product:
       skills:
@@ -20,220 +20,42 @@ plugin_policy:
       skills:
         - topic-research-deposition
         - qihang-writing-style
-  external_skill_policy: "External skills remain indexed or vendored in skills/ for reference; workflows may reference them, but they do not enter plugins unless explicitly promoted."
+    qihang-skill-pack:
+      skills:
+        - qihang-skill-index
 
-external_sources:
-  chinese_natural_voice_revision:
-    original_archive: "chinese-natural-voice-revision-universal.zip"
-    captured_at: "2026-06-08"
-    local_package_path: "skills/chinese-natural-voice-revision"
-    license_note: "No standalone license file detected in the supplied archive."
-    migrated_scope:
-      - "SKILL.md"
-      - "AGENTS.md"
-      - "skill.json"
-      - "agents/openai.yaml"
-    vetting:
-      risk_level: "low"
-      red_flags: "none detected"
-      note: "No shell commands, network calls, credential access, eval/exec, base64, or destructive file operations detected."
-  humanizer_zh:
-    repo: "https://github.com/op7418/Humanizer-zh"
-    mirrored_commit: "91f3d394db8419c20d67ebe22a96cf8fee0a404b"
-    local_package_path: "skills/humanizer-zh"
-    license_note: "MIT license copied from upstream LICENSE."
-    stars_at_review: "about 9.7k"
-    migrated_scope:
-      - "SKILL.md"
-      - "README.md"
-      - "LICENSE"
-    excluded_scope:
-      - ".gitignore"
-      - "git metadata"
-    vetting:
-      risk_level: "low"
-      red_flags: "none detected"
-      note: "Markdown-only skill package; README installation commands are documentation only."
-  md2wechat:
-    repo: "https://github.com/geekjourneyx/md2wechat-skill"
-    mirrored_commit: "f905ed61111df9c58e6898da104efe7a862cf258"
-    upstream_path: "skills/md2wechat"
-    local_package_path: "skills/md2wechat"
-    license_note: "Business Source License 1.1; personal non-commercial content creation is allowed by upstream additional grant, commercial use requires separate authorization before the Change Date."
-    migrated_scope:
-      - "skills/md2wechat/SKILL.md"
-      - "LICENSE"
-    excluded_scope:
-      - "CLI source code"
-      - "themes"
-      - "layout module source definitions"
-      - "docs"
-      - "examples"
-      - "assets"
-      - "platform adapters"
-  anthropic_frontend_design:
-    repo: "https://github.com/anthropics/skills"
-    mirrored_commit: "c30d329f5814647c1e2f071020c1e8c1c9893ef1"
-    upstream_path: "skills/frontend-design"
-    local_package_path: "skills/frontend-design"
-    license_note: "Apache-2.0 LICENSE.txt copied with the skill package; upstream source is Anthropic's official skills repository."
-  oss_investment_scorecard:
-    repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
-    mirrored_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
-    local_package_path: "skills/oss-investment-scorecard"
-    license_note: "Upstream README states MIT; GitHub licenseInfo was null because no standalone LICENSE file was detected."
-  greensock_gsap_skills:
-    repo: "https://github.com/greensock/gsap-skills"
-    mirrored_commit: "aed9cfd3277740755f6bfc1155c7aa645403b760"
-    local_package_path: "skills/greensock-gsap-skills"
-    license_note: "MIT license copied from upstream LICENSE."
-    migrated_scope:
-      - "upstream skills/ directory"
-      - "upstream README.md"
-      - "upstream LICENSE"
-    excluded_scope:
-      - "examples/"
-      - "plugin packaging directories"
-      - "assets/"
-  awesome_design_skills:
-    repo: "https://github.com/bergside/awesome-design-skills"
-    mirrored_commit: "53c9fe6d8be161e48bcdaa0130d9bd542b1ff755"
-    local_package_path: "skills/awesome-design-skills"
-    license_note: "MIT license copied from upstream LICENSE."
-    migrated_scope:
-      - "skills/dashboard"
-      - "skills/shadcn"
-      - "skills/bento"
-      - "skills/premium"
-      - "skills/minimal"
-      - "skills/index.json"
-      - "upstream README.md"
-      - "upstream LICENSE"
-    excluded_scope:
-      - "all other style directories until separately validated"
-  typeui_fundamentals:
-    repo: "https://github.com/bergside/typeui"
-    mirrored_commit: "d4f7713589aa8d4e1486d1d2054eda64929d2be4"
-    local_package_path: "skills/typeui-fundamentals"
-    license_note: "MIT text copied from upstream LICENSE.md."
-    migrated_scope:
-      - "skills/fundamentals/SKILL.md"
-      - "skills/fundamentals/accessibility.md"
-      - "skills/fundamentals/typography-principles.md"
-      - "skills/fundamentals/ui-principles.md"
-      - "skills/fundamentals/ux-principles.md"
-    excluded_scope:
-      - "CLI"
-      - "plugins/"
-      - "MCP server"
-      - "registry client implementation"
-  taste_skill:
-    repo: "https://github.com/leonxlnx/taste-skill"
-    mirrored_commit: "3c7017d636c3a4aad378433ea6d0cfa6c921da4a"
-    local_package_path: "skills/taste-skill"
-    license_note: "MIT license copied from upstream LICENSE."
-    stars_at_review: 38108
-    migrated_scope:
-      - "skills/"
-      - "README.md"
-      - "CHANGELOG.md"
-      - "LICENSE"
-      - "skill.sh"
-    excluded_scope:
-      - ".github/"
-      - "assets/"
-      - "examples/"
-      - "research/"
-    vetting:
-      risk_level: "low"
-      note: "Migrated core is mostly markdown skill content; reviewed install command examples and external URLs are informational."
-  impeccable:
-    repo: "https://github.com/pbakaus/impeccable"
-    mirrored_commit: "1aedbcf538e3fa6694ccbf00294cc18e59ba1f21"
-    local_package_path: "skills/impeccable"
-    license_note: "Apache-2.0 LICENSE and NOTICE.md copied from upstream."
-    stars_at_review: 36057
-    migrated_scope:
-      - ".agents/skills/impeccable archived under upstream/.agents/skills/impeccable"
-      - "README.md"
-      - "LICENSE"
-      - "NOTICE.md"
-      - "wrapper SKILL.md"
-    excluded_scope:
-      - "platform adapter directories"
-      - "CLI"
-      - "site"
-      - "extension"
-      - "demos"
-      - "tests"
-      - "tools"
-      - "functions"
-    vetting:
-      risk_level: "medium"
-      note: "Includes executable Node scripts, local server/browser tooling, update check, and file-editing flows; wrapper prevents treating the archive as a path-ready install."
-  frontend_design_candidate_sources:
-    research_note: "docs/sections/frontend-design/sources.md"
-    prompt_index: "docs/sections/frontend-design/prompt-index.md"
-    call_chain: "docs/sections/frontend-design/ui-call-chain.md"
-    reviewed_at: "2026-06-08"
-    minimum_stars_for_main_list: 1000
-    candidates:
-      - repo: "https://github.com/bergside/awesome-design-skills"
-        license: "MIT"
-        stars: 1168
-        role: "design skill index and style-skill discovery source"
-      - repo: "https://github.com/bergside/typeui"
-        license: "MIT text in LICENSE.md; GitHub API reports Other"
-        stars: 1081
-        role: "design skill CLI and registry candidate"
-      - repo: "https://github.com/greensock/gsap-skills"
-        license: "MIT"
-        stars: 8479
-        role: "official GSAP AI skills; first direct migration candidate"
-      - repo: "https://github.com/leonxlnx/taste-skill"
-        license: "MIT"
-        stars: 38108
-        role: "anti-slop frontend skill collection; direct core migration candidate"
-      - repo: "https://github.com/pbakaus/impeccable"
-        license: "Apache-2.0"
-        stars: 36057
-        role: "high-craft frontend design skill with runtime scripts; archive plus wrapper/index candidate"
-      - repo: "https://github.com/shadcn-ui/ui"
-        license: "MIT"
-        stars: 115953
-        role: "shadcn/ui component and design-system reference"
-      - repo: "https://github.com/tailwindlabs/tailwindcss"
-        license: "MIT"
-        stars: 95441
-        role: "Tailwind layout, spacing, responsive, and utility-class reference"
-      - repo: "https://github.com/mui/material-ui"
-        license: "MIT"
-        stars: 98399
-        role: "enterprise React UI and Material Design reference"
-      - repo: "https://github.com/ant-design/ant-design"
-        license: "MIT"
-        stars: 98297
-        role: "B2B SaaS, dashboard, and enterprise design reference"
-      - repo: "https://github.com/motiondivision/motion"
-        license: "MIT"
-        stars: 32263
-        role: "React and JavaScript animation reference"
-      - repo: "https://github.com/magicuidesign/magicui"
-        license: "MIT"
-        stars: 21201
-        role: "animated landing-page and design-engineering component reference"
-      - repo: "https://github.com/0xeb/TheBigPromptLibrary"
-        license: "MIT"
-        stars: 5111
-        role: "v0 and UI system prompt reference source"
-      - repo: "https://github.com/BehiSecc/awesome-claude-skills"
-        license: "No license detected"
-        stars: 9425
-        role: "Claude Skills discovery index; reference only"
-      - repo: "https://github.com/2-fly-4-ai/V0-system-prompt"
-        license: "No license detected"
-        stars: 1812
-        role: "v0 system prompt reference link only"
+external_index:
+  source_of_truth: "skills/qihang-skill-index/references/github-skill-index.md"
+  rule: "External skills are GitHub references first. Do not vendor them into skills/ unless Qihang explicitly promotes and rewrites them as self-cultivated capabilities."
+  indexed_domains:
+    - writing-style
+    - wechat-publishing
+    - product-investment
+    - frontend-design
+    - skill-discovery
+
+sections:
+  product:
+    title: "产品"
+    purpose: "产品分析、案例研究、场景边界、商业模式和竞争定位"
+  writing:
+    title: "写作"
+    purpose: "公众号选题、素材沉淀、启航写作风格和文稿定稿"
+  operations:
+    title: "运营"
+    purpose: "技能库治理、外部技能索引、同步、发布和工作流维护"
+  investment:
+    title: "投资"
+    purpose: "投资评估和 DD 方向；外部投资技能只通过索引引用"
+  frontend-design:
+    title: "前端设计"
+    purpose: "设计与 UI 外部能力通过索引选择，不在本仓库保留大包"
+  technology:
+    title: "技术"
+    purpose: "技术可行性、AI 基础设施、架构判断、工程风险"
+  development-paradigms:
+    title: "开发范式"
+    purpose: "AI Agent Native 开发流程、TDD、review、调试与收敛机制"
 
 pipelines:
   wechat_product_research_writing_publish:
@@ -246,27 +68,28 @@ pipelines:
       - topic-research-deposition
       - ai-product-analyzer
       - qihang-writing-style
-      - md2wechat
+    external_references:
+      - md2wechat via qihang-skill-index
     output_artifacts:
       - "research deposition folder"
       - "product insight memo"
       - "Qihang-style WeChat article"
       - "WeChat draft"
   investment_product_to_research_report:
-    title: "投资 / 产品问题到研报"
+    title: "产品洞察到投资判断"
     workflow_doc: "docs/workflows/investment-product-to-research-report.md"
     sections:
-      - investment
       - product
+      - investment
     primary_skills:
-      - oss-investment-scorecard
       - ai-product-analyzer
+    external_references:
+      - oss-investment-scorecard via qihang-skill-index
     output_artifacts:
       - "quick note"
       - "case memo"
       - "research report"
-      - "IC memo"
-      - "DD priority list"
+      - "DD question tree"
   prd_to_frontend:
     title: "PRD 到前端实现"
     workflow_doc: "docs/workflows/prd-to-frontend.md"
@@ -275,68 +98,21 @@ pipelines:
       - frontend-design
       - development-paradigms
     primary_skills:
-      - awesome-design-skills-selected-styles
-      - typeui-fundamentals
-      - taste-skill
-      - impeccable-index
-      - greensock-gsap-skills
+      - qihang-skill-index
+    external_references:
+      - "Anthropic frontend-design"
+      - "GSAP skills"
+      - "Awesome Design Skills"
+      - "TypeUI"
+      - "Taste Skill"
+      - "Impeccable"
     output_artifacts:
       - "frontend brief"
       - "page type decision"
-      - "design strategy"
-      - "component plan"
+      - "design source selection"
       - "browser acceptance record"
 
-sections:
-  investment:
-    title: "投资"
-    purpose: "VC 投资评估、融资可行性、IC 论述、DD 优先级"
-  product:
-    title: "产品"
-    purpose: "产品分析、案例研究、场景边界、商业模式和竞争定位"
-  writing:
-    title: "写作"
-    purpose: "中文写作、改写、语气修订、作者声音和文稿自然化"
-  frontend-design:
-    title: "前端设计"
-    purpose: "前端设计、UI/UX、视觉风格、设计提示词和界面生成质量控制"
-  technology:
-    title: "技术"
-    purpose: "技术可行性、AI 基础设施、架构判断、工程风险"
-  development-paradigms:
-    title: "开发范式"
-    purpose: "AI Agent Native 开发流程、TDD、review、调试与收敛机制"
-  operations:
-    title: "运营"
-    purpose: "自动化、知识库同步、投稿、治理和协作流程"
-
 skills:
-  - id: oss-investment-scorecard
-    title: "OSS Investment Scorecard"
-    section: investment
-    status: vendored
-    source_type: external_skill_repo
-    package_path: "skills/oss-investment-scorecard/SKILL.md"
-    package_support:
-      - "skills/oss-investment-scorecard/references/scored-examples.md"
-      - "skills/oss-investment-scorecard/template/evaluation-template.md"
-      - "skills/oss-investment-scorecard/cases/"
-      - "skills/oss-investment-scorecard/llms.txt"
-    upstream_source:
-      repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
-      commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
-      original_skill_name: "oss-investment-scorecard"
-      replaced_local_skill: "vc-investment-evaluator"
-    pipeline_role: "investment_question_to_research_report"
-    trigger_examples:
-      - "从 VC 视角看这个项目"
-      - "这个项目值得投吗"
-      - "给这个 AI 开源项目打分"
-      - "评估这个项目的投资价值"
-      - "这个开源项目值得投吗"
-      - "score this open source company"
-    copy_policy: "vendored_external_skill"
-    notes: "直接迁移 lucy-cxy/oss-investment-scorecard，替代本地临时整理的 vc-investment-evaluator。"
   - id: ai-product-analyzer
     title: "AI Product Analyzer"
     section: product
@@ -347,100 +123,21 @@ skills:
       - "skills/ai-product-analyzer/references/business-model.md"
       - "skills/ai-product-analyzer/references/data-agent.md"
       - "skills/ai-product-analyzer/references/narrative-audit.md"
-    original_source:
-      type: "local_seed_skill"
-      path: ".claude/skills/ai-product-analyzer"
-      captured_at: "2026-06-08"
-      source_worktree_state: "untracked"
-      ongoing_relationship: false
     package_traits:
       - self_contained
       - no_external_path_dependency
       - reference_routed
     plugin_distribution: "agent-product"
-    pipeline_role: "product_analysis_for_investment_and_research_report_chain"
+    pipeline_role:
+      - "wechat_product_research_writing_publish"
+      - "investment_product_to_research_report"
     trigger_examples:
       - "分析一下这个 AI 产品"
-      - "这个 AI 产品值得关注吗"
       - "从 BP 逻辑评估这个产品"
-      - "帮我看看这个产品的商业模式和叙事"
       - "这个产品是好案例、反面教材，还是待观察"
     copy_policy: "internal_user_cultivated_skill_package"
-    notes: "启航自培养产品洞察技能；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。SKILL.md 已明确要求先做 Reference 路由，深度分析需读取对应 references 后再输出判断。原始本地目录只作为导入 provenance，不代表本仓库存在上游依赖。"
-  - id: chinese-natural-voice-revision
-    title: "Chinese Natural Voice Revision"
-    section: writing
-    status: vendored
-    source_type: user_supplied_complete_skill_package
-    package_path: "skills/chinese-natural-voice-revision/SKILL.md"
-    package_support:
-      - "skills/chinese-natural-voice-revision/AGENTS.md"
-      - "skills/chinese-natural-voice-revision/skill.json"
-      - "skills/chinese-natural-voice-revision/agents/openai.yaml"
-    original_source:
-      type: "user_supplied_zip"
-      archive_name: "chinese-natural-voice-revision-universal.zip"
-      captured_at: "2026-06-08"
-    package_traits:
-      - complete_package
-      - no_external_path_dependency
-      - no_command_execution
-    trigger_examples:
-      - "中文文章降AI味"
-      - "中文稿降AIGC"
-      - "中文作文更像人写"
-      - "读后感自然化修改"
-      - "保留作者声音润色"
-    copy_policy: "vendored_user_supplied_complete_skill_package"
-    notes: "按用户要求迁入完全体；安全检查未发现命令、网络、凭据、eval/base64 或破坏性文件操作。"
-  - id: humanizer-zh
-    title: "Humanizer-zh"
-    section: writing
-    status: vendored
-    source_type: external_chinese_writing_skill
-    package_path: "skills/humanizer-zh/SKILL.md"
-    package_support:
-      - "skills/humanizer-zh/README.md"
-      - "skills/humanizer-zh/LICENSE"
-      - "skills/humanizer-zh/UPSTREAM.md"
-    upstream_source:
-      repo: "https://github.com/op7418/Humanizer-zh"
-      commit: "91f3d394db8419c20d67ebe22a96cf8fee0a404b"
-    package_traits:
-      - markdown_only
-      - no_external_path_dependency
-      - no_command_execution
-    trigger_examples:
-      - "用 humanizer-zh 改写这段中文"
-      - "清理这篇文章的 AI 写作痕迹"
-      - "把这段话改得更自然、更像真人写"
-    copy_policy: "vendored_external_skill_package"
-    notes: "迁移 op7418/Humanizer-zh 核心文件；用于中文写作自然化和常见 AI 模式清理，不承诺检测规避。"
-  - id: qihang-writing-style
-    title: "Qihang Writing Style"
-    section: writing
-    status: internal
-    source_type: user_calibrated_writing_skill
-    package_path: "skills/qihang-writing-style/SKILL.md"
-    package_support:
-      - "skills/qihang-writing-style/references/writing-process.md"
-      - "skills/qihang-writing-style/references/voice-quality.md"
-      - "skills/qihang-writing-style/references/ai-flavor-checklist.md"
-      - "skills/qihang-writing-style/references/style-rhythm.md"
-      - "skills/qihang-writing-style/references/skill-methodology-writing.md"
-    package_traits:
-      - reference_routed
-      - user_style_calibrated
-      - lightweight_style_guidance
-    plugin_distribution: "agent-writing"
-    trigger_examples:
-      - "按我的公众号风格写"
-      - "这篇不像我的风格"
-      - "按这篇文章的节奏改"
-      - "写一篇 Skill 方法论文章"
-      - "这篇太方、短句太多、太像 AI"
-    copy_policy: "internal_user_calibrated_skill"
-    notes: "基于用户提供的 Skill 主题文章和尼采随笔沉淀；不复制长篇样本文本到 SKILL.md，采用轻量 references 降低上下文负担，不用脚本机械检查写作风格。"
+    notes: "启航自培养产品洞察技能；正式保留在本仓库。"
+
   - id: topic-research-deposition
     title: "Topic Research Deposition"
     section: writing
@@ -459,192 +156,62 @@ skills:
       - screenshot_evidence
       - handoff_to_qihang_writing_style
     plugin_distribution: "agent-writing"
-    pipeline_role: "wechat_topic_research_step_zero"
+    pipeline_role:
+      - "wechat_product_research_writing_publish"
     trigger_examples:
       - "搜一下这个选题"
-      - "开始搜索这个话题"
       - "第 0 步，先沉淀素材"
-      - "帮我看看 loop engineering 这个话题"
       - "把这个主题的 Twitter、Reddit、网页和公众号资料拉下来"
     copy_policy: "internal_workflow_skill"
-    notes: "公众号写作第 0 步，只负责跨平台搜索、全文素材落盘和截图留证；搜索由主对话按 Twitter/X、Reddit、Exa 全网、微信公众号串行执行，避免子代理概括、截断或落盘散乱；不做文章判断、不进入 SCQA。搜索完成后等待用户确认，再交给 qihang-writing-style。"
-  - id: md2wechat
-    title: "md2wechat"
+    notes: "公众号写作第 0 步，只负责跨平台搜索、全文素材落盘和截图留证。"
+
+  - id: qihang-writing-style
+    title: "Qihang Writing Style"
     section: writing
-    status: vendored_partial
-    source_type: external_wechat_formatting_skill
-    package_path: "skills/md2wechat/SKILL.md"
+    status: internal
+    source_type: user_calibrated_writing_skill
+    package_path: "skills/qihang-writing-style/SKILL.md"
     package_support:
-      - "skills/md2wechat/LICENSE"
-      - "skills/md2wechat/UPSTREAM.md"
-    upstream_source:
-      repo: "https://github.com/geekjourneyx/md2wechat-skill"
-      commit: "f905ed61111df9c58e6898da104efe7a862cf258"
-      path: "skills/md2wechat"
+      - "skills/qihang-writing-style/references/writing-process.md"
+      - "skills/qihang-writing-style/references/voice-quality.md"
+      - "skills/qihang-writing-style/references/ai-flavor-checklist.md"
+      - "skills/qihang-writing-style/references/style-rhythm.md"
+      - "skills/qihang-writing-style/references/skill-methodology-writing.md"
     package_traits:
-      - cli_runtime_protocol
-      - publishing_side_effects
-      - credentials_required_for_wechat_draft
+      - reference_routed
+      - user_style_calibrated
+      - lightweight_style_guidance
+    plugin_distribution: "agent-writing"
+    pipeline_role:
+      - "wechat_product_research_writing_publish"
     trigger_examples:
-      - "把这篇 Markdown 转成微信公众号格式"
-      - "预览一下公众号排版"
-      - "推送到微信公众号草稿箱"
-      - "用 md2wechat 检查 layout 模块"
-    copy_policy: "vendored_partial_external_skill"
-    notes: "只迁移 md2wechat skill runtime protocol；CLI 源码、主题和 layout 模块定义不进入本仓库。上游为 BUSL-1.1，个人内容创作可用，商业用途需单独授权。"
-  - id: greensock-gsap-skills
-    title: "GSAP Skills"
-    section: frontend-design
-    status: vendored
-    source_type: external_skill_collection
-    package_path: "skills/greensock-gsap-skills/skills"
+      - "按我的公众号风格写"
+      - "这篇不像我的风格"
+      - "这篇太方、短句太多、太像 AI"
+    copy_policy: "internal_user_calibrated_skill"
+    notes: "启航自培养写作风格技能；正式保留在本仓库。"
+
+  - id: qihang-skill-index
+    title: "Qihang Skill Index"
+    section: operations
+    status: internal_index
+    source_type: user_curated_external_github_index
+    package_path: "skills/qihang-skill-index/SKILL.md"
     package_support:
-      - "skills/greensock-gsap-skills/skills/gsap-core/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-frameworks/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-performance/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-plugins/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-react/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-scrolltrigger/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-timeline/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/gsap-utils/SKILL.md"
-      - "skills/greensock-gsap-skills/skills/llms.txt"
-    upstream_source:
-      repo: "https://github.com/greensock/gsap-skills"
-      commit: "aed9cfd3277740755f6bfc1155c7aa645403b760"
-    trigger_examples:
-      - "这个前端流程需要 GSAP 动效"
-      - "给这个 dashboard 增加可解释的状态转场"
-      - "用 GSAP React 做产品流程演示"
-    copy_policy: "vendored_external_skill_collection"
-    notes: "只迁移官方 skills 目录；examples、plugin 包装和 assets 暂不进入正式库。"
-  - id: awesome-design-skills-selected-styles
-    title: "Awesome Design Skills Selected Styles"
-    section: frontend-design
-    status: vendored_partial
-    source_type: external_style_skill_collection
-    package_path: "skills/awesome-design-skills/skills"
-    package_support:
-      - "skills/awesome-design-skills/skills/dashboard/SKILL.md"
-      - "skills/awesome-design-skills/skills/dashboard/DESIGN.md"
-      - "skills/awesome-design-skills/skills/shadcn/SKILL.md"
-      - "skills/awesome-design-skills/skills/shadcn/DESIGN.md"
-      - "skills/awesome-design-skills/skills/bento/SKILL.md"
-      - "skills/awesome-design-skills/skills/bento/DESIGN.md"
-      - "skills/awesome-design-skills/skills/premium/SKILL.md"
-      - "skills/awesome-design-skills/skills/premium/DESIGN.md"
-      - "skills/awesome-design-skills/skills/minimal/SKILL.md"
-      - "skills/awesome-design-skills/skills/minimal/DESIGN.md"
-      - "skills/awesome-design-skills/skills/index.json"
-    upstream_source:
-      repo: "https://github.com/bergside/awesome-design-skills"
-      commit: "53c9fe6d8be161e48bcdaa0130d9bd542b1ff755"
-    trigger_examples:
-      - "先判断这个页面应该用什么视觉风格"
-      - "这个 PRD-to-product console 用 dashboard 还是 shadcn 风格"
-      - "给 landing page 选 premium 或 bento 方向"
-    copy_policy: "vendored_partial_external_style_skills"
-    notes: "只迁移本地实验验证过的 5 个风格目录；其他风格目录继续留在候选源中。"
-  - id: frontend-design
-    title: "Anthropic Frontend Design"
-    section: frontend-design
-    status: vendored
-    source_type: official_anthropic_skill
-    package_path: "skills/frontend-design/SKILL.md"
-    package_support:
-      - "skills/frontend-design/LICENSE.txt"
-    upstream_source:
-      repo: "https://github.com/anthropics/skills"
-      commit: "c30d329f5814647c1e2f071020c1e8c1c9893ef1"
-      path: "skills/frontend-design"
-    trigger_examples:
-      - "做一个高质量前端页面"
-      - "这个页面设计得更有质感"
-      - "构建一个 landing page"
-      - "优化 dashboard UI"
-      - "frontend design"
-    copy_policy: "vendored_official_anthropic_skill"
-    notes: "Anthropic 官方 skills repo 中的 frontend-design skill，作为 frontend-design 板块的通用设计质量提升技能。"
-  - id: typeui-fundamentals
-    title: "TypeUI Fundamentals"
-    section: frontend-design
-    status: vendored_partial
-    source_type: external_ui_ux_principles_skill
-    package_path: "skills/typeui-fundamentals/SKILL.md"
-    package_support:
-      - "skills/typeui-fundamentals/accessibility.md"
-      - "skills/typeui-fundamentals/typography-principles.md"
-      - "skills/typeui-fundamentals/ui-principles.md"
-      - "skills/typeui-fundamentals/ux-principles.md"
-    upstream_source:
-      repo: "https://github.com/bergside/typeui"
-      commit: "d4f7713589aa8d4e1486d1d2054eda64929d2be4"
-    trigger_examples:
-      - "检查这个 UI 是否符合基础 UX 原则"
-      - "评估这个组件库的可访问性和排版"
-      - "给前端设计做基础原则审查"
-    copy_policy: "vendored_partial_external_skill"
-    notes: "只迁移 TypeUI skills/fundamentals；CLI、插件、MCP、registry 实现只做 reference，不进入正式技能包。该包是原则层，使用前应先有项目设计系统或 DESIGN.md 上下文。"
-  - id: taste-skill
-    title: "Taste Skill"
-    section: frontend-design
-    status: vendored_partial
-    source_type: external_frontend_skill_collection
-    package_path: "skills/taste-skill/skills"
-    package_support:
-      - "skills/taste-skill/skills/brandkit/SKILL.md"
-      - "skills/taste-skill/skills/brutalist-skill/SKILL.md"
-      - "skills/taste-skill/skills/gpt-tasteskill/SKILL.md"
-      - "skills/taste-skill/skills/image-to-code-skill/SKILL.md"
-      - "skills/taste-skill/skills/imagegen-frontend-mobile/SKILL.md"
-      - "skills/taste-skill/skills/imagegen-frontend-web/SKILL.md"
-      - "skills/taste-skill/skills/minimalist-skill/SKILL.md"
-      - "skills/taste-skill/skills/output-skill/SKILL.md"
-      - "skills/taste-skill/skills/redesign-skill/SKILL.md"
-      - "skills/taste-skill/skills/soft-skill/SKILL.md"
-      - "skills/taste-skill/skills/stitch-skill/SKILL.md"
-      - "skills/taste-skill/skills/stitch-skill/DESIGN.md"
-      - "skills/taste-skill/skills/taste-skill/SKILL.md"
-      - "skills/taste-skill/skills/taste-skill-v1/SKILL.md"
-      - "skills/taste-skill/skills/llms.txt"
-    upstream_source:
-      repo: "https://github.com/leonxlnx/taste-skill"
-      commit: "3c7017d636c3a4aad378433ea6d0cfa6c921da4a"
-    pipeline_role: "prd_to_frontend_design_strategy_and_anti_slop_layer"
-    trigger_examples:
-      - "这个 landing page 不要 AI 味"
-      - "用更强的设计品味重做这个页面"
-      - "把截图还原成高质量前端"
-      - "判断这个页面应该走什么设计方向"
-    copy_policy: "vendored_partial_external_skill_collection"
-    notes: "只迁移核心 skills 目录和必要上游说明；assets、examples、research 不进入正式源。"
-  - id: impeccable-index
-    title: "Impeccable Index"
-    section: frontend-design
-    status: vendored_partial_index
-    source_type: external_frontend_design_skill_with_runtime_scripts
-    package_path: "skills/impeccable/SKILL.md"
-    package_support:
-      - "skills/impeccable/upstream/.agents/skills/impeccable/SKILL.md"
-      - "skills/impeccable/upstream/.agents/skills/impeccable/reference/"
-      - "skills/impeccable/upstream/.agents/skills/impeccable/scripts/"
-      - "skills/impeccable/README.md"
-      - "skills/impeccable/LICENSE"
-      - "skills/impeccable/NOTICE.md"
-      - "skills/impeccable/UPSTREAM.md"
-    upstream_source:
-      repo: "https://github.com/pbakaus/impeccable"
-      commit: "1aedbcf538e3fa6694ccbf00294cc18e59ba1f21"
+      - "skills/qihang-skill-index/references/github-skill-index.md"
     package_traits:
-      - runtime_path_coupled
-      - executable_scripts
-      - local_browser_tooling
-      - wrapper_required
-    vetting:
-      risk_level: "medium"
-    pipeline_role: "prd_to_frontend_design_audit_polish_and_live_iteration_layer"
+      - lightweight_index
+      - no_external_code_copy
+      - github_source_reference
+    plugin_distribution: "qihang-skill-pack"
+    pipeline_role:
+      - "wechat_product_research_writing_publish"
+      - "investment_product_to_research_report"
+      - "prd_to_frontend"
     trigger_examples:
-      - "用 Impeccable 审查这个前端"
-      - "做前端 polish 和 anti-pattern detection"
-      - "让 Claude 按 Impeccable live 流程迭代页面"
-    copy_policy: "vendored_partial_external_skill_archive_with_wrapper"
-    notes: "不把上游完整仓库当作普通 skill 迁入；保留核心包供索引和项目级安装参考，真正运行脚本前应安装到目标项目的 .agents/skills/impeccable/。"
+      - "找一下之前收录过的外部技能"
+      - "这个外部 skill 要不要装"
+      - "把外部技能改成 GitHub 索引"
+      - "前端设计可以参考哪些外部技能源"
+    copy_policy: "internal_lightweight_index"
+    notes: "收纳非启航自培养技能的 GitHub 索引；不保留外部技能正文。"

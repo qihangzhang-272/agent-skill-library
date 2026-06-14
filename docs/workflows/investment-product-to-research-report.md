@@ -37,7 +37,7 @@
 
 | 判断条件 | 优先技能 | 用途 |
 | --- | --- | --- |
-| 对象是开源 AI 项目或开源公司 | `skills/oss-investment-scorecard/` | 做开源生态、团队、技术护城河、商业化和退出路径评分 |
+| 对象是开源 AI 项目或开源公司 | `qihang-skill-index` 中的 `oss-investment-scorecard` 来源 | 做开源生态、团队、技术护城河、商业化和退出路径评分 |
 | 对象是 AI 产品、deck、商业模式或产品案例 | `skills/ai-product-analyzer/` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
 | 既是开源项目又有产品化公司 | 先 `ai-product-analyzer`，再 `oss-investment-scorecard` | 先判断产品 / BP 是否成立，再判断 VC 可投资性 |
 | 需要生成研报或 IC memo | 两个技能输出合并进入研报骨架 | 把单点判断转成可继续 DD 的材料 |
@@ -119,10 +119,11 @@
 
 ## 4. 投资判断
 
-触发 `oss-investment-scorecard` 的条件：
+参考 `oss-investment-scorecard` 外部来源的条件：
 
 - 对象是开源项目、开源商业公司、AI 基础设施，或投资问题明确要求 VC 视角。
 - 需要从“产品看起来不错”推进到“是否值得进入投资漏斗”。
+- 先通过 `qihang-skill-index` 找到上游来源；不要假设本仓库有本地 `skills/oss-investment-scorecard/`。
 
 最少要产出：
 
@@ -212,7 +213,7 @@
 
 每次跑完这条链后，只把可复用部分沉淀回本仓库：
 
-- 新发现的高质量技能来源 -> `catalog/skills.yml` 或候选文档。
+- 新发现的高质量技能来源 -> `qihang-skill-index`。
 - 可复用调用方式 -> 本文档或相关 workflow。
 - 具体公司研报、客户材料、deck 内容 -> 不进入正式技能库。
 - 一次性实验记录 -> `local-experiments/`。

@@ -13,13 +13,12 @@
 | `id` | 稳定技能 ID，使用 kebab-case |
 | `title` | 人类可读名称 |
 | `section` | 所属板块 |
-| `status` | `indexed`、`vendored`、`vendored_partial`、`candidate`、`deprecated` 等 |
-| `source_type` | 来源类型，例如 `official_anthropic_skill`、`external_skill_repo`、`user_supplied_complete_skill_package` |
+| `status` | `internal`、`internal_index`、`deprecated` 等 |
+| `source_type` | 来源类型，例如 `user_cultivated_product_insight_skill`、`user_curated_external_github_index` |
 | `package_path` | 本地技能入口；如果只做索引，则写来源文档路径 |
 | `package_support` | 支撑文件、references、templates、cases 或 agents |
-| `upstream_source` 或 `original_source` | 上游 URL、commit、路径、捕获时间 |
 | `trigger_examples` | 触发这个技能的典型用户表达 |
-| `copy_policy` | `source_index_first`、`vendored_external_skill`、`vendored_partial_external_skill` 等 |
+| `copy_policy` | `internal_user_cultivated_skill_package`、`internal_lightweight_index` 等 |
 | `pipeline_role` | 在调用链中的角色 |
 | `notes` | 边界说明、替代关系、风险和维护备注 |
 
@@ -27,7 +26,7 @@
 
 `catalog/claude-plugins.json` 是 Claude Code plugin 分发映射，回答“哪些源技能被打包成哪个可安装插件”。
 
-默认只把自培养、高频复用技能写入这个文件。外部收藏技能即使已经 vendored 到 `skills/`，也不代表应该进入插件；除非它被明确提升为核心运行能力。
+默认只把自培养、高频复用技能和 `qihang-skill-index` 写入这个文件。外部收藏技能通过索引引用，不作为完整插件分发。
 
 每个插件至少应包含：
 
@@ -39,7 +38,7 @@
 | `section` | 主归属板块 |
 | `keywords` | 检索关键词 |
 | `distributionStatus` | 是否进入分发层 |
-| `distributionScope` | 分发范围；当前主要使用 `self_cultivated` |
+| `distributionScope` | 分发范围；当前主要使用 `self_cultivated` 或 `curated_index` |
 | `version` | semver 版本号；插件内容变化时必须更新 |
 | `releasePolicy` | 更新策略；当前使用 `manual_semver` |
 | `skills` | 源技能目录到插件技能目录的映射 |
@@ -58,15 +57,16 @@
 
 例如 `frontend-design` 板块：
 
-- `catalog/skills.yml` 记录 `frontend-design`、`typeui-fundamentals`、GSAP、Awesome Design Skills 的来源、范围和边界。
+- `skills/qihang-skill-index/references/github-skill-index.md` 记录 `frontend-design`、TypeUI、GSAP、Awesome Design Skills 等外部来源和使用边界。
 - `docs/sections/frontend-design/` 记录来源筛选、prompt 入口和 UI 调用链。
-- 除非某个设计技能被长期验证为自培养核心能力，否则不写入 `catalog/claude-plugins.json`。
+- 除非某个设计技能被长期验证并重写为自培养核心能力，否则不新增本地技能包。
 
 例如写作和产品板块：
 
 - `ai-product-analyzer` 是自培养产品洞察技能，写入 `agent-product`。
 - `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，写入 `agent-writing`。
-- `md2wechat` 是外部发布适配技能，工作流可以引用，但默认不进入插件。
+- `qihang-skill-index` 是启航外部 GitHub 技能源索引，写入 `qihang-skill-pack`。
+- `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 
 ## 生成规则
 
@@ -88,6 +88,7 @@
 claude plugin validate .
 claude plugin validate .\plugins\agent-product --strict
 claude plugin validate .\plugins\agent-writing --strict
+claude plugin validate .\plugins\qihang-skill-pack --strict
 ```
 
 ## 禁止事项

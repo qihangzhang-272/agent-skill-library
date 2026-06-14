@@ -22,7 +22,7 @@
 | [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) | 1168 | MIT | DESIGN.md / SKILL.md 风格技能索引，含 `dashboard`、`shadcn`、`bento`、`editorial`、`premium` 等目录 | 作为风格 skill 发现入口；按目录挑选，不全量搬 |
 | [bergside/typeui](https://github.com/bergside/typeui) | 1081 | LICENSE.md 为 MIT，GitHub API 显示 Other | 面向 Codex / Claude / Cursor 的设计 skill CLI 和 registry | 先审具体 `skills/` 和 registry，再决定是否迁移 |
 | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | 38108 | MIT | Anti-slop 前端技能集合，含多个 `SKILL.md`：设计品味、redesign、image-to-code、移动/网页 imagegen、brandkit、风格技能等 | 迁移核心 `skills/`，不迁移 assets、examples、research |
-| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | 36057 | Apache-2.0 | 高强度前端设计 skill，含 critique、audit、polish、live 等命令；仓库同时包含 CLI、站点、扩展和多平台适配 | 不搬全仓库；归档 `.agents/skills/impeccable` 核心包并建立 wrapper/index |
+| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | 36057 | Apache-2.0 | 高强度前端设计 skill，含 critique、audit、polish、live 等命令；仓库同时包含 CLI、站点、扩展和多平台适配 | 不搬全仓库；只在 `qihang-skill-index` 保留 GitHub 索引 |
 | [0xeb/TheBigPromptLibrary](https://github.com/0xeb/TheBigPromptLibrary) | 5111 | MIT | 系统 prompt 集合，包含 v0.dev 相关 prompt | 只提炼 UI 生成约束，不完整搬系统 prompt |
 | [BehiSecc/awesome-claude-skills](https://github.com/BehiSecc/awesome-claude-skills) | 9425 | 未检测到 license | Claude Skills 大型索引 | 只做继续发现入口，不复制无授权内容 |
 | [2-fly-4-ai/V0-system-prompt](https://github.com/2-fly-4-ai/V0-system-prompt) | 1812 | 未检测到 license | v0 system prompt 单仓库 | 只做参考链接，不复制原文 |
@@ -77,15 +77,15 @@
 
 ## 2026-06-08 收录结果
 
-已按保守范围迁移：
+历史上曾按保守范围迁移。当前已收敛为轻量索引，不再保留本地外部技能目录：
 
-| 来源 | 目标路径 | 迁移范围 |
+| 来源 | 当前状态 | 原迁移范围 |
 | --- | --- | --- |
-| [greensock/gsap-skills](https://github.com/greensock/gsap-skills) | `skills/greensock-gsap-skills/` | 只迁移官方 `skills/`、`README.md`、`LICENSE` |
-| [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) | `skills/awesome-design-skills/` | 只迁移 `dashboard`、`shadcn`、`bento`、`premium`、`minimal` 五个风格目录 |
-| [bergside/typeui](https://github.com/bergside/typeui) | `skills/typeui-fundamentals/` | 只迁移 `skills/fundamentals`，不迁移 CLI、插件、MCP 和 registry 实现；使用前需要项目设计系统或 `DESIGN.md` 上下文 |
-| [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | `skills/taste-skill/` | 只迁移核心 `skills/`、`README.md`、`CHANGELOG.md`、`LICENSE`、`skill.sh`；不迁移 `.github/`、`assets/`、`examples/`、`research/` |
-| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `skills/impeccable/` | 归档 `.agents/skills/impeccable` 核心包、`README.md`、`LICENSE`、`NOTICE.md`，新增 `impeccable-index` wrapper；不迁移多平台适配、CLI、站点、扩展、demo、测试和工具目录 |
+| [greensock/gsap-skills](https://github.com/greensock/gsap-skills) | `qihang-skill-index` GitHub 索引 | 官方 `skills/`、`README.md`、`LICENSE` |
+| [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) | `qihang-skill-index` GitHub 索引 | `dashboard`、`shadcn`、`bento`、`premium`、`minimal` 五个风格目录 |
+| [bergside/typeui](https://github.com/bergside/typeui) | `qihang-skill-index` GitHub 索引 | `skills/fundamentals` |
+| [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | `qihang-skill-index` GitHub 索引 | 核心 `skills/`、`README.md`、`CHANGELOG.md`、`LICENSE`、`skill.sh` |
+| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `qihang-skill-index` GitHub 索引 | 上游 GitHub 仓库和说明文件 |
 
 网页 prompt 来源只做索引，不复制正文。见 `docs/sections/frontend-design/prompt-index.md`。
 

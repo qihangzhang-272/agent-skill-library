@@ -17,10 +17,11 @@
 1. **工作流编排**：把已经验证过的技能链沉淀到 `orchestrations/` 和 `docs/workflows/`。HTML 编排台只是辅助工具，不是源头。
 2. **技能收藏索引**：外部好用技能优先记录在 `catalog/skills.yml` 和各 section 文档里。除非边界、许可证和复用价值都清楚，否则不把外部仓库整包搬进来。
 
-Claude Code plugin 只作为自培养技能的分发层。目前默认只分发：
+Claude Code plugin 只作为自培养技能和轻量索引的分发层。目前默认只分发：
 
 - `agent-product`：`ai-product-analyzer`
 - `agent-writing`：`topic-research-deposition`、`qihang-writing-style`
+- `qihang-skill-pack`：`qihang-skill-index`
 
 ## 分类
 
@@ -55,22 +56,14 @@ Claude Code plugin 只作为自培养技能的分发层。目前默认只分发�
 claude plugin validate .
 ```
 
-## 当前种子技能
+## 当前正式技能
 
 | 技能 | 板块 | 来源 | 状态 |
 | --- | --- | --- | --- |
-| `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
 | `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 自培养产品洞察技能，进入 `agent-product` 插件 |
-| `chinese-natural-voice-revision` | writing | `skills/chinese-natural-voice-revision/` | 已从用户提供 zip 完全体迁移 |
-| `humanizer-zh` | writing | `skills/humanizer-zh/` | 已迁移中文 AI 写作痕迹清理 skill |
 | `qihang-writing-style` | writing | `skills/qihang-writing-style/` | 自培养启航写作风格技能，进入 `agent-writing` 插件 |
 | `topic-research-deposition` | writing | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
-| `frontend-design` | frontend-design | `skills/frontend-design/` | 已迁移 Anthropic 官方 skills repo 的 frontend-design skill |
-| `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
-| `awesome-design-skills` | frontend-design | `skills/awesome-design-skills/` | 已保守迁移 5 个已验证风格 skill |
-| `typeui-fundamentals` | frontend-design | `skills/typeui-fundamentals/` | 已迁移 TypeUI 基础 UI/UX 原则 skill |
-| `taste-skill` | frontend-design | `skills/taste-skill/` | 已保守迁移核心 `skills/` 目录 |
-| `impeccable-index` | frontend-design | `skills/impeccable/` | 已归档核心包并以 wrapper/index 收录 |
+| `qihang-skill-index` | operations | `skills/qihang-skill-index/` | 启航外部 GitHub 技能源索引，进入 `qihang-skill-pack` 插件 |
 
 ## 当前运行链
 
@@ -106,18 +99,8 @@ claude plugin validate .
 
 ## 重要边界
 
-`oss-investment-scorecard` 已经作为单独 skill 包放在本仓库中，替代之前临时整理的 `vc-investment-evaluator`。
-
 `ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，可独立复制到项目或用户级 skills 目录。
 
-`chinese-natural-voice-revision` 按完整包保留 `SKILL.md`、`AGENTS.md`、`skill.json` 和 `agents/openai.yaml`，用于中文自然语气改写，不承诺检测规避，也不伪造个人经历。
-
-`humanizer-zh` 是 MIT 授权的中文写作自然化 skill，按上游核心文件保留，用于识别和清理常见 AI 写作模式；本仓库不把它表述为检测规避保证。
-
-`frontend-design` 是 Anthropic 官方 skills repo 的前端设计技能独立迁移包，用于提升前端页面和组件的视觉质量。
-
-`frontend-design` 板块当前采用“保守迁移 + 引用索引”策略：GSAP 官方 skills、Awesome Design Skills 的已验证风格目录、TypeUI fundamentals、Taste Skill 核心 skills 可以进入 `skills/`；21st.dev、designprompts.dev 等网页 prompt 只记录入口，不复制 prompt 正文。
-
-`impeccable-index` 只作为 Impeccable 的本地索引和核心归档，不把上游完整仓库的 CLI、站点、扩展和多平台适配层作为正式源内容迁入。
+`qihang-skill-index` 是外部技能的统一收纳入口。`humanizer-zh`、`md2wechat`、`oss-investment-scorecard`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等外部来源只保留 GitHub 索引，不再把完整文件堆进 `skills/`。
 
 本仓库和 Product Hunter 没有长期关系。历史上从某个本地目录借用过内容，只作为导入 provenance，不构成本仓库的上游、资料源或同步关系。

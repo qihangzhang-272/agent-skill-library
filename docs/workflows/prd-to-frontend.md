@@ -2,7 +2,7 @@
 
 日期：2026-06-08
 
-定位：这是一条从需求确认到前端可验收实现的跨板块运行链。它连接 `product`、`frontend-design` 和 `development-paradigms`，目标是让 agent 在项目初始化时知道如何选择设计技能、组件参考、动效技能和验证流程。
+定位：这是一条从需求确认到前端可验收实现的跨技能运行链。它连接产品澄清、外部设计来源选择、前端实现和浏览器验收，目标是让 agent 在项目初始化时知道如何选择设计技能、组件参考、动效技能和验证流程。
 
 本仓库不保存项目源码，也不复制 UI 库源码。具体前端代码应在目标项目里生成和维护，本仓库只保存调用链、技能选择规则和质量门。
 
@@ -86,7 +86,7 @@
 | Component registry | 管理组件、来源、成熟度、采纳决策 | TypeUI fundamentals + registry reference |
 | Data / enterprise UI | 信息密度高、权限复杂、表格和筛选多 | Ant Design / MUI / shadcn reference |
 
-已有详细 UI 层调用链见 `docs/sections/frontend-design/ui-call-chain.md`。
+UI 层调用链固定为：页面类型判断 -> 设计策略层 -> 组件系统层 -> 动效层 -> 资产治理层 -> 浏览器验收。
 
 ## 3. 信息架构
 
@@ -214,7 +214,7 @@
 
 项目完成后，只把可复用判断沉淀回本仓库：
 
-- 有效的技能组合 -> 更新 workflow 或 section README。
+- 有效的技能组合 -> 更新 workflow 或 `qihang-skill-index`。
 - 高质量外部 skill -> 加入 `qihang-skill-index`，不复制正文。
 - 可复用组件模式 -> 写成调用策略或验收规则。
 - 具体项目源码 -> 不进入本仓库。

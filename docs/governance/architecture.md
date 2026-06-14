@@ -21,9 +21,8 @@
 
 | 层 | 保存什么 | 不保存什么 |
 | --- | --- | --- |
-| `catalog/` | 技能索引、来源路径、状态、触发场景、迁移边界 | 长篇资料正文 |
-| `sections/` | 分板块入口、优先级、已收录能力、待补方向 | 具体技能包正文 |
-| `docs/` | 治理规则、收录流程、组合搭配、调用链 | 一次性实验页面或临时运行结果 |
+| `catalog/` | 本地正式技能总账、调用链角色、插件分发映射 | 长篇资料正文 |
+| `docs/` | 治理规则、收录流程、组合搭配、调用链 | 外部来源清单、一次性实验页面或临时运行结果 |
 | `skills/` | 启航自培养技能、轻量外部 GitHub 索引 | 外部完整 skill、未验证来源、网页 prompt 原文、UI 库源码 |
 | `plugins/` | Claude Code 可安装插件分发结果 | 源技能正文的手工维护副本 |
 | `.claude-plugin/` | Claude Code marketplace manifest | 技能正文、agents、hooks、commands |
@@ -33,11 +32,10 @@
 
 ## 引用关系
 
-以 `frontend-design` 为例：
+以前端设计为例：
 
-- `skills/qihang-skill-index/` 保存外部设计技能的 GitHub 来源索引。
-- `docs/sections/frontend-design/ui-call-chain.md` 保存从模糊需求到前端实现的调用链。
-- `docs/sections/frontend-design/prompt-index.md` 只保存网页 prompt 入口，不复制正文。
+- `skills/qihang-skill-index/` 保存外部设计技能和 UI 来源的 GitHub repo 根目录索引。
+- `docs/workflows/prd-to-frontend.md` 保存从模糊需求到前端实现的调用链。
 - `orchestrations/` 保存跨技能链路，`apps/skill-orchestrator/` 将链路可视化并生成整条链 handoff prompt。
 - `catalog/claude-plugins.json` 决定哪些源技能进入 Claude Code 插件，`plugins/` 和 `.claude-plugin/` 是分发结果。
 - `local-experiments/` 保存本地网页实验，不进入正式库。

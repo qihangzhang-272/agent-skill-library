@@ -397,7 +397,7 @@ label span {
 }
 
 .node-index,
-.node-section {
+.node-meta {
   display: inline-flex;
   align-items: center;
   min-height: 26px;
@@ -411,7 +411,7 @@ label span {
   color: #fff;
 }
 
-.node-section {
+.node-meta {
   border: 1px solid var(--line);
   color: var(--green);
   background: var(--green-soft);

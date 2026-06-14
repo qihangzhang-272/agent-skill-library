@@ -1,6 +1,6 @@
-version: 2
+version: 3
 library: agent-skill-library
-principle: "self-cultivated skills stay local; external skills stay as GitHub indexes unless explicitly promoted"
+principle: "self-cultivated skills stay local; external skills and source repositories stay as repo-root GitHub indexes unless explicitly promoted"
 
 distribution:
   claude_code_marketplace_manifest: ".claude-plugin/marketplace.json"
@@ -26,50 +26,27 @@ plugin_policy:
 
 external_index:
   source_of_truth: "skills/qihang-skill-index/references/github-skill-index.md"
-  rule: "External skills are GitHub references first. Do not vendor them into skills/ unless Qihang explicitly promotes and rewrites them as self-cultivated capabilities."
+  url_rule: "Use GitHub repository root URLs by default. Do not force links to SKILL.md subdirectories unless a workflow needs that exact path."
+  validation_rule: "Repo roots must resolve with git ls-remote before being treated as indexed sources."
   indexed_domains:
     - writing-style
     - wechat-publishing
     - product-investment
     - frontend-design
+    - research-web-reach
     - skill-discovery
-
-sections:
-  product:
-    title: "产品"
-    purpose: "产品分析、案例研究、场景边界、商业模式和竞争定位"
-  writing:
-    title: "写作"
-    purpose: "公众号选题、素材沉淀、启航写作风格和文稿定稿"
-  operations:
-    title: "运营"
-    purpose: "技能库治理、外部技能索引、同步、发布和工作流维护"
-  investment:
-    title: "投资"
-    purpose: "投资评估和 DD 方向；外部投资技能只通过索引引用"
-  frontend-design:
-    title: "前端设计"
-    purpose: "设计与 UI 外部能力通过索引选择，不在本仓库保留大包"
-  technology:
-    title: "技术"
-    purpose: "技术可行性、AI 基础设施、架构判断、工程风险"
-  development-paradigms:
-    title: "开发范式"
-    purpose: "AI Agent Native 开发流程、TDD、review、调试与收敛机制"
 
 pipelines:
   wechat_product_research_writing_publish:
     title: "公众号产品 / 选题文章链"
     workflow_doc: "orchestrations/wechat-product-research-writing-publish.json"
-    sections:
-      - product
-      - writing
     primary_skills:
       - topic-research-deposition
       - ai-product-analyzer
       - qihang-writing-style
     external_references:
       - md2wechat via qihang-skill-index
+      - agent-reach via qihang-skill-index
     output_artifacts:
       - "research deposition folder"
       - "product insight memo"
@@ -78,9 +55,6 @@ pipelines:
   investment_product_to_research_report:
     title: "产品洞察到投资判断"
     workflow_doc: "docs/workflows/investment-product-to-research-report.md"
-    sections:
-      - product
-      - investment
     primary_skills:
       - ai-product-analyzer
     external_references:
@@ -93,19 +67,17 @@ pipelines:
   prd_to_frontend:
     title: "PRD 到前端实现"
     workflow_doc: "docs/workflows/prd-to-frontend.md"
-    sections:
-      - product
-      - frontend-design
-      - development-paradigms
     primary_skills:
       - qihang-skill-index
     external_references:
-      - "Anthropic frontend-design"
+      - "Anthropic skills"
       - "GSAP skills"
       - "Awesome Design Skills"
       - "TypeUI"
       - "Taste Skill"
       - "Impeccable"
+      - "shadcn/ui"
+      - "Magic UI"
     output_artifacts:
       - "frontend brief"
       - "page type decision"
@@ -115,7 +87,6 @@ pipelines:
 skills:
   - id: ai-product-analyzer
     title: "AI Product Analyzer"
-    section: product
     status: internal
     source_type: user_cultivated_product_insight_skill
     package_path: "skills/ai-product-analyzer/SKILL.md"
@@ -140,7 +111,6 @@ skills:
 
   - id: topic-research-deposition
     title: "Topic Research Deposition"
-    section: writing
     status: internal
     source_type: internal_writing_workflow_skill
     package_path: "skills/topic-research-deposition/SKILL.md"
@@ -167,7 +137,6 @@ skills:
 
   - id: qihang-writing-style
     title: "Qihang Writing Style"
-    section: writing
     status: internal
     source_type: user_calibrated_writing_skill
     package_path: "skills/qihang-writing-style/SKILL.md"
@@ -193,16 +162,15 @@ skills:
 
   - id: qihang-skill-index
     title: "Qihang Skill Index"
-    section: operations
     status: internal_index
-    source_type: user_curated_external_github_index
+    source_type: user_curated_external_github_repo_index
     package_path: "skills/qihang-skill-index/SKILL.md"
     package_support:
       - "skills/qihang-skill-index/references/github-skill-index.md"
     package_traits:
       - lightweight_index
       - no_external_code_copy
-      - github_source_reference
+      - github_repo_root_reference
     plugin_distribution: "qihang-skill-pack"
     pipeline_role:
       - "wechat_product_research_writing_publish"
@@ -210,8 +178,8 @@ skills:
       - "prd_to_frontend"
     trigger_examples:
       - "找一下之前收录过的外部技能"
-      - "这个外部 skill 要不要装"
+      - "这个外部 repo 要不要装"
       - "把外部技能改成 GitHub 索引"
       - "前端设计可以参考哪些外部技能源"
     copy_policy: "internal_lightweight_index"
-    notes: "收纳非启航自培养技能的 GitHub 索引；不保留外部技能正文。"
+    notes: "收纳非启航自培养技能和技能源的 GitHub repo 根目录索引；不保留外部技能正文。"

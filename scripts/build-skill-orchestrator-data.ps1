@@ -44,16 +44,6 @@ function Get-FrontMatterValue {
   return ''
 }
 
-function Infer-Section {
-  param([string]$RelativePath)
-
-  if ($RelativePath -like '*ai-product-analyzer*') { return 'product' }
-  if ($RelativePath -like '*qihang-writing-style*') { return 'writing' }
-  if ($RelativePath -like '*topic-research-deposition*') { return 'writing' }
-  if ($RelativePath -like '*qihang-skill-index*') { return 'operations' }
-  return 'unknown'
-}
-
 function Get-RelativePathCompat {
   param(
     [Parameter(Mandatory = $true)][string]$BasePath,
@@ -89,7 +79,6 @@ $skills = foreach ($file in $skillFiles) {
   [ordered]@{
     id = $name
     title = ($name -replace '-', ' ')
-    section = Infer-Section -RelativePath $relativePath
     path = $relativePath
     directory = $skillDir
     description = $description

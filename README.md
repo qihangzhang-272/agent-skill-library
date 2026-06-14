@@ -15,7 +15,7 @@
 本仓库只承担两个核心职能：
 
 1. **工作流编排**：把已经验证过的技能链沉淀到 `orchestrations/` 和 `docs/workflows/`。HTML 编排台只是辅助工具，不是源头。
-2. **技能收藏索引**：外部好用技能优先记录在 `catalog/skills.yml` 和各 section 文档里。除非边界、许可证和复用价值都清楚，否则不把外部仓库整包搬进来。
+2. **技能收藏索引**：外部好用技能和技能源优先记录在 `qihang-skill-index`，URL 默认使用 GitHub repo 根目录。除非边界、许可证和复用价值都清楚，否则不把外部仓库整包搬进来。
 
 Claude Code plugin 只作为自培养技能和轻量索引的分发层。目前默认只分发：
 
@@ -23,17 +23,15 @@ Claude Code plugin 只作为自培养技能和轻量索引的分发层。目前�
 - `agent-writing`：`topic-research-deposition`、`qihang-writing-style`
 - `qihang-skill-pack`：`qihang-skill-index`
 
-## 分类
+## 索引入口
 
-| 板块 | 用途 |
+| 入口 | 用途 |
 | --- | --- |
-| `sections/investment/` | VC、投资评估、融资判断、IC 论述、DD 问题 |
-| `sections/product/` | 产品分析、案例研究、用户/场景/商业模式判断 |
-| `sections/writing/` | 中文写作、改写、语气修订、作者声音和文稿自然化 |
-| `sections/frontend-design/` | 前端设计、UI/UX、视觉风格、设计提示词和界面生成质量控制 |
-| `sections/technology/` | 技术架构、AI 基础设施、工程可行性 |
-| `sections/development-paradigms/` | AI Agent Native 开发范式、TDD、review、调试 |
-| `sections/operations/` | 自动化、工作流、知识库同步、投稿与治理 |
+| `skills/` | 只放启航自培养技能和启航维护的轻量索引 |
+| `skills/qihang-skill-index/` | 外部 GitHub 技能 / 技能源 repo 根目录索引 |
+| `catalog/skills.yml` | 本地正式技能总账、调用链角色和插件分发关系 |
+| `orchestrations/` | 已验证工作流编排 |
+| `docs/workflows/` | 跨技能工作流说明 |
 
 ## Claude Code 插件市场
 
@@ -87,14 +85,14 @@ claude plugin validate .
 - 技能库宪法见 [docs/governance/library-constitution.md](docs/governance/library-constitution.md)。
 - 索引和记录方式见 [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md)。
 - 收录、协作、Linear 和跨板块调用链见 [docs/workflows/](docs/workflows/)。
-- 各板块的来源、调用链和索引见 [docs/sections/](docs/sections/)。
+- 外部 GitHub 技能源索引见 [github-skill-index.md](skills/qihang-skill-index/references/github-skill-index.md)。
 
 ## 维护规则
 
-1. 新增技能前先判断它属于哪个板块。
-2. 每个技能必须记录来源、用途、触发场景、迁移方式和验证状态。
-3. 外部技能默认先做索引；只有许可证、边界和复用价值清楚时才复制。
-4. 每次收录都更新 `catalog/skills.yml`。
+1. 新增技能前先判断它是启航自培养技能，还是外部 GitHub repo 索引。
+2. 每个本地技能必须记录来源、用途、触发场景、迁移方式和验证状态。
+3. 外部 repo 默认先进入 `qihang-skill-index`，URL 使用 repo 根目录。
+4. 每次新增或删除本地正式技能都更新 `catalog/skills.yml`。
 5. Linear 项目用于跟踪收录、审查、去重和重构任务。
 
 ## 重要边界

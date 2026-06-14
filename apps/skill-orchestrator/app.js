@@ -130,7 +130,7 @@ function render() {
 function renderSkillList() {
   const query = elements.skillSearch.value.trim().toLowerCase();
   const skills = (data.skills || []).filter((skill) => {
-    const haystack = `${skill.id} ${skill.title} ${skill.section} ${skill.path} ${skill.description}`.toLowerCase();
+    const haystack = `${skill.id} ${skill.title} ${skill.directory} ${skill.path} ${skill.description}`.toLowerCase();
     return !query || haystack.includes(query);
   });
 
@@ -145,7 +145,7 @@ function renderSkillList() {
     card.innerHTML = `
       <div>
         <strong>${escapeHtml(skill.id)}</strong>
-        <span>${escapeHtml(skill.section || "unknown")}</span>
+        <span>${escapeHtml(skill.directory || "skills")}</span>
       </div>
       <p>${escapeHtml(shortText(skill.description || skill.path || "", 110))}</p>
       <div class="skill-card-footer">
@@ -177,7 +177,7 @@ function renderChain() {
     card.innerHTML = `
       <div class="node-topline">
         <span class="node-index">${index + 1}</span>
-        <span class="node-section">${escapeHtml(skill?.section || "missing")}</span>
+        <span class="node-meta">${escapeHtml(skill?.directory || "missing")}</span>
       </div>
       <strong>${escapeHtml(node.title)}</strong>
       <p>${escapeHtml(node.role || defaultRole(skill))}</p>
@@ -482,17 +482,19 @@ function defaultRole(skill) {
 
 function defaultInput(skill) {
   if (!skill) return "";
-  if (skill.section === "product") return "全局输入材料、产品信息、上一节点输出。";
-  if (skill.section === "investment") return "产品判断、公开事实、GitHub / 融资 / 商业化线索。";
-  if (skill.section === "frontend-design") return "上一节点产物、页面目标、视觉约束、组件需求。";
+  if (skill.id === "ai-product-analyzer") return "全局输入材料、产品信息、上一节点输出。";
+  if (skill.id === "topic-research-deposition") return "选题、搜索范围、平台约束和素材保存要求。";
+  if (skill.id === "qihang-writing-style") return "已沉淀素材、核心判断、目标平台和需要改写或成稿的文稿。";
+  if (skill.id === "qihang-skill-index") return "需要查找、选择、验证或安装的外部 GitHub repo 根目录。";
   return "全局输入材料和上一节点输出。";
 }
 
 function defaultOutput(skill) {
   if (!skill) return "";
-  if (skill.section === "product") return "结构化产品分析、关键判断、最强论点、最弱缺口。";
-  if (skill.section === "investment") return "投资判断、评分或 DD 问题树。";
-  if (skill.section === "frontend-design") return "设计策略、页面结构、组件计划或可视化产物。";
+  if (skill.id === "ai-product-analyzer") return "结构化产品分析、关键判断、最强论点、最弱缺口。";
+  if (skill.id === "topic-research-deposition") return "按平台归档的原始素材、截图证据和待确认缺口。";
+  if (skill.id === "qihang-writing-style") return "符合启航风格的公众号或社媒文稿，以及必要的修订说明。";
+  if (skill.id === "qihang-skill-index") return "可用外部 repo 根目录、适用场景、安装/引用边界和是否应沉淀的判断。";
   return "本节点可交付产物。";
 }
 

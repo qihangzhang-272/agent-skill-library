@@ -12,7 +12,6 @@
 | --- | --- |
 | `id` | 稳定技能 ID，使用 kebab-case |
 | `title` | 人类可读名称 |
-| `section` | 所属板块 |
 | `status` | `internal`、`internal_index`、`deprecated` 等 |
 | `source_type` | 来源类型，例如 `user_cultivated_product_insight_skill`、`user_curated_external_github_index` |
 | `package_path` | 本地技能入口；如果只做索引，则写来源文档路径 |
@@ -35,7 +34,6 @@
 | `name` | 插件 ID，也是安装后的命名空间 |
 | `displayName` | 插件展示名 |
 | `description` | 插件用途 |
-| `section` | 主归属板块 |
 | `keywords` | 检索关键词 |
 | `distributionStatus` | 是否进入分发层 |
 | `distributionScope` | 分发范围；当前主要使用 `self_cultivated` 或 `curated_index` |
@@ -55,10 +53,10 @@
 
 技能总账记录能力本身，插件映射记录分发组合。
 
-例如 `frontend-design` 板块：
+例如前端设计来源：
 
 - `skills/qihang-skill-index/references/github-skill-index.md` 记录 `frontend-design`、TypeUI、GSAP、Awesome Design Skills 等外部来源和使用边界。
-- `docs/sections/frontend-design/` 记录来源筛选、prompt 入口和 UI 调用链。
+- `docs/workflows/prd-to-frontend.md` 记录 UI 调用链和选择规则。
 - 除非某个设计技能被长期验证并重写为自培养核心能力，否则不新增本地技能包。
 
 例如写作和产品板块：

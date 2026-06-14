@@ -17,8 +17,7 @@
 | `catalog/claude-plugins.json` | 保存 Claude Code 插件分发映射 | 只记录哪些源技能进入哪些可安装插件，不复制正文 |
 | `plugins/` | 保存由脚本生成或同步的 Claude Code 可安装插件 | 只分发自培养、高频复用技能；不作为源内容维护；源内容仍以 `skills/` 和 `catalog/` 为准 |
 | `.claude-plugin/` | 保存 marketplace manifest | 只放 Claude Code marketplace 所需元数据 |
-| `sections/` | 保存板块入口、优先级和已收录能力 | 不放完整技能正文 |
-| `docs/` | 保存治理规则、收入流程、组合搭配和调用链 | 不放具体项目产物 |
+| `docs/` | 保存治理规则、收录流程、组合搭配和调用链 | 不放具体项目产物或外部来源清单 |
 | `apps/` | 保存辅助管理界面 | 不做自动 runner，不替代 agent 判断 |
 | `local-experiments/` | 保存本地实验 | 默认不进入正式技能库 |
 
@@ -27,7 +26,7 @@
 每次新增或迁移一个技能前，必须回答：
 
 1. 它解决什么 Agent 工作问题？
-2. 属于哪个 section？
+2. 它是启航自培养技能，还是外部 GitHub repo 索引？
 3. 什么时候应该触发？
 4. 输入需要什么？
 5. 输出应该是什么？
@@ -83,4 +82,4 @@ Claude Code plugin 是分发层，不是源内容层。
 - 每次改变可分发插件时，运行 `scripts/build-claude-plugins.ps1`。
 - 每次改变可分发插件内容时，同步更新 `catalog/claude-plugins.json` 中对应插件的 `version`。
 - 每次改变索引结构时，同步更新 `docs/governance/catalog-schema.md`。
-- 每次改变调用链时，同步更新对应 `docs/workflows/` 或 `docs/sections/<section>/`。
+- 每次改变调用链时，同步更新对应 `docs/workflows/`。

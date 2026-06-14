@@ -22,11 +22,11 @@ plugins/<plugin-name>/
 
 ## 当前插件
 
-| 插件 | 主板块 | 用途 |
-| --- | --- | --- |
-| `agent-product` | product | 启航自培养产品洞察技能，做 AI 产品 BP 逻辑、商业模式和叙事判断 |
-| `agent-writing` | writing | 启航自培养公众号写作链路，包含选题素材沉淀和启航写作风格 |
-| `qihang-skill-pack` | operations | 启航外部 GitHub 技能源索引，用来选择外部能力但不复制外部正文 |
+| 插件 | 用途 |
+| --- | --- |
+| `agent-product` | 启航自培养产品洞察技能，做 AI 产品 BP 逻辑、商业模式和叙事判断 |
+| `agent-writing` | 启航自培养公众号写作链路，包含选题素材沉淀和启航写作风格 |
+| `qihang-skill-pack` | 启航外部 GitHub 技能源 repo 根目录索引，用来选择外部能力但不复制外部正文 |
 
 ## 安装测试
 

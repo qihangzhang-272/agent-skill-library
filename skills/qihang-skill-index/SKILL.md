@@ -8,7 +8,7 @@ description: >-
 
 # Qihang Skill Index
 
-This skill is a lightweight index for useful external GitHub skills and agent-related repositories Qihang has noticed.
+This skill is a lightweight index for useful external GitHub skill/source repositories Qihang has noticed.
 
 It is not a mirror. Do not treat indexed external repositories as local source packages.
 
@@ -16,7 +16,7 @@ It is not a mirror. Do not treat indexed external repositories as local source p
 
 Use this skill when:
 
-- You need to find a previously collected external skill source.
+- You need to find a previously collected external skill or source repository.
 - You need to decide whether an external skill should stay as an index, be installed into a target project, or be promoted into a self-cultivated skill.
 - A workflow references an external capability such as `md2wechat`, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
 - The repository feels bloated because external skill files were copied into `skills/`.
@@ -44,7 +44,7 @@ Otherwise, keep only the GitHub source, role, and usage notes.
 
 ## Index
 
-Read `references/github-skill-index.md` for the current curated list.
+Read `references/github-skill-index.md` for the current curated list. Source URLs intentionally point to GitHub repository roots unless Qihang asks for a specific subdirectory.
 
 ## How To Apply
 
@@ -60,3 +60,4 @@ Read `references/github-skill-index.md` for the current curated list.
 - Keep detailed external notes in the reference file, not in `SKILL.md`.
 - Remove local external folders after their source is represented in the index.
 - Do not list every interesting AI repo. Only include sources that have already affected Qihang's workflows or are likely to be reused.
+- Validate indexed URLs as reachable repo roots. Do not rewrite them to `tree/.../SKILL.md` unless the workflow specifically needs that path.

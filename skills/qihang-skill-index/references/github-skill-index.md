@@ -2,12 +2,16 @@
 
 This is Qihang's lightweight external skill/source index. It records where useful external capabilities live and how they fit into current workflows. It does not mirror their contents.
 
+Source URLs intentionally point to GitHub repository roots. A source may be a pure skill repo, a repo containing one or more skill directories, or a broader reference repo used by a workflow.
+
+Last repo-root verification: 2026-06-13 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
+
 ## Writing And Style
 
 | Source | Role | Status | Notes |
 | --- | --- | --- | --- |
 | `https://github.com/op7418/Humanizer-zh` | Chinese text naturalization and AI-pattern cleanup | reference | Useful as a cleanup reference. Do not let it override `qihang-writing-style`. |
-| `https://github.com/yzhao062/agent-style` | Human-like agent writing/style reference | candidate | User-added source. Keep as a style reference until specific reusable rules are absorbed into `qihang-writing-style`. |
+| `https://github.com/yzhao062/agent-style` | Human-like agent writing/style reference | reference | User-added source. Keep as a style reference until specific reusable rules are absorbed into `qihang-writing-style`. |
 
 Local archive without GitHub source:
 
@@ -35,12 +39,12 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Notes |
 | --- | --- | --- | --- |
-| `https://github.com/anthropics/skills` | Official Anthropic skills source, including `frontend-design` | reference | Prefer upstream source for generic frontend design guidance. |
-| `https://github.com/greensock/gsap-skills` | Official GSAP skills for animation work | reference | Use when a project explicitly needs GSAP. |
-| `https://github.com/bergside/awesome-design-skills` | Design style skill collection | reference | Good for style discovery. Do not copy all style folders by default. |
-| `https://github.com/bergside/typeui` | UI/UX fundamentals and design-system references | reference | Use for typography, accessibility, and UI principles. |
-| `https://github.com/leonxlnx/taste-skill` | Anti-slop frontend design and redesign skill collection | reference | Strong source, but large; keep as GitHub reference unless a small rule subset becomes Qihang-specific. |
-| `https://github.com/pbakaus/impeccable` | High-craft frontend design workflow and commands | reference | Runtime-heavy. Install upstream in target projects instead of archiving scripts locally. |
+| `https://github.com/anthropics/skills` | Official Anthropic skills source, including `frontend-design` | skill collection | Prefer upstream source for generic frontend design guidance. |
+| `https://github.com/greensock/gsap-skills` | Official GSAP skills for animation work | skill collection | Use when a project explicitly needs GSAP. |
+| `https://github.com/bergside/awesome-design-skills` | Design style skill collection | skill collection | Good for style discovery. Do not copy all style folders by default. |
+| `https://github.com/bergside/typeui` | UI/UX fundamentals and design-system references | skill/source repo | Use for typography, accessibility, and UI principles. |
+| `https://github.com/leonxlnx/taste-skill` | Anti-slop frontend design and redesign skill collection | skill collection | Strong source, but large; keep as GitHub reference unless a small rule subset becomes Qihang-specific. |
+| `https://github.com/pbakaus/impeccable` | High-craft frontend design workflow and commands | skill/source repo | Runtime-heavy. Install upstream in target projects instead of archiving scripts locally. |
 | `https://github.com/shadcn-ui/ui` | React component and design-system reference | docs/source | Reference for component choices, not a skill mirror. |
 | `https://github.com/tailwindlabs/tailwindcss` | Tailwind layout and styling reference | docs/source | Reference only. |
 | `https://github.com/mui/material-ui` | Enterprise React UI reference | docs/source | Reference only. |

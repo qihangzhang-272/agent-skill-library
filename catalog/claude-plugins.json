@@ -14,7 +14,6 @@
       "displayName": "Agent Product Insight",
       "description": "Qihang's self-cultivated AI product insight skill for BP logic, business-model judgment, narrative audit, and product-analysis articles.",
       "version": "0.3.0",
-      "section": "product",
       "keywords": [
         "product",
         "product-insight",
@@ -38,7 +37,6 @@
       "displayName": "Agent Writing Workflow",
       "description": "Qihang's self-cultivated WeChat writing workflow skills: topic research deposition and author-style drafting/revision.",
       "version": "0.3.0",
-      "section": "writing",
       "keywords": [
         "writing",
         "chinese",
@@ -68,7 +66,6 @@
       "displayName": "Qihang Skill Pack",
       "description": "Qihang's lightweight external GitHub skill/source index for selecting useful upstream skills without vendoring their contents.",
       "version": "0.1.0",
-      "section": "operations",
       "keywords": [
         "qihang",
         "skill-index",

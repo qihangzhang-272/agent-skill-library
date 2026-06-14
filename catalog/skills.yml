@@ -60,6 +60,7 @@ pipelines:
       - "docs/workflows/prd-to-frontend.md"
       - "docs/workflows/investment-product-to-research-report.md"
     primary_skills:
+      - topic-research-deposition
       - ai-product-analyzer
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
@@ -113,28 +114,35 @@ skills:
   - id: topic-research-deposition
     title: "Topic Research Deposition"
     status: internal
-    source_type: internal_writing_workflow_skill
+    source_type: internal_research_deposition_skill
     package_path: "skills/topic-research-deposition/SKILL.md"
     package_support:
+      - "skills/topic-research-deposition/references/agent-reach-search.md"
       - "skills/topic-research-deposition/references/platform-commands.md"
+      - "skills/topic-research-deposition/references/product-investment-research.md"
+      - "skills/topic-research-deposition/references/wechat-writing-research.md"
       - "skills/topic-research-deposition/references/wechat-viral-logic.md"
       - "skills/topic-research-deposition/references/wechat-extraction.md"
       - "skills/topic-research-deposition/references/quality-checklist.md"
     package_traits:
-      - multi_platform_research
-      - serial_platform_search
+      - generic_research_deposition
+      - agent_reach_default
+      - mode_routed
+      - reference_routed
       - source_deposition_only
       - screenshot_evidence
       - handoff_to_qihang_writing_style
     plugin_distribution: "agent-writing"
     pipeline_role:
       - "topic_writing_md2wechat"
+      - "product_analysis"
     trigger_examples:
       - "搜一下这个选题"
       - "第 0 步，先沉淀素材"
-      - "把这个主题的 Twitter、Reddit、网页和公众号资料拉下来"
+      - "用 agent-reach 覆盖 Twitter/Reddit/网页/公众号等素材面"
+      - "产品分析前先把事实和证据沉淀下来"
     copy_policy: "internal_workflow_skill"
-    notes: "公众号写作第 0 步，只负责跨平台搜索、全文素材落盘和截图留证。"
+    notes: "通用搜索、事实收集和素材沉淀技能；agent-reach 是默认 reach layer，Twitter/Reddit/Exa/微信等只是覆盖面。公众号经验保留在 wechat-writing-research mode。"
 
   - id: qihang-writing-style
     title: "Qihang Writing Style"

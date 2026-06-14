@@ -1,7 +1,7 @@
 {
   "name": "qihang-skill-pack",
   "displayName": "Qihang Skill Pack",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities without vendoring their contents.",
   "author": {
     "name": "Private Agent Skill Library"

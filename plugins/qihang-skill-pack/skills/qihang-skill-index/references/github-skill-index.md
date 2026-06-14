@@ -33,7 +33,7 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Notes |
 | --- | --- | --- | --- |
-| `https://github.com/Panniantong/agent-reach` | Internet reach, cross-platform search/access, and external content discovery for agents | installed external capability | Local skill homepage confirms this source. Use when topic research or material deposition needs broader platform access. Keep implementation outside this repository. |
+| `https://github.com/Panniantong/agent-reach` | Internet reach, cross-platform search/access, and external content discovery for agents | installed external capability | Default reach layer for `topic-research-deposition` and product/investment fact collection. Treat Twitter/X, Reddit, Exa/web, WeChat, GitHub, and other sites as agent-reach surfaces, not separate default workflow nodes. Keep implementation outside this repository. |
 
 ## Frontend Design And UI
 

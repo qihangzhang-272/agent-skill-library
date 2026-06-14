@@ -12,7 +12,7 @@ This skill routes Qihang's proven workflows. It is a workflow entry point, not a
 | Workflow | Trigger | Chain | Final Output |
 | --- | --- | --- | --- |
 | `topic-writing-md2wechat` | 公众号选题、写文章、排版、推草稿箱 | `topic-research-deposition` -> `qihang-writing-style` -> `qihang-skill-index` for `md2wechat` | 已排版公众号文稿、图片/封面处理记录、草稿箱状态 |
-| `product-analysis` | 产品分析、产品可视化、前端 brief、投资判断、研报、OSS investment | `ai-product-analyzer` -> `qihang-skill-index` only for the selected output mode | 产品判断，以及对应模式的可视化 brief、前端实现计划、投资研报、DD 问题树或 OSS investment 评分 |
+| `product-analysis` | 产品分析、产品可视化、前端 brief、投资判断、研报、OSS investment | `topic-research-deposition` when facts are missing -> `ai-product-analyzer` -> `qihang-skill-index` only for the selected output mode | 产品判断，以及对应模式的可视化 brief、前端实现计划、投资研报、DD 问题树或 OSS investment 评分 |
 
 ## Execution Rules
 
@@ -21,6 +21,7 @@ This skill routes Qihang's proven workflows. It is a workflow entry point, not a
 - Do not treat `md2wechat`, `frontend-design`, or `oss-investment-scorecard` as local skills. Resolve them through `qihang-skill-index` repo-root sources.
 - `product-frontend-design` and `product-investment-report` are output modes inside `product-analysis`, not separate workflows.
 - In `product-analysis`, choose one output mode before adding frontend or investment context.
+- Any search or fact collection uses `topic-research-deposition` with `agent-reach` as the default reach layer. Do not turn a platform list into a required command sequence.
 - Load and follow each underlying skill before executing its node.
 - Each node must state: input, skill/source used, output, and whether the next node can proceed.
 - Publishing or deployment requires an explicit environment check before claiming success.
@@ -74,6 +75,7 @@ research object -> scope question -> fact collection -> ai-product-analyzer -> i
 Minimum handoff:
 
 - Research object, object type, core question, target output, known materials, missing materials.
+- If facts are missing, run `topic-research-deposition` in `product-research` or `investment-research` mode before `ai-product-analyzer`.
 - Separate facts from judgment; current facts about financing, customers, GitHub data, pricing, team, and competitors must be checked when relevant.
 - Use `ai-product-analyzer` for BP logic, product成立性, business model, narrative, traction, team, and strongest / weakest points.
 - Use `qihang-skill-index` for `oss-investment-scorecard` only when the object is open source, AI infrastructure, an open-source company, or the user asks for VC-style investment scoring.
@@ -110,6 +112,7 @@ If a selected source is only present in `qihang-skill-index`, say it is an index
 | Turning every old workflow doc into a skill | Only the listed active workflows and modes are active. |
 | Re-vendoring external skills | Keep external repos in `qihang-skill-index`. |
 | Skipping writing style before md2wechat | `md2wechat` formats and publishes; it does not create Qihang-style writing. |
+| Treating Twitter, Reddit, Exa, or WeChat as the workflow itself | They are `agent-reach` surfaces inside `topic-research-deposition`, not default workflow nodes. |
 | Jumping from product analysis straight to code | First turn product judgment into frontend brief and design source choice. |
 | Turning frontend references into a long chain | Pick one primary source from `qihang-skill-index`; use at most one critique source when a specific gap appears. |
 | Splitting product frontend and investment into competing workflows | Use one `product-analysis` workflow, then choose the output mode. |

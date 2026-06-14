@@ -1,8 +1,8 @@
 {
   "name": "agent-writing",
   "displayName": "Agent Writing Workflow",
-  "version": "0.3.0",
-  "description": "Qihang's self-cultivated WeChat writing workflow skills: topic research deposition and author-style drafting/revision.",
+  "version": "0.3.1",
+  "description": "Qihang's self-cultivated research deposition and WeChat writing skills: agent-reach based source collection, public-account research mode, and author-style drafting/revision.",
   "author": {
     "name": "Private Agent Skill Library"
   },

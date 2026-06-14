@@ -18,8 +18,8 @@
     {
       "name": "agent-writing",
       "source": "./plugins/agent-writing",
-      "description": "Qihang's self-cultivated WeChat writing workflow skills: topic research deposition and author-style drafting/revision.",
-      "version": "0.3.0",
+      "description": "Qihang's self-cultivated research deposition and WeChat writing skills: agent-reach based source collection, public-account research mode, and author-style drafting/revision.",
+      "version": "0.3.1",
       "author": {
         "name": "Private Agent Skill Library"
       },
@@ -29,7 +29,7 @@
       "name": "qihang-skill-pack",
       "source": "./plugins/qihang-skill-pack",
       "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities without vendoring their contents.",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "author": {
         "name": "Private Agent Skill Library"
       },

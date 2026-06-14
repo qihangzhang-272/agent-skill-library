@@ -1,4 +1,12 @@
-# 四平台搜索命令参考
+# Direct Platform Command Fallback
+
+This file is fallback-only.
+
+Default search/access must use `agent-reach`. Use the commands below only when agent-reach is unavailable, incomplete for a required surface, or Qihang explicitly asks for a direct command.
+
+Record the fallback reason in the deposition report.
+
+# Legacy Four-Platform Search Commands
 
 ---
 

@@ -18,9 +18,10 @@ This skill routes Qihang's proven workflows. It is a workflow entry point, not a
 
 - Only these workflows are active unless Qihang explicitly adds another one.
 - Do not insert `ai-product-analyzer` into the writing/publishing chain unless Qihang explicitly asks for product analysis.
-- Do not treat `md2wechat` or external frontend design sources as local skills. Resolve them through `qihang-skill-index` repo-root sources.
+- Do not treat `md2wechat` as a local skill. Resolve it through `qihang-skill-index` repo-root sources.
 - Treat `oss-investment-scorecard` as a promoted local skill package. Load it directly after `ai-product-analyzer` in the product-analysis chain.
 - Default product-investment chain: AI-native product view -> OSS investment structure -> visualization.
+- The visualization step is frontend self-generation under the constitution below, not another frontend skill orchestration step.
 - Do not ask Qihang to choose a framework when the wording already implies this chain.
 - Do not classify whether `oss-investment-scorecard` is "accurately applicable" before using it in this workflow. Here it is the lightweight structure layer for final output, not a gatekeeping category.
 - `product-frontend-design` means product analysis -> frontend brief; add visualization only when the target is a report page.
@@ -61,14 +62,9 @@ Minimum handoff:
 - OSS investment structure to preserve: fact sheet, macro gate when useful, scorecard table, verdict, IC thesis, DD priorities, watch triggers.
 - Report structure source: `ai-product-analyzer` for product view, `oss-investment-scorecard` for output structure.
 - Page type and first-screen information. First screen should show object, verdict, and the highest-signal facts from the report.
-- Primary frontend source from `qihang-skill-index`, plus rejected sources and upgrade trigger.
-- For a product visual report, default artifact is a static HTML / visual report brief. Do not default to an app scaffold.
-- Component system default: existing project system first. If there is no target project, use static HTML/CSS for report pages; use shadcn/ui + Tailwind only for dashboards, agent workspaces, or confirmed React implementation.
-- Ant Design is only for dense enterprise data unless the project already uses MUI.
-- Visual experience principles: modern, calm, information-dense, not old enterprise-table style unless data demands it.
-- Layout principle: all-expanded by default. Do not hide core report content inside accordions, nested cards, or stacked collapsible blocks.
-- Structure follows the upstream report. Do not impose a fixed section order from this workflow.
-- Avoid card piles. Use full-width sections, comparison bands, score strips, timelines, matrices, and diagrams when they express logic better than another card.
+- Frontend approach: self-generate the visual report. Do not route this step through external frontend skills or `qihang-skill-index`.
+- Default artifact is static HTML/CSS unless the target project already has a stack or Qihang explicitly asks for implementation in an app.
+- Obey the frontend constitution below.
 - Acceptance checks: first screen expresses the right object, mobile works, text does not overflow, loading/empty/error states exist, core action works, browser screenshot is reviewed.
 
 ### Investment View
@@ -92,29 +88,31 @@ Minimum handoff:
 - Final output must include verdict, thesis, fact card, AI-native product judgment, OSS investment scorecard structure, DD priorities, uncertainty, and watch triggers.
 - If the user asked for a report or visual report, include those investment elements in the report and visualization. Do not downgrade to pure text just because investment judgment is present.
 
-## Product Frontend Source Choice
+## Visual Report Frontend Constitution
 
-When visualization is needed, pick exactly one primary frontend source:
+When product-analysis needs a visual report, generate the frontend directly. Do not add another skill-selection layer.
 
-| Output type | Primary source | Upgrade only when |
-| --- | --- | --- |
-| Product visual report / memo | TypeUI | Dense tables, filters, or enterprise states require Ant Design; existing MUI projects keep MUI; generic visuals need Taste or Impeccable as critique only |
-| SaaS dashboard / agent workspace | shadcn/ui + Tailwind | Enterprise data complexity requires Ant Design; motion is allowed only for state clarity |
-| Landing page | Awesome Design Skills | Magic UI is only for local polish, not the page system |
-| Generic creative frontend | Anthropic `frontend-design` | Use only when the output is not a report, dashboard, or enterprise product surface |
+Required rules:
+
+- Preserve the `oss-investment-scorecard` structure. Do not invent a new argument order.
+- First screen must show object, verdict, total score or decision state, and the highest-signal facts.
+- Keep the page modern, calm, information-dense, and report-like. Do not make it a marketing landing page.
+- Keep core report content all-expanded. Do not hide key analysis inside accordions, tabs, nested cards, or collapsed blocks.
+- Avoid card piles. Prefer full-width sections, score strips, comparison bands, matrices, timelines, tables, and simple logic diagrams.
+- Separate facts, judgments, assumptions, DD priorities, watch triggers, and source gaps visually.
+- Use stable responsive dimensions; text must not overflow on desktop or mobile.
+- If there is no target project, use one static HTML/CSS file. Use an existing project stack only when a target project is provided.
+- Browser-check the result before calling it done; review at least one desktop and one mobile viewport.
 
 The handoff must state:
 
 ```text
 Product/investment chain:
 Report structure source:
-Primary frontend source:
-Reason:
-Rejected sources:
-Upgrade trigger:
+Frontend approach:
+Frontend constitution:
+Verification:
 ```
-
-If a selected source is only present in `qihang-skill-index`, say it is an indexed external source. Do not claim its rules were applied unless you actually read or installed the upstream source.
 
 ## Common Mistakes
 
@@ -124,12 +122,11 @@ If a selected source is only present in `qihang-skill-index`, say it is an index
 | Re-vendoring external skills | Keep external repos in `qihang-skill-index`. |
 | Skipping writing style before md2wechat | `md2wechat` formats and publishes; it does not create Qihang-style writing. |
 | Treating Twitter, Reddit, Exa, or WeChat as the workflow itself | They are `agent-reach` surfaces inside `topic-research-deposition`, not default workflow nodes. |
-| Jumping from product analysis straight to code | First turn product judgment into frontend brief and design source choice. |
-| Turning frontend references into a long chain | Pick one primary source from `qihang-skill-index`; use at most one critique source when a specific gap appears. |
+| Jumping from product analysis straight to code | First finish OSS investment structure, then self-generate the visual report under the frontend constitution. |
+| Turning visual report generation into frontend skill orchestration | Generate the frontend directly and obey the frontend constitution. |
 | Treating visual report, investment report, and product analysis as competing modes | Use the default chain: AI-native product view -> OSS investment structure -> visualization. |
 | Hiding a report inside collapsed UI | Keep report content all-expanded unless interaction is explicitly requested. |
 | Inventing report structure inside the orchestrator | Product perspective comes from `ai-product-analyzer`; structure comes from `oss-investment-scorecard`. |
-| Treating TypeUI as loaded context just because it is indexed | Read or install the upstream source first, or state that only the index entry was used. |
 | Creating a Next.js project too early | Ask Qihang to confirm implementation and target directory before scaffolding. |
 
 ## Handoff Template
@@ -138,6 +135,8 @@ If a selected source is only present in `qihang-skill-index`, say it is an index
 Workflow:
 Product/investment chain:
 Report structure source:
+Frontend approach:
+Frontend constitution:
 Input:
 Required chain:
 Node 1 input/output:

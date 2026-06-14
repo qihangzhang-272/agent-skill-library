@@ -39,7 +39,7 @@
 | --- | --- | --- |
 | AI-native 产品视角 | `skills/ai-product-analyzer/` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
 | 结构化投资输出 | `skills/oss-investment-scorecard/` | 把产品判断组织成 fact sheet、macro gate、scorecard、verdict、IC thesis、DD 和 watch triggers |
-| 可视化承接 | `qihang-skill-index` 中的前端来源 | 把 OSS investment 结构化结果做成现代、全展开的可视化研报页 |
+| 可视化承接 | 前端自生成 | 把 OSS investment 结构化结果做成现代、全展开的可视化研报页；不再编排外部前端技能 |
 
 ## 调用链
 
@@ -164,9 +164,18 @@ AI-native 产品判断
 - research report：保留完整结构和来源。
 - IC memo：强化 verdict、IC thesis、关键风险、DD 条件。
 
-如果输出形态是可视化研报页，沿用 `oss-investment-scorecard` 结构，不在 workflow 里重新规定论证顺序。
+如果输出形态是可视化研报页，沿用 `oss-investment-scorecard` 结构，不在 workflow 里重新规定论证顺序，也不再选择外部前端技能。
 
 页面默认现代、全展开、少折叠、不堆叠卡片；优先用分区、矩阵、时间线、评分条和逻辑图表达已有研报结构。
+
+前端宪法：
+
+- 前端由执行者直接生成，不通过 `qihang-skill-index` 选择 Type/UI/设计技能。
+- 默认交付一个静态 HTML/CSS 文件；只有已有目标项目或明确要求时才使用项目栈。
+- 首屏必须显示研究对象、verdict、总分或决策状态、最高信号事实。
+- 核心报告内容全部展开，不把关键判断藏进折叠、tab 或嵌套卡片。
+- 视觉结构服务于 `oss-investment-scorecard`：fact sheet、macro gate、scorecard、IC thesis、DD priorities、watch triggers 必须可扫读。
+- 桌面和移动都要检查，文字不能溢出，核心信息不能重叠。
 
 ## 6. 质量门
 

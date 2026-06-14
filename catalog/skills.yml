@@ -74,17 +74,10 @@ pipelines:
       - text-only memo
       - frontend brief
     external_references:
-      - "TypeUI"
-      - "Anthropic skills"
-      - "Awesome Design Skills"
-      - "Taste Skill"
-      - "Impeccable"
-      - "shadcn/ui"
-      - "Magic UI"
+      - "agent-reach via topic-research-deposition when facts are missing"
     output_artifacts:
       - "product insight"
-      - "visual report brief or static HTML plan"
-      - "frontend source selection"
+      - "self-generated visual report page or static HTML"
       - "investment judgment"
       - "research report"
       - "DD question tree"
@@ -244,4 +237,4 @@ skills:
       - "产品分析后做 OSS investment"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 默认主链是 AI-native 产品视角 -> OSS investment 结构化 -> 可视化，只有用户明确只要文字或前端 brief 时才提前停下。"
+    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 默认主链是 AI-native 产品视角 -> OSS investment 结构化 -> 前端自生成可视化，只有用户明确只要文字或前端 brief 时才提前停下。"

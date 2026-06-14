@@ -7,7 +7,20 @@ distribution:
   claude_code_plugin_index: "catalog/claude-plugins.json"
   claude_code_plugin_root: "plugins/"
   build_script: "scripts/build-claude-plugins.ps1"
-  source_of_truth: "skills/ and catalog/; plugins/ is generated distribution output"
+  source_of_truth: "skills/ and catalog/; plugins/ is generated distribution output for self-cultivated skills"
+
+plugin_policy:
+  default_scope: "self_cultivated"
+  rule: "Only Qihang-cultivated, high-frequency operational skills enter Claude Code plugin distribution by default."
+  current_plugins:
+    agent-product:
+      skills:
+        - ai-product-analyzer
+    agent-writing:
+      skills:
+        - topic-research-deposition
+        - qihang-writing-style
+  external_skill_policy: "External skills remain indexed or vendored in skills/ for reference; workflows may reference them, but they do not enter plugins unless explicitly promoted."
 
 external_sources:
   chinese_natural_voice_revision:
@@ -223,6 +236,22 @@ external_sources:
         role: "v0 system prompt reference link only"
 
 pipelines:
+  wechat_product_research_writing_publish:
+    title: "公众号产品 / 选题文章链"
+    workflow_doc: "orchestrations/wechat-product-research-writing-publish.json"
+    sections:
+      - product
+      - writing
+    primary_skills:
+      - topic-research-deposition
+      - ai-product-analyzer
+      - qihang-writing-style
+      - md2wechat
+    output_artifacts:
+      - "research deposition folder"
+      - "product insight memo"
+      - "Qihang-style WeChat article"
+      - "WeChat draft"
   investment_product_to_research_report:
     title: "投资 / 产品问题到研报"
     workflow_doc: "docs/workflows/investment-product-to-research-report.md"
@@ -311,8 +340,8 @@ skills:
   - id: ai-product-analyzer
     title: "AI Product Analyzer"
     section: product
-    status: vendored
-    source_type: internal_seed_skill
+    status: internal
+    source_type: user_cultivated_product_insight_skill
     package_path: "skills/ai-product-analyzer/SKILL.md"
     package_support:
       - "skills/ai-product-analyzer/references/business-model.md"
@@ -328,6 +357,7 @@ skills:
       - self_contained
       - no_external_path_dependency
       - reference_routed
+    plugin_distribution: "agent-product"
     pipeline_role: "product_analysis_for_investment_and_research_report_chain"
     trigger_examples:
       - "分析一下这个 AI 产品"
@@ -335,8 +365,8 @@ skills:
       - "从 BP 逻辑评估这个产品"
       - "帮我看看这个产品的商业模式和叙事"
       - "这个产品是好案例、反面教材，还是待观察"
-    copy_policy: "vendored_internal_skill_package"
-    notes: "从本地 seed skill 迁移；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。SKILL.md 已明确要求先做 Reference 路由，深度分析需读取对应 references 后再输出判断。原始本地目录只作为导入 provenance，不代表本仓库存在上游依赖。"
+    copy_policy: "internal_user_cultivated_skill_package"
+    notes: "启航自培养产品洞察技能；包内包含 SKILL.md 和三份 references，可独立复制到 .claude/skills 或用户级 skills 目录。SKILL.md 已明确要求先做 Reference 路由，深度分析需读取对应 references 后再输出判断。原始本地目录只作为导入 provenance，不代表本仓库存在上游依赖。"
   - id: chinese-natural-voice-revision
     title: "Chinese Natural Voice Revision"
     section: writing
@@ -402,6 +432,7 @@ skills:
       - reference_routed
       - user_style_calibrated
       - lightweight_style_guidance
+    plugin_distribution: "agent-writing"
     trigger_examples:
       - "按我的公众号风格写"
       - "这篇不像我的风格"
@@ -427,6 +458,7 @@ skills:
       - source_deposition_only
       - screenshot_evidence
       - handoff_to_qihang_writing_style
+    plugin_distribution: "agent-writing"
     pipeline_role: "wechat_topic_research_step_zero"
     trigger_examples:
       - "搜一下这个选题"

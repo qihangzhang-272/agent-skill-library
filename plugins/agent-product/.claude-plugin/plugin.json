@@ -1,17 +1,18 @@
 {
-    "name":  "agent-product",
-    "displayName":  "Agent Product",
-    "version":  "0.2.0",
-    "description":  "Reference-aware product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
-    "author":  {
-                   "name":  "Private Agent Skill Library"
-               },
-    "repository":  "https://github.com/qihangzhang-272/agent-skill-library.git",
-    "keywords":  [
-                     "product",
-                     "ai-product",
-                     "case-analysis",
-                     "business-model"
-                 ],
-    "skills":  "./skills"
+  "name": "agent-product",
+  "displayName": "Agent Product Insight",
+  "version": "0.3.0",
+  "description": "Qihang's self-cultivated AI product insight skill for BP logic, business-model judgment, narrative audit, and product-analysis articles.",
+  "author": {
+    "name": "Private Agent Skill Library"
+  },
+  "repository": "https://github.com/qihangzhang-272/agent-skill-library.git",
+  "keywords": [
+    "product",
+    "product-insight",
+    "ai-product",
+    "case-analysis",
+    "business-model"
+  ],
+  "skills": "./skills"
 }

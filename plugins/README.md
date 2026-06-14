@@ -4,6 +4,8 @@
 
 这里不是源内容目录。源技能继续维护在 `skills/`，分发映射维护在 `catalog/claude-plugins.json`。
 
+插件只放自培养、会高频复用的技能。外部收藏技能默认留在 `catalog/skills.yml` 和 section 索引里，不进入插件分发层。
+
 ## 生成
 
 ```powershell
@@ -22,10 +24,8 @@ plugins/<plugin-name>/
 
 | 插件 | 主板块 | 用途 |
 | --- | --- | --- |
-| `agent-product` | product | AI 产品分析、商业模式、叙事审计和研报前置判断 |
-| `agent-writing` | writing | 中文自然语气、保留作者声音、AI 写作模式清理和文稿润色 |
-| `agent-frontend-design` | frontend-design | 前端设计、UI/UX、视觉风格、Taste anti-slop、Impeccable 索引和 GSAP 动效 |
-| `agent-investment` | investment | OSS 投资评分、VC 问题和 DD 判断 |
+| `agent-product` | product | 启航自培养产品洞察技能，做 AI 产品 BP 逻辑、商业模式和叙事判断 |
+| `agent-writing` | writing | 启航自培养公众号写作链路，包含选题素材沉淀和启航写作风格 |
 
 ## 安装测试
 

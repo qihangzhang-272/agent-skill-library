@@ -1,8 +1,14 @@
 # Orchestrations
 
-这里保存从可视化编排台导出的技能链定义。它不是 runner，也不直接调用 Claude；它只描述一条人工拼出的工作流应该按什么顺序使用哪些技能、每段输入什么、输出什么、如何验收。
+这里保存稳定的技能链定义。它不是 runner，也不直接调用 Claude；它只描述一条人工验证过的工作流应该按什么顺序使用哪些技能、每段输入什么、输出什么、如何验收。
 
-当前仓库不放预置静态 workflow。编排默认在 `apps/skill-orchestrator/index.html` 里动态完成，并保存在浏览器 localStorage。只有当某条链被反复验证、值得沉淀时，才从页面导出后放入本目录。
+`apps/skill-orchestrator/index.html` 只是辅助编排台，不是工作流源头。临时链路可以先在页面里拖拽和导出；一旦某条链被反复验证、值得沉淀，就放入本目录，由 Git 管理。
+
+## 当前工作流
+
+| 工作流 | 文件 | 用途 |
+| --- | --- | --- |
+| 公众号产品/选题文章链 | `wechat-product-research-writing-publish.json` | 连接产品洞察、选题素材沉淀、启航写作风格和公众号排版发布 |
 
 ## 文件格式
 
@@ -32,3 +38,4 @@
 2. 新技能迁移进 `skills/` 后，运行 `scripts/build-skill-orchestrator-data.ps1` 刷新页面数据。
 3. 具体项目产物不进入本目录。
 4. 未验证的临时链路只保存在浏览器 localStorage，不提交到仓库。
+5. 自培养技能可以进入 Claude Code plugin；外部收藏技能默认只在 workflow 中按需引用，不进入插件分发层。

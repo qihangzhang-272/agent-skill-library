@@ -3,7 +3,7 @@
   "marketplace": {
     "name": "agent-skill-library",
     "displayName": "Agent Skill Library",
-    "description": "Private Claude Code marketplace for reusable agent skills and workflow capabilities.",
+    "description": "Private Claude Code marketplace for Qihang's self-cultivated agent skills. External skills stay in the library index unless explicitly promoted.",
     "owner": {
       "name": "Private Agent Skill Library"
     }
@@ -11,17 +11,19 @@
   "plugins": [
     {
       "name": "agent-product",
-      "displayName": "Agent Product",
-      "description": "Reference-aware product analysis skills for AI product cases, business model review, narrative audit, and research-report preparation.",
-      "version": "0.2.0",
+      "displayName": "Agent Product Insight",
+      "description": "Qihang's self-cultivated AI product insight skill for BP logic, business-model judgment, narrative audit, and product-analysis articles.",
+      "version": "0.3.0",
       "section": "product",
       "keywords": [
         "product",
+        "product-insight",
         "ai-product",
         "case-analysis",
         "business-model"
       ],
       "distributionStatus": "active",
+      "distributionScope": "self_cultivated",
       "releasePolicy": "manual_semver",
       "skills": [
         {
@@ -33,217 +35,31 @@
     },
     {
       "name": "agent-writing",
-      "displayName": "Agent Writing",
-      "description": "Writing and revision skills for Chinese natural voice, tone preservation, AI writing pattern cleanup, and manuscript polish.",
-      "version": "0.2.0",
+      "displayName": "Agent Writing Workflow",
+      "description": "Qihang's self-cultivated WeChat writing workflow skills: topic research deposition and author-style drafting/revision.",
+      "version": "0.3.0",
       "section": "writing",
       "keywords": [
         "writing",
         "chinese",
-        "voice",
-        "revision",
-        "humanizer"
+        "wechat",
+        "qihang",
+        "topic-research",
+        "author-style"
       ],
       "distributionStatus": "active",
+      "distributionScope": "self_cultivated",
       "releasePolicy": "manual_semver",
       "skills": [
         {
-          "id": "chinese-natural-voice-revision",
-          "sourcePath": "skills/chinese-natural-voice-revision",
-          "targetName": "chinese-natural-voice-revision"
+          "id": "topic-research-deposition",
+          "sourcePath": "skills/topic-research-deposition",
+          "targetName": "topic-research-deposition"
         },
         {
-          "id": "humanizer-zh",
-          "sourcePath": "skills/humanizer-zh",
-          "targetName": "humanizer-zh"
-        }
-      ]
-    },
-    {
-      "name": "agent-frontend-design",
-      "displayName": "Agent Frontend Design",
-      "description": "Frontend design, UI/UX fundamentals, visual style skills, Taste anti-slop skills, Impeccable index, and GSAP motion skills for PRD-to-frontend workflows.",
-      "version": "0.2.0",
-      "section": "frontend-design",
-      "keywords": [
-        "frontend",
-        "ui",
-        "ux",
-        "design",
-        "gsap",
-        "taste",
-        "anti-slop",
-        "impeccable"
-      ],
-      "distributionStatus": "active",
-      "releasePolicy": "manual_semver",
-      "skills": [
-        {
-          "id": "frontend-design",
-          "sourcePath": "skills/frontend-design",
-          "targetName": "frontend-design"
-        },
-        {
-          "id": "typeui-fundamentals",
-          "sourcePath": "skills/typeui-fundamentals",
-          "targetName": "typeui-fundamentals"
-        },
-        {
-          "id": "brandkit",
-          "sourcePath": "skills/taste-skill/skills/brandkit",
-          "targetName": "brandkit"
-        },
-        {
-          "id": "brutalist-skill",
-          "sourcePath": "skills/taste-skill/skills/brutalist-skill",
-          "targetName": "brutalist-skill"
-        },
-        {
-          "id": "gpt-tasteskill",
-          "sourcePath": "skills/taste-skill/skills/gpt-tasteskill",
-          "targetName": "gpt-tasteskill"
-        },
-        {
-          "id": "image-to-code-skill",
-          "sourcePath": "skills/taste-skill/skills/image-to-code-skill",
-          "targetName": "image-to-code-skill"
-        },
-        {
-          "id": "imagegen-frontend-mobile",
-          "sourcePath": "skills/taste-skill/skills/imagegen-frontend-mobile",
-          "targetName": "imagegen-frontend-mobile"
-        },
-        {
-          "id": "imagegen-frontend-web",
-          "sourcePath": "skills/taste-skill/skills/imagegen-frontend-web",
-          "targetName": "imagegen-frontend-web"
-        },
-        {
-          "id": "minimalist-skill",
-          "sourcePath": "skills/taste-skill/skills/minimalist-skill",
-          "targetName": "minimalist-skill"
-        },
-        {
-          "id": "output-skill",
-          "sourcePath": "skills/taste-skill/skills/output-skill",
-          "targetName": "output-skill"
-        },
-        {
-          "id": "redesign-skill",
-          "sourcePath": "skills/taste-skill/skills/redesign-skill",
-          "targetName": "redesign-skill"
-        },
-        {
-          "id": "soft-skill",
-          "sourcePath": "skills/taste-skill/skills/soft-skill",
-          "targetName": "soft-skill"
-        },
-        {
-          "id": "stitch-skill",
-          "sourcePath": "skills/taste-skill/skills/stitch-skill",
-          "targetName": "stitch-skill"
-        },
-        {
-          "id": "taste-skill",
-          "sourcePath": "skills/taste-skill/skills/taste-skill",
-          "targetName": "taste-skill"
-        },
-        {
-          "id": "taste-skill-v1",
-          "sourcePath": "skills/taste-skill/skills/taste-skill-v1",
-          "targetName": "taste-skill-v1"
-        },
-        {
-          "id": "impeccable-index",
-          "sourcePath": "skills/impeccable",
-          "targetName": "impeccable-index"
-        },
-        {
-          "id": "dashboard",
-          "sourcePath": "skills/awesome-design-skills/skills/dashboard",
-          "targetName": "dashboard"
-        },
-        {
-          "id": "shadcn",
-          "sourcePath": "skills/awesome-design-skills/skills/shadcn",
-          "targetName": "shadcn"
-        },
-        {
-          "id": "bento",
-          "sourcePath": "skills/awesome-design-skills/skills/bento",
-          "targetName": "bento"
-        },
-        {
-          "id": "premium",
-          "sourcePath": "skills/awesome-design-skills/skills/premium",
-          "targetName": "premium"
-        },
-        {
-          "id": "minimal",
-          "sourcePath": "skills/awesome-design-skills/skills/minimal",
-          "targetName": "minimal"
-        },
-        {
-          "id": "gsap-core",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-core",
-          "targetName": "gsap-core"
-        },
-        {
-          "id": "gsap-frameworks",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-frameworks",
-          "targetName": "gsap-frameworks"
-        },
-        {
-          "id": "gsap-performance",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-performance",
-          "targetName": "gsap-performance"
-        },
-        {
-          "id": "gsap-plugins",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-plugins",
-          "targetName": "gsap-plugins"
-        },
-        {
-          "id": "gsap-react",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-react",
-          "targetName": "gsap-react"
-        },
-        {
-          "id": "gsap-scrolltrigger",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-scrolltrigger",
-          "targetName": "gsap-scrolltrigger"
-        },
-        {
-          "id": "gsap-timeline",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-timeline",
-          "targetName": "gsap-timeline"
-        },
-        {
-          "id": "gsap-utils",
-          "sourcePath": "skills/greensock-gsap-skills/skills/gsap-utils",
-          "targetName": "gsap-utils"
-        }
-      ]
-    },
-    {
-      "name": "agent-investment",
-      "displayName": "Agent Investment",
-      "description": "Investment evaluation skills for OSS company scoring, VC questions, diligence, and research-report workflows.",
-      "version": "0.1.0",
-      "section": "investment",
-      "keywords": [
-        "investment",
-        "vc",
-        "oss",
-        "diligence"
-      ],
-      "distributionStatus": "active",
-      "releasePolicy": "manual_semver",
-      "skills": [
-        {
-          "id": "oss-investment-scorecard",
-          "sourcePath": "skills/oss-investment-scorecard",
-          "targetName": "oss-investment-scorecard"
+          "id": "qihang-writing-style",
+          "sourcePath": "skills/qihang-writing-style",
+          "targetName": "qihang-writing-style"
         }
       ]
     }

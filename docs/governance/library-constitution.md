@@ -15,7 +15,7 @@
 | `skills/` | 保存已确认可复用的技能包或保守迁移的外部 skill 子集 | 只放可被 agent 读取和复用的能力，不放网页 prompt 正文、UI 库源码、一次性实验结果 |
 | `catalog/skills.yml` | 保存技能总账 | 每个技能必须记录来源、用途、触发场景、迁移边界、验证状态 |
 | `catalog/claude-plugins.json` | 保存 Claude Code 插件分发映射 | 只记录哪些源技能进入哪些可安装插件，不复制正文 |
-| `plugins/` | 保存由脚本生成或同步的 Claude Code 可安装插件 | 不作为源内容维护；源内容仍以 `skills/` 和 `catalog/` 为准 |
+| `plugins/` | 保存由脚本生成或同步的 Claude Code 可安装插件 | 只分发自培养、高频复用技能；不作为源内容维护；源内容仍以 `skills/` 和 `catalog/` 为准 |
 | `.claude-plugin/` | 保存 marketplace manifest | 只放 Claude Code marketplace 所需元数据 |
 | `sections/` | 保存板块入口、优先级和已收录能力 | 不放完整技能正文 |
 | `docs/` | 保存治理规则、收入流程、组合搭配和调用链 | 不放具体项目产物 |
@@ -65,6 +65,8 @@
 
 Claude Code plugin 是分发层，不是源内容层。
 
+默认只有自培养技能进入插件分发层。外部技能、外部 prompt 集合、外部 UI/设计技能和一次性迁移包，优先留在 `catalog/skills.yml` 和 section 索引里；只有当它们被长期验证、边界清楚，并被明确提升为核心运行能力时，才允许进入插件。
+
 - marketplace manifest 固定放在 `.claude-plugin/marketplace.json`。
 - 每个插件固定放在 `plugins/<plugin-name>/`。
 - 每个插件的 manifest 固定放在 `plugins/<plugin-name>/.claude-plugin/plugin.json`。
@@ -72,6 +74,7 @@ Claude Code plugin 是分发层，不是源内容层。
 - 不允许把 `skills/`、`agents/`、`hooks/` 放进 `.claude-plugin/`。
 - 插件不得引用插件目录外部文件；需要的技能文件必须复制进插件目录。
 - 插件必须写 semver 版本号；只要某个插件包含的技能正文、支撑文件或 manifest 变化，就必须 bump 对应插件版本。
+- 当前默认插件范围：`agent-product` 分发产品洞察技能，`agent-writing` 分发选题调研和启航写作风格技能。
 
 ## 维护原则
 

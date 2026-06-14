@@ -10,6 +10,18 @@
 - 外部技能优先以地址、索引、来源和调用方式沉淀；只有明确可迁移且边界清楚的技能包才 vendored 到 `skills/`。
 - 网页 prompt、UI 库源码、项目资料和一次性实验结果不进入正式技能包。
 
+## 仓库职能
+
+本仓库只承担两个核心职能：
+
+1. **工作流编排**：把已经验证过的技能链沉淀到 `orchestrations/` 和 `docs/workflows/`。HTML 编排台只是辅助工具，不是源头。
+2. **技能收藏索引**：外部好用技能优先记录在 `catalog/skills.yml` 和各 section 文档里。除非边界、许可证和复用价值都清楚，否则不把外部仓库整包搬进来。
+
+Claude Code plugin 只作为自培养技能的分发层。目前默认只分发：
+
+- `agent-product`：`ai-product-analyzer`
+- `agent-writing`：`topic-research-deposition`、`qihang-writing-style`
+
 ## 分类
 
 | 板块 | 用途 |
@@ -24,14 +36,14 @@
 
 ## Claude Code 插件市场
 
-本仓库现在同时提供 Claude Code plugin marketplace 分发层：
+本仓库现在同时提供 Claude Code plugin marketplace 分发层。它只负责分发自培养、会高频复用的技能，不承载外部收藏目录：
 
 - Marketplace manifest：`.claude-plugin/marketplace.json`
 - 插件分发目录：`plugins/`
 - 插件分发索引：`catalog/claude-plugins.json`
 - 生成脚本：`scripts/build-claude-plugins.ps1`
 
-`plugins/` 不是源内容目录。源技能仍维护在 `skills/`，分发映射维护在 `catalog/claude-plugins.json`。每次改变技能进入哪个插件后，运行：
+`plugins/` 不是源内容目录。源技能仍维护在 `skills/`，分发映射维护在 `catalog/claude-plugins.json`。每次改变自培养技能进入哪个插件后，运行：
 
 ```powershell
 .\scripts\build-claude-plugins.ps1
@@ -48,9 +60,10 @@ claude plugin validate .
 | 技能 | 板块 | 来源 | 状态 |
 | --- | --- | --- | --- |
 | `oss-investment-scorecard` | investment | `skills/oss-investment-scorecard/` | 已从 `lucy-cxy/oss-investment-scorecard` 完整迁移 |
-| `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 已迁移为自包含技能包 |
+| `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 自培养产品洞察技能，进入 `agent-product` 插件 |
 | `chinese-natural-voice-revision` | writing | `skills/chinese-natural-voice-revision/` | 已从用户提供 zip 完全体迁移 |
 | `humanizer-zh` | writing | `skills/humanizer-zh/` | 已迁移中文 AI 写作痕迹清理 skill |
+| `qihang-writing-style` | writing | `skills/qihang-writing-style/` | 自培养启航写作风格技能，进入 `agent-writing` 插件 |
 | `topic-research-deposition` | writing | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
 | `frontend-design` | frontend-design | `skills/frontend-design/` | 已迁移 Anthropic 官方 skills repo 的 frontend-design skill |
 | `greensock-gsap-skills` | frontend-design | `skills/greensock-gsap-skills/` | 已保守迁移 GSAP 官方 AI skills |
@@ -63,6 +76,7 @@ claude plugin validate .
 
 | 调用链 | 文档 | 作用 |
 | --- | --- | --- |
+| 公众号产品 / 选题文章链 | `orchestrations/wechat-product-research-writing-publish.json` | 把产品洞察、选题调研、启航写作和公众号排版发布串成稳定工作流 |
 | 投资 / 产品问题到研报 | `docs/workflows/investment-product-to-research-report.md` | 把产品判断、投资评分、DD 问题树整理成研报、case memo 或 IC memo |
 | PRD 到前端实现 | `docs/workflows/prd-to-frontend.md` | 把模糊需求或 PRD 推进到页面结构、组件计划、前端实现和浏览器验收 |
 

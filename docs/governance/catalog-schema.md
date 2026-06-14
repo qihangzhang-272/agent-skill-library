@@ -27,6 +27,8 @@
 
 `catalog/claude-plugins.json` 是 Claude Code plugin 分发映射，回答“哪些源技能被打包成哪个可安装插件”。
 
+默认只把自培养、高频复用技能写入这个文件。外部收藏技能即使已经 vendored 到 `skills/`，也不代表应该进入插件；除非它被明确提升为核心运行能力。
+
 每个插件至少应包含：
 
 | 字段 | 含义 |
@@ -37,6 +39,7 @@
 | `section` | 主归属板块 |
 | `keywords` | 检索关键词 |
 | `distributionStatus` | 是否进入分发层 |
+| `distributionScope` | 分发范围；当前主要使用 `self_cultivated` |
 | `version` | semver 版本号；插件内容变化时必须更新 |
 | `releasePolicy` | 更新策略；当前使用 `manual_semver` |
 | `skills` | 源技能目录到插件技能目录的映射 |
@@ -56,9 +59,14 @@
 例如 `frontend-design` 板块：
 
 - `catalog/skills.yml` 记录 `frontend-design`、`typeui-fundamentals`、GSAP、Awesome Design Skills 的来源、范围和边界。
-- `catalog/claude-plugins.json` 记录这些技能被组合进 `agent-frontend-design`。
 - `docs/sections/frontend-design/` 记录来源筛选、prompt 入口和 UI 调用链。
-- `plugins/agent-frontend-design/` 是可安装分发结果。
+- 除非某个设计技能被长期验证为自培养核心能力，否则不写入 `catalog/claude-plugins.json`。
+
+例如写作和产品板块：
+
+- `ai-product-analyzer` 是自培养产品洞察技能，写入 `agent-product`。
+- `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，写入 `agent-writing`。
+- `md2wechat` 是外部发布适配技能，工作流可以引用，但默认不进入插件。
 
 ## 生成规则
 
@@ -79,6 +87,7 @@
 ```powershell
 claude plugin validate .
 claude plugin validate .\plugins\agent-product --strict
+claude plugin validate .\plugins\agent-writing --strict
 ```
 
 ## 禁止事项

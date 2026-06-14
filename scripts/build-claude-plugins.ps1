@@ -76,6 +76,14 @@ Assert-ChildPath -Parent $repoRoot -Child $marketplaceRoot
 New-Item -ItemType Directory -Force -Path $pluginsRoot | Out-Null
 New-Item -ItemType Directory -Force -Path $marketplaceRoot | Out-Null
 
+$configuredPluginNames = @($config.plugins | ForEach-Object { $_.name })
+foreach ($existingPlugin in Get-ChildItem -LiteralPath $pluginsRoot -Directory) {
+  Assert-ChildPath -Parent $pluginsRoot -Child $existingPlugin.FullName
+  if ($configuredPluginNames -notcontains $existingPlugin.Name) {
+    Remove-Item -LiteralPath $existingPlugin.FullName -Recurse -Force
+  }
+}
+
 $origin = ""
 try {
   $origin = (git config --get remote.origin.url) 2>$null

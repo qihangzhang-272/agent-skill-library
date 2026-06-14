@@ -1,18 +1,19 @@
 {
-    "name":  "agent-writing",
-    "displayName":  "Agent Writing",
-    "version":  "0.2.0",
-    "description":  "Writing and revision skills for Chinese natural voice, tone preservation, AI writing pattern cleanup, and manuscript polish.",
-    "author":  {
-                   "name":  "Private Agent Skill Library"
-               },
-    "repository":  "https://github.com/qihangzhang-272/agent-skill-library.git",
-    "keywords":  [
-                     "writing",
-                     "chinese",
-                     "voice",
-                     "revision",
-                     "humanizer"
-                 ],
-    "skills":  "./skills"
+  "name": "agent-writing",
+  "displayName": "Agent Writing Workflow",
+  "version": "0.3.0",
+  "description": "Qihang's self-cultivated WeChat writing workflow skills: topic research deposition and author-style drafting/revision.",
+  "author": {
+    "name": "Private Agent Skill Library"
+  },
+  "repository": "https://github.com/qihangzhang-272/agent-skill-library.git",
+  "keywords": [
+    "writing",
+    "chinese",
+    "wechat",
+    "qihang",
+    "topic-research",
+    "author-style"
+  ],
+  "skills": "./skills"
 }

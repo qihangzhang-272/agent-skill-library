@@ -41,7 +41,7 @@
 | 节点 | 优先技能 / 来源 | 用途 |
 | --- | --- | --- |
 | 事实收集 | `topic-research-deposition` + `qihang-investment-research` | 搜索和沉淀事实，不做投资结论 |
-| 投资工作包总入口 | `qihang-ai-investment-orchestrator` | 路由后续投资节点，避免一次性加载所有 references |
+| 工作流总入口 | `qihang-workflow-orchestrator` -> `references/product-investment-icmemo.md` | 路由投资工作流，避免把具体 workflow 写进 `SKILL.md` |
 | AI-native 产品视角 | `qihang-ai-product-judgment` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
 | 竞争格局 | `qihang-competitive-landscape` | 市场定义、竞品分组、定位、护城河、bull/base/bear |
 | 单位经济 | `qihang-unit-economics` | 定价、收入质量、毛利、推理成本、CAC/payback、AI readiness |
@@ -124,7 +124,7 @@
 
 ## 3. 投资工作包执行
 
-触发 `qihang-ai-investment-orchestrator`，让它按节点渐进加载 references。
+触发 `qihang-workflow-orchestrator`，读取 `references/product-investment-icmemo.md`，再按节点渐进加载 `agent-investment` 中的业务技能。
 
 每个节点必须输出：
 

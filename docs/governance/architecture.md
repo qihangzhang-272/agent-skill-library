@@ -35,6 +35,7 @@
 以前端设计为例：
 
 - `skills/qihang-skill-index/` 保存外部设计技能和 UI 来源的 GitHub repo 根目录索引。
+- `skills/qihang-workflow-orchestrator/SKILL.md` 只保存工作流路由；具体 workflow 压缩在它的 `references/`，避免把调度器写成第二套文档系统。
 - `docs/workflows/prd-to-frontend.md` 保存从模糊需求到前端实现的调用链。
 - `orchestrations/` 保存跨技能链路，`apps/skill-orchestrator/` 将链路可视化并生成整条链 handoff prompt。
 - `catalog/claude-plugins.json` 决定哪些源技能进入 Claude Code 插件，`plugins/` 和 `.claude-plugin/` 是分发结果。

@@ -65,7 +65,7 @@
       "name": "qihang-skill-pack",
       "displayName": "Qihang Skill Pack",
       "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "keywords": [
         "qihang",
         "skill-index",
@@ -94,7 +94,7 @@
       "name": "agent-investment",
       "displayName": "Agent Investment",
       "description": "Qihang's AI investment IC memo package: research handoff, AI-native product judgment, competitive landscape, unit economics, scorecard, valuation, DD, thesis tracking, and IC memo writing.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "keywords": [
         "investment",
         "ic-memo",
@@ -109,11 +109,6 @@
       "distributionScope": "self_cultivated_with_migrated_references",
       "releasePolicy": "manual_semver",
       "skills": [
-        {
-          "id": "qihang-ai-investment-orchestrator",
-          "sourcePath": "skills/qihang-ai-investment-orchestrator",
-          "targetName": "qihang-ai-investment-orchestrator"
-        },
         {
           "id": "qihang-investment-research",
           "sourcePath": "skills/qihang-investment-research",

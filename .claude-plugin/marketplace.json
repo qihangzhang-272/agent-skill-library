@@ -29,7 +29,7 @@
       "name": "qihang-skill-pack",
       "source": "./plugins/qihang-skill-pack",
       "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "author": {
         "name": "Private Agent Skill Library"
       },
@@ -39,7 +39,7 @@
       "name": "agent-investment",
       "source": "./plugins/agent-investment",
       "description": "Qihang's AI investment IC memo package: research handoff, AI-native product judgment, competitive landscape, unit economics, scorecard, valuation, DD, thesis tracking, and IC memo writing.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "author": {
         "name": "Private Agent Skill Library"
       },

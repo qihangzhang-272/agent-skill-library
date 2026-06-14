@@ -1,6 +1,6 @@
 # Workflow Docs
 
-这里放可以重复执行的流程，不放具体技能正文。
+这里放可以重复执行的流程，不放具体技能正文。Claude Code 运行时的压缩 workflow 入口在 `skills/qihang-workflow-orchestrator/references/`；本目录保留更完整的治理说明和背景说明。
 
 ## 当前文件
 

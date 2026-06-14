@@ -63,6 +63,7 @@
 索引可以丰富，执行链路必须克制。
 
 - `qihang-skill-index` 是外部技能和前端库的资产层，不是把所有参考源串起来执行的工作流。
+- `qihang-workflow-orchestrator` 是唯一默认工作流调度入口；它的 `SKILL.md` 只保留路由表，具体 workflow 必须压缩到 `references/`，不得再创建子调度器技能。
 - 一条工作流只暴露必要节点；多个外部参考源只能在同一个选择节点里择一使用，不能被机械串成多段调用链。
 - 不为了“管理复杂度”新增包装技能。只有当某个判断被启航反复使用、能用自己的语言稳定复述，并且明显降低后续执行成本时，才允许沉淀为新的本地技能。
 - product-analysis 这类链路应保持：`ai-product-analyzer` 或 `qihang-ai-product-judgment` 提供启航的 AI-native 产品视角，`agent-investment` 工作包提供竞争格局、单位经济、投资评分、估值、DD、跟踪和 IC Memo 成稿，最后按需前端自生成可视化。不要先按“是否准确适用 OSS investment”分类。

@@ -1,5 +1,5 @@
 window.SKILL_ORCHESTRATOR_DATA = {
-  "generatedAt": "2026-06-14 07:55:37",
+  "generatedAt": "2026-06-14 08:12:45",
   "repository": {
     "name": "agent-skill-library",
     "root": "."
@@ -11,14 +11,6 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "path": "skills/ai-product-analyzer/SKILL.md",
       "directory": "skills/ai-product-analyzer",
       "description": "从 BP / Pitch Deck 商业判断逻辑出发，对 AI 产品进行完整评估。 触发方式：- \"分析一下 [产品名]\" - \"评估 [产品]\" - \"[产品名] 怎么样\" - \"帮我看看这个 AI 产品\" - \"这个产品值得关注吗\" 输出：11 段 BP 逻辑链评估 → 综合判定（好案例/反面教材/待观察）+ 最强论点 + 最弱缺口 + 建议叙事线。 分析前必须判断是否需要读取 references/；命中商业模式、Data Agent、叙事审计等场景时先读取对应 reference，再输出判断。",
-      "status": "available"
-    },
-    {
-      "id": "qihang-ai-investment-orchestrator",
-      "title": "qihang ai investment orchestrator",
-      "path": "skills/qihang-ai-investment-orchestrator/SKILL.md",
-      "directory": "skills/qihang-ai-investment-orchestrator",
-      "description": "Route Qihang's AI investment workflow from fact pack to IC memo. Use when Qihang asks whether an AI product, AI company, open-source AI project, infrastructure layer, or case is worth investing in, tracking, passing, or turning into an IC memo / investment memo / visual research report. This skill coordinates the agent-investment package without loading all references at once.",
       "status": "available"
     },
     {
@@ -106,7 +98,7 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "title": "qihang workflow orchestrator",
       "path": "skills/qihang-workflow-orchestrator/SKILL.md",
       "directory": "skills/qihang-workflow-orchestrator",
-      "description": "Use when Qihang asks to run, package, choose, or maintain a proven workflow such as topic-to-WeChat publishing, product-to-frontend, or product-to-investment IC memo / visual research report. This is the cross-package router for agent-writing, agent-product, agent-investment, and qihang-skill-pack.",
+      "description": "Route Qihang's proven workflows. Use when Qihang asks to run, package, choose, or maintain workflows for topic-to-WeChat publishing, product-to-frontend, product-to-investment IC memo / visual report, or skill-library maintenance. This skill only routes; workflow details live in references.",
       "status": "available"
     },
     {

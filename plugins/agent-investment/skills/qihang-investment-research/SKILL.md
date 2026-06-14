@@ -16,7 +16,7 @@ This skill should run before the investment package when the materials are incom
 - Mark every key fact with source URL or `not found`.
 - Do not write the IC memo here.
 - Do not decide invest / pass here.
-- Hand off a fact pack to `qihang-ai-investment-orchestrator`.
+- Hand off a fact pack to `qihang-ai-product-judgment` through the `qihang-workflow-orchestrator` product-investment workflow.
 
 ## References
 

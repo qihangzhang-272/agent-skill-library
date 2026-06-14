@@ -62,10 +62,9 @@ claude plugin validate .
 | `ai-product-analyzer` | `skills/ai-product-analyzer/` | 自培养产品洞察技能，进入 `agent-product` 插件 |
 | `qihang-writing-style` | `skills/qihang-writing-style/` | 自培养启航写作风格技能，进入 `agent-writing` 插件 |
 | `topic-research-deposition` | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
-| `qihang-ai-investment-orchestrator` | `skills/qihang-ai-investment-orchestrator/` | 启航 AI 投资工作包入口，进入 `agent-investment` 插件 |
 | `qihang-ic-memo-writer` | `skills/qihang-ic-memo-writer/` | 投资节点产出后的最终 IC Memo 写作技能，进入 `agent-investment` 插件 |
 | `qihang-skill-index` | `skills/qihang-skill-index/` | 启航外部 GitHub 技能源索引，进入 `qihang-skill-pack` 插件 |
-| `qihang-workflow-orchestrator` | `skills/qihang-workflow-orchestrator/` | 三条已跑通工作流的调用入口，进入 `qihang-skill-pack` 插件 |
+| `qihang-workflow-orchestrator` | `skills/qihang-workflow-orchestrator/` | 已跑通工作流的统一路由入口，具体链路压缩在 references，进入 `qihang-skill-pack` 插件 |
 
 ## 当前运行链
 
@@ -105,6 +104,6 @@ claude plugin validate .
 
 `qihang-skill-index` 是外部技能的统一收纳入口。`humanizer-zh`、`md2wechat`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等外部来源只保留 GitHub 索引，不再把完整文件堆进 `skills/`。
 
-`oss-investment-scorecard` 已从独立默认技能降级为 `agent-investment` 内部 reference。运行时不要直接调用旧入口，应通过 `qihang-ai-investment-orchestrator` 和 `qihang-investment-scorecard` 使用其结构。
+`oss-investment-scorecard` 已从独立默认技能降级为 `agent-investment` 内部 reference。运行时不要直接调用旧入口；产品投资链由 `qihang-workflow-orchestrator` 路由，再通过 `qihang-investment-scorecard` 使用其结构。
 
 本仓库和 Product Hunter 没有长期关系。历史上从某个本地目录借用过内容，只作为导入 provenance，不构成本仓库的上游、资料源或同步关系。

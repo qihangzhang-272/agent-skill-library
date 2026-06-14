@@ -26,7 +26,6 @@ plugin_policy:
         - qihang-workflow-orchestrator
     agent-investment:
       skills:
-        - qihang-ai-investment-orchestrator
         - qihang-investment-research
         - qihang-ai-product-judgment
         - qihang-competitive-landscape
@@ -74,7 +73,7 @@ pipelines:
     primary_skills:
       - topic-research-deposition
       - ai-product-analyzer
-      - qihang-ai-investment-orchestrator
+      - qihang-workflow-orchestrator
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
     product_investment_chain:
@@ -204,26 +203,6 @@ skills:
       - "前端设计可以参考哪些外部技能源"
     copy_policy: "internal_lightweight_index"
     notes: "收纳非启航自培养技能和技能源的 GitHub repo 根目录索引；不保留外部技能正文。"
-
-  - id: qihang-ai-investment-orchestrator
-    title: "Qihang AI Investment Orchestrator"
-    status: internal
-    source_type: user_cultivated_investment_workflow_router
-    package_path: "skills/qihang-ai-investment-orchestrator/SKILL.md"
-    package_traits:
-      - lightweight_router
-      - progressive_disclosure
-      - node_handoff_required
-    plugin_distribution: "agent-investment"
-    pipeline_role:
-      - "product_analysis"
-    trigger_examples:
-      - "这个 AI case 值不值得投"
-      - "跑我的产品投资分析工作流"
-      - "把这个产品做成 IC memo"
-      - "产品分析后出投资研报和可视化"
-    copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "agent-investment 的总入口；只路由节点，不一次性加载所有投研 references。"
 
   - id: qihang-investment-research
     title: "Qihang Investment Research"
@@ -481,9 +460,14 @@ skills:
     status: internal
     source_type: user_cultivated_workflow_router
     package_path: "skills/qihang-workflow-orchestrator/SKILL.md"
+    package_support:
+      - "skills/qihang-workflow-orchestrator/references/topic-writing-md2wechat.md"
+      - "skills/qihang-workflow-orchestrator/references/product-frontend-design.md"
+      - "skills/qihang-workflow-orchestrator/references/product-investment-icmemo.md"
+      - "skills/qihang-workflow-orchestrator/references/skill-library-maintenance.md"
     package_traits:
       - lightweight_workflow_router
-      - no_external_code_copy
+      - reference_routed_workflows
       - routes_to_underlying_skills
     plugin_distribution: "qihang-skill-pack"
     pipeline_role:
@@ -497,4 +481,4 @@ skills:
       - "产品分析后做 IC memo"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "封装已确认工作流：topic-writing-md2wechat、product-frontend-design 和 product-investment-icmemo；投资默认主链是事实收集 -> agent-investment -> IC Memo -> 可选前端自生成可视化。"
+    notes: "总调度器只保留路由表；具体 workflow 下沉到 references。当前覆盖 topic-writing-md2wechat、product-frontend-design、product-investment-icmemo 和 skill-library-maintenance。"

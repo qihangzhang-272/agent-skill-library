@@ -1,7 +1,7 @@
 {
   "name": "agent-investment",
   "displayName": "Agent Investment",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Qihang's AI investment IC memo package: research handoff, AI-native product judgment, competitive landscape, unit economics, scorecard, valuation, DD, thesis tracking, and IC memo writing.",
   "author": {
     "name": "Private Agent Skill Library"

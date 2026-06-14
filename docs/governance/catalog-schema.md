@@ -66,7 +66,7 @@
 - `qihang-skill-index` 是启航外部 GitHub 技能源索引，写入 `qihang-skill-pack`。
 - `agent-investment` 是启航 AI 投资 IC Memo 工作包，写入研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪和 IC Memo 写作节点。
 - `oss-investment-scorecard` 已被 `qihang-investment-scorecard` 吸收为 reference，不再写入 `qihang-skill-pack` 或作为默认运行入口。
-- `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；产品投资相关能力统一为 `product-analysis`，默认主链是 AI-native 产品视角 -> agent-investment -> IC Memo -> 可选前端自生成可视化。
+- `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；`SKILL.md` 只做路由，具体 workflow 压缩到 `references/`。产品投资相关能力统一为 `product-analysis`，默认主链是 AI-native 产品视角 -> agent-investment -> IC Memo -> 可选前端自生成可视化。
 - `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 
 ## 生成规则

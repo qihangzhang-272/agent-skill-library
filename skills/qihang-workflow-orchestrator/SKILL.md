@@ -95,6 +95,7 @@ When product-analysis needs a visual report, generate the frontend directly. Do 
 Required rules:
 
 - Preserve the `oss-investment-scorecard` structure. Do not invent a new argument order.
+- Preserve all upstream report content. Frontend work may visualize, group, order, and emphasize content, but must not delete, omit, compress away, or rewrite substantive findings, evidence, DD questions, watch triggers, assumptions, source gaps, or risk notes.
 - First screen must show object, verdict, total score or decision state, and the highest-signal facts.
 - Keep the page modern, calm, information-dense, and report-like. Do not make it a marketing landing page.
 - Keep core report content all-expanded. Do not hide key analysis inside accordions, tabs, nested cards, or collapsed blocks.
@@ -126,6 +127,7 @@ Verification:
 | Turning visual report generation into frontend skill orchestration | Generate the frontend directly and obey the frontend constitution. |
 | Treating visual report, investment report, and product analysis as competing modes | Use the default chain: AI-native product view -> OSS investment structure -> visualization. |
 | Hiding a report inside collapsed UI | Keep report content all-expanded unless interaction is explicitly requested. |
+| Dropping report content during frontend generation | Keep all upstream report content; visualization can reorganize it but cannot remove it. |
 | Inventing report structure inside the orchestrator | Product perspective comes from `ai-product-analyzer`; structure comes from `oss-investment-scorecard`. |
 | Creating a Next.js project too early | Ask Qihang to confirm implementation and target directory before scaffolding. |
 

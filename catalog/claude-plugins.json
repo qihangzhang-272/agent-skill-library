@@ -65,7 +65,7 @@
       "name": "qihang-skill-pack",
       "displayName": "Qihang Skill Pack",
       "description": "Qihang's lightweight external GitHub skill/source index, promoted OSS investment scorecard, and proven workflow router for selecting upstream capabilities.",
-      "version": "0.2.8",
+      "version": "0.2.9",
       "keywords": [
         "qihang",
         "skill-index",

@@ -38,7 +38,7 @@
 | 节点 | 优先技能 / 来源 | 用途 |
 | --- | --- | --- |
 | AI-native 产品视角 | `skills/ai-product-analyzer/` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
-| 结构化投资输出 | `qihang-skill-index` 中的 `oss-investment-scorecard` 来源 | 把产品判断组织成 fact sheet、macro gate、scorecard、verdict、IC thesis、DD 和 watch triggers |
+| 结构化投资输出 | `skills/oss-investment-scorecard/` | 把产品判断组织成 fact sheet、macro gate、scorecard、verdict、IC thesis、DD 和 watch triggers |
 | 可视化承接 | `qihang-skill-index` 中的前端来源 | 把 OSS investment 结构化结果做成现代、全展开的可视化研报页 |
 
 ## 调用链
@@ -128,8 +128,8 @@ AI-native 产品视角 -> OSS investment 结构化 -> 可视化
 
 使用方式：
 
-- 先通过 `qihang-skill-index` 找到上游来源；不要假设本仓库有本地 `skills/oss-investment-scorecard/`。
-- 读取上游 `SKILL.md` 或可用模板，不复制正文进本仓库。
+- 先读取本地 `skills/oss-investment-scorecard/SKILL.md`，再按需读取它的 `references/`、`cases/` 或 `template/`。
+- `qihang-skill-index` 只保留上游 GitHub 来源和更新线索，不作为运行时入口。
 - 用上游结构组织最终成果；不在本 workflow 里重写一套投资框架。
 - 如果某些 OSS 字段对非开源产品不贴合，标注“改写 / 不适用 / 待验证”，不要因此跳过结构化输出。
 

@@ -12,8 +12,8 @@
 | --- | --- |
 | `id` | 稳定技能 ID，使用 kebab-case |
 | `title` | 人类可读名称 |
-| `status` | `internal`、`internal_index`、`deprecated` 等 |
-| `source_type` | 来源类型，例如 `user_cultivated_product_insight_skill`、`user_curated_external_github_index` |
+| `status` | `internal`、`internal_index`、`promoted_external`、`deprecated` 等 |
+| `source_type` | 来源类型，例如 `user_cultivated_product_insight_skill`、`user_curated_external_github_index`、`promoted_external_skill_package` |
 | `package_path` | 本地技能入口；如果只做索引，则写来源文档路径 |
 | `package_support` | 支撑文件、references、templates、cases 或 agents |
 | `trigger_examples` | 触发这个技能的典型用户表达 |
@@ -25,7 +25,7 @@
 
 `catalog/claude-plugins.json` 是 Claude Code plugin 分发映射，回答“哪些源技能被打包成哪个可安装插件”。
 
-默认只把自培养、高频复用技能和 `qihang-skill-index` 写入这个文件。外部收藏技能通过索引引用，不作为完整插件分发。
+默认只把自培养、高频复用技能、已晋升外部技能和 `qihang-skill-index` 写入这个文件。未晋升外部收藏技能通过索引引用，不作为完整插件分发。
 
 每个插件至少应包含：
 
@@ -64,6 +64,7 @@
 - `ai-product-analyzer` 是自培养产品洞察技能，写入 `agent-product`。
 - `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，写入 `agent-writing`。
 - `qihang-skill-index` 是启航外部 GitHub 技能源索引，写入 `qihang-skill-pack`。
+- `oss-investment-scorecard` 是已晋升外部技能包，写入 `qihang-skill-pack`，在 product-analysis 中作为结构化投资输出层。
 - `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；产品相关能力统一为 `product-analysis`，默认主链是 AI-native 产品视角 -> OSS investment 结构化 -> 可视化。
 - `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 

@@ -64,15 +64,16 @@
     {
       "name": "qihang-skill-pack",
       "displayName": "Qihang Skill Pack",
-      "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities without vendoring their contents.",
-      "version": "0.2.6",
+      "description": "Qihang's lightweight external GitHub skill/source index, promoted OSS investment scorecard, and proven workflow router for selecting upstream capabilities.",
+      "version": "0.2.7",
       "keywords": [
         "qihang",
         "skill-index",
         "workflow",
         "github",
         "external-skills",
-        "curation"
+        "curation",
+        "oss-investment"
       ],
       "distributionStatus": "active",
       "distributionScope": "curated_index",
@@ -82,6 +83,11 @@
           "id": "qihang-skill-index",
           "sourcePath": "skills/qihang-skill-index",
           "targetName": "qihang-skill-index"
+        },
+        {
+          "id": "oss-investment-scorecard",
+          "sourcePath": "skills/oss-investment-scorecard",
+          "targetName": "oss-investment-scorecard"
         },
         {
           "id": "qihang-workflow-orchestrator",

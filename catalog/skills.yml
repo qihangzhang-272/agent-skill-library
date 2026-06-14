@@ -23,6 +23,7 @@ plugin_policy:
     qihang-skill-pack:
       skills:
         - qihang-skill-index
+        - oss-investment-scorecard
         - qihang-workflow-orchestrator
 
 external_index:
@@ -62,6 +63,7 @@ pipelines:
     primary_skills:
       - topic-research-deposition
       - ai-product-analyzer
+      - oss-investment-scorecard
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
     product_investment_chain:
@@ -79,7 +81,6 @@ pipelines:
       - "Impeccable"
       - "shadcn/ui"
       - "Magic UI"
-      - oss-investment-scorecard via qihang-skill-index
     output_artifacts:
       - "product insight"
       - "visual report brief or static HTML plan"
@@ -193,6 +194,34 @@ skills:
       - "前端设计可以参考哪些外部技能源"
     copy_policy: "internal_lightweight_index"
     notes: "收纳非启航自培养技能和技能源的 GitHub repo 根目录索引；不保留外部技能正文。"
+
+  - id: oss-investment-scorecard
+    title: "OSS Investment Scorecard"
+    status: promoted_external
+    source_type: promoted_external_skill_package
+    upstream_repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
+    upstream_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
+    package_path: "skills/oss-investment-scorecard/SKILL.md"
+    package_support:
+      - "skills/oss-investment-scorecard/references/scored-examples.md"
+      - "skills/oss-investment-scorecard/cases/hugging-face.md"
+      - "skills/oss-investment-scorecard/cases/inferact-vllm.md"
+      - "skills/oss-investment-scorecard/template/evaluation-template.md"
+    package_traits:
+      - promoted_external_skill_body
+      - local_skill_package
+      - reference_routed
+      - structured_scorecard
+    plugin_distribution: "qihang-skill-pack"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "用 OSS investment 结构化这个产品分析"
+      - "产品分析后按投资 scorecard 出结构化结果"
+      - "这个开源 AI 公司值得投吗"
+      - "把这个项目整理成 IC thesis、DD priorities 和 watch triggers"
+    copy_policy: "promoted_external_skill_package"
+    notes: "已从 qihang-skill-index 晋升为本地技能包；在 product-analysis 中作为 ai-product-analyzer 之后的结构化输出层。保留上游 repo 作为更新来源。"
 
   - id: qihang-workflow-orchestrator
     title: "Qihang Workflow Orchestrator"

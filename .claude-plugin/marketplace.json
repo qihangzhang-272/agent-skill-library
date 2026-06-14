@@ -28,8 +28,8 @@
     {
       "name": "qihang-skill-pack",
       "source": "./plugins/qihang-skill-pack",
-      "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities without vendoring their contents.",
-      "version": "0.2.6",
+      "description": "Qihang's lightweight external GitHub skill/source index, promoted OSS investment scorecard, and proven workflow router for selecting upstream capabilities.",
+      "version": "0.2.7",
       "author": {
         "name": "Private Agent Skill Library"
       },

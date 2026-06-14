@@ -27,7 +27,7 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Notes |
 | --- | --- | --- | --- |
-| `https://github.com/lucy-cxy/oss-investment-scorecard` | OSS/AI company investment scorecard and structured output source | reference | In `product-analysis`, use as the lightweight structure layer after `ai-product-analyzer`: fact sheet, macro gate, scorecard, verdict, IC thesis, DD priorities, watch triggers. Do not vendor the full repo unless promoted again. |
+| `https://github.com/lucy-cxy/oss-investment-scorecard` | OSS/AI company investment scorecard and structured output source | promoted local skill | Promoted to `skills/oss-investment-scorecard/` from upstream commit `28a210d0a194ba0f31fe59edaf413abfafa2008e`. Keep this repo root as the update source; use the local skill in `product-analysis`. |
 
 ## Research And Web Reach
 

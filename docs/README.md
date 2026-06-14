@@ -2,7 +2,7 @@
 
 `docs/` 保存技能库的治理文档和可复用工作流说明。它不保存完整技能包、外部来源清单或重复分类入口。
 
-正式技能包放在 `skills/`；外部 GitHub 技能和技能源统一记录在 `skills/qihang-skill-index/references/github-skill-index.md`；机器可读总账放在 `catalog/`。
+正式技能包放在 `skills/`；外部 GitHub 技能和技能源先记录在 `skills/qihang-skill-index/references/github-skill-index.md`，明确晋升后才进入 `skills/`；机器可读总账放在 `catalog/`。
 
 ## 目录结构
 

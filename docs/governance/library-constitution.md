@@ -12,7 +12,7 @@
 
 | 层 | 责任 | 约束 |
 | --- | --- | --- |
-| `skills/` | 保存启航自培养技能和启航轻量外部索引 | 不放外部完整 skill、网页 prompt 正文、UI 库源码、一次性实验结果 |
+| `skills/` | 保存启航自培养技能、已晋升外部技能包和启航轻量外部索引 | 不放未晋升的外部完整 skill、网页 prompt 正文、UI 库源码、一次性实验结果 |
 | `catalog/skills.yml` | 保存技能总账 | 每个技能必须记录来源、用途、触发场景、迁移边界、验证状态 |
 | `catalog/claude-plugins.json` | 保存 Claude Code 插件分发映射 | 只记录哪些源技能进入哪些可安装插件，不复制正文 |
 | `plugins/` | 保存由脚本生成或同步的 Claude Code 可安装插件 | 只分发自培养、高频复用技能；不作为源内容维护；源内容仍以 `skills/` 和 `catalog/` 为准 |
@@ -43,7 +43,7 @@
 - 外部技能默认先进入 `qihang-skill-index`。
 - 网页 prompt 只记录入口、用途、选择策略和访问方式，不复制正文。
 - UI 库源码不复制，只记录使用场景、配置参考和文档入口。
-- 只有当外部技能被启航反复使用并沉淀成自培养能力时，才允许新增本地技能包。
+- 只有当外部技能被启航明确晋升，且来源、边界和调用链清楚时，才允许新增本地技能包。
 - 禁止为了“先收着”把外部仓库完整复制进 `skills/`。
 
 ## 调用链优先级
@@ -75,7 +75,7 @@
 
 Claude Code plugin 是分发层，不是源内容层。
 
-默认只有自培养技能和 `qihang-skill-index` 进入插件分发层。外部技能、外部 prompt 集合、外部 UI/设计技能和一次性迁移包，优先进入 `qihang-skill-index` 的 GitHub 索引；只有当它们被长期验证、边界清楚，并被启航重写成自培养能力时，才允许新增本地技能。
+默认只有自培养技能、已晋升外部技能和 `qihang-skill-index` 进入插件分发层。外部技能、外部 prompt 集合、外部 UI/设计技能和一次性迁移包，优先进入 `qihang-skill-index` 的 GitHub 索引；只有当它们被启航明确晋升、边界清楚，并且能进入稳定调用链时，才允许新增本地技能。
 
 - marketplace manifest 固定放在 `.claude-plugin/marketplace.json`。
 - 每个插件固定放在 `plugins/<plugin-name>/`。
@@ -84,7 +84,7 @@ Claude Code plugin 是分发层，不是源内容层。
 - 不允许把 `skills/`、`agents/`、`hooks/` 放进 `.claude-plugin/`。
 - 插件不得引用插件目录外部文件；需要的技能文件必须复制进插件目录。
 - 插件必须写 semver 版本号；只要某个插件包含的技能正文、支撑文件或 manifest 变化，就必须 bump 对应插件版本。
-- 当前默认插件范围：`agent-product` 分发产品洞察技能，`agent-writing` 分发选题调研和启航写作风格技能，`qihang-skill-pack` 分发外部 GitHub 技能源索引和已跑通工作流入口。
+- 当前默认插件范围：`agent-product` 分发产品洞察技能，`agent-writing` 分发选题调研和启航写作风格技能，`qihang-skill-pack` 分发外部 GitHub 技能源索引、已晋升的 `oss-investment-scorecard` 和已跑通工作流入口。
 
 ## 维护原则
 

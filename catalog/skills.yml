@@ -64,15 +64,13 @@ pipelines:
       - ai-product-analyzer
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
-    analysis_paths:
-      - product-core
-      - investment-lens
-      - oss-investment-lens
-    presentation_surfaces:
-      - text-memo
+    product_investment_chain:
+      - product-and-investment-view
+      - research-report
       - visual-report
-      - frontend-brief
-      - interactive-dashboard
+    explicit_stop_points:
+      - text-only memo
+      - frontend brief
     external_references:
       - "TypeUI"
       - "Anthropic skills"
@@ -217,4 +215,4 @@ skills:
       - "产品分析后做 OSS investment"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 按 analysis path + presentation surface 两轴组合，不再把投资判断和可视化呈现做成互斥 mode。"
+    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 默认主链是产品+投资视角 -> 研报 -> 可视化，只有用户明确只要文字或前端 brief 时才提前停下。"

@@ -58,10 +58,10 @@
 投资判断和可视化呈现不是二选一。如果用户说“产品投资分析研报”“可视化研报页”“HTML 研报”，默认链路是：
 
 ```text
-product-core -> investment-lens -> visual-report
+产品+投资视角 -> 研报 -> 可视化
 ```
 
-只有当用户明确说 IC memo、DD 问题树或只要文字版时，才停在 `text-memo`。
+只有当用户明确说 IC memo、DD 问题树或只要文字版时，才停在文字研报。
 
 ## 1. 研究问题定界
 
@@ -206,13 +206,9 @@ product-core -> investment-lens -> visual-report
 - research report：保留完整骨架和来源。
 - IC memo：强化 verdict、thesis、投资风险、条款或里程碑条件。
 
-如果输出形态是可视化研报页，沿用同一套内容骨架，但页面组织按自然论证顺序展开：
+如果输出形态是可视化研报页，沿用上游产品判断或投资判断形成的研报骨架，不在 workflow 里重新规定论证顺序。
 
-```text
-verdict -> fact card -> product mechanism -> investment judgment -> risks and DD -> watch triggers -> sources
-```
-
-页面默认现代、全展开、少折叠、不堆叠卡片；优先用分区、矩阵、时间线、评分条和逻辑图表达结构。
+页面默认现代、全展开、少折叠、不堆叠卡片；优先用分区、矩阵、时间线、评分条和逻辑图表达已有研报结构。
 
 ## 6. 质量门
 

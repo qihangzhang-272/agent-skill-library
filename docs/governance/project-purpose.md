@@ -31,6 +31,6 @@
 ## 当前主线
 
 - 写作发布：服务于 topic -> writing -> md2wechat 的公众号链路。
-- 产品分析：服务于 product-analysis 的端到端链路，并按输出模式进入 analysis-only、visual-report、investment-report 或 oss-investment。
+- 产品分析：服务于 product-analysis 的端到端链路，按 analysis path + presentation surface 组合，支持产品判断、投资判断和可视化研报自然串联。
 - 技术 / 开发范式：服务于文档驱动、评估充分、可稳定交付的端到端开发管线。
 - 运营：服务于技能库治理、Linear 跟踪、GitHub 私有仓库维护和自动化协作。

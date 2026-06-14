@@ -53,7 +53,7 @@
 一个技能进入正式库后，至少要能解释它在某条链路里的位置：
 
 - topic -> writing -> md2wechat。
-- product-analysis -> analysis-only / visual-report / investment-report / oss-investment。
+- product-analysis -> analysis path + presentation surface。分析深度和呈现形态不能做成互斥 mode。
 - 技术开发范式和项目初始化。
 - 写作、改写和内容定稿。
 - 运营、同步和治理。
@@ -65,7 +65,8 @@
 - `qihang-skill-index` 是外部技能和前端库的资产层，不是把所有参考源串起来执行的工作流。
 - 一条工作流只暴露必要节点；多个外部参考源只能在同一个选择节点里择一使用，不能被机械串成多段调用链。
 - 不为了“管理复杂度”新增包装技能。只有当某个判断被启航反复使用、能用自己的语言稳定复述，并且明显降低后续执行成本时，才允许沉淀为新的本地技能。
-- product-analysis 这类链路应保持：先完成产品判断，再选择唯一输出模式；需要可视化时再从 `qihang-skill-index` 中选择一个最适合的前端参考，最后进入实现和验收。
+- product-analysis 这类链路应保持：先确定分析路径（product-core / investment-lens / oss-investment-lens），再确定呈现形态（text-memo / visual-report / frontend-brief / interactive-dashboard）。产品投资分析研报默认是 product-core -> investment-lens -> visual-report，除非用户明确只要 IC memo 或 DD 文本。
+- 可视化研报页的体验原则：现代风、全展开、不堆叠、不把核心内容藏进折叠组件；按自然论证逻辑组织，而不是按内部技能分类或工具名称组织。
 - 复杂度必须从基础能力逐步增加：能用现有栈和一个主参考解决，就不引入第二个参考；只有明确出现信息密度、组件能力、数据表格、交互状态或审美验收不足时，才升级到更复杂来源。
 
 如果暂时没有明确调用链，它可以被收录为候选，但不应被标记为核心能力。

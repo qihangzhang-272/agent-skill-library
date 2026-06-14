@@ -64,7 +64,7 @@
 - `ai-product-analyzer` 是自培养产品洞察技能，写入 `agent-product`。
 - `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，写入 `agent-writing`。
 - `qihang-skill-index` 是启航外部 GitHub 技能源索引，写入 `qihang-skill-pack`。
-- `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；产品相关能力统一为 `product-analysis`，再按输出模式分流。
+- `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；产品相关能力统一为 `product-analysis`，再按 analysis path 和 presentation surface 两轴组合。
 - `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 
 ## 生成规则

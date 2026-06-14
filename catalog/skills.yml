@@ -64,11 +64,15 @@ pipelines:
       - ai-product-analyzer
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
-    output_modes:
-      - analysis-only
+    analysis_paths:
+      - product-core
+      - investment-lens
+      - oss-investment-lens
+    presentation_surfaces:
+      - text-memo
       - visual-report
-      - investment-report
-      - oss-investment
+      - frontend-brief
+      - interactive-dashboard
     external_references:
       - "TypeUI"
       - "Anthropic skills"
@@ -213,4 +217,4 @@ skills:
       - "产品分析后做 OSS investment"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 下含 analysis-only、visual-report、investment-report、oss-investment 输出模式。"
+    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 按 analysis path + presentation surface 两轴组合，不再把投资判断和可视化呈现做成互斥 mode。"

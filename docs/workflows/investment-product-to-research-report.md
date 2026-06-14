@@ -50,10 +50,18 @@
 -> 事实收集
 -> 产品 / BP 逻辑判断
 -> 投资评分或投资可行性判断
--> 研报结构化
+-> 研报结构化或可视化研报页
 -> DD 问题树
 -> 结论和跟踪触发器
 ```
+
+投资判断和可视化呈现不是二选一。如果用户说“产品投资分析研报”“可视化研报页”“HTML 研报”，默认链路是：
+
+```text
+product-core -> investment-lens -> visual-report
+```
+
+只有当用户明确说 IC memo、DD 问题树或只要文字版时，才停在 `text-memo`。
 
 ## 1. 研究问题定界
 
@@ -197,6 +205,14 @@
 - case memo：保留产品判断、投资判断和 DD 问题树。
 - research report：保留完整骨架和来源。
 - IC memo：强化 verdict、thesis、投资风险、条款或里程碑条件。
+
+如果输出形态是可视化研报页，沿用同一套内容骨架，但页面组织按自然论证顺序展开：
+
+```text
+verdict -> fact card -> product mechanism -> investment judgment -> risks and DD -> watch triggers -> sources
+```
+
+页面默认现代、全展开、少折叠、不堆叠卡片；优先用分区、矩阵、时间线、评分条和逻辑图表达结构。
 
 ## 6. 质量门
 

@@ -17,4 +17,4 @@
 - 上游同步流程。
 - Linear / GitHub 协作流程。
 - 从实验到正式收录的验收流程。
-- 跨技能调用链，例如 product -> frontend-design、product -> investment report。
+- 跨技能调用链，例如 product-analysis -> visual-report / investment-report / oss-investment。

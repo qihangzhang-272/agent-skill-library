@@ -54,37 +54,33 @@ pipelines:
       - "Qihang-style WeChat article"
       - "WeChat layout artifact"
       - "WeChat draft status"
-  product_frontend_design:
-    title: "产品判断到前端设计实现"
-    workflow_doc: "docs/workflows/prd-to-frontend.md"
+  product_analysis:
+    title: "产品分析到可视化、前端 brief、投资研报或 OSS investment"
+    workflow_docs:
+      - "docs/workflows/prd-to-frontend.md"
+      - "docs/workflows/investment-product-to-research-report.md"
     primary_skills:
       - ai-product-analyzer
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
+    output_modes:
+      - analysis-only
+      - visual-report
+      - investment-report
+      - oss-investment
     external_references:
+      - "TypeUI"
       - "Anthropic skills"
       - "Awesome Design Skills"
-      - "TypeUI"
       - "Taste Skill"
       - "Impeccable"
       - "shadcn/ui"
       - "Magic UI"
-    output_artifacts:
-      - "product insight"
-      - "frontend brief"
-      - "design source selection"
-      - "implementation and browser acceptance plan"
-  product_investment_report:
-    title: "产品判断到投资研报"
-    workflow_doc: "docs/workflows/investment-product-to-research-report.md"
-    primary_skills:
-      - ai-product-analyzer
-      - qihang-skill-index
-    workflow_skill: qihang-workflow-orchestrator
-    external_references:
       - oss-investment-scorecard via qihang-skill-index
     output_artifacts:
       - "product insight"
+      - "visual report brief or static HTML plan"
+      - "frontend source selection"
       - "investment judgment"
       - "research report"
       - "DD question tree"
@@ -106,8 +102,7 @@ skills:
       - reference_routed
     plugin_distribution: "agent-product"
     pipeline_role:
-      - "product_frontend_design"
-      - "product_investment_report"
+      - "product_analysis"
     trigger_examples:
       - "分析一下这个 AI 产品"
       - "从 BP 逻辑评估这个产品"
@@ -180,8 +175,7 @@ skills:
     plugin_distribution: "qihang-skill-pack"
     pipeline_role:
       - "topic_writing_md2wechat"
-      - "product_frontend_design"
-      - "product_investment_report"
+      - "product_analysis"
     trigger_examples:
       - "找一下之前收录过的外部技能"
       - "这个外部 repo 要不要装"
@@ -202,13 +196,13 @@ skills:
     plugin_distribution: "qihang-skill-pack"
     pipeline_role:
       - "topic_writing_md2wechat"
-      - "product_frontend_design"
-      - "product_investment_report"
+      - "product_analysis"
     trigger_examples:
       - "跑一下写作发布工作流"
       - "topic 到 writing 到 md2wechat"
       - "产品分析后做前端设计"
       - "产品分析后做投资研报"
+      - "产品分析后做 OSS investment"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "封装三条已确认工作流：topic-writing-md2wechat、product-frontend-design 和 product-investment-report。"
+    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 下含 analysis-only、visual-report、investment-report、oss-investment 输出模式。"

@@ -1,5 +1,5 @@
 window.SKILL_ORCHESTRATOR_DATA = {
-  "generatedAt": "2026-06-14 00:29:05",
+  "generatedAt": "2026-06-14 07:55:37",
   "repository": {
     "name": "agent-skill-library",
     "root": "."
@@ -14,11 +14,59 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "status": "available"
     },
     {
-      "id": "oss-investment-scorecard",
-      "title": "oss investment scorecard",
-      "path": "skills/oss-investment-scorecard/SKILL.md",
-      "directory": "skills/oss-investment-scorecard",
-      "description": "Evaluate whether an open source project / company is investable by a USD-denominated VC fund in the current AI cycle. ALWAYS use this skill when the user asks any of the following: - \"evaluate [project] for investment\" - \"can we invest in [project]\" - \"score this open source company\" - \"投资评估 [项目]\" - \"这个开源项目值得投吗\" - \"给 [公司] 打分\" - Any request to assess, rate, or rank an open source startup's investability - Any comparison of two or more open source companies from an investment perspective The skill produces a structured 5-dimension weighted scorecard (max 10 pts), a pass/recommend/watch verdict, and an IC-ready one-paragraph thesis. It also flags one-vote-veto conditions that cause an immediate Pass regardless of total score.",
+      "id": "qihang-ai-investment-orchestrator",
+      "title": "qihang ai investment orchestrator",
+      "path": "skills/qihang-ai-investment-orchestrator/SKILL.md",
+      "directory": "skills/qihang-ai-investment-orchestrator",
+      "description": "Route Qihang's AI investment workflow from fact pack to IC memo. Use when Qihang asks whether an AI product, AI company, open-source AI project, infrastructure layer, or case is worth investing in, tracking, passing, or turning into an IC memo / investment memo / visual research report. This skill coordinates the agent-investment package without loading all references at once.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-ai-product-judgment",
+      "title": "qihang ai product judgment",
+      "path": "skills/qihang-ai-product-judgment/SKILL.md",
+      "directory": "skills/qihang-ai-product-judgment",
+      "description": "Run Qihang's AI-native product judgment inside the investment workflow. Use after facts are collected and before market, unit economics, scorecard, DD, or IC memo writing. This skill evaluates whether the AI product is genuinely AI-native, commercially coherent, narratively clear, and product/BP-valid.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-competitive-landscape",
+      "title": "qihang competitive landscape",
+      "path": "skills/qihang-competitive-landscape/SKILL.md",
+      "directory": "skills/qihang-competitive-landscape",
+      "description": "Build the market and competitive landscape layer for Qihang's AI investment memo. Use when an IC memo, investment memo, product investment report, or AI case review needs market sizing, competitor mapping, positioning, moat assessment, bull/base/bear scenarios, or why-now context.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-ic-memo-writer",
+      "title": "qihang ic memo writer",
+      "path": "skills/qihang-ic-memo-writer/SKILL.md",
+      "directory": "skills/qihang-ic-memo-writer",
+      "description": "Write the final Qihang-style investment committee memo from completed investment workflow node outputs. Use only after fact collection, AI product judgment, competitive landscape, unit economics, scorecard, valuation, DD, and thesis tracking have produced handoffs. This skill does not search or create new analysis.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-investment-dd",
+      "title": "qihang investment dd",
+      "path": "skills/qihang-investment-dd/SKILL.md",
+      "directory": "skills/qihang-investment-dd",
+      "description": "Generate diligence priorities, red flags, data-room requests, management questions, expert-call questions, and one-vote-veto checks for Qihang's AI investment memo. Use after product, market, unit economics, scorecard, and valuation nodes have produced preliminary judgments.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-investment-research",
+      "title": "qihang investment research",
+      "path": "skills/qihang-investment-research/SKILL.md",
+      "directory": "skills/qihang-investment-research",
+      "description": "Collect and organize source-backed facts before Qihang's AI investment analysis. Use before IC memo, investment memo, AI case investment review, DD prep, or visual investment report when product, company, financing, customer, pricing, competitor, GitHub, or market facts are missing. This skill deposits facts only and does not write investment conclusions.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-investment-scorecard",
+      "title": "qihang investment scorecard",
+      "path": "skills/qihang-investment-scorecard/SKILL.md",
+      "directory": "skills/qihang-investment-scorecard",
+      "description": "Convert AI product judgment and fact packs into Qihang's investment scorecard layer. Use for AI / OSS / infrastructure investability scoring, macro gate, deal screening, one-vote veto checks, pass / watch / recommend decisions, and scorecard handoff into IC memo.",
       "status": "available"
     },
     {
@@ -30,11 +78,35 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "status": "available"
     },
     {
+      "id": "qihang-thesis-tracking",
+      "title": "qihang thesis tracking",
+      "path": "skills/qihang-thesis-tracking/SKILL.md",
+      "directory": "skills/qihang-thesis-tracking",
+      "description": "Turn an AI investment memo into a falsifiable thesis, catalyst calendar, watch triggers, KPI monitoring plan, and update process. Use when Qihang wants to track an AI company, open-source project, investment case, portfolio company, or watchlist item after the initial memo.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-unit-economics",
+      "title": "qihang unit economics",
+      "path": "skills/qihang-unit-economics/SKILL.md",
+      "directory": "skills/qihang-unit-economics",
+      "description": "Analyze business model quality, revenue quality, customer economics, AI readiness, and value creation for AI investment cases. Use when an IC memo needs ARR, NDR, LTV/CAC, CAC payback, gross margin, inference cost, pricing, revenue concentration, pilot readiness, or value creation logic.",
+      "status": "available"
+    },
+    {
+      "id": "qihang-valuation-returns",
+      "title": "qihang valuation returns",
+      "path": "skills/qihang-valuation-returns/SKILL.md",
+      "directory": "skills/qihang-valuation-returns",
+      "description": "Build valuation, comps, return logic, and financial-model sanity checks for Qihang's AI investment memo. Use when an IC memo needs valuation framing, comps, return scenarios, IRR/MOIC sensitivity, DCF/LBO logic, three-statement context, or model/audit standards. Do not build Excel unless explicitly requested.",
+      "status": "available"
+    },
+    {
       "id": "qihang-workflow-orchestrator",
       "title": "qihang workflow orchestrator",
       "path": "skills/qihang-workflow-orchestrator/SKILL.md",
       "directory": "skills/qihang-workflow-orchestrator",
-      "description": "Use when Qihang asks to run, package, choose, or maintain a proven workflow such as topic-to-WeChat publishing or product analysis that may become a visual report, frontend brief, investment memo, or OSS investment review.",
+      "description": "Use when Qihang asks to run, package, choose, or maintain a proven workflow such as topic-to-WeChat publishing, product-to-frontend, or product-to-investment IC memo / visual research report. This is the cross-package router for agent-writing, agent-product, agent-investment, and qihang-skill-pack.",
       "status": "available"
     },
     {

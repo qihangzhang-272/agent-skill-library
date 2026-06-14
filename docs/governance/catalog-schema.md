@@ -25,7 +25,7 @@
 
 `catalog/claude-plugins.json` 是 Claude Code plugin 分发映射，回答“哪些源技能被打包成哪个可安装插件”。
 
-默认只把自培养、高频复用技能、已晋升外部技能和 `qihang-skill-index` 写入这个文件。未晋升外部收藏技能通过索引引用，不作为完整插件分发。
+默认只把自培养、高频复用技能、已晋升为启航工作包的技能和 `qihang-skill-index` 写入这个文件。未晋升外部收藏技能通过索引引用，不作为完整插件分发。
 
 每个插件至少应包含：
 
@@ -64,8 +64,9 @@
 - `ai-product-analyzer` 是自培养产品洞察技能，写入 `agent-product`。
 - `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，写入 `agent-writing`。
 - `qihang-skill-index` 是启航外部 GitHub 技能源索引，写入 `qihang-skill-pack`。
-- `oss-investment-scorecard` 是已晋升外部技能包，写入 `qihang-skill-pack`，在 product-analysis 中作为结构化投资输出层。
-- `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；产品相关能力统一为 `product-analysis`，默认主链是 AI-native 产品视角 -> OSS investment 结构化 -> 前端自生成可视化。
+- `agent-investment` 是启航 AI 投资 IC Memo 工作包，写入研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪和 IC Memo 写作节点。
+- `oss-investment-scorecard` 已被 `qihang-investment-scorecard` 吸收为 reference，不再写入 `qihang-skill-pack` 或作为默认运行入口。
+- `qihang-workflow-orchestrator` 是已跑通工作流入口，写入 `qihang-skill-pack`；产品投资相关能力统一为 `product-analysis`，默认主链是 AI-native 产品视角 -> agent-investment -> IC Memo -> 可选前端自生成可视化。
 - `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 
 ## 生成规则
@@ -88,6 +89,7 @@
 claude plugin validate .
 claude plugin validate .\plugins\agent-product --strict
 claude plugin validate .\plugins\agent-writing --strict
+claude plugin validate .\plugins\agent-investment --strict
 claude plugin validate .\plugins\qihang-skill-pack --strict
 ```
 

@@ -1,4 +1,4 @@
-version: 4
+version: 5
 library: agent-skill-library
 principle: "self-cultivated skills stay local; external skills and source repositories stay as repo-root GitHub indexes unless explicitly promoted"
 
@@ -23,8 +23,19 @@ plugin_policy:
     qihang-skill-pack:
       skills:
         - qihang-skill-index
-        - oss-investment-scorecard
         - qihang-workflow-orchestrator
+    agent-investment:
+      skills:
+        - qihang-ai-investment-orchestrator
+        - qihang-investment-research
+        - qihang-ai-product-judgment
+        - qihang-competitive-landscape
+        - qihang-unit-economics
+        - qihang-investment-scorecard
+        - qihang-valuation-returns
+        - qihang-investment-dd
+        - qihang-thesis-tracking
+        - qihang-ic-memo-writer
 
 external_index:
   source_of_truth: "skills/qihang-skill-index/references/github-skill-index.md"
@@ -56,20 +67,27 @@ pipelines:
       - "WeChat layout artifact"
       - "WeChat draft status"
   product_analysis:
-    title: "产品分析到可视化、前端 brief、投资研报或 OSS investment"
+    title: "产品分析到投资 IC Memo 和可视化研报"
     workflow_docs:
       - "docs/workflows/prd-to-frontend.md"
       - "docs/workflows/investment-product-to-research-report.md"
     primary_skills:
       - topic-research-deposition
       - ai-product-analyzer
-      - oss-investment-scorecard
+      - qihang-ai-investment-orchestrator
       - qihang-skill-index
     workflow_skill: qihang-workflow-orchestrator
     product_investment_chain:
+      - fact-pack
       - ai-native-product-view
-      - oss-investment-structure
-      - visual-report
+      - competitive-landscape
+      - unit-economics
+      - investment-scorecard
+      - valuation-returns
+      - diligence
+      - thesis-tracking
+      - ic-memo
+      - optional-visual-report
     explicit_stop_points:
       - text-only memo
       - frontend brief
@@ -77,11 +95,10 @@ pipelines:
       - "agent-reach via topic-research-deposition when facts are missing"
     output_artifacts:
       - "product insight"
-      - "self-generated visual report page or static HTML"
-      - "investment judgment"
-      - "research report"
+      - "AI investment IC memo"
       - "DD question tree"
       - "watch triggers"
+      - "optional self-generated visual report page or static HTML"
 
 skills:
   - id: ai-product-analyzer
@@ -188,33 +205,276 @@ skills:
     copy_policy: "internal_lightweight_index"
     notes: "收纳非启航自培养技能和技能源的 GitHub repo 根目录索引；不保留外部技能正文。"
 
-  - id: oss-investment-scorecard
-    title: "OSS Investment Scorecard"
-    status: promoted_external
-    source_type: promoted_external_skill_package
-    upstream_repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
-    upstream_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
-    package_path: "skills/oss-investment-scorecard/SKILL.md"
-    package_support:
-      - "skills/oss-investment-scorecard/references/scored-examples.md"
-      - "skills/oss-investment-scorecard/cases/hugging-face.md"
-      - "skills/oss-investment-scorecard/cases/inferact-vllm.md"
-      - "skills/oss-investment-scorecard/template/evaluation-template.md"
+  - id: qihang-ai-investment-orchestrator
+    title: "Qihang AI Investment Orchestrator"
+    status: internal
+    source_type: user_cultivated_investment_workflow_router
+    package_path: "skills/qihang-ai-investment-orchestrator/SKILL.md"
     package_traits:
-      - promoted_external_skill_body
-      - local_skill_package
-      - reference_routed
-      - structured_scorecard
-    plugin_distribution: "qihang-skill-pack"
+      - lightweight_router
+      - progressive_disclosure
+      - node_handoff_required
+    plugin_distribution: "agent-investment"
     pipeline_role:
       - "product_analysis"
     trigger_examples:
-      - "用 OSS investment 结构化这个产品分析"
-      - "产品分析后按投资 scorecard 出结构化结果"
-      - "这个开源 AI 公司值得投吗"
-      - "把这个项目整理成 IC thesis、DD priorities 和 watch triggers"
-    copy_policy: "promoted_external_skill_package"
-    notes: "已从 qihang-skill-index 晋升为本地技能包；在 product-analysis 中作为 ai-product-analyzer 之后的结构化输出层。保留上游 repo 作为更新来源。"
+      - "这个 AI case 值不值得投"
+      - "跑我的产品投资分析工作流"
+      - "把这个产品做成 IC memo"
+      - "产品分析后出投资研报和可视化"
+    copy_policy: "internal_user_cultivated_workflow_skill"
+    notes: "agent-investment 的总入口；只路由节点，不一次性加载所有投研 references。"
+
+  - id: qihang-investment-research
+    title: "Qihang Investment Research"
+    status: internal
+    source_type: user_cultivated_research_handoff_skill_with_migrated_references
+    package_path: "skills/qihang-investment-research/SKILL.md"
+    package_support:
+      - "skills/qihang-investment-research/references/deal-sourcing.md"
+      - "skills/qihang-investment-research/references/funding-digest.md"
+      - "skills/qihang-investment-research/references/sector-seeds.md"
+    package_traits:
+      - fact_pack_only
+      - no_investment_conclusion
+      - source_backed
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "先搜清楚这个公司的事实"
+      - "投资分析前先做 fact pack"
+      - "融资、客户、竞品和 GitHub 数据先核一下"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "投研前置事实沉淀节点；搜索和事实收集在这里完成，IC memo 写作阶段不再搜索。"
+
+  - id: qihang-ai-product-judgment
+    title: "Qihang AI Product Judgment"
+    status: internal
+    source_type: user_cultivated_ai_product_judgment_skill
+    package_path: "skills/qihang-ai-product-judgment/SKILL.md"
+    package_support:
+      - "skills/qihang-ai-product-judgment/references/ai-product-analyzer.md"
+      - "skills/qihang-ai-product-judgment/references/business-model.md"
+      - "skills/qihang-ai-product-judgment/references/data-agent.md"
+      - "skills/qihang-ai-product-judgment/references/narrative-audit.md"
+    package_traits:
+      - ai_native_product_view
+      - bp_logic
+      - reference_routed
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "从 AI native 产品视角判断"
+      - "这个产品到底成立不成立"
+      - "先跑我的产品判断再做投资"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "把 ai-product-analyzer 的判断迁入投资包节点；保留产品成立性作为投资判断的前置层。"
+
+  - id: qihang-competitive-landscape
+    title: "Qihang Competitive Landscape"
+    status: internal
+    source_type: user_cultivated_competitive_landscape_skill_with_migrated_references
+    package_path: "skills/qihang-competitive-landscape/SKILL.md"
+    package_support:
+      - "skills/qihang-competitive-landscape/references/competitive-analysis.md"
+      - "skills/qihang-competitive-landscape/references/frameworks.md"
+      - "skills/qihang-competitive-landscape/references/schemas.md"
+      - "skills/qihang-competitive-landscape/references/sector-overview.md"
+      - "skills/qihang-competitive-landscape/references/idea-generation.md"
+      - "skills/qihang-competitive-landscape/references/market-researcher-agent.md"
+    package_traits:
+      - competitor_mapping
+      - market_structure
+      - moat_assessment
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "竞争格局怎么看"
+      - "这个市场里谁是替代方案"
+      - "把竞品和定位放进 IC memo"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "投研工作包中的市场和竞争格局节点；避免只看产品、不看战场。"
+
+  - id: qihang-unit-economics
+    title: "Qihang Unit Economics"
+    status: internal
+    source_type: user_cultivated_unit_economics_skill_with_migrated_references
+    package_path: "skills/qihang-unit-economics/SKILL.md"
+    package_support:
+      - "skills/qihang-unit-economics/references/unit-economics.md"
+      - "skills/qihang-unit-economics/references/ai-readiness.md"
+      - "skills/qihang-unit-economics/references/value-creation-plan.md"
+    package_traits:
+      - business_model_quality
+      - margin_and_inference_cost
+      - value_creation
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "这个 AI 产品经济账能不能打"
+      - "看一下毛利、推理成本和 CAC"
+      - "商业模式质量放进 IC memo"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "把产品价值转成商业质量和单位经济判断。"
+
+  - id: qihang-investment-scorecard
+    title: "Qihang Investment Scorecard"
+    status: internal
+    source_type: user_cultivated_scorecard_skill_with_migrated_references
+    upstream_repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
+    upstream_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
+    package_path: "skills/qihang-investment-scorecard/SKILL.md"
+    package_support:
+      - "skills/qihang-investment-scorecard/references/oss-investment-scorecard.md"
+      - "skills/qihang-investment-scorecard/references/scored-examples.md"
+      - "skills/qihang-investment-scorecard/references/cases/hugging-face.md"
+      - "skills/qihang-investment-scorecard/references/cases/inferact-vllm.md"
+      - "skills/qihang-investment-scorecard/references/template/evaluation-template.md"
+      - "skills/qihang-investment-scorecard/references/deal-screening.md"
+    package_traits:
+      - scorecard_layer
+      - one_vote_veto
+      - reference_routed
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "用投资 scorecard 结构化"
+      - "这个项目应该 pass、watch 还是继续 DD"
+      - "把产品判断变成投资评分"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "替代旧的独立 oss-investment-scorecard 入口；上游内容仅作为 reference 保留，不再平行进入默认插件。"
+
+  - id: qihang-valuation-returns
+    title: "Qihang Valuation Returns"
+    status: internal
+    source_type: user_cultivated_valuation_returns_skill_with_migrated_references
+    package_path: "skills/qihang-valuation-returns/SKILL.md"
+    package_support:
+      - "skills/qihang-valuation-returns/references/returns-analysis.md"
+      - "skills/qihang-valuation-returns/references/comps-analysis.md"
+      - "skills/qihang-valuation-returns/references/initiating-coverage/valuation-methodologies.md"
+      - "skills/qihang-valuation-returns/references/dcf-model.md"
+      - "skills/qihang-valuation-returns/references/lbo-model.md"
+      - "skills/qihang-valuation-returns/references/3-statement-model.md"
+      - "skills/qihang-valuation-returns/references/audit-xls.md"
+    package_traits:
+      - valuation_logic
+      - returns_analysis
+      - no_excel_by_default
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "估值和回报逻辑怎么写"
+      - "这个投资要靠什么回本"
+      - "IC memo 需要 valuation / return 部分"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "只提供估值和回报逻辑；除非明确要求，不自动生成 Excel 模型。"
+
+  - id: qihang-investment-dd
+    title: "Qihang Investment DD"
+    status: internal
+    source_type: user_cultivated_diligence_skill_with_migrated_references
+    package_path: "skills/qihang-investment-dd/SKILL.md"
+    package_support:
+      - "skills/qihang-investment-dd/references/dd-checklist.md"
+      - "skills/qihang-investment-dd/references/dd-meeting-prep.md"
+      - "skills/qihang-investment-dd/references/datapack-builder.md"
+    package_traits:
+      - diligence_questions
+      - red_flags
+      - data_room_requests
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "生成 DD 问题树"
+      - "这个 case 投前要验证什么"
+      - "列管理层和专家访谈问题"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "把前面判断转成可验证的尽调问题和一票否决项。"
+
+  - id: qihang-thesis-tracking
+    title: "Qihang Thesis Tracking"
+    status: internal
+    source_type: user_cultivated_thesis_tracking_skill_with_migrated_references
+    package_path: "skills/qihang-thesis-tracking/SKILL.md"
+    package_support:
+      - "skills/qihang-thesis-tracking/references/thesis-tracker.md"
+      - "skills/qihang-thesis-tracking/references/catalyst-calendar.md"
+      - "skills/qihang-thesis-tracking/references/portfolio-monitoring.md"
+      - "skills/qihang-thesis-tracking/references/earnings-analysis.md"
+      - "skills/qihang-thesis-tracking/references/earnings-preview.md"
+    package_traits:
+      - watch_triggers
+      - catalyst_calendar
+      - falsifiable_thesis
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "这个 case 后续怎么看"
+      - "生成 watch triggers"
+      - "把投资观点做成可证伪 thesis"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "把一次性 memo 变成可跟踪的投资假设。"
+
+  - id: qihang-ic-memo-writer
+    title: "Qihang IC Memo Writer"
+    status: internal
+    source_type: user_cultivated_ic_memo_writer_with_migrated_references
+    package_path: "skills/qihang-ic-memo-writer/SKILL.md"
+    package_support:
+      - "skills/qihang-ic-memo-writer/references/ic-memo.md"
+      - "skills/qihang-ic-memo-writer/references/initiating-coverage.md"
+      - "skills/qihang-ic-memo-writer/references/strip-profile.md"
+      - "skills/qihang-ic-memo-writer/references/tear-sheet.md"
+      - "skills/qihang-ic-memo-writer/references/cim-builder.md"
+      - "skills/qihang-ic-memo-writer/references/teaser.md"
+      - "skills/qihang-ic-memo-writer/references/pitch-deck.md"
+      - "skills/qihang-ic-memo-writer/references/ib-check-deck.md"
+    package_traits:
+      - final_writer_only
+      - no_search
+      - ic_memo_structure
+    plugin_distribution: "agent-investment"
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "最后写成 IC memo"
+      - "把前面节点产出合成投资委员会材料"
+      - "输出严谨的投资 memo"
+    copy_policy: "internal_user_cultivated_skill_with_migrated_references"
+    notes: "最终写作节点；只消费前面节点 handoff，不在写作阶段新增搜索或新分析。"
+
+  - id: oss-investment-scorecard
+    title: "OSS Investment Scorecard"
+    status: absorbed_reference
+    source_type: promoted_external_reference_absorbed_into_agent_investment
+    upstream_repo: "https://github.com/lucy-cxy/oss-investment-scorecard"
+    upstream_commit: "28a210d0a194ba0f31fe59edaf413abfafa2008e"
+    package_path: "skills/qihang-investment-scorecard/references/oss-investment-scorecard.md"
+    package_support:
+      - "skills/qihang-investment-scorecard/references/scored-examples.md"
+      - "skills/qihang-investment-scorecard/references/cases/hugging-face.md"
+      - "skills/qihang-investment-scorecard/references/cases/inferact-vllm.md"
+      - "skills/qihang-investment-scorecard/references/template/evaluation-template.md"
+    package_traits:
+      - migrated_reference
+      - no_runtime_skill
+      - scorecard_source
+    plugin_distribution: null
+    pipeline_role:
+      - "product_analysis"
+    trigger_examples:
+      - "旧 OSS investment 结构来源"
+    copy_policy: "migrated_reference_only"
+    notes: "旧独立技能已被 qihang-investment-scorecard 吸收；不再进入 qihang-skill-pack，也不再作为默认可调用技能暴露。"
 
   - id: qihang-workflow-orchestrator
     title: "Qihang Workflow Orchestrator"
@@ -234,7 +494,7 @@ skills:
       - "topic 到 writing 到 md2wechat"
       - "产品分析后做前端设计"
       - "产品分析后做投资研报"
-      - "产品分析后做 OSS investment"
+      - "产品分析后做 IC memo"
       - "把跑通的工作流封装成技能"
     copy_policy: "internal_user_cultivated_workflow_skill"
-    notes: "封装已确认工作流：topic-writing-md2wechat 和 product-analysis；product-analysis 默认主链是 AI-native 产品视角 -> OSS investment 结构化 -> 前端自生成可视化，只有用户明确只要文字或前端 brief 时才提前停下。"
+    notes: "封装已确认工作流：topic-writing-md2wechat、product-frontend-design 和 product-investment-icmemo；投资默认主链是事实收集 -> agent-investment -> IC Memo -> 可选前端自生成可视化。"

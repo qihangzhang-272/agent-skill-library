@@ -27,7 +27,8 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Notes |
 | --- | --- | --- | --- |
-| `https://github.com/lucy-cxy/oss-investment-scorecard` | OSS/AI company investment scorecard and structured output source | promoted local skill | Promoted to `skills/oss-investment-scorecard/` from upstream commit `28a210d0a194ba0f31fe59edaf413abfafa2008e`. Keep this repo root as the update source; use the local skill in `product-analysis`. |
+| `https://github.com/lucy-cxy/oss-investment-scorecard` | OSS/AI company investment scorecard and structured output source | absorbed reference | Absorbed into `skills/qihang-investment-scorecard/references/` from upstream commit `28a210d0a194ba0f31fe59edaf413abfafa2008e`. Do not call the old skill directly; use `agent-investment`. |
+| `https://github.com/anthropics/financial-services` | Financial services, investment banking, public equity, and diligence skill references | migrated reference source | Selected files migrated into `agent-investment` references from commit `4bbabc7cd1a474c1667fa05a2bfe58e411dcf9c1`. Keep upstream as reference/update source, not as a parallel runtime workflow. |
 
 ## Research And Web Reach
 

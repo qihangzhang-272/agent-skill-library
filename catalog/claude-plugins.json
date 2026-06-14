@@ -64,16 +64,15 @@
     {
       "name": "qihang-skill-pack",
       "displayName": "Qihang Skill Pack",
-      "description": "Qihang's lightweight external GitHub skill/source index, promoted OSS investment scorecard, and proven workflow router for selecting upstream capabilities.",
-      "version": "0.2.9",
+      "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities.",
+      "version": "0.3.0",
       "keywords": [
         "qihang",
         "skill-index",
         "workflow",
         "github",
         "external-skills",
-        "curation",
-        "oss-investment"
+        "curation"
       ],
       "distributionStatus": "active",
       "distributionScope": "curated_index",
@@ -85,14 +84,80 @@
           "targetName": "qihang-skill-index"
         },
         {
-          "id": "oss-investment-scorecard",
-          "sourcePath": "skills/oss-investment-scorecard",
-          "targetName": "oss-investment-scorecard"
-        },
-        {
           "id": "qihang-workflow-orchestrator",
           "sourcePath": "skills/qihang-workflow-orchestrator",
           "targetName": "qihang-workflow-orchestrator"
+        }
+      ]
+    },
+    {
+      "name": "agent-investment",
+      "displayName": "Agent Investment",
+      "description": "Qihang's AI investment IC memo package: research handoff, AI-native product judgment, competitive landscape, unit economics, scorecard, valuation, DD, thesis tracking, and IC memo writing.",
+      "version": "0.1.0",
+      "keywords": [
+        "investment",
+        "ic-memo",
+        "ai-investment",
+        "qihang",
+        "competitive-landscape",
+        "unit-economics",
+        "due-diligence",
+        "valuation"
+      ],
+      "distributionStatus": "active",
+      "distributionScope": "self_cultivated_with_migrated_references",
+      "releasePolicy": "manual_semver",
+      "skills": [
+        {
+          "id": "qihang-ai-investment-orchestrator",
+          "sourcePath": "skills/qihang-ai-investment-orchestrator",
+          "targetName": "qihang-ai-investment-orchestrator"
+        },
+        {
+          "id": "qihang-investment-research",
+          "sourcePath": "skills/qihang-investment-research",
+          "targetName": "qihang-investment-research"
+        },
+        {
+          "id": "qihang-ai-product-judgment",
+          "sourcePath": "skills/qihang-ai-product-judgment",
+          "targetName": "qihang-ai-product-judgment"
+        },
+        {
+          "id": "qihang-competitive-landscape",
+          "sourcePath": "skills/qihang-competitive-landscape",
+          "targetName": "qihang-competitive-landscape"
+        },
+        {
+          "id": "qihang-unit-economics",
+          "sourcePath": "skills/qihang-unit-economics",
+          "targetName": "qihang-unit-economics"
+        },
+        {
+          "id": "qihang-investment-scorecard",
+          "sourcePath": "skills/qihang-investment-scorecard",
+          "targetName": "qihang-investment-scorecard"
+        },
+        {
+          "id": "qihang-valuation-returns",
+          "sourcePath": "skills/qihang-valuation-returns",
+          "targetName": "qihang-valuation-returns"
+        },
+        {
+          "id": "qihang-investment-dd",
+          "sourcePath": "skills/qihang-investment-dd",
+          "targetName": "qihang-investment-dd"
+        },
+        {
+          "id": "qihang-thesis-tracking",
+          "sourcePath": "skills/qihang-thesis-tracking",
+          "targetName": "qihang-thesis-tracking"
+        },
+        {
+          "id": "qihang-ic-memo-writer",
+          "sourcePath": "skills/qihang-ic-memo-writer",
+          "targetName": "qihang-ic-memo-writer"
         }
       ]
     }

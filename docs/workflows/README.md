@@ -6,7 +6,7 @@
 
 - `linear-workflow.md`：Linear 项目、Issue 类型和技能收录跟踪口径。
 - `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。
-- `investment-product-to-research-report.md`：从 AI-native 产品判断到 OSS investment 结构化和前端自生成可视化研报页的轻量调用链。
+- `investment-product-to-research-report.md`：从 AI-native 产品判断到 `agent-investment` IC Memo，再到可选前端自生成可视化研报页的调用链。
 
 ## 放置标准
 
@@ -17,4 +17,4 @@
 - 上游同步流程。
 - Linear / GitHub 协作流程。
 - 从实验到正式收录的验收流程。
-- 跨技能调用链，例如 product-analysis -> AI-native 产品视角 -> OSS investment 结构化 -> 前端自生成可视化。
+- 跨技能调用链，例如 product-analysis -> AI-native 产品视角 -> agent-investment -> IC Memo -> 前端自生成可视化。

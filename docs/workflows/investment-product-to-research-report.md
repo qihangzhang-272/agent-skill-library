@@ -1,23 +1,26 @@
-# 投资 / 产品问题到研报调用链
+# 投资 / 产品问题到 IC Memo 与可视化研报调用链
 
-日期：2026-06-08
+日期：2026-06-14
 
-定位：这是一条轻量调用链，用来把启航的 AI-native 产品判断接到 `oss-investment-scorecard` 的结构化输出，再承接成可视化研报页。它不是新的研报框架，不复制上游正文，也不替代 `ai-product-analyzer` 或 `oss-investment-scorecard`。
+定位：这是一条轻量但完整的调用链，用来把启航的 AI-native 产品判断接入 `agent-investment` 工作包，最终产出 IC Memo、DD 问题树、watch triggers，并按需承接成可视化研报页。
+
+它不是把多个投研来源机械串起来，也不是让 `oss-investment-scorecard` 独立承担全部结构。旧 OSS scorecard 只作为 `qihang-investment-scorecard` 的 reference。
 
 ## 适用场景
 
 当输入是下面任一类型时，优先进入这条链：
 
-- 评估一个 AI 产品、开源项目、创业公司或技术基础设施是否值得关注。
-- 从 BP / Pitch Deck 逻辑判断一个产品是否成立。
-- 从 VC 视角判断项目是否值得投资、继续跟踪或放弃。
-- 把零散产品观察整理成研报、IC memo、case note 或 DD 问题树。
+- 评估一个 AI 产品、开源项目、创业公司或技术基础设施是否值得投资、继续跟踪或放弃。
+- 从 BP / Pitch Deck 逻辑判断一个产品是否成立，并进一步形成投资判断。
+- 从 VC / 投研视角判断项目的市场、商业模式、竞争格局、回报逻辑和 DD 优先级。
+- 把零散产品观察整理成 IC memo、research report、case note 或可视化研报页。
 
 不适用场景：
 
 - 只需要一句产品点评。
 - 只需要维护技能索引或搬运资料。
 - 没有明确研究对象，只有泛泛行业观点。
+- 只需要公众号文章，不需要投资判断。
 
 ## 输入要求
 
@@ -25,40 +28,58 @@
 
 - 研究对象名称。
 - 对象类型：产品、公司、开源项目、基础设施、客户案例、市场方向。
-- 当前问题：投资判断、产品复盘、BP 审查、竞品比较、研报准备、DD 准备。
+- 当前问题：投资判断、产品复盘、BP 审查、竞品比较、IC memo、DD 准备。
 
 增强输入：
 
 - 官网、GitHub、文档、融资新闻、客户案例、deck、demo、公开访谈。
-- 想要输出的深度：quick note、case memo、research report、IC memo。
+- 想要输出的深度：quick note、case memo、research report、IC memo、visual report。
 - 目标读者：自己阅读、客户咨询、投资讨论、团队复盘。
 
 ## 技能选择
 
 | 节点 | 优先技能 / 来源 | 用途 |
 | --- | --- | --- |
-| AI-native 产品视角 | `skills/ai-product-analyzer/` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
-| 结构化投资输出 | `skills/oss-investment-scorecard/` | 把产品判断组织成 fact sheet、macro gate、scorecard、verdict、IC thesis、DD 和 watch triggers |
-| 可视化承接 | 前端自生成 | 把 OSS investment 结构化结果做成现代、全展开的可视化研报页；不再编排外部前端技能 |
+| 事实收集 | `topic-research-deposition` + `qihang-investment-research` | 搜索和沉淀事实，不做投资结论 |
+| 投资工作包总入口 | `qihang-ai-investment-orchestrator` | 路由后续投资节点，避免一次性加载所有 references |
+| AI-native 产品视角 | `qihang-ai-product-judgment` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
+| 竞争格局 | `qihang-competitive-landscape` | 市场定义、竞品分组、定位、护城河、bull/base/bear |
+| 单位经济 | `qihang-unit-economics` | 定价、收入质量、毛利、推理成本、CAC/payback、AI readiness |
+| 投资评分 | `qihang-investment-scorecard` | 使用旧 OSS scorecard reference 和 deal screening 形成 scorecard / veto / verdict |
+| 估值回报 | `qihang-valuation-returns` | comps、估值方法、回报驱动、IRR/MOIC 场景 |
+| DD | `qihang-investment-dd` | 尽调问题、管理层问题、专家访谈、data-room request、一票否决 |
+| 跟踪 | `qihang-thesis-tracking` | thesis、watch triggers、catalyst calendar、复盘节奏 |
+| 成稿 | `qihang-ic-memo-writer` | 把节点 handoff 合成为 IC Memo，不再搜索或新增分析 |
+| 可视化承接 | 前端自生成 | 把完整 IC Memo 做成现代、全展开的可视化研报页 |
 
 ## 调用链
+
+默认链路：
 
 ```text
 研究对象
 -> 研究问题定界
 -> 事实收集
 -> AI-native 产品 / BP 逻辑判断
--> OSS investment 结构化
--> 可视化研报页
+-> 竞争格局
+-> 单位经济
+-> 投资评分
+-> 估值和回报逻辑
+-> DD priority
+-> thesis tracking
+-> IC Memo
+-> 可选可视化研报页
 ```
 
-结构化和可视化不是二选一。如果用户说“产品投资分析研报”“可视化研报页”“HTML 研报”，默认链路是：
+结构化、IC Memo 和可视化不是三选一。
+
+如果用户说“产品投资分析研报”“这个 AI case 值不值得投”“出 IC memo”，默认链路是：
 
 ```text
-AI-native 产品视角 -> OSS investment 结构化 -> 可视化
+产品判断 -> 投资判断 -> IC Memo
 ```
 
-只有当用户明确说 IC memo、DD 问题树或只要文字版时，才停在结构化文字结果。
+如果用户继续说“可视化”“HTML 研报”“页面”，再把完整 IC Memo 承接成页面。页面不得删减 memo 内容。
 
 ## 1. 研究问题定界
 
@@ -69,7 +90,7 @@ AI-native 产品视角 -> OSS investment 结构化 -> 可视化
 - 这次两个判断轴的权重是什么：产品是否成立，以及项目是否值得继续投资、跟踪或放弃。
 - 研究对象处于哪个阶段：概念、demo、早期产品、开源增长、商业化、融资中、规模化。
 - 这次输出是内部阅读材料、对外咨询材料，还是投资决策材料。
-- 最终要给出 verdict、watch trigger，还是只是整理 case。
+- 最终要给出 verdict、watch trigger，还是完整 IC Memo。
 
 输出：
 
@@ -99,83 +120,76 @@ AI-native 产品视角 -> OSS investment 结构化 -> 可视化
 - 未找到不等于不存在，必须标记为“未找到 / 待验证”。
 - 可以做推断，但必须写明“基于哪些事实推断”。
 - 不把媒体叙事当成事实，不把官网口号当成 traction。
+- 搜索在这里完成。进入 `qihang-ic-memo-writer` 后不再搜索。
 
-## 3. 产品 / BP 逻辑判断
+## 3. 投资工作包执行
 
-触发 `ai-product-analyzer`，重点不是复述产品功能，而是判断 BP 逻辑是否成立。
+触发 `qihang-ai-investment-orchestrator`，让它按节点渐进加载 references。
 
-最少要产出：
-
-- 一句话定位是否清晰。
-- Problem 是否真实、高频、高价值。
-- Solution 是否直接回应问题。
-- 产品形态是否让价值可见。
-- Why Now 是否有独立成立的窗口。
-- 市场、商业模式、竞争、traction、团队和资金用途是否互相支撑。
-- 综合判定：好案例、反面教材、待观察。
-
-如果出现下面情况，研报要显式标记风险：
-
-- AI 只是旧范式的包装。
-- 产品价值依赖“未来模型一定变好”。
-- 商业模式把固定订阅收入和高变动推理成本硬绑在一起。
-- 没有明确 NOT Positioning，竞争边界模糊。
-- traction 只有不可证伪大数字，没有可检查行为证据。
-
-## 4. OSS Investment 结构化
-
-`oss-investment-scorecard` 在这条链里是结构化输出层，不是适用性分类器。
-
-使用方式：
-
-- 先读取本地 `skills/oss-investment-scorecard/SKILL.md`，再按需读取它的 `references/`、`cases/` 或 `template/`。
-- `qihang-skill-index` 只保留上游 GitHub 来源和更新线索，不作为运行时入口。
-- 用上游结构组织最终成果；不在本 workflow 里重写一套投资框架。
-- 如果某些 OSS 字段对非开源产品不贴合，标注“改写 / 不适用 / 待验证”，不要因此跳过结构化输出。
-
-结构化结果至少保留：
-
-- Macro gate：窗口、开源结构优势、AI cycle premium。
-- 五维 scorecard：社区、团队、技术护城河、商业化、退出路径。
-- 一票否决项检查。
-- IC thesis。
-- DD priority list。
-- Watch triggers。
-
-## 5. 结构化和可视化
-
-最终结构以 `oss-investment-scorecard` 为主，嵌入 `ai-product-analyzer` 的 AI-native 产品判断。
+每个节点必须输出：
 
 ```text
-AI-native 产品判断
--> OSS investment fact sheet
--> Macro gate
--> Scorecard table
--> Verdict / IC thesis
--> DD priority list
--> Watch triggers
--> Sources and uncertainty
+Node:
+Inputs used:
+References loaded:
+Facts:
+Judgments:
+Assumptions:
+Unknowns:
+Next-node handoff:
 ```
 
-输出形态按需求裁剪，但不改变上游结构来源：
+节点职责：
 
-- quick note：只保留 verdict、产品最强/最弱判断、scorecard 摘要、下一步。
-- case memo：保留产品判断、scorecard、DD priority 和 watch triggers。
-- research report：保留完整结构和来源。
-- IC memo：强化 verdict、IC thesis、关键风险、DD 条件。
+- `qihang-ai-product-judgment`：产品是否成立，是否 AI-native，叙事和 BP 逻辑是否连贯。
+- `qihang-competitive-landscape`：市场、竞品、替代方案、定位、护城河。
+- `qihang-unit-economics`：收入质量、推理成本、毛利、CAC、部署可行性。
+- `qihang-investment-scorecard`：投资评分、macro gate、deal-screening verdict、一票否决。
+- `qihang-valuation-returns`：估值方法、comps、回报驱动、退出路径。
+- `qihang-investment-dd`：DD 优先级、问题树、data-room request、red flags。
+- `qihang-thesis-tracking`：watch triggers、catalyst calendar、可证伪 thesis。
 
-如果输出形态是可视化研报页，沿用 `oss-investment-scorecard` 结构，不在 workflow 里重新规定论证顺序，也不再选择外部前端技能。
+## 4. IC Memo 成稿
 
-页面默认现代、全展开、少折叠、不堆叠卡片；优先用分区、矩阵、时间线、评分条和逻辑图表达已有研报结构。
+触发 `qihang-ic-memo-writer`。
+
+成稿规则：
+
+- 只消费前面节点 handoff，不重新搜索，不新增未验证事实。
+- 保留 facts、judgments、assumptions、unknowns 的边界。
+- 保留弱点、矛盾和来源缺口，不把它们写成“未来可解决”的空话。
+- 输出以 IC Memo 为默认，不退化成 scorecard-only。
+
+默认 memo 结构：
+
+```text
+1. Executive Summary
+2. Investment Recommendation
+3. Company / Product Overview
+4. AI-native Product Judgment
+5. Market & Competitive Landscape
+6. Business Model & Unit Economics
+7. Technical / OSS / Ecosystem Moat
+8. Valuation / Return Logic
+9. Investment Scorecard
+10. Key Risks & One-Vote Veto
+11. Due Diligence Priorities
+12. Thesis Tracking & Watch Triggers
+13. Sources, Unknowns, Verification Gaps
+```
+
+## 5. 可视化承接
+
+如果输出形态是可视化研报页，页面只做可视化承接，不重新论证。
 
 前端宪法：
 
 - 前端由执行者直接生成，不通过 `qihang-skill-index` 选择 Type/UI/设计技能。
-- 前端不得删减上游研报内容；只能做可视化、分组、排序、强调和版式呈现，不能删除、漏掉、压缩掉或改写实质性判断、证据、DD 问题、watch triggers、假设、来源缺口和风险提示。
+- 前端不得删减上游 IC Memo 内容；只能做可视化、分组、排序、强调和版式呈现。
 - 默认交付一个静态 HTML/CSS 文件；只有已有目标项目或明确要求时才使用项目栈。
 - 首屏必须显示研究对象、verdict、总分或决策状态、最高信号事实。
 - 核心报告内容全部展开，不把关键判断藏进折叠、tab 或嵌套卡片。
-- 视觉结构服务于 `oss-investment-scorecard`：fact sheet、macro gate、scorecard、IC thesis、DD priorities、watch triggers 必须可扫读。
+- 视觉结构服务于 IC Memo 的自然顺序：产品判断 -> 投资判断 -> DD -> watch triggers -> 来源缺口。
 - 桌面和移动都要检查，文字不能溢出，核心信息不能重叠。
 
 ## 6. 质量门
@@ -188,6 +202,7 @@ AI-native 产品判断
 - 是否说明最强论点和最弱缺口。
 - 是否有 DD priority，而不是假装信息完整。
 - 是否说明 watch trigger，方便后续复查。
+- 如果做可视化，是否保留了全部 memo 内容。
 
 ## 7. 收录反馈
 

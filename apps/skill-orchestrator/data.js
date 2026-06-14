@@ -1,5 +1,5 @@
 window.SKILL_ORCHESTRATOR_DATA = {
-  "generatedAt": "2026-06-13 22:25:55",
+  "generatedAt": "2026-06-13 23:52:20",
   "repository": {
     "name": "agent-skill-library",
     "root": "."
@@ -26,7 +26,7 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "title": "qihang workflow orchestrator",
       "path": "skills/qihang-workflow-orchestrator/SKILL.md",
       "directory": "skills/qihang-workflow-orchestrator",
-      "description": "Use when Qihang asks to run, package, choose, or maintain a proven workflow such as topic-to-WeChat publishing, product-to-frontend design, or product-to-investment research.",
+      "description": "Use when Qihang asks to run, package, choose, or maintain a proven workflow such as topic-to-WeChat publishing or product analysis that may become a visual report, frontend brief, investment memo, or OSS investment review.",
       "status": "available"
     },
     {
@@ -42,7 +42,7 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "title": "topic research deposition",
       "path": "skills/topic-research-deposition/SKILL.md",
       "directory": "skills/topic-research-deposition",
-      "description": "公众号写作第 0 步——跨平台选题搜索与原始素材沉淀。当用户提到\"搜一下选题\"、\"开始搜索\"、\"第 0 步\"、\"选题搜索\"、\"帮我搜一下 XX\"、\"看看 XX 话题\"、\"素材沉淀\"或\"补截图\"时触发。在四个平台（Twitter/X、Reddit、Exa 全网、微信公众号）串行执行 3-4 轮递进搜索，将原始素材按平台归档为 md 文档，并截图留证。不做信息消化或预判。搜索完成后做概览汇报，等待用户发令才进入下一步。",
+      "description": "Use when Qihang asks to 搜一下、调研、找资料、沉淀素材、补截图、做产品事实收集、投资/OSS research、公众号选题搜索、写作前第 0 步，或需要在写作/产品分析前建立可复查的 evidence folder。",
       "status": "available"
     }
   ]

@@ -55,7 +55,7 @@ Verified facts:
 Unverified claims:
 Missing facts:
 DD priority candidates:
-Suggested handoff: product-analysis mode investment-report or oss-investment
+Suggested handoff: product-analysis chain for OSS investment structured and visual output
 ```
 
 ## Evidence Discipline

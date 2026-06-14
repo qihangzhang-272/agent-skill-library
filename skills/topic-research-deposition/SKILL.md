@@ -26,7 +26,7 @@ Choose one mode before creating folders or searching.
 | `writing-research` | Research for an article that is not necessarily WeChat-specific | `references/agent-reach-search.md`, `references/quality-checklist.md` |
 | `wechat-writing-research` | 公众号选题、第 0 步、需要微信素材、公众号爆款逻辑、图文截图和后续交给 `qihang-writing-style` | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
 | `product-research` | Facts needed before `ai-product-analyzer`: product, company, pricing, customers, competitors, demo, docs, GitHub, traction | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
-| `investment-research` | Facts needed for `product-analysis` investment-report or oss-investment modes: financing, team, market, OSS metrics, commercial traction, DD evidence | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
+| `investment-research` | Facts needed before product-analysis structured output: financing, team, market, OSS metrics, commercial traction, DD evidence | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
 
 If the user says "公众号", "第 0 步", "爆款", "推草稿箱前", or asks for WeChat screenshots, choose `wechat-writing-research`.
 
@@ -64,7 +64,7 @@ Handoff rules:
 
 - `writing-research` and `wechat-writing-research` can hand off to `qihang-writing-style`.
 - `product-research` can hand off to `ai-product-analyzer`.
-- `investment-research` can hand off to `qihang-workflow-orchestrator` product-analysis mode `investment-report` or `oss-investment`.
+- `investment-research` can hand off to `qihang-workflow-orchestrator` product-analysis chain for OSS investment structured and visual output.
 - Do not continue into the next skill until Qihang says to continue.
 
 ## Storage Rules

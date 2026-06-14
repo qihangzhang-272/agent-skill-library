@@ -12,17 +12,18 @@ This skill routes Qihang's proven workflows. It is a workflow entry point, not a
 | Workflow | Trigger | Chain | Final Output |
 | --- | --- | --- | --- |
 | `topic-writing-md2wechat` | 公众号选题、写文章、排版、推草稿箱 | `topic-research-deposition` -> `qihang-writing-style` -> `qihang-skill-index` for `md2wechat` | 已排版公众号文稿、图片/封面处理记录、草稿箱状态 |
-| `product-analysis` | 产品分析、投资判断、研报、可视化研报页、前端 brief、OSS investment | `topic-research-deposition` when facts are missing -> `ai-product-analyzer` -> investment lens when needed -> report -> visualization when implied | 产品+投资视角、研报结构、可视化研报页；明确只要文字或 brief 时才提前停下 |
+| `product-analysis` | 产品分析、投资判断、研报、可视化研报页、前端 brief、OSS investment | `topic-research-deposition` when facts are missing -> `ai-product-analyzer` for AI-native product view -> `oss-investment-scorecard` for structure -> visualization | AI-native 产品判断、OSS investment 结构化结果、可视化研报页；明确只要文字或 brief 时才提前停下 |
 
 ## Execution Rules
 
 - Only these workflows are active unless Qihang explicitly adds another one.
 - Do not insert `ai-product-analyzer` into the writing/publishing chain unless Qihang explicitly asks for product analysis.
 - Do not treat `md2wechat`, `frontend-design`, or `oss-investment-scorecard` as local skills. Resolve them through `qihang-skill-index` repo-root sources.
-- Default product-investment chain: product analysis + investment lens -> report -> visualization.
+- Default product-investment chain: AI-native product view -> OSS investment structure -> visualization.
 - Do not ask Qihang to choose a framework when the wording already implies this chain.
+- Do not classify whether `oss-investment-scorecard` is "accurately applicable" before using it in this workflow. Here it is the lightweight structure layer for final output, not a gatekeeping category.
 - `product-frontend-design` means product analysis -> frontend brief; add visualization only when the target is a report page.
-- `product-investment-report` means product analysis + investment lens -> report -> visualization, unless Qihang explicitly asks only for text.
+- `product-investment-report` means AI-native product view -> OSS investment structure -> visualization, unless Qihang explicitly asks only for text.
 - Any search or fact collection uses `topic-research-deposition` with `agent-reach` as the default reach layer. Do not turn a platform list into a required command sequence.
 - Load and follow each underlying skill before executing its node.
 - Each node must state: input, skill/source used, output, and whether the next node can proceed.
@@ -33,31 +34,31 @@ This skill routes Qihang's proven workflows. It is a workflow entry point, not a
 Keep the default chain simple:
 
 ```text
-product + investment view -> report -> visualization
+ai-product-analyzer -> oss-investment-scorecard -> visual report
 ```
 
 Default interpretation:
 
-- "产品投资分析研报" means product analysis + investment view, then report, then visual report page.
-- "OSS investment 研报 / 开源项目投资分析" means product analysis + OSS investment source, then report, then visual report page.
+- "产品投资分析研报" means `ai-product-analyzer` first, then structure the output with `oss-investment-scorecard`, then create a visual report page.
+- "OSS investment 研报 / 开源项目投资分析" uses the same chain; the OSS source determines structure, not whether the workflow is allowed to proceed.
 - Stop at a text memo only when Qihang explicitly says "只要文字", "只要 IC memo", "只要 DD 问题树", or "不要可视化".
 - Stop at a frontend brief only when Qihang explicitly asks for frontend implementation planning rather than a report page.
 
-Use `ai-product-analyzer` to decide the product judgment. Use `oss-investment-scorecard` from `qihang-skill-index` only when the investment view is OSS/VC/open-source specific. The orchestrator must not invent a report argument structure; it should preserve the structure produced by the product or investment source.
+Use `ai-product-analyzer` to provide Qihang's AI-native product perspective. Then use `oss-investment-scorecard` from `qihang-skill-index` as the lightweight structure layer for final structured and visual output. The orchestrator must not invent a report argument structure; it should preserve the product judgment and map it into the OSS investment structure.
 
 ### Visual Report
 
 Required flow:
 
 ```text
-product input -> fact collection -> ai-product-analyzer -> investment view if needed -> report structure from upstream analysis -> visual report page -> browser acceptance
+product input -> fact collection -> ai-product-analyzer -> oss-investment-scorecard structure -> visual report page -> browser acceptance
 ```
 
 Minimum handoff:
 
 - Product judgment to preserve: verdict, strongest argument, weakest gap, suggested narrative line.
-- Investment judgment to preserve when present: thesis, key score, main upside, main risk, DD priorities, watch triggers.
-- Report structure source: `ai-product-analyzer`, `oss-investment-scorecard`, or both.
+- OSS investment structure to preserve: fact sheet, macro gate when useful, scorecard table, verdict, IC thesis, DD priorities, watch triggers.
+- Report structure source: `ai-product-analyzer` for product view, `oss-investment-scorecard` for output structure.
 - Page type and first-screen information. First screen should show object, verdict, and the highest-signal facts from the report.
 - Primary frontend source from `qihang-skill-index`, plus rejected sources and upgrade trigger.
 - For a product visual report, default artifact is a static HTML / visual report brief. Do not default to an app scaffold.
@@ -71,7 +72,7 @@ Minimum handoff:
 
 ### Investment View
 
-Use when product judgment needs to become an investment memo, research report, IC memo, case note, or DD question tree.
+Use when product judgment needs to become an investment memo, research report, IC memo, case note, DD question tree, or structured visual report.
 
 Required flow:
 
@@ -85,9 +86,9 @@ Minimum handoff:
 - If facts are missing, run `topic-research-deposition` in `product-research` or `investment-research` mode before `ai-product-analyzer`.
 - Separate facts from judgment; current facts about financing, customers, GitHub data, pricing, team, and competitors must be checked when relevant.
 - Use `ai-product-analyzer` for BP logic, product成立性, business model, narrative, traction, team, and strongest / weakest points.
-- Use `qihang-skill-index` for `oss-investment-scorecard` only when the object is open source, AI infrastructure, an open-source company, or the user asks for VC-style investment scoring.
-- Do not force open-source scorecards onto non-open-source products; use an investment question tree instead.
-- Final output must include verdict, thesis, fact card, product judgment, investment judgment, DD priorities, uncertainty, and watch triggers.
+- Use `qihang-skill-index` to read `oss-investment-scorecard` as the output structure source.
+- Do not over-classify object type before using the structure. If a field does not fit a non-OSS product, mark it adapted or not applicable instead of blocking the workflow.
+- Final output must include verdict, thesis, fact card, AI-native product judgment, OSS investment scorecard structure, DD priorities, uncertainty, and watch triggers.
 - If the user asked for a report or visual report, include those investment elements in the report and visualization. Do not downgrade to pure text just because investment judgment is present.
 
 ## Product Frontend Source Choice
@@ -124,9 +125,9 @@ If a selected source is only present in `qihang-skill-index`, say it is an index
 | Treating Twitter, Reddit, Exa, or WeChat as the workflow itself | They are `agent-reach` surfaces inside `topic-research-deposition`, not default workflow nodes. |
 | Jumping from product analysis straight to code | First turn product judgment into frontend brief and design source choice. |
 | Turning frontend references into a long chain | Pick one primary source from `qihang-skill-index`; use at most one critique source when a specific gap appears. |
-| Treating visual report, investment report, and product analysis as competing modes | Use the default chain: product + investment view -> report -> visualization. |
+| Treating visual report, investment report, and product analysis as competing modes | Use the default chain: AI-native product view -> OSS investment structure -> visualization. |
 | Hiding a report inside collapsed UI | Keep report content all-expanded unless interaction is explicitly requested. |
-| Inventing report structure inside the orchestrator | Preserve the structure from `ai-product-analyzer` or `oss-investment-scorecard`. |
+| Inventing report structure inside the orchestrator | Product perspective comes from `ai-product-analyzer`; structure comes from `oss-investment-scorecard`. |
 | Treating TypeUI as loaded context just because it is indexed | Read or install the upstream source first, or state that only the index entry was used. |
 | Creating a Next.js project too early | Ask Qihang to confirm implementation and target directory before scaffolding. |
 

@@ -2,7 +2,7 @@
 
 日期：2026-06-08
 
-定位：这是一条跨产品洞察和投资判断的运行链，用来把一个投资问题、产品案例或项目判断，推进成可阅读、可追踪、可继续 DD 的研究材料。它不是新的技能包，也不复制框架正文。
+定位：这是一条轻量调用链，用来把启航的 AI-native 产品判断接到 `oss-investment-scorecard` 的结构化输出，再承接成可视化研报页。它不是新的研报框架，不复制上游正文，也不替代 `ai-product-analyzer` 或 `oss-investment-scorecard`。
 
 ## 适用场景
 
@@ -35,12 +35,11 @@
 
 ## 技能选择
 
-| 判断条件 | 优先技能 | 用途 |
+| 节点 | 优先技能 / 来源 | 用途 |
 | --- | --- | --- |
-| 对象是开源 AI 项目或开源公司 | `qihang-skill-index` 中的 `oss-investment-scorecard` 来源 | 做开源生态、团队、技术护城河、商业化和退出路径评分 |
-| 对象是 AI 产品、deck、商业模式或产品案例 | `skills/ai-product-analyzer/` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
-| 既是开源项目又有产品化公司 | 先 `ai-product-analyzer`，再 `oss-investment-scorecard` | 先判断产品 / BP 是否成立，再判断 VC 可投资性 |
-| 需要生成研报或 IC memo | 两个技能输出合并进入研报骨架 | 把单点判断转成可继续 DD 的材料 |
+| AI-native 产品视角 | `skills/ai-product-analyzer/` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
+| 结构化投资输出 | `qihang-skill-index` 中的 `oss-investment-scorecard` 来源 | 把产品判断组织成 fact sheet、macro gate、scorecard、verdict、IC thesis、DD 和 watch triggers |
+| 可视化承接 | `qihang-skill-index` 中的前端来源 | 把 OSS investment 结构化结果做成现代、全展开的可视化研报页 |
 
 ## 调用链
 
@@ -48,20 +47,18 @@
 研究对象
 -> 研究问题定界
 -> 事实收集
--> 产品 / BP 逻辑判断
--> 投资评分或投资可行性判断
--> 研报结构化或可视化研报页
--> DD 问题树
--> 结论和跟踪触发器
+-> AI-native 产品 / BP 逻辑判断
+-> OSS investment 结构化
+-> 可视化研报页
 ```
 
-投资判断和可视化呈现不是二选一。如果用户说“产品投资分析研报”“可视化研报页”“HTML 研报”，默认链路是：
+结构化和可视化不是二选一。如果用户说“产品投资分析研报”“可视化研报页”“HTML 研报”，默认链路是：
 
 ```text
-产品+投资视角 -> 研报 -> 可视化
+AI-native 产品视角 -> OSS investment 结构化 -> 可视化
 ```
 
-只有当用户明确说 IC memo、DD 问题树或只要文字版时，才停在文字研报。
+只有当用户明确说 IC memo、DD 问题树或只要文字版时，才停在结构化文字结果。
 
 ## 1. 研究问题定界
 
@@ -69,7 +66,7 @@
 
 必须回答：
 
-- 这次是在判断“产品是否成立”，还是“项目是否值得投”。
+- 这次两个判断轴的权重是什么：产品是否成立，以及项目是否值得继续投资、跟踪或放弃。
 - 研究对象处于哪个阶段：概念、demo、早期产品、开源增长、商业化、融资中、规模化。
 - 这次输出是内部阅读材料、对外咨询材料，还是投资决策材料。
 - 最终要给出 verdict、watch trigger，还是只是整理 case。
@@ -125,88 +122,49 @@
 - 没有明确 NOT Positioning，竞争边界模糊。
 - traction 只有不可证伪大数字，没有可检查行为证据。
 
-## 4. 投资判断
+## 4. OSS Investment 结构化
 
-参考 `oss-investment-scorecard` 外部来源的条件：
+`oss-investment-scorecard` 在这条链里是结构化输出层，不是适用性分类器。
 
-- 对象是开源项目、开源商业公司、AI 基础设施，或投资问题明确要求 VC 视角。
-- 需要从“产品看起来不错”推进到“是否值得进入投资漏斗”。
+使用方式：
+
 - 先通过 `qihang-skill-index` 找到上游来源；不要假设本仓库有本地 `skills/oss-investment-scorecard/`。
+- 读取上游 `SKILL.md` 或可用模板，不复制正文进本仓库。
+- 用上游结构组织最终成果；不在本 workflow 里重写一套投资框架。
+- 如果某些 OSS 字段对非开源产品不贴合，标注“改写 / 不适用 / 待验证”，不要因此跳过结构化输出。
 
-最少要产出：
+结构化结果至少保留：
 
 - Macro gate：窗口、开源结构优势、AI cycle premium。
-- 五维评分：社区、团队、技术护城河、商业化、退出路径。
+- 五维 scorecard：社区、团队、技术护城河、商业化、退出路径。
 - 一票否决项检查。
 - IC thesis。
 - DD priority list。
 - Watch triggers。
 
-如果对象不是开源项目，不要硬套开源 scorecard。此时只保留投资判断问题树：
+## 5. 结构化和可视化
 
-- 市场是否够大。
-- 进入时机是否正确。
-- 团队是否有 founder-market fit。
-- 商业化路径是否清楚。
-- 是否有可验证 traction。
-- 退出路径和估值逻辑是否合理。
-
-## 5. 研报结构化
-
-标准研报骨架：
+最终结构以 `oss-investment-scorecard` 为主，嵌入 `ai-product-analyzer` 的 AI-native 产品判断。
 
 ```text
-# 标题
-
-## 结论先行
-- Verdict：
-- 一句话 thesis：
-- 当前建议：Pass / Watch / Deep DD / IC discussion
-
-## 事实卡片
-- 产品 / 公司：
-- 阶段：
-- 核心用户：
-- 关键数据：
-- 主要来源：
-
-## 产品判断
-- BP 逻辑链摘要：
-- 最强论点：
-- 最弱缺口：
-- 好案例 / 反面教材 / 待观察：
-
-## 投资判断
-- Macro gate：
-- Scorecard 或投资问题树：
-- 主要上行：
-- 主要风险：
-
-## 市场与竞争
-- 替代方案：
-- 直接竞品：
-- 平台风险：
-- 差异化：
-
-## DD 问题树
-- 必须验证：
-- 可后置验证：
-- 观察触发器：
-
-## 来源与不确定性
-- 已验证来源：
-- 未找到信息：
-- 关键推断：
+AI-native 产品判断
+-> OSS investment fact sheet
+-> Macro gate
+-> Scorecard table
+-> Verdict / IC thesis
+-> DD priority list
+-> Watch triggers
+-> Sources and uncertainty
 ```
 
-输出深度按需求裁剪：
+输出形态按需求裁剪，但不改变上游结构来源：
 
-- quick note：只保留结论、事实卡片、最强论点、最弱缺口、下一步。
-- case memo：保留产品判断、投资判断和 DD 问题树。
-- research report：保留完整骨架和来源。
-- IC memo：强化 verdict、thesis、投资风险、条款或里程碑条件。
+- quick note：只保留 verdict、产品最强/最弱判断、scorecard 摘要、下一步。
+- case memo：保留产品判断、scorecard、DD priority 和 watch triggers。
+- research report：保留完整结构和来源。
+- IC memo：强化 verdict、IC thesis、关键风险、DD 条件。
 
-如果输出形态是可视化研报页，沿用上游产品判断或投资判断形成的研报骨架，不在 workflow 里重新规定论证顺序。
+如果输出形态是可视化研报页，沿用 `oss-investment-scorecard` 结构，不在 workflow 里重新规定论证顺序。
 
 页面默认现代、全展开、少折叠、不堆叠卡片；优先用分区、矩阵、时间线、评分条和逻辑图表达已有研报结构。
 

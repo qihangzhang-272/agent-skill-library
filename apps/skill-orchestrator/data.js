@@ -1,5 +1,5 @@
 window.SKILL_ORCHESTRATOR_DATA = {
-  "generatedAt": "2026-06-13 22:13:07",
+  "generatedAt": "2026-06-13 22:25:55",
   "repository": {
     "name": "agent-skill-library",
     "root": "."
@@ -19,6 +19,14 @@ window.SKILL_ORCHESTRATOR_DATA = {
       "path": "skills/qihang-skill-index/SKILL.md",
       "directory": "skills/qihang-skill-index",
       "description": ">-",
+      "status": "available"
+    },
+    {
+      "id": "qihang-workflow-orchestrator",
+      "title": "qihang workflow orchestrator",
+      "path": "skills/qihang-workflow-orchestrator/SKILL.md",
+      "directory": "skills/qihang-workflow-orchestrator",
+      "description": "Use when Qihang asks to run, package, choose, or maintain a proven workflow such as topic-to-WeChat publishing, product-to-frontend design, or product-to-investment research.",
       "status": "available"
     },
     {

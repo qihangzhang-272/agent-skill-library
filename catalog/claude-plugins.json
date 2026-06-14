@@ -64,11 +64,12 @@
     {
       "name": "qihang-skill-pack",
       "displayName": "Qihang Skill Pack",
-      "description": "Qihang's lightweight external GitHub skill/source index for selecting useful upstream skills without vendoring their contents.",
-      "version": "0.1.0",
+      "description": "Qihang's lightweight external GitHub skill/source index and proven workflow router for selecting upstream capabilities without vendoring their contents.",
+      "version": "0.2.0",
       "keywords": [
         "qihang",
         "skill-index",
+        "workflow",
         "github",
         "external-skills",
         "curation"
@@ -81,6 +82,11 @@
           "id": "qihang-skill-index",
           "sourcePath": "skills/qihang-skill-index",
           "targetName": "qihang-skill-index"
+        },
+        {
+          "id": "qihang-workflow-orchestrator",
+          "sourcePath": "skills/qihang-workflow-orchestrator",
+          "targetName": "qihang-workflow-orchestrator"
         }
       ]
     }

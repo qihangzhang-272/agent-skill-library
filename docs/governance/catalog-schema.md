@@ -59,11 +59,12 @@
 - `docs/workflows/prd-to-frontend.md` 记录 UI 调用链和选择规则。
 - 除非某个设计技能被长期验证并重写为自培养核心能力，否则不新增本地技能包。
 
-例如写作和产品板块：
+例如写作、产品和工作流：
 
 - `ai-product-analyzer` 是自培养产品洞察技能，写入 `agent-product`。
 - `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，写入 `agent-writing`。
 - `qihang-skill-index` 是启航外部 GitHub 技能源索引，写入 `qihang-skill-pack`。
+- `qihang-workflow-orchestrator` 是三条已跑通工作流入口，写入 `qihang-skill-pack`。
 - `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 
 ## 生成规则

@@ -5,8 +5,8 @@
 ## 当前文件
 
 - `linear-workflow.md`：Linear 项目、Issue 类型和技能收录跟踪口径。
-- `investment-product-to-research-report.md`：投资 / 产品问题到研报、IC memo 和 DD 问题树的调用链。
 - `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。
+- `investment-product-to-research-report.md`：从产品判断到投资研报、IC memo 和 DD 问题树的调用链。
 
 ## 放置标准
 
@@ -17,4 +17,4 @@
 - 上游同步流程。
 - Linear / GitHub 协作流程。
 - 从实验到正式收录的验收流程。
-- 跨板块调用链，例如投资 / 产品到研报、PRD 到前端实现。
+- 跨技能调用链，例如 product -> frontend-design、product -> investment report。

@@ -21,7 +21,7 @@ Claude Code plugin 只作为自培养技能和轻量索引的分发层。目前�
 
 - `agent-product`：`ai-product-analyzer`
 - `agent-writing`：`topic-research-deposition`、`qihang-writing-style`
-- `qihang-skill-pack`：`qihang-skill-index`
+- `qihang-skill-pack`：`qihang-skill-index`、`qihang-workflow-orchestrator`
 
 ## 索引入口
 
@@ -56,20 +56,21 @@ claude plugin validate .
 
 ## 当前正式技能
 
-| 技能 | 板块 | 来源 | 状态 |
-| --- | --- | --- | --- |
-| `ai-product-analyzer` | product | `skills/ai-product-analyzer/` | 自培养产品洞察技能，进入 `agent-product` 插件 |
-| `qihang-writing-style` | writing | `skills/qihang-writing-style/` | 自培养启航写作风格技能，进入 `agent-writing` 插件 |
-| `topic-research-deposition` | writing | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
-| `qihang-skill-index` | operations | `skills/qihang-skill-index/` | 启航外部 GitHub 技能源索引，进入 `qihang-skill-pack` 插件 |
+| 技能 | 来源 | 状态 |
+| --- | --- | --- |
+| `ai-product-analyzer` | `skills/ai-product-analyzer/` | 自培养产品洞察技能，进入 `agent-product` 插件 |
+| `qihang-writing-style` | `skills/qihang-writing-style/` | 自培养启航写作风格技能，进入 `agent-writing` 插件 |
+| `topic-research-deposition` | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
+| `qihang-skill-index` | `skills/qihang-skill-index/` | 启航外部 GitHub 技能源索引，进入 `qihang-skill-pack` 插件 |
+| `qihang-workflow-orchestrator` | `skills/qihang-workflow-orchestrator/` | 三条已跑通工作流的调用入口，进入 `qihang-skill-pack` 插件 |
 
 ## 当前运行链
 
 | 调用链 | 文档 | 作用 |
 | --- | --- | --- |
-| 公众号产品 / 选题文章链 | `orchestrations/wechat-product-research-writing-publish.json` | 把产品洞察、选题调研、启航写作和公众号排版发布串成稳定工作流 |
-| 投资 / 产品问题到研报 | `docs/workflows/investment-product-to-research-report.md` | 把产品判断、投资评分、DD 问题树整理成研报、case memo 或 IC memo |
-| PRD 到前端实现 | `docs/workflows/prd-to-frontend.md` | 把模糊需求或 PRD 推进到页面结构、组件计划、前端实现和浏览器验收 |
+| topic -> writing -> md2wechat | `skills/qihang-workflow-orchestrator/` | 从选题素材沉淀到启航风格正文，再通过 `qihang-skill-index` 查 md2wechat 并进入公众号排版/草稿箱 |
+| product -> frontend-design | `docs/workflows/prd-to-frontend.md` | 从产品洞察推进到前端 brief、设计来源选择、实现计划和浏览器验收 |
+| product -> investment report | `docs/workflows/investment-product-to-research-report.md` | 从产品洞察推进到投资判断、研报结构、DD 问题树和跟踪触发器 |
 
 ## 可视化编排
 
@@ -84,7 +85,7 @@ claude plugin validate .
 - 仓库治理和引用原则见 [docs/governance/](docs/governance/)。
 - 技能库宪法见 [docs/governance/library-constitution.md](docs/governance/library-constitution.md)。
 - 索引和记录方式见 [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md)。
-- 收录、协作、Linear 和跨板块调用链见 [docs/workflows/](docs/workflows/)。
+- 收录、协作、Linear 和跨技能调用链见 [docs/workflows/](docs/workflows/)。
 - 外部 GitHub 技能源索引见 [github-skill-index.md](skills/qihang-skill-index/references/github-skill-index.md)。
 
 ## 维护规则

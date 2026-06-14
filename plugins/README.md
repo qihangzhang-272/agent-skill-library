@@ -26,7 +26,7 @@ plugins/<plugin-name>/
 | --- | --- |
 | `agent-product` | 启航自培养产品洞察技能，做 AI 产品 BP 逻辑、商业模式和叙事判断 |
 | `agent-writing` | 启航自培养公众号写作链路，包含选题素材沉淀和启航写作风格 |
-| `qihang-skill-pack` | 启航外部 GitHub 技能源 repo 根目录索引，用来选择外部能力但不复制外部正文 |
+| `qihang-skill-pack` | 启航外部 GitHub 技能源 repo 根目录索引和三条已跑通 workflow 入口 |
 
 ## 安装测试
 

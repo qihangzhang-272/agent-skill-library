@@ -1,17 +1,17 @@
 {
-  "id": "wechat-product-research-writing-publish",
-  "title": "产品洞察 / 选题调研 -> 启航写作 -> 公众号排版发布",
-  "goal": "把一个 AI 产品、技术话题、外部文章或公众号选题，从素材沉淀推进到启航风格文章，再进入微信公众号排版和草稿箱发布。",
-  "context": "这条链是人工工作流定义，不是自动 runner。Claude 需要按节点顺序读取对应 skill；其中 ai-product-analyzer、topic-research-deposition、qihang-writing-style 是自培养能力，qihang-skill-index 用于查找 md2wechat、agent-reach 等外部能力来源。",
+  "id": "topic-writing-md2wechat",
+  "title": "选题沉淀 -> 启航写作 -> 公众号排版发布",
+  "goal": "把一个公众号选题、外部文章或技术话题，从原始素材沉淀推进到启航风格文章，再进入微信公众号排版和草稿箱发布。",
+  "context": "这条链是人工工作流定义，不是自动 runner。Claude 需要按节点顺序读取对应 skill；topic-research-deposition 和 qihang-writing-style 是自培养能力，qihang-skill-index 用于查找 md2wechat、agent-reach 等外部能力来源。",
   "finalOutput": "完成一篇可发布的公众号文章，包含正文、图文节奏、配图提示或已沉淀图片、Markdown 排版结果、草稿箱推送状态和未完成风险。",
   "pluginScope": {
     "distributedSkills": [
-      "agent-product:ai-product-analyzer",
       "agent-writing:topic-research-deposition",
-      "agent-writing:qihang-writing-style"
+      "agent-writing:qihang-writing-style",
+      "qihang-skill-pack:qihang-workflow-orchestrator"
     ],
     "libraryOnlySkills": [
-      "qihang-skill-index"
+      "qihang-skill-pack:qihang-skill-index"
     ]
   },
   "nodes": [
@@ -23,15 +23,6 @@
       "input": "选题方向、来源链接、已有素材、用户想看的平台和文章体裁。",
       "output": "按平台归档的原始素材 md、截图、前置确认摘要、五维度覆盖情况和素材目录。",
       "acceptance": "素材落入固定 draft 目录；每条有 URL 的核心素材有截图；完成后停下等待用户确认是否进入写作。"
-    },
-    {
-      "id": "product-insight",
-      "skillId": "ai-product-analyzer",
-      "title": "产品洞察与 BP 逻辑判断",
-      "role": "当文章对象是 AI 产品、创业公司、技术产品或产品案例时执行。用 BP 逻辑链形成产品判断，不把官网叙事当结论。",
-      "input": "产品官网、公开资料、调研素材、截图、用户指定的问题和目标读者。",
-      "output": "Reference 使用记录、BP 11 段判断、综合判定、最强论点、最弱缺口和建议叙事线。",
-      "acceptance": "事实与判断分开；信息不足处明确标注；命中商业模式、Data Agent 或叙事审计时已读取对应 references。"
     },
     {
       "id": "qihang-writing",
@@ -54,7 +45,7 @@
   ],
   "rules": [
     "这条链描述稳定人工流程，不复制各技能正文。",
-    "如果只是写作修改，不需要强行执行 topic-research 或 product-insight。",
+    "如果只是产品分析，不进入这条链，改用 product 相关工作流。",
     "如果只是技能库维护，不进入 md2wechat 发布节点。",
     "外部收藏技能默认只通过 qihang-skill-index 引用，除非明确被提升为自培养核心技能。"
   ]

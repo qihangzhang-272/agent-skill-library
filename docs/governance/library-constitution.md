@@ -52,8 +52,9 @@
 
 一个技能进入正式库后，至少要能解释它在某条链路里的位置：
 
-- 投资 / 产品问题到研报。
-- PRD 到前端实现。
+- topic -> writing -> md2wechat。
+- product -> frontend-design。
+- product -> investment report。
 - 技术开发范式和项目初始化。
 - 写作、改写和内容定稿。
 - 运营、同步和治理。
@@ -73,7 +74,7 @@ Claude Code plugin 是分发层，不是源内容层。
 - 不允许把 `skills/`、`agents/`、`hooks/` 放进 `.claude-plugin/`。
 - 插件不得引用插件目录外部文件；需要的技能文件必须复制进插件目录。
 - 插件必须写 semver 版本号；只要某个插件包含的技能正文、支撑文件或 manifest 变化，就必须 bump 对应插件版本。
-- 当前默认插件范围：`agent-product` 分发产品洞察技能，`agent-writing` 分发选题调研和启航写作风格技能，`qihang-skill-pack` 分发外部 GitHub 技能源索引。
+- 当前默认插件范围：`agent-product` 分发产品洞察技能，`agent-writing` 分发选题调研和启航写作风格技能，`qihang-skill-pack` 分发外部 GitHub 技能源索引和已跑通工作流入口。
 
 ## 维护原则
 

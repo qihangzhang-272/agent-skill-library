@@ -8,7 +8,7 @@
 
 | 工作流 | 文件 | 用途 |
 | --- | --- | --- |
-| 公众号产品/选题文章链 | `wechat-product-research-writing-publish.json` | 连接产品洞察、选题素材沉淀、启航写作风格和公众号排版发布 |
+| topic -> writing -> md2wechat | `topic-writing-md2wechat.json` | 连接选题素材沉淀、启航写作风格和公众号排版发布 |
 
 ## 文件格式
 

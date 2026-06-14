@@ -1,4 +1,4 @@
-version: 3
+version: 4
 library: agent-skill-library
 principle: "self-cultivated skills stay local; external skills and source repositories stay as repo-root GitHub indexes unless explicitly promoted"
 
@@ -23,6 +23,7 @@ plugin_policy:
     qihang-skill-pack:
       skills:
         - qihang-skill-index
+        - qihang-workflow-orchestrator
 
 external_index:
   source_of_truth: "skills/qihang-skill-index/references/github-skill-index.md"
@@ -37,41 +38,31 @@ external_index:
     - skill-discovery
 
 pipelines:
-  wechat_product_research_writing_publish:
-    title: "公众号产品 / 选题文章链"
-    workflow_doc: "orchestrations/wechat-product-research-writing-publish.json"
+  topic_writing_md2wechat:
+    title: "选题沉淀到公众号草稿箱"
+    workflow_doc: "orchestrations/topic-writing-md2wechat.json"
     primary_skills:
       - topic-research-deposition
-      - ai-product-analyzer
       - qihang-writing-style
+      - qihang-skill-index
+    workflow_skill: qihang-workflow-orchestrator
     external_references:
       - md2wechat via qihang-skill-index
       - agent-reach via qihang-skill-index
     output_artifacts:
       - "research deposition folder"
-      - "product insight memo"
       - "Qihang-style WeChat article"
-      - "WeChat draft"
-  investment_product_to_research_report:
-    title: "产品洞察到投资判断"
-    workflow_doc: "docs/workflows/investment-product-to-research-report.md"
-    primary_skills:
-      - ai-product-analyzer
-    external_references:
-      - oss-investment-scorecard via qihang-skill-index
-    output_artifacts:
-      - "quick note"
-      - "case memo"
-      - "research report"
-      - "DD question tree"
-  prd_to_frontend:
-    title: "PRD 到前端实现"
+      - "WeChat layout artifact"
+      - "WeChat draft status"
+  product_frontend_design:
+    title: "产品判断到前端设计实现"
     workflow_doc: "docs/workflows/prd-to-frontend.md"
     primary_skills:
+      - ai-product-analyzer
       - qihang-skill-index
+    workflow_skill: qihang-workflow-orchestrator
     external_references:
       - "Anthropic skills"
-      - "GSAP skills"
       - "Awesome Design Skills"
       - "TypeUI"
       - "Taste Skill"
@@ -79,10 +70,25 @@ pipelines:
       - "shadcn/ui"
       - "Magic UI"
     output_artifacts:
+      - "product insight"
       - "frontend brief"
-      - "page type decision"
       - "design source selection"
-      - "browser acceptance record"
+      - "implementation and browser acceptance plan"
+  product_investment_report:
+    title: "产品判断到投资研报"
+    workflow_doc: "docs/workflows/investment-product-to-research-report.md"
+    primary_skills:
+      - ai-product-analyzer
+      - qihang-skill-index
+    workflow_skill: qihang-workflow-orchestrator
+    external_references:
+      - oss-investment-scorecard via qihang-skill-index
+    output_artifacts:
+      - "product insight"
+      - "investment judgment"
+      - "research report"
+      - "DD question tree"
+      - "watch triggers"
 
 skills:
   - id: ai-product-analyzer
@@ -100,8 +106,8 @@ skills:
       - reference_routed
     plugin_distribution: "agent-product"
     pipeline_role:
-      - "wechat_product_research_writing_publish"
-      - "investment_product_to_research_report"
+      - "product_frontend_design"
+      - "product_investment_report"
     trigger_examples:
       - "分析一下这个 AI 产品"
       - "从 BP 逻辑评估这个产品"
@@ -127,7 +133,7 @@ skills:
       - handoff_to_qihang_writing_style
     plugin_distribution: "agent-writing"
     pipeline_role:
-      - "wechat_product_research_writing_publish"
+      - "topic_writing_md2wechat"
     trigger_examples:
       - "搜一下这个选题"
       - "第 0 步，先沉淀素材"
@@ -152,7 +158,7 @@ skills:
       - lightweight_style_guidance
     plugin_distribution: "agent-writing"
     pipeline_role:
-      - "wechat_product_research_writing_publish"
+      - "topic_writing_md2wechat"
     trigger_examples:
       - "按我的公众号风格写"
       - "这篇不像我的风格"
@@ -173,9 +179,9 @@ skills:
       - github_repo_root_reference
     plugin_distribution: "qihang-skill-pack"
     pipeline_role:
-      - "wechat_product_research_writing_publish"
-      - "investment_product_to_research_report"
-      - "prd_to_frontend"
+      - "topic_writing_md2wechat"
+      - "product_frontend_design"
+      - "product_investment_report"
     trigger_examples:
       - "找一下之前收录过的外部技能"
       - "这个外部 repo 要不要装"
@@ -183,3 +189,26 @@ skills:
       - "前端设计可以参考哪些外部技能源"
     copy_policy: "internal_lightweight_index"
     notes: "收纳非启航自培养技能和技能源的 GitHub repo 根目录索引；不保留外部技能正文。"
+
+  - id: qihang-workflow-orchestrator
+    title: "Qihang Workflow Orchestrator"
+    status: internal
+    source_type: user_cultivated_workflow_router
+    package_path: "skills/qihang-workflow-orchestrator/SKILL.md"
+    package_traits:
+      - lightweight_workflow_router
+      - no_external_code_copy
+      - routes_to_underlying_skills
+    plugin_distribution: "qihang-skill-pack"
+    pipeline_role:
+      - "topic_writing_md2wechat"
+      - "product_frontend_design"
+      - "product_investment_report"
+    trigger_examples:
+      - "跑一下写作发布工作流"
+      - "topic 到 writing 到 md2wechat"
+      - "产品分析后做前端设计"
+      - "产品分析后做投资研报"
+      - "把跑通的工作流封装成技能"
+    copy_policy: "internal_user_cultivated_workflow_skill"
+    notes: "封装三条已确认工作流：topic-writing-md2wechat、product-frontend-design 和 product-investment-report。"

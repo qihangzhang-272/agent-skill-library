@@ -19,7 +19,7 @@
       "name": "agent-writing",
       "source": "./plugins/agent-writing",
       "description": "Qihang's self-cultivated research deposition and WeChat writing skills: agent-reach based source collection, public-account research mode, and author-style drafting/revision.",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "author": {
         "name": "Private Agent Skill Library"
       },

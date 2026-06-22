@@ -163,15 +163,26 @@ skills:
     source_type: user_calibrated_writing_skill
     package_path: "skills/qihang-writing-style/SKILL.md"
     package_support:
-      - "skills/qihang-writing-style/references/writing-process.md"
-      - "skills/qihang-writing-style/references/voice-quality.md"
-      - "skills/qihang-writing-style/references/ai-flavor-checklist.md"
-      - "skills/qihang-writing-style/references/style-rhythm.md"
+      - "skills/qihang-writing-style/references/_index-frameworks.md"
+      - "skills/qihang-writing-style/references/frameworks/bluf.md"
+      - "skills/qihang-writing-style/references/frameworks/fast-writing.md"
+      - "skills/qihang-writing-style/references/frameworks/inverted-pyramid.md"
+      - "skills/qihang-writing-style/references/frameworks/islands-bridges.md"
+      - "skills/qihang-writing-style/references/frameworks/paul-graham-essay.md"
+      - "skills/qihang-writing-style/references/frameworks/pyramid.md"
+      - "skills/qihang-writing-style/references/frameworks/scqa.md"
+      - "skills/qihang-writing-style/references/frameworks/sivers-compression.md"
+      - "skills/qihang-writing-style/references/frameworks/stratechery-analysis.md"
+      - "skills/qihang-writing-style/references/frameworks/tim-urban-explainer.md"
+      - "skills/qihang-writing-style/references/voices/_index.md"
+      - "skills/qihang-writing-style/references/voices/qihang.md"
+      - "skills/qihang-writing-style/references/ai-flavor-filter/checklist.md"
       - "skills/qihang-writing-style/references/skill-methodology-writing.md"
     package_traits:
       - reference_routed
+      - framework_voice_filter_architecture
       - user_style_calibrated
-      - lightweight_style_guidance
+      - progressive_disclosure
     plugin_distribution: "agent-writing"
     pipeline_role:
       - "topic_writing_md2wechat"
@@ -180,7 +191,7 @@ skills:
       - "这篇不像我的风格"
       - "这篇太方、短句太多、太像 AI"
     copy_policy: "internal_user_calibrated_skill"
-    notes: "启航自培养写作风格技能；正式保留在本仓库。"
+    notes: "启航自培养写作风格技能；已重构为 Framework、Voice、AI-Flavor Filter 三层架构，正式保留在本仓库。"
 
   - id: qihang-skill-index
     title: "Qihang Skill Index"

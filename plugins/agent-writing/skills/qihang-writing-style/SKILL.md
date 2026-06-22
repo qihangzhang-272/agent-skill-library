@@ -13,46 +13,52 @@ description: >-
 
 ## Core Use
 
-This skill covers both the **interactive writing process** (how to work with Qihang before drafting) and the **style rules** (how the final prose should read).
+This skill is a **three-layer system** for writing Qihang's Chinese public-account essays:
 
-The goal is not to remove AI flavor. The goal is to match Qihang's thinking rhythm: concrete, exploratory, self-questioning, grounded in examples, and driven by genuine insight rather than polished conclusions.
+- **Layer 1: Framework** — 文章的结构骨架（从哪起、按什么顺序推进、在哪收）。10 个独立框架，由 AI 根据题材自主选择。
+- **Layer 2: Voice** — 文章的语言质地（句子读起来像谁）。默认 `qihang` voice。
+- **Layer 3: AI-Flavor Filter** — 通用 AI 味检测（13 条禁止模式）。强制启用。
 
-## Interactive Writing Process (Required)
+三层**解耦**。可以独立替换任何一层而不影响其他两层。
 
-Do NOT generate a full draft immediately. Follow these steps and wait for Qihang's feedback at each step.
+## 调用流程（强制）
 
-### Step 1: SCQA Framing
+### Step 0: 理解写作场景
 
-Define the article's foundation with Qihang:
+读用户给的题材、原始诉求、已有材料。
+**如果用户只给了一个话题但没有任何材料，先做一轮澄清问答**，不要直接开写。澄清要问：
+- 是什么题材类型？（产品分析 / 复杂概念解释 / 探索型 essay / 新闻资讯 / ...）
+- 用户自己有没有论点？还是想边写边发现？
+- 有没有 deadline / 字数约束？
 
-- **S (Situation)**: What is the accepted background in this domain? Be specific — names, events, timelines.
-- **C (Conflict)**: What pain point, change, or counter-intuitive phenomenon has emerged? This should stand on its own as an interesting tension, without needing your opinion to make it interesting.
-- **Q (Question)**: What is the core question the article must answer? Not a rhetorical question — one you genuinely don't have a settled answer for.
-- **A (Answer/Hypothesis)**: What is your preliminary core argument? Have a point of view first, then find evidence. Do not list information aimlessly.
+### Step 1: 选 Framework
 
-Present the SCQA framework. Ask: "Does this framing feel right? Should anything be adjusted?" Wait for confirmation.
+1. 加载 `references/_index-frameworks.md` 信号路由表
+2. 根据 Step 0 收集到的题材特征，自主匹配 1 个 framework
+3. 加载 `references/frameworks/<chosen>.md`
+4. 向用户告知："我选了 X 框架，原因是 Y。如果不合适请告诉我。"
+5. 按该框架的骨架步骤推进——**多数框架是 4-7 步交互式流程，每步等用户确认**
 
-### Step 2: Logic Tree Decomposition (MECE)
+### Step 2: 应用 Voice
 
-Decompose 3-5 first-level supporting arguments using MECE (Mutually Exclusive, Collectively Exhaustive). For each argument, note what types of evidence are needed.
+- 加载 `references/voices/_index.md` 看可用 voices
+- 默认加载 `references/voices/qihang.md`，**贯穿写作全程**
+- Voice 从第一句就生效，不是写完才套上去
 
-Present the tree. Ask: "Are these arguments comprehensive? Specific cases you want to embed?" Wait for confirmation.
+### Step 3: 草稿完成后过 AI-Flavor Filter（强制）
 
-### Step 3: Deepening and Validation
+1. 加载 `references/ai-flavor-filter/checklist.md`
+2. **逐条扫描 13 条禁止模式**
+3. 发现一条就修一条
+4. 修完之后向用户报告做了哪些修改
 
-For each supporting argument, expand in depth: why it happens (deductive reasoning), what evidence supports it (inductive reasoning), and what judgment it points to.
+### Step 4: 交付
 
-Present the reasoning chain. Ask: "Does the logic hold? Anything weak or missing?" Wait for confirmation.
+- 草稿全文
+- 标注：所选 Framework / 所用 Voice / 修复了哪些 AI 味问题
+- 简要说明主要的结构和风格选择
 
-### Step 4: Pyramid Output
-
-Integrate into a full article: engaging title, SCQA storytelling opening, body with sub-headlines and inline picture cues, ending that reopens the question (never close with a maxim). Default at least 5000 Chinese characters.
-
-After delivering the draft, note the main structural and style choices made.
-
-> **Detailed process guide:** `references/writing-process.md` — read when stuck or needing deeper guidance on any step.
-
-## Picture Cues Inside the Draft
+## 配图建议规则
 
 Weave picture cues directly into the body at the natural visual break of a section — after the core argument lands and before the next paragraph picks up.
 
@@ -66,62 +72,40 @@ Rules:
 - Only suggest images that actually exist in the research folder, or generated concepts a human can picture. Don't hallucinate screenshots.
 - Cues in Chinese, inline. Don't hoist into a separate appendix.
 
-## Absolute Prohibitions
-
-These patterns are FORBIDDEN in all Qihang articles. Scan for them before delivering any draft.
-
-| Pattern | Why forbidden |
-|---------|--------------|
-| "不是…而是…" | Mechanical contrast frame. Write it out in two full sentences instead. |
-| "如果…那么…" | Conclusion-posture, not exploration-posture. |
-| "本质上是…" / "关键在于…" / "真正的价值是…" | Declarative shortcuts that kill discussion. |
-| "它不是 A，而是 B" | Semantic substitution that looks like thinking but stays in place. |
-| Parallelism / tricolon / enumerated triplets in prose | Statistical model signature. At most one instance per article, and only when the rhythm is genuinely earned. |
-| Arrow chains in prose ("A → B → C") | PPT logic. Narrate the causality instead of diagramming it. |
-| Meta-narration ("到这儿其实可以停了", "这里卡住了") | Never explain your writing decisions to the reader. |
-| Frame words ("暴露了一件事", "这段分析放在X身上也成立") | Enter the analysis directly, don't announce it. |
-| Macro-assertion sentences ("所有人都在做同一件事") | If you can't show it with a specific case, don't declare it. |
-| Declarative endings | The ending must reopen the question, not close it with a final answer. |
-| Consecutive short paragraphs (>2) | In text-heavy articles, use medium paragraphs for rhythm. |
-
-## Required Voice
-
-- **Self-interruption discussion tone**: Give a surface answer, then immediately question it. Pull the reader in: "但这句话太容易说了。对吧？"
-- **Insight = quality of the question, not certainty of the answer.** The article's value lies in asking a question worth asking.
-- **Discussion space > declarative judgment.** Instead of "人剩下判断。这就是结论。", write "我现在的感觉是，人的位置正在往上游退。但退到哪儿算停？我不知道。"
-- **Colloquial precision**: Use "你看" / "这里有意思的是" / "我后来发现" / "真正麻烦的是" instead of conclusion-connectors.
-- **Start from a question, not from "I read something".** Reading material supports your argument; it is not the structural skeleton.
-- **Hypothesis-driven**: Have a point of view first, then find evidence.
-- **Ground every source in a lived scene**: When citing a source, place it in a concrete viewing/reading context. "我前阵子读到一个人类学家访谈" / "我也是在一次播客里听到..." / "后来我又翻到他在 The Atlantic 上的一篇文章". Never introduce a source as a floating authority; always attach it to where and how you encountered it.
-
 ## English-to-Chinese Translation Rule
 
 When quoting English source material in a Chinese article, **always provide a Chinese translation immediately after the English text**.
 
 The translation should be natural Chinese — capture meaning and tone, not grammar. For short embedded terms ("prompt", "loop", "agent"), inline translation is not required if already established. For full sentences or substantive clauses, always translate. When the English quote is the punchline of a section, the Chinese translation should carry equivalent weight.
 
-## Style Continuity
-
-- Prefer concrete experience, examples, and operational details over polished conclusions.
-- Keep repeated terms when repetition is natural. Don't replace terms with many synonyms.
-- Every abstract claim needs one: concrete example, metaphor/story, tool/file/script name, failure mode, before/after contrast, or user scene.
-- Keep source facts and personal judgment distinguishable.
-- If user feedback conflicts with this skill, update the skill instead of treating the feedback as a one-off edit.
-
-## Reference Files
-
-This skill uses **progressive disclosure**. SKILL.md is the routing skeleton (<200 lines). Detailed content lives in references/ — read them when the task calls for it.
-
-| Reference file | When to read |
-|---------------|-------------|
-| `references/writing-process.md` | Stuck or needing deeper guidance on the 4-step interactive process |
-| `references/voice-quality.md` | Before drafting — how to achieve the right language texture: colloquial feel, sentence rhythm, Chinese-English mixing, emotional leakage |
-| `references/ai-flavor-checklist.md` | After completing a draft — scan all 11 patterns and remove every instance before delivery |
-| `references/style-rhythm.md` | During revision — rhythm rules, paragraph shapes, opening/closing examples, voice descriptions |
-| `references/skill-methodology-writing.md` | Only when the topic is about agent skills, context engineering, prompt workflows, or writing systems |
-
 ## Output Expectations
 
-**New article:** Do not draft until Step 4. Default at least 5000 Chinese characters. Full draft unless Qihang asks for outline only.
+**New article:** Do not draft until the framework's final Step. Default at least 5000 Chinese characters. Full draft unless Qihang asks for outline only.
 
-**Revision:** Preserve Qihang's thesis and facts. Fix rhythm, density, section flow, and prohibited patterns first. Mention main style changes briefly after the revised file.
+**Revision:** Preserve Qihang's thesis and facts. Fix rhythm, density, section flow, and Filter patterns first. Mention main style changes briefly after the revised file.
+
+## Reference Files Routing
+
+This skill uses **progressive disclosure**. SKILL.md is the routing skeleton. Detailed content lives in `references/` — load them when the task calls for it.
+
+| 文件 | 何时加载 |
+|---|---|
+| `references/_index-frameworks.md` | 每次开始写作（Step 1） |
+| `references/frameworks/<name>.md` | AI 选定框架后 |
+| `references/voices/_index.md` | 需要查 voice 选项时 |
+| `references/voices/qihang.md` | 默认贯穿全程（Step 2） |
+| `references/ai-flavor-filter/checklist.md` | 草稿完成后强制扫描（Step 3） |
+| `references/skill-methodology-writing.md` | 题材是 agent skills / context engineering / prompt workflows / writing systems 时按需加载 |
+
+## 三层架构的设计理由
+
+为什么不把 Framework + Voice + Filter 写在一个文件里？因为它们是**三个独立层级**：
+
+- **Framework 决定怎么"展开"**——同一个题材用 SCQA 走和用 Paul Graham essay 走，结构完全不同
+- **Voice 决定怎么"说话"**——同一个骨架，用 Qihang 的语调和用 Naval 的格言式语调，读起来是完全不同的两篇文章
+- **Filter 决定怎么"避坑"**——所有 AI 写出来的文章都有一些通用的味道，这些应该被强制清除，跟选了什么 framework / voice 无关
+
+解耦三层有三个好处：
+1. **可独立替换**：换 Framework 不影响 Voice 和 Filter；换 Voice 不影响 Framework 和 Filter
+2. **可扩展**：未来加新 framework / voice 只是加一个文件，不影响整体
+3. **可复用**：Filter 层可以被其他写作技能借用，因为它和具体作者无关

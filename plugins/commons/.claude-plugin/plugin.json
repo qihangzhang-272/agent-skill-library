@@ -1,0 +1,7 @@
+{
+  "name": "commons",
+  "displayName": "Commons",
+  "version": "0.1.0",
+  "description": "共享通用能力：前端范式与交付规范（本轮占位预留）。",
+  "author": { "name": "Private Agent Skill Library" }
+}

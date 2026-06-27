@@ -1,0 +1,7 @@
+{
+  "name": "domain-investment",
+  "displayName": "Domain Investment",
+  "version": "0.1.0",
+  "description": "投研 IC memo 领域：研究、产品判断、竞品、单元经济、评分、估值、DD、thesis、IC memo 瓦片技能。",
+  "author": { "name": "Private Agent Skill Library" }
+}

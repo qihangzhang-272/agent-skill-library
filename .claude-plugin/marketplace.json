@@ -1,49 +1,14 @@
 {
   "name": "agent-skill-library",
-  "description": "Private Claude Code marketplace for Qihang's self-cultivated agent skills. External skills stay in the library index unless explicitly promoted.",
-  "owner": {
-    "name": "Private Agent Skill Library"
-  },
+  "description": "Private Claude Code marketplace for Qihang's self-cultivated agent skills, organized as foundation / orchestrator+index / domains.",
+  "owner": { "name": "Private Agent Skill Library" },
   "plugins": [
-    {
-      "name": "agent-product",
-      "source": "./plugins/agent-product",
-      "description": "Qihang's self-cultivated AI product insight skill for BP logic, business-model judgment, narrative audit, and product-analysis articles.",
-      "version": "0.3.0",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    },
-    {
-      "name": "agent-writing",
-      "source": "./plugins/agent-writing",
-      "description": "Qihang's self-cultivated research deposition and WeChat writing skills: agent-reach based source collection, public-account research mode, and author-style drafting/revision.",
-      "version": "0.3.3",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    },
-    {
-      "name": "qihang-skill-pack",
-      "source": "./plugins/qihang-skill-pack",
-      "description": "Qihang's lightweight GitHub skill/source index and stable workflow router: agent-reach research to Qihang writing to Codex/md2wechat layout, product-to-frontend, product-to-investment IC memo, and skill-library maintenance.",
-      "version": "0.3.2",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    },
-    {
-      "name": "agent-investment",
-      "source": "./plugins/agent-investment",
-      "description": "Qihang's AI investment IC memo package: research handoff, AI-native product judgment, competitive landscape, unit economics, scorecard, valuation, DD, thesis tracking, and IC memo writing.",
-      "version": "0.1.1",
-      "author": {
-        "name": "Private Agent Skill Library"
-      },
-      "strict": true
-    }
+    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.1.0", "description": "元层：章程 + skill-architecture 元技能 + principles 占位。" },
+    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.1.0", "description": "调度路由 + references/chains 唯一权威源 + 落盘铁律。" },
+    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.1.0", "description": "两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。" },
+    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.1.0", "description": "公众号写作领域瓦技能。" },
+    { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.1.0", "description": "投研 IC memo 领域 9 个瓦技能。" },
+    { "name": "domain-product",    "source": "./plugins/domain-product",    "version": "0.1.0", "description": "AI 产品分析领域瓦技能。" },
+    { "name": "commons",           "source": "./plugins/commons",           "version": "0.1.0", "description": "共享通用能力（前端范式占位预留）。" }
   ]
 }

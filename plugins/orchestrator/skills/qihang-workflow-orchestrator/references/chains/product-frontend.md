@@ -8,6 +8,8 @@ ai-product-analyzer（产品洞察）→ 前端 brief → 页面/原型实现 �
 
 ## 落盘协议（领域细则）
 项目夹: research/<YYYY-MM-DD>-<product>-frontend/
+  ↑ 路径相对「用户当前工作项目目录」（运行时所在的项目根），不是技能库/插件仓库本身。
+    绝不把产物写进 plugins/ 或本技能库 repo 内。若不确定项目根在哪，先问用户。
 过程包:
   01-product-insight.md
   02-frontend-brief.md

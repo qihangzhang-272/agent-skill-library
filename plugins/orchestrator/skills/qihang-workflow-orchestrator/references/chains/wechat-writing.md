@@ -8,6 +8,8 @@ topic-research-deposition → qihang-writing-style（起草）→ 修订 → md2
 
 ## 落盘协议（领域细则）
 项目夹: writing/<YYYY-MM-DD>-<选题>/
+  ↑ 路径相对「用户当前工作项目目录」（运行时所在的项目根），不是技能库/插件仓库本身。
+    绝不把产物写进 plugins/ 或本技能库 repo 内。若不确定项目根在哪，先问用户。
 过程包:
   01-topic-research/     # 跨平台素材沉淀（agent-reach 截图与原始素材）
   02-outline.md

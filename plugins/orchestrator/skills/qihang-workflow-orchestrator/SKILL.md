@@ -18,7 +18,7 @@ Route to one chain definition, then follow that chain. This file only routes; ch
 | AI case 是否值得投、IC memo、DD、可视化研报 | `references/chains/investment-icmemo.md` |
 
 ## 端到端交付铁律（所有链继承）
-1. 任何端到端 workflow 必须先创建 run folder（项目文件夹），不允许散落文件。
+1. 任何端到端 workflow 必须先创建 run folder（项目文件夹），不允许散落文件。run folder 建在「用户当前工作项目目录」下，绝不写进 plugins/ 或本技能库 repo；不确定项目根就先问用户。
 2. 每个有保留价值的中间产物必须按所选 chain 定义落盘。
 3. 最终交付物不得替代过程包——成品与过程包同时存在。
 

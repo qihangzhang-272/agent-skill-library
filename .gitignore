@@ -3,3 +3,7 @@ Thumbs.db
 *.tmp
 *.log
 skills/*.zip
+
+# 运行产物与重构脚手架（不该进技能库）
+research/
+.migration/

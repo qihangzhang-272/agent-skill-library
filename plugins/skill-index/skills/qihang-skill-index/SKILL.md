@@ -46,6 +46,10 @@ Otherwise, keep only the GitHub source, role, and usage notes.
 
 Read `references/github-skill-index.md` for the current curated list. Source URLs intentionally point to GitHub repository roots unless Qihang asks for a specific subdirectory.
 
+## Registering A New Skill
+
+要登记一个新发现的外部技能时，读 `references/registration-guide.md`。它定义了：填哪 5 个字段（Source/Role/Status/Domain/Notes）、Status 阶梯（reference → absorbed/migrated）、以及**归 Domain 的门槛**（只有真融入某条 chain 才标 domain，否则留空）。不要凭印象往索引里加行——按指南走。
+
 ## How To Apply
 
 1. Identify the domain: writing, publishing, product/investment, frontend/design, or skill discovery.

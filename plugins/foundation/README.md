@@ -14,7 +14,7 @@
 
 ## 怎么扩展
 新增技能/领域请用 skill-architecture 元技能生成，不要手写散落结构。
-principles（上位价值观）的创建同样由 skill-architecture 驱动。
+principles 是启航的个人操作手册（认知原型、DO/DON'T、CALIBRATION），作为被动参考库按需读取；更新时也通过 skill-architecture 的维护约定，保持克制，只写跨 domain 都成立的偏好。
 
 ## 技能库维护
 - 技能分类、catalog 维护、版本（manual semver）、marketplace 注册与 `claude plugin validate . --strict` 校验，统一通过 skill-architecture 元技能的 references 约定执行。

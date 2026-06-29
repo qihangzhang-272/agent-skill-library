@@ -1,6 +1,33 @@
-# 创建/扩展 principles（本轮仅占位）
-principles 是上位价值观层：AI 理念、前端/视觉设计偏好、系统目标。
-本轮不实做，principles/SKILL.md 为空占位。
-将来扩展时：在 principles/ 下按主题建 reference（如 ai-philosophy.md /
-design-preferences.md / system-goals.md），并在 principles/SKILL.md 定义触发范围。
-该创建动作应通过本元技能完成，不手写散落文件。
+# 维护 principles
+
+principles 是启航的个人操作手册，采用「认知原型 + DO / DON'T / CALIBRATION」结构。
+
+## 定位
+
+- 被动参考库：只有当某个 workflow/skill 需要对齐启航的思考、交付、审美或不确定性处理偏好时才读取。
+- 不是全局强制规则：不要把所有任务都变成 principles 驱动。
+- 不写身份宣言：写可执行、可检验的偏好。
+
+## 能写什么
+
+只写跨 domain 都成立的偏好，例如：
+- 如何处理不确定性
+- 如何避免空洞和堆砌
+- 如何汇报
+- 何时信启航、何时不要盲从
+- 如何拆分超出上下文单位的大任务
+
+## 不写什么
+
+- 领域专属流程：放回对应 chain。
+- 专业 know-how / 数据源 / 搜索平台 checklist：放回对应 domain 技能或 chain 的 checklist。
+- 前端具体设计系统：放 commons 或对应视觉技能。
+- 口号、自我形象、简历式介绍。
+
+## 更新规则
+
+更新前先问：删掉这条会不会让 agent 在多个 domain 中更容易犯错？
+- 会：可以保留。
+- 不会：不要写进 principles。
+
+保持克制，不追求 1500 字上限。宁可短，也不要把领域问题塞进通用原则。

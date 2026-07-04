@@ -7,105 +7,130 @@
 - 第一用户是仓库维护者本人。
 - 主要使用者是被维护者配置和调用的 Codex、Claude 和后续 agent。
 - 仓库记录哪些能力值得用、什么时候用、怎么组合、如何配置到具体项目。
-- 外部技能优先以地址、索引、来源和调用方式沉淀；只有明确可迁移且边界清楚的技能包才 vendored 到 `skills/`。
+- 外部技能优先以地址、索引、来源和调用方式沉淀；只有明确可迁移且边界清楚的技能包才 vendored 进 `plugins/*/skills/`。
 - 网页 prompt、UI 库源码、项目资料和一次性实验结果不进入正式技能包。
 
 ## 仓库职能
 
-本仓库只承担两个核心职能：
+本仓库承担两个核心职能：
 
-1. **工作流编排**：把已经验证过的技能链沉淀到 `orchestrations/` 和 `docs/workflows/`。HTML 编排台只是辅助工具，不是源头。
-2. **技能收藏索引**：外部好用技能和技能源优先记录在 `qihang-skill-index`，URL 默认使用 GitHub repo 根目录。除非边界、许可证和复用价值都清楚，否则不把外部仓库整包搬进来。
+1. **工作流编排**：把已经验证过的技能链沉淀到 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/`，并在 `docs/workflows/` 写跨技能调用链说明。
+2. **技能分发**：通过 Claude Code plugin marketplace 分发自培养、高频复用的技能。外部好用技能和技能源优先记录在 `qihang-skill-index`，URL 默认使用 GitHub repo 根目录；除非边界、许可证和复用价值都清楚，否则不把外部仓库整包搬进来。
 
-Claude Code plugin 只作为自培养技能和轻量索引的分发层。目前默认只分发：
+## 三层 plugins 架构
 
-- `agent-product`：`ai-product-analyzer`
-- `agent-writing`：`topic-research-deposition`、`qihang-writing-style`
-- `qihang-skill-pack`：`qihang-skill-index`、`qihang-workflow-orchestrator`，负责 marketplace 里的稳定工作流路由
-- `agent-investment`：启航 AI 投资 IC Memo 工作包，包含研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪和成稿节点
+本仓库已重构为三层 plugins 架构。源技能维护在 `plugins/` 下，按角色分层：
+
+| 层 | 目录 | 职责 |
+| --- | --- | --- |
+| **Foundation（基础层）** | `plugins/foundation/` | 元层：`principles` 个人操作手册 + `skill-architecture` 元技能（新增技能/领域/链时的脚手架与协议） |
+| **Orchestrator + Index（调度与索引层）** | `plugins/orchestrator/`、`plugins/skill-index/` | `qihang-workflow-orchestrator` 路由已验证工作流；`qihang-skill-index` 索引本地与外部 GitHub 技能 |
+| **Domain（领域层）** | `plugins/domain-writing/`、`plugins/domain-investment/`、`plugins/domain-product/` | 按领域组织的瓦技能（tile skills），每个领域一条 chain，瓦技能只承接一个节点 |
+| **Commons（共享层）** | `plugins/commons/` | 跨领域共享的通用能力（当前为前端范式占位预留） |
+
+每个 plugin 都有 `.claude-plugin/plugin.json`，技能正文放在 `plugins/<plugin>/skills/<skill>/SKILL.md`（裸 name，三层渐进披露：SKILL.md → references/ → assets/）。
 
 ## 索引入口
 
 | 入口 | 用途 |
 | --- | --- |
-| `skills/` | 只放启航自培养技能和启航维护的轻量索引 |
-| `skills/qihang-skill-index/` | 外部 GitHub 技能 / 技能源 repo 根目录索引 |
-| `catalog/skills.yml` | 本地正式技能总账、调用链角色和插件分发关系 |
-| `orchestrations/` | 已验证工作流编排 |
+| `plugins/foundation/skills/skill-architecture/` | 元技能：新增技能/领域/链时生成 spec 合规骨架，强制落盘协议 |
+| `plugins/skill-index/skills/qihang-skill-index/` | 外部 GitHub 技能 / 技能源 repo 索引，探测与提示安装 |
+| `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/` | 已验证工作流的 chain 定义（落盘协议、节点顺序、过程包文件名） |
 | `docs/workflows/` | 跨技能工作流说明 |
+| `docs/governance/` | 仓库级原则、架构边界、引用策略 |
 
 ## Claude Code 插件市场
 
-本仓库现在同时提供 Claude Code plugin marketplace 分发层。它只负责分发自培养、会高频复用的技能，不承载外部收藏目录：
+本仓库提供 Claude Code plugin marketplace 分发层。它只分发自培养、会高频复用的技能，不承载外部收藏目录：
 
 - Marketplace manifest：`.claude-plugin/marketplace.json`
 - 插件分发目录：`plugins/`
-- 插件分发索引：`catalog/claude-plugins.json`
-- 生成脚本：`scripts/build-claude-plugins.ps1`
+- 当前分发 7 个 plugin：`foundation` / `orchestrator` / `skill-index` / `domain-writing` / `domain-investment` / `domain-product` / `commons`
 
-`plugins/` 不是源内容目录。源技能仍维护在 `skills/`，分发映射维护在 `catalog/claude-plugins.json`。每次改变自培养技能进入哪个插件后，运行：
+三层架构下，`plugins/` 既是源内容目录也是分发目录——源技能直接维护在 `plugins/<plugin>/skills/`，不再有独立的 `skills/` 源目录或 `catalog/` 总账。
 
-```powershell
-.\scripts\build-claude-plugins.ps1
-```
-
-然后用 Claude Code 验证：
+新增 plugin 或改变技能归属后，运行：
 
 ```powershell
-claude plugin validate .
+claude plugin validate . --strict
 ```
 
 ## 当前正式技能
 
-| 技能 | 来源 | 状态 |
+按三层架构分组：
+
+### Foundation（基础层）
+
+| 技能 | 路径 | 用途 |
 | --- | --- | --- |
-| `ai-product-analyzer` | `skills/ai-product-analyzer/` | 自培养产品洞察技能，进入 `agent-product` 插件 |
-| `qihang-writing-style` | `skills/qihang-writing-style/` | 自培养启航写作风格技能，进入 `agent-writing` 插件 |
-| `topic-research-deposition` | `skills/topic-research-deposition/` | 已沉淀为公众号选题搜索与素材截图工作流 |
-| `qihang-ic-memo-writer` | `skills/qihang-ic-memo-writer/` | 投资节点产出后的最终 IC Memo 写作技能，进入 `agent-investment` 插件 |
-| `qihang-skill-index` | `skills/qihang-skill-index/` | 启航外部 GitHub 技能源索引，进入 `qihang-skill-pack` 插件 |
-| `qihang-workflow-orchestrator` | `skills/qihang-workflow-orchestrator/` | 已跑通工作流的统一路由入口，具体链路压缩在 references，进入 marketplace 的 `qihang-skill-pack` 插件 |
+| `principles` | `plugins/foundation/skills/principles/` | 启航个人操作手册：认知原型、DO/DON'T、CALIBRATION。被动参考库，不是全局强制规则 |
+| `skill-architecture` | `plugins/foundation/skills/skill-architecture/` | 元技能：新增技能/领域/链时生成 spec 合规骨架，强制落盘协议，更新 marketplace.json |
+
+### Orchestrator + Index（调度与索引层）
+
+| 技能 | 路径 | 用途 |
+| --- | --- | --- |
+| `qihang-workflow-orchestrator` | `plugins/orchestrator/skills/qihang-workflow-orchestrator/` | 已跑通工作流的统一路由入口，具体 chain 压缩在 `references/chains/` |
+| `qihang-skill-index` | `plugins/skill-index/skills/qihang-skill-index/` | 两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装 |
+
+### Domain（领域层）
+
+| 领域 | 技能 | 路径 |
+| --- | --- | --- |
+| **domain-writing** | `qihang-writing-style` | `plugins/domain-writing/skills/qihang-writing-style/` |
+| | `topic-research-deposition` | `plugins/domain-writing/skills/topic-research-deposition/` |
+| **domain-investment** | `qihang-investment-research` | `plugins/domain-investment/skills/qihang-investment-research/` |
+| | `qihang-ai-product-judgment` | `plugins/domain-investment/skills/qihang-ai-product-judgment/` |
+| | `qihang-competitive-landscape` | `plugins/domain-investment/skills/qihang-competitive-landscape/` |
+| | `qihang-unit-economics` | `plugins/domain-investment/skills/qihang-unit-economics/` |
+| | `qihang-investment-scorecard` | `plugins/domain-investment/skills/qihang-investment-scorecard/` |
+| | `qihang-valuation-returns` | `plugins/domain-investment/skills/qihang-valuation-returns/` |
+| | `qihang-investment-dd` | `plugins/domain-investment/skills/qihang-investment-dd/` |
+| | `qihang-thesis-tracking` | `plugins/domain-investment/skills/qihang-thesis-tracking/` |
+| | `qihang-ic-memo-writer` | `plugins/domain-investment/skills/qihang-ic-memo-writer/` |
+| | `investment-visual-report` | `plugins/domain-investment/skills/investment-visual-report/` |
+| **domain-product** | `ai-product-analyzer` | `plugins/domain-product/skills/ai-product-analyzer/` |
 
 ## 当前运行链
 
-| 调用链 | 文档 | 作用 |
-| --- | --- | --- |
-| agent-reach search -> Qihang writing -> Codex layout -> md2wechat | `skills/qihang-workflow-orchestrator/references/topic-writing-md2wechat.md` | Claude Code 先用 agent-reach 沉淀素材，再按启航写作技能成稿，最后由 Codex 做排版准备并通过 `qihang-skill-index` 解析 md2wechat 进入公众号排版/草稿箱 |
-| product -> frontend-design | `docs/workflows/prd-to-frontend.md` | 从产品洞察推进到前端 brief、设计来源选择、实现计划和浏览器验收 |
-| product -> investment IC memo -> visual report | `docs/workflows/investment-product-to-research-report.md` | 从 AI-native 产品判断进入启航投资工作包，产出 IC Memo、DD 问题树、watch triggers，并可继续做全展开可视化研报 |
+调用链由 `qihang-workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/`，跨技能说明在 `docs/workflows/`。
 
-## 可视化编排
+| 调用链 | chain 定义 | 文档 | 作用 |
+| --- | --- | --- | --- |
+| 公众号选题 → 启航写作 → md2wechat 排版 | `chains/wechat-writing.md` | - | agent-reach 沉淀素材 → 启航写作技能成稿 → md2wechat 进入公众号排版/草稿箱 |
+| 产品洞察 → 前端实现 | `chains/product-frontend.md` | `docs/workflows/prd-to-frontend.md` | 从产品洞察推进到前端 brief、设计来源选择、实现计划、浏览器验收 |
+| AI case → 投研 IC memo → 可视化研报 | `chains/investment-icmemo.md` | `docs/workflows/investment-product-to-research-report.md` | 从 AI-native 产品判断进入启航投资工作包，产出 IC Memo、DD 问题树、watch triggers，并可承接为全展开可视化研报 |
 
-- 本地编排台：`apps/skill-orchestrator/index.html`
-- 数据生成：运行 `.\scripts\build-skill-orchestrator-data.ps1`
+## 端到端交付铁律（所有链继承）
 
-编排台不运行 Claude，也不做本地 runner。它从当前 `skills/` 扫描技能，支持拖拽拼出动态技能链，实时生成整条链的 Claude handoff prompt。只有反复验证后值得沉淀的链路，才从页面导出 JSON 放进 `orchestrations/`。
+1. 任何端到端 workflow 必须先创建 run folder（项目文件夹），不允许散落文件。run folder 建在「用户当前工作项目目录」下，**绝不写进 `plugins/` 或本技能库 repo**；不确定项目根就先问用户。
+2. 每个有保留价值的中间产物必须按所选 chain 定义落盘。
+3. 最终交付物不得替代过程包——成品与过程包同时存在。
 
-## 文档入口
+## 维护原则
 
-- 文档总目录见 [docs/README.md](docs/README.md)。
-- 仓库治理和引用原则见 [docs/governance/](docs/governance/)。
-- 技能库宪法见 [docs/governance/library-constitution.md](docs/governance/library-constitution.md)。
-- 索引和记录方式见 [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md)。
-- 收录、协作、Linear 和跨技能调用链见 [docs/workflows/](docs/workflows/)。
-- 外部 GitHub 技能源索引见 [github-skill-index.md](skills/qihang-skill-index/references/github-skill-index.md)。
-
-## 维护规则
-
-1. 新增技能前先判断它是启航自培养技能，还是外部 GitHub repo 索引。
-2. 每个本地技能必须记录来源、用途、触发场景、迁移方式和验证状态。
-3. 外部 repo 默认先进入 `qihang-skill-index`，URL 使用 repo 根目录。
-4. 每次新增或删除本地正式技能都更新 `catalog/skills.yml`。
-5. Linear 项目用于跟踪收录、审查、去重和重构任务。
+- 调用链清楚比技能数量多更重要。
+- 大的资料源、复杂项目、网页 prompt 集合、UI 库和工具链，默认只做索引。
+- 小而清楚的技能包，只有在许可证、来源、迁移范围和复用场景明确时，才 vendored 进 `plugins/*/skills/`。
+- 分类优先服务调用链，不为了分类完整而增加空目录。
+- 新增技能/领域/链时，用 `skill-architecture` 元技能生成骨架，不要手创建 skill 文件夹——保证架构一致。
+- 需要提交时，commit 信息使用 `YYYY-MM-DD HH:mm｜中文变更描述`。
 
 ## 重要边界
 
-`ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，可独立复制到项目或用户级 skills 目录。
+- `ai-product-analyzer` 是明确需要跨环境复用的例外：它随包携带必要 `references/`，可独立复制到项目或用户级 skills 目录。
+- `qihang-skill-index` 是外部技能的统一收纳入口。`humanizer-zh`、`md2wechat`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等外部来源只保留 GitHub 索引，不再把完整文件堆进仓库。
+- `oss-investment-scorecard` 已从独立默认技能降级为 `qihang-investment-scorecard` 的内部 reference。运行时不要直接调用旧入口；产品投资链由 `qihang-workflow-orchestrator` 路由，再通过 `qihang-investment-scorecard` 使用其结构。
+- 投资工作包只暴露研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪、成稿、可视化研报节点；不要在 `domain-investment` 里再放第二个投资调度器。
+- 本仓库和 Product Hunter 没有长期关系。历史上从某个本地目录借用过内容，只作为导入 provenance，不构成本仓库的上游、资料源或同步关系。
 
-`qihang-skill-index` 是外部技能的统一收纳入口。`humanizer-zh`、`md2wechat`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等外部来源只保留 GitHub 索引，不再把完整文件堆进 `skills/`。
+## 相关文档
 
-`oss-investment-scorecard` 已从独立默认技能降级为 `agent-investment` 内部 reference。运行时不要直接调用旧入口；产品投资链由 `qihang-workflow-orchestrator` 路由，再通过 `qihang-investment-scorecard` 使用其结构。
-
-投资工作包只暴露研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪和成稿节点；不要在 `agent-investment` 里再放第二个投资调度器。
-
-本仓库和 Product Hunter 没有长期关系。历史上从某个本地目录借用过内容，只作为导入 provenance，不构成本仓库的上游、资料源或同步关系。
+- [docs/README.md](docs/README.md) — 文档总目录
+- [docs/governance/architecture.md](docs/governance/architecture.md) — 技能库整体架构、分层和边界
+- [docs/governance/library-constitution.md](docs/governance/library-constitution.md) — 技能库长期约束、收录判断
+- [docs/governance/project-purpose.md](docs/governance/project-purpose.md) — 仓库为什么存在、给谁用
+- [docs/governance/reference-policy.md](docs/governance/reference-policy.md) — 引用式技能库规则，资料正文不复制
+- [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md) — 技能总账记录方式
+- [docs/workflows/](docs/workflows/) — 跨技能工作流说明

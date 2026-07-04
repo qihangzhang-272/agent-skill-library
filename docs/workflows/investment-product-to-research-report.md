@@ -211,4 +211,4 @@ Next-node handoff:
 - 新发现的高质量技能来源 -> `qihang-skill-index`。
 - 可复用调用方式 -> 本文档或相关 workflow。
 - 具体公司研报、客户材料、deck 内容 -> 不进入正式技能库。
-- 一次性实验记录 -> `local-experiments/`。
+- 一次性实验记录 -> 不进入正式技能库，只保留实验结论。

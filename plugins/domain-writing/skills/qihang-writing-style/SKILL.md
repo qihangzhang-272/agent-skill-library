@@ -17,7 +17,7 @@ This skill is a **three-layer system** for writing Qihang's Chinese public-accou
 
 - **Layer 1: Framework** — 文章的结构骨架（从哪起、按什么顺序推进、在哪收）。10 个独立框架，由 AI 根据题材自主选择。
 - **Layer 2: Voice** — 文章的语言质地（句子读起来像谁）。默认 `qihang` voice。
-- **Layer 3: AI-Flavor Filter** — 通用 AI 味检测（13 条禁止模式）。强制启用。
+- **Layer 3: AI-Flavor Filter** — 通用 AI 味检测（15 条禁止模式）。强制启用。
 
 三层**解耦**。可以独立替换任何一层而不影响其他两层。
 
@@ -48,7 +48,7 @@ This skill is a **three-layer system** for writing Qihang's Chinese public-accou
 ### Step 3: 草稿完成后过 AI-Flavor Filter（强制）
 
 1. 加载 `references/ai-flavor-filter/checklist.md`
-2. **逐条扫描 13 条禁止模式**
+2. **逐条扫描 15 条禁止模式**
 3. 发现一条就修一条
 4. 修完之后向用户报告做了哪些修改
 

@@ -17,4 +17,4 @@ ai-product-analyzer（产品洞察）→ 前端 brief → 页面/原型实现 �
   03-page.html（或原型目录）
 
 ## 执行规则
-- 前端范式与设计偏好引用 commons + foundation/principles（两者本轮为占位，缺失时按通用现代风格交付并注明）。
+- 前端范式与设计偏好引用 commons + foundation/principles；commons 仍为占位预留、principles 已激活，缺失部分按通用现代风格交付并注明。

@@ -3,11 +3,11 @@
   "description": "Private Claude Code marketplace for Qihang's self-cultivated agent skills, organized as foundation / orchestrator+index / domains.",
   "owner": { "name": "Private Agent Skill Library" },
   "plugins": [
-    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.1.0", "description": "元层：章程 + skill-architecture 元技能 + principles 占位。" },
-    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.1.0", "description": "调度路由 + references/chains 唯一权威源 + 落盘铁律。" },
-    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.1.0", "description": "两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。" },
-    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.1.0", "description": "公众号写作领域瓦技能。" },
-    { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.1.0", "description": "投研 IC memo 领域 9 个瓦技能。" },
+    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.2.0", "description": "元层：章程 + skill-architecture 元技能 + principles 个人操作手册。" },
+    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.2.0", "description": "调度路由 + references/chains 唯一权威源 + 落盘铁律。" },
+    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.2.0", "description": "两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。" },
+    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.2.0", "description": "公众号写作领域瓦技能。" },
+    { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.2.0", "description": "投研 IC memo 领域 9 节点 + 可视化研报瓦技能。" },
     { "name": "domain-product",    "source": "./plugins/domain-product",    "version": "0.1.0", "description": "AI 产品分析领域瓦技能。" },
     { "name": "commons",           "source": "./plugins/commons",           "version": "0.1.0", "description": "共享通用能力（前端范式占位预留）。" }
   ]

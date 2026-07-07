@@ -90,4 +90,8 @@ claude plugin validate . --strict
 - [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md) — 插件内技能记录方式
 - [docs/workflows/](docs/workflows/) — 跨技能工作流说明
 
-commit 信息格式：`YYYY-MM-DD HH:mm｜中文变更描述`。
+## 仓库工作规则
+
+- **永远在 main 分支操作**。不新开 git worktree，不开长期特性分支——直接在 main 上改、验证、提交。需要隔离试验时用 `git stash` 或另起 clone，不在仓库里维护并行分支。
+- **commit 格式统一为** `YYYY-MM-DD HH:mm｜中文变更描述`，不使用 `feat()` / `fix()` / `merge:` 等其他格式。示例：`2026-07-07 14:30｜修复 principles 描述滞后并 bump version`。
+- 正文改动后的 version bump 与 validate 见「安装与验证」节。

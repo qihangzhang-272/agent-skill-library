@@ -1,7 +1,7 @@
 {
   "name": "domain-writing",
   "displayName": "Domain Writing",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "公众号写作领域：选题素材沉淀、启航文风起草与修订。",
   "author": { "name": "Private Agent Skill Library" }
 }

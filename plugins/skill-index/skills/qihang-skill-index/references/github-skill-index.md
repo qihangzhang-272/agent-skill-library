@@ -6,7 +6,7 @@ Source URLs intentionally point to GitHub repository roots. A source may be a pu
 
 **Domain 列**：表示该外部技能是否已融入某条 domain 的工作流（chain）。门槛见 `registration-guide.md` —— 只有真进了某条 chain 才标 domain，否则留空（`—`）表示未归类。可选值：`writing` / `investment` / `product` / `commons`（绝对通用）/ 逗号分隔（跨领域）/ `—`（未归类）。
 
-Last repo-root verification: 2026-06-13 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
+Last repo-root verification: 2026-07-07 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
 
 ## Writing And Style
 

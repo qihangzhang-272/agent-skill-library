@@ -17,8 +17,7 @@ plugins/
 ├── skill-index/         # qihang-skill-index：外部 GitHub 技能索引
 ├── domain-writing/      # 公众号写作瓦技能
 ├── domain-investment/   # 投研 IC memo 瓦技能（9 节点 + 可视化研报）
-├── domain-product/      # AI 产品分析瓦技能
-└── commons/             # 跨领域共享能力（占位）
+└── domain-product/      # AI 产品分析瓦技能
 ```
 
 每个 plugin 有 `.claude-plugin/plugin.json`。技能正文放 `plugins/<plugin>/skills/<skill>/SKILL.md`，三层渐进披露：`SKILL.md` → `references/` → `assets/`。
@@ -28,7 +27,7 @@ plugins/
 **Foundation**
 
 - `principles` — 启航个人操作手册。认知原型 + DO/DON'T + CALIBRATION。被动参考库，不是全局强制规则。
-- `skill-architecture` — 元技能。新增技能/领域/链时生成 spec 合规骨架，强制落盘协议，更新 marketplace.json。**不要手创建 skill 文件夹。**
+- `skill-architecture` — 元技能。新增技能/领域/链时生成 spec 合规骨架，更新 marketplace.json。瓦技能可独立存在，chain 是可选主动编排。**不要手创建 skill 文件夹。**
 
 **Orchestrator + Index**
 
@@ -50,9 +49,6 @@ plugins/
 ```
 公众号选题 → agent-reach 搜索 → 启航写作 → md2wechat 排版
   chain: wechat-writing.md
-
-产品洞察 → 前端 brief → 设计来源选择 → 实现计划 → 浏览器验收
-  chain: product-frontend.md  ·  doc: docs/workflows/prd-to-frontend.md
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
   chain: investment-icmemo.md  ·  doc: docs/workflows/investment-product-to-research-report.md
@@ -83,10 +79,7 @@ claude plugin validate . --strict
 
 ## 治理文档
 
-- [docs/governance/architecture.md](docs/governance/architecture.md) — 架构与分层边界
-- [docs/governance/library-constitution.md](docs/governance/library-constitution.md) — 长期约束与收录判断
-- [docs/governance/project-purpose.md](docs/governance/project-purpose.md) — 仓库定位与外部边界
-- [docs/governance/reference-policy.md](docs/governance/reference-policy.md) — 引用式规则，正文不复制
+- [docs/governance/library-constitution.md](docs/governance/library-constitution.md) — 长期约束、三层架构、收录判断、引用策略与复制边界
 - [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md) — 插件内技能记录方式
 - [docs/workflows/](docs/workflows/) — 跨技能工作流说明
 

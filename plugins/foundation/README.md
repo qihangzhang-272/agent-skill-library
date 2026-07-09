@@ -4,7 +4,7 @@
 一个 Claude Code marketplace 形态的个人技能库。本体即 `plugins/<group>/`，按职责分三层：
 - 元层 foundation：系统是什么、怎么生长、为谁服务。
 - 骨架层 orchestrator / skill-index：怎么调度、怎么找技能。
-- 能力层 domain-writing / domain-investment / domain-product / commons：具体干活。
+- 能力层 domain-writing / domain-investment / domain-product：具体干活。
 
 ## 为什么这么设计
 - `plugins/<group>/` 直接做一等本体，不再设独立 skills/ 源 + 构建复制，消除漂移。

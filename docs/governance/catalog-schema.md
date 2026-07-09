@@ -1,6 +1,6 @@
 # 插件内技能记录方式
 
-本仓库已重构为三层 plugins 架构，不再有独立的 `catalog/skills.yml` 或 `catalog/claude-plugins.json`。技能元数据和分发关系直接记录在两个地方：
+三层架构总览见 `library-constitution.md`。本文档只讲字段级约定：技能元数据和分发关系记录在两个地方：
 
 - `.claude-plugin/marketplace.json` — marketplace 入口，列出所有可安装 plugin。
 - `plugins/<plugin>/.claude-plugin/plugin.json` — 单个 plugin 的 manifest，含 name / displayName / version / description。
@@ -50,7 +50,7 @@
 例如前端设计来源：
 
 - `plugins/skill-index/skills/qihang-skill-index/references/github-skill-index.md` 记录 `frontend-design`、TypeUI、GSAP、Awesome Design Skills 等外部来源和使用边界。
-- `docs/workflows/prd-to-frontend.md` 记录 UI 调用链和选择规则。
+- `docs/workflows/prd-to-frontend.md` 记录 UI 调用链和选择规则（该 chain 目前是草稿，未挂入 orchestrator 路由表）。
 - 除非某个设计技能被长期验证并重写为自培养核心能力，否则不新增本地技能包。
 
 例如写作、产品和工作流：

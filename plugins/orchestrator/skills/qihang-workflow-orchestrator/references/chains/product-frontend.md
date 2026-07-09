@@ -1,4 +1,6 @@
-# Chain: Product to Frontend
+# Chain: Product to Frontend（草稿，未挂入路由表）
+
+> 未跑通，暂不出现在 orchestrator 路由表。跑通一次后按 skill-architecture 场景 C 主动挂回。
 
 ## 适用
 产品洞察后做前端 brief、页面、原型、HTML 或浏览器验收。
@@ -17,4 +19,4 @@ ai-product-analyzer（产品洞察）→ 前端 brief → 页面/原型实现 �
   03-page.html（或原型目录）
 
 ## 执行规则
-- 前端范式与设计偏好引用 commons + foundation/principles；commons 仍为占位预留、principles 已激活，缺失部分按通用现代风格交付并注明。
+- 前端范式与设计偏好引用 foundation/principles + `qihang-skill-index` 的 Frontend Design And UI 分类；缺失部分按通用现代风格交付并注明。

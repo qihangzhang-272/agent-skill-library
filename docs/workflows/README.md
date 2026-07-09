@@ -4,8 +4,7 @@
 
 ## 当前文件
 
-- `linear-workflow.md`：Linear 项目、Issue 类型和技能收录跟踪口径。
-- `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。
+- `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。**草稿，未跑通，未挂入 orchestrator 路由表**（对应 chain 见 `product-frontend.md`）。
 - `investment-product-to-research-report.md`：从 AI-native 产品判断到 `agent-investment` IC Memo，再到可选前端自生成可视化研报页的调用链。
 
 稳定写作发布链在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/wechat-writing.md`：agent-reach 搜索沉淀 -> 启航写作 -> Codex 排版准备 -> md2wechat/公众号草稿箱。
@@ -17,6 +16,6 @@
 - 技能收录流程。
 - 技能审查流程。
 - 上游同步流程。
-- Linear / GitHub 协作流程。
+- GitHub 协作流程。
 - 从实验到正式收录的验收流程。
 - 跨技能调用链，例如 product-analysis -> AI-native 产品视角 -> agent-investment -> IC Memo -> 前端自生成可视化。

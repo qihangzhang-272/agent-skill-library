@@ -5,6 +5,8 @@ description: Structure and draft a Confidential Information Memorandum for sell-
 
 # CIM Builder
 
+> **Qihang migration compatibility:** This full CIM workflow is preserved without content reduction. The wrapper supplies disclosure authority, approved materials, and the project run folder.
+
 ## Workflow
 
 ### Step 1: Gather Source Materials

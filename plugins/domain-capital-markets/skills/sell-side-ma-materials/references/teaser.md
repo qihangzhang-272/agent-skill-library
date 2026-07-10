@@ -5,6 +5,8 @@ description: Draft anonymous one-page company teasers for sell-side M&A processe
 
 # Teaser
 
+> **Qihang migration compatibility:** This full Teaser workflow is preserved without content reduction. The wrapper supplies the approved anonymization and disclosure perimeter.
+
 ## Workflow
 
 ### Step 1: Gather Inputs

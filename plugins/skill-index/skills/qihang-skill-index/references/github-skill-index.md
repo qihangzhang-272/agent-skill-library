@@ -36,7 +36,7 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
-| `https://github.com/Panniantong/agent-reach` | Internet reach, cross-platform search/access, and external content discovery for agents | installed external capability | commons | 跨领域默认搜索底座：服务 writing 的素材沉淀、investment 的事实收集。Treat Twitter/X, Reddit, Exa/web, WeChat, GitHub, and other sites as agent-reach surfaces, not separate default workflow nodes. Keep implementation outside this repository. |
+| `https://github.com/Panniantong/agent-reach` | Multi-backend internet reach (OpenCLI / per-platform CLIs / APIs) across 15 platforms: search, social, dev, web, video, finance, career | installed external capability | commons | 跨领域默认搜索底座：服务 writing 的素材沉淀、investment 的事实收集。v1.5.0+，多后端路由，`agent-reach doctor --json` 查各平台 active_backend。雪球渠道已装（A/港/美股行情、搜索、热帖、热股）。Treat platforms as agent-reach surfaces, not separate workflow nodes. Keep implementation outside this repository. |
 
 ## Frontend Design And UI
 

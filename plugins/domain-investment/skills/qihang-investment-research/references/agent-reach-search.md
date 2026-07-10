@@ -6,6 +6,8 @@ Use this reference whenever the investment fact pack needs external search or pl
 
 Use `agent-reach` as the default reach layer for search, browsing, platform access, and source discovery.
 
+多后端平台（小红书/Reddit/B站/Twitter 等）先跑 `agent-reach doctor --json`，按各平台 `active_backend` 选命令组；agent-reach 不可用或不覆盖时才 fallback（见下方 Fallback Policy）。
+
 Treat platform names as agent-reach surfaces, not separate workflow nodes:
 
 - GitHub (OSS 真实性、star/fork/活跃度、commit 历史、license)
@@ -19,6 +21,7 @@ Treat platform names as agent-reach surfaces, not separate workflow nodes:
 - YouTube / 播客（demo、创始人访谈）
 - Exa / general web（融资新闻、行业报告、市场规模）
 - papers / research pages（技术真实性、算法可证伪点）
+- 雪球（A股/港股/美股行情、财报、公司动态、热股、社区观点--公开市场标的专用）
 
 ## Search Shape
 

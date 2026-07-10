@@ -6,6 +6,8 @@ Use this reference whenever a research mode needs external search or platform ac
 
 Use `agent-reach` as the default reach layer for search, browsing, platform access, and source discovery.
 
+多后端平台（小红书/Reddit/B站/Twitter 等）先跑 `agent-reach doctor --json`，按各平台 `active_backend` 选命令组；agent-reach 不可用或不覆盖时才 fallback（见下方 Fallback Policy）。
+
 Treat platform names as agent-reach surfaces, not separate workflow nodes:
 
 - Twitter / X

@@ -58,7 +58,8 @@
 - `ai-product-analyzer` 是自培养产品洞察技能，进入 `domain-product` plugin。
 - `topic-research-deposition` 和 `qihang-writing-style` 是自培养写作链路技能，进入 `domain-writing` plugin。
 - `qihang-skill-index` 是启航外部 GitHub 技能源索引，进入 `skill-index` plugin。
-- `domain-investment` 是启航 AI 投资 IC Memo 工作包，包含研究、产品判断、竞争格局、单位经济、评分、估值、DD、跟踪、IC Memo 写作和可视化研报节点。
+- `domain-investment` 是启航投资决策工作包，包含研究、产品判断、竞争格局、单位经济、财务模型、评分、估值、DD、跟踪、IC Memo 写作和可视化研报节点。
+- `domain-capital-markets` 承接公开市场首次覆盖、股票研究、金融图表、公司资料、投行演示、卖方 M&A 材料与金融交付物 QC；它只提供瓦技能，固定链仍由 orchestrator 路由。
 - `oss-investment-scorecard` 已被 `qihang-investment-scorecard` 吸收为 reference，不再作为独立默认运行入口。
 - `qihang-workflow-orchestrator` 是已跑通工作流入口，进入 `orchestrator` plugin；`SKILL.md` 只做路由，具体 chain 压缩到 `references/chains/`。
 - `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。

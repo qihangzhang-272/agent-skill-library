@@ -16,6 +16,7 @@ Read when relevant:
 - `references/returns-analysis.md` for IRR/MOIC and scenario tables.
 - `references/comps-analysis.md` for peer set, valuation multiples, comparability, and red flags.
 - `references/initiating-coverage/valuation-methodologies.md` for valuation method selection.
+- `references/price-target-handoff.md` for reconciling methods into a price target or decision-range handoff.
 
 When an XLSX model exists, consume the audited handoff from `qihang-financial-model-builder`. Do not reproduce its workbook instructions here.
 

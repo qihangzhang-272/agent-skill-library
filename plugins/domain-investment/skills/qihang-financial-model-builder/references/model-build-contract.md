@@ -26,6 +26,7 @@ If a required input is missing, list it and stop or build an explicitly incomple
 - Derived values must be formulas, not repeated hardcodes.
 - Forecast formulas must be consistent across periods unless a documented transition is intentional.
 - Keep signs, currency, scale, fiscal periods, and per-share units explicit.
+- Use a consistent visual convention: hardcoded inputs, formulas, cross-sheet links, and unresolved error flags must be visually distinguishable. Document the convention in the workbook rather than assuming a color means the same thing in every template.
 - Mark external links and unsupported functions.
 - Do not hide errors with blanket IFERROR unless the fallback meaning is documented.
 

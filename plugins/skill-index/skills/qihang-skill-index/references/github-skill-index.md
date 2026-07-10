@@ -4,7 +4,7 @@ This is Qihang's lightweight external skill/source index. It records where usefu
 
 Source URLs intentionally point to GitHub repository roots. A source may be a pure skill repo, a repo containing one or more skill directories, or a broader reference repo used by a workflow.
 
-**Domain 列**：表示该外部技能是否已融入某条 domain 的工作流（chain）。门槛见 `registration-guide.md` —— 只有真进了某条 chain 才标 domain，否则留空（`—`）表示未归类。可选值：`writing` / `investment` / `product` / `commons`（绝对通用）/ 逗号分隔（跨领域）/ `—`（未归类）。
+**Domain 列**：表示该外部技能是否已融入某条 domain 的工作流（chain）。门槛见 `registration-guide.md` —— 只有真进了某条 chain 才标 domain，否则留空（`—`）表示未归类。可选值：`writing` / `investment` / `capital-markets` / `product` / `commons`（绝对通用）/ 逗号分隔（跨领域）/ `—`（未归类）。
 
 Last repo-root verification: 2026-07-07 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
 
@@ -30,7 +30,7 @@ Local archive without GitHub source:
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
 | `https://github.com/lucy-cxy/oss-investment-scorecard` | OSS/AI company investment scorecard and structured output source | absorbed reference | investment | Absorbed into `domain-investment/skills/qihang-investment-scorecard/references/` from upstream commit `28a210d0a194ba0f31fe59edaf413abfafa2008e`. Do not call the old skill directly; use `domain-investment`. |
-| `https://github.com/anthropics/financial-services` | Financial services, investment banking, public equity, and diligence skill references | migrated reference source | investment | Apache-2.0. Selected files came from commit `4bbabc7cd1a474c1667fa05a2bfe58e411dcf9c1`. Qihang approved lossless migration of the standalone public-equity and banking skill content into `domain-capital-markets`; only paths, declared dependencies, packaging, and orchestration placement may change. Content that remains inside `domain-investment` may be distilled into its canonical owner. Do not expose the upstream end-to-end agents as parallel runtime orchestrators. |
+| `https://github.com/anthropics/financial-services` | Financial services, investment banking, public equity, and diligence skill references | migrated reference source | investment, capital-markets | Apache-2.0. Selected files came from commit `4bbabc7cd1a474c1667fa05a2bfe58e411dcf9c1`. Qihang approved lossless migration of the standalone public-equity and banking skill content into `domain-capital-markets`; only paths, declared dependencies, packaging, and orchestration placement may change. Content that remains inside `domain-investment` may be distilled into its canonical owner. Do not expose the upstream end-to-end agents as parallel runtime orchestrators. |
 
 ## Research And Web Reach
 

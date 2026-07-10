@@ -13,12 +13,9 @@ It consumes completed node outputs. It must not search for new facts or invent m
 
 Read when relevant:
 
-- `references/ic-memo.md` for PE IC memo structure.
-- `references/initiating-coverage.md` and `references/initiating-coverage/*` for institutional research report assembly.
-- `references/strip-profile.md`, `references/tear-sheet.md`, and `references/tear-sheet/*` for company profile and fact-sheet density.
-- `references/cim-builder.md`, `references/teaser.md`, `references/pitch-deck.md`, and `references/pitch-deck/*` for banking-style material organization.
-- `references/ib-check-deck.md` for professional quality checks.
-- `references/funding-digest.md`, `references/funding-digest/*`, and `references/earnings-preview-beta.md` for capital markets and mature-company event framing.
+- `references/memo-assembly.md` for final assembly rules.
+- `references/pe-deal-addendum.md` only for PE deal terms, value creation, and 100-day planning.
+- `references/quality-checklist.md` before delivery.
 
 ## Required Memo Structure
 

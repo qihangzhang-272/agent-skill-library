@@ -14,6 +14,8 @@ description: Build pre-earnings analysis with estimate models, scenario framewor
 - Find the earnings date and time (pre-market vs. after-hours)
 - Review the company's prior quarter earnings call for any guidance or commentary
 
+Record the fiscal quarter and fiscal year exactly as reported by the company; do not infer it from the calendar date. Date-stamp every consensus data point and retain its source. Treat direct management quotations as verbatim only when copied from the transcript; otherwise label them as a paraphrase.
+
 ### Step 2: Key Metrics Framework
 
 Build a "what to watch" framework specific to the company:
@@ -68,6 +70,8 @@ One-page earnings preview with:
 ## Important Notes
 
 - Consensus estimates change — always note the source and date of estimates
+- Label valuation ratios as `LTM` or `NTM`. Calculate LTM from the latest four reported quarters and NTM from the next four quarterly estimates; do not substitute an unlabeled annual figure.
+- Show the inputs and intermediate arithmetic for multi-step calculations. Use one common start and end date when comparing stock returns across peers.
 - "Whisper numbers" from buy-side surveys are often more relevant than published consensus
 - Historical earnings reactions help calibrate expectations (search for "[company] earnings reaction history")
 - Options-implied move tells you what the market expects — compare to your scenarios

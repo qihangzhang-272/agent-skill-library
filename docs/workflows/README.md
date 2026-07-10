@@ -6,6 +6,7 @@
 
 - `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。**草稿，未跑通，未挂入 orchestrator 路由表**（对应 chain 见 `product-frontend.md`）。
 - `investment-product-to-research-report.md`：从 AI-native 产品判断到 `agent-investment` IC Memo，再到可选前端自生成可视化研报页的调用链。
+- `public-equity-coverage.md`：从公开公司事实包、模型、估值与 thesis，到首次覆盖报告和数值终审的资本市场调用链。
 
 稳定写作发布链在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/wechat-writing.md`：agent-reach 搜索沉淀 -> 启航写作 -> Codex 排版准备 -> md2wechat/公众号草稿箱。
 

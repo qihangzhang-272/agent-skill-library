@@ -16,7 +16,8 @@ plugins/
 ├── orchestrator/        # qihang-workflow-orchestrator：唯一工作流路由入口
 ├── skill-index/         # qihang-skill-index：外部 GitHub 技能索引
 ├── domain-writing/      # 公众号写作瓦技能
-├── domain-investment/   # 投研 IC memo 瓦技能（9 节点 + 可视化研报）
+├── domain-investment/   # 投资决策瓦技能（研究、模型、估值、IC memo）
+├── domain-capital-markets/ # 公开市场研究、首次覆盖与投行交付物瓦技能
 └── domain-product/      # AI 产品分析瓦技能
 ```
 
@@ -39,7 +40,8 @@ plugins/
 | 领域 | 瓦技能 |
 | --- | --- |
 | `domain-writing` | `qihang-writing-style` · `topic-research-deposition` |
-| `domain-investment` | `qihang-investment-research` · `qihang-ai-product-judgment` · `qihang-competitive-landscape` · `qihang-unit-economics` · `qihang-investment-scorecard` · `qihang-valuation-returns` · `qihang-investment-dd` · `qihang-thesis-tracking` · `qihang-ic-memo-writer` · `investment-visual-report` |
+| `domain-investment` | `qihang-investment-research` · `qihang-ai-product-judgment` · `qihang-competitive-landscape` · `qihang-unit-economics` · `qihang-financial-model-builder` · `qihang-investment-scorecard` · `qihang-valuation-returns` · `qihang-investment-dd` · `qihang-thesis-tracking` · `qihang-ic-memo-writer` · `investment-visual-report` |
+| `domain-capital-markets` | `public-equity-coverage-writer` · `investment-chart-pack` · `financial-company-profile` · `investment-banking-pitch-deck` · `sell-side-ma-materials` · `financial-artifact-qc` |
 | `domain-product` | `ai-product-analyzer` |
 
 ## 运行链
@@ -52,6 +54,9 @@ plugins/
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
   chain: investment-icmemo.md  ·  doc: docs/workflows/investment-product-to-research-report.md
+
+公开公司 → 事实包 → 竞争格局 → 模型 → 估值 → thesis/业绩前瞻 → 图表 → 首次覆盖 → 金融 QC
+  chain: public-equity-coverage.md  ·  doc: docs/workflows/public-equity-coverage.md
 ```
 
 ## 落盘铁律（所有链继承）
@@ -74,7 +79,7 @@ claude plugin validate . --strict
 - `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
 - `qihang-skill-index` 是外部技能统一收纳入口。`humanizer-zh`、`md2wechat`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等只保留 GitHub 索引，不堆完整文件。
 - `oss-investment-scorecard` 已降级为 `qihang-investment-scorecard` 的内部 reference，不要直接调用旧入口。
-- 投资工作包只暴露 9 节点 + 可视化研报，不在 `domain-investment` 里再放第二个调度器。
+- 投资与资本市场领域都只放瓦技能；所有固定链都由 `qihang-workflow-orchestrator` 路由，不设第二个调度器。
 - 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。
 
 ## 治理文档

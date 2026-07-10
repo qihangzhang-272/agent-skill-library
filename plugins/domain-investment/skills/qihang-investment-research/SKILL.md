@@ -24,6 +24,7 @@ This skill should run before the investment package when the materials are incom
 Read only when needed:
 
 - `references/agent-reach-search.md` for the default agent-reach reach layer, source surfaces, depth, and fallback policy.
+- `references/public-company-research.md` for public-company filings, management, industry, competitive, and risk fact collection.
 - `references/deal-sourcing.md` for target discovery, company shortlists, founder/company outreach context, or sourcing logic.
 - `references/funding-digest.md` and `references/sector-seeds.md` for funding rounds, capital-market activity, sector watchlists, and deal-flow summaries.
 

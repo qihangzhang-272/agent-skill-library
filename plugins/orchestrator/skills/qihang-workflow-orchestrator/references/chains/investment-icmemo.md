@@ -4,10 +4,10 @@
 AI 产品/公司/开源项目/case 是否值得投、IC memo、DD、watch triggers、可视化研报。
 
 ## 链路（9 瓦技能，顺序执行）
-research object → qihang-investment-research → qihang-ai-product-judgment →
-qihang-competitive-landscape → qihang-unit-economics → qihang-investment-scorecard →
-qihang-valuation-returns → qihang-investment-dd → qihang-thesis-tracking →
-qihang-ic-memo-writer → optional visual report（用 investment-visual-report 技能）
+research object → domain-investment:qihang-investment-research → domain-investment:qihang-ai-product-judgment →
+domain-investment:qihang-competitive-landscape → domain-investment:qihang-unit-economics → domain-investment:qihang-investment-scorecard →
+domain-investment:qihang-valuation-returns → domain-investment:qihang-investment-dd → domain-investment:qihang-thesis-tracking →
+domain-investment:qihang-ic-memo-writer → optional visual report（用 domain-investment:investment-visual-report 技能）
 
 ## 落盘协议（领域细则）
 项目夹: research/<YYYY-MM-DD>-<target>-investment/

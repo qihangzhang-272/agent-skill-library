@@ -4,7 +4,7 @@
 公众号选题、agent-reach 搜索、启航文风起草、md2wechat 排版推草稿箱。
 
 ## 链路
-topic-research-deposition → qihang-writing-style（起草）→ 修订 → md2wechat 排版
+domain-writing:topic-research-deposition → domain-writing:qihang-writing-style（起草）→ 修订 → md2wechat 排版
 
 ## 落盘协议（领域细则）
 项目夹: writing/<YYYY-MM-DD>-<选题>/

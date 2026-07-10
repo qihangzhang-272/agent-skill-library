@@ -5,16 +5,18 @@ description: "Populates investment banking pitch deck templates with data from s
 
 # Populating Investment Banking Pitch Deck Templates
 
+> **Qihang migration compatibility:** This workflow and all support references are preserved without content reduction. The original `reference/` links have been repaired to `references/`. Use the wrapper's approved-handoff rule and current presentation capability when the original workflow assumes a specific runtime.
+
 ## Reference Files
 
 **Read all reference files at task start before beginning any work.** These contain critical patterns and anti-patterns that will affect your approach. Do not wait until you encounter issues.
 
 | File | Purpose |
 |------|---------|
-| [`formatting-standards.md`](reference/formatting-standards.md) | Text, bullets, tables, charts, alignment |
-| [`slide-templates.md`](reference/slide-templates.md) | Content mapping guidance for common slide types |
-| [`xml-reference.md`](reference/xml-reference.md) | PowerPoint XML patterns for tables, shapes, arrows |
-| [`calculation-standards.md`](reference/calculation-standards.md) | Financial formulas for verification (CAGR, consensus) |
+| [`formatting-standards.md`](references/formatting-standards.md) | Text, bullets, tables, charts, alignment |
+| [`slide-templates.md`](references/slide-templates.md) | Content mapping guidance for common slide types |
+| [`xml-reference.md`](references/xml-reference.md) | PowerPoint XML patterns for tables, shapes, arrows |
+| [`calculation-standards.md`](references/calculation-standards.md) | Financial formulas for verification (CAGR, consensus) |
 
 ---
 
@@ -65,21 +67,21 @@ Pitch Deck Progress:
 3. Extract relevant data points from each source
 4. Validate all numbers against original sources
 5. Standardize units and currency (convert all figures to the primary unit/currency used in the template)
-6. Note any calculations that need verification → see [`calculation-standards.md`](reference/calculation-standards.md) for formulas
+6. Note any calculations that need verification → see [`calculation-standards.md`](references/calculation-standards.md) for formulas
 
 ### Phase 2: Content Mapping
 1. **Open and visually review the template** — understand its structure, style, and existing content before modifying
 2. Analyze template structure — identify all placeholder areas and content boxes
-3. Map source data to corresponding template sections → see [`slide-templates.md`](reference/slide-templates.md) for mapping guidance
+3. Map source data to corresponding template sections → see [`slide-templates.md`](references/slide-templates.md) for mapping guidance
 4. Identify placeholder guidance boxes (colored instruction boxes from task creator)
-5. Note any data gaps or mismatches → see [`slide-templates.md`](reference/slide-templates.md#handling-data-template-mismatches) for resolution
+5. Note any data gaps or mismatches → see [`slide-templates.md`](references/slide-templates.md#handling-data-template-mismatches) for resolution
 
 ### Phase 3: Template Population
 1. **Remove or reformat placeholder boxes** — colored instruction boxes show WHAT to create, not HOW to format. Delete them and create properly formatted content in their place. See [Critical Anti-Patterns](#critical-anti-patterns-never-do-these).
 2. Populate each section with mapped content (focus on content first)
-3. **Then apply formatting** to match template style → see [`formatting-standards.md`](reference/formatting-standards.md)
-4. Create tables as actual table objects (NEVER use pipe/tab-separated text) → see [`xml-reference.md`](reference/xml-reference.md#table-implementation)
-5. Create arrows/shapes as PowerPoint objects → see [`xml-reference.md`](reference/xml-reference.md#arrow-shapes)
+3. **Then apply formatting** to match template style → see [`formatting-standards.md`](references/formatting-standards.md)
+4. Create tables as actual table objects (NEVER use pipe/tab-separated text) → see [`xml-reference.md`](references/xml-reference.md#table-implementation)
+5. Create arrows/shapes as PowerPoint objects → see [`xml-reference.md`](references/xml-reference.md#arrow-shapes)
 6. Insert company logo if provided in task files; if not available, flag to user: "[LOGO NOT PROVIDED - please supply company logo]"
 
 ### Phase 4: Validate → Fix → Repeat
@@ -209,8 +211,8 @@ These requirements are non-negotiable regardless of template:
 | Requirement | Details |
 |-------------|---------|
 | **Text Readability** | All text MUST have sufficient contrast with background. Examples: white/light text on dark blue, dark green, black backgrounds; black/dark text on white, light gray, light yellow backgrounds. |
-| **Actual Table Objects** | Tabular data MUST be table objects, not tab-separated text. See [`xml-reference.md`](reference/xml-reference.md#table-implementation). |
-| **Proper Chart/Table Sizing** | Pasted visuals MUST fill designated area. See [`formatting-standards.md`](reference/formatting-standards.md#chart-and-image-handling). |
+| **Actual Table Objects** | Tabular data MUST be table objects, not tab-separated text. See [`xml-reference.md`](references/xml-reference.md#table-implementation). |
+| **Proper Chart/Table Sizing** | Pasted visuals MUST fill designated area. See [`formatting-standards.md`](references/formatting-standards.md#chart-and-image-handling). |
 | **Consistent Formatting** | Bullets within section MUST match (symbol, size, indent). Same-level boxes MUST use same font size. |
 | **Content Boundaries** | All content MUST stay within slide edges. Footnote box width: ~32.5cm for 16:9, ~24cm for 4:3. |
 | **No Placeholder Formatting** | Remove colored instruction boxes. Main body: dark text on light background per template. |
@@ -246,7 +248,7 @@ If uncertain: check if the shape exists on an empty slide from the same template
 
 **Recognition test:** If you're typing `|` characters or relying on spaces/tabs to create columns, you're creating text, not a table.
 
-**MUST verify:** After creating any table, verify it is an actual table object. See [`xml-reference.md`](reference/xml-reference.md#critical-verify-tables-are-actual-table-objects) for verification methods.
+**MUST verify:** After creating any table, verify it is an actual table object. See [`xml-reference.md`](references/xml-reference.md#critical-verify-tables-are-actual-table-objects) for verification methods.
 
 ### Anti-Pattern 3: Inheriting Placeholder Contrast
 
@@ -277,18 +279,18 @@ For detailed explanations of the most critical failures, see [Critical Anti-Patt
 
 | Failure | Solution | Reference |
 |---------|----------|-----------|
-| Unstructured text dumps | Break into bullets (✓, ×, •) | [`formatting-standards.md`](reference/formatting-standards.md#bullet-point-structure) |
-| Pipe/tab-separated "tables" | Create actual table objects — text with separators is NOT a table | [`xml-reference.md`](reference/xml-reference.md#table-implementation) |
+| Unstructured text dumps | Break into bullets (✓, ×, •) | [`formatting-standards.md`](references/formatting-standards.md#bullet-point-structure) |
+| Pipe/tab-separated "tables" | Create actual table objects — text with separators is NOT a table | [`xml-reference.md`](references/xml-reference.md#table-implementation) |
 | Poor text/background contrast | Audit every text element | — |
-| Tiny pasted charts | Resize to fill area, paste chart only | [`formatting-standards.md`](reference/formatting-standards.md#proper-sizing-workflow) |
+| Tiny pasted charts | Resize to fill area, paste chart only | [`formatting-standards.md`](references/formatting-standards.md#proper-sizing-workflow) |
 | Source data pasted with charts | Select only chart object before copy | — |
 | Data dumped into placeholder boxes | Delete colored instruction boxes, create new properly formatted content | [Anti-Patterns](#critical-anti-patterns-never-do-these) |
-| Inconsistent bullets | Define style once, apply to all | [`formatting-standards.md`](reference/formatting-standards.md#bullet-consistency) |
-| Inconsistent fonts across boxes | Standardize same-level boxes | [`formatting-standards.md`](reference/formatting-standards.md#font-consistency) |
+| Inconsistent bullets | Define style once, apply to all | [`formatting-standards.md`](references/formatting-standards.md#bullet-consistency) |
+| Inconsistent fonts across boxes | Standardize same-level boxes | [`formatting-standards.md`](references/formatting-standards.md#font-consistency) |
 | Content overflow | Set explicit box widths (footnotes: 32.5cm for 16:9, 24cm for 4:3) | — |
 | Missing logo | Use logo from task files; if not provided, flag to user | — |
 | Remaining `[brackets]` | Search and replace all placeholders | — |
-| Text arrows (→, ⟹) | Use PowerPoint shape objects | [`xml-reference.md`](reference/xml-reference.md#arrow-shapes) |
+| Text arrows (→, ⟹) | Use PowerPoint shape objects | [`xml-reference.md`](references/xml-reference.md#arrow-shapes) |
 
 ---
 
@@ -333,7 +335,7 @@ When creating tables (MUST be actual table objects):
 
 **Width:** Fill designated section width completely.
 
-For XML implementation, see [`xml-reference.md`](reference/xml-reference.md#table-implementation).
+For XML implementation, see [`xml-reference.md`](references/xml-reference.md#table-implementation).
 
 ---
 
@@ -365,7 +367,7 @@ All superscript numbers (¹, ², ³) in slide body MUST have corresponding Notes
 
 ## Data Requirements by Slide Type
 
-For detailed data requirements, formatting principles, and example column headers for each slide type, see [`slide-templates.md`](reference/slide-templates.md#common-slide-types-and-data-requirements).
+For detailed data requirements, formatting principles, and example column headers for each slide type, see [`slide-templates.md`](references/slide-templates.md#common-slide-types-and-data-requirements).
 
 Common slide types covered: Market Definition, Market Sizing/TAM, Competitive Landscape, Financial Summary, Transaction Comparables.
 
@@ -377,7 +379,7 @@ Before delivering the populated template, verify:
 
 ### Data Accuracy
 - [ ] All figures match original source documents
-- [ ] Calculated values verified against formulas (see [`calculation-standards.md`](reference/calculation-standards.md))
+- [ ] Calculated values verified against formulas (see [`calculation-standards.md`](references/calculation-standards.md))
 - [ ] Years and time periods are correct
 - [ ] Company/competitor names spelled correctly
 - [ ] Same figures are identical across all slides where they appear

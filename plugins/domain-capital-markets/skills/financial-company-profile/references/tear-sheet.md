@@ -5,6 +5,8 @@ description: "Generate professional company tear sheets using S&P Capital IQ dat
 
 # Financial Tear Sheet Generator
 
+> **Qihang migration compatibility:** This complete provider-specific workflow is preserved without content reduction. S&P/Kensho remains the preferred provider mode. When it is unavailable, the wrapper may supply an approved fact pack; retain every period, unit, provenance, and missing-data rule below.
+
 Generate audience-specific company tear sheets by pulling live data from S&P Capital IQ via the S&P Global MCP tools and formatting the result as a professional Word document.
 
 ## Style Configuration
@@ -362,9 +364,7 @@ Each reference defines sections, a query plan, formatting guidance, and page len
 ### Step 3: Pull Data via S&P Global MCP
 
 **First:** Create the intermediate file directory:
-```bash
-mkdir -p /tmp/tear-sheet/
-```
+Create `{{RUN_FOLDER}}/tear-sheet-data/` using the current environment's native filesystem command.
 
 Use the **S&P Global** MCP tools (also known as the Kensho LLM-ready API). Claude will have access to structured tools for financial data, company information, market data, consensus estimates, earnings transcripts, M&A transactions, and business relationships. The query plans in each reference file describe what data to retrieve for each section — map these to the appropriate S&P Global tools available in the conversation.
 
@@ -411,7 +411,7 @@ After all data collection is complete and intermediate files are written, comput
 
 If a validation fails: attempt recalculation from raw data. If still inconsistent, flag the metric as "N/A" rather than publishing incorrect numbers. Quiet math errors in a tear sheet destroy credibility.
 
-**Write results** to `/tmp/tear-sheet/calculations.csv` with columns: `metric,value,formula,components`
+**Write results** to `{{RUN_FOLDER}}/tear-sheet-data/calculations.csv` with columns: `metric,value,formula,components`
 
 Example rows:
 ```
@@ -446,7 +446,7 @@ peer-comps.csv:      ✓ (12 rows)
 
 ### Step 4: Format as DOCX
 
-Read `/mnt/skills/public/docx/SKILL.md` for docx creation mechanics (docx-js via Node). Apply the Style Configuration above plus the section-specific formatting in the reference file.
+Use the document creation capability available in the current environment for DOCX creation mechanics. Apply the Style Configuration above plus the section-specific formatting in the reference file.
 
 **Page length defaults (user can override):**
 - Equity Research: 1 page (density is the convention)
@@ -459,12 +459,12 @@ If content exceeds the target, each reference file specifies which sections to c
 **Output filename:** `[CompanyName]_TearSheet_[Audience]_[YYYYMMDD].docx`
 Example: `Nvidia_TearSheet_CorpDev_20260220.docx`
 
-Save to `/mnt/user-data/outputs/` and present to the user.
+Save to `{{RUN_FOLDER}}/` and present to the user.
 
 ## Data Integrity Rules
 
 These override everything else:
-1. **S&P Global tools are the only source for financial data.** Do not fill gaps with training knowledge — it may be stale or wrong.
+1. **In S&P provider mode, S&P Global tools are the only source for financial data. In fact-pack mode, use only the approved fact-pack sources.** Do not fill gaps with training knowledge — it may be stale or wrong.
 2. **Label what you can't find.** Use "N/A" or "Not disclosed" rather than omitting a row silently.
 3. **Dates matter.** Note the fiscal year end or reporting period. Don't assume calendar year = fiscal year. Market data (stock prices, market cap) should include an "as of" date.
 4. **Don't mix reporting periods.** If you have FY2023 revenue and LTM EBITDA, label them distinctly.
@@ -480,9 +480,7 @@ These override everything else:
 All data retrieved from MCP tools must be persisted to structured intermediate files before document generation. These files — not conversation context — are the single source of truth for every number in the document.
 
 **Setup:** At the start of Step 3, create the working directory:
-```
-mkdir -p /tmp/tear-sheet/
-```
+Create `{{RUN_FOLDER}}/tear-sheet-data/` using the current environment's native filesystem command.
 
 **Write-after-query mandate:** After each MCP query step completes, immediately write the retrieved data to the appropriate intermediate file(s). Do not wait until all queries finish. Each reference file's query plan specifies which file(s) to write after each step.
 
@@ -490,16 +488,16 @@ mkdir -p /tmp/tear-sheet/
 
 | File | Format | Columns / Structure | Used By |
 |---|---|---|---|
-| `/tmp/tear-sheet/company-profile.txt` | Key-value text | name, ticker, exchange, HQ, sector, industry, founded, employees, market_cap, enterprise_value, stock_price, 52wk_high, 52wk_low, shares_outstanding, beta, ownership | All |
-| `/tmp/tear-sheet/financials.csv` | CSV | `period,line_item,value,source` | All |
-| `/tmp/tear-sheet/segments.csv` | CSV | `period,segment_name,revenue,source` | ER, IB, CD |
-| `/tmp/tear-sheet/valuation.csv` | CSV | `metric,trailing,forward,source` | ER, IB, CD |
-| `/tmp/tear-sheet/consensus.csv` | CSV | `metric,fy_year,value,source` | ER |
-| `/tmp/tear-sheet/earnings.txt` | Structured text | Quarter, date, key quotes, guidance, key drivers | ER, IB, Sales |
-| `/tmp/tear-sheet/relationships.txt` | Structured text | Customers, suppliers, partners, competitors — each with descriptors | IB, CD, Sales |
-| `/tmp/tear-sheet/peer-comps.csv` | CSV | `ticker,metric,value,source` | ER, IB, CD |
-| `/tmp/tear-sheet/ma-activity.csv` | CSV | `date,target,deal_value,type,rationale,source` | IB, CD |
-| `/tmp/tear-sheet/calculations.csv` | CSV | `metric,value,formula,components` | All (written in Step 3b) |
+| `{{RUN_FOLDER}}/tear-sheet-data/company-profile.txt` | Key-value text | name, ticker, exchange, HQ, sector, industry, founded, employees, market_cap, enterprise_value, stock_price, 52wk_high, 52wk_low, shares_outstanding, beta, ownership | All |
+| `{{RUN_FOLDER}}/tear-sheet-data/financials.csv` | CSV | `period,line_item,value,source` | All |
+| `{{RUN_FOLDER}}/tear-sheet-data/segments.csv` | CSV | `period,segment_name,revenue,source` | ER, IB, CD |
+| `{{RUN_FOLDER}}/tear-sheet-data/valuation.csv` | CSV | `metric,trailing,forward,source` | ER, IB, CD |
+| `{{RUN_FOLDER}}/tear-sheet-data/consensus.csv` | CSV | `metric,fy_year,value,source` | ER |
+| `{{RUN_FOLDER}}/tear-sheet-data/earnings.txt` | Structured text | Quarter, date, key quotes, guidance, key drivers | ER, IB, Sales |
+| `{{RUN_FOLDER}}/tear-sheet-data/relationships.txt` | Structured text | Customers, suppliers, partners, competitors — each with descriptors | IB, CD, Sales |
+| `{{RUN_FOLDER}}/tear-sheet-data/peer-comps.csv` | CSV | `ticker,metric,value,source` | ER, IB, CD |
+| `{{RUN_FOLDER}}/tear-sheet-data/ma-activity.csv` | CSV | `date,target,deal_value,type,rationale,source` | IB, CD |
+| `{{RUN_FOLDER}}/tear-sheet-data/calculations.csv` | CSV | `metric,value,formula,components` | All (written in Step 3b) |
 
 **Abbreviations:** ER = Equity Research, IB = IB/M&A, CD = Corp Dev, Sales = Sales/BD.
 

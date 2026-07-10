@@ -159,7 +159,7 @@ def add_section(slide, x, y, w, header_text, bullets, header_size=10, bullet_siz
 - **Follow brand guidelines if provided**
 
 ### Visual Reference
-See `examples/Nike_Strip_Profile_Example.pptx` for layout inspiration. Adapt colors to each company's brand.
+If the user provides a comparable strip-profile example, use it for layout inspiration. No example asset is bundled with this skill; adapt colors to each company's verified brand guidance.
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "name": "domain-capital-markets",
   "displayName": "Domain Capital Markets",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "资本市场领域：公开市场股票研究、首次覆盖、公司资料和投行交付物瓦技能。",
   "author": { "name": "Private Agent Skill Library" }
 }

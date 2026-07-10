@@ -1,6 +1,6 @@
 ---
 name: qihang-workflow-orchestrator
-description: Route Qihang's proven workflows. Use when Qihang asks to run, package, choose, or maintain workflows for agent-reach research to Qihang writing to Codex/md2wechat layout, product-to-investment IC memo / visual report, or skill-library maintenance. This skill only routes; workflow details live in references.
+description: Route Qihang's proven workflows. Use when Qihang asks to run, package, choose, or maintain workflows for agent-reach research to Qihang writing to Codex/md2wechat layout, product-to-investment IC memo / visual report, public-equity initiating coverage, or skill-library maintenance. This skill only routes; workflow details live in references.
 ---
 
 # Qihang Workflow Orchestrator

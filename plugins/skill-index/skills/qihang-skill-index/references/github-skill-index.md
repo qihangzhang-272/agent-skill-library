@@ -30,7 +30,7 @@ Local archive without GitHub source:
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
 | `https://github.com/lucy-cxy/oss-investment-scorecard` | OSS/AI company investment scorecard and structured output source | absorbed reference | investment | Absorbed into `domain-investment/skills/qihang-investment-scorecard/references/` from upstream commit `28a210d0a194ba0f31fe59edaf413abfafa2008e`. Do not call the old skill directly; use `domain-investment`. |
-| `https://github.com/anthropics/financial-services` | Financial services, investment banking, public equity, and diligence skill references | migrated reference source | investment | Apache-2.0. Selected files came from commit `4bbabc7cd1a474c1667fa05a2bfe58e411dcf9c1`. Qihang approved distilling the stable public-equity and banking capabilities into local tile skills under `domain-capital-markets`; retain this URL and commit as provenance, do not expose the upstream end-to-end agents as parallel runtime orchestrators. |
+| `https://github.com/anthropics/financial-services` | Financial services, investment banking, public equity, and diligence skill references | migrated reference source | investment | Apache-2.0. Selected files came from commit `4bbabc7cd1a474c1667fa05a2bfe58e411dcf9c1`. Qihang approved lossless migration of the standalone public-equity and banking skill content into `domain-capital-markets`; only paths, declared dependencies, packaging, and orchestration placement may change. Content that remains inside `domain-investment` may be distilled into its canonical owner. Do not expose the upstream end-to-end agents as parallel runtime orchestrators. |
 
 ## Research And Web Reach
 

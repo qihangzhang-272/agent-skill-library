@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**目标：** 将 qihang-ic-memo-writer 下隐藏的完整金融交付技能提炼为边界清楚、可独立触发的瓦技能，保留现有 Investment IC Memo 主链，并在验证门槛通过后新增 Public Equity Coverage 链。
+**目标：** 将 qihang-ic-memo-writer 下属于公开市场和投行交付的完整技能无损迁移为边界清楚、可独立触发的瓦技能；只对继续留在 domain-investment 的内容做提炼、合并和去重；保留现有 Investment IC Memo 主链，并在验证门槛通过后新增 Public Equity Coverage 链。
 
 **架构：** domain-investment 继续拥有事实、判断、估值和投资决策能力；新增 domain-capital-markets，拥有公开市场研报和金融交付物。所有端到端顺序只由 qihang-workflow-orchestrator 编排，任何领域 skill 都不得自行调度其他 skill。
 
@@ -22,6 +22,7 @@
   - financial-company-profile
   - investment-banking-pitch-deck
   - sell-side-ma-materials
+  - financial-artifact-qc
 - 新增 Public Equity Coverage chain，但必须在瓦技能独立验证和两次代表性组合验证通过后才挂入 orchestrator 路由表。
 
 ### 0.2 不新增的包装技能
@@ -32,6 +33,21 @@
 - 不把 CIM 和 Teaser 拆成两个 skill；合并为 sell-side-ma-materials 的两个模式。
 - 不把 Tear Sheet 和 Strip Profile 拆成两个 skill；合并为 financial-company-profile 的两个输出模式。
 - funding-digest 和 public-equity earnings 暂由现有 investment-research、thesis-tracking 持有；只有独立触发被真实使用后再晋升。
+
+### 0.3 无损迁移规则
+
+迁入 domain-capital-markets 的原生 skill 内容不得提炼、摘要化或只保留检查表。必须保留全部业务步骤、模板说明、计算规则、受众变体、质量门和技术示例。
+
+允许的变化只有：
+
+- 把完整内容移动到新的 SKILL.md、references/ 或 assets/；
+- 修正相对路径和缺失引用；
+- 把旧环境硬编码改为显式依赖或 provider adapter；
+- 把内部调度段原样转移到唯一 orchestrator chain；
+- 删除完全重复副本，但前提是 canonical 内容完整保留且迁移映射可追溯；
+- 对明显不可执行的硬编码示例加“示例/不可直接运行”标记，但不删除示例正文。
+
+继续留在 domain-investment 的 task1、task2、task3、ic-memo、funding 和 earnings 内容可以按现有 owner 提炼。
 
 ### 0.3 新 chain 与条件步骤
 
@@ -48,13 +64,13 @@
 | initiating-coverage/task1-company-research.md | qihang-investment-research | 提炼 public-company source checklist |
 | initiating-coverage/task2-financial-modeling.md | qihang-financial-model-builder | 提炼模型输入、工作簿、审计和 handoff 契约 |
 | initiating-coverage/task3-valuation.md | qihang-valuation-returns | 只提炼 price-target handoff；删除重复流程 |
-| initiating-coverage/task4-chart-generation.md | investment-chart-pack | 保留图表选择和来源规则；不迁移硬编码示例 |
-| initiating-coverage/task5-report-assembly.md | public-equity-coverage-writer | 保留报告结构、输入映射、引用和数字 QA |
+| initiating-coverage/task4-chart-generation.md | investment-chart-pack | 完整迁移；保留代码与示例，修路径并标记不可直接运行部分 |
+| initiating-coverage/task5-report-assembly.md | public-equity-coverage-writer | 完整迁移报告结构、组装流程、输入映射、引用和数字 QA |
 | initiating-coverage/valuation-methodologies.md | qihang-valuation-returns | 删除完全重复副本 |
-| tear-sheet.md、tear-sheet/*、strip-profile.md | financial-company-profile | 提炼为 Tear Sheet / Strip Profile 两种模式 |
-| pitch-deck.md、pitch-deck/* | investment-banking-pitch-deck | 提炼模板映射、版式和交付 QA |
-| cim-builder.md、teaser.md | sell-side-ma-materials | 提炼 CIM / Teaser 两种模式 |
-| ib-check-deck.md | 各 writer / artifact skill | 提炼通用终审规则，不保留独立入口 |
+| tear-sheet.md、tear-sheet/*、strip-profile.md | financial-company-profile | 完整迁移为 Tear Sheet / Strip Profile 两种模式 |
+| pitch-deck.md、pitch-deck/* | investment-banking-pitch-deck | 完整迁移模板映射、版式、OOXML 和交付 QA |
+| cim-builder.md、teaser.md | sell-side-ma-materials | 完整迁移为 CIM / Teaser 两种模式 |
+| ib-check-deck.md | financial-artifact-qc | 完整迁移为独立终审 skill；补齐或声明缺失依赖 |
 | funding-digest.md、funding-digest/sector-seeds.md | qihang-investment-research | 删除 writer 中的完全重复副本 |
 | earnings-preview-beta.md | qihang-thesis-tracking | 只提炼财季命名、LTM/NTM、claim provenance 等 safeguard |
 
@@ -115,7 +131,7 @@ claude plugin validate . --strict
 - 仓库根 URL
 - 固定 commit：4bbabc7cd1a474c1667fa05a2bfe58e411dcf9c1
 - LICENSE 和可再分发边界
-- 本迁移是“用自己的语言提炼”，不是保留上游完整 runtime 副本
+- domain-capital-markets 采用无损内容迁移；domain-investment 内部吸收仍采用提炼和 canonical owner
 
 在 github-skill-index.md 的 Notes 中补齐 URL、commit、license、目标 domain、替代关系五项。若 license 不允许再分发，停止迁移正文，只保留结构化契约和上游索引。
 
@@ -266,7 +282,7 @@ Source and number gaps:
 Report path:
 ~~~
 
-report-structure.md 只保留机构研报章节和输入映射；assembly-quality.md 只保留引用、数字、期间、单位、评级与目标价一致性规则。删除“使用全部 token”“一次只跑一个 task”等旧调度指令。
+report-structure.md 与 assembly-quality.md 完整承接 task5 的报告结构、组装步骤、引用、数字、期间、单位、评级与目标价规则。`initiating-coverage.md` 中的调度指令不删除，原样转移到 Public Equity Coverage chain；writer 本身不保留调度职责。
 
 **Step 4：验证**
 
@@ -301,7 +317,7 @@ git commit -m "$ts｜新增公开市场首次覆盖成稿技能与资本市场�
 - 只消费批准后的表格、模型和估值 handoff。
 - 每张图必须记录 chart id、问题、数据文件、字段、期间、单位、计算、来源、输出路径。
 - 不规定必须生成 25–35 张；只生成能回答研究问题的图。
-- 不迁移 task4 中的硬编码公司数据、注释式伪实现或未声明 pip 安装。
+- 完整保留 task4 中的代码、硬编码示例和注释式实现，但将其放入 reference，明确标记示例状态，并把未声明依赖补进 skill contract；不得把示例数据当作运行时数据。
 
 输出：
 
@@ -324,7 +340,7 @@ Handoff to coverage writer:
 - 估值敏感性图
 - manifest 中的期间、单位和来源映射
 
-如果需要固定脚本，只有在代表性 fixture 通过后才创建 scripts/render_chart_pack.py；否则先保持高自由度说明，不把未经测试的旧代码迁入。
+旧代码完整保留在 reference 并标记其示例状态。只有代表性 fixture 通过后，才把其中可执行部分提升为 scripts/render_chart_pack.py；未经测试的示例不得作为默认 runtime 执行入口。
 
 **Step 3：静态检查**
 
@@ -333,7 +349,7 @@ rg -n "hardcoded|example company|pip install|/tmp|/mnt/" "plugins/domain-capital
 claude plugin validate . --strict
 ~~~
 
-预期：无旧环境和硬编码示例。
+预期：无旧环境硬编码；硬编码示例只存在于明确标记的 reference 中，且不会被当作运行时输入。
 
 **Step 4：提交**
 
@@ -342,7 +358,7 @@ git add plugins/domain-capital-markets/skills/investment-chart-pack
 git add plugins/domain-capital-markets/.claude-plugin/plugin.json .claude-plugin/marketplace.json
 git diff --cached --check
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
-git commit -m "$ts｜提炼投资图表包技能并建立数据来源契约"
+git commit -m "$ts｜完整迁移投资图表包技能并建立数据来源契约"
 ~~~
 
 ## Task 5：创建 Financial Company Profile
@@ -357,7 +373,7 @@ git commit -m "$ts｜提炼投资图表包技能并建立数据来源契约"
 - 修改：plugins/domain-capital-markets/.claude-plugin/plugin.json
 - 修改：.claude-plugin/marketplace.json
 
-**Step 1：合并而非复制**
+**Step 1：以两个模式完整迁移**
 
 一个 skill 支持两个 mode：
 
@@ -394,10 +410,10 @@ git add plugins/domain-capital-markets/skills/financial-company-profile
 git add plugins/domain-capital-markets/.claude-plugin/plugin.json .claude-plugin/marketplace.json
 git diff --cached --check
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
-git commit -m "$ts｜合并并提炼公司资料与条带式简介技能"
+git commit -m "$ts｜完整迁移公司资料与条带式简介技能"
 ~~~
 
-## Task 6：创建 Pitch Deck 与 Sell-side M&A 交付技能
+## Task 6：创建 Pitch Deck、Sell-side M&A 与 Artifact QC 技能
 
 **文件：**
 
@@ -408,16 +424,18 @@ git commit -m "$ts｜合并并提炼公司资料与条带式简介技能"
 - 创建：plugins/domain-capital-markets/skills/sell-side-ma-materials/references/cim.md
 - 创建：plugins/domain-capital-markets/skills/sell-side-ma-materials/references/teaser.md
 - 创建：plugins/domain-capital-markets/skills/sell-side-ma-materials/references/disclosure-quality.md
+- 创建：plugins/domain-capital-markets/skills/financial-artifact-qc/SKILL.md
+- 创建：plugins/domain-capital-markets/skills/financial-artifact-qc/references/ib-check-deck.md
 - 修改：plugins/domain-capital-markets/.claude-plugin/plugin.json
 - 修改：.claude-plugin/marketplace.json
 
-**Step 1：Pitch Deck 只保留稳定能力**
+**Step 1：完整迁移 Pitch Deck**
 
 - 输入必须有用户模板和已批准的数据 handoff。
 - 保留 template inventory、content mapping、data gap、数字一致性、渲染验收。
-- 不原样迁移 492 行 OOXML 手册；标准工具能完成的操作不用 XML。
-- 只有确实需要底层 XML 且有 fixture 验证时，才增加最小 XML reference。
-- calculation-standards 中的估值公式由 qihang-valuation-returns 持有；Pitch Deck 只核对展示值和 handoff 一致。
+- 完整迁移 OOXML 手册；SKILL.md 仍优先标准工具，只有标准 API 无法完成时才加载 XML reference。
+- 修复原文件的 `reference/` 坏路径，并保留底层 XML 风险警告。
+- 完整保留 calculation-standards；运行时 qihang-valuation-returns 仍是估值结论 owner，Pitch Deck 用该 reference 做展示值和 handoff 一致性复核。
 
 **Step 2：CIM 与 Teaser 合并**
 
@@ -426,14 +444,21 @@ git commit -m "$ts｜合并并提炼公司资料与条带式简介技能"
 - 输入必须包含交易背景、批准披露范围、匿名化要求和来源材料。
 - skill 不自行研究或估值；缺输入时返回 required-input checklist。
 
-**Step 3：验证**
+**Step 3：完整迁移 Artifact QC**
+
+- ib-check-deck.md 全文迁入 financial-artifact-qc。
+- 原本缺失的 extract_numbers.py、ib-terminology.md 和 report-format.md 必须补齐、替换为已存在能力，或明确声明为可选依赖；不能静默删除相应检查步骤。
+- 该 skill 只检查成品与源 handoff，不重写研究、估值或交易结论。
+
+**Step 4：验证**
 
 测试：
 
 1. “基于这个模板和已批准估值做 pitch deck” → pitch-deck。
 2. “生成匿名 sell-side teaser，不暴露公司名” → sell-side-ma-materials / teaser。
 3. “编写完整 CIM” → sell-side-ma-materials / cim。
-4. “写 IC Memo” → 均不触发。
+4. “检查这份 pitch deck 的数字、叙事和版式” → financial-artifact-qc。
+5. “写 IC Memo” → 均不触发。
 
 运行：
 
@@ -444,15 +469,16 @@ claude plugin validate . --strict
 
 预期：没有坏路径或未声明依赖。
 
-**Step 4：提交**
+**Step 5：提交**
 
 ~~~powershell
 git add plugins/domain-capital-markets/skills/investment-banking-pitch-deck
 git add plugins/domain-capital-markets/skills/sell-side-ma-materials
+git add plugins/domain-capital-markets/skills/financial-artifact-qc
 git add plugins/domain-capital-markets/.claude-plugin/plugin.json .claude-plugin/marketplace.json
 git diff --cached --check
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
-git commit -m "$ts｜提炼投行演示文稿与卖方并购材料技能"
+git commit -m "$ts｜完整迁移投行演示文稿、卖方并购材料与终审技能"
 ~~~
 
 ## Task 7：把未晋升内容归还现有 owner
@@ -539,7 +565,7 @@ git commit -m "$ts｜归并公开公司研究、财报跟踪与 IC Memo 终审�
 
 **Step 2：删除旧文件**
 
-只删除已完成提炼、存在 canonical owner 或可由上游索引恢复的文件。不要删除 qihang-investment-research 和 qihang-valuation-returns 中的 canonical 内容。
+只删除已完成无损迁移、存在 canonical owner 或按本计划允许在 domain-investment 内提炼的文件。删除前逐文件核对源文件与目标映射；不要删除 qihang-investment-research 和 qihang-valuation-returns 中的 canonical 内容。
 
 **Step 3：检查残留**
 
@@ -557,7 +583,7 @@ claude plugin validate . --strict
 
 - writer 总行数约 200–350
 - 从 writer 节点移除约 95% 以上历史内容
-- 新增技能合计内容显著小于迁移前 10,113 行
+- domain-capital-markets 的迁移内容不以减少行数为目标；仓库净减只来自 domain-investment 内提炼和完全重复副本删除
 
 **Step 5：提交**
 

@@ -5,6 +5,8 @@ description: Create institutional-quality equity research initiation reports thr
 
 # Initiating Coverage
 
+> **Qihang migration compatibility:** This full source is preserved without content reduction. When used through `qihang-workflow-orchestrator`, the orchestrator chain owns task order and prerequisite checks. The original single-task and “wait for user” instructions below apply only to standalone/manual execution and must not create a second runtime scheduler.
+
 Create institutional-quality equity research initiation reports through a structured 5-task workflow. Each task must be executed separately with verified inputs.
 
 ## Overview
@@ -181,7 +183,7 @@ Request 5: Task 5 - Report Assembly (requires ALL previous task outputs)
 
 **Process**:
 1. Verify company name/ticker provided
-2. Load detailed instructions from references/task1-company-research.md
+2. Load detailed instructions from `domain-investment:qihang-investment-research`
 3. Execute qualitative research workflow
 4. Deliver research document
 
@@ -239,7 +241,7 @@ Optional:
 
 **Process**:
 1. Verify access to financial data
-2. Load detailed instructions from references/task2-financial-modeling.md
+2. Load detailed instructions from `domain-investment:qihang-financial-model-builder`
 3. **Step 1**: Extract historical financials (if needed)
 4. **Step 2+**: Build projection model with 6 essential tabs
 5. Deliver Excel model
@@ -311,7 +313,7 @@ Required from model:
 
 **Process**:
 1. Verify financial model is accessible
-2. Load detailed instructions from references/task3-valuation.md
+2. Load detailed instructions from `domain-investment:qihang-valuation-returns`
 3. Execute valuation workflow
 4. Deliver valuation analysis
 
@@ -424,7 +426,7 @@ Required from External Sources:
 
 **Process**:
 1. Verify model and valuation outputs are accessible
-2. Load detailed instructions from references/task4-chart-generation.md
+2. Load detailed instructions from `domain-capital-markets:investment-chart-pack`
 3. Execute chart generation workflow
 4. Package all charts into a zip file
 5. Deliver zip file
@@ -692,16 +694,13 @@ Would you like to start with Task 1 first?"
 
 Detailed instructions for each task are in separate reference files to keep this skill lean:
 
-- **references/task1-company-research.md** - Company research workflow
-- **references/task2-financial-modeling.md** - Financial modeling workflow
-- **references/task3-valuation.md** - Valuation methodology
-  - Also see: references/valuation-methodologies.md for DCF/comps deep dive
-- **references/task4-chart-generation.md** - Chart generation workflow
-- **references/task5-report-assembly.md** - Report writing workflow
-  - Also see: assets/report-template.md for report structure
-  - Also see: assets/quality-checklist.md for quality checks
+- **domain-investment:qihang-investment-research** - Company research workflow
+- **domain-investment:qihang-financial-model-builder** - Financial modeling workflow
+- **domain-investment:qihang-valuation-returns** - Valuation methodology and DCF/comps interpretation
+- **domain-capital-markets:investment-chart-pack** - Chart generation workflow
+- **references/task5-report-assembly.md** - Complete report writing, structure, and quality workflow
 
-**When to load reference files**: Load ONLY the reference file associated with the specific task being performed. These files are very large - do not load multiple reference files at once. Read the appropriate task reference file at the start of the task for detailed step-by-step instructions.
+**When to load reference files**: In standalone/manual mode, load only the skill or reference associated with the specific task. In an orchestrated run, consume each completed handoff and load `references/task5-report-assembly.md` only for final assembly.
 
 ---
 

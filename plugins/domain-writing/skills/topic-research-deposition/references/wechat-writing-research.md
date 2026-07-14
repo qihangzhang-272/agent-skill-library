@@ -70,6 +70,19 @@ Coverage target:
 - at least one systematic argument
 - at least one production case, project, or concrete example
 
+## Standard Flow
+
+```text
+clarify research objective
+-> choose mode
+-> create mode-appropriate research folder
+-> search with agent-reach
+-> save raw source material by source/platform
+-> screenshot important URLs（强制，见 Screenshots 节）
+-> quality check
+-> report coverage and stop for next instruction
+```
+
 ## Source Files
 
 One source per file when practical:
@@ -89,15 +102,15 @@ One source per file when practical:
 
 Do not write "这篇值得关注因为..." in source files. That is analysis, not deposition.
 
-## Screenshots
+## Screenshots（强制）
 
-Screenshots are evidence and candidate article images.
+截图是证据，也是候选文章配图。**这一步是强制的，不是 "when useful"。** `screenshots/` 空目录 = 研究流程没走完。
 
-- Screenshot important URLs after source text is saved.
-- Use descriptive filenames: `{surface}-{序号}-{slug}.png`.
-- If agent-reach provides screenshot/archive capability, prefer it.
-- If fallback is needed, use `shot-scraper`.
-- Do not fabricate screenshots for sources without URL access.
+- 每个被引用的关键源 URL（推文、论文、博客、prompt PDF、官方公告页）都要截图存档。
+- 命名：`{surface}-{序号}-{slug}.png`，如 `twitter-01-bloom-cdc.png`、`web-01-openai-cdc-proof.png`。
+- 优先用 playwright browser 截图；fallback 用 `shot-scraper`。
+- 无 URL 访问的源，标注 `no-screenshot` 并说明原因，不要伪造截图。
+- 截图同时是文章配图候选--起草时可直接引用。
 
 ## Completion Report
 
@@ -110,10 +123,10 @@ Mode: wechat-writing-research
 Search tool: agent-reach
 素材目录:
 素材总量:
-截图:
+截图:（必须列出 screenshots/ 里的文件；空目录要说明原因）
 五维度覆盖:
 覆盖盲区:
-下一步建议: 是否进入 qihang-writing-style 的 SCQA framing？
+下一步建议: 是否进入编辑判断 + 起草？
 ```
 
-Do not continue into SCQA or drafting until Qihang says to continue.
+Do not continue into drafting until Qihang says to continue.

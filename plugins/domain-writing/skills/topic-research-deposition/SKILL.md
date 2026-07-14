@@ -1,7 +1,7 @@
 ---
 name: topic-research-deposition
 description: >
-  Use when Qihang asks to 搜一下、调研、找资料、沉淀素材、补截图、做产品事实收集、投资/OSS research、公众号选题搜索、写作前第 0 步，或需要在写作/产品分析前建立可复查的 evidence folder。
+  Use when Qihang asks to 搜一下、调研、找资料、沉淀素材、补截图、做产品事实收集、投资/OSS research、公众号选题搜索、写作前第 0 步，或需要在写作/产品分析前建立可复查的 evidence folder.
 ---
 
 # Topic Research Deposition
@@ -63,6 +63,7 @@ Next suggested handoff:
 Handoff rules:
 
 - `writing-research` and `wechat-writing-research` can hand off to `qihang-writing-style`.
+- 交接给 `qihang-writing-style` 后，该 skill 会先做**编辑判断**（竞争解释 / 反证 / 未知项 / 暂时结论 / 删除哪些材料，落盘 `01.5-editorial-judgment.md`），再选框架起草。编辑判断在写作之前完成，比选框架更重要。
 - `product-research` can hand off to `ai-product-analyzer`.
 - `investment-research` can hand off to `qihang-workflow-orchestrator` product-analysis chain for OSS investment structured and visual output.
 - Do not continue into the next skill until Qihang says to continue.

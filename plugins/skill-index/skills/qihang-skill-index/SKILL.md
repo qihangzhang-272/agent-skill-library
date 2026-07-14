@@ -18,7 +18,7 @@ Use this skill when:
 
 - You need to find a previously collected external skill or source repository.
 - You need to decide whether an external skill should stay as an index, be installed into a target project, or be promoted into a self-cultivated skill.
-- A workflow references an external capability such as `md2wechat`, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
+- A workflow references an external capability such as `baoyu-skills`, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
 - The repository feels bloated because external skill files were copied into `skills/`.
 
 Do not use this skill to replace Qihang's own skills:
@@ -48,7 +48,7 @@ Read `references/github-skill-index.md` for the current curated list. Source URL
 
 ## Registering A New Skill
 
-要登记一个新发现的外部技能时，读 `references/registration-guide.md`。它定义了：填哪 5 个字段（Source/Role/Status/Domain/Notes）、Status 阶梯（reference → absorbed/migrated）、以及**归 Domain 的门槛**（只有真融入某条 chain 才标 domain，否则留空）。不要凭印象往索引里加行——按指南走。
+要登记一个新发现的外部技能时，读 `references/registration-guide.md`。它定义了：填哪 5 个字段（Source/Role/Status/Domain/Notes）、Status 阶梯（reference -> absorbed/migrated）、以及**归 Domain 的门槛**（只有真融入某条 chain 才标 domain，否则留空）。不要凭印象往索引里加行--按指南走。
 
 ## How To Apply
 

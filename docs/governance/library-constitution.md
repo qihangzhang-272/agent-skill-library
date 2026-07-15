@@ -17,10 +17,10 @@
 
 ## 当前主线
 
-- 写作发布：服务于 topic -> writing -> md2wechat 的公众号链路。
-- 产品分析：服务于 product-analysis 的端到端链路，默认串联 AI-native 产品判断、domain-investment 投资工作包、IC Memo 和可选前端自生成可视化研报页。
+- 写作发布：服务于 topic -> writing -> Baoyu 配图、排版与草稿箱发布的公众号链路。
+- 产品分析：服务于 product-analysis 的端到端链路，默认串联 AI-native 产品判断、domain-investment 投资工作包、IC Memo 和可选 `investment-visual-report` 可视化研报页。
 - 技术 / 开发范式：服务于文档驱动、评估充分、可稳定交付的端到端开发管线。
-- 运营：服务于技能库治理、GitHub 私有仓库维护和自动化协作。
+- 运营：服务于技能库治理、GitHub 仓库维护和自动化协作。
 
 ## 分层约束
 
@@ -78,7 +78,7 @@
 
 瓦技能可独立存在，不要求进任何 chain。进 chain 是可选的主动编排（见 `plugins/foundation/skills/skill-architecture/references/chain-authoring.md`）。当某个瓦技能确实进了某条 chain 时，要能解释它的位置：
 
-- topic -> writing -> md2wechat。
+- topic -> writing -> Baoyu 配图、排版与草稿箱发布。
 - product-analysis -> AI-native 产品视角 -> domain-investment 投资工作包 -> IC Memo -> 可选可视化。产品、投资、研报和可视化不做成平行分类。
 - 技术开发范式和项目初始化。
 - 写作、改写和内容定稿。
@@ -92,7 +92,7 @@
 - `qihang-workflow-orchestrator` 是唯一默认工作流调度入口；它的 `SKILL.md` 只保留路由表，具体 chain 必须压缩到 `references/chains/`，不得再创建子调度器技能。
 - 一条工作流只暴露必要节点；多个外部参考源只能在同一个选择节点里择一使用，不能被机械串成多段调用链。
 - 不为了"管理复杂度"新增包装技能。只有当某个判断被启航反复使用、能用自己的语言稳定复述，并且明显降低后续执行成本时，才允许沉淀为新的本地技能。
-- product-analysis 这类链路应保持：`ai-product-analyzer` 或 `qihang-ai-product-judgment` 提供启航的 AI-native 产品视角，`domain-investment` 工作包提供竞争格局、单位经济、投资评分、估值、DD、跟踪和 IC Memo 成稿，最后按需前端自生成可视化。不要先按"是否准确适用 OSS investment"分类。
+- product-analysis 这类链路应保持：`ai-product-analyzer` 或 `qihang-ai-product-judgment` 提供启航的 AI-native 产品视角，`domain-investment` 工作包提供竞争格局、单位经济、投资评分、估值、DD、跟踪和 IC Memo 成稿，最后按需由 `investment-visual-report` 可视化。不要先按"是否准确适用 OSS investment"分类。
 - 被吸收的外部投资技能只能作为 `domain-investment` 的 references 使用，不再和启航自培养技能平行暴露为默认运行入口。
 - 可视化研报页不再编排外部前端技能；执行者直接生成前端，并遵守前端宪法。
 - 前端宪法：现代风、全展开、不堆叠、不把核心内容藏进折叠组件；首屏显示对象、verdict、总分或决策状态、高信号事实；页面结构沿用 IC Memo 的自然顺序，不由 orchestrator 重新发明论证顺序；前端不得删减上游研报内容，只能做可视化、分组、排序、强调和版式呈现；桌面和移动都要验收，文字不能溢出或重叠。
@@ -112,7 +112,7 @@ Claude Code plugin 既是分发层也是源内容层——三层架构下，源�
 - 插件里的技能固定放在 `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`。
 - 不允许把 `skills/`、`agents/`、`hooks/` 放进 `.claude-plugin/`。
 - 插件不得引用插件目录外部文件；需要的技能文件必须复制进插件目录。
-- 插件必须写 semver 版本号；只要某个插件包含的技能正文、支撑文件或 manifest 变化，就必须 bump 对应插件版本。
+- 插件必须写 semver 版本号；只要某个插件包含的技能正文、支撑文件或 manifest 变化，就必须 bump 对应插件版本，并同步 marketplace 中的版本。
 - 当前默认插件范围：`foundation` 分发元层技能，`orchestrator` 分发工作流路由入口，`skill-index` 分发外部 GitHub 技能源索引，`domain-writing` 分发选题调研和启航写作风格技能，`domain-investment` 分发启航 AI 投资 IC Memo 工作包，`domain-product` 分发产品洞察技能。不为"以后可能用"预建空插件——需要跨领域共享能力时，用 `skill-architecture` 元技能按需新建。
 
 字段级约定（marketplace.json / plugin.json 的具体字段含义和记录粒度）见 `catalog-schema.md`。
@@ -122,6 +122,6 @@ Claude Code plugin 既是分发层也是源内容层——三层架构下，源�
 - 源技能直接维护在 `plugins/<plugin>/skills/`，不存在"先生成再分发"的两步流程。
 - 改动技能正文后，同步 bump 对应插件 `plugins/<plugin>/.claude-plugin/plugin.json` 的 `version`。
 - 新增技能/领域/链时，用 `skill-architecture` 元技能生成骨架，不要手创建 skill 文件夹。
-- 每次改变可分发插件内容时，运行 `claude plugin validate . --strict` 验证。
+- 每次改变可分发插件内容时，运行 `claude plugin validate . --strict` 与 `node scripts/validate-repository.mjs --base HEAD`；两项均通过才允许推送。
 - 每次改变调用链时，同步更新对应 `docs/workflows/` 和 orchestrator 的 `references/chains/`。
 - 每次改变索引结构时，同步更新 `docs/governance/`。

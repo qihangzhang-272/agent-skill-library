@@ -26,7 +26,7 @@
 | `installed external capability` | 已在本机/项目安装，运行时真在调用 | 像 agent-reach、baoyu-skills 这种已成为某 chain 默认依赖的 |
 | `skill collection` | 一个含多技能的合集，按需取用 | 如 taste-skill、anthropics/skills |
 | `absorbed reference` | 它的判断/规则已被提炼进某个本地瓦技能 | 提炼进了 `domain-*/skills/.../references/` |
-| `migrated reference source` | 部分文件已迁入某 domain，上游留作更新源 | 如 financial-services 迁入 agent-investment |
+| `migrated reference source` | 部分文件已迁入某 domain，上游留作更新源 | 如 financial-services 迁入 domain-investment |
 
 晋升原则（沿用 SKILL.md 的 Promotion Rule）：一个外部源要从"链接"变成"本地技能"，**必须是你反复用过、把稳定可复用的判断用自己的话提炼出来**之后。Do not promote by copying. Promote by distilling.
 

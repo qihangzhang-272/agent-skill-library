@@ -9,7 +9,7 @@
 | 目录 | 用途 | 当前文件 |
 | --- | --- | --- |
 | `governance/` | 仓库级原则、架构边界、引用策略、索引规范 | `README.md`、`library-constitution.md`、`catalog-schema.md` |
-| `workflows/` | 操作流程和跨技能调用链 | `README.md`、`prd-to-frontend.md`、`investment-product-to-research-report.md` |
+| `workflows/` | 操作流程和跨技能调用链 | `README.md`、`prd-to-frontend.md`、`investment-product-to-research-report.md`、`public-equity-coverage.md` |
 
 ## 放置规则
 
@@ -24,3 +24,4 @@
 - [governance/catalog-schema.md](governance/catalog-schema.md)：插件内技能记录方式。
 - [workflows/prd-to-frontend.md](workflows/prd-to-frontend.md)：PRD 到前端实现的调用链（草稿，未挂入路由表）。
 - [workflows/investment-product-to-research-report.md](workflows/investment-product-to-research-report.md)：产品判断到投资研报的调用链。
+- [workflows/public-equity-coverage.md](workflows/public-equity-coverage.md)：公开公司首次覆盖、估值、图表与金融 QC 调用链。

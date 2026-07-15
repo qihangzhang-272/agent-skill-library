@@ -23,7 +23,7 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
-| `https://github.com/JimLiu/baoyu-skills` | 公众号排版与发布（baoyu-post-to-wechat / baoyu-markdown-to-html / baoyu-cover-image / baoyu-article-illustrator） | installed external capability | writing | 已进 wechat-writing chain 的排版节点，替代原 md2wechat。本地安装在项目级 `.agents/skills/`，配置在 `.baoyu-skills/`。 |
+| `https://github.com/JimLiu/baoyu-skills` | 公众号排版与发布（baoyu-post-to-wechat / baoyu-markdown-to-html / baoyu-cover-image / baoyu-article-illustrator） | installed external capability | writing | 已进 wechat-writing chain 的配图、排版与发布节点。本地安装在项目级 `.agents/skills/`，配置在 `.baoyu-skills/`。 |
 
 ## Product And Investment
 

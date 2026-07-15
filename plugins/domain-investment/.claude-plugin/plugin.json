@@ -1,7 +1,7 @@
 {
   "name": "domain-investment",
   "displayName": "Domain Investment",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "投资决策领域：研究、产品判断、竞品、单元经济、财务模型、评分、估值、DD、thesis、IC memo、可视化研报瓦片技能。公开市场交付物由 domain-capital-markets 承接。",
   "author": { "name": "Private Agent Skill Library" }
 }

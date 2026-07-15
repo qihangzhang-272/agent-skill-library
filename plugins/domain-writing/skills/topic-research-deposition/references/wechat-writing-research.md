@@ -25,27 +25,21 @@ Before creating folders or searching, confirm:
    - angles to avoid
    - known sources, people, projects, or articles to include
 
-Write a 3-5 sentence confirmation summary to `{draft_dir}/_确认.md`.
+Write a 3-5 sentence confirmation summary to `{run_dir}/_确认.md`.
 
 ## Folder
 
-Use this folder only in WeChat writing mode:
-
-```powershell
-$base = "C:\Users\Administrator\Desktop\AI\codex\Writing platforms\agent-skill-library-management\writing\wechat\drafts\{YYYY-MM-DD}-{topic-slug}"
-New-Item -ItemType Directory -Force -Path "$base\sources" | Out-Null
-New-Item -ItemType Directory -Force -Path "$base\screenshots" | Out-Null
-New-Item -ItemType Directory -Force -Path "$base\wechat" | Out-Null
-```
-
-If a run needs legacy platform folders, create them under this draft folder:
+Use the chain-owned run folder in WeChat writing mode. Do not invent another base path:
 
 ```text
-twitter/
-reddit/
-web/
-wechat/
+writing/drafts/{YYYY-MM-DD}-{topic-slug}/
+  _确认.md
+  01-topic-research/
+    sources/
+    screenshots/
 ```
+
+If a run needs platform folders, create them under `01-topic-research/sources/`.
 
 Do not use this folder for generic product or investment research.
 
@@ -104,7 +98,7 @@ Do not write "这篇值得关注因为..." in source files. That is analysis, no
 
 ## Screenshots（强制）
 
-截图是证据，也是候选文章配图。**这一步是强制的，不是 "when useful"。** `screenshots/` 空目录 = 研究流程没走完。
+截图是证据，也是候选文章配图。**这一步是强制的。** `01-topic-research/screenshots/` 空目录 = 研究流程没走完。
 
 - 每个被引用的关键源 URL（推文、论文、博客、prompt PDF、官方公告页）都要截图存档。
 - 命名：`{surface}-{序号}-{slug}.png`，如 `twitter-01-bloom-cdc.png`、`web-01-openai-cdc-proof.png`。

@@ -49,7 +49,7 @@ plugins/
 调用链由 `qihang-workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/`。
 
 ```
-公众号选题 → agent-reach 搜索 → 启航写作 → md2wechat 排版
+公众号选题 → agent-reach 搜索 → 启航写作 → Baoyu 配图、排版与草稿箱发布
   chain: wechat-writing.md
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
@@ -68,16 +68,17 @@ AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值
 ## 安装与验证
 
 ```powershell
-# 在本仓库根目录
+# 在本仓库根目录；提交和推送前必须两项都通过
 claude plugin validate . --strict
+node scripts/validate-repository.mjs --base HEAD
 ```
 
-改动技能正文后，bump 对应 `plugins/<plugin>/.claude-plugin/plugin.json` 的 `version`。
+改动技能正文后，bump 对应 `plugins/<plugin>/.claude-plugin/plugin.json` 的 `version`，并同步 `.claude-plugin/marketplace.json`。本仓库已启用 `.githooks/pre-push` 与 GitHub Actions 双门禁；首次 clone 后执行 `git config core.hooksPath .githooks`。
 
 ## 边界
 
 - `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
-- `qihang-skill-index` 是外部技能统一收纳入口。`humanizer-zh`、`md2wechat`、`frontend-design`、GSAP、TypeUI、Taste Skill、Impeccable 等只保留 GitHub 索引，不堆完整文件。
+- `qihang-skill-index` 是外部技能统一收纳入口。Baoyu、agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等保留上游来源与使用边界，不把完整外部仓库堆进本库。
 - `oss-investment-scorecard` 已降级为 `qihang-investment-scorecard` 的内部 reference，不要直接调用旧入口。
 - 投资与资本市场领域都只放瓦技能；所有固定链都由 `qihang-workflow-orchestrator` 路由，不设第二个调度器。
 - 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。

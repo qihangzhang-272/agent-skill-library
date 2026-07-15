@@ -1,7 +1,7 @@
 {
   "name": "orchestrator",
   "displayName": "Orchestrator",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "调度路由：意图->领域->固定链；链定义存于本技能 references/chains，端到端落盘铁律。",
   "author": { "name": "Private Agent Skill Library" },
   "dependencies": [

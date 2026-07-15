@@ -1,0 +1,40 @@
+name: 仓库质量门禁
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: 严格验证
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Claude Code
+        run: npm install --global @anthropic-ai/claude-code@2.1.210
+
+      - name: Validate Claude plugins
+        run: claude plugin validate . --strict
+
+      - name: Validate repository contracts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE_SHA" ] && ! [[ "$BASE_SHA" =~ ^0+$ ]]; then
+            node scripts/validate-repository.mjs --base "$BASE_SHA" --head HEAD
+          else
+            node scripts/validate-repository.mjs
+          fi

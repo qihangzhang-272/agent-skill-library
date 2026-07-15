@@ -21,19 +21,19 @@ description: >-
 1. 用 `assets/skill-template/SKILL.md` 建技能文件夹。
 2. description 写到能触发。
 3. 按需加 references/。
-4. bump 所在 plugin version。
-5. `claude plugin validate . --strict`。
+4. bump 所在 plugin version，并同步 marketplace 中的 version。
+5. `claude plugin validate . --strict` + `node scripts/validate-repository.mjs --base HEAD`。
 6. 不碰 chain。
 
 ## 场景 B：建新 domain
 1. 建 `plugins/domain-<name>/` + `.claude-plugin/plugin.json`。
 2. 瓦技能进 `skills/<skill>/SKILL.md`。
 3. marketplace.json 注册新 plugin。
-4. validate。
+4. 同步 plugin/marketplace version，运行两项仓库验证。
 5. chain 可选，不自动建。
 
 ## 场景 C：主动建/改 chain
-你主动要把多个瓦技能串成工作流时，读 `chain-authoring.md`。chain 不是加技能的副作用。
+你主动要把多个瓦技能串成工作流时，读 `chain-authoring.md`。chain 不是加技能的副作用；改 chain 后必须同步 workflow 文档、bump orchestrator version 并通过两项仓库验证。
 
 ## 从零建库
 换环境或单独使用本模块时，读 `references/bootstrap-from-scratch.md`，从空目录长出三层架构。

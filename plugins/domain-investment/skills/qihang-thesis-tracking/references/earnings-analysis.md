@@ -133,7 +133,7 @@ The earnings update process follows 5 phases:
 - ✅ Verify transcript date matches release date
 - ✅ If dates don't match or are old (>3 months), search again
 
-**See [references/workflow.md](references/workflow.md)** for detailed search procedures and verification steps.
+**See [earnings-analysis/workflow.md](earnings-analysis/workflow.md)** for detailed search procedures and verification steps.
 
 ### Phase 2: Analysis (2-3 hours)
 - Beat/miss analysis for each key metric
@@ -141,7 +141,7 @@ The earnings update process follows 5 phases:
 - Margin and guidance analysis
 - Update financial model and estimates
 
-**See [references/workflow.md](references/workflow.md)** for detailed analysis framework.
+**See [earnings-analysis/workflow.md](earnings-analysis/workflow.md)** for detailed analysis framework.
 
 ### Phase 3: Chart Generation (1-2 hours)
 Create 8-12 charts focusing on quarterly trends and what's new:
@@ -154,12 +154,12 @@ Create 8-12 charts focusing on quarterly trends and what's new:
 - Estimate revisions
 - Valuation charts
 
-**See [references/workflow.md](references/workflow.md)** for chart specifications.
+**See [earnings-analysis/workflow.md](earnings-analysis/workflow.md)** for chart specifications.
 
 ### Phase 4: Report Creation (2-3 hours)
 Create 8-12 page DOCX report with specific structure.
 
-**See [references/report-structure.md](references/report-structure.md)** for complete page-by-page templates and formatting requirements.
+**See [earnings-analysis/report-structure.md](earnings-analysis/report-structure.md)** for complete page-by-page templates and formatting requirements.
 
 **High-level structure:**
 - Page 1: Earnings summary with rating and price target
@@ -172,7 +172,7 @@ Create 8-12 page DOCX report with specific structure.
 ### Phase 5: Quality Check & Delivery (30 minutes)
 Verify content, formatting, accuracy, and timeliness before delivery.
 
-**See [references/best-practices.md](references/best-practices.md)** for quality checklist and common mistakes to avoid.
+**See [earnings-analysis/best-practices.md](earnings-analysis/best-practices.md)** for quality checklist and common mistakes to avoid.
 
 ## Output Specification
 
@@ -209,13 +209,13 @@ Verify content, formatting, accuracy, and timeliness before delivery.
 
 ## Resources
 
-### references/workflow.md
+### earnings-analysis/workflow.md
 Detailed Phase 1-5 instructions with step-by-step procedures for data collection, analysis, chart generation, and report creation.
 
-### references/report-structure.md
+### earnings-analysis/report-structure.md
 Complete page-by-page templates, table formats, and formatting requirements for the DOCX report.
 
-### references/best-practices.md
+### earnings-analysis/best-practices.md
 Examples of good/bad headlines, tips for success, common mistakes to avoid, and comprehensive quality checklist.
 
 ## Dependencies

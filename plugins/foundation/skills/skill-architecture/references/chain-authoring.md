@@ -14,10 +14,12 @@ chain 是瓦技能之上**可选**的编排层。瓦技能是核心，可独立�
 2. 填三段：适用 / 链路 / 落盘协议。**落盘协议是必填项**--没有落盘协议的 chain 不算完成。
 3. orchestrator `SKILL.md` 路由表加一行指向新 chain。
 4. 同步 `docs/workflows/` 下对应文档。
+5. bump orchestrator version，同步 marketplace，运行两项仓库验证。
 
 ## 改一条 chain
-- 改 chain 定义文件 + 同步 docs/workflows。
+- 改 chain 定义文件 + 同步 docs/workflows + bump orchestrator version 与 marketplace version。
 - 瓦技能本身不用改--chain 引用瓦技能，不是反过来。
+- 运行 `claude plugin validate . --strict` 与 `node scripts/validate-repository.mjs --base HEAD`。
 
 ## 不做什么
 - 加瓦技能时不自动建/改 chain。chain 永远是你主动发起。

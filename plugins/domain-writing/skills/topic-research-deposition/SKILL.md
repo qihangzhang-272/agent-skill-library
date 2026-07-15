@@ -40,7 +40,7 @@ clarify research objective
 -> create mode-appropriate research folder
 -> search with agent-reach
 -> save raw source material by source/platform
--> screenshot or archive important URLs when useful
+-> screenshot or archive evidence according to the selected mode
 -> quality check
 -> report coverage and stop for next instruction
 ```
@@ -70,8 +70,8 @@ Handoff rules:
 
 ## Storage Rules
 
-- General/product/investment research should use a neutral research folder, not `writing/wechat/drafts/`.
-- Only `wechat-writing-research` uses `writing/wechat/drafts/YYYY-MM-DD-{topic-slug}/`.
+- General/product/investment research should use a neutral research folder, not the WeChat run folder.
+- Only `wechat-writing-research` uses `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`; its source material and screenshots live under `01-topic-research/`.
 - Keep raw source material separate from analysis. Do not turn the deposition folder into a finished article or memo.
 - Save one source per file when practical. Include title, author/source, date, URL, capture method, search mode, and full text or full relevant excerpt.
 - If a source cannot be fully fetched, mark it as `partial` and explain why. Do not hide the failure behind a summary.

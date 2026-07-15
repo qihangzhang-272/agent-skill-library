@@ -25,10 +25,17 @@ plugins/<group>/
 ## plugin.json
 唯一强制字段 `name`（kebab-case）；建议补 version / displayName / description / author。
 - version 用 manual semver，破坏性变更（改插件名）升 minor 起步。
-- 技能正文 / 支撑文件 / manifest 变化时必须 bump version。
+- 技能正文 / 支撑文件 / manifest 变化时必须 bump version，并同步 marketplace 中该 plugin 的 version。
 
 ## marketplace.json
-固定放 `.claude-plugin/marketplace.json`，列出所有可安装 plugin。每个 plugin 至少 name / source / version / description，外加顶层 description（`--strict` 必填）。`source` 用 `./plugins/<name>` 相对路径格式。
+固定放 `.claude-plugin/marketplace.json`，列出所有可安装 plugin。每个 plugin 至少 name / source / version / description，外加顶层 description（`--strict` 必填）。`source` 用 `./plugins/<name>` 相对路径格式；version 必须与对应 `plugin.json` 一致。
+
+提交和推送前运行：
+
+```powershell
+claude plugin validate . --strict
+node scripts/validate-repository.mjs --base HEAD
+```
 
 ## 落盘
 - 运行时产物落项目工作区，绝不写进 plugins/ 或本仓库。

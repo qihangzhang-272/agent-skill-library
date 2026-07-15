@@ -5,7 +5,7 @@ description: Write the final Qihang-style investment committee memo from complet
 
 # Qihang IC Memo Writer
 
-This is the final writing node for `agent-investment`.
+This is the final writing node for `domain-investment`.
 
 It consumes completed node outputs. It must not search for new facts or invent missing analysis.
 

@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+root="$(git rev-parse --show-toplevel)"
+cd "$root"
+
+claude plugin validate . --strict
+node scripts/validate-repository.mjs
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$local_sha$remote_sha" in
+    *0000000000000000000000000000000000000000*) continue ;;
+  esac
+  node scripts/validate-repository.mjs --base "$remote_sha" --head "$local_sha"
+done

@@ -1,7 +1,7 @@
 {
   "name": "foundation",
   "displayName": "Foundation",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "元层：架构章程、如何创建新技能/新领域的元技能、principles 个人操作手册。",
   "author": { "name": "Private Agent Skill Library" }
 }

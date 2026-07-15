@@ -62,7 +62,7 @@
 - `domain-capital-markets` 承接公开市场首次覆盖、股票研究、金融图表、公司资料、投行演示、卖方 M&A 材料与金融交付物 QC；它只提供瓦技能，固定链仍由 orchestrator 路由。
 - `oss-investment-scorecard` 已被 `qihang-investment-scorecard` 吸收为 reference，不再作为独立默认运行入口。
 - `qihang-workflow-orchestrator` 是已跑通工作流入口，进入 `orchestrator` plugin；`SKILL.md` 只做路由，具体 chain 压缩到 `references/chains/`。
-- `md2wechat`、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
+- Baoyu、`agent-reach` 等外部能力由 `qihang-skill-index` 引用。
 
 ## 验证规则
 
@@ -70,9 +70,10 @@
 
 ```powershell
 claude plugin validate . --strict
+node scripts/validate-repository.mjs --base HEAD
 ```
 
-验证 marketplace.json 和各 plugin.json 的 schema 合规性、source 路径正确性、版本字段完整性。
+第一项验证 Claude plugin schema；第二项验证 marketplace/plugin 版本一致、内容变化已 bump、chain 引用、相对链接和废弃路径。任一失败都不得推送。
 
 ## 禁止事项
 

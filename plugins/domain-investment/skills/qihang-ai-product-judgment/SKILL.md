@@ -7,7 +7,7 @@ description: Run Qihang's AI-native product judgment inside the investment workf
 
 This node answers: does the AI product itself make sense?
 
-It is the product judgment layer inside `agent-investment`.
+It is the product judgment layer inside `domain-investment`.
 
 ## References
 

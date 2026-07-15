@@ -1,14 +1,14 @@
 {
   "name": "agent-skill-library",
-  "description": "Private Claude Code marketplace for Qihang's self-cultivated agent skills, organized as foundation / orchestrator+index / domains.",
+  "description": "Personal Claude Code marketplace for Qihang's self-cultivated agent skills, organized as foundation / orchestrator+index / domains.",
   "owner": { "name": "Private Agent Skill Library" },
   "plugins": [
-    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.6.0", "description": "元层：章程 + skill-architecture 元技能 + principles 个人操作手册。" },
-    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.5.1", "description": "调度路由 + references/chains 唯一权威源 + 落盘铁律。" },
-    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.3.3", "description": "两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。" },
-    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.2.1", "description": "公众号写作领域瓦技能。" },
-    { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.4.1", "description": "投资决策领域：事实、判断、模型、估值、DD、IC memo 与可视化研报瓦技能。" },
-    { "name": "domain-capital-markets", "source": "./plugins/domain-capital-markets", "version": "0.6.0", "description": "资本市场领域：公开市场股票研究、首次覆盖与投行交付物瓦技能。" },
+    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.6.1", "description": "元层：章程 + skill-architecture 元技能 + principles 个人操作手册。" },
+    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.5.3", "description": "调度路由 + references/chains 唯一权威源 + 落盘铁律。" },
+    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.3.5", "description": "两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。" },
+    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.3.1", "description": "公众号写作领域瓦技能。" },
+    { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.4.2", "description": "投资决策领域：事实、判断、模型、估值、DD、IC memo 与可视化研报瓦技能。" },
+    { "name": "domain-capital-markets", "source": "./plugins/domain-capital-markets", "version": "0.6.1", "description": "资本市场领域：公开市场股票研究、首次覆盖与投行交付物瓦技能。" },
     { "name": "domain-product",    "source": "./plugins/domain-product",    "version": "0.1.0", "description": "AI 产品分析领域瓦技能。" }
   ]
 }

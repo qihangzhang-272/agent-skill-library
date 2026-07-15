@@ -12,7 +12,7 @@ Run this checklist after each research pass. Fix failures before handing off.
 | No summary-only sources | Source files do not contain only "核心要点", "主要观点", "搜索总结", "关键发现", "此处省略", or similar summary labels | Re-fetch or mark as metadata-only |
 | Source metadata present | Each source has title, source/author, date if available, URL, capture method, and mode | Add metadata before analysis |
 | Raw material separated | Raw source files are separate from notes, judgment, article draft, or memo draft | Split files |
-| Folder matches mode | General/product/investment research uses a neutral research folder; only `wechat-writing-research` uses `writing/wechat/drafts/` | Move files to the correct folder |
+| Folder matches mode | General/product/investment research uses a neutral research folder; only `wechat-writing-research` uses `writing/drafts/` | Move files to the correct folder |
 | Queries are reproducible | Search intents, queries, or agent-reach task prompts are recorded | Add a search log |
 | Gaps are explicit | Missing sources, failed fetches, and weak evidence are listed | Add gaps before handoff |
 | No temp leakage | Scratch JSON, debug txt, and tool dumps are either archived intentionally or removed | Clean the folder |
@@ -36,6 +36,6 @@ Only apply when mode is `wechat-writing-research`.
 
 | Check | Standard | If It Fails |
 | --- | --- | --- |
-| Draft folder | Files live under `writing/wechat/drafts/YYYY-MM-DD-{topic-slug}/` | Move files |
+| Draft folder | Files live under `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`; evidence lives under `01-topic-research/` | Move files |
 | WeChat logic | `wechat-viral-logic.md` has been considered before writing handoff | Load it before reporting ready |
-| Screenshot rhythm | Important visual sources or later article image cues are captured or listed | Add screenshots or image-cue notes |
+| Screenshot evidence | Every cited key URL has a screenshot under `01-topic-research/screenshots/`, or an explicit `no-screenshot` reason | Capture the screenshot or record why it cannot be captured |

@@ -1,6 +1,6 @@
 ---
 name: investment-chart-pack
-description: Use when Qihang needs a sourced financial chart pack for public-equity initiating coverage, valuation, company performance, market structure, scenarios, or an institutional research report, and approved research, model, and valuation handoffs already exist.
+description: Use when the user needs a sourced financial chart pack for public-equity initiating coverage, valuation, company performance, market structure, scenarios, or an institutional research report, and approved research, model, and valuation handoffs already exist.
 ---
 
 # Investment Chart Pack

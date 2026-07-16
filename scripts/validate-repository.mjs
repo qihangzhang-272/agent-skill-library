@@ -68,7 +68,7 @@ for (const path of files.filter((file) => file.endsWith("SKILL.md"))) {
 
 const chainFiles = files.filter((path) =>
   rel(path).replaceAll("\\", "/").startsWith(
-    "plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/",
+    "plugins/orchestrator/skills/workflow-orchestrator/references/chains/",
   ),
 );
 for (const path of chainFiles)
@@ -97,7 +97,7 @@ for (const path of files.filter((file) => /\.(md|json)$/i.test(file)))
 
 const runFolder = "writing/drafts/{YYYY-MM-DD}-{topic-slug}/";
 const runFolderDocs = [
-  "plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/wechat-writing.md",
+  "plugins/orchestrator/skills/workflow-orchestrator/references/chains/wechat-writing.md",
   "plugins/domain-writing/skills/topic-research-deposition/SKILL.md",
   "plugins/domain-writing/skills/topic-research-deposition/references/wechat-writing-research.md",
   "plugins/domain-writing/skills/topic-research-deposition/references/quality-checklist.md",
@@ -119,7 +119,7 @@ if (base && !/^0+$/.test(base)) {
     if (previous === json(join(root, path)).version)
       errors.push(`plugin 内容已变化但版本未升级: ${name} (${previous})`);
   }
-  const chainChanged = changed.some((path) => path.includes("qihang-workflow-orchestrator/references/chains/"));
+  const chainChanged = changed.some((path) => path.includes("workflow-orchestrator/references/chains/"));
   if (chainChanged && !changed.some((path) => path.startsWith("docs/workflows/")))
     errors.push("chain 已变化，但 docs/workflows/ 没有同步更新");
 }

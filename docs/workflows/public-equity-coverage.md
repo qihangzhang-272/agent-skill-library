@@ -2,7 +2,7 @@
 
 日期：2026-07-09
 
-定位：这是 `qihang-workflow-orchestrator` 中唯一的公开市场研究与首次覆盖入口。它复用 `domain-investment` 的研究、竞争、模型、估值和 thesis 瓦技能，并由 `domain-capital-markets` 承接图表、成稿与金融交付物 QC；资本市场领域不设第二个调度器。
+定位：这是 `workflow-orchestrator` 中唯一的公开市场研究与首次覆盖入口。它复用 `domain-investment` 的研究、竞争、模型、估值和 thesis 瓦技能，并由 `domain-capital-markets` 承接图表、成稿与金融交付物 QC；资本市场领域不设第二个调度器。
 
 ## 适用场景
 
@@ -16,11 +16,11 @@
 
 | 顺序 | 技能 | 责任 | 必留产物 |
 | --- | --- | --- | --- |
-| 1 | `qihang-investment-research` | 事实、来源登记、公开公司与行业材料 | `02-company-fact-pack.md` |
-| 2 | `qihang-competitive-landscape` | 同业、替代、定位与风险 | `03-competitive-landscape.md` |
-| 3 | `qihang-financial-model-builder` | 审计可追溯的历史与预测模型 | `04-financial-model-handoff.md` 与模型文件 |
-| 4 | `qihang-valuation-returns` | 方法选择、估值桥、目标价/区间与敏感性 | `05-valuation-returns.md` |
-| 5 | `qihang-thesis-tracking` | 财报前瞻、催化剂、证伪条件与跟踪节奏 | `06-thesis-earnings-watch.md` |
+| 1 | `investment-research` | 事实、来源登记、公开公司与行业材料 | `02-company-fact-pack.md` |
+| 2 | `investment-competitive-landscape` | 同业、替代、定位与风险 | `03-competitive-landscape.md` |
+| 3 | `investment-financial-model-builder` | 审计可追溯的历史与预测模型 | `04-financial-model-handoff.md` 与模型文件 |
+| 4 | `investment-valuation-returns` | 方法选择、估值桥、目标价/区间与敏感性 | `05-valuation-returns.md` |
+| 5 | `investment-thesis-tracking` | 财报前瞻、催化剂、证伪条件与跟踪节奏 | `06-thesis-earnings-watch.md` |
 | 6 | `investment-chart-pack` | 只用已批准数据制图 | `07-chart-pack/` |
 | 7 | `public-equity-coverage-writer` | 组装首次覆盖报告，不重新研究或建模 | `08-initiating-coverage-draft.html` |
 | 8 | `financial-artifact-qc` | 数字、单位、期间、引文与格式终审 | `09-qc-findings.json`、`10-public-equity-coverage.*` |

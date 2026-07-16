@@ -1,6 +1,6 @@
 ---
 name: financial-company-profile
-description: Use when Qihang needs a company tear sheet, company one-pager, fact sheet, company snapshot, corporate-development target profile, sales meeting brief, or investment-banking strip profile for a named public or private company.
+description: Use when the user needs a company tear sheet, company one-pager, fact sheet, company snapshot, corporate-development target profile, sales meeting brief, or investment-banking strip profile for a named public or private company.
 ---
 
 # Financial Company Profile

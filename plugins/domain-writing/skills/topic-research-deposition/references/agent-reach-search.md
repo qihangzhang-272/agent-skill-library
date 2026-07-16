@@ -58,7 +58,7 @@ Use direct commands from `platform-commands.md` only when:
 1. agent-reach is unavailable.
 2. agent-reach cannot access a required surface.
 3. agent-reach returns partial data and direct fetch is needed for completeness.
-4. Qihang explicitly asks to use a specific command.
+4. The user explicitly asks to use a specific command.
 
 When falling back, record:
 
@@ -76,4 +76,4 @@ Stop and report coverage when:
 - The research question is answered with enough source diversity.
 - Required surfaces have been covered or explicitly failed.
 - Further search is producing duplicates.
-- The next step belongs to another skill, such as `qihang-writing-style` or `ai-product-analyzer`.
+- The next step belongs to another skill, such as `public-account-writing-style` or `ai-product-analyzer`.

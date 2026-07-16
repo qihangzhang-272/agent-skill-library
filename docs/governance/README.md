@@ -9,4 +9,4 @@
 
 ## 放置标准
 
-只有影响整个技能库维护方式的规则才放这里。外部来源清单放到 `qihang-skill-index`；可复用调用链放到 `docs/workflows/`。
+只有影响整个技能库维护方式的规则才放这里。外部来源清单放到 `external-skill-index`；可复用调用链放到 `docs/workflows/`。

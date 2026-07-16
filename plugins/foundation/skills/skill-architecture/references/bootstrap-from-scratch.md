@@ -9,7 +9,7 @@
 ├── .claude-plugin/marketplace.json   # 分发入口
 ├── README.md                          # 架构树 + 定位 + 验证
 └── plugins/
-    ├── foundation/          # 元层：skill-architecture 元技能 + principles 个人操作手册
+    ├── foundation/          # 元层：skill-architecture 元技能 + principles Agent 操作原则
     ├── orchestrator/        # 工作流路由入口（SKILL.md 只做路由，chain 压缩在 references/chains/）
     ├── skill-index/         # 外部 GitHub 技能索引（默认是链接，不收编正文）
     └── domain-*/            # 按需：按领域组织的瓦技能
@@ -28,7 +28,7 @@
   "description": "<一句话 marketplace 用途>",
   "owner": { "name": "<owner>" },
   "plugins": [
-    { "name": "foundation", "source": "./plugins/foundation", "version": "0.1.0", "description": "元层：架构章程、元技能、个人操作手册。" }
+    { "name": "foundation", "source": "./plugins/foundation", "version": "0.1.0", "description": "元层：架构章程、元技能、Agent 操作原则。" }
   ]
 }
 ```
@@ -41,7 +41,7 @@ plugins/foundation/
 ├── .claude-plugin/plugin.json
 └── skills/
     ├── skill-architecture/   # 本模块自身
-    └── principles/           # 个人操作手册
+    └── principles/           # Agent 操作原则
 ```
 
 > 循环说明：skill-architecture 既是建库指引来源、又是 foundation 的一个瓦技能产物。操作顺序是「先把 skill-architecture 当种子放在 `.claude/skills/` 读它的 bootstrap 指引，建库后再整体复制进 `plugins/foundation/skills/skill-architecture/` 归位」。
@@ -52,7 +52,7 @@ plugin.json：
   "name": "foundation",
   "displayName": "Foundation",
   "version": "0.1.0",
-  "description": "元层：架构章程、元技能、个人操作手册。",
+  "description": "元层：架构章程、元技能、Agent 操作原则。",
   "author": { "name": "<owner>" }
 }
 ```
@@ -62,7 +62,7 @@ principles 的 SKILL.md 用 `principles-authoring.md` 规定的三段结构（�
 ```
 plugins/orchestrator/
 ├── .claude-plugin/plugin.json
-└── skills/qihang-workflow-orchestrator/
+└── skills/workflow-orchestrator/
     ├── SKILL.md              # 只含路由表骨架，先空
     └── references/chains/    # 空目录，等你主动建 chain
 ```
@@ -71,7 +71,7 @@ SKILL.md 骨架（含 frontmatter，先空路由表，建 chain 时加行）：
 
 ```markdown
 ---
-name: qihang-workflow-orchestrator
+name: workflow-orchestrator
 description: >-
   Route proven workflows. Use when asked to run, package, choose, or maintain
   workflows. This skill only routes; workflow details live in references.

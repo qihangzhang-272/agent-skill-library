@@ -2,7 +2,7 @@
 
 `docs/` 保存技能库的治理文档和可复用工作流说明。它不保存完整技能包、外部来源清单或重复分类入口。
 
-正式技能包维护在 `plugins/<plugin>/skills/<skill>/`；外部 GitHub 技能和技能源先记录在 `plugins/skill-index/skills/qihang-skill-index/references/github-skill-index.md`，明确晋升后才进入 `plugins/*/skills/`。
+正式技能包维护在 `plugins/<plugin>/skills/<skill>/`；外部 GitHub 技能和技能源先记录在 `plugins/skill-index/skills/external-skill-index/references/github-skill-index.md`，明确晋升后才进入 `plugins/*/skills/`。
 
 ## 目录结构
 
@@ -15,7 +15,7 @@
 
 - 仓库级原则放 `docs/governance/`。
 - 操作流程和跨技能调用链放 `docs/workflows/`。
-- 外部 repo 来源、用途和边界放 `qihang-skill-index`，不再单独维护分类文档。
+- 外部 repo 来源、用途和边界放 `external-skill-index`，不再单独维护分类文档。
 - 临时实验、网页运行结果和人工评审记录不放正式 `docs/`。
 
 ## 当前入口

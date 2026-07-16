@@ -1,6 +1,6 @@
 ---
 name: sell-side-ma-materials
-description: Use when Qihang needs a sell-side M&A confidential information memorandum, anonymous teaser, or buyer-facing transaction material based on approved company, financial, and transaction inputs.
+description: Use when the user needs a sell-side M&A confidential information memorandum, anonymous teaser, or buyer-facing transaction material based on approved company, financial, and transaction inputs.
 ---
 
 # Sell-side M&A Materials

@@ -6,7 +6,7 @@ The goal is to collect facts before `ai-product-analyzer` or `product-analysis` 
 
 ## Product Research
 
-Use when Qihang needs product facts before analysis, visual report, or frontend brief.
+Use when the user needs product facts before analysis, visual report, or frontend brief.
 
 Minimum coverage:
 
@@ -33,7 +33,7 @@ Suggested handoff: ai-product-analyzer
 
 ## Investment Research
 
-Use when Qihang needs evidence for investment memo, IC memo, DD question tree, or OSS investment.
+Use when the user needs evidence for investment memo, IC memo, DD question tree, or OSS investment.
 
 Minimum coverage:
 

@@ -1,6 +1,6 @@
 # Task 4: Chart Generation - Detailed Workflow
 
-> **Qihang migration compatibility:** This full workflow, chart catalog, and its examples are preserved without content reduction. Example company values and commented implementations are reference material only; replace them with approved handoff data. Dependencies must be available in the current environment before execution.
+> **Library migration compatibility:** This full workflow, chart catalog, and its examples are preserved without content reduction. Example company values and commented implementations are reference material only; replace them with approved handoff data. Dependencies must be available in the current environment before execution.
 
 This document provides step-by-step instructions for executing Task 4 (Chart Generation) of the initiating-coverage skill.
 

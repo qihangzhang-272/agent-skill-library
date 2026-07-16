@@ -4,7 +4,7 @@
 
 是 Agent 的运行能力库——给 Codex / Claude / 后续 agent 用的、可调用、可组合、可配置的工作能力。
 
-第一用户是维护者本人。外部技能默认只做索引（URL + 来源 + 调用方式），只有许可证、边界、复用价值都清楚时才 vendored 进 `plugins/`。网页 prompt、UI 库源码、项目资料、一次性实验——不进正式库。
+本库面向需要维护和调用 Agent 技能的使用者。外部技能默认只做索引（URL + 来源 + 调用方式），只有许可证、边界、复用价值都清楚时才 vendored 进 `plugins/`。网页 prompt、UI 库源码、项目资料、一次性实验——不进正式库。
 
 ## 架构：三层 plugins
 
@@ -12,9 +12,9 @@
 
 ```
 plugins/
-├── foundation/          # 元层：principles 个人操作手册 + skill-architecture 元技能
-├── orchestrator/        # qihang-workflow-orchestrator：唯一工作流路由入口
-├── skill-index/         # qihang-skill-index：外部 GitHub 技能索引
+├── foundation/          # 元层：principles Agent 操作原则 + skill-architecture 元技能
+├── orchestrator/        # workflow-orchestrator：唯一工作流路由入口
+├── skill-index/         # external-skill-index：外部 GitHub 技能索引
 ├── domain-writing/      # 公众号写作瓦技能
 ├── domain-investment/   # 投资决策瓦技能（研究、模型、估值、IC memo）
 ├── domain-capital-markets/ # 公开市场研究、首次覆盖与投行交付物瓦技能
@@ -27,29 +27,29 @@ plugins/
 
 **Foundation**
 
-- `principles` — 启航个人操作手册。认知原型 + DO/DON'T + CALIBRATION。被动参考库，不是全局强制规则。
+- `principles` — Agent 操作原则。认知原型 + DO/DON'T + CALIBRATION。被动参考库，不是全局强制规则。
 - `skill-architecture` — 元技能。新增技能/领域/链时生成 spec 合规骨架，更新 marketplace.json。瓦技能可独立存在，chain 是可选主动编排。**不要手创建 skill 文件夹。**
 
 **Orchestrator + Index**
 
-- `qihang-workflow-orchestrator` — 已跑通工作流的统一路由入口。`SKILL.md` 只做路由，具体 chain 压缩在 `references/chains/`。
-- `qihang-skill-index` — 两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。
+- `workflow-orchestrator` — 已跑通工作流的统一路由入口。`SKILL.md` 只做路由，具体 chain 压缩在 `references/chains/`。
+- `external-skill-index` — 两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。
 
 **Domain**
 
 | 领域 | 瓦技能 |
 | --- | --- |
-| `domain-writing` | `qihang-writing-style` · `topic-research-deposition` |
-| `domain-investment` | `qihang-investment-research` · `qihang-ai-product-judgment` · `qihang-competitive-landscape` · `qihang-unit-economics` · `qihang-financial-model-builder` · `qihang-investment-scorecard` · `qihang-valuation-returns` · `qihang-investment-dd` · `qihang-thesis-tracking` · `qihang-ic-memo-writer` · `investment-visual-report` |
+| `domain-writing` | `public-account-writing-style` · `topic-research-deposition` |
+| `domain-investment` | `investment-research` · `investment-ai-product-judgment` · `investment-competitive-landscape` · `investment-unit-economics` · `investment-financial-model-builder` · `investment-scorecard` · `investment-valuation-returns` · `investment-dd` · `investment-thesis-tracking` · `investment-ic-memo-writer` · `investment-visual-report` |
 | `domain-capital-markets` | `public-equity-coverage-writer` · `investment-chart-pack` · `financial-company-profile` · `investment-banking-pitch-deck` · `sell-side-ma-materials` · `financial-artifact-qc` |
 | `domain-product` | `ai-product-analyzer` |
 
 ## 运行链
 
-调用链由 `qihang-workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/`。
+调用链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
 
 ```
-公众号选题 → agent-reach 搜索 → 启航写作 → Baoyu 配图、排版与草稿箱发布
+公众号选题 → agent-reach 搜索 → 公众号编辑写作 → Baoyu 配图、排版与草稿箱发布
   chain: wechat-writing.md
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
@@ -78,9 +78,9 @@ node scripts/validate-repository.mjs --base HEAD
 ## 边界
 
 - `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
-- `qihang-skill-index` 是外部技能统一收纳入口。Baoyu、agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等保留上游来源与使用边界，不把完整外部仓库堆进本库。
-- `oss-investment-scorecard` 已降级为 `qihang-investment-scorecard` 的内部 reference，不要直接调用旧入口。
-- 投资与资本市场领域都只放瓦技能；所有固定链都由 `qihang-workflow-orchestrator` 路由，不设第二个调度器。
+- `external-skill-index` 是外部技能统一收纳入口。Baoyu、agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等保留上游来源与使用边界，不把完整外部仓库堆进本库。
+- `oss-investment-scorecard` 已降级为 `investment-scorecard` 的内部 reference，不要直接调用旧入口。
+- 投资与资本市场领域都只放瓦技能；所有固定链都由 `workflow-orchestrator` 路由，不设第二个调度器。
 - 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。
 
 ## 治理文档

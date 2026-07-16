@@ -1,6 +1,6 @@
 ---
 name: public-equity-coverage-writer
-description: Use when Qihang needs an institutional public-equity initiating-coverage report, stock rating and price target, or final equity-research report assembled from completed research, model, valuation, thesis, and chart handoffs. Do not use for private-company IC memos or to perform upstream research and modeling inside the writer.
+description: Use when the user needs an institutional public-equity initiating-coverage report, stock rating and price target, or final equity-research report assembled from completed research, model, valuation, thesis, and chart handoffs. Do not use for private-company IC memos or to perform upstream research and modeling inside the writer.
 ---
 
 # Public Equity Coverage Writer
@@ -9,7 +9,7 @@ Assemble the final initiating-coverage report without redoing upstream analysis.
 
 ## Core Rule
 
-The Qihang orchestrator owns end-to-end sequencing. The full migrated source references retain their original single-task workflow for fidelity, but those dispatch instructions are subordinate when this skill is called from a chain.
+The workflow orchestrator owns end-to-end sequencing. The full migrated source references retain their original single-task workflow for fidelity, but those dispatch instructions are subordinate when this skill is called from a chain.
 
 ## How To Apply
 

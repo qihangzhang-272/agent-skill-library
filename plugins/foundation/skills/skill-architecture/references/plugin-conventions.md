@@ -14,7 +14,7 @@ plugins/<group>/
 ## 三层架构
 | 层 | 目录 | 放什么 | 不放什么 |
 | --- | --- | --- | --- |
-| Foundation | `plugins/foundation/` | 元技能 + 个人操作手册 | 领域 know-how、具体 chain |
+| Foundation | `plugins/foundation/` | 元技能 + Agent 操作原则 | 领域 know-how、具体 chain |
 | Orchestrator + Index | `plugins/orchestrator/`、`plugins/skill-index/` | 工作流路由 + 外部技能索引 | 技能正文副本、项目产物 |
 | Domain | `plugins/domain-*/` | 瓦技能，每个领域一个 plugin | 第二个领域调度器 |
 

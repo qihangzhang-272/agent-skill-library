@@ -14,6 +14,6 @@ Last repo-root verification: <日期> via `git ls-remote --symref <repo> HEAD`.
 
 ## Promotion Rule
 
-外部技能只有在反复使用、提炼出稳定可复用判断后，才从索引晋升为本地自培养技能。
+外部技能只有在反复使用、提炼出稳定可复用判断后，才从索引晋升为本地维护技能。
 
 Do not promote by copying. Promote by distilling.

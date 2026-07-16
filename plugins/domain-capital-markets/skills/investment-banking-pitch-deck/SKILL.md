@@ -1,6 +1,6 @@
 ---
 name: investment-banking-pitch-deck
-description: Use when Qihang needs to populate, refresh, or quality-check an existing investment-banking PowerPoint pitch deck template using approved financial, transaction, market, or company handoffs.
+description: Use when the user needs to populate, refresh, or quality-check an existing investment-banking PowerPoint pitch deck template using approved financial, transaction, market, or company handoffs.
 ---
 
 # Investment Banking Pitch Deck

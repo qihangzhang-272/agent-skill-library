@@ -1,7 +1,7 @@
 {
   "name": "skill-index",
   "displayName": "Skill Index",
-  "version": "0.3.5",
-  "description": "两层生态索引：我的技能 vs GitHub 外部技能，探测与提示安装。",
-  "author": { "name": "Private Agent Skill Library" }
+  "version": "0.4.0",
+  "description": "两层生态索引：本地维护技能 vs GitHub 外部技能，探测与提示安装。",
+  "author": { "name": "Agent Skill Library Maintainers" }
 }

@@ -10,7 +10,7 @@ chain 是瓦技能之上**可选**的编排层。瓦技能是核心，可独立�
 不满足这两条就不建--零散瓦技能直接用即可。
 
 ## 建一条 chain
-1. 复制 `assets/chain-template.md`，放 `orchestrator/skills/qihang-workflow-orchestrator/references/chains/<name>.md`。
+1. 复制 `assets/chain-template.md`，放 `orchestrator/skills/workflow-orchestrator/references/chains/<name>.md`。
 2. 填三段：适用 / 链路 / 落盘协议。**落盘协议是必填项**--没有落盘协议的 chain 不算完成。
 3. orchestrator `SKILL.md` 路由表加一行指向新 chain。
 4. 同步 `docs/workflows/` 下对应文档。

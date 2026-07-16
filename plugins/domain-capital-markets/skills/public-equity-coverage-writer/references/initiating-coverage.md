@@ -5,7 +5,7 @@ description: Create institutional-quality equity research initiation reports thr
 
 # Initiating Coverage
 
-> **Qihang migration compatibility:** This full source is preserved without content reduction. When used through `qihang-workflow-orchestrator`, the orchestrator chain owns task order and prerequisite checks. The original single-task and “wait for user” instructions below apply only to standalone/manual execution and must not create a second runtime scheduler.
+> **Library migration compatibility:** This full source is preserved without content reduction. When used through `workflow-orchestrator`, the orchestrator chain owns task order and prerequisite checks. The original single-task and “wait for user” instructions below apply only to standalone/manual execution and must not create a second runtime scheduler.
 
 Create institutional-quality equity research initiation reports through a structured 5-task workflow. Each task must be executed separately with verified inputs.
 
@@ -183,7 +183,7 @@ Request 5: Task 5 - Report Assembly (requires ALL previous task outputs)
 
 **Process**:
 1. Verify company name/ticker provided
-2. Load detailed instructions from `domain-investment:qihang-investment-research`
+2. Load detailed instructions from `domain-investment:investment-research`
 3. Execute qualitative research workflow
 4. Deliver research document
 
@@ -241,7 +241,7 @@ Optional:
 
 **Process**:
 1. Verify access to financial data
-2. Load detailed instructions from `domain-investment:qihang-financial-model-builder`
+2. Load detailed instructions from `domain-investment:investment-financial-model-builder`
 3. **Step 1**: Extract historical financials (if needed)
 4. **Step 2+**: Build projection model with 6 essential tabs
 5. Deliver Excel model
@@ -313,7 +313,7 @@ Required from model:
 
 **Process**:
 1. Verify financial model is accessible
-2. Load detailed instructions from `domain-investment:qihang-valuation-returns`
+2. Load detailed instructions from `domain-investment:investment-valuation-returns`
 3. Execute valuation workflow
 4. Deliver valuation analysis
 
@@ -694,9 +694,9 @@ Would you like to start with Task 1 first?"
 
 Detailed instructions for each task are in separate reference files to keep this skill lean:
 
-- **domain-investment:qihang-investment-research** - Company research workflow
-- **domain-investment:qihang-financial-model-builder** - Financial modeling workflow
-- **domain-investment:qihang-valuation-returns** - Valuation methodology and DCF/comps interpretation
+- **domain-investment:investment-research** - Company research workflow
+- **domain-investment:investment-financial-model-builder** - Financial modeling workflow
+- **domain-investment:investment-valuation-returns** - Valuation methodology and DCF/comps interpretation
 - **domain-capital-markets:investment-chart-pack** - Chart generation workflow
 - **references/task5-report-assembly.md** - Complete report writing, structure, and quality workflow
 

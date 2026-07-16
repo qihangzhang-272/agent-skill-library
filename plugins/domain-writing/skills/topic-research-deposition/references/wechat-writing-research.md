@@ -2,13 +2,13 @@
 
 Use this reference only for `wechat-writing-research`.
 
-This mode preserves the original public-account research experience: search is for article writing, not generic fact lookup. It collects raw material, screenshots, and writing ammunition before handing off to `qihang-writing-style`.
+This mode preserves the original public-account research experience: search is for article writing, not generic fact lookup. It collects raw material, screenshots, and writing ammunition before handing off to `public-account-writing-style`.
 
 ## Pre-Search Confirmation
 
 Before creating folders or searching, confirm:
 
-1. What does Qihang want to understand?
+1. What does the user want to understand?
    - development history, controversy, key people, technical principle, business model, philosophy, product, or current debate
    - existing knowledge level
    - the core question the article should answer
@@ -123,4 +123,4 @@ Search tool: agent-reach
 下一步建议: 是否进入编辑判断 + 起草？
 ```
 
-Do not continue into drafting until Qihang says to continue.
+Do not continue into drafting until the user says to continue.

@@ -5,7 +5,7 @@ description: "Populates investment banking pitch deck templates with data from s
 
 # Populating Investment Banking Pitch Deck Templates
 
-> **Qihang migration compatibility:** This workflow and all support references are preserved without content reduction. The original `reference/` links have been repaired to `references/`. Use the wrapper's approved-handoff rule and current presentation capability when the original workflow assumes a specific runtime.
+> **Library migration compatibility:** This workflow and all support references are preserved without content reduction. The original `reference/` links have been repaired to `references/`. Use the wrapper's approved-handoff rule and current presentation capability when the original workflow assumes a specific runtime.
 
 ## Reference Files
 

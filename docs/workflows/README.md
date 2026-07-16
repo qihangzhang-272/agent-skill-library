@@ -1,6 +1,6 @@
 # Workflow Docs
 
-这里放可以重复执行的流程，不放具体技能正文。Claude Code 运行时的压缩 workflow 入口在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/`；本目录保留更完整的治理说明和背景说明。
+这里放可以重复执行的流程，不放具体技能正文。Claude Code 运行时的压缩 workflow 入口在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`；本目录保留更完整的治理说明和背景说明。
 
 ## 当前文件
 
@@ -8,7 +8,7 @@
 - `investment-product-to-research-report.md`：从 AI-native 产品判断到 `domain-investment` IC Memo，再到可选 `investment-visual-report` 可视化研报页的调用链。
 - `public-equity-coverage.md`：从公开公司事实包、模型、估值与 thesis，到首次覆盖报告和数值终审的资本市场调用链。
 
-稳定写作发布链在 `plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/wechat-writing.md`：agent-reach 搜索沉淀 -> 启航写作 -> Baoyu 配图、排版与公众号草稿箱发布。
+稳定写作发布链在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/wechat-writing.md`：agent-reach 搜索沉淀 -> 公众号编辑写作 -> Baoyu 配图、排版与公众号草稿箱发布。
 
 ## 放置标准
 

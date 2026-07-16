@@ -1,6 +1,6 @@
 ---
 name: financial-artifact-qc
-description: Use when Qihang needs a final quality-control pass on an investment-banking pitch deck, client presentation, company profile, financial document, or capital-markets artifact for number consistency, narrative alignment, language, and visual readiness.
+description: Use when the user needs a final quality-control pass on an investment-banking pitch deck, client presentation, company profile, financial document, or capital-markets artifact for number consistency, narrative alignment, language, and visual readiness.
 ---
 
 # Financial Artifact QC

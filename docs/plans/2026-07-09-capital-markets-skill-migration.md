@@ -2,11 +2,11 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**目标：** 将 qihang-ic-memo-writer 下属于公开市场和投行交付的完整技能无损迁移为边界清楚、可独立触发的瓦技能；只对继续留在 domain-investment 的内容做提炼、合并和去重；保留现有 Investment IC Memo 主链，并在验证门槛通过后新增 Public Equity Coverage 链。
+**目标：** 将 investment-ic-memo-writer 下属于公开市场和投行交付的完整技能无损迁移为边界清楚、可独立触发的瓦技能；只对继续留在 domain-investment 的内容做提炼、合并和去重；保留现有 Investment IC Memo 主链，并在验证门槛通过后新增 Public Equity Coverage 链。
 
-**架构：** domain-investment 继续拥有事实、判断、估值和投资决策能力；新增 domain-capital-markets，拥有公开市场研报和金融交付物。所有端到端顺序只由 qihang-workflow-orchestrator 编排，任何领域 skill 都不得自行调度其他 skill。
+**架构：** domain-investment 继续拥有事实、判断、估值和投资决策能力；新增 domain-capital-markets，拥有公开市场研报和金融交付物。所有端到端顺序只由 workflow-orchestrator 编排，任何领域 skill 都不得自行调度其他 skill。
 
-**技术栈：** Claude Code plugin、Markdown SKILL.md、PowerShell、claude plugin validate、DOCX/PPTX/XLSX 交付工具、现有 qihang handoff 协议。
+**技术栈：** Claude Code plugin、Markdown SKILL.md、PowerShell、claude plugin validate、DOCX/PPTX/XLSX 交付工具、现有 library handoff 协议。
 
 ---
 
@@ -14,8 +14,8 @@
 
 ### 0.1 保留与新增
 
-- 保留现有 plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/investment-icmemo.md，默认语义仍是“投资决策 → IC Memo”。
-- 新增 domain-investment:qihang-financial-model-builder，负责实际工作簿构建；qihang-valuation-returns 只负责估值、回报和模型结果解释。
+- 保留现有 plugins/orchestrator/skills/workflow-orchestrator/references/chains/investment-icmemo.md，默认语义仍是“投资决策 → IC Memo”。
+- 新增 domain-investment:investment-financial-model-builder，负责实际工作簿构建；investment-valuation-returns 只负责估值、回报和模型结果解释。
 - 新增 domain-capital-markets，首批包含：
   - public-equity-coverage-writer
   - investment-chart-pack
@@ -60,25 +60,25 @@
 
 | 当前来源 | 目标 owner | 处理 |
 | --- | --- | --- |
-| references/ic-memo.md | qihang-ic-memo-writer | 提炼 PE deal addendum，删除原文件 |
-| initiating-coverage/task1-company-research.md | qihang-investment-research | 提炼 public-company source checklist |
-| initiating-coverage/task2-financial-modeling.md | qihang-financial-model-builder | 提炼模型输入、工作簿、审计和 handoff 契约 |
-| initiating-coverage/task3-valuation.md | qihang-valuation-returns | 只提炼 price-target handoff；删除重复流程 |
+| references/ic-memo.md | investment-ic-memo-writer | 提炼 PE deal addendum，删除原文件 |
+| initiating-coverage/task1-company-research.md | investment-research | 提炼 public-company source checklist |
+| initiating-coverage/task2-financial-modeling.md | investment-financial-model-builder | 提炼模型输入、工作簿、审计和 handoff 契约 |
+| initiating-coverage/task3-valuation.md | investment-valuation-returns | 只提炼 price-target handoff；删除重复流程 |
 | initiating-coverage/task4-chart-generation.md | investment-chart-pack | 完整迁移；保留代码与示例，修路径并标记不可直接运行部分 |
 | initiating-coverage/task5-report-assembly.md | public-equity-coverage-writer | 完整迁移报告结构、组装流程、输入映射、引用和数字 QA |
-| initiating-coverage/valuation-methodologies.md | qihang-valuation-returns | 删除完全重复副本 |
+| initiating-coverage/valuation-methodologies.md | investment-valuation-returns | 删除完全重复副本 |
 | tear-sheet.md、tear-sheet/*、strip-profile.md | financial-company-profile | 完整迁移为 Tear Sheet / Strip Profile 两种模式 |
 | pitch-deck.md、pitch-deck/* | investment-banking-pitch-deck | 完整迁移模板映射、版式、OOXML 和交付 QA |
 | cim-builder.md、teaser.md | sell-side-ma-materials | 完整迁移为 CIM / Teaser 两种模式 |
 | ib-check-deck.md | financial-artifact-qc | 完整迁移为独立终审 skill；补齐或声明缺失依赖 |
-| funding-digest.md、funding-digest/sector-seeds.md | qihang-investment-research | 删除 writer 中的完全重复副本 |
-| earnings-preview-beta.md | qihang-thesis-tracking | 只提炼财季命名、LTM/NTM、claim provenance 等 safeguard |
+| funding-digest.md、funding-digest/sector-seeds.md | investment-research | 删除 writer 中的完全重复副本 |
+| earnings-preview-beta.md | investment-thesis-tracking | 只提炼财季命名、LTM/NTM、claim provenance 等 safeguard |
 
 ## 2. 全局成功标准
 
 迁移完成必须同时满足：
 
-1. qihang-ic-memo-writer 只保留最终 IC Memo 汇编职责，不搜索、不建模、不生成 PPTX/DOCX 交付物。
+1. investment-ic-memo-writer 只保留最终 IC Memo 汇编职责，不搜索、不建模、不生成 PPTX/DOCX 交付物。
 2. domain skill 中不存在 task1 → task5 之类的内部调度器。
 3. 每个新 skill 有独立、可区分的 description、输入契约、输出契约、依赖声明和“不该使用”的边界。
 4. 新 skill 不包含 /tmp、/mnt/skills、/mnt/user-data、/home/claude 等旧环境硬编码。
@@ -94,7 +94,7 @@
 **文件：**
 
 - 检查：git status 输出的全部未提交文件
-- 修改：plugins/skill-index/skills/qihang-skill-index/references/github-skill-index.md
+- 修改：plugins/skill-index/skills/external-skill-index/references/github-skill-index.md
 - 修改：plugins/skill-index/.claude-plugin/plugin.json
 - 修改：.claude-plugin/marketplace.json
 
@@ -115,7 +115,7 @@ git diff --cached --name-only
 运行：
 
 ~~~powershell
-$root = "plugins/domain-investment/skills/qihang-ic-memo-writer"
+$root = "plugins/domain-investment/skills/investment-ic-memo-writer"
 $files = Get-ChildItem $root -Recurse -File
 $lines = ($files | Get-Content | Measure-Object -Line).Lines
 "files=$($files.Count) lines=$lines"
@@ -140,7 +140,7 @@ claude plugin validate . --strict
 只暂存 skill-index 和对应版本文件，检查 staged diff 后提交：
 
 ~~~powershell
-git add plugins/skill-index/skills/qihang-skill-index/references/github-skill-index.md
+git add plugins/skill-index/skills/external-skill-index/references/github-skill-index.md
 git add plugins/skill-index/.claude-plugin/plugin.json .claude-plugin/marketplace.json
 git diff --cached --check
 git diff --cached --name-only
@@ -152,13 +152,13 @@ git commit -m "$ts｜补全金融技能迁移来源、许可与替代关系"
 
 **文件：**
 
-- 创建：plugins/domain-investment/skills/qihang-financial-model-builder/SKILL.md
-- 创建：plugins/domain-investment/skills/qihang-financial-model-builder/references/model-build-contract.md
-- 迁移：plugins/domain-investment/skills/qihang-valuation-returns/references/3-statement-model.md
-- 迁移：plugins/domain-investment/skills/qihang-valuation-returns/references/dcf-model.md
-- 迁移：plugins/domain-investment/skills/qihang-valuation-returns/references/lbo-model.md
-- 迁移：plugins/domain-investment/skills/qihang-valuation-returns/references/audit-xls.md
-- 修改：plugins/domain-investment/skills/qihang-valuation-returns/SKILL.md
+- 创建：plugins/domain-investment/skills/investment-financial-model-builder/SKILL.md
+- 创建：plugins/domain-investment/skills/investment-financial-model-builder/references/model-build-contract.md
+- 迁移：plugins/domain-investment/skills/investment-valuation-returns/references/3-statement-model.md
+- 迁移：plugins/domain-investment/skills/investment-valuation-returns/references/dcf-model.md
+- 迁移：plugins/domain-investment/skills/investment-valuation-returns/references/lbo-model.md
+- 迁移：plugins/domain-investment/skills/investment-valuation-returns/references/audit-xls.md
+- 修改：plugins/domain-investment/skills/investment-valuation-returns/SKILL.md
 - 修改：plugins/domain-investment/.claude-plugin/plugin.json
 - 修改：.claude-plugin/marketplace.json
 
@@ -167,7 +167,7 @@ git commit -m "$ts｜补全金融技能迁移来源、许可与替代关系"
 运行：
 
 ~~~powershell
-Test-Path "plugins/domain-investment/skills/qihang-financial-model-builder/SKILL.md"
+Test-Path "plugins/domain-investment/skills/investment-financial-model-builder/SKILL.md"
 ~~~
 
 预期：False。
@@ -199,7 +199,7 @@ Handoff to valuation:
 **Step 3：迁移模型实现知识**
 
 - 将三表、DCF、LBO、XLS 审计的完整实现规则归 financial-model-builder。
-- qihang-valuation-returns 只保留估值方法选择、comps、entry/exit、IRR/MOIC 和 price-target 解释。
+- investment-valuation-returns 只保留估值方法选择、comps、entry/exit、IRR/MOIC 和 price-target 解释。
 - 如 DCF/LBO 文件中同时含“方法选择”和“工作簿实现”，先把方法选择提炼进 valuation-methodologies，再迁移实现正文。
 - 不保留两份完整副本，不允许 sibling skill 的脆弱相对路径引用。
 
@@ -208,8 +208,8 @@ Handoff to valuation:
 运行：
 
 ~~~powershell
-rg -n "build spreadsheets|three-statement|audit-xls|workbook" "plugins/domain-investment/skills/qihang-valuation-returns/SKILL.md"
-rg -n "XLSX|three-statement|DCF|LBO|audit" "plugins/domain-investment/skills/qihang-financial-model-builder/SKILL.md"
+rg -n "build spreadsheets|three-statement|audit-xls|workbook" "plugins/domain-investment/skills/investment-valuation-returns/SKILL.md"
+rg -n "XLSX|three-statement|DCF|LBO|audit" "plugins/domain-investment/skills/investment-financial-model-builder/SKILL.md"
 claude plugin validate . --strict
 ~~~
 
@@ -218,8 +218,8 @@ claude plugin validate . --strict
 **Step 5：提交**
 
 ~~~powershell
-git add plugins/domain-investment/skills/qihang-financial-model-builder
-git add plugins/domain-investment/skills/qihang-valuation-returns
+git add plugins/domain-investment/skills/investment-financial-model-builder
+git add plugins/domain-investment/skills/investment-valuation-returns
 git add plugins/domain-investment/.claude-plugin/plugin.json .claude-plugin/marketplace.json
 git diff --cached --check
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -390,7 +390,7 @@ git commit -m "$ts｜完整迁移投资图表包技能并建立数据来源契�
 **Step 2：重写依赖边界**
 
 - S&P/Kensho 只能是可选数据 provider，不是必备运行时。
-- 如果 provider 不可用，消费 qihang-investment-research 的 fact pack。
+- 如果 provider 不可用，消费 investment-research 的 fact pack。
 - 所有缺失字段明确标记，不用训练知识补管理层、持股或最新财务。
 - 删除 /tmp、/mnt/user-data、/mnt/skills/public/docx 和缺失 examples 依赖。
 - DOCX/PPTX 输出必须声明所用文档或演示文稿能力。
@@ -435,7 +435,7 @@ git commit -m "$ts｜完整迁移公司资料与条带式简介技能"
 - 保留 template inventory、content mapping、data gap、数字一致性、渲染验收。
 - 完整迁移 OOXML 手册；SKILL.md 仍优先标准工具，只有标准 API 无法完成时才加载 XML reference。
 - 修复原文件的 `reference/` 坏路径，并保留底层 XML 风险警告。
-- 完整保留 calculation-standards；运行时 qihang-valuation-returns 仍是估值结论 owner，Pitch Deck 用该 reference 做展示值和 handoff 一致性复核。
+- 完整保留 calculation-standards；运行时 investment-valuation-returns 仍是估值结论 owner，Pitch Deck 用该 reference 做展示值和 handoff 一致性复核。
 
 **Step 2：CIM 与 Teaser 合并**
 
@@ -485,13 +485,13 @@ git commit -m "$ts｜完整迁移投行演示文稿、卖方并购材料与终�
 
 **文件：**
 
-- 创建：plugins/domain-investment/skills/qihang-investment-research/references/public-company-research.md
-- 修改：plugins/domain-investment/skills/qihang-investment-research/SKILL.md
-- 修改：plugins/domain-investment/skills/qihang-thesis-tracking/references/earnings-preview.md
-- 创建：plugins/domain-investment/skills/qihang-ic-memo-writer/references/memo-assembly.md
-- 创建：plugins/domain-investment/skills/qihang-ic-memo-writer/references/quality-checklist.md
-- 创建：plugins/domain-investment/skills/qihang-ic-memo-writer/references/pe-deal-addendum.md
-- 修改：plugins/domain-investment/skills/qihang-ic-memo-writer/SKILL.md
+- 创建：plugins/domain-investment/skills/investment-research/references/public-company-research.md
+- 修改：plugins/domain-investment/skills/investment-research/SKILL.md
+- 修改：plugins/domain-investment/skills/investment-thesis-tracking/references/earnings-preview.md
+- 创建：plugins/domain-investment/skills/investment-ic-memo-writer/references/memo-assembly.md
+- 创建：plugins/domain-investment/skills/investment-ic-memo-writer/references/quality-checklist.md
+- 创建：plugins/domain-investment/skills/investment-ic-memo-writer/references/pe-deal-addendum.md
+- 修改：plugins/domain-investment/skills/investment-ic-memo-writer/SKILL.md
 - 修改：plugins/domain-investment/.claude-plugin/plugin.json
 - 修改：.claude-plugin/marketplace.json
 
@@ -531,9 +531,9 @@ writer 不再列出 initiating coverage、tear sheet、strip profile、CIM、tea
 **Step 4：提交**
 
 ~~~powershell
-git add plugins/domain-investment/skills/qihang-investment-research
-git add plugins/domain-investment/skills/qihang-thesis-tracking
-git add plugins/domain-investment/skills/qihang-ic-memo-writer
+git add plugins/domain-investment/skills/investment-research
+git add plugins/domain-investment/skills/investment-thesis-tracking
+git add plugins/domain-investment/skills/investment-ic-memo-writer
 git add plugins/domain-investment/.claude-plugin/plugin.json .claude-plugin/marketplace.json
 git diff --cached --check
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -544,20 +544,20 @@ git commit -m "$ts｜归并公开公司研究、财报跟踪与 IC Memo 终审�
 
 **文件：**
 
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/initiating-coverage.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/initiating-coverage/
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/tear-sheet.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/tear-sheet/
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/strip-profile.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/pitch-deck.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/pitch-deck/
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/cim-builder.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/teaser.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/ib-check-deck.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/funding-digest.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/funding-digest/
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/earnings-preview-beta.md
-- 删除：plugins/domain-investment/skills/qihang-ic-memo-writer/references/ic-memo.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/initiating-coverage.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/initiating-coverage/
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/tear-sheet.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/tear-sheet/
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/strip-profile.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/pitch-deck.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/pitch-deck/
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/cim-builder.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/teaser.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/ib-check-deck.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/funding-digest.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/funding-digest/
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/earnings-preview-beta.md
+- 删除：plugins/domain-investment/skills/investment-ic-memo-writer/references/ic-memo.md
 
 **Step 1：迁移完整性门**
 
@@ -565,13 +565,13 @@ git commit -m "$ts｜归并公开公司研究、财报跟踪与 IC Memo 终审�
 
 **Step 2：删除旧文件**
 
-只删除已完成无损迁移、存在 canonical owner 或按本计划允许在 domain-investment 内提炼的文件。删除前逐文件核对源文件与目标映射；不要删除 qihang-investment-research 和 qihang-valuation-returns 中的 canonical 内容。
+只删除已完成无损迁移、存在 canonical owner 或按本计划允许在 domain-investment 内提炼的文件。删除前逐文件核对源文件与目标映射；不要删除 investment-research 和 investment-valuation-returns 中的 canonical 内容。
 
 **Step 3：检查残留**
 
 ~~~powershell
-rg -n "initiating-coverage|tear-sheet|strip-profile|cim-builder|teaser|pitch-deck|funding-digest|earnings-preview-beta|ib-check-deck" "plugins/domain-investment/skills/qihang-ic-memo-writer"
-rg -n "/mnt/skills|/mnt/user-data|/tmp|/home/claude" "plugins/domain-investment/skills/qihang-ic-memo-writer"
+rg -n "initiating-coverage|tear-sheet|strip-profile|cim-builder|teaser|pitch-deck|funding-digest|earnings-preview-beta|ib-check-deck" "plugins/domain-investment/skills/investment-ic-memo-writer"
+rg -n "/mnt/skills|/mnt/user-data|/tmp|/home/claude" "plugins/domain-investment/skills/investment-ic-memo-writer"
 claude plugin validate . --strict
 ~~~
 
@@ -588,7 +588,7 @@ claude plugin validate . --strict
 **Step 5：提交**
 
 ~~~powershell
-git add plugins/domain-investment/skills/qihang-ic-memo-writer
+git add plugins/domain-investment/skills/investment-ic-memo-writer
 git diff --cached --check
 $ts = Get-Date -Format "yyyy-MM-dd HH:mm"
 git commit -m "$ts｜删除 IC Memo Writer 中已完成晋升的隐藏技能副本"
@@ -602,7 +602,7 @@ git commit -m "$ts｜删除 IC Memo Writer 中已完成晋升的隐藏技能副�
 | --- | --- |
 | 这个 AI 项目值不值得投，给我 IC Memo | 原 investment-icmemo，不触发 Coverage |
 | 为某上市公司写首次覆盖、评级和目标价 | Public Equity Coverage 候选组合 |
-| 根据已审核历史数据建立三表和 DCF XLSX | qihang-financial-model-builder |
+| 根据已审核历史数据建立三表和 DCF XLSX | investment-financial-model-builder |
 | 做一页 Corp Dev tear sheet | financial-company-profile / tear-sheet |
 | 做一页并购目标 strip profile | financial-company-profile / strip-profile |
 | 基于模板生成投行 pitch deck | investment-banking-pitch-deck |
@@ -636,11 +636,11 @@ git commit -m "$ts｜删除 IC Memo Writer 中已完成晋升的隐藏技能副�
 两次都手动按相同顺序调用：
 
 ~~~text
-qihang-investment-research
-→ qihang-competitive-landscape
-→ qihang-financial-model-builder
-→ qihang-valuation-returns
-→ qihang-thesis-tracking
+investment-research
+→ investment-competitive-landscape
+→ investment-financial-model-builder
+→ investment-valuation-returns
+→ investment-thesis-tracking
 → investment-chart-pack
 → public-equity-coverage-writer
 ~~~
@@ -662,8 +662,8 @@ qihang-investment-research
 
 **文件：**
 
-- 创建：plugins/orchestrator/skills/qihang-workflow-orchestrator/references/chains/public-equity-coverage.md
-- 修改：plugins/orchestrator/skills/qihang-workflow-orchestrator/SKILL.md
+- 创建：plugins/orchestrator/skills/workflow-orchestrator/references/chains/public-equity-coverage.md
+- 修改：plugins/orchestrator/skills/workflow-orchestrator/SKILL.md
 - 修改：plugins/orchestrator/.claude-plugin/plugin.json
 - 创建：docs/workflows/public-equity-coverage.md
 - 修改：docs/workflows/README.md
@@ -686,11 +686,11 @@ qihang-investment-research
 **Step 2：定义链路**
 
 ~~~text
-domain-investment:qihang-investment-research
-→ domain-investment:qihang-competitive-landscape
-→ domain-investment:qihang-financial-model-builder
-→ domain-investment:qihang-valuation-returns
-→ domain-investment:qihang-thesis-tracking
+domain-investment:investment-research
+→ domain-investment:investment-competitive-landscape
+→ domain-investment:investment-financial-model-builder
+→ domain-investment:investment-valuation-returns
+→ domain-investment:investment-thesis-tracking
 → domain-capital-markets:investment-chart-pack
 → domain-capital-markets:public-equity-coverage-writer
 ~~~
@@ -748,8 +748,8 @@ git commit -m "$ts｜新增公开市场首次覆盖调用链与落盘协议"
 若条件通过：
 
 - 修改 investment-icmemo.md，增加显式条件：
-  - 用户要求 XLSX、三表、DCF/LBO、精确敏感性或可审计模型时调用 qihang-financial-model-builder；
-  - 其他情况直接进入 qihang-valuation-returns。
+  - 用户要求 XLSX、三表、DCF/LBO、精确敏感性或可审计模型时调用 investment-financial-model-builder；
+  - 其他情况直接进入 investment-valuation-returns。
 - 同步 docs/workflows/investment-product-to-research-report.md。
 - 为可选 workbook 定义不破坏现有 01–10 文件协议的附加路径。
 
@@ -788,11 +788,11 @@ git status --short
 
 ### funding-market-digest
 
-只有在真实出现固定周报/月报需求，而且 S&P/Kensho 或 provider-independent 输入协议稳定后，才从 qihang-investment-research 的 reference 晋升。晋升时删除旧 canonical reference，避免双 owner。
+只有在真实出现固定周报/月报需求，而且 S&P/Kensho 或 provider-independent 输入协议稳定后，才从 investment-research 的 reference 晋升。晋升时删除旧 canonical reference，避免双 owner。
 
 ### public-equity-earnings
 
-只有 earnings preview / earnings review 被独立反复触发时，才从 qihang-thesis-tracking 提炼为事件型 skill。thesis-tracking 继续拥有长期 thesis 状态，earnings skill 只拥有单次事件交付。
+只有 earnings preview / earnings review 被独立反复触发时，才从 investment-thesis-tracking 提炼为事件型 skill。thesis-tracking 继续拥有长期 thesis 状态，earnings skill 只拥有单次事件交付。
 
 ### financial-artifact-qc
 
@@ -804,7 +804,7 @@ git status --short
 - 删除 writer 旧文件必须晚于目标 skill 和 canonical owner 验证。
 - 新 chain 是最后一个功能提交；chain 失败可单独移除，不影响独立瓦技能。
 - 不使用 git reset --hard 或 checkout --；回滚使用明确的 revert 提交，提交信息仍遵循中文时间格式。
-- 上游来源始终保留在 qihang-skill-index，因此即使删除本地旧副本，也能追溯原始 commit。
+- 上游来源始终保留在 external-skill-index，因此即使删除本地旧副本，也能追溯原始 commit。
 
 ## 5. 完成定义
 

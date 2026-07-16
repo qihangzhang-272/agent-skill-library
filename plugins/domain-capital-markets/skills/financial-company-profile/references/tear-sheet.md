@@ -5,7 +5,7 @@ description: "Generate professional company tear sheets using S&P Capital IQ dat
 
 # Financial Tear Sheet Generator
 
-> **Qihang migration compatibility:** This complete provider-specific workflow is preserved without content reduction. S&P/Kensho remains the preferred provider mode. When it is unavailable, the wrapper may supply an approved fact pack; retain every period, unit, provenance, and missing-data rule below.
+> **Library migration compatibility:** This complete provider-specific workflow is preserved without content reduction. S&P/Kensho remains the preferred provider mode. When it is unavailable, the wrapper may supply an approved fact pack; retain every period, unit, provenance, and missing-data rule below.
 
 Generate audience-specific company tear sheets by pulling live data from S&P Capital IQ via the S&P Global MCP tools and formatting the result as a professional Word document.
 

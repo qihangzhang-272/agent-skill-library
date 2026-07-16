@@ -2,9 +2,9 @@
 
 日期：2026-06-14
 
-定位：这是一条轻量但完整的调用链，用来把启航的 AI-native 产品判断接入 `domain-investment` 工作包，最终产出 IC Memo、DD 问题树、watch triggers，并按需承接成可视化研报页。
+定位：这是一条轻量但完整的调用链，用来把本库的 AI-native 产品判断接入 `domain-investment` 工作包，最终产出 IC Memo、DD 问题树、watch triggers，并按需承接成可视化研报页。
 
-它不是把多个投研来源机械串起来，也不是让 `oss-investment-scorecard` 独立承担全部结构。旧 OSS scorecard 只作为 `qihang-investment-scorecard` 的 reference。
+它不是把多个投研来源机械串起来，也不是让 `oss-investment-scorecard` 独立承担全部结构。旧 OSS scorecard 只作为 `investment-scorecard` 的 reference。
 
 ## 适用场景
 
@@ -40,16 +40,16 @@
 
 | 节点 | 优先技能 / 来源 | 用途 |
 | --- | --- | --- |
-| 事实收集 | `topic-research-deposition` + `qihang-investment-research` | 搜索和沉淀事实，不做投资结论 |
-| 工作流总入口 | `qihang-workflow-orchestrator` -> `references/chains/investment-icmemo.md` | 路由投资工作流，避免把具体 workflow 写进 `SKILL.md` |
-| AI-native 产品视角 | `qihang-ai-product-judgment` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
-| 竞争格局 | `qihang-competitive-landscape` | 市场定义、竞品分组、定位、护城河、bull/base/bear |
-| 单位经济 | `qihang-unit-economics` | 定价、收入质量、毛利、推理成本、CAC/payback、AI readiness |
-| 投资评分 | `qihang-investment-scorecard` | 使用旧 OSS scorecard reference 和 deal screening 形成 scorecard / veto / verdict |
-| 估值回报 | `qihang-valuation-returns` | comps、估值方法、回报驱动、IRR/MOIC 场景 |
-| DD | `qihang-investment-dd` | 尽调问题、管理层问题、专家访谈、data-room request、一票否决 |
-| 跟踪 | `qihang-thesis-tracking` | thesis、watch triggers、catalyst calendar、复盘节奏 |
-| 成稿 | `qihang-ic-memo-writer` | 把节点 handoff 合成为 IC Memo，不再搜索或新增分析 |
+| 事实收集 | `topic-research-deposition` + `investment-research` | 搜索和沉淀事实，不做投资结论 |
+| 工作流总入口 | `workflow-orchestrator` -> `references/chains/investment-icmemo.md` | 路由投资工作流，避免把具体 workflow 写进 `SKILL.md` |
+| AI-native 产品视角 | `investment-ai-product-judgment` | 做 BP 逻辑链、产品成立性、叙事和商业模式判断 |
+| 竞争格局 | `investment-competitive-landscape` | 市场定义、竞品分组、定位、护城河、bull/base/bear |
+| 单位经济 | `investment-unit-economics` | 定价、收入质量、毛利、推理成本、CAC/payback、AI readiness |
+| 投资评分 | `investment-scorecard` | 使用旧 OSS scorecard reference 和 deal screening 形成 scorecard / veto / verdict |
+| 估值回报 | `investment-valuation-returns` | comps、估值方法、回报驱动、IRR/MOIC 场景 |
+| DD | `investment-dd` | 尽调问题、管理层问题、专家访谈、data-room request、一票否决 |
+| 跟踪 | `investment-thesis-tracking` | thesis、watch triggers、catalyst calendar、复盘节奏 |
+| 成稿 | `investment-ic-memo-writer` | 把节点 handoff 合成为 IC Memo，不再搜索或新增分析 |
 | 可视化承接 | `investment-visual-report` | 把完整 IC Memo 做成现代、全展开的可视化研报页 |
 
 ## 调用链
@@ -120,11 +120,11 @@
 - 未找到不等于不存在，必须标记为“未找到 / 待验证”。
 - 可以做推断，但必须写明“基于哪些事实推断”。
 - 不把媒体叙事当成事实，不把官网口号当成 traction。
-- 搜索在这里完成。进入 `qihang-ic-memo-writer` 后不再搜索。
+- 搜索在这里完成。进入 `investment-ic-memo-writer` 后不再搜索。
 
 ## 3. 投资工作包执行
 
-触发 `qihang-workflow-orchestrator`，读取 `references/chains/investment-icmemo.md`，再按节点渐进加载 `domain-investment` 中的业务技能。
+触发 `workflow-orchestrator`，读取 `references/chains/investment-icmemo.md`，再按节点渐进加载 `domain-investment` 中的业务技能。
 
 每个节点必须输出：
 
@@ -141,17 +141,17 @@ Next-node handoff:
 
 节点职责：
 
-- `qihang-ai-product-judgment`：产品是否成立，是否 AI-native，叙事和 BP 逻辑是否连贯。
-- `qihang-competitive-landscape`：市场、竞品、替代方案、定位、护城河。
-- `qihang-unit-economics`：收入质量、推理成本、毛利、CAC、部署可行性。
-- `qihang-investment-scorecard`：投资评分、macro gate、deal-screening verdict、一票否决。
-- `qihang-valuation-returns`：估值方法、comps、回报驱动、退出路径。
-- `qihang-investment-dd`：DD 优先级、问题树、data-room request、red flags。
-- `qihang-thesis-tracking`：watch triggers、catalyst calendar、可证伪 thesis。
+- `investment-ai-product-judgment`：产品是否成立，是否 AI-native，叙事和 BP 逻辑是否连贯。
+- `investment-competitive-landscape`：市场、竞品、替代方案、定位、护城河。
+- `investment-unit-economics`：收入质量、推理成本、毛利、CAC、部署可行性。
+- `investment-scorecard`：投资评分、macro gate、deal-screening verdict、一票否决。
+- `investment-valuation-returns`：估值方法、comps、回报驱动、退出路径。
+- `investment-dd`：DD 优先级、问题树、data-room request、red flags。
+- `investment-thesis-tracking`：watch triggers、catalyst calendar、可证伪 thesis。
 
 ## 4. IC Memo 成稿
 
-触发 `qihang-ic-memo-writer`。
+触发 `investment-ic-memo-writer`。
 
 成稿规则：
 
@@ -184,7 +184,7 @@ Next-node handoff:
 
 前端宪法：
 
-- 可视化由 `investment-visual-report` 承接，不通过 `qihang-skill-index` 选择 Type/UI/设计技能。
+- 可视化由 `investment-visual-report` 承接，不通过 `external-skill-index` 选择 Type/UI/设计技能。
 - 前端不得删减上游 IC Memo 内容；只能做可视化、分组、排序、强调和版式呈现。
 - 默认交付一个静态 HTML/CSS 文件；只有已有目标项目或明确要求时才使用项目栈。
 - 首屏必须显示研究对象、verdict、总分或决策状态、最高信号事实。
@@ -208,7 +208,7 @@ Next-node handoff:
 
 每次跑完这条链后，只把可复用部分沉淀回本仓库：
 
-- 新发现的高质量技能来源 -> `qihang-skill-index`。
+- 新发现的高质量技能来源 -> `external-skill-index`。
 - 可复用调用方式 -> 本文档或相关 workflow。
 - 具体公司研报、客户材料、deck 内容 -> 不进入正式技能库。
 - 一次性实验记录 -> 不进入正式技能库，只保留实验结论。

@@ -75,7 +75,7 @@
 
 ## 2. 页面类型判断
 
-先判断页面类型，再通过 `qihang-skill-index` 决定参考哪些外部设计来源。
+先判断页面类型，再通过 `external-skill-index` 决定参考哪些外部设计来源。
 
 | 页面类型 | 判断标准 | 主路线 |
 | --- | --- | --- |
@@ -111,7 +111,7 @@ UI 层调用链固定为：页面类型判断 -> 设计策略层 -> 组件系统
 
 ## 4. 设计策略选择
 
-外部设计来源统一从 `qihang-skill-index` 查询，不再假设本仓库有本地 skill 目录：
+外部设计来源统一从 `external-skill-index` 查询，不再假设本仓库有本地 skill 目录：
 
 - Anthropic `frontend-design`
 - Awesome Design Skills
@@ -153,7 +153,7 @@ UI 层调用链固定为：页面类型判断 -> 设计策略层 -> 组件系统
 
 只有动效能提升理解或反馈时才启用。
 
-外部动效来源统一从 `qihang-skill-index` 查询：
+外部动效来源统一从 `external-skill-index` 查询：
 
 - GSAP Skills
 - Motion
@@ -214,8 +214,8 @@ UI 层调用链固定为：页面类型判断 -> 设计策略层 -> 组件系统
 
 项目完成后，只把可复用判断沉淀回本仓库：
 
-- 有效的技能组合 -> 更新 workflow 或 `qihang-skill-index`。
-- 高质量外部 skill -> 加入 `qihang-skill-index`，不复制正文。
+- 有效的技能组合 -> 更新 workflow 或 `external-skill-index`。
+- 高质量外部 skill -> 加入 `external-skill-index`，不复制正文。
 - 可复用组件模式 -> 写成调用策略或验收规则。
 - 具体项目源码 -> 不进入本仓库。
 - 一次性网页实验 -> 不进入正式技能库，只保留实验结论。

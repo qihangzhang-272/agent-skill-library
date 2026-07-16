@@ -39,7 +39,7 @@ description: >-
 换环境或单独使用本模块时，读 `references/bootstrap-from-scratch.md`，从空目录长出三层架构。
 
 ## 维护 principles
-principles 是个人操作手册：认知原型、DO/DON'T、CALIBRATION。被动参考库，不是全局强制规则。更新时保持克制：只写跨 domain 成立、可执行、可检验的偏好。详见 `principles-authoring.md`。
+principles 是 Agent 操作原则：认知原型、DO/DON'T、CALIBRATION。被动参考库，不是全局强制规则。更新时保持克制：只写跨 domain 成立、可执行、可检验的原则。详见 `principles-authoring.md`。
 
 ## 参考
 - `assets/skill-template/SKILL.md`：瓦技能范本

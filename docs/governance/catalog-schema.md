@@ -1,9 +1,11 @@
 # 插件内技能记录方式
 
-三层架构总览见 `library-constitution.md`。本文档只讲字段级约定：技能元数据和分发关系记录在两个地方：
+三层架构总览见 `library-constitution.md`。本文档只讲字段级约定：技能正文只有一份，Claude Code 与 Codex 分别维护自己的分发元数据：
 
 - `.claude-plugin/marketplace.json` — marketplace 入口，列出所有可安装 plugin。
 - `plugins/<plugin>/.claude-plugin/plugin.json` — 单个 plugin 的 manifest，含 name / displayName / version / description。
+- `.agents/plugins/marketplace.json` — Codex marketplace 入口。
+- `plugins/<plugin>/.codex-plugin/plugin.json` — Codex manifest，含相同 name/version、`skills: "./skills/"` 与 interface。
 
 技能正文放在 `plugins/<plugin>/skills/<skill>/SKILL.md`，三层渐进披露：`SKILL.md` → `references/` → `assets/`。
 
@@ -45,7 +47,7 @@
 
 - **触发与用途**：写在 `SKILL.md` 的 frontmatter（`name` + `description`）和正文。
 - **调用链角色**：写在 orchestrator 的 `references/chains/<chain>.md`。
-- **分发关系**：写在 `.claude-plugin/marketplace.json` 和各 plugin 的 `plugin.json`。
+- **分发关系**：分别写在 Claude/Codex marketplace 和各 plugin 的双 manifest；两端共享 `skills/`。
 
 例如前端设计来源：
 
@@ -62,7 +64,7 @@
 - `domain-capital-markets` 承接公开市场首次覆盖、股票研究、金融图表、公司资料、投行演示、卖方 M&A 材料与金融交付物 QC；它只提供瓦技能，固定链仍由 orchestrator 路由。
 - `oss-investment-scorecard` 已被 `investment-scorecard` 吸收为 reference，不再作为独立默认运行入口。
 - `workflow-orchestrator` 是已跑通工作流入口，进入 `orchestrator` plugin；`SKILL.md` 只做路由，具体 chain 压缩到 `references/chains/`。
-- Baoyu、`agent-reach` 等外部能力由 `external-skill-index` 引用。
+- Baoyu 中已晋升的 10 个公众号与内容视觉技能随 `domain-writing` 分发，其中 `baoyu-image-gen` 为非 Codex 运行时提供可配置图像生成后端；上游 URL、commit 与许可仍由 `external-skill-index` 记录，`agent-reach` 等其余外部能力继续由索引引用。
 
 ## 验证规则
 
@@ -73,7 +75,7 @@ claude plugin validate . --strict
 node scripts/validate-repository.mjs --base HEAD
 ```
 
-第一项验证 Claude plugin schema；第二项验证 marketplace/plugin 版本一致、内容变化已 bump、chain 引用、相对链接和废弃路径。任一失败都不得推送。
+第一项验证 Claude plugin schema；第二项验证 Claude/Codex 双 marketplace、双 manifest、版本一致、内容变化已 bump、chain 引用、相对链接和废弃路径。Codex 官方 validator 可用时还须逐插件运行。任一失败都不得推送。
 
 ## 禁止事项
 

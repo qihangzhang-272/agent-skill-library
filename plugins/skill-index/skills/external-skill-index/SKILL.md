@@ -18,7 +18,7 @@ Use this skill when:
 
 - You need to find a previously collected external skill or source repository.
 - You need to decide whether an external skill should stay as an index, be installed into a target project, or be promoted into a locally maintained skill.
-- A workflow references an external capability such as `baoyu-skills`, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
+- A workflow references an external capability such as agent-reach, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
 - The repository feels bloated because external skill files were copied into `skills/`.
 
 Do not use this skill to replace locally maintained skills:

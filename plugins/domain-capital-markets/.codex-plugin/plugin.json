@@ -1,0 +1,23 @@
+{
+  "name": "domain-capital-markets",
+  "version": "0.6.3",
+  "description": "资本市场领域：公开市场股票研究、首次覆盖、公司资料和投行交付物瓦技能。",
+  "author": {
+    "name": "Agent Skill Library Maintainers"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Domain Capital Markets",
+    "shortDescription": "公开市场研究、首次覆盖与投行交付物。",
+    "longDescription": "覆盖上市公司研究、金融图表、首次覆盖报告、公司资料和投行材料。",
+    "developerName": "Agent Skill Library Maintainers",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "为这家上市公司生成首次覆盖研究。"
+    ]
+  }
+}

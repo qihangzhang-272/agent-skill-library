@@ -2,6 +2,7 @@
 Thumbs.db
 *.tmp
 *.log
+node_modules/
 
 # 运行产物（不该进技能库）
 research/

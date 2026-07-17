@@ -1,0 +1,2 @@
+# Preserve vendored Baoyu skill bytes, including upstream trailing blank lines.
+plugins/domain-writing/skills/baoyu-*/** whitespace=-blank-at-eof

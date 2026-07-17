@@ -1,7 +1,7 @@
 {
   "name": "domain-writing",
   "displayName": "Domain Writing",
-  "version": "0.4.0",
-  "description": "公众号写作领域：选题素材沉淀、编辑判断、可选框架起草与三层 AI 味审校。",
+  "version": "0.5.0",
+  "description": "公众号写作领域：素材沉淀、编辑写作、Markdown 排版、图像生成后端、正文插图、封面、信息图、SVG 图解、知识漫画、HTML 预览与草稿箱发布。",
   "author": { "name": "Agent Skill Library Maintainers" }
 }

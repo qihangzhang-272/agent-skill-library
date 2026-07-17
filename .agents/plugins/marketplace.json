@@ -1,0 +1,92 @@
+{
+  "name": "agent-skill-library",
+  "interface": {
+    "displayName": "Agent Skill Library"
+  },
+  "plugins": [
+    {
+      "name": "foundation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/foundation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "orchestrator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/orchestrator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "skill-index",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skill-index"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "domain-writing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/domain-writing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "domain-investment",
+      "source": {
+        "source": "local",
+        "path": "./plugins/domain-investment"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "domain-capital-markets",
+      "source": {
+        "source": "local",
+        "path": "./plugins/domain-capital-markets"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "domain-product",
+      "source": {
+        "source": "local",
+        "path": "./plugins/domain-product"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -21,7 +21,12 @@ plugins/
 └── domain-product/      # AI 产品分析瓦技能
 ```
 
-每个 plugin 有 `.claude-plugin/plugin.json`。技能正文放 `plugins/<plugin>/skills/<skill>/SKILL.md`，三层渐进披露：`SKILL.md` → `references/` → `assets/`。
+每个 plugin 共用一份 `skills/` 正文，同时带有 `.claude-plugin/plugin.json` 和 `.codex-plugin/plugin.json`。Claude Code 与 Codex 只读取各自的分发元数据，不复制第二份技能正文。技能正文放 `plugins/<plugin>/skills/<skill>/SKILL.md`，三层渐进披露：`SKILL.md` → `references/` → `assets/`。
+
+| 运行时 | Marketplace | Plugin manifest | 技能正文 |
+| --- | --- | --- | --- |
+| Claude Code | `.claude-plugin/marketplace.json` | `plugins/<plugin>/.claude-plugin/plugin.json` | `plugins/<plugin>/skills/` |
+| Codex | `.agents/plugins/marketplace.json` | `plugins/<plugin>/.codex-plugin/plugin.json` | 同一份 `plugins/<plugin>/skills/` |
 
 ## 技能清单
 
@@ -39,7 +44,7 @@ plugins/
 
 | 领域 | 瓦技能 |
 | --- | --- |
-| `domain-writing` | `public-account-writing-style` · `topic-research-deposition` |
+| `domain-writing` | `public-account-writing-style` · `topic-research-deposition` · `baoyu-format-markdown` · `baoyu-image-gen` · `baoyu-article-illustrator` · `baoyu-infographic` · `baoyu-diagram` · `baoyu-comic` · `baoyu-cover-image` · `baoyu-markdown-to-html` · `baoyu-post-to-wechat` · `baoyu-compress-image` |
 | `domain-investment` | `investment-research` · `investment-ai-product-judgment` · `investment-competitive-landscape` · `investment-unit-economics` · `investment-financial-model-builder` · `investment-scorecard` · `investment-valuation-returns` · `investment-dd` · `investment-thesis-tracking` · `investment-ic-memo-writer` · `investment-visual-report` |
 | `domain-capital-markets` | `public-equity-coverage-writer` · `investment-chart-pack` · `financial-company-profile` · `investment-banking-pitch-deck` · `sell-side-ma-materials` · `financial-artifact-qc` |
 | `domain-product` | `ai-product-analyzer` |
@@ -49,7 +54,7 @@ plugins/
 调用链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
 
 ```
-公众号选题 → agent-reach 搜索 → 公众号编辑写作 → Baoyu 配图、排版与草稿箱发布
+公众号选题 → agent-reach 搜索 → 公众号编辑写作 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → HTML 预览 → 草稿箱发布
   chain: wechat-writing.md
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
@@ -65,7 +70,30 @@ AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值
 2. 每个有保留价值的中间产物按 chain 定义落盘。
 3. 成品不替代过程包——两者同时存在。
 
-## 安装与验证
+## 双端安装与验证
+
+### Claude Code
+
+```powershell
+claude plugin marketplace add qihangzhang-272/agent-skill-library
+claude plugin install orchestrator@agent-skill-library
+```
+
+Claude Code 读取 `.claude-plugin/`。`orchestrator` 的 Claude manifest 会声明其工作流依赖；`foundation` 与 `domain-product` 可按需单独安装。
+
+### Codex
+
+```powershell
+codex plugin marketplace add qihangzhang-272/agent-skill-library
+```
+
+Codex 读取 `.agents/plugins/marketplace.json` 与各插件的 `.codex-plugin/plugin.json`。当前 Codex CLI 负责注册 marketplace，单插件安装在 Codex App 的 Plugins 页面完成；安装或升级后新开任务，才会载入新的技能命名空间。项目也可以通过 `.agents/skills/` 直接发现技能，但这只是项目级入口，不替代正式 Codex Plugin 分发。
+
+Codex 不读取 Claude manifest 的 `dependencies`。公众号完整链至少同时安装 `orchestrator` 与 `domain-writing`；需要检索外部技能来源时再安装 `skill-index`。要使用整套架构，应在 Plugins 页面安装 marketplace 中全部 7 个插件。Claude Code 安装 `orchestrator` 时则会按其 manifest 解析领域依赖。
+
+`domain-writing` 自带统一的 `package.json` 与 `bun.lock`，覆盖迁入脚本的运行依赖；`node_modules` 不进入仓库。Bun 默认会在首次脚本执行时安装缺失依赖，禁用自动安装的环境可在该 plugin 根目录运行 `bun install --frozen-lockfile`。
+
+### 仓库门禁
 
 ```powershell
 # 在本仓库根目录；提交和推送前必须两项都通过
@@ -73,12 +101,12 @@ claude plugin validate . --strict
 node scripts/validate-repository.mjs --base HEAD
 ```
 
-改动技能正文后，bump 对应 `plugins/<plugin>/.claude-plugin/plugin.json` 的 `version`，并同步 `.claude-plugin/marketplace.json`。本仓库已启用 `.githooks/pre-push` 与 GitHub Actions 双门禁；首次 clone 后执行 `git config core.hooksPath .githooks`。
+第一项验证 Claude Code schema；第二项同时检查 Claude/Codex 双 manifest、两个 marketplace、版本一致性、技能发现、chain 引用和相对链接。改动 plugin 内容后，Claude 与 Codex manifest 必须使用同一版本，并同步 Claude marketplace。本仓库已启用 `.githooks/pre-push` 与 GitHub Actions 双门禁；首次 clone 后执行 `git config core.hooksPath .githooks`。
 
 ## 边界
 
 - `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
-- `external-skill-index` 是外部技能统一收纳入口。Baoyu、agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等保留上游来源与使用边界，不把完整外部仓库堆进本库。
+- `external-skill-index` 是外部技能统一收纳入口。Baoyu 中经过维护者晋升的 10 个公众号与内容视觉技能已按 MIT 许可迁入 `domain-writing`，包含 Claude Code 可调用的 `baoyu-image-gen` 图像后端；索引保留上游 commit 与边界。agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等仍保留为外部来源。
 - `oss-investment-scorecard` 已降级为 `investment-scorecard` 的内部 reference，不要直接调用旧入口。
 - 投资与资本市场领域都只放瓦技能；所有固定链都由 `workflow-orchestrator` 路由，不设第二个调度器。
 - 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。

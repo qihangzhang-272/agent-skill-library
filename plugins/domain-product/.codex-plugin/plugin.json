@@ -1,0 +1,23 @@
+{
+  "name": "domain-product",
+  "version": "0.1.2",
+  "description": "AI 产品分析领域：BP 逻辑链、商业模式判断、叙事审计。",
+  "author": {
+    "name": "Agent Skill Library Maintainers"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Domain Product",
+    "shortDescription": "分析 AI 产品、商业模式与叙事逻辑。",
+    "longDescription": "从 BP 和产品材料中提取逻辑链，判断商业模式并审计产品叙事。",
+    "developerName": "Agent Skill Library Maintainers",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "分析这个 AI 产品的商业逻辑。"
+    ]
+  }
+}

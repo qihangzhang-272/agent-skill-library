@@ -23,7 +23,7 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
-| `https://github.com/JimLiu/baoyu-skills` | 公众号排版与发布（baoyu-post-to-wechat / baoyu-markdown-to-html / baoyu-cover-image / baoyu-article-illustrator） | installed external capability | writing | 已进 wechat-writing chain 的配图、排版与发布节点。本地安装在项目级 `.agents/skills/`，配置在 `.baoyu-skills/`。 |
+| `https://github.com/JimLiu/baoyu-skills` | 公众号排版、图像生成、插图、封面、信息图、SVG 图解、知识漫画、HTML 与发布 | migrated reference source | writing | 经维护者明确晋升，MIT；从 commit `6b7a2e417500561a5ecdd0b168332f4142584617` 原样迁入 `domain-writing`：`baoyu-format-markdown`、`baoyu-image-gen`、`baoyu-article-illustrator`、`baoyu-infographic`、`baoyu-diagram`、`baoyu-comic`、`baoyu-cover-image`、`baoyu-markdown-to-html`、`baoyu-post-to-wechat`、`baoyu-compress-image`。保留上游许可证，排除 `node_modules` 与个人配置；项目偏好继续放 `.baoyu-skills/`。 |
 
 ## Product And Investment
 

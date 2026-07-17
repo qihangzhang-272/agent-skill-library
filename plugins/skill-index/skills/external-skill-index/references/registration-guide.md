@@ -23,7 +23,7 @@
 | Status | 含义 | 何时用 |
 | --- | --- | --- |
 | `reference` | 纯链接参考，没动它 | 刚发现、还没真用过。**新登记默认就是这个** |
-| `installed external capability` | 已在本机/项目安装，运行时真在调用 | 像 agent-reach、baoyu-skills 这种已成为某 chain 默认依赖的 |
+| `installed external capability` | 已在本机/项目安装，运行时真在调用 | 像 agent-reach 这种已成为某 chain 默认依赖的 |
 | `skill collection` | 一个含多技能的合集，按需取用 | 如 taste-skill、anthropics/skills |
 | `absorbed reference` | 它的判断/规则已被提炼进某个本地瓦技能 | 提炼进了 `domain-*/skills/.../references/` |
 | `migrated reference source` | 部分文件已迁入某 domain，上游留作更新源 | 如 financial-services 迁入 domain-investment |
@@ -39,7 +39,7 @@ Domain 字段不是"看起来像哪个领域就标哪个"。**门槛**：
 判定方法 -- 问自己一个问题：
 
 - **"这个技能进了哪条 chain？"**
-  - 进了某条 chain（如 baoyu-skills 进了 wechat-writing chain）-> 标该 domain（`writing`）
+  - 进了某条 chain（如 Baoyu 上游迁入的本地技能进入 wechat-writing chain）-> 标该 domain（`writing`）
   - 没进任何 chain，只是"将来也许能用" -> **Domain 留空 / 标 `未归类`**，不要强行归类
 
 可选值：`writing` / `investment` / `product` / `commons`（绝对通用，如 agent-reach）/ 多个（跨领域，逗号分隔）/ 空（未归类）。

@@ -1,7 +1,7 @@
 {
   "name": "domain-product",
   "displayName": "Domain Product",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AI 产品分析领域：BP 逻辑链、商业模式判断、叙事审计。",
   "author": { "name": "Agent Skill Library Maintainers" }
 }

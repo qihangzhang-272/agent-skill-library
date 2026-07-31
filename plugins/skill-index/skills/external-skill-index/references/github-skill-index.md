@@ -6,7 +6,7 @@ Source URLs intentionally point to GitHub repository roots. A source may be a pu
 
 **Domain 列**：表示该外部技能是否已融入某条 domain 的工作流（chain）。门槛见 `registration-guide.md` -- 只有真进了某条 chain 才标 domain，否则留空（`-`）表示未归类。可选值：`writing` / `investment` / `capital-markets` / `product` / `commons`（绝对通用）/ 逗号分隔（跨领域）/ `-`（未归类）。
 
-Last repo-root verification: 2026-07-07 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
+Last repo-root verification: 2026-07-30 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
 
 ## Writing And Style
 
@@ -24,6 +24,16 @@ Local archive without GitHub source:
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
 | `https://github.com/JimLiu/baoyu-skills` | 公众号排版、图像生成、插图、封面、信息图、SVG 图解、知识漫画、HTML 与发布 | migrated reference source | writing | 经维护者明确晋升，MIT；从 commit `6b7a2e417500561a5ecdd0b168332f4142584617` 原样迁入 `domain-writing`：`baoyu-format-markdown`、`baoyu-image-gen`、`baoyu-article-illustrator`、`baoyu-infographic`、`baoyu-diagram`、`baoyu-comic`、`baoyu-cover-image`、`baoyu-markdown-to-html`、`baoyu-post-to-wechat`、`baoyu-compress-image`。保留上游许可证，排除 `node_modules` 与个人配置；项目偏好继续放 `.baoyu-skills/`。 |
+
+## Visual Storytelling And Diagramming
+
+| Source | Role | Status | Domain | Notes |
+| --- | --- | --- | --- | --- |
+| `https://github.com/anthropics/skills` | `canvas-design` / `brand-guidelines` 的视觉哲学与品牌约束参考 | absorbed reference | writing | 已提炼进 `editorial-visual-storytelling`：先声明视觉语言、再产出；优化优先删减和精修。不复制 Anthropic 品牌资产。 |
+| `https://github.com/aicontentskills/ai-video-storyboard-skill` | 分镜 purpose、动作和共享视觉主题参考 | absorbed reference | writing | MIT。只吸收逐画面任务与连续性契约，不把短视频 hook/build/payoff/CTA 公式搬进公众号漫画。 |
+| `https://github.com/lukilabs/beautiful-mermaid` | Mermaid 自动布局、主题化 SVG 渲染 | installed external capability | writing | MIT；作为 `baoyu-diagram` 的公众号 `simple-editorial` 渲染依赖，保留 `.mmd` 语义源。 |
+| `https://github.com/terrastruct/d2` | diagram-as-code、布局引擎与主题参考 | reference | - | MPL-2.0。当前未要求安装；作为复杂 diagram 的后续备选，不进入主链运行时。 |
+| `https://github.com/plantuml-stdlib/C4-PlantUML` | abstraction-first 与按受众拆分架构视图 | absorbed reference | writing | MIT；已提炼进公众号 diagram 清晰度规则，不复制宏与主题源码。 |
 
 ## Product And Investment
 
@@ -44,7 +54,6 @@ Local archive without GitHub source:
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
-| `https://github.com/anthropics/skills` | Official Anthropic skills source, including `frontend-design` | skill collection | - | Prefer upstream source for generic frontend design guidance. |
 | `https://github.com/greensock/gsap-skills` | Official GSAP skills for animation work | skill collection | - | Use when a project explicitly needs GSAP. |
 | `https://github.com/bergside/awesome-design-skills` | Design style skill collection | skill collection | - | Good for style discovery. Do not copy all style folders by default. |
 | `https://github.com/bergside/typeui` | UI/UX fundamentals and design-system references | skill/source repo | - | Use for typography, accessibility, and UI principles. |

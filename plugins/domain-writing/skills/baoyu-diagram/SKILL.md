@@ -1,12 +1,12 @@
 ---
 name: baoyu-diagram
-description: Create professional, dark-themed SVG diagrams of any type — architecture diagrams, flowcharts, sequence diagrams, structural diagrams, mind maps, timelines, illustrative/conceptual diagrams, and more. Use this skill whenever the user asks for any kind of technical or conceptual diagram, visualization of a system, process flow, data flow, component relationship, network topology, decision tree, org chart, state machine, or any visual representation of structure/logic/process. Also trigger when the user says "画个图" "画一个架构图" "diagram" "flowchart" "sequence diagram" "draw me a ..." or uploads content and asks to visualize it. Output is always a standalone .svg file.
+description: Create clear, reproducible diagrams for architecture, flow, sequence, structure, state, and conceptual relationships. Use whenever the user asks for 架构图、流程图、关系图、状态图、decision tree、diagram or any visual representation of structure/logic/process. For public-account and non-technical audiences, default to a low-complexity editorial theme with Mermaid source plus SVG/PNG; use the legacy dark technical SVG style only when the user explicitly wants it.
 version: 1.117.3
 ---
 
 # Diagram Generator
 
-Create professional SVG diagrams across multiple diagram types. All output is a single self-contained `.svg` file with embedded styles and fonts.
+Create professional diagrams across multiple diagram types. Public-account diagrams default to a short semantic source (`.mmd`) rendered into SVG; unsupported or highly custom layouts may fall back to a hand-authored self-contained SVG.
 
 ## Supported Diagram Types
 
@@ -22,7 +22,24 @@ Create professional SVG diagrams across multiple diagram types. All output is a 
 | **State Machine** | State transitions, lifecycle | Rounded state nodes, labeled transitions, start/end markers |
 | **Data Flow** | Data transformation pipelines | Process bubbles, data stores, external entities |
 
-## Design System
+## Mode Routing
+
+### `simple-editorial` — default for WeChat and general readers
+
+Read `references/editorial-simple.md` before modeling. Core constraints:
+
+- Start with one natural-language question.
+- Keep one abstraction level and one reading direction.
+- Prefer 3–5 primary nodes; split above 6.
+- Use Mermaid source and the bundled renderer.
+- Use clean geometry, ample whitespace, warm editorial background, dark ink, cobalt signal and optional orange human-decision accent.
+- Preserve `.mmd`, `.svg`, and `@2x.png`.
+
+### `technical-dark` — explicit opt-in
+
+Use the legacy design system below when the user explicitly requests a dark technical diagram, detailed infrastructure view, or the target publication already uses that system.
+
+## Legacy Technical-Dark Design System
 
 ### Color Palette
 
@@ -209,7 +226,7 @@ Rounded-rect states with double-border for composite states. Filled circle for i
 
 ## Output Rules
 
-1. Output a **single `.svg` file** — no external dependencies except the Google Fonts import
+1. `simple-editorial`: output `.mmd`, `.svg`, and `@2x.png`; `technical-dark`: output a self-contained `.svg` and `@2x.png`
 2. Set `viewBox` to fit all content with 30px padding; do NOT set fixed `width`/`height` attributes (let the SVG scale responsively)
 3. Include `xmlns="http://www.w3.org/2000/svg"` on the root `<svg>` element
 4. Put all `<style>`, `<defs>`, markers, and patterns at the top of the SVG
@@ -236,13 +253,28 @@ Options:
 - `-o, --output <path>` — Custom output path (default: `<input>@2x.png`)
 - `--json` — JSON output
 
+### Mermaid → editorial SVG
+
+Install declared dependencies once in `{baseDir}/scripts/`:
+
+```bash
+${BUN_X} install
+```
+
+Then render:
+
+```bash
+${BUN_X} {baseDir}/scripts/render-mermaid.ts <mmd-path> --output <svg-path> --theme editorial --json
+```
+
+The `.mmd` file is the semantic source. Do not edit the generated SVG by hand unless the renderer cannot express a required relationship.
+
 ## Process
 
-1. Identify the diagram type from the user's request
-2. Read the relevant reference file if one exists for that type
-3. Plan the layout: list all components, determine grouping and flow direction, calculate positions
-4. Write the SVG following the layering order above
-5. Verify spacing rules — no overlaps, legends outside boundaries, viewBox large enough
-6. Save the SVG file
-7. Run `${BUN_X} {baseDir}/scripts/main.ts <svg-path>` to generate @2x PNG
-8. Present both files to the user
+1. Identify the audience, natural-language question, diagram type, and mode
+2. For `simple-editorial`, read `references/editorial-simple.md`; for `technical-dark`, read the relevant type reference
+3. Delete components that do not answer the question; choose one abstraction level and flow direction
+4. `simple-editorial`: save Mermaid source, render SVG, then convert to @2x PNG
+5. `technical-dark` or unsupported layout: write SVG following the legacy layering rules, then convert to @2x PNG
+6. Verify no overlaps, no clipped labels, no crossing main-path connectors, and mobile readability
+7. Present the semantic source (when present), SVG, and PNG

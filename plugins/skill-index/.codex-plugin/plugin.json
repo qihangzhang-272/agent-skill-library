@@ -1,6 +1,6 @@
 {
   "name": "skill-index",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "两层生态索引：本地维护技能 vs GitHub 外部技能，探测与提示安装。",
   "author": {
     "name": "Agent Skill Library Maintainers"

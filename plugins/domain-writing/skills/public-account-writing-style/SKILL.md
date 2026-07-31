@@ -92,6 +92,8 @@ Format: `[📷 配图建议：这里放 X 的截图/生成图，承接上文的 
 
 A good cue answers three questions: what image, which argument it serves, and what it visually emphasizes.
 
+在端到端 wechat-writing chain 中，这些 cue 只是候选位置，不是最终视觉文案。下游 `editorial-visual-storytelling` 负责把候选位置改写为 `Viewer job`、人/材料锚点和 `Scene fact`，再由 Visual Copy Desk 生成候选并确定允许画内文字；渲染技能不得直接把本节小标题、文章金句或 cue 原句搬进图片。
+
 Rules:
 - Never lean on the cue as a crutch for weak prose. Text must carry the argument.
 - One cue per major section or pivotal turn; don't carpet-bomb every two paragraphs.

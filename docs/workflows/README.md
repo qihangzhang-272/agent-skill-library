@@ -7,8 +7,9 @@
 - `prd-to-frontend.md`：从模糊需求或 PRD 到前端实现、浏览器验收和复用沉淀的调用链。**草稿，未跑通，未挂入 orchestrator 路由表**（对应 chain 见 `product-frontend.md`）。
 - `investment-product-to-research-report.md`：从 AI-native 产品判断到 `domain-investment` IC Memo，再到可选 `investment-visual-report` 可视化研报页的调用链。
 - `public-equity-coverage.md`：从公开公司事实包、模型、估值与 thesis，到首次覆盖报告和数值终审的资本市场调用链。
+- `wechat-writing.md`：研究、公众号编辑写作、领域视觉计划、按计划生产、HTML 预览与草稿箱发布。
 
-稳定写作发布链在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/wechat-writing.md`：agent-reach 搜索沉淀 -> 公众号编辑写作 -> Markdown 排版 -> 自动视觉路由（截图复用 / 通用插图 / 信息图 / SVG 图解 / 知识漫画）与封面 -> HTML 预览 -> 以最终 Markdown 推送公众号草稿箱。Codex 优先使用原生 imagegen；Claude Code 等没有原生图像后端的运行时可路由到随 `domain-writing` 分发的 `baoyu-image-gen`。该 chain 同时定义研究、统一视觉与发布 Handoff、分支并行边界、原生过程包和公众号发布资产的归一规则。
+稳定写作发布链在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/wechat-writing.md`：agent-reach 搜索沉淀 -> 公众号编辑写作 -> Markdown 排版 -> 由 `editorial-visual-storytelling` 独立生成视觉计划 -> 按计划调用截图复用 / 通用插图 / 信息图 / SVG 图解 / 知识漫画与封面 -> HTML 预览 -> 以最终 Markdown 推送公众号草稿箱。Chain 只规定顺序、交接和落盘，不承担视觉内容与形式判断。
 
 ## 放置标准
 

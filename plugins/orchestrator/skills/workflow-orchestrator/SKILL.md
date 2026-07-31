@@ -1,6 +1,6 @@
 ---
 name: workflow-orchestrator
-description: Route the library's proven workflows. Use when the user asks to run, package, choose, or maintain workflows for agent-reach research to public-account writing, Baoyu layout, automatic visual production, HTML preview and WeChat draft publishing; product-to-investment IC memo / visual report; public-equity initiating coverage; or skill-library maintenance. This skill only routes; workflow details live in references.
+description: Route the library's proven workflows. Use when the user asks to run, package, choose, or maintain workflows for agent-reach research to public-account writing, Baoyu layout, visual-plan-driven production, HTML preview and WeChat draft publishing; product-to-investment IC memo / visual report; public-equity initiating coverage; or skill-library maintenance. This skill only routes; workflow details live in references.
 ---
 
 # Workflow Orchestrator

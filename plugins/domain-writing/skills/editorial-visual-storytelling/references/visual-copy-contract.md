@@ -30,7 +30,7 @@
 | `Position` | 图片插在哪里，前后读者刚读到什么？ |
 | `Viewer job` | 读者看完这张图只需要得到什么？ |
 | `Human/material anchor` | 谁在做什么，或哪种材料状态承载内容？ |
-| `Character anchor` | 是否使用固定头像角色？角色在画面里执行什么解释动作？ |
+| `Character anchor` | 生成型公众号视觉默认使用启航头像角色；写清角色在画面里的解释动作。若例外不用，记录原因。 |
 | `Central logic visual` | 如果是单幅知识漫画，中央用什么可见关系让读者看懂逻辑？ |
 | `Scene fact` | 画面和文章能确认的具体事实或动作是什么？ |
 | `Copy role` | title / caption / label / narration / dialogue / none |

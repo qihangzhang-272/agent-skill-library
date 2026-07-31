@@ -1,6 +1,14 @@
 # 启航头像角色·单幅知识漫画解释系统
 
-本文件沉淀启航公众号的固定讲解角色与配图语法。它属于 `editorial-visual-storytelling` 的视觉判断层；workflow orchestrator 只按 plan 调用，不负责决定是否使用角色、说什么或画什么关系。
+本文件沉淀启航公众号的固定讲解角色与配图语法。启航头像是原创公众号生成型视觉的默认身份资产，无需用户逐篇指定。它属于 `editorial-visual-storytelling` 的视觉判断层；workflow orchestrator 只按 plan 调用，不负责决定是否使用角色、说什么或画什么关系。
+
+## 默认加载规则
+
+- `cover`、`illustration`、`comic` 与 `single-panel explainer comic` 默认加载本角色参考图，并在 visual plan 中写清角色动作。
+- `infographic` 与 `diagram` 仍优先保证信息清晰；适合加入讲解入口时使用头像角色，不适合时只继承暖纸色、深海军蓝、钴蓝与橙黄信号色。
+- `source reuse` 不加入角色，不覆盖转载原图、研究截图、产品界面、论文图表或真实证据。
+- 用户明确指定其他角色、其他品牌身份或无人画面时，遵循用户要求，并在 visual plan 记录覆盖原因。
+- 下游渲染技能不得因为提示词中没有再次出现“使用启航头像”，就退回通用人物；角色参考由本默认规则自动继承。
 
 ## 角色身份参考
 
@@ -18,7 +26,7 @@
 
 ## 适用形式
 
-当用户要求“用头像形象解释逻辑”“做得更动漫、更亲民”“不要冷冰冰的架构图”时，优先评估 `single-panel explainer comic`：
+当正文需要亲民解释一段逻辑、而架构图过冷或概念插画过虚时，优先评估 `single-panel explainer comic`；不再以用户是否主动提到头像作为触发条件：
 
 ```text
 中央：一段关系或判断的视觉中心

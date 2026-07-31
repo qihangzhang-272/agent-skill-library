@@ -4,7 +4,7 @@ description: >
   Use before generating covers, article illustrations, infographics, architecture diagrams, or knowledge comics
   for Chinese public-account articles. Trigger whenever visual assets feel too diagrammatic, too AI-polished,
   emotionally empty, overloaded with labels/arrows, or when the user asks for 漫画文案、配图文案、视觉叙事、
-  封面概念、架构图内容设计、信息图脚本、知识漫画分镜. Produces the visual editorial brief and exact
+  封面概念、架构图内容设计、信息图脚本、知识漫画分镜、头像角色讲解图. Produces the visual editorial brief and exact
   on-image copy that downstream Baoyu rendering skills must follow.
 ---
 
@@ -76,6 +76,9 @@ description: >
 - **信息图**：只在读者确实需要同时比较、总览或记忆多个信息时使用。
 - **架构图**：先写一句自然语言问题，再选择一个抽象层级；公众号默认只保留一条主路径。
 - **知识漫画**：分镜必须包含动作、阻力或关系变化；不能只是四个会说结论的方框。
+- **单幅知识漫画解释图**：当读者需要看懂一段逻辑、但架构图过冷或概念插画过虚时，使用“中央逻辑视觉 + 侧边讲解角色”。中央视觉负责关系，角色负责指出阅读入口；不能退化成角色站在流程图旁念结论。
+
+若项目指定使用启航头像角色，加载 `references/qihang-avatar-explainer-system.md`，并把 `assets/qihang-avatar-character.jpg` 作为角色身份参考。头像不是泛化风格图：人物、透明眼镜、深蓝乱发和黑色小动物伙伴共同构成可识别角色，不得擅自替换成通用职场人物。
 
 具体规则见 `references/comic-copy.md` 与 `references/diagram-clarity.md`。
 
@@ -105,6 +108,7 @@ description: >
 - `references/visual-copy-desk.md` - 封面、图注、节点、旁白与对白的独立文案审校。
 - `references/asset-form-selection.md` - 是否配图、选择何种资产及渲染 Owner 的领域判断。
 - `references/comic-copy.md` - 让知识漫画具有人物、动作、停顿和真实材料感。
+- `references/qihang-avatar-explainer-system.md` - 启航头像角色与单幅知识漫画解释图的固定视觉语法。
 - `references/diagram-clarity.md` - 面向移动端阅读的低复杂度架构图规则。
 - `references/visual-ai-flavor-filter.md` - 信息图、架构图和漫画的 AI 味检查。
 - `references/source-notes.md` - GitHub 开源来源、提炼范围与许可证边界。

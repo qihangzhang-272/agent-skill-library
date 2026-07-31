@@ -30,6 +30,8 @@
 | `Position` | 图片插在哪里，前后读者刚读到什么？ |
 | `Viewer job` | 读者看完这张图只需要得到什么？ |
 | `Human/material anchor` | 谁在做什么，或哪种材料状态承载内容？ |
+| `Character anchor` | 是否使用固定头像角色？角色在画面里执行什么解释动作？ |
+| `Central logic visual` | 如果是单幅知识漫画，中央用什么可见关系让读者看懂逻辑？ |
 | `Scene fact` | 画面和文章能确认的具体事实或动作是什么？ |
 | `Copy role` | title / caption / label / narration / dialogue / none |
 | `Copy candidates` | 2–3 个从不同角度写出的候选；不是同义改写。 |
@@ -53,6 +55,7 @@
 6. 下游 prompt 的 `Text (verbatim)` 必须来自本文件，不得临场扩写。
 7. `Exact text` 必须通过朗读、去图和反复述检查；具体方法见 `visual-copy-desk.md`。
 8. 画内文字优先 4–8 字，硬上限 10 个中文字符；长解释必须移到 `Caption outside image`。
+9. 单幅知识漫画必须分别写清 `Character anchor` 与 `Central logic visual`；禁止只写“角色讲解该概念”。
 
 ## 合格示例
 

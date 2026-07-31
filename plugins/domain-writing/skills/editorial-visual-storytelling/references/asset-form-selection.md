@@ -19,6 +19,7 @@
 | 多项同时比较、数据总览、矩阵或层级 | infographic | baoyu-infographic | 必须形成独立信息单元；移动端过密就拆。 |
 | 流程、状态、组件关系、数据流或时间顺序 | diagram | baoyu-diagram | 一张图只回答一个问题，默认 3–5 个节点。 |
 | 连续动作、人物关系、材料阻力或认知变化 | comic | baoyu-comic | 纯逻辑拆解不自动漫画化。 |
+| 一段逻辑需要亲民解释，且用户明确要求人物讲解 | single-panel explainer comic | baoyu-comic | 中央画逻辑关系，侧边角色只指出阅读入口；不是流程图加人物。 |
 | 文章识别与入口情绪 | cover | baoyu-cover-image | 不与正文视觉竞争。 |
 | 正文已经更清楚，或没有真实锚点 | none | none | 不生成图片不是失败。 |
 
@@ -27,6 +28,7 @@
 - 关系必须精确阅读：diagram。
 - 多项需要同时比较：infographic。
 - 人物动作或关系变化本身有阅读价值：comic。
+- 逻辑关系必须看懂，但概念插画太虚、架构图太冷：single-panel explainer comic。
 - 单一瞬间或材料状态：illustration。
 - 证据已经存在：source。
 - 形式之间仍然无法明确选择：先减少 `Viewer job`，不要并行生成多个形式赌效果。
@@ -35,6 +37,7 @@
 
 - diagram 默认 3–5 个主要节点，超过 6 个拆图。
 - comic 默认 3–4 格，每格一个动作。
+- single-panel explainer comic 默认 1 个中央逻辑视觉、1 个讲解角色、1 个气泡、3–5 个主标签；必要时允许少量二级标签，但不画多层框线与连线网络。
 - infographic 在手机宽度下不能依靠缩小字号容纳内容。
 - 每个画内文本单元优先 4–8 字，硬上限 10 个中文字符。
 - 同一个插入位置只有一个 `Selected form` 和一个 `Render owner`。

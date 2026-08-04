@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:5e85af2881da24a4e542278ec3b666c07f7e58d6032f9ced5349016297bac232
+  digest: sha256:e729361a2473c13e1d62db4bd3cb42d265ad9b175ea4ecb0ecb1d1d10dfba5d1
 spec:
   subject:
     skillId: investment-dd

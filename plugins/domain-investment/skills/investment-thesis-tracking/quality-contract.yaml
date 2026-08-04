@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:3e92c32b4623c9a55d62e23ca3ee4b2e3c24a36532ceb30725cdd596a8a3b5c4
+  digest: sha256:daae311a997932c200d6e0eb0eae578aff2f17313b60ad1966c6307f5809f33d
 spec:
   subject:
     skillId: investment-thesis-tracking

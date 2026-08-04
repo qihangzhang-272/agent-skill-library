@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:e2772dd67803df43e75a368e32e656033e6f4e4efc0c75a15dd81a7bc07c9075
+  digest: sha256:4d99b66e4e02aa41fa3bc8643132647d953f3532b1e3230c5ac370d375083ec3
 spec:
   subject:
     skillId: investment-unit-economics

@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:95e4be17d5c6cb6ffac1694b4ee9a331bed8196db18aecff1a61205ba44b31ef
+  digest: sha256:5a486688be2452107691ea210c1fd1474f60b6aedd671472c4f064ba260fb397
 spec:
   subject:
     skillId: topic-research-deposition

@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:7861f84b56d20743649a3e7449b1ef1ded174eb97fe7906d58f49a7bb03f9c19
+  digest: sha256:36c15fd2abdcae55551f00448b71bc206bede9d0a5bbf54f1777b4fda0b8cc9f
 spec:
   subject:
     skillId: investment-research

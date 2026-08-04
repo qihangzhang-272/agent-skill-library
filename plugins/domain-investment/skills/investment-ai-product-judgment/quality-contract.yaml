@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:cbdc3eacf52ab64ec991ac9bcc4b32764705447dbcb33f29741c77abc9c10275
+  digest: sha256:8b383d4cfacce77662c9693d7d4f93e529c52b58c31ce537d63fa836febda97f
 spec:
   subject:
     skillId: investment-ai-product-judgment

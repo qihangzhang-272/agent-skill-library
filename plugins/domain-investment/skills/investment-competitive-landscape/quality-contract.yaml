@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:ab8bee1aa98dee55bbc449edadc01e91076fd139d3c2ff49936e8f9107945e34
+  digest: sha256:be342f0567a48d07133ca1adba9a0965f6ca176ebd19269c650633eb38fd98b4
 spec:
   subject:
     skillId: investment-competitive-landscape

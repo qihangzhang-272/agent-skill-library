@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:f20e44c93c2ecf50526d8aaef90e80250e6e8b7d5e09b2baae05c5b98f57ba06
+  digest: sha256:9fd269f0b6be13d2d7ee83c3388a1e3d3290a6c8a0e7b78d8eb7f01ea50dce12
 spec:
   subject:
     skillId: investment-visual-report

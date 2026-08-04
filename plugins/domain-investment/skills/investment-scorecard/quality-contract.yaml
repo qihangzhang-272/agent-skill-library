@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:caebf04e3e7c72c34eb52c1afb569480ad3a4929b2bcf1bc2097b70615eaf2e4
+  digest: sha256:215313e4a6a25f7ca0c5586855f0683ed618c7ee1a70fea4fc2111d6ce84b0b7
 spec:
   subject:
     skillId: investment-scorecard

@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:21b1389e8a2fb9bd68bc8de6f8d626f9a191058bf7ab687d26546949b75fdd4c
+  digest: sha256:c444ab9022d42e7086eac14e22f432ccd8c048ebe63aef2615aa7b37171d56a8
 spec:
   subject:
     skillId: investment-ic-memo-writer

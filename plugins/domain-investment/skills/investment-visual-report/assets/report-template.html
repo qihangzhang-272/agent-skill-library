@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <!--
   投研视觉研报 骨架模板
-  用法：复制本文件作为 10-visual-report.html 的起点。
+  用法：复制本文件作为 11-visual-report.html 的起点。
   - <style> 已含完整设计系统，直接用，不要引外部 CSS/JS。
-  - 把下面 PLACEHOLDER 区域替换为 memo 内容；用不到的 section 整段删掉。
+  - 把下面 PLACEHOLDER 区域替换为 memo 内容；15 个必需 section 不得删除。只删非必需展示组件；必需 section 缺失或过薄时返回 REWORK。
+  - 把 VERDICT_CLASS_REQUIRED 替换为 verdict-proceed、verdict-conditional、verdict-watch 或 verdict-pass，且必须与 Memo 原 verdict 一致。
   - 组件片段见 references/components.md；配色语义见 references/design-system.md。
 -->
 <html lang="zh-CN">
@@ -21,9 +22,12 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;ba
 .hdr h1{font-size:32px;font-weight:800;margin-bottom:8px}
 .hdr .sub{font-size:16px;color:#cbd5e1;margin-bottom:24px}
 .vstrip{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
-.vbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(217,119,6,.15);border:1px solid rgba(217,119,6,.3);padding:10px 20px;border-radius:8px;font-size:18px;font-weight:700;color:#fbbf24}
-.vbadge .dot{width:12px;height:12px;border-radius:50%;background:#fbbf24}
-.score-big{font-size:48px;font-weight:800;color:#fbbf24}
+.vbadge{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:18px;font-weight:700}
+.vbadge .dot{width:12px;height:12px;border-radius:50%;background:currentColor}
+.vbadge.verdict-proceed{color:var(--green);background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.3)}
+.vbadge.verdict-conditional,.vbadge.verdict-watch{color:#fbbf24;background:rgba(217,119,6,.15);border:1px solid rgba(217,119,6,.3)}
+.vbadge.verdict-pass{color:var(--red);background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}
+.score-big{font-size:48px;font-weight:800;color:#fff}
 .score-lbl{font-size:13px;color:#94a3b8}
 .sstrip{background:var(--surface);border-bottom:1px solid var(--border);padding:24px 40px;display:flex;gap:0}
 .si{flex:1;text-align:center;padding:12px 8px;border-right:1px solid var(--border)}
@@ -88,7 +92,7 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0}
   <h1>标的名</h1>
   <div class="sub">一句话定位 &bull; 地区 &bull; 累计融资 &bull; 最新轮次</div>
   <div class="vstrip">
-    <div class="vbadge"><span class="dot"></span> WATCH / TRACK</div>
+    <div class="vbadge VERDICT_CLASS_REQUIRED"><span class="dot"></span> MEMO VERDICT (EXACT)</div>
     <div><div class="score-big">0.00</div><div class="score-lbl">/ 10 投资评分</div></div>
   </div>
 </div>
@@ -114,27 +118,45 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0}
   <div class="danger">…</div>
 </div>
 
-<!-- ==================== 2. 公司/产品概览 ==================== -->
+<!-- ==================== 2. 投资建议 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">2</span> Company / Product Overview</div>
+  <div class="st"><span class="n">2</span> Investment Recommendation</div>
+  <p>Memo 原文建议、条件与解决证据…</p>
+</div>
+
+<!-- ==================== 3. 公司/产品概览 ==================== -->
+<div class="sec">
+  <div class="st"><span class="n">3</span> Company / Product Overview</div>
   <table><tr><th>项</th><th>值</th><th>来源</th></tr><tr><td>…</td><td>…</td><td>…</td></tr></table>
 </div>
 
-<!-- ==================== 3. 竞争格局 ==================== -->
+<!-- ==================== 4. AI-native 产品判断 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">3</span> Competitive Landscape</div>
+  <div class="st"><span class="n">4</span> AI-native Product Judgment</div>
+  <p>产品判断、最强论点、最弱缺口与反证…</p>
+</div>
+
+<!-- ==================== 5. 市场与竞争 ==================== -->
+<div class="sec">
+  <div class="st"><span class="n">5</span> Market &amp; Competitive Landscape</div>
   <table><tr><th>竞品</th><th>定位</th><th>对比</th></tr><tr><td>…</td><td>…</td><td>…</td></tr></table>
 </div>
 
-<!-- ==================== 4. 单元经济 ==================== -->
+<!-- ==================== 6. 商业模式与单位经济 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">4</span> Unit Economics</div>
+  <div class="st"><span class="n">6</span> Business Model &amp; Unit Economics</div>
   <table><tr><th>指标</th><th>值</th><th>状态</th></tr><tr><td>…</td><td>…</td><td><span class="t ty">假设</span></td></tr></table>
 </div>
 
-<!-- ==================== 5. 估值/回报 ==================== -->
+<!-- ==================== 7. 技术/OSS/生态护城河 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">5</span> Valuation / Return Logic</div>
+  <div class="st"><span class="n">7</span> Technical / OSS / Ecosystem Moat</div>
+  <p>技术边界、生态证据、可复制性与反证…</p>
+</div>
+
+<!-- ==================== 8. 估值/回报 ==================== -->
+<div class="sec">
+  <div class="st"><span class="n">8</span> Valuation / Return Logic</div>
   <h4>回报情景</h4>
   <div class="g3">
     <div class="sc sc-b"><div class="sc-l" style="color:var(--green)">🐂 Bull</div><div class="sc-m" style="color:var(--green)">0x</div><div class="sc-d">…</div></div>
@@ -143,9 +165,9 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0}
   </div>
 </div>
 
-<!-- ==================== 6. 评分卡 ==================== -->
+<!-- ==================== 9. 评分卡 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">6</span> Investment Scorecard</div>
+  <div class="st"><span class="n">9</span> Investment Scorecard</div>
   <div class="pl"><div class="pl-n">A. 维度 (25%)</div><div class="pl-b"><div class="pl-f" style="width:0%;background:var(--yellow)">0.0</div></div></div>
   <div class="card" style="text-align:center;background:var(--g100);margin-top:16px">
     <div class="card-t">综合评级</div>
@@ -154,30 +176,41 @@ hr{border:none;border-top:1px solid var(--border);margin:24px 0}
   </div>
 </div>
 
-<!-- ==================== 7. 风险/一票否决 ==================== -->
+<!-- ==================== 10. 风险/一票否决 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">7</span> Key Risks &amp; One-Vote Veto</div>
+  <div class="st"><span class="n">10</span> Key Risks &amp; One-Vote Veto</div>
   <table><tr><th>风险</th><th>严重性</th><th>可能性</th><th>缓解</th></tr><tr><td>…</td><td><span class="t tr">高</span></td><td><span class="t ty">中</span></td><td>…</td></tr></table>
 </div>
 
-<!-- ==================== 8. DD 优先级 ==================== -->
+<!-- ==================== 11. DD 优先级 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">8</span> Due Diligence Priorities</div>
+  <div class="st"><span class="n">11</span> Due Diligence Priorities</div>
   <table><tr><th>#</th><th>问题</th><th>验证方式</th></tr><tr><td>1</td><td>…</td><td>…</td></tr></table>
 </div>
 
-<!-- ==================== 9. Thesis / Watch Triggers ==================== -->
+<!-- ==================== 12. Thesis / Watch Triggers ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">9</span> Thesis &amp; Watch Triggers</div>
-  <blockquote>IC thesis seed（≤100 words）…</blockquote>
-  <h4>Watch Until</h4>
-  <ul><li>触发条件…</li></ul>
+  <div class="st"><span class="n">12</span> Thesis Tracking &amp; Watch Triggers</div>
+  <blockquote>可证伪论点…</blockquote>
+  <ul><li>触发条件、阈值与行动…</li></ul>
 </div>
 
-<!-- ==================== 10. 来源/缺口 ==================== -->
+<!-- ==================== 13. 来源/未知项/核验缺口 ==================== -->
 <div class="sec">
-  <div class="st"><span class="n">10</span> Sources &amp; Gaps</div>
-  <p style="font-size:13px;color:var(--g500)">数据缺口与来源说明…</p>
+  <div class="st"><span class="n">13</span> Sources, Unknowns &amp; Verification Gaps</div>
+  <p style="font-size:13px;color:var(--g500)">来源、反证、未知项、已接受缺口与决策影响…</p>
+</div>
+
+<!-- ==================== 14. Artifact 谱系 ==================== -->
+<div class="sec">
+  <div class="st"><span class="n">14</span> Artifact Provenance</div>
+  <table><tr><th>Artifact</th><th>Revision / Digest</th><th>用途</th></tr><tr><td>01–10…</td><td>…</td><td>结论或证据核对…</td></tr></table>
+</div>
+
+<!-- ==================== 15. 完成记录 ==================== -->
+<div class="sec">
+  <div class="st"><span class="n">15</span> Completion Record</div>
+  <p>Status、inputs consumed、obligation results、unknowns、consumer notes…</p>
 </div>
 
 </div>

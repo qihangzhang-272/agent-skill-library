@@ -12,22 +12,12 @@ State multiple methodology: "X.Xx EV/Revenue" or "X.Xx EV/EBITDA"
 
 ## Scenario Analysis Table
 
-| Scenario | Probability | Valuation | Key Assumptions |
-|----------|-------------|-----------|-----------------|
-| Bull | XX% | $XXB | [Specific, quantified] |
-| Base | XX% | $XXB | [Specific, quantified] |
-| Bear | XX% | $XXB | [Specific, quantified] |
+| Scenario | Probability | Competitive / Operating Outcome | Key Assumptions |
+|----------|-------------|---------------------------------|-----------------|
+| Bull | XX% | [Observable competitive or operating outcome] | [Specific, quantified] |
+| Base | XX% | [Observable competitive or operating outcome] | [Specific, quantified] |
+| Bear | XX% | [Observable competitive or operating outcome] | [Specific, quantified] |
 
-## Slide Structure
+Do not create valuation outputs in this table. Valuation belongs to `investment-valuation-returns`; this node passes forward only competitive mechanisms, signposts, and operating implications.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│ [Insight headline, not topic]                               │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│                     [Main Content]                          │
-│                                                             │
-├─────────────────────────────────────────────────────────────┤
-│ Source: [Citation] ([Date])                                 │
-└─────────────────────────────────────────────────────────────┘
-```
+These tables are Markdown sections inside `04-competitive-landscape.md`. They do not require a slide, spreadsheet, or separate visual Artifact.

@@ -1,103 +1,85 @@
----
-name: dd-meeting-prep
-description: Prepare for due diligence meetings — management presentations, expert network calls, customer references, and advisor sessions. Generates targeted question lists, benchmarks to reference, and red flags to probe. Use before any diligence meeting or call. Triggers on "prep for management meeting", "diligence call prep", "expert call questions", "customer reference questions", or "meeting prep for [company]".
----
+# Internal Method: Diligence Question Design
 
-# Diligence Meeting Prep
+Use this method inside `investment-dd` to create questions that test a claim and change a decision. It is not an independent meeting-preparation Skill or scheduler.
 
-## Workflow
+## Question construction
 
-### Step 1: Meeting Context
+Every material question should contain:
 
-Ask the user for:
-- **Meeting type**: Management presentation, expert call, customer reference, advisor check-in, site visit
-- **Attendees**: Who from the target company or third party
-- **Topic focus**: Full business overview, or specific workstream (financial, commercial, operational, tech)
-- **What you already know**: Prior meetings, CIM, data room findings
-- **Key concerns**: Specific issues to probe
+```text
+Claim being tested:
+Question:
+Why it matters:
+Evidence or example requested:
+Expected respondent:
+Follow-up if vague:
+Answer that supports the case:
+Answer that weakens or falsifies it:
+Effect on verdict / score / valuation / terms:
+```
 
-### Step 2: Generate Question List
+Avoid questions that invite a rehearsed narrative without proof. Ask for cohorts, dated examples, reconciliations, documents, customer names, failure cases, and trade-offs where appropriate.
 
-Organize questions by priority and topic. Structure depends on meeting type:
+## Management questions
 
-#### Management Presentation
-**Business Overview (warm-up)**
-- Walk us through the founding story and key milestones
-- How do you describe the business to someone unfamiliar with the space?
-- What are you most proud of? What would you do differently?
+### Strategy and market
 
-**Revenue & Growth**
-- Walk us through revenue by customer/segment/geography
-- What's driving growth? Price vs. volume vs. new customers
-- What does the sales cycle look like? How has win rate trended?
-- Where do you see the biggest growth opportunities in the next 3-5 years?
+- What narrow problem and buyer budget does the company own today?
+- Which alternatives win, and why has the company lost recent deals?
+- Which market assumptions have changed, and what evidence caused the change?
+- What is deliberately outside the roadmap or target market?
 
-**Competitive Positioning**
-- Who do you lose deals to and why?
-- What's your moat? How defensible is it?
-- How do customers evaluate you vs. alternatives?
+### Commercial and customer
 
-**Operations & Team**
-- Walk us through the org chart — who are the key people?
-- What roles are you hiring for? What's been hardest to fill?
-- What keeps you up at night operationally?
+- Reconcile bookings, contracted ARR, recognized revenue, usage, pilots, and cash collection.
+- Show retention and expansion by cohort, segment, and product.
+- Explain customer concentration, churn, discounting, services content, and implementation burden.
+- Provide concrete win/loss, renewal, and deployment examples.
 
-**Financial Deep-Dive**
-- Walk us through the margin bridge — what's changed and why?
-- Any one-time or non-recurring items we should understand?
-- How do you think about capex — maintenance vs. growth?
-- Working capital seasonality?
+### Product and technology
 
-**Forward Look**
-- Walk us through the budget/plan for next year
-- What assumptions are you most/least confident in?
-- What would need to go right/wrong to significantly beat/miss plan?
+- Demonstrate the core workflow and where human intervention remains.
+- Separate proprietary capability from third-party model, cloud, data, and open-source dependencies.
+- Provide reliability, latency, unit-cost, security, incident, and benchmark evidence.
+- Explain technical debt, release quality, roadmap dependencies, and failure modes.
 
-#### Expert Network Call
-- How do you view [company]'s positioning in the market?
-- What are the secular trends driving this space?
-- Who are the strongest competitors and why?
-- What risks should an investor be aware of?
-- If you were buying this business, what would you diligence most carefully?
+### Team, governance, and financing
 
-#### Customer Reference Call
-- How did you find [company] and why did you choose them?
-- What alternatives did you evaluate?
-- What do they do well? Where could they improve?
-- How likely are you to renew/expand? What would change that?
-- If they raised prices 10-20%, how would you react?
+- Identify key-person dependencies, critical hiring gaps, and incentive misalignment.
+- Reconcile cap table, runway, burn, financing needs, and use of proceeds.
+- Explain governance, related-party matters, founder liquidity, and expected exit paths.
 
-### Step 3: Benchmarks & Context
+## Expert questions
 
-For each key topic, provide relevant benchmarks:
-- Industry growth rates and margin profiles
-- Comparable company metrics (if comps analysis exists in session)
-- Data points from the CIM or data room that warrant follow-up
-- Discrepancies between different data sources to clarify
+- Is the problem technically and commercially important, or mostly narrative?
+- How do practitioners solve it today, and what switching constraints matter?
+- Which benchmarks or claims are credible, and which are easy to game?
+- Where can platforms, incumbents, regulation, or cost curves compress the opportunity?
+- What evidence would change the expert's view?
 
-### Step 4: Red Flags to Probe
+Experts provide informed perspective, not target-company facts. Label opinion and conflicts of interest.
 
-Based on what's known, flag specific areas to dig into:
-- Inconsistencies in the CIM or financials
-- Customer concentration or churn signals
-- Management team gaps or recent departures
-- Unusual accounting treatments
-- Missing data room items
+## Customer-reference questions
 
-### Step 5: Output
+- What triggered purchase, who owned budget, and what alternatives were considered?
+- How long did implementation and time-to-value take?
+- Which workflows are production-critical versus experimental?
+- What measurable outcome changed, and how was it measured?
+- What has failed, disappointed, or required unexpected services?
+- Would the customer renew, expand, recommend, or replace the product? Why?
 
-One-page meeting prep doc:
-1. **Meeting logistics**: Who, when, where, duration
-2. **Objectives**: Top 3 things you need to learn from this meeting
-3. **Question list**: Prioritized, grouped by topic (star the must-asks)
-4. **Benchmarks**: Key numbers to reference
-5. **Red flags**: Specific items to probe
-6. **Follow-up items**: What to request after the meeting
+Customer anecdotes do not substitute for representative retention or revenue data. Record selection bias and relationship context.
 
-## Important Notes
+## Red flags to probe
 
-- Lead with open-ended questions — let management talk, then follow up on specifics
-- Don't lead the witness — ask neutral questions, not "isn't it true that..."
-- Take notes on body language and confidence levels, not just answers
-- Always end with: "What haven't we asked about that we should?"
-- Keep the question list to 15-20 max — you won't get through more in a 60-90 min session
+- answers that mix signed, deployed, active, paid, and recognized revenue;
+- repeated reliance on future model improvement or one partner;
+- metrics that change definition between periods;
+- unexplained customer, founder, or staff departures;
+- benchmark results without reproducible setup;
+- refusal to reconcile source documents to claims;
+- legal, security, IP, or licensing issues described as paperwork only.
+
+## Completion test
+
+A question set is ready only when P0/P1 questions trace to upstream claims, request observable proof, include a follow-up, and state how the answer changes the investment decision.

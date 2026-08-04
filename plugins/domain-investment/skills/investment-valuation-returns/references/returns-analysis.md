@@ -1,119 +1,82 @@
----
-name: returns-analysis
-description: Build quick IRR/MOIC sensitivity tables for PE deal evaluation. Models returns across entry multiple, leverage, exit multiple, growth, and hold period scenarios. Use when sizing up a deal, stress-testing assumptions, or preparing IC returns exhibits. Triggers on "returns analysis", "IRR sensitivity", "MOIC table", "what's the return at", "model the returns", or "back of the envelope".
----
+# Internal Method: Returns Analysis
 
-# Returns Analysis
+Use this method inside `investment-valuation-returns` for private-deal or other cash-on-cash return scenarios. It is not an independent Skill or a required workbook workflow.
 
-## Workflow
+## 1. Normalize deal inputs
 
-### Step 1: Gather Deal Inputs
+State source, date, currency, units, and scenario for:
 
-Ask for (or extract from prior analysis):
+- entry EBITDA or other operating basis;
+- entry multiple, enterprise value, net debt, equity invested, and transaction costs;
+- debt by tranche, rate, amortization, and fees;
+- revenue growth, margin, capex, working capital, taxes, and cash conversion;
+- hold period, exit operating metric, exit multiple, and net debt at exit;
+- management rollover, co-invest, interim distributions, and dilution where applicable.
 
-**Entry:**
-- Entry EBITDA (LTM or NTM)
-- Entry multiple (EV / EBITDA)
-- Enterprise value
-- Net debt at close
-- Equity check size
-- Transaction fees & expenses
+Missing values remain unknown. Do not assume zero debt, fees, dilution, or working-capital needs.
 
-**Financing:**
-- Senior debt (x EBITDA, rate, amortization)
-- Subordinated debt / mezzanine (if any)
-- Total leverage at entry (x EBITDA)
-- Equity contribution
+## 2. Calculate the base case
 
-**Operating Assumptions:**
-- Revenue growth rate (annual)
-- EBITDA margin trajectory
-- Capex as % of revenue
-- Working capital changes
-- Debt paydown schedule
+```text
+Entry enterprise value = Entry metric × Entry multiple
+Entry equity value = Enterprise value - Net debt and debt-like items
+Equity invested = Entry equity value + Fees - Rollover / co-invest adjustments
+Exit enterprise value = Exit operating metric × Exit multiple
+Exit equity value = Exit enterprise value - Exit net debt and other claims
+MOIC = Total equity proceeds / Equity invested
+IRR = Discount rate that sets dated equity cash flows to zero NPV
+```
 
-**Exit:**
-- Hold period (years)
-- Exit multiple (EV / EBITDA)
-- Exit EBITDA (calculated from growth assumptions)
+Show the bridge from entry to exit and state whether returns are gross or net of applicable fees/carry.
 
-### Step 2: Base Case Returns
+## 3. Attribute returns
 
-Calculate:
+Separate the contribution of:
 
-| Metric | Value |
-|--------|-------|
-| Entry EV | |
-| Equity invested | |
-| Exit EBITDA | |
-| Exit EV | |
-| Net debt at exit | |
-| Exit equity value | |
-| **MOIC** | |
-| **IRR** | |
-| Cash-on-cash | |
+- operating growth;
+- margin expansion or contraction;
+- multiple expansion or contraction;
+- debt paydown;
+- interim cash distributions;
+- fees, dilution, and other drag.
 
-Show the returns waterfall:
-- EBITDA growth contribution
-- Multiple expansion/contraction contribution
-- Debt paydown contribution
-- Fee/expense drag
+Attribution must reconcile to total equity value change. Do not describe leverage-created IRR as operating improvement.
 
-### Step 3: Sensitivity Tables
+## 4. Run sensitivities
 
-Build 2-way sensitivity matrices:
+Use the variables that dominate the case, commonly:
 
-**Entry Multiple vs. Exit Multiple**
-| | Exit 6x | Exit 7x | Exit 8x | Exit 9x | Exit 10x |
-|---|---------|---------|---------|---------|----------|
-| Entry 7x | | | | | |
-| Entry 8x | | | | | |
-| Entry 9x | | | | | |
-| Entry 10x | | | | | |
+- entry versus exit multiple;
+- growth or exit EBITDA versus exit multiple;
+- leverage versus exit multiple;
+- hold period versus exit multiple;
+- margin, cash conversion, or financing cost.
 
-**EBITDA Growth vs. Exit Multiple** (at fixed entry)
+Show MOIC and IRR together where timing matters. Choose plausible ranges and state their evidence or assumption basis.
 
-**Leverage vs. Exit Multiple** (at fixed entry and growth)
+## 5. Build scenarios
 
-**Hold Period vs. Exit Multiple**
+For bull, base, and bear cases, show the operating path, exit basis, capital structure, MOIC, IRR, and key failure mode. Avoid scenarios that differ only in the final multiple.
 
-Show both IRR and MOIC in each cell (IRR / MOIC format).
+## 6. Sanity checks
 
-### Step 4: Scenario Analysis
+- Entry sources and uses reconcile.
+- Debt never amortizes below zero and interest follows the stated balance/rate.
+- Exit net debt matches cash generation and distributions.
+- Hold periods match IRR timing.
+- Transaction costs and taxes are not omitted.
+- MOIC and IRR move in the expected direction under sensitivity changes.
+- The downside case does not quietly preserve upside-only assumptions.
 
-Build 3 scenarios:
+## Required method handoff
 
-| | Bull | Base | Bear |
-|---|------|------|------|
-| Revenue CAGR | | | |
-| Exit EBITDA margin | | | |
-| Exit multiple | | | |
-| Exit EBITDA | | | |
-| MOIC | | | |
-| IRR | | | |
-
-### Step 5: Output
-
-- Excel workbook with:
-  - Assumptions tab
-  - Returns calculation
-  - Sensitivity tables (formatted with conditional coloring)
-  - Scenario summary
-- One-page returns summary suitable for IC deck
-
-## Key Formulas
-
-- **MOIC** = Exit Equity Value / Equity Invested
-- **IRR** = solve for r: Equity Invested × (1 + r)^n = Exit Equity Value (adjust for interim cash flows)
-- **Returns attribution**:
-  - Growth: (Exit EBITDA - Entry EBITDA) × Exit Multiple / Equity
-  - Multiple: (Exit Multiple - Entry Multiple) × Entry EBITDA / Equity
-  - Leverage: Debt paydown over hold period / Equity
-
-## Important Notes
-
-- Always show returns both gross and net of fees/carry where applicable
-- Management rollover and co-invest change the equity check — ask if relevant
-- Dividend recaps or interim distributions affect IRR significantly — include if planned
-- Don't forget transaction costs (typically 2-4% of EV) — they reduce Day 1 equity value
-- Tax considerations (asset vs. stock deal, 338(h)(10) election) can materially affect after-tax returns
+```text
+Entry, financing, operating, and exit assumptions:
+Base-case equity bridge:
+MOIC / IRR:
+Return attribution:
+Sensitivity results:
+Bull / base / bear cases:
+Dominant variables:
+Data limitations and red flags:
+```

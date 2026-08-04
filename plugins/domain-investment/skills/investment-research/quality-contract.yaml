@@ -1,0 +1,114 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-research.quality
+  revision: 1
+  createdAt: 2026-08-04T14:33:20.511Z
+  createdBy: agent:contract-drafter
+  digest: sha256:7861f84b56d20743649a3e7449b1ef1ded174eb97fe7906d58f49a7bb03f9c19
+spec:
+  subject:
+    skillId: investment-research
+    skillRevision: 1
+    skillContentDigest: sha256:425fab877828f41599640b1faceda1766a472a1eed841e9770bb51e97f1530c5
+  reviewState: approved
+  builtFromFiles:
+    - path: references/agent-reach-search.md
+      role: method-reference
+      digest: sha256:3953bd1f7aee49ae0dd2ce586873a69ffcee8f56c04a8b33cce97856477fa4f7
+    - path: references/deal-sourcing.md
+      role: method-reference
+      digest: sha256:74fb6bd65b510c283ffc25ebee52aafe45f005a74e13899e5a6d2a4e34358782
+    - path: references/funding-digest.md
+      role: method-reference
+      digest: sha256:c8f18a5e38a873f4981db6c758431fccdf1415a05eb9f12eda61a2dce3f43a3c
+    - path: references/public-company-research.md
+      role: method-reference
+      digest: sha256:162d58d5cd92b2496fdd094dccdc1f67e57eae754ff052f4a9c9ac7ab1254ffa
+    - path: references/sector-seeds.md
+      role: method-reference
+      digest: sha256:35b8fa07c0e8281de56b31024d2ab2ed5d90b08201521898213acd90de115592
+    - path: SKILL.md
+      role: instruction
+      digest: sha256:605ae188c36eff47b5a33d78c4c7388f435b2fd3ff557ce52d5a0cb7f84b2342
+  obligations:
+    - id: artifact-envelope-and-lineage
+      requirement: 输出唯一独立 Artifact artifacts/02-fact-pack.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
+      required: true
+      verifier: harness
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: false
+        unknownAllowed: false
+    - id: current-source-coverage
+      requirement: 对时间敏感的公司、融资、产品、客户、团队、技术、OSS、所有权和市场事实使用本次运行重新核验的来源，并写明适用期间
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: evidence-per-key-fact
+      requirement: 每项被陈述为事实的关键内容都有可定位证据、来源日期和事实适用期间；无证据内容不得冒充事实
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: fact-pack-completeness
+      requirement: 事实包覆盖公司、产品、技术与 OSS、市场、客户、商业模式、团队、所有权、融资、竞争、风险和关键时间线等适用区域
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: epistemic-and-conflict-separation
+      requirement: 事实、公司口径、第三方观点、推断、假设、反证和来源冲突分别呈现
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: missing-facts-to-dd
+      requirement: 把缺失事实转成可执行核验方向，并说明其对产品、竞争、经济性、评分和估值判断的影响
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: false
+        unknownAllowed: false
+    - id: external-fact-availability
+      requirement: 只有外部公司、市场、融资、客户、团队、技术、OSS 或所有权事实在 Plan 冻结的来源或验证方法耗尽后仍不可得时，才允许形成 gap
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: false
+        unknownAllowed: true
+        unknownRequires:
+          - attemptRefs
+          - boundedAttempts
+          - reason
+          - decisionImpact
+          - fallback
+          - revisitTrigger
+  artifact:
+    mediaTypes:
+      - text/markdown
+    independent: true
+    workflowPath: .asl/runs/<run-id>/artifacts/02-fact-pack.md
+  handoff:
+    requiredSections:
+      - status
+      - inputsConsumed
+      - obligationResults
+      - facts
+      - judgments
+      - assumptions
+      - counterevidence
+      - unknowns
+      - evidenceRefs
+      - consumerNotes

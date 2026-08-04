@@ -12,12 +12,12 @@
   <h1>公司名 / 项目名</h1>
   <div class="sub">一句话定位 &bull; 地区 &bull; 累计融资 &bull; 最新轮次（领投）</div>
   <div class="vstrip">
-    <div class="vbadge"><span class="dot"></span> WATCH / TRACK</div>
+    <div class="vbadge"><span class="dot"></span> MEMO VERDICT (EXACT)</div>
     <div><div class="score-big">6.08</div><div class="score-lbl">/ 10 投资评分</div></div>
   </div>
 </div>
 ```
-评级文字按 memo 结论：RECOMMEND / WATCH / TRACK / PASS。badge 和 score-big 的颜色按区间（绿/金/红）。
+评级文字逐字使用 memo 的 `Proceed / Conditional proceed / Watch / Pass`，不得压缩或改名。badge 颜色跟随 memo 结论；评分颜色只做数值一致性展示，不能反向改写结论。
 
 ## 2. 评分条 strip（有评分卡时）
 
@@ -117,7 +117,7 @@ memo 里大量结构化事实用表格。表头大写小字灰色，斑马线靠
 <div class="card" style="text-align:center;background:var(--g100)">
   <div class="card-t">综合评级</div>
   <div class="card-v" style="color:var(--yellow);font-size:40px">6.08 / 10</div>
-  <div class="card-n" style="font-size:14px">🟠 Watch / Track — 建议 6 个月后重新评估</div>
+  <div class="card-n" style="font-size:14px">MEMO VERDICT (EXACT) — Memo 原文条件或行动</div>
 </div>
 ```
 
@@ -129,5 +129,6 @@ memo 里大量结构化事实用表格。表头大写小字灰色，斑马线靠
 
 ## section 顺序参考（跟随 IC memo）
 
-1 执行摘要 → 2 公司/产品概览 → 3 竞争格局 → 4 单元经济 → 5 估值/回报 → 6 评分卡 → 7 风险/一票否决 → 8 DD 优先级 → 9 thesis/watch triggers → 10 来源/缺口。
-memo 没有的节就跳过编号，不留空壳。
+1 Executive Summary → 2 Investment Recommendation → 3 Company/Product → 4 AI-native Product Judgment → 5 Market/Competitive → 6 Business Model/Unit Economics → 7 Technical/OSS/Ecosystem Moat → 8 Valuation/Return → 9 Scorecard → 10 Risks/Veto → 11 DD → 12 Thesis/Watch → 13 Sources/Unknowns/Gaps → 14 Artifact Provenance → 15 Completion Record。
+
+15 个 Memo 合同章节任一缺失或过薄时必须拒收，不能靠跳过编号继续生成。只可省略 Memo 本身明确标为不适用的非必需展示组件。

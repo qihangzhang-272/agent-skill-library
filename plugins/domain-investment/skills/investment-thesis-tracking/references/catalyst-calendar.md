@@ -1,84 +1,46 @@
----
-name: catalyst-calendar
-description: Build and maintain a calendar of upcoming catalysts across a coverage universe — earnings dates, conferences, product launches, regulatory decisions, and macro events. Helps prioritize attention and position ahead of events. Triggers on "catalyst calendar", "upcoming events", "what's coming up", "earnings calendar", "event calendar", or "catalyst tracker".
----
+# Internal Method: Catalyst Register
 
-# Catalyst Calendar
+Use this method inside `investment-thesis-tracking` to build a dated monitoring table. It does not operate or synchronize an external calendar.
 
-## Workflow
+## Catalyst categories
 
-### Step 1: Define Coverage Universe
+- company events: earnings, financing, launches, roadmap milestones, pricing, customer or partnership announcements;
+- industry events: peer results, platform changes, standards, major conferences, competitive launches;
+- regulatory and legal events: decisions, filings, hearings, compliance deadlines;
+- macro and market events: rates, policy, commodity/currency, budget cycles, procurement windows;
+- DD events: expected evidence delivery, management meetings, customer references, or verification deadlines.
 
-- List of companies to track (tickers or names)
-- Sector / industry focus
-- Include macro events? (Fed meetings, economic data, regulatory deadlines)
-- Time horizon (next 2 weeks, month, quarter)
+## Required fields
 
-### Step 2: Gather Catalysts
+| Field | Meaning |
+| --- | --- |
+| Date or window | Exact date when supported; otherwise a labeled range |
+| Event | Observable occurrence, not a vague theme |
+| Source / basis | Accepted Artifact evidence or stated assumption |
+| Affected pillar | Thesis pillar or risk tested |
+| Expected signal | What would support, weaken, or falsify the pillar |
+| Probability | Optional; include only with a defensible basis |
+| Materiality | High / medium / low with decision rationale |
+| Dependency | Precondition or related event |
+| Action | Review, verify, upgrade, downgrade, exit, or no change |
+| Revisit trigger | What requires the entry to be refreshed |
 
-For each company, identify upcoming events:
+## Event-window discipline
 
-**Earnings & Financial Events**
-- Quarterly earnings date and time (pre/post market)
-- Annual shareholder meeting
-- Investor day / analyst day
-- Capital markets day
-- Debt maturity / refinancing dates
+- Distinguish confirmed dates, management targets, market expectations, and analyst estimates.
+- Do not infer a fiscal period from a calendar date.
+- Do not fabricate dates to make the table complete.
+- Avoid double-counting one underlying event under several names.
+- Separate the expected event from the evidence that would matter after it occurs.
 
-**Corporate Events**
-- Product launches or announcements
-- FDA approvals / regulatory decisions
-- Contract renewals or expirations
-- M&A milestones (close dates, regulatory approvals)
-- Management transitions
-- Insider trading windows (lockup expirations)
+## Prioritization
 
-**Industry Events**
-- Major conferences (dates, which companies presenting)
-- Trade shows and expos
-- Regulatory comment periods or rulings
-- Industry data releases (monthly sales, traffic, etc.)
+Focus attention on catalysts that can change recommendation, valuation, financing risk, a veto, or a thesis pillar. High-likelihood but immaterial events should not crowd out low-frequency, thesis-breaking events.
 
-**Macro Events**
-- Fed meetings (FOMC dates)
-- Jobs report, CPI, GDP releases
-- Central bank decisions (ECB, BOJ, etc.)
-- Geopolitical events with market impact
+## Post-event update
 
-### Step 3: Calendar View
+After a dated input is supplied, record actual outcome, difference from expectation, affected pillar, conviction impact, action, and next trigger. Retain the original expected signal for auditability.
 
-| Date | Event | Company/Sector | Type | Impact (H/M/L) | Our Positioning | Notes |
-|------|-------|---------------|------|-----------------|----------------|-------|
-| | | | Earnings/Corp/Industry/Macro | | Long/Short/Neutral | |
+## Completion test
 
-### Step 4: Weekly Preview
-
-Each week, generate a forward-looking summary:
-
-**This Week's Key Events:**
-1. [Day]: [Company] Q[X] earnings — consensus [$X EPS], our estimate [$X], key focus: [metric]
-2. [Day]: [Event] — why it matters for [stocks]
-3. [Day]: [Macro release] — expectations and positioning
-
-**Next Week Preview:**
-- Early heads-up on important events coming
-
-**Position Implications:**
-- Events that could move specific positions
-- Any pre-positioning recommended
-- Risk management ahead of binary events
-
-### Step 5: Output
-
-- Excel workbook with calendar view and sortable columns
-- Weekly preview email/note (markdown)
-- Optional: integration with Google Calendar
-
-## Important Notes
-
-- Earnings dates shift — verify against company IR pages and Bloomberg/FactSet closer to the date
-- Pre-announce risk: track companies with a history of pre-announcing (positive or negative)
-- Conference attendance lists are valuable — which companies are presenting and which are conspicuously absent?
-- Some catalysts are recurring (monthly industry data) — build a template and auto-populate
-- Color-code by impact level: Red = high impact, Yellow = moderate, Green = routine
-- Archive past catalysts with the actual outcome — builds pattern recognition over time
+The register is ready when every high-materiality event links to a pillar, observable signal, action, source/basis, and honest date status. The table lives inside `09-thesis-tracking.md`; no external calendar or separate workbook is required.

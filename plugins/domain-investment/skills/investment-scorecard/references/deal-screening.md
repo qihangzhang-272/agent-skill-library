@@ -1,9 +1,6 @@
----
-name: deal-screening
-description: Quickly screen inbound deal flow — CIMs, teasers, and broker materials — against the fund's investment criteria. Extracts key deal metrics, runs a pass/fail framework, and outputs a one-page screening memo. Use when reviewing new deal flow, triaging inbound materials, or deciding whether to take a first call. Triggers on "screen this deal", "review this CIM", "should we look at this", "triage this teaser", or "deal screening".
----
+# Internal Method: Deal Screening
 
-# Deal Screening
+Apply this method inside `investment-scorecard`; it is not an independent Skill or workflow.
 
 ## Workflow
 
@@ -23,7 +20,7 @@ From the provided CIM, teaser, or description, extract:
 
 ### Step 2: Screen Against Criteria
 
-Apply the fund's investment criteria (ask user if not known):
+Apply the fund criteria bound in the inputs. If the mandate is absent, record the limitation or return `REWORK`; do not invent criteria.
 
 | Criterion | Target | Actual | Pass/Fail |
 |-----------|--------|--------|-----------|
@@ -47,14 +44,13 @@ Provide a 3-part assessment:
 3. **Bear case** (2-3 bullets): Key risks and concerns
 4. **Key questions**: What you'd need to answer on a first call
 
-### Step 4: Output
+### Step 4: Contribution to `06-investment-scorecard.md`
 
-One-page screening memo suitable for sharing with partners or an IC quick screen.
+Integrate the mandate-fit table, verdict, bull case, bear case, and key questions into the single scorecard Artifact. Do not create a separate one-page memo or another deliverable.
 
 ## Important Notes
 
-- Speed matters — screening should take minutes, not hours
 - Be direct about red flags. Don't bury concerns
 - If financials seem inconsistent or incomplete, flag it explicitly
-- Ask for the fund's criteria upfront if this is the first screening
-- Save screening criteria in memory for future deals once confirmed
+- Use only criteria bound in the current inputs, including a Personal Workspace mandate only when the Host has bound its exact ref and revision into this Run; if criteria are absent, record the limitation or return `REWORK`
+- Do not write screening criteria to hidden memory or any destination outside the current Run

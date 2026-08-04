@@ -18,6 +18,6 @@ Record publication date, reporting period, and URL (or document page) for every 
 - **Competition and industry**: direct, indirect, and emerging competitors; differentiation, switching costs, distribution, market structure, market size only with a dated source, growth drivers, and regulation.
 - **Risks**: company-disclosed risk factors, financial dependencies, customer/supplier concentration, technology, regulatory, and execution risks. Preserve the source's uncertainty rather than rewriting it as certainty.
 
-## Handoff
+## Contribution to the Fact Pack
 
-Provide a compact fact pack grouped by the headings above, separating sourced facts from open questions. Hand off product evidence to `investment-ai-product-judgment`, competitive evidence to `investment-competitive-landscape`, and approved historical data to `investment-financial-model-builder` through the orchestrator.
+Provide findings under the headings above, separating sourced facts, supplied claims, estimates, and open questions. Insert them into `02-fact-pack.md`; do not invoke product judgment, competitive analysis, financial modeling, or an orchestrator from this method. The current Host owner controls all later routing.

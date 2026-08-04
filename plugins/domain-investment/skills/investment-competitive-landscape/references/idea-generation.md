@@ -1,21 +1,20 @@
----
-name: idea-generation
-description: Systematic stock screening and investment idea sourcing. Combines quantitative screens, thematic research, and pattern recognition to surface new long and short ideas. Use when looking for new ideas, running screens, or conducting thematic sweeps. Triggers on "idea generation", "stock screen", "find ideas", "what looks interesting", "screen for", "new ideas", or "pitch me something".
----
+# Thematic Candidate-Screening Method
 
-# Idea Generation
+This is an optional internal method of `investment-competitive-landscape`, not a standalone Skill. Use it only when the core question needs a thematic sweep, candidate universe, or public-market comparison. It surfaces candidates; it does not make an investment decision or start another workflow.
 
 ## Workflow
 
 ### Step 1: Define Search Criteria
 
-Ask the user for parameters:
+Derive or record the following parameters from accepted inputs:
 - **Direction**: Long ideas, short ideas, or both
 - **Market cap**: Large, mid, small, micro
 - **Sector**: Specific sector or cross-sector
 - **Style**: Value, growth, quality, special situation, event-driven
 - **Geography**: US, international, global
 - **Theme**: Any specific thematic angle (AI, reshoring, aging demographics, etc.)
+
+In a managed run, do not add another user-approval pause. If a parameter is absent, state the limitation and use a conservative assumption only when the screen remains decision-useful.
 
 ### Step 2: Quantitative Screens
 
@@ -63,13 +62,15 @@ Run screens based on the style:
 
 ### Step 3: Thematic Sweep
 
-For thematic ideas, research the theme and identify beneficiaries:
+For thematic ideas, use only the theme, candidate universe, and evidence already present in the accepted inputs:
 
-1. Define the thesis (e.g., "AI infrastructure spending accelerates through 2026")
-2. Map the value chain — who benefits directly vs. indirectly?
-3. Identify pure-play vs. diversified exposure
-4. Assess which names are already "priced in" vs. under-appreciated
-5. Look for second-order beneficiaries that the market hasn't connected to the theme
+1. Restate the accepted thesis (e.g., "AI infrastructure spending accelerates through 2026").
+2. Map the accepted candidates across the value chain — direct versus indirect exposure.
+3. Separate pure-play from diversified exposure using cited input facts.
+4. Assess which accepted names appear priced in versus under-appreciated, with explicit evidence and assumptions.
+5. Identify second-order beneficiaries only when they already appear in the accepted candidate universe.
+
+This method does not research a new theme, search for new names, or expand the universe. If the accepted inputs do not contain enough evidence or candidates, return the missing obligation to `fact-pack` through the current Host owner.
 
 ### Step 4: Idea Presentation
 
@@ -94,12 +95,12 @@ For each idea that passes the screen, present:
 **Key Risks:**
 - What would make this wrong
 
-**Suggested Next Steps:**
-- Build full model? Deep-dive diligence? Expert call?
+**Questions for the Host owner:**
+- Which evidence or analysis would be needed before this candidate could enter a later approved workflow?
 
-### Step 5: Output
+### Step 5: Contribution to `04-competitive-landscape.md`
 
-- Shortlist of 5-10 ideas with one-page summaries
+- Shortlist of 5-10 candidates with compact evidence-backed summaries
 - Screening criteria and methodology documented
 - Comparison table across all ideas
 - Prioritized list: which ideas to research first
@@ -112,3 +113,4 @@ For each idea that passes the screen, present:
 - Contrarian ideas need a catalyst — being early without a catalyst is the same as being wrong
 - Track idea hit rates over time — which screens and approaches produce the best ideas?
 - Short ideas need higher conviction — timing is harder and risk is asymmetric
+- Do not invoke modeling, diligence, expert outreach, or another Skill. Return the candidate evidence to the parent Skill.

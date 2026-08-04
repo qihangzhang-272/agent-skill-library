@@ -1,0 +1,117 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-competitive-landscape.quality
+  revision: 1
+  createdAt: 2026-08-04T14:33:20.511Z
+  createdBy: agent:contract-drafter
+  digest: sha256:ab8bee1aa98dee55bbc449edadc01e91076fd139d3c2ff49936e8f9107945e34
+spec:
+  subject:
+    skillId: investment-competitive-landscape
+    skillRevision: 1
+    skillContentDigest: sha256:885c9592d14728c2af7c7060278620768cfa143926934ba32329a1030b3bc0d9
+  reviewState: approved
+  builtFromFiles:
+    - path: references/competitive-analysis.md
+      role: method-reference
+      digest: sha256:ac93399e5d7f561e9cac6005a7d494bdf1e7af92b18b12f10e9a3c9c663ed3e9
+    - path: references/frameworks.md
+      role: method-reference
+      digest: sha256:93b3f437c8da7a48e8a77603bd4eb47aba5880e40afdc1d77b8e590bd02c61b7
+    - path: references/idea-generation.md
+      role: method-reference
+      digest: sha256:ab381f9fb98394c7cb073128661d742f2ebf1d8d5864afa09e7667273660486c
+    - path: references/market-researcher-agent.md
+      role: method-reference
+      digest: sha256:0b1d052f849ce414b29483da062feac642389616f7fdbab9db216f864a771ae8
+    - path: references/schemas.md
+      role: method-reference
+      digest: sha256:9aa0af712f879ddab1921ce3f5eaf0de97a76bd128389c0f76b936c5e8eaf239
+    - path: references/sector-overview.md
+      role: method-reference
+      digest: sha256:41bef5e84fe9b221b9cbe3a267dea7b15da9893206468535163d8c92ccea6e96
+    - path: SKILL.md
+      role: instruction
+      digest: sha256:c1850ae2d1f772133ff6ab70a92010cf3d9612213599968a57ad62c95631249a
+  obligations:
+    - id: artifact-envelope-and-lineage
+      requirement: 输出唯一独立 Artifact artifacts/04-competitive-landscape.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
+      required: true
+      verifier: harness
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: false
+        unknownAllowed: false
+    - id: market-value-chain-economics
+      requirement: 明确市场边界、规模与增长口径、价值链、利润池、行业经济性、why-now 与适用的行业定义指标
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: competitor-universe
+      requirement: 覆盖直接竞争、间接替代、现状方案、邻近和潜在进入者，并说明纳入或排除依据
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: comparable-evidence
+      requirement: 关键竞品对比采用一致字段、期间、单位和可追溯来源，未知项不得用主观评分伪装为事实
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: positioning-moat-counterevidence
+      requirement: 判断定位、差异化、分发、数据、技术、成本和转换壁垒，同时呈现削弱护城河的反证
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: strategic-scenarios
+      requirement: 形成竞争或经营层面的 bull/base/bear 情景、可观察 signpost、时间范围和对后续经济性及估值工作的影响，不在本节点创造估值
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: true
+        unknownAllowed: false
+    - id: external-market-competitor-data
+      requirement: 只有外部市场数值或竞品事实在 Plan 冻结的来源或验证方法耗尽后仍不可得时，才允许形成 gap；市场定义、宇宙构造、纳排、护城河检验和情景分析必须完成
+      required: true
+      verifier: consumer
+      completion:
+        answerRefRequired: true
+        evidenceRefsRequired: false
+        unknownAllowed: true
+        unknownRequires:
+          - attemptRefs
+          - boundedAttempts
+          - reason
+          - decisionImpact
+          - fallback
+          - revisitTrigger
+  artifact:
+    mediaTypes:
+      - text/markdown
+    independent: true
+    workflowPath: .asl/runs/<run-id>/artifacts/04-competitive-landscape.md
+  handoff:
+    requiredSections:
+      - status
+      - inputsConsumed
+      - obligationResults
+      - facts
+      - judgments
+      - assumptions
+      - counterevidence
+      - unknowns
+      - evidenceRefs
+      - consumerNotes

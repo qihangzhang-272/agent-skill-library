@@ -1,59 +1,71 @@
----
-name: value-creation-plan
-description: Structure post-acquisition value creation plans with revenue, cost, and operational levers mapped to an EBITDA bridge. Includes 100-day priorities, KPI targets, and accountability frameworks. Use when planning post-close execution, preparing operating partner materials, or building a board-ready value creation roadmap. Triggers on "value creation plan", "100-day plan", "post-close plan", "EBITDA bridge", "operating plan", or "value creation levers".
----
+# Value-Creation Analysis Method
 
-# Value Creation Plan
+This is an internal method of investment-unit-economics, not a standalone Skill. Use it to test revenue, margin, operating, and strategic value-creation levers inside 05-unit-economics.md.
 
-## Workflow
+It does not create a Word document, PowerPoint, Excel model, board pack, M&A pipeline, or separate plan Artifact. It analyzes the case evidence and records what would need to be validated later.
 
-### Step 1: Baseline Assessment
+## 1. Establish the Baseline
 
-Understand the starting point:
-- Current revenue, EBITDA, and margins
-- Organizational structure and capabilities
-- Key operational metrics by function
-- Management team strengths and gaps
-- Quick wins already identified during diligence
+Record the starting point with periods and sources:
 
-### Step 2: Value Creation Levers
+- revenue, gross profit, EBITDA, margins, and cash conversion;
+- business mix and customer economics;
+- organizational and operating capacity;
+- management strengths, gaps, and ownership of initiatives;
+- initiatives already underway;
+- quick wins or constraints identified during diligence.
 
-Map all levers to an EBITDA bridge over the hold period:
+Do not calculate value creation from an unreconciled baseline.
 
-#### Revenue Growth Levers
-- **Organic growth**: Price increases, volume growth, market expansion
-- **Cross-sell / upsell**: New products to existing customers
-- **New market entry**: Geographic expansion, new verticals, new channels
-- **Sales force effectiveness**: Hire reps, improve conversion, shorten cycle
-- **M&A / add-ons**: Bolt-on acquisitions to add revenue and capabilities
+## 2. Map Value-Creation Levers
 
-For each lever:
-- Current state → Target state
-- Revenue impact ($)
-- Timeline to impact
-- Investment required
-- Confidence level (high/medium/low)
+### Revenue growth
 
-#### Margin Expansion Levers
-- **Pricing optimization**: Price increases, mix shift, bundling
-- **COGS reduction**: Procurement savings, supplier consolidation, automation
-- **OpEx optimization**: Overhead reduction, shared services, offshoring
-- **Technology investment**: Automation, systems integration, data analytics
-- **Scale leverage**: Fixed cost leverage as revenue grows
+- price and packaging;
+- volume growth;
+- cross-sell and upsell;
+- new geography, vertical, or channel;
+- sales-force productivity and conversion;
+- add-on M&A as a hypothesis when strategically relevant.
 
-#### Strategic / Multiple Expansion
-- **Platform building**: Add-on acquisitions, tuck-ins
-- **Recurring revenue shift**: Move from project to recurring/subscription
-- **Market positioning**: Category leadership, brand building
-- **Management upgrades**: Key hires to professionalize the business
-- **ESG / governance**: Board formation, reporting improvements
+### Margin expansion
 
-### Step 3: EBITDA Bridge
+- procurement and supplier consolidation;
+- product or customer mix;
+- process automation;
+- overhead and shared services;
+- systems integration and analytics;
+- fixed-cost leverage.
 
-Build the walk from current to target EBITDA:
+### Strategic or multiple-quality improvement
+
+- increasing recurring revenue;
+- category positioning and distribution;
+- management or governance upgrades;
+- reporting and control quality;
+- platform or add-on strategy.
+
+For each lever provide:
+
+| Field | Requirement |
+|---|---|
+| Current state | Sourced baseline |
+| Target state | Observable, time-bound outcome |
+| Revenue impact | Formula, timing, and source basis |
+| Cost / investment | Implementation and ongoing cost |
+| EBITDA impact | Incremental, not double-counted |
+| Timing | Ramp and first measurable result |
+| Owner | Known owner or explicit unknown |
+| Dependencies | Data, people, systems, regulation, M&A, or capital |
+| Confidence | High/medium/low with reason |
+| Disconfirming evidence | What could invalidate the lever |
+
+## 3. Build the EBITDA Bridge
+
+Use a transparent bridge rather than a headline target:
 
 | Lever | Year 1 | Year 2 | Year 3 | Year 4 | Year 5 |
-|-------|--------|--------|--------|--------|--------|
+|---|---:|---:|---:|---:|---:|
 | Base EBITDA | | | | | |
 | Organic revenue growth | | | | | |
 | Pricing | | | | | |
@@ -61,63 +73,69 @@ Build the walk from current to target EBITDA:
 | COGS savings | | | | | |
 | OpEx optimization | | | | | |
 | Technology investment | | | | | |
-| **Pro Forma EBITDA** | | | | | |
-| **Margin** | | | | | |
+| Pro forma EBITDA | | | | | |
+| Margin | | | | | |
 
-### Step 4: 100-Day Plan
+Show revenue-to-EBITDA conversion, implementation costs, timing, and overlap between levers. Do not count the same revenue growth in both base case and a named initiative. Keep acquisition impact separate from organic performance.
 
-Prioritize the first 100 days post-close:
+If the inputs cannot support a numerical bridge, provide formulas, required data, and sensitivity ranges rather than fabricated values.
 
-**Days 1-30: Stabilize & Assess**
-- Management alignment and retention (sign employment agreements, set comp)
-- Quick wins — pricing, obvious cost cuts, low-hanging fruit
-- Detailed operational assessment by function
-- Customer communication plan
-- Set up reporting and KPI dashboards
+## 4. Test the First 100 Days
 
-**Days 31-60: Plan & Initiate**
-- Finalize strategic plan and communicate to organization
-- Launch top 3-5 value creation initiatives
-- Begin add-on M&A pipeline development
-- Hire for critical gaps
-- Implement new reporting cadence (weekly flash, monthly review, quarterly board)
+Use the 100-day lens to test execution realism, not to authorize actions.
 
-**Days 61-100: Execute & Measure**
-- First results from quick-win initiatives
-- First board meeting with operating metrics
-- Progress report on each value creation lever
-- Adjust plan based on early learnings
+### Days 1-30: stabilize and measure
 
-### Step 5: KPI Dashboard
+- align initiative owners;
+- verify baseline and reporting;
+- define customer and employee communication needs;
+- validate quick-win assumptions;
+- identify missing data and controls.
 
-Define the metrics that will track value creation:
+### Days 31-60: initiate
 
-| KPI | Current | Year 1 Target | Owner | Reporting Frequency |
-|-----|---------|---------------|-------|-------------------|
-| Revenue | | | CEO | Monthly |
-| EBITDA | | | CFO | Monthly |
-| EBITDA margin | | | CFO | Monthly |
-| New customer wins | | | CRO | Weekly |
-| Net retention | | | CRO | Monthly |
-| Employee turnover | | | CHRO | Monthly |
-| Cash conversion | | | CFO | Monthly |
+- select the few highest-confidence initiatives;
+- define owner, budget, milestones, and failure criteria;
+- identify critical hiring or capability gaps;
+- establish reporting cadence.
 
-### Step 6: Output
+### Days 61-100: measure and adapt
 
-- Word document or PowerPoint with:
-  - Executive summary (1 page)
-  - EBITDA bridge chart
-  - Value creation levers detail (1 page per lever)
-  - 100-day plan timeline
-  - KPI dashboard
-  - Accountability matrix (who owns what)
-- Excel model backing the EBITDA bridge
+- compare early results with the baseline;
+- quantify realized versus forecast impact;
+- stop, revise, or scale each initiative based on evidence.
 
-## Important Notes
+## 5. Define KPIs
 
-- Be realistic about timing — most PE value creation takes 12-24 months to show in financials
-- Quick wins matter for momentum and credibility, but don't over-rotate on cost cuts at the expense of growth
-- Management buy-in is critical — co-develop the plan, don't impose it
-- Track initiative-level P&L impact, not just top-line EBITDA — you need to know what's working
-- Add-on M&A is often the largest value creation lever — start the pipeline on Day 1
-- Always pressure-test assumptions with operating partners or industry experts
+| KPI | Current | Target and date | Owner | Frequency | Evidence source |
+|---|---:|---:|---|---|---|
+| Revenue | | | | | |
+| EBITDA | | | | | |
+| EBITDA margin | | | | | |
+| New customers | | | | | |
+| Net retention | | | | | |
+| Employee turnover | | | | | |
+| Cash conversion | | | | | |
+
+Use initiative-level KPIs so the bridge can be audited. A company-level EBITDA improvement alone does not prove which lever worked.
+
+## Contribution to 05-unit-economics.md
+
+Return:
+
+- reconciled baseline;
+- prioritized levers and mechanisms;
+- EBITDA bridge or formulas/sensitivities when data is missing;
+- 100-day execution-realism test;
+- KPI and ownership table;
+- timing, investment, dependencies, confidence, and counterevidence;
+- unknowns and diligence requirements.
+
+## Guardrails
+
+- Most value creation takes time; distinguish quick wins from multi-year change.
+- Do not over-rotate on cost cuts at the expense of durable growth.
+- Do not assume management buy-in or execution capacity without evidence.
+- Treat add-on M&A as a lever requiring later authorization and diligence, not an action from this Skill.
+- Record expert or operating-partner validation as a future diligence need; do not contact anyone.
+- Return findings to the parent Skill and never invoke another Skill or advance the Workflow.

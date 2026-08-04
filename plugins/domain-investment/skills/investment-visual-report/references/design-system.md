@@ -5,7 +5,7 @@
 ## 设计哲学
 
 - **投委读物，不是营销页**：克制、信息密度高、专业感。深色 header 压阵，白卡承载内容，语义色传递判断。
-- **一眼看懂结论**：评级和评分放最显眼处（header），用颜色编码强弱，让人 3 秒内 get 到 watch/pass/recommend。
+- **一眼看懂结论**：评级和评分放最显眼处（header），评级逐字采用 Memo 的 `Proceed / Conditional proceed / Watch / Pass`，用颜色编码强弱。
 - **数据可信感**：表格规整、来源标注、数字右对齐感。让投委信任这份分析。
 
 ## 配色系统（CSS variables）
@@ -40,7 +40,7 @@
 | 风险 / 短板 / 否决 / bear | `--red` | 低分维度、最弱缺口、bear 场景、红旗 |
 | 结构性矛盾 / 悖论 | `--orange` | 商业模式悖论这类"非简单好坏"的提示框 |
 
-评级 badge 的颜色跟随综合评分区间：Recommend(高)→绿，Watch/Track(中)→黄/金，Pass(低)→红。secondme 是 Watch，用的金黄 `#fbbf24`。
+评级 badge 的文字和语义颜色跟随 Memo 结论：Proceed→绿，Conditional proceed→黄/金，Watch→黄/金，Pass→红。综合评分只用于核对和展示，不能覆盖 Memo 的 exact verdict；若二者冲突，拒收 Memo 而不是在视觉层选择一个。
 
 ## 排版
 

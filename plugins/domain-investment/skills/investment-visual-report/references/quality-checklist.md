@@ -9,14 +9,16 @@
 - [ ] 把 .html 文件直接双击能在浏览器打开、样式完整（离线可用）
 
 ## 忠于 memo（最重要 — 不能改判断）
-- [ ] 评级（RECOMMEND/WATCH/PASS）与 memo 结论一致
+- [ ] `10-ic-memo.md` 是唯一结论源；01–09 只用于核对来源、完整性与冲突
+- [ ] 评级原样使用 memo 的 `Proceed / Conditional proceed / Watch / Pass`，没有压缩、改名或自行映射
 - [ ] 综合评分、各维度分值与评分卡节点的数字一致
 - [ ] 没有新增 memo 里没有的结论或数据
 - [ ] 缺数据的地方如实标"未验证/数据不足"，没有编造
+- [ ] 若 memo 与 01–09 在关键事实、评分、估值或结论上冲突，已拒收 memo，未生成第三套判断
 
 ## 配色与判断一致
 - [ ] 高分/利好/bull 用绿，中性/观察/base 用黄，低分/风险/bear 用红
-- [ ] header 评级 badge 和大评分的颜色跟随结论区间
+- [ ] header 评级 badge 的文字与颜色跟随 memo 原结论；大评分只做一致性展示，不反向决定评级
 - [ ] 没有"低分维度却标绿"这种色义矛盾
 
 ## 布局与响应式
@@ -26,10 +28,10 @@
 - [ ] 表格内容不被截断
 
 ## 完整性
-- [ ] memo 里有的关键节（摘要/竞品/估值/评分/风险/DD/thesis）都有对应 section
-- [ ] memo 里没有的节没有留空壳
-- [ ] 来源/数据缺口在末尾有交代
+- [ ] 15 个合同章节均有对应 section：Executive Summary、Investment Recommendation、Company/Product、AI-native Product Judgment、Market/Competitive、Business Model/Unit Economics、Technical/OSS/Ecosystem Moat、Valuation/Return、Scorecard、Risks/Veto、DD、Thesis/Watch、Sources/Unknowns/Gaps、Artifact Provenance、Completion Record
+- [ ] 必需章节缺失或过薄时已拒收 memo；只删除 memo 明确标为不适用的非必需展示组件
+- [ ] 反证、来源、未知项、已接受缺口和决策影响在末尾有交代
 
 ## 落盘
-- [ ] 文件名是投研 chain 定义的 `10-visual-report.html`
-- [ ] 落在用户项目工作区的研究项目夹内，**没有**写进 plugins/ 或技能库 repo
+- [ ] 文件名是投研 chain 定义的 `11-visual-report.html`
+- [ ] 落在用户项目的 `.asl/runs/<run-id>/artifacts/`，**没有**写进 plugins/ 或技能库 repo

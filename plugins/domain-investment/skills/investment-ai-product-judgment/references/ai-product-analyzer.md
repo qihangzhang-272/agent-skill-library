@@ -1,19 +1,10 @@
----
-name: ai-product-analyzer
-description: >
-  从 BP / Pitch Deck 商业判断逻辑出发，对 AI 产品进行完整评估。
-  触发方式：- "分析一下 [产品名]" - "评估 [产品]" - "[产品名] 怎么样" - "帮我看看这个 AI 产品" - "这个产品值得关注吗"
-  输出：11 段 BP 逻辑链评估 → 综合判定（好案例/反面教材/待观察）+ 最强论点 + 最弱缺口 + 建议叙事线。
-  分析前必须判断是否需要读取 references/；命中商业模式、Data Agent、叙事审计等场景时先读取对应 reference，再输出判断。
----
+# AI 产品判断内部方法
 
-# AI 产品分析器
-
-以 BP / Pitch Deck 商业判断逻辑为输出骨架，评估 AI 产品是否具备**可投资、可增长、可叙事**的商业成立性。输出 11 段 BP 逻辑链 + 综合判定。
+这是 `investment-ai-product-judgment` 的内部分析方法，不是另一个 Skill。以 BP / Pitch Deck 商业判断逻辑为输出骨架，评估 AI 产品是否具备**可投资、可增长、可叙事**的商业成立性。输出 11 段 BP 逻辑链 + 综合判定。
 
 ## Reference 路由（必须先执行）
 
-不要只依赖本 `SKILL.md` 的简写框架。开始分析前，先做一次 Reference 路由判断；命中任一条件时，必须先读取对应文件，再进入 BP 11 段分析。
+不要只依赖主 `SKILL.md` 的简写框架。开始分析前，先做一次内部 Reference 路由判断；命中任一条件时，必须先读取对应文件，再进入 BP 11 段分析。
 
 必须读取：
 
@@ -23,8 +14,8 @@ description: >
 
 可不读取：
 
-- 用户只要一句话快速判断，且不涉及上面任一专项。
-- 信息极少，无法支持专项诊断；此时要明确标注“轻量模式，未读取 references”。
+- Standalone 用户只要一句话快速判断，且不涉及上面任一专项；managed workflow 不适用这个缩写例外。
+- Standalone 信息极少且用户明确只要轻量判断；此时要明确标注“轻量模式，未读取 references”。Managed workflow 不允许用轻量模式绕过合同：输入过薄时必须拒收责任上游，或在合同允许且有界尝试耗尽后保留完整 gap 字段。
 
 输出要求：
 
@@ -34,7 +25,7 @@ description: >
 
 ## 分析流程
 
-1. 收集产品信息（官网、产品描述、公开数据）
+1. 消费已接受的事实包；standalone 使用时再收集必要的官网、产品描述和公开数据
 2. 执行 Reference 路由：判断并读取必要的 `references/` 文件
 3. 按 BP 11 段逐段分析——每段给出明确判断 + AI 特有检验；深度任务不得只给 2-5 句短评
 4. 无法从可用信息确认的内容标注"信息不足"，不猜测填充
@@ -143,9 +134,9 @@ description: >
 
 ---
 
-## References
+## Internal References
 
-这些 reference 是专项判断依据，不是附件。Reference 路由命中时必须读取：
+这些 reference 是当前 Skill 的专项判断依据，不是附件，也不是可调用的 Skill。Reference 路由命中时必须读取：
 
 - **商业模式深度诊断**（稀缺性反演、三层市场、时间炸弹、五形态）→ `references/business-model.md`
 - **Data Agent 专项评估**（六层上下文、25 分制、推理闭环）→ `references/data-agent.md`

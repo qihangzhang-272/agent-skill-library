@@ -7,7 +7,7 @@ description: Collect and organize source-backed facts before AI investment analy
 
 Collect the fact pack before investment judgment.
 
-This skill should run before the investment package when the materials are incomplete.
+Standalone use and managed-workflow use MUST apply the same fact, source, counterevidence, and unknown-handling standard. A workflow may bind inputs and an Artifact path, but it never permits a shorter analysis.
 
 ## Rules
 
@@ -17,7 +17,8 @@ This skill should run before the investment package when the materials are incom
 - Mark every key fact with source URL or `not found`.
 - Do not write the IC memo here.
 - Do not decide invest / pass here.
-- Hand off a fact pack to `investment-ai-product-judgment` through the `workflow-orchestrator` product-investment workflow.
+- Treat reference files as internal methods of this Skill, never as nested Skills or Agents.
+- Return the completed fact pack to the current Host owner; never invoke the next Skill.
 
 ## References
 
@@ -28,20 +29,51 @@ Read only when needed:
 - `references/deal-sourcing.md` for target discovery, company shortlists, founder/company outreach context, or sourcing logic.
 - `references/funding-digest.md` and `references/sector-seeds.md` for funding rounds, capital-market activity, sector watchlists, and deal-flow summaries.
 
+## Managed Workflow Contract
+
+When the frozen Workflow binds this node, consume exactly `node-output:source-intake`, including its accepted `01-source-intake.md` Artifact and Handoff. Do not proceed from an unaccepted or stale input.
+
+Produce exactly one independent node Artifact: `artifacts/02-fact-pack.md`.
+
+The direct consumer is `investment-ai-product-judgment`. It must accept all required quality obligations and handoff sections. If it rejects the fact pack, revise this node’s Artifact and return it for acceptance; do not let another Skill silently fill the missing research.
+
 ## Fact Pack Output
 
 ```text
+Status: READY / READY-WITH-GAPS / REWORK
 Research object:
 Object type:
 Core investment question:
 Materials reviewed:
+Reference methods used and why:
 Product facts:
 Business facts:
 Technical / OSS facts:
 Market and competitor facts:
 Funding and ownership facts:
 Customer / traction facts:
-Missing facts:
+Contradictions and counterevidence:
+Assumptions:
+Unknowns with attempts and decision impact:
+  attemptRefs:
+  boundedAttempts:
+    limit:
+    used:
+    exhausted:
+  reason:
+  decisionImpact:
+  fallback:
+  revisitTrigger:
 Source list:
-Ready for next node: yes/no
+Handoff for investment-ai-product-judgment:
 ```
+
+Each key fact must have an evidence reference. Keep company claims, third-party claims, verified facts, assumptions, and judgments visibly separate. Do not infer a missing metric from peers or treat `not found` as zero.
+
+Completion states:
+
+- `READY`: all required fact-pack obligations are satisfied.
+- `READY-WITH-GAPS`: a genuinely unavailable external fact remains; copy the Plan-frozen attempt limit, record used attempts and `exhausted=true`, then record attempt references, reason, decision impact, fallback, and revisit trigger.
+- `REWORK`: research, provenance, required coverage, or fact/claim separation is incomplete and can still be corrected.
+
+The Artifact is not complete merely because the file exists. After the consumer accepts it, return control to the current Host owner. Do not invoke `investment-ai-product-judgment`, an orchestrator, or any later Skill, and do not advance the Workflow yourself.

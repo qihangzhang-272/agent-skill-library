@@ -1,68 +1,83 @@
----
-name: deal-sourcing
-description: PE deal sourcing workflow — discover target companies, check CRM for existing relationships, and draft personalized founder outreach emails. Use when sourcing new deals, prospecting companies in a sector, or reaching out to founders. Triggers on "find companies", "source deals", "draft founder email", "check if we've seen this company", or "outreach to founder".
----
+# Deal-Sourcing Research Method
 
-# Deal Sourcing
+This is an internal research method of investment-research, not a standalone Skill and not an outreach Agent. Use it when the fact pack needs a target universe, company shortlist, ownership context, or sourcing rationale.
 
-## Workflow
+It may research and organize facts. It must not search private email or chat systems, draft or send outreach, create CRM records, or trigger any external write.
 
-This skill follows a 3-step sourcing pipeline:
+## 1. Define the Search Boundary
 
-### Step 1: Discover Companies
+Derive the boundary from the core investment question and supplied materials:
 
-Research and identify potential target companies based on the user's criteria:
+- sector and subsector;
+- revenue or size range;
+- growth and profitability profile;
+- geography;
+- ownership type, such as founder-owned, sponsor-backed, or carve-out;
+- product, customer, technology, or business-model constraints;
+- explicit exclusions.
 
-- **Sector/industry focus**: Ask the user what space they're looking in (e.g., "B2B SaaS in healthcare", "industrial services in the Southeast")
-- **Deal parameters**: Revenue range, EBITDA range, growth profile, geography, ownership type (founder-owned, PE-backed, corporate carve-out)
-- **Sources**: Use web search to find companies matching criteria. Look at industry reports, conference attendee lists, trade publications, and competitor landscapes
-- **Output**: A shortlist of companies with: name, description, estimated revenue/size, location, founder/CEO name, website, and why they fit the thesis
+In a managed workflow, do not add a second approval pause. If a material criterion is absent, record the ambiguity and its effect on the universe; use only a conservative, stated interpretation when the search can still proceed.
 
-### Step 2: CRM Check
+## 2. Discover Candidates
 
-Before outreach, check if the company or founder already exists in the firm's CRM:
+Search current, decision-relevant sources such as:
 
-- Search the user's email (Gmail) for prior correspondence with the company or founder
-- Search Slack for any internal mentions or prior discussions about the target
-- Ask the user: "Have you or your team had any prior contact with [Company]?"
-- Flag any existing relationships, prior passes, or known context
-- **Output**: For each company, note: "New" (no prior contact), "Existing" (prior correspondence found — summarize), or "Previously Passed" (if evidence of a prior pass)
+- company and product sites;
+- regulatory or corporate records;
+- industry associations and conference lists;
+- trade publications and credible sector reports;
+- competitor and customer ecosystems;
+- financing announcements and ownership records.
 
-### Step 3: Draft Founder Outreach
+Build a shortlist only from candidates that can be tied to evidence. For each candidate capture:
 
-Draft personalized cold emails to founders/CEOs:
+| Field | Requirement |
+|---|---|
+| Company | Legal or commonly verified name |
+| Description | One factual sentence about the business |
+| Size | Sourced value or explicitly labeled estimate/unknown |
+| Geography | Headquarters and relevant operating footprint |
+| Ownership | Founder, sponsor, public, subsidiary, or unknown |
+| Key person | Founder/CEO only when source-backed |
+| Website | Primary URL |
+| Fit | Which declared criteria the company meets |
+| Concern | Which criterion is weak, uncertain, or contradicted |
+| Evidence | URL/document, publication date, and capture date |
 
-- **Tone**: Professional but warm. Not overly formal — founders respond better to genuine, concise outreach
-- **Structure**:
-  1. Brief intro — who you are and your firm (ask user for their firm intro if not known)
-  2. Why this company caught your attention — reference something specific (product, market position, growth)
-  3. What you're looking for — partnership, not just a transaction
-  4. Soft ask — "Would you be open to a brief conversation?"
-- **Personalization**: Reference the company's specific product, recent news, or market position. Never use generic templates
-- **Length**: 4-6 sentences max. Founders are busy
-- **Voice matching**: If the user has sent prior outreach emails, study them to match their tone and style. Search Gmail for "sent" emails with keywords like "reaching out", "introduction", "partnership" to find examples
+Favor a smaller, well-supported universe over a long generic list. A missing size estimate is not permission to invent one.
 
-### Email Draft Guidelines
+## 3. Relationship Context
 
-- Subject line: Keep it short and specific. Reference the company or sector, not "Investment Opportunity"
-- No attachments on first touch
-- Include a clear but low-pressure CTA
-- Draft in Gmail if available, otherwise output as text for the user to copy
+Use only relationship history explicitly supplied as a managed input or approved project file. Classify it as:
 
-## Example Interaction
+- new — no supplied evidence of prior contact;
+- existing — supplied material proves prior contact;
+- previously-passed — supplied material records a prior pass and reason;
+- unknown — no authorized relationship data is available.
 
-**User**: "Find me founder-owned industrial services companies in Texas doing $10-50M revenue"
+Do not search Gmail, Slack, CRM, or another private system from this method. Do not ask the user to confirm every company during a managed run. Record missing relationship context as an unknown and let the Host owner decide whether a later authorized workflow should obtain it.
 
-**Assistant**:
-1. Searches web for industrial services companies in Texas matching the criteria
-2. Presents a shortlist of 5-8 companies with key details
-3. For each, checks Gmail/Slack for prior contact
-4. Drafts personalized outreach emails for the ones marked "New"
-5. Presents drafts for user review before sending
+## 4. Rank the Shortlist
 
-## Important Notes
+Rank candidates against the declared criteria, not by familiarity. For each candidate show:
 
-- Always present the shortlist for user review before drafting emails
-- Never send emails without explicit user approval
-- If the user's firm intro or investment criteria aren't clear, ask before drafting
-- Prioritize quality over quantity — 5 well-researched targets beat 20 generic ones
+- evidence-backed fit;
+- most important uncertainty;
+- source freshness;
+- what fact would change inclusion or priority;
+- whether the company is a target, comparable, ecosystem participant, or exclusion.
+
+Screening surfaces candidates; it does not produce an invest/pass conclusion.
+
+## Contribution to 02-fact-pack.md
+
+Insert these sections:
+
+- Sourcing boundary
+- Candidate universe and evidence
+- Inclusion / exclusion rationale
+- Ownership and relationship context
+- Unresolved entities or criteria
+- Priority follow-up facts
+
+Return the findings to investment-research. Do not invoke another Skill, compose emails, contact founders, or advance the Workflow.

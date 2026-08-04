@@ -17,6 +17,18 @@ Run this checklist after each research pass. Fix failures before handing off.
 | Gaps are explicit | Missing sources, failed fetches, and weak evidence are listed | Add gaps before handoff |
 | No temp leakage | Scratch JSON, debug txt, and tool dumps are either archived intentionally or removed | Clean the folder |
 
+## Managed Investment Checks
+
+Apply these in addition to the general checks when the frozen investment Workflow uses this Skill.
+
+| Check | Standard | If It Fails |
+| --- | --- | --- |
+| Input closure | Research object, supplied-material collection, and core question are all explicitly consumed | Mark `REWORK` and consume the missing input |
+| Single node Artifact | The only node Artifact is `01-source-intake.md`; raw captures are referenced evidence attachments | Merge duplicate node outputs into `01-source-intake.md` |
+| Claim separation | Verified facts, supplied-material claims, assumptions, contradictions, and unknowns are distinct | Mark `REWORK` and separate them |
+| Unknown completeness | Every unavailable required item has attempts, reason, impact, fallback, and revisit trigger | Add the missing fields before `READY-WITH-GAPS` |
+| Owner control | The Skill returns to the current Host owner without invoking the next Skill or creating another approval pause | Remove hidden routing or pause behavior |
+
 ## Surface Checks
 
 Use these only for surfaces that were actually searched.

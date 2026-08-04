@@ -1,8 +1,8 @@
 # Product And Investment Research Modes
 
-Use this reference for `product-research` and `investment-research`.
+Use this internal method for `product-research` and `investment-research`.
 
-The goal is to collect facts before `ai-product-analyzer` or `product-analysis` modes. Do not produce the final product judgment inside this skill.
+The goal is to collect facts before a later product or investment judgment. Do not produce that judgment inside this Skill and do not invoke the later Skill.
 
 ## Product Research
 
@@ -28,8 +28,10 @@ Research object:
 Primary facts:
 Missing facts:
 Source folder:
-Suggested handoff: ai-product-analyzer
+Suggested handoff scope: product judgment
 ```
+
+In the managed investment workflow, place this material inside the single `01-source-intake.md` Artifact rather than creating a second node Artifact.
 
 ## Investment Research
 
@@ -55,8 +57,10 @@ Verified facts:
 Unverified claims:
 Missing facts:
 DD priority candidates:
-Suggested handoff: product-analysis chain for OSS investment structured and visual output
+Suggested handoff scope: investment fact-pack construction
 ```
+
+In the managed investment workflow, place this material inside the single `01-source-intake.md` Artifact. Return control to the Host owner; workflow routing is outside this method.
 
 ## Evidence Discipline
 

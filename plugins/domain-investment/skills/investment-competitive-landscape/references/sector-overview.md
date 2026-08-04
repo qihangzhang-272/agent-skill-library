@@ -1,19 +1,18 @@
----
-name: sector-overview
-description: Create comprehensive industry and sector landscape reports covering market dynamics, competitive positioning, key players, and thematic trends. Use for client requests, sector initiations, thematic research pieces, or internal knowledge building. Triggers on "sector overview", "industry report", "market landscape", "sector analysis", "industry deep dive", or "thematic research".
----
+# Sector Overview Internal Method
 
-# Sector Overview
+This is an internal method of `investment-competitive-landscape`, not a standalone Skill. Use it to construct the sector portion of `04-competitive-landscape.md`; do not create another report, document, deck, spreadsheet, or approval step.
 
 ## Workflow
 
-### Step 1: Define Scope
+### Step 1: Derive Scope
 
 - **Sector / subsector**: What industry and how narrowly defined?
-- **Purpose**: Client report, internal research, pitch material, idea generation
-- **Depth**: High-level overview (5-10 pages) or deep dive (20-30 pages)
+- **Purpose**: Which investment question the sector analysis must answer
+- **Depth**: How much coverage is required to answer that question without unnecessary breadth
 - **Angle**: Neutral landscape vs. thematic thesis (e.g., "AI infrastructure buildout")
 - **Universe**: Public companies only, or include private?
+
+Use the accepted upstream Artifacts and frozen Workflow. In a managed run, do not stop to ask these questions again; mark a decision-critical ambiguity as `REWORK`, or state a conservative assumption when it does not distort the analysis.
 
 ### Step 2: Market Overview
 
@@ -62,27 +61,29 @@ For each company, brief profile:
 - Recent M&A transaction multiples
 - How does the sector compare to the broader market?
 
-### Step 5: Investment Implications
+### Step 5: Competitive Implications
 
 - Where are the best risk/reward opportunities?
 - What thematic bets can be expressed through this sector?
 - Key debates in the sector (bull vs. bear arguments)
 - Catalysts that could change the sector narrative
 
-### Step 6: Output
+### Step 6: Contribution to the Artifact
 
-- Word document or PowerPoint with:
-  - Market overview and sizing
-  - Competitive landscape map
-  - Company comparison table
-  - Valuation summary
-  - Key charts: market growth, share trends, valuation history
-- Excel appendix with detailed company data
+Write these sections into `04-competitive-landscape.md`:
+
+- market overview and sizing;
+- market structure and value chain;
+- competitor and company comparison;
+- dated trends, drivers, and headwinds;
+- relevant valuation context explicitly reserved as context, not a valuation conclusion;
+- competitive implications, counterevidence, assumptions, and unknowns.
 
 ## Important Notes
 
 - Source all market size data — cite the research firm or methodology
 - Distinguish between TAM hype and realistic addressable market
 - Sector overviews age fast — note the date and flag data that may be stale
-- Charts are essential — market size waterfall, competitive positioning matrix, valuation scatter plot
-- If for a client, tailor the "so what" to their specific situation (M&A target identification, competitive positioning, market entry)
+- Use a table or described positioning map when it materially clarifies the analysis; a separate chart file is not required.
+- Tailor the “so what” to the core investment question without producing an invest/pass decision.
+- Return findings to the parent Skill. Never invoke another Skill or advance the Workflow.

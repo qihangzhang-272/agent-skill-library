@@ -1,8 +1,8 @@
 # Sector Seed Companies Reference
 
-When the user specifies a sector but not specific companies, use these seed lists to bootstrap the company universe. These are starting points — always expand via `get_competitors_from_identifiers` and validate with `get_info_from_identifiers`.
+When the research scope specifies a sector but not specific companies, use these seed lists to bootstrap the company universe. They are hypotheses, not a current registry: expand them through current primary or licensed sources available to this Skill and validate entity status before use.
 
-> **All seeds below have been validated against S&P Global's identifier system.** If a seed fails to resolve, try the alias listed in parentheses before dropping it.
+> These names and status notes can become stale. Revalidate them for the run date. If a brand name fails to resolve, try the legal-name alias before dropping it and record the resolution source.
 
 ## Technology / Software
 
@@ -80,7 +80,7 @@ Seeds: Figure AI, Agility Robotics, Locus Robotics, Symbotic, Covariant
 ### Space / Aerospace
 Seeds: SpaceX, Relativity Space, Rocket Lab, Planet Labs, Astra
 
-## Identifier Alias Reference
+## Historical Entity Alias Reference
 
 Some well-known brand names don't match S&P Global's legal entity names. If a brand name returns empty results from `get_info_from_identifiers`, try the alias:
 
@@ -92,12 +92,12 @@ Some well-known brand names don't match S&P Global's legal entity names. If a br
 | Adept AI | Adept AI Labs Inc. | C_1780739313 |
 | xAI | X.AI LLC | C_1863863313 |
 
-> **Tip:** When a brand name fails, try `get_info_from_identifiers` with the legal name. If that also fails, the company may not be indexed yet. As a last resort, use the `company_id` directly as the identifier.
+> **Tip:** When a brand name fails, try the legal name. A source-specific identifier may be used only when that data source is already available to this Skill; otherwise record the unresolved entity as a gap.
 
 ## Notes
 
 - These lists skew toward US-based companies. For geographic filtering (Europe, Asia, etc.), the competitor expansion step is especially important.
-- For niche sub-sectors not listed here, ask the user for 2–3 example companies to use as seeds.
+- For niche sub-sectors not listed here, use 2–3 supplied examples when available; otherwise discover current anchor companies from authorized sources or state the universe limitation.
 - Always validate seeds are still active/relevant — companies pivot, merge, or shut down.
 - **Refresh cadence:** These seeds should be reviewed quarterly. AI sector seeds in particular change rapidly due to acquisitions and new entrants.
-- Seeds marked as subsidiaries or acquired will still resolve in `get_info_from_identifiers` (status = "Operating Subsidiary") but will return zero funding rounds. Skip these for funding queries.
+- Seeds marked as subsidiaries or acquired may resolve in entity databases while having no independent funding rounds. Exclude them from independent-company funding searches and explain why.

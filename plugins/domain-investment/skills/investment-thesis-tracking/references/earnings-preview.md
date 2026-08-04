@@ -1,77 +1,50 @@
----
-name: earnings-preview
-description: Build pre-earnings analysis with estimate models, scenario frameworks, and key metrics to watch. Use before a company reports quarterly earnings to prepare positioning notes, set up bull/bear scenarios, and identify what will move the stock. Triggers on "earnings preview", "what to watch for [company] earnings", "pre-earnings", "earnings setup", or "preview Q[X] for [company]".
----
+# Internal Method: Earnings Preview
 
-# Earnings Preview
+Use this method inside `investment-thesis-tracking` only when accepted inputs contain the required dated company, consensus, and thesis evidence. It does not launch a search or produce a separate earnings document.
 
-## Workflow
+## Verify the setup
 
-### Step 1: Gather Context
+State company/ticker, fiscal quarter and year, expected report date, as-of date, consensus-source date, current recommendation/conviction, and input revisions. Fiscal period must come from supplied company evidence, not inference from the calendar date.
 
-- Identify the company and reporting quarter
-- Pull consensus estimates via web search (revenue, EPS, key segment metrics)
-- Find the earnings date and time (pre-market vs. after-hours)
-- Review the company's prior quarter earnings call for any guidance or commentary
+If the relevant period or consensus basis is missing or stale, record the responsible evidence gap and return `REWORK` or a bounded `READY-WITH-GAPS` through the Host.
 
-Record the fiscal quarter and fiscal year exactly as reported by the company; do not infer it from the calendar date. Date-stamp every consensus data point and retain its source. Treat direct management quotations as verbatim only when copied from the transcript; otherwise label them as a paraphrase.
+## Establish expectations
 
-### Step 2: Key Metrics Framework
+Capture:
 
-Build a "what to watch" framework specific to the company:
+- revenue, EPS or profit, and guidance expectations;
+- segment, geography, product, or KPI expectations that matter to the thesis;
+- buy-side or management hurdle when explicitly evidenced;
+- prior guidance and the assumptions embedded in consensus;
+- recent operational signals already present in accepted inputs.
 
-**Financial Metrics:**
-- Revenue vs. consensus (total and by segment)
-- EPS vs. consensus
-- Margins (gross, operating, net) — expanding or contracting?
-- Free cash flow
-- Forward guidance vs. consensus
+Date every expectation and keep company guidance, market consensus, and analyst assumption separate.
 
-**Operational Metrics** (sector-specific):
-- Tech/SaaS: ARR, net retention, RPO, customer count
-- Retail: Same-store sales, traffic, basket size
-- Industrials: Backlog, book-to-bill, price vs. volume
-- Financials: NIM, credit quality, loan growth, fee income
-- Healthcare: Scripts, patient volumes, pipeline updates
+## Define thesis-linked watch items
 
-### Step 3: Scenario Analysis
+For each key item state:
 
-Build 3 scenarios with stock price implications:
+```text
+Metric / topic:
+Consensus or prior expectation:
+Affected thesis pillar:
+Bull signal:
+Base signal:
+Bear signal:
+Management question:
+Potential valuation / conviction impact:
+```
 
-| Scenario | Revenue | EPS | Key Driver | Stock Reaction |
-|----------|---------|-----|------------|----------------|
-| Bull | | | | |
-| Base | | | | |
-| Bear | | | | |
+## Scenario framing
 
-For each scenario:
-- What would need to happen operationally
-- What management commentary would signal this
-- Historical context — how has the stock moved on similar prints?
+Build bull/base/bear cases around actual drivers: demand, retention, price/mix, margin, unit cost, guidance, financing, or product execution. Do not define scenarios solely as arbitrary EPS beats or misses.
 
-### Step 4: Catalyst Checklist
+For each scenario, state expected evidence, thesis impact, valuation implication, and likely action. Price-reaction estimates are optional and must be clearly labeled as assumptions.
 
-Identify the 3-5 things that will determine the stock's reaction:
+## Risk and asymmetry
 
-1. [Metric] vs. [consensus/whisper number] — why it matters
-2. [Guidance item] — what the buy-side expects to hear
-3. [Narrative shift] — any strategic changes, M&A, restructuring
+Identify crowded expectations, easy-to-game KPIs, one-off comparability issues, seasonality, reporting-definition changes, and evidence that could invalidate the setup even if headline results beat.
 
-### Step 5: Output
+## Completion test
 
-One-page earnings preview with:
-- Company, quarter, earnings date
-- Consensus estimates table
-- Key metrics to watch (ranked by importance)
-- Bull/base/bear scenario table
-- Catalyst checklist
-- Trading setup: recent stock performance, implied move from options
-
-## Important Notes
-
-- Consensus estimates change — always note the source and date of estimates
-- Label valuation ratios as `LTM` or `NTM`. Calculate LTM from the latest four reported quarters and NTM from the next four quarterly estimates; do not substitute an unlabeled annual figure.
-- Show the inputs and intermediate arithmetic for multi-step calculations. Use one common start and end date when comparing stock returns across peers.
-- "Whisper numbers" from buy-side surveys are often more relevant than published consensus
-- Historical earnings reactions help calibrate expectations (search for "[company] earnings reaction history")
-- Options-implied move tells you what the market expects — compare to your scenarios
+The preview is ready when period/date/source lineage is explicit, expectations are separated by type, watch items map to thesis pillars, and each scenario has observable signals and actions. Its output is a subsection of `09-thesis-tracking.md`.

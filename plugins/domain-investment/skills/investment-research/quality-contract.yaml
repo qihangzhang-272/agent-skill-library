@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:36c15fd2abdcae55551f00448b71bc206bede9d0a5bbf54f1777b4fda0b8cc9f
+  digest: sha256:1c3d40f55f553bba9f995879e4821ffac4e75c8b836b50b345aaa956ef04b778
 spec:
   subject:
     skillId: investment-research
@@ -36,6 +36,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/02-fact-pack.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

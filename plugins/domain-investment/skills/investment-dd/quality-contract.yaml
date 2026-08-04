@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:e729361a2473c13e1d62db4bd3cb42d265ad9b175ea4ecb0ecb1d1d10dfba5d1
+  digest: sha256:f50d99d446ae3369564a625aa6bd5b1cf25956002040fd522e5260959321a874
 spec:
   subject:
     skillId: investment-dd
@@ -30,6 +30,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/08-dd-questions.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

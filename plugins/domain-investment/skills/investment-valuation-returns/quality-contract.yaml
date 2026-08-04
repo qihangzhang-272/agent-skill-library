@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:cc4538174d25836b12b7f236cb2455cc2b9aa486f79373aff55b566cf9a504af
+  digest: sha256:881d125981d38ec2130fb2eb95ad520917afae94e0b3843de66566e91be0f4b9
 spec:
   subject:
     skillId: investment-valuation-returns
@@ -33,6 +33,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/07-valuation-returns.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

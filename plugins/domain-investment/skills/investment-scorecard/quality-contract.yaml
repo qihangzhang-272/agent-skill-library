@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:215313e4a6a25f7ca0c5586855f0683ed618c7ee1a70fea4fc2111d6ce84b0b7
+  digest: sha256:6deab603142752b608da19a7a770ae6983421d5f9d68812d0273f73c6e7214c8
 spec:
   subject:
     skillId: investment-scorecard
@@ -39,6 +39,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/06-investment-scorecard.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

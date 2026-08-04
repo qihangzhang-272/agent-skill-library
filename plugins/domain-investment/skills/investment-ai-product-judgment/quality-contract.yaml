@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:8b383d4cfacce77662c9693d7d4f93e529c52b58c31ce537d63fa836febda97f
+  digest: sha256:ff0da587e7b5c07bc0f740cdf56d5f38b1b78a40a34249044cb54fb66a424234
 spec:
   subject:
     skillId: investment-ai-product-judgment
@@ -33,6 +33,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/03-product-judgment.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

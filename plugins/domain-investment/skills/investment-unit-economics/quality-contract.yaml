@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:4d99b66e4e02aa41fa3bc8643132647d953f3532b1e3230c5ac370d375083ec3
+  digest: sha256:e6cc34b541e3b3d451c607f27b10c834816845bfadb6b72cdf0e4ec41048a8c3
 spec:
   subject:
     skillId: investment-unit-economics
@@ -30,6 +30,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/05-unit-economics.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

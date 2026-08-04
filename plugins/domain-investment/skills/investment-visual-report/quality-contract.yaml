@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:9fd269f0b6be13d2d7ee83c3388a1e3d3290a6c8a0e7b78d8eb7f01ea50dce12
+  digest: sha256:71d9a822b6d2809c398032248e6cc58c4110813ac1b8da6d14d2e4a36717862e
 spec:
   subject:
     skillId: investment-visual-report
@@ -33,6 +33,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/11-visual-report.html，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false
@@ -41,6 +42,7 @@ spec:
       requirement: 仅接收引用、revision、digest、可接收状态和有效合同结果齐全的 01–10 Artifact
       required: true
       verifier: harness
+      harnessCheck: accepted-input-preflight
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false
@@ -80,7 +82,7 @@ spec:
     - id: offline-single-file-structure
       requirement: 输出为指定路径的单一 HTML，CSS 和必要脚本内联，无运行时外部依赖，并包含十五个命名 section 的结构
       required: true
-      verifier: harness
+      verifier: consumer
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

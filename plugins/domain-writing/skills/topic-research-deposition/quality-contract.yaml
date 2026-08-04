@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:5a486688be2452107691ea210c1fd1474f60b6aedd671472c4f064ba260fb397
+  digest: sha256:988bcdf95585a8ef7fb3ddf45863b8e76a36ef12fbb1cb3ebe3f604ad8ec7c5c
 spec:
   subject:
     skillId: topic-research-deposition
@@ -42,6 +42,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/01-source-intake.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

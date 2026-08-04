@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:daae311a997932c200d6e0eb0eae578aff2f17313b60ad1966c6307f5809f33d
+  digest: sha256:afbbee4688f50074fa6f04630095a5d2c0a05714cdf4f225e06fc09a115265dd
 spec:
   subject:
     skillId: investment-thesis-tracking
@@ -45,6 +45,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/09-thesis-tracking.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

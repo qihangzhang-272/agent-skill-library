@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:c444ab9022d42e7086eac14e22f432ccd8c048ebe63aef2615aa7b37171d56a8
+  digest: sha256:3ee6f779b30254de4ec6efb95181c7d5b0d7f2c00596c24af7dbe0be9e80ed11
 spec:
   subject:
     skillId: investment-ic-memo-writer
@@ -30,6 +30,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/10-ic-memo.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false
@@ -38,6 +39,7 @@ spec:
       requirement: 仅在 01–09 Artifact 引用、revision、digest、可接收状态和有效合同结果齐全时组装 Memo
       required: true
       verifier: harness
+      harnessCheck: accepted-input-preflight
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

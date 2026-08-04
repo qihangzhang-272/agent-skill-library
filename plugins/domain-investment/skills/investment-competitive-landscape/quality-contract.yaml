@@ -5,7 +5,7 @@ metadata:
   revision: 1
   createdAt: 2026-08-04T14:33:20.511Z
   createdBy: agent:contract-drafter
-  digest: sha256:be342f0567a48d07133ca1adba9a0965f6ca176ebd19269c650633eb38fd98b4
+  digest: sha256:620f534bdf8e906326d5f573035055b4c7b2c406d3f7cd12d122556bc2eed04d
 spec:
   subject:
     skillId: investment-competitive-landscape
@@ -39,6 +39,7 @@ spec:
       requirement: 输出唯一独立 Artifact artifacts/04-competitive-landscape.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
       required: true
       verifier: harness
+      harnessCheck: artifact-envelope
       completion:
         answerRefRequired: true
         evidenceRefsRequired: false

@@ -25,9 +25,10 @@ Do not use this skill to replace locally maintained skills:
 
 - `ai-product-analyzer`
 - `topic-research-deposition`
-- `public-account-writing-style`
 
 Those are source skills and should remain local.
+
+`human-writing` is a maintainer-approved vendored upstream release. Keep its vendored directory byte-for-byte aligned with a pinned upstream release; update it by whole-directory replacement, never by local content patches.
 
 ## Core Rule
 
@@ -38,7 +39,7 @@ Only copy an external skill into this repository when all of these are true:
 1. The library maintainers explicitly promote it from reference to core capability.
 2. The license and maintenance boundary are clear.
 3. The copied files are small, self-contained, and actually needed at runtime.
-4. The external source cannot be used cleanly through upstream install instructions.
+4. The external source cannot be used cleanly through upstream install instructions, or an approved domain workflow must distribute a pinned release as a local runtime.
 
 Otherwise, keep only the GitHub source, role, and usage notes.
 
@@ -55,13 +56,13 @@ Read `references/github-skill-index.md` for the current curated list. Source URL
 1. Identify the domain: writing, publishing, product/investment, frontend/design, or skill discovery.
 2. Find the matching source in the index.
 3. Prefer upstream install or direct GitHub reference in the target project.
-4. If a workflow depends on the source, reference the repo name and expected role instead of copying its files.
+4. If a workflow depends on the source, reference the repo name and expected role instead of copying its files unless the index records a maintainer-approved exact vendoring exception.
 5. If the library maintainers repeatedly rewrite or customize the external skill, create a new locally maintained skill instead of patching the external copy.
 
 ## Maintenance
 
 - Keep this skill compact.
 - Keep detailed external notes in the reference file, not in `SKILL.md`.
-- Remove local external folders after their source is represented in the index.
+- Remove local external folders after their source is represented in the index, except when the index records a maintainer-approved vendored runtime.
 - Do not list every interesting AI repo. Only include sources that have already affected the library's workflows or are likely to be reused.
 - Validate indexed URLs as reachable repo roots. Do not rewrite them to `tree/.../SKILL.md` unless the workflow specifically needs that path.

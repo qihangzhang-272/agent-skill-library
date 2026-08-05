@@ -14,11 +14,11 @@
 | **Role** | 一句话：它提供什么能力 | 用动作描述（"把 Markdown 转成公众号格式"），不要抄它的营销语 |
 | **Status** | 见下方"二、Status 阶梯" | 决定它和本库的关系深度 |
 | **Domain** | 见下方"三、归 Domain 的门槛" | **默认留空 / 未归类** |
-| **Notes** | 怎么用、边界、license 风险、何时别用 | 写"别让它覆盖 public-account-writing-style"这类护栏 |
+| **Notes** | 怎么用、边界、license 风险、何时别用 | 写清它是否覆盖现有 owner、是否原样迁入、固定的 release/commit 和本地目标路径 |
 
 ## 二、Status 阶梯（外部技能和本库的关系深度）
 
-一个外部技能随着你用得越深，Status 逐级升高。**不靠复制晋升，靠提炼晋升**：
+一个外部技能随着你用得越深，Status 逐级升高。默认不靠复制晋升，而靠提炼晋升；维护者明确批准的无损迁入是例外：
 
 | Status | 含义 | 何时用 |
 | --- | --- | --- |
@@ -26,9 +26,9 @@
 | `installed external capability` | 已在本机/项目安装，运行时真在调用 | 像 agent-reach 这种已成为某 chain 默认依赖的 |
 | `skill collection` | 一个含多技能的合集，按需取用 | 如 taste-skill、anthropics/skills |
 | `absorbed reference` | 它的判断/规则已被提炼进某个本地瓦技能 | 提炼进了 `domain-*/skills/.../references/` |
-| `migrated reference source` | 部分文件已迁入某 domain，上游留作更新源 | 如 financial-services 迁入 domain-investment |
+| `migrated reference source` | 部分或完整运行目录已迁入某 domain，上游留作更新源 | 如 financial-services 的选择性迁入，或 `human-writing` 的固定 release 原样迁入 |
 
-晋升原则（沿用 SKILL.md 的 Promotion Rule）：一个外部源要从"链接"变成"本地技能"，**必须是你反复用过、把稳定可复用的判断用自己的话提炼出来**之后。Do not promote by copying. Promote by distilling.
+晋升原则（沿用 SKILL.md 的 Promotion Rule）：通常只有反复使用并把稳定判断提炼成本地能力后才晋升。若维护者明确要求原样迁入，必须同时记录许可证、固定 release/commit、目标路径、替代关系和无本地补丁边界；后续升级采用整目录替换。
 
 ## 三、归 Domain 的门槛（关键 -- 别随手贴标签）
 
@@ -55,4 +55,4 @@ Domain 字段不是"看起来像哪个领域就标哪个"。**门槛**：
 
 - 保持 `github-skill-index.md` 紧凑，详细笔记放 Notes 列，不要写进 skill-index 的 SKILL.md。
 - 定期用 `git ls-remote --symref <repo> HEAD` 验证 URL 仍可达，并更新文件顶部的"Last repo-root verification"日期。
-- 若某外部技能被提炼进了本地 domain，把它的 Status 升级为 `absorbed`/`migrated`，并在 Notes 里写明进了哪个 domain、哪个 commit。
+- 若某外部技能被提炼或经批准原样迁入本地 domain，把它的 Status 升级为 `absorbed`/`migrated`，并在 Notes 里写明 domain、release/commit、目标路径和维护边界。

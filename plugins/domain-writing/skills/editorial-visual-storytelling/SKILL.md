@@ -36,7 +36,7 @@ description: >
 
 ### 1. 读取语义源
 
-读取 `01.5-editorial-judgment.md`、`04-revised.md`、`05-formatted.md`、研究截图和项目视觉规范。`04-revised.md` 仍是正文语义源；本技能不得改写观点。
+读取 `04-revised.md`、`05-formatted.md`、研究截图和项目视觉规范。`04-revised.md` 仍是正文语义源；本技能不得改写观点。
 
 ### 2. 写视觉编辑判断
 

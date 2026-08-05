@@ -6,24 +6,28 @@ Source URLs intentionally point to GitHub repository roots. A source may be a pu
 
 **Domain 列**：表示该外部技能是否已融入某条 domain 的工作流（chain）。门槛见 `registration-guide.md` -- 只有真进了某条 chain 才标 domain，否则留空（`-`）表示未归类。可选值：`writing` / `investment` / `capital-markets` / `product` / `commons`（绝对通用）/ 逗号分隔（跨领域）/ `-`（未归类）。
 
-Last repo-root verification: 2026-07-30 via `git ls-remote --symref <repo> HEAD`. All listed GitHub repositories resolved successfully at verification time.
+Last repo-root verification: 2026-08-04 via GitHub API / `gh repo view`. `KKKKhazix/human-writing` and the three WeChat corpus sources added in this update resolved successfully; previously indexed roots retain their 2026-07-30 verification.
 
 ## Writing And Style
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
-| `https://github.com/op7418/Humanizer-zh` | Chinese text naturalization and AI-pattern cleanup | reference | - | 清理参考，未进 chain。Do not let it override `public-account-writing-style`. |
-| `https://github.com/yzhao062/agent-style` | Human-like agent writing/style reference | reference | - | User-added source. 风格参考，规则尚未提炼进 `public-account-writing-style`，暂不归 domain。 |
+| `https://github.com/KKKKhazix/human-writing` | 通用中文创作与改稿的唯一正文写作 owner | migrated reference source | writing | MIT；正式版 `v1.0.0`，tag commit `d86bd7b3c8a77aa4b8ac69778d671a7bafcbdbe9`。从该 tag 原样迁入 `plugins/domain-writing/skills/human-writing/` 并接入 `wechat-writing` chain；本地不修改正文、references、检查脚本或 OpenAI 配置。升级时整目录替换并重新核验 hash。 |
+| `https://github.com/op7418/Humanizer-zh` | Chinese text naturalization and AI-pattern cleanup | reference | - | 清理参考，未进 chain。不得覆盖或二次改写 `human-writing`。 |
+| `https://github.com/yzhao062/agent-style` | Human-like agent writing/style reference | reference | - | User-added source. 仅作风格参考，未合并进 `human-writing`，暂不归 domain。 |
 
 Local archive without GitHub source:
 
 - `chinese-natural-voice-revision-universal.zip` was previously imported as a complete package. Without a stable GitHub source, it should not remain as a primary indexed external skill.
 
-## WeChat Publishing
+## WeChat Corpus And Publishing
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
 | `https://github.com/JimLiu/baoyu-skills` | 公众号排版、图像生成、插图、封面、信息图、SVG 图解、知识漫画、HTML 与发布 | migrated reference source | writing | 经维护者明确晋升，MIT；从 commit `6b7a2e417500561a5ecdd0b168332f4142584617` 原样迁入 `domain-writing`：`baoyu-format-markdown`、`baoyu-image-gen`、`baoyu-article-illustrator`、`baoyu-infographic`、`baoyu-diagram`、`baoyu-comic`、`baoyu-cover-image`、`baoyu-markdown-to-html`、`baoyu-post-to-wechat`、`baoyu-compress-image`。保留上游许可证，排除 `node_modules` 与个人配置；项目偏好继续放 `.baoyu-skills/`。 |
+| `https://github.com/mcncarl/yichen-skills` | 公众号账号级批量语料工作流参考 | reference | - | 自定义 Personal Learning and Non-Commercial Use License：未经书面许可，不得商业或业务运营使用，不得作为公开技能集合、商业交付或公司内部 toolkit 再打包。本库未复制 `yichen-wechat-mp-batch-exporter`；只在独立需求分析后编写本地 corpus contract。核验 commit `28066c9f91cecd819784fc70bf882473a4fd29fa`。 |
+| `https://github.com/wechat-article/wechat-article-exporter` | 公众号搜索、历史同步、正文批量采集和多格式导出的外部运行时 | reference | writing | MIT；作为 `wechat-account-corpus-research` 的可选外部适配器，保持外置，不复制实现。2026-08-04 已通过公开 endpoint 的 API 可达与已知 URL HTML smoke；账号历史仍需用户登录后另验。公共端点的登录、格式、会员与频率限制会变化，运行时读取当前官方文档。核验 commit `47da63edfd5c7e7aabaf44c96faf88e0f6b8290f`。 |
+| `https://github.com/wechat-article/wxdown-service` | 阅读量与评论增强采集所需的本地凭据辅助服务 | reference | - | 当前源码仓库没有 LICENSE；不得 vendoring。涉及 mitmproxy 根证书、系统代理和明文短期凭据，已明确排除出 `wechat-account-corpus-research` 默认能力。核验 commit `28feff2095359acb158f856c40b357e77b686d2c`。 |
 
 ## Visual Storytelling And Diagramming
 
@@ -78,4 +82,4 @@ Local archive without GitHub source:
 
 An external source can move from this index into a locally maintained skill only after the library maintainers have repeatedly used it and distilled stable, reusable judgment.
 
-Do not promote by copying. Promote by distilling.
+Default promotion is by distilling, not copying. A maintainer-approved vendored upstream release is the narrow exception: pin the release and commit, preserve the license, keep the vendored directory unmodified, and upgrade it by whole-directory replacement.

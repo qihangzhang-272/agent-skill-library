@@ -44,7 +44,7 @@ plugins/
 
 | 领域 | 瓦技能 |
 | --- | --- |
-| `domain-writing` | `public-account-writing-style` · `topic-research-deposition` · `baoyu-format-markdown` · `baoyu-image-gen` · `baoyu-article-illustrator` · `baoyu-infographic` · `baoyu-diagram` · `baoyu-comic` · `baoyu-cover-image` · `baoyu-markdown-to-html` · `baoyu-post-to-wechat` · `baoyu-compress-image` |
+| `domain-writing` | `wechat-account-corpus-research` · `topic-research-deposition` · `human-writing` · `baoyu-format-markdown` · `editorial-visual-storytelling` · `baoyu-image-gen` · `baoyu-article-illustrator` · `baoyu-infographic` · `baoyu-diagram` · `baoyu-comic` · `baoyu-cover-image` · `baoyu-markdown-to-html` · `baoyu-post-to-wechat` · `baoyu-compress-image` |
 | `domain-investment` | `investment-research` · `investment-ai-product-judgment` · `investment-competitive-landscape` · `investment-unit-economics` · `investment-financial-model-builder` · `investment-scorecard` · `investment-valuation-returns` · `investment-dd` · `investment-thesis-tracking` · `investment-ic-memo-writer` · `investment-visual-report` |
 | `domain-capital-markets` | `public-equity-coverage-writer` · `investment-chart-pack` · `financial-company-profile` · `investment-banking-pitch-deck` · `sell-side-ma-materials` · `financial-artifact-qc` |
 | `domain-product` | `ai-product-analyzer` |
@@ -54,7 +54,7 @@ plugins/
 调用链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
 
 ```
-公众号选题 → agent-reach 搜索 → 公众号编辑写作 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → HTML 预览 → 草稿箱发布
+公众号选题 → [按需：账号历史/对标账号语料] → agent-reach 搜索 → human-writing 写作与改稿 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → HTML 预览 → 草稿箱发布
   chain: wechat-writing.md
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
@@ -106,7 +106,7 @@ node scripts/validate-repository.mjs --base HEAD
 ## 边界
 
 - `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
-- `external-skill-index` 是外部技能统一收纳入口。Baoyu 中经过维护者晋升的 10 个公众号与内容视觉技能已按 MIT 许可迁入 `domain-writing`，包含 Claude Code 可调用的 `baoyu-image-gen` 图像后端；索引保留上游 commit 与边界。agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等仍保留为外部来源。
+- `external-skill-index` 是外部技能统一收纳入口。`human-writing v1.0.0` 与 Baoyu 中经过维护者晋升的 10 个公众号及内容视觉技能已按 MIT 许可原样迁入 `domain-writing`；`human-writing` 是 `wechat-writing` chain 的唯一正文写作 owner，本库不对其上游技能正文打补丁。`wechat-account-corpus-research` 只维护独立编写的数据与授权契约，外部 exporter、受限参考源和高风险增强服务的 URL、commit、许可证与调用边界只在索引维护。agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等仍保留为外部来源。
 - `oss-investment-scorecard` 已降级为 `investment-scorecard` 的内部 reference，不要直接调用旧入口。
 - 投资与资本市场领域都只放瓦技能；所有固定链都由 `workflow-orchestrator` 路由，不设第二个调度器。
 - 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。

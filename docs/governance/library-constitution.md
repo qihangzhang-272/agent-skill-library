@@ -113,7 +113,7 @@ Claude Code plugin 既是分发层也是源内容层——三层架构下，源�
 - 不允许把 `skills/`、`agents/`、`hooks/` 放进 `.claude-plugin/`。
 - 插件不得引用插件目录外部文件；需要的技能文件必须复制进插件目录。
 - 插件必须写 semver 版本号；只要某个插件包含的技能正文、支撑文件或 manifest 变化，就必须 bump 对应插件版本，并同步 marketplace 中的版本。
-- 当前默认插件范围：`foundation` 分发元层技能，`orchestrator` 分发工作流路由入口，`skill-index` 分发外部 GitHub 技能源索引，`domain-writing` 分发选题调研和公众号编辑写作技能，`domain-investment` 分发 AI 投资 IC Memo 工作包，`domain-product` 分发产品洞察技能。不为"以后可能用"预建空插件——需要跨领域共享能力时，用 `skill-architecture` 元技能按需新建。
+- 当前默认插件范围：`foundation` 分发元层技能，`orchestrator` 分发工作流路由入口，`skill-index` 分发外部 GitHub 技能源索引，`domain-writing` 分发账号语料、选题调研和公众号编辑写作技能，`domain-investment` 分发 AI 投资 IC Memo 工作包，`domain-product` 分发产品洞察技能。不为"以后可能用"预建空插件——需要跨领域共享能力时，用 `skill-architecture` 元技能按需新建。
 
 字段级约定（marketplace.json / plugin.json 的具体字段含义和记录粒度）见 `catalog-schema.md`。
 

@@ -14,6 +14,8 @@ Default search and access tool: `agent-reach`.
 
 Twitter/X, Reddit, Exa/web, 微信公众号, GitHub, Hacker News, YouTube, podcasts, papers, and other platform searches are treated as agent-reach reach surfaces. Do not turn them into a required sequence. Use direct platform commands only as fallback when agent-reach is unavailable, incomplete, or the user explicitly asks for a direct platform command.
 
+公众号账号级历史、批量 URL 和对标账号语料由 `wechat-account-corpus-research` 负责。用户明确要求这些能力时，先调用该瓦技能，再消费其 manifest；本技能不要平行实现第二套账号抓取。
+
 `SKILL.md` is the router. Load only the references required by the selected mode. Do not load all WeChat, product, and fallback command references together.
 
 ## Mode Selection
@@ -24,7 +26,7 @@ Choose one mode before creating folders or searching.
 | --- | --- | --- |
 | `general-research` | General research, background checks, source collection, concept definition, broad web/social search | `references/agent-reach-search.md`, `references/quality-checklist.md` |
 | `writing-research` | Research for an article that is not necessarily WeChat-specific | `references/agent-reach-search.md`, `references/quality-checklist.md` |
-| `wechat-writing-research` | 公众号选题、第 0 步、需要微信素材、公众号爆款逻辑、图文截图和后续交给 `public-account-writing-style` | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
+| `wechat-writing-research` | 公众号选题、第 0 步、需要微信素材、公众号爆款逻辑、图文截图和后续交给 `human-writing` | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
 | `product-research` | Facts needed before `ai-product-analyzer`: product, company, pricing, customers, competitors, demo, docs, GitHub, traction | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
 | `investment-research` | Facts needed before product-analysis structured output: financing, team, market, OSS metrics, commercial traction, DD evidence | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
 
@@ -38,6 +40,7 @@ If the user asks for product analysis, product visual report, investment report,
 clarify research objective
 -> choose mode
 -> create mode-appropriate research folder
+-> [if account history or benchmark corpus is requested] consume wechat-account-corpus-research output
 -> search with agent-reach
 -> save raw source material by source/platform
 -> screenshot or archive evidence according to the selected mode
@@ -62,11 +65,12 @@ Next suggested handoff:
 
 Handoff rules:
 
-- `writing-research` and `wechat-writing-research` can hand off to `public-account-writing-style`.
-- 交接给 `public-account-writing-style` 后，该 skill 会先做**编辑判断**（竞争解释 / 反证 / 未知项 / 暂时结论 / 删除哪些材料，落盘 `01.5-editorial-judgment.md`），再选框架起草。编辑判断在写作之前完成，比选框架更重要。
+- `writing-research` and `wechat-writing-research` can hand off to `human-writing`.
+- 进入完整 `wechat-writing` chain 时，写作阶段的文件名与交接条件由 chain 负责；本技能只提供研究过程包，不为 `human-writing` 增加第二套框架或写作规则。
 - `product-research` can hand off to `ai-product-analyzer`.
 - `investment-research` can hand off to `workflow-orchestrator` product-analysis chain for OSS investment structured and visual output.
-- Do not continue into the next skill until the user says to continue.
+- 独立调用本技能时，完成 coverage report 后停止，等待用户决定是否继续。
+- 用户已明确要求运行完整 `wechat-writing` chain 时，由 chain 管理交接；只读研究门禁通过后不额外暂停，但新增登录、扩范围或发布授权仍必须单独确认。
 
 ## Storage Rules
 
@@ -84,7 +88,8 @@ Handoff rules:
 | Treating a platform list as a required search sequence | Use agent-reach as the default reach layer; platforms are surfaces, not workflow nodes. |
 | Losing existing WeChat experience while generalizing | Load `wechat-writing-research.md` and `wechat-viral-logic.md` when mode is WeChat. |
 | Summarizing sources instead of depositing them | Save raw source material first; analysis belongs to the next skill. |
-| Continuing into writing or product analysis automatically | Stop after coverage report and wait for the user. |
+| Rebuilding account-history crawling inside this skill | Call `wechat-account-corpus-research`, then consume its manifest and corpus. |
+| Continuing after a standalone research call | Stop after coverage report; only an explicitly requested end-to-end chain may continue through its declared handoff. |
 | Claiming agent-reach was used when it was not available | State the actual fallback command or tool used. |
 
 ## Reference Files

@@ -2,7 +2,7 @@
 
 Use this reference only for `wechat-writing-research`.
 
-This mode preserves the original public-account research experience: search is for article writing, not generic fact lookup. It collects raw material, screenshots, and writing ammunition before handing off to `public-account-writing-style`.
+This mode preserves the original public-account research experience: search is for article writing, not generic fact lookup. It collects raw material, screenshots, and writing ammunition before handing off to `human-writing`.
 
 ## Pre-Search Confirmation
 
@@ -74,7 +74,9 @@ clarify research objective
 -> save raw source material by source/platform
 -> screenshot important URLs（强制，见 Screenshots 节）
 -> quality check
--> report coverage and stop for next instruction
+-> report coverage
+-> [standalone call] stop for next instruction
+-> [explicit end-to-end chain, no new authorization or blocking gap] hand off to human-writing
 ```
 
 ## Source Files
@@ -108,7 +110,7 @@ Do not write "这篇值得关注因为..." in source files. That is analysis, no
 
 ## Completion Report
 
-After research, stop and report:
+After research, always report:
 
 ```text
 ## [topic] 素材沉淀完成
@@ -120,7 +122,7 @@ Search tool: agent-reach
 截图:（必须列出 screenshots/ 里的文件；空目录要说明原因）
 五维度覆盖:
 覆盖盲区:
-下一步建议: 是否进入编辑判断 + 起草？
+下一步交接: standalone=等待用户决定 / end-to-end chain=进入 human-writing
 ```
 
-Do not continue into drafting until the user says to continue.
+Standalone calls must stop after the report. In an explicitly requested end-to-end `wechat-writing` chain, continue through the declared handoff when coverage passes and no new login, scope expansion, material gap, or publishing authorization is required.

@@ -58,7 +58,7 @@
 例如写作、产品和工作流：
 
 - `ai-product-analyzer` 是本地维护的产品洞察技能，进入 `domain-product` plugin。
-- `topic-research-deposition` 和 `public-account-writing-style` 是本地维护的写作链路技能，进入 `domain-writing` plugin。
+- `wechat-account-corpus-research` 与 `topic-research-deposition` 是本地维护的写作链路瓦技能；`human-writing` 是经维护者批准、按 MIT 许可证原样迁入的上游写作瓦技能。三者进入 `domain-writing` plugin；账号 corpus 只在用户要求历史或对标账号时作为可选前置节点。
 - `external-skill-index` 是本库的外部 GitHub 技能源索引，进入 `skill-index` plugin。
 - `domain-investment` 是本库的投资决策工作包，包含研究、产品判断、竞争格局、单位经济、财务模型、评分、估值、DD、跟踪、IC Memo 写作和可视化研报节点。
 - `domain-capital-markets` 承接公开市场首次覆盖、股票研究、金融图表、公司资料、投行演示、卖方 M&A 材料与金融交付物 QC；它只提供瓦技能，固定链仍由 orchestrator 路由。

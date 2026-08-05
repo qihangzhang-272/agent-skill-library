@@ -1,15 +1,15 @@
 {
   "name": "domain-writing",
-  "version": "0.9.2",
-  "description": "公众号写作领域：素材沉淀、编辑写作、去 AI 味审校、Visual Copy Desk、视觉叙事、Markdown 排版、正文插图、清晰架构图、知识漫画、HTML 预览与草稿箱发布。",
+  "version": "0.10.0",
+  "description": "公众号写作领域：账号语料、素材沉淀、human-writing 中文创作与改稿、Visual Copy Desk、视觉叙事、Markdown 排版、正文插图、清晰架构图、知识漫画、HTML 预览与草稿箱发布。",
   "author": {
     "name": "Agent Skill Library Maintainers"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Domain Writing",
-    "shortDescription": "公众号研究、写作、去 AI 味审校、视觉叙事、排版与发布。",
-    "longDescription": "从素材沉淀、忠实去 AI 味审校、视觉编辑 brief、Visual Copy Desk、漫画文案和清晰图解，到 HTML 预览和公众号草稿箱发布。",
+    "shortDescription": "公众号账号语料、研究、human-writing、视觉叙事、排版与发布。",
+    "longDescription": "从账号历史与批量 URL 语料、素材沉淀、human-writing 中文创作与改稿、视觉编辑 brief、Visual Copy Desk、漫画文案和清晰图解，到 HTML 预览和公众号草稿箱发布。",
     "developerName": "Agent Skill Library Maintainers",
     "category": "Productivity",
     "capabilities": [
@@ -18,8 +18,8 @@
       "Write"
     ],
     "defaultPrompt": [
-      "运行公众号写作与视觉发布链。",
-      "先忠实审校原文，再从场景事实审校视觉文案并选择配图形式。"
+      "运行公众号账号语料、human-writing 与视觉发布链。",
+      "先按 human-writing 完成写作与改稿，再从场景事实审校视觉文案并选择配图形式。"
     ]
   }
 }

@@ -6,15 +6,15 @@ Source URLs intentionally point to GitHub repository roots. A source may be a pu
 
 **Domain 列**：表示该外部技能是否已融入某条 domain 的工作流（chain）。门槛见 `registration-guide.md` -- 只有真进了某条 chain 才标 domain，否则留空（`-`）表示未归类。可选值：`writing` / `investment` / `capital-markets` / `product` / `commons`（绝对通用）/ 逗号分隔（跨领域）/ `-`（未归类）。
 
-Last repo-root verification: 2026-08-04 via GitHub API / `gh repo view`. `KKKKhazix/human-writing` and the three WeChat corpus sources added in this update resolved successfully; previously indexed roots retain their 2026-07-30 verification.
+Last repo-root verification: 2026-08-04 via GitHub API / `gh repo view`. The writing reference and three WeChat corpus sources added in this update resolved successfully; previously indexed roots retain their 2026-07-30 verification.
 
 ## Writing And Style
 
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
-| `https://github.com/KKKKhazix/human-writing` | 通用中文创作与改稿的唯一正文写作 owner | migrated reference source | writing | MIT；正式版 `v1.0.0`，tag commit `d86bd7b3c8a77aa4b8ac69778d671a7bafcbdbe9`。从该 tag 原样迁入 `plugins/domain-writing/skills/human-writing/` 并接入 `wechat-writing` chain；本地不修改正文、references、检查脚本或 OpenAI 配置。升级时整目录替换并重新核验 hash。 |
-| `https://github.com/op7418/Humanizer-zh` | Chinese text naturalization and AI-pattern cleanup | reference | - | 清理参考，未进 chain。不得覆盖或二次改写 `human-writing`。 |
-| `https://github.com/yzhao062/agent-style` | Human-like agent writing/style reference | reference | - | User-added source. 仅作风格参考，未合并进 `human-writing`，暂不归 domain。 |
+| `https://github.com/KKKKhazix/human-writing` | 中文活人感与段落节奏参考 | reference | - | MIT；只保留 GitHub 来源供人工对照。本库不复制其技能全文，不安装为本地技能，不进入 `wechat-writing` chain；可复用判断必须先独立提炼，并接受 `public-account-writing-style` 的框架与 AI-Flavor Filter 约束。 |
+| `https://github.com/op7418/Humanizer-zh` | Chinese text naturalization and AI-pattern cleanup | reference | - | 清理参考，未进 chain。不得覆盖 `public-account-writing-style`。 |
+| `https://github.com/yzhao062/agent-style` | Human-like agent writing/style reference | reference | - | User-added source. 仅作风格参考，未合并进本地主写作技能，暂不归 domain。 |
 
 Local archive without GitHub source:
 

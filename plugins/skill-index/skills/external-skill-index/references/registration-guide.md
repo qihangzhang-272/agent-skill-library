@@ -26,7 +26,7 @@
 | `installed external capability` | 已在本机/项目安装，运行时真在调用 | 像 agent-reach 这种已成为某 chain 默认依赖的 |
 | `skill collection` | 一个含多技能的合集，按需取用 | 如 taste-skill、anthropics/skills |
 | `absorbed reference` | 它的判断/规则已被提炼进某个本地瓦技能 | 提炼进了 `domain-*/skills/.../references/` |
-| `migrated reference source` | 部分或完整运行目录已迁入某 domain，上游留作更新源 | 如 financial-services 的选择性迁入，或 `human-writing` 的固定 release 原样迁入 |
+| `migrated reference source` | 部分或完整运行目录已迁入某 domain，上游留作更新源 | 如 financial-services 的选择性迁入，或经批准的固定 release 原样迁入 |
 
 晋升原则（沿用 SKILL.md 的 Promotion Rule）：通常只有反复使用并把稳定判断提炼成本地能力后才晋升。若维护者明确要求原样迁入，必须同时记录许可证、固定 release/commit、目标路径、替代关系和无本地补丁边界；后续升级采用整目录替换。
 

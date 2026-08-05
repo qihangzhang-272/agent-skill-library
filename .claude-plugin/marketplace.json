@@ -4,9 +4,9 @@
   "owner": { "name": "Agent Skill Library Maintainers" },
   "plugins": [
     { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.6.3", "description": "元层：章程 + skill-architecture 元技能 + principles Agent 操作原则。" },
-    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.9.1", "description": "纯调度路由 + references/chains 唯一权威源 + 落盘铁律，不承载领域判断。" },
-    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.4.3", "description": "两层生态索引：本地维护技能 vs GitHub 外部技能，探测与提示安装。" },
-    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.10.0", "description": "公众号账号语料、研究、human-writing 中文创作与改稿、Visual Copy Desk、独立视觉计划、排版、清晰图解、知识漫画、HTML 预览与发布瓦技能。" },
+    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.10.0", "description": "纯调度路由 + references/chains 唯一权威源 + 落盘铁律，不承载领域判断。" },
+    { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.4.4", "description": "两层生态索引：本地维护技能 vs GitHub 外部技能，探测与提示安装。" },
+    { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.11.0", "description": "公众号账号语料、研究、编辑判断与深度写作、AI 味审校、Visual Copy Desk、独立视觉计划、排版、清晰图解、知识漫画、HTML 预览与发布瓦技能。" },
     { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.5.1", "description": "投资决策领域：事实、判断、模型、估值、DD、IC memo 与可视化研报瓦技能。" },
     { "name": "domain-capital-markets", "source": "./plugins/domain-capital-markets", "version": "0.6.3", "description": "资本市场领域：公开市场股票研究、首次覆盖与投行交付物瓦技能。" },
     { "name": "domain-product",    "source": "./plugins/domain-product",    "version": "0.1.2", "description": "AI 产品分析领域瓦技能。" }

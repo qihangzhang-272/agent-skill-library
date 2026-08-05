@@ -26,7 +26,7 @@ Choose one mode before creating folders or searching.
 | --- | --- | --- |
 | `general-research` | General research, background checks, source collection, concept definition, broad web/social search | `references/agent-reach-search.md`, `references/quality-checklist.md` |
 | `writing-research` | Research for an article that is not necessarily WeChat-specific | `references/agent-reach-search.md`, `references/quality-checklist.md` |
-| `wechat-writing-research` | 公众号选题、第 0 步、需要微信素材、公众号爆款逻辑、图文截图和后续交给 `human-writing` | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
+| `wechat-writing-research` | 公众号选题、第 0 步、需要微信素材、公众号爆款逻辑、图文截图和后续交给 `public-account-writing-style` | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
 | `product-research` | Facts needed before `ai-product-analyzer`: product, company, pricing, customers, competitors, demo, docs, GitHub, traction | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
 | `investment-research` | Facts needed before product-analysis structured output: financing, team, market, OSS metrics, commercial traction, DD evidence | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
 
@@ -65,8 +65,8 @@ Next suggested handoff:
 
 Handoff rules:
 
-- `writing-research` and `wechat-writing-research` can hand off to `human-writing`.
-- 进入完整 `wechat-writing` chain 时，写作阶段的文件名与交接条件由 chain 负责；本技能只提供研究过程包，不为 `human-writing` 增加第二套框架或写作规则。
+- `writing-research` and `wechat-writing-research` can hand off to `public-account-writing-style`.
+- 交接后由 `public-account-writing-style` 先完成编辑判断，再决定是否使用框架并完成起草与终审；本技能只提供研究过程包。
 - `product-research` can hand off to `ai-product-analyzer`.
 - `investment-research` can hand off to `workflow-orchestrator` product-analysis chain for OSS investment structured and visual output.
 - 独立调用本技能时，完成 coverage report 后停止，等待用户决定是否继续。

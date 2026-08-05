@@ -1,7 +1,7 @@
 {
   "name": "domain-writing",
   "displayName": "Domain Writing",
-  "version": "0.10.0",
-  "description": "公众号写作领域：账号语料、素材沉淀、human-writing 中文创作与改稿、Visual Copy Desk、视觉叙事、Markdown 排版、正文插图、清晰架构图、知识漫画、HTML 预览与草稿箱发布。",
+  "version": "0.11.0",
+  "description": "公众号写作领域：账号语料、素材沉淀、公众号编辑判断与深度写作、AI 味审校、Visual Copy Desk、视觉叙事、Markdown 排版、正文插图、清晰架构图、知识漫画、HTML 预览与草稿箱发布。",
   "author": { "name": "Agent Skill Library Maintainers" }
 }

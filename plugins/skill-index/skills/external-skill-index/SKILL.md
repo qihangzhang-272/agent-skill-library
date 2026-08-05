@@ -25,10 +25,9 @@ Do not use this skill to replace locally maintained skills:
 
 - `ai-product-analyzer`
 - `topic-research-deposition`
+- `public-account-writing-style`
 
 Those are source skills and should remain local.
-
-`human-writing` is a maintainer-approved vendored upstream release. Keep its vendored directory byte-for-byte aligned with a pinned upstream release; update it by whole-directory replacement, never by local content patches.
 
 ## Core Rule
 

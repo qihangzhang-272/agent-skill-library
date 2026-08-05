@@ -2,113 +2,39 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-visual-report.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:71d9a822b6d2809c398032248e6cc58c4110813ac1b8da6d14d2e4a36717862e
 spec:
-  subject:
-    skillId: investment-visual-report
-    skillRevision: 1
-    skillContentDigest: sha256:b64babc09261865075c143d0204f3325ef8c910ef981aa6f7a69307dab438650
-  reviewState: approved
-  builtFromFiles:
-    - path: assets/report-template.html
-      role: asset
-      digest: sha256:caddbfbbf944ebd0c8da86ab259a47439f3ccd072de6c978a9544efd3c99720b
-    - path: references/components.md
-      role: method-reference
-      digest: sha256:674a54976068c7ae4d6ed7ce2e981b2413458f6fed046084c689669396679128
-    - path: references/design-system.md
-      role: method-reference
-      digest: sha256:efe91a34ba96fcc5d9d3377e02b63bf7f3775039172b94b85d3983076f9a31b4
-    - path: references/quality-checklist.md
-      role: quality-checklist
-      digest: sha256:60a5512e5d681d68bbbdd9a8599cc5fe2924126e4cd675e68d69c99b6f81e3e0
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:742a879034d6020e05339dc8c72f8351a7cb78818448b7ab1df8bf4e7a04e9e9
+  builtFrom:
+    - SKILL.md
+    - assets/report-template.html
+    - references/components.md
+    - references/design-system.md
+    - references/quality-checklist.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/11-visual-report.html，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
-    - id: accepted-input-preflight
-      requirement: 仅接收引用、revision、digest、可接收状态和有效合同结果齐全的 01–10 Artifact
-      required: true
-      verifier: harness
-      harnessCheck: accepted-input-preflight
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: memo-sole-conclusion
-      requirement: 所有结论、建议、评分和措辞强度只来自 10-ic-memo，不创建第三套投资结论
+      requirement: 只读取并转换 10-ic-memo；所有内容、结论、建议、评分和措辞强度均来自 Memo，不读取 01–09 补洞，也不创建第三套投资结论
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
-    - id: upstream-evidence-only
-      requirement: 01–09 只用于证据谱系、完整性和冲突核对；发现冲突时拒收 Memo 并返回责任节点，不自行裁决
-      required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: verdict-score-unit-fidelity
-      requirement: 逐字保留 Memo 的 Proceed、Conditional proceed、Watch 或 Pass，以及分数、估值、回报、单位、日期、情景、缺口和限制
+      requirement: 忠实保留 Memo 的推进（Proceed）、有条件推进（Conditional proceed）、观察（Watch）或放弃（Pass），以及分数、估值、回报、单位、日期、情景、缺口和限制
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
-    - id: fifteen-section-completeness
-      requirement: 完整承接 Memo 的十五个必需 section，不删除、压薄或用视觉组件替代正文义务
+    - id: thirteen-section-completeness
+      requirement: 完整承接 Memo 的十三个投资人章节，不压薄或用视觉组件替代正文
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
+    - id: investor-readable-chinese
+      requirement: 章节名、标签和解释面向中文投资人；专业缩写和英文投资术语沿用 Memo 的中文解释，不以内部工程术语代替业务表达
+      required: true
+    - id: clickable-external-sources
+      requirement: 完整保留 Memo 中的真实外部 URL，并在 HTML 中使用可读锚文本、可点击链接以及安全的新窗口属性
+      required: true
+    - id: business-body-without-runtime-audit
+      requirement: HTML 只呈现投资业务正文，不展示内部工作区元数据、检查过程、尝试记录或运行证明
+      required: true
     - id: offline-single-file-structure
-      requirement: 输出为指定路径的单一 HTML，CSS 和必要脚本内联，无运行时外部依赖，并包含十五个命名 section 的结构
+      requirement: 输出为指定路径的单一 HTML，CSS 全部内联，无运行时外部依赖，并包含十三个命名 section；外部来源链接可在联网时点击
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: visual-usability-and-semantic-color
-      requirement: 消费者确认桌面与移动端可读、无关键溢出、具备基本可访问性，且 verdict class 和语义色忠于 Memo
+      requirement: 桌面与移动端均可读、无关键溢出、具备基本可访问性，且 verdict class 和语义色忠于 Memo
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
   artifact:
-    mediaTypes:
-      - text/html
+    path: 11-visual-report.html
+    mediaType: text/html
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/11-visual-report.html
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

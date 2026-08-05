@@ -7,7 +7,7 @@ description: Route the library's proven workflows. Use when the user asks to run
 
 Select exactly one matching chain definition and return that reference to the current Host session. Chain bodies live in `references/chains/`.
 
-This Skill is a thin routing entrypoint, not a business node and not a second scheduler. The current visible Codex App task or Claude Code session remains the sole execution owner. This Skill must not invoke domain Skills, advance nodes, retry work, accept Handoffs, or maintain hidden runtime state.
+This Skill is a thin routing entrypoint, not a business node and not a second scheduler. The current visible Codex App task or Claude Code session remains the sole execution owner. This Skill must not invoke domain Skills, advance nodes, retry work, or maintain hidden runtime state.
 
 ## 触发场景
 
@@ -23,6 +23,8 @@ This Skill is a thin routing entrypoint, not a business node and not a second sc
 
 `references/chains/product-frontend.md` 是未跑通的草稿，未挂入路由表。跑通后按 `skill-architecture` 的场景 C 主动挂回。
 
+当前只有 `investment-icmemo.md` 已迁移为 ASL-WEP v0.1 Profile。`wechat-writing.md` 与 `public-equity-coverage.md` 仍是 Library-native legacy chain；可以供原生 Library 工作参考，但不得交给 ASL Harness 冒充稳定 Workflow，必须先完成外部能力本地 Skill 化、质量合同和试跑。
+
 ## 路由输出
 
 本 Skill 只返回：
@@ -35,20 +37,18 @@ This Skill is a thin routing entrypoint, not a business node and not a second sc
 
 ## 所有稳定 chain 的共同边界
 
-1. Host 在运行前把意图、Workflow、完整 Skill 顺序、Skill revision、质量合同、Artifact 路径、可选节点和权限冻结进 Plan。
+1. Host 在运行前只确定意图、Skill 顺序、各节点质量合同路径、Artifact 路径、可选节点和权限；节点内容到达时再按需加载。
 2. Run 固定落在用户当前项目的 `.asl/runs/<run-id>/`；不得把业务产物写入 `plugins/` 或技能库仓库。
 3. 唯一业务节点单位是 Skill。Prompt、MCP、Agent、API、脚本和 Tool 只能作为本地 Skill 已声明的内部实现，不能成为隐藏的平行节点。
-4. 每个纳入 Plan 的 Skill 都必须产生一个独立 Artifact。不存在“只保存有保留价值的中间产物”这一自由裁量；最终成品不能替代过程包。
+4. 每个纳入的 Skill 都必须产生一个独立 Artifact；最终成品不能替代过程包。
 5. Standalone 和 Workflow 调用使用同一核心质量合同。处于长链中不能降低 Skill 的研究、判断、验证或交付义务。
-6. Harness 只检查确定性义务；直接消费者负责语义验收。拒收必须回到真正责任 Skill 的新 attempt，不创建 Review Skill。
-7. 合同允许未知且有界尝试耗尽时，可以 `accepted-with-gaps` 继续，但必须传播尝试、原因、影响、fallback 和重新检查条件。
-8. 上游 Artifact revision 改变后，引用旧 digest 的下游 Artifact 必须失效并重跑；旧 Artifact、Handoff 和事件保留。
-9. 只有用户明确反馈才能进入演化记录。沉默、普通编辑和含义不明确的运行信号一律不解释为偏好。
+6. 后续 Skill 发现必需内容缺失时，回到责任 Skill 补做；信息确实不可获得时，说明原因、影响、保守处理和重新检查条件后继续。
+7. 只有用户明确反馈才能进入演化记录。沉默、普通编辑和含义不明确的运行信号一律不解释为偏好。
 
 ## 执行规则
 
 - 默认只解析一个 chain，除非用户明确要求组合。
-- chain 的完整 Skill 顺序由 Plan 冻结后，当前 Host Session 按节点显式执行；本 Skill 不执行该顺序。
-- 搜索和素材收集只能发生在冻结节点中已声明的本地 Skill 内部，并且必须先于只消费上游 Artifact 的写作或组装 Skill。
-- 稳定 Run 不得临时从外部索引搜索、安装或插入能力。外部 Skill、MCP、Prompt、Agent 或 API 必须先在 Run 外完成来源登记、本地 Skill 化、隔离试跑和人类批准，才能被新的稳定 Plan 引用。
+- 当前 Host Session 按 chain 的 Skill 顺序显式执行；本 Skill 不执行该顺序。
+- 搜索和素材收集只能发生在当前节点已声明的本地 Skill 内部，并且必须先于只消费上游 Artifact 的写作或组装 Skill。
+- 稳定 Workflow 运行中不得临时从外部索引搜索、安装或插入能力。外部 Skill、MCP、Prompt、Agent 或 API 必须先在 Run 外完成来源登记、本地 Skill 化、隔离试跑和人类批准，才能进入新的稳定 Workflow。
 - 普通未知项按 Skill 合同记录并继续；只有会改变 Workflow 路径、扩大权限、安全边界或导致后续执行无意义时才请求用户。

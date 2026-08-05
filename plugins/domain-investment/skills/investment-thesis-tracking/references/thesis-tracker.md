@@ -68,7 +68,7 @@ Status may be `on track`, `at risk`, `failed`, or `unknown`. Conviction changes 
 - Separate operating performance, valuation, technical progress, governance, and market narrative.
 - Keep metric definitions stable; if a definition changes, show both old and new bases.
 - Date every update and retain its input revision.
-- Use the Run Artifact as the durable record; do not assume hidden memory across sessions.
+- Use the dated Artifact as the durable record; do not assume hidden memory across sessions.
 - A review cadence is a commitment to inspect evidence, not proof that evidence exists.
 
 ## Completion test

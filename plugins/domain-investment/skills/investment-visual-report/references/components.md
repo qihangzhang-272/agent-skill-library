@@ -1,134 +1,124 @@
-# 投研视觉研报 — 组件片段库
+# 投研视觉研报组件
 
-按 memo 实际内容挑用。每个组件给出 HTML 片段，配色用 `design-system.md` 的 CSS variables。缺的内容删掉对应组件，不硬凑。
+只选择 Memo 真实包含的组件。所有 `{{...}}` 都必须替换为 Memo 原值；没有对应内容就删除整个可选组件，不能保留占位符或创造数字。
 
-## 1. Header（深色，每份研报都要）
-
-标的名 + 评级 badge + 大评分，是投委第一眼。
+## 1. 报告头
 
 ```html
-<div class="hdr">
-  <div class="hdr-meta">Investment Committee Memo &bull; 2026-06-27</div>
-  <h1>公司名 / 项目名</h1>
-  <div class="sub">一句话定位 &bull; 地区 &bull; 累计融资 &bull; 最新轮次（领投）</div>
+<header class="hdr">
+  <div class="hdr-meta">投资委员会备忘录 &bull; {{估值或报告日期}}</div>
+  <h1>{{公司或项目名称}}</h1>
+  <div class="sub">{{一句话业务定位}}</div>
   <div class="vstrip">
-    <div class="vbadge"><span class="dot"></span> MEMO VERDICT (EXACT)</div>
-    <div><div class="score-big">6.08</div><div class="score-lbl">/ 10 投资评分</div></div>
+    <div class="vbadge {{结论颜色类}}"><span class="dot"></span>{{Memo 唯一结论}}</div>
+    <div><div class="score-big">{{Memo 综合评分}}</div><div class="score-lbl">投资评分</div></div>
   </div>
-</div>
+</header>
 ```
-评级文字逐字使用 memo 的 `Proceed / Conditional proceed / Watch / Pass`，不得压缩或改名。badge 颜色跟随 memo 结论；评分颜色只做数值一致性展示，不能反向改写结论。
 
-## 2. 评分条 strip（有评分卡时）
+结论只可显示为 `推进（Proceed）`、`有条件推进（Conditional proceed）`、`观察（Watch）` 或 `放弃（Pass）`，并逐字继承 Memo。Memo 没有综合评分时删除评分块，不填零。
 
-各维度横向均分，一眼看强弱分布。
+## 2. 章节
+
+```html
+<section class="sec">
+  <h2 class="st"><span class="n">1</span>执行摘要</h2>
+  <p>{{Memo 对应章节的完整内容}}</p>
+</section>
+```
+
+十三个必需章节都用这一结构，顺序见本文末尾。视觉组件只能帮助阅读，不能取代正文。
+
+## 3. 评分概览
+
+只有 Memo 有完整评分卡时使用：
 
 ```html
 <div class="sstrip">
-  <div class="si"><div class="lb">维度名 (权重%)</div><div class="vl" style="color:var(--green)">7.0</div><div class="bar"><div class="bf" style="width:70%;background:var(--green)"></div></div></div>
-  <!-- 重复 N 个维度 -->
+  <div class="si">
+    <div class="lb">{{维度与权重}}</div>
+    <div class="vl">{{分值}}</div>
+    <div class="bar"><div class="bf" style="width:{{百分比}};background:var(--yellow)"></div></div>
+  </div>
 </div>
 ```
 
-## 3. 编号 Section（每个主题一节）
-
-```html
-<div class="sec">
-  <div class="st"><span class="n">1</span> Executive Summary</div>
-  <p>正文…</p>
-  <h4>小标题</h4>
-  <ul><li>要点…</li></ul>
-</div>
-```
-
-## 4. 指标卡网格（关键数字三连）
-
-执行摘要里"最强维度/最弱维度/加权回报"这类三连最适合。
+## 4. 指标卡
 
 ```html
 <div class="g3">
-  <div class="card"><div class="card-t">最强维度</div><div class="card-v" style="color:var(--green)">7.5</div><div class="card-n">技术壁垒 — 说明</div></div>
-  <div class="card"><div class="card-t">最弱维度</div><div class="card-v" style="color:var(--red)">4.5</div><div class="card-n">商业化 — 说明</div></div>
-  <div class="card"><div class="card-t">加权回报</div><div class="card-v" style="color:var(--yellow)">~2.0x</div><div class="card-n">MOIC / IRR</div></div>
+  <div class="card"><div class="card-t">{{指标名}}</div><div class="card-v">{{Memo 原值}}</div><div class="card-n">{{口径和解释}}</div></div>
 </div>
 ```
 
-## 5. Bull / Base / Bear 场景卡（估值/回报节）
-
-三色并列，投委最爱看的回报情景。
+## 5. 乐观、基准、悲观情景
 
 ```html
 <div class="g3">
-  <div class="sc sc-b"><div class="sc-l" style="color:var(--green)">🐂 Bull (25%)</div><div class="sc-m" style="color:var(--green)">4-6x</div><div class="sc-d" style="color:var(--green)">IRR 60-80%</div><div class="sc-d">退出 $2B-$3B</div><div class="sc-d">触发条件…</div></div>
-  <div class="sc sc-a"><div class="sc-l" style="color:var(--yellow)">📊 Base (50%)</div><div class="sc-m" style="color:var(--yellow)">1-1.6x</div><div class="sc-d">…</div></div>
-  <div class="sc sc-r"><div class="sc-l" style="color:var(--red)">🐻 Bear (25%)</div><div class="sc-m" style="color:var(--red)">0.2-0.4x</div><div class="sc-d">…</div></div>
+  <div class="sc sc-b"><div class="sc-l">乐观情景（Bull）</div><div class="sc-m">{{回报原值}}</div><div class="sc-d">{{条件与假设}}</div></div>
+  <div class="sc sc-a"><div class="sc-l">基准情景（Base）</div><div class="sc-m">{{回报原值}}</div><div class="sc-d">{{条件与假设}}</div></div>
+  <div class="sc sc-r"><div class="sc-l">悲观情景（Bear）</div><div class="sc-m">{{回报原值}}</div><div class="sc-d">{{条件与假设}}</div></div>
 </div>
 ```
 
-## 6. 评分进度条（评分卡节，带数值）
+内部收益率（IRR）和投资回报倍数（MOIC）沿用 Memo 的中文解释、币种、期间和精度。
 
-比 strip 更详细，每维度一行、带权重。
-
-```html
-<div class="pl"><div class="pl-n">A. 维度名 (25%)</div><div class="pl-b"><div class="pl-f" style="width:55%;background:var(--yellow)">5.5</div></div></div>
-```
-
-## 7. 数据表（事实、融资、产品矩阵、可比交易）
-
-memo 里大量结构化事实用表格。表头大写小字灰色，斑马线靠 border。
+## 6. 表格
 
 ```html
-<table>
-  <tr><th>列1</th><th>列2</th><th>来源</th></tr>
-  <tr><td>…</td><td>…</td><td>来源名</td></tr>
-</table>
-```
-强调行用 `<strong>`；关键轮次/数字加粗。
-
-## 8. 状态标签 chip（表格内嵌状态）
-
-```html
-<span class="t tg">通过</span>   <!-- 绿 -->
-<span class="t ty">观察</span>   <!-- 黄 -->
-<span class="t tr">风险</span>   <!-- 红 -->
-<span class="t tb">投资人名</span> <!-- 蓝 -->
-<span class="t tp">分类</span>   <!-- 紫 -->
-<span class="t tgr">中性</span>  <!-- 灰 -->
-```
-
-## 9. 时间线（产品演变、融资历程）
-
-```html
-<div class="tl-i"><div class="tl-d" style="background:var(--accent)"></div><div class="tl-c"><div class="tl-dt">2025-03</div><div class="tl-tx"><strong>事件</strong> — 描述</div></div></div>
-```
-
-## 10. 提示框（引用、利好、警示、风险）
-
-```html
-<blockquote>最强论点 / thesis 引用，斜体蓝边</blockquote>
-<div class="ok">利好信号，绿边</div>
-<div class="warn">需注意，橙边</div>
-<div class="danger">最弱缺口 / 红旗，红边</div>
-```
-
-## 11. 综合评级总卡（评分卡节收尾）
-
-```html
-<div class="card" style="text-align:center;background:var(--g100)">
-  <div class="card-t">综合评级</div>
-  <div class="card-v" style="color:var(--yellow);font-size:40px">6.08 / 10</div>
-  <div class="card-n" style="font-size:14px">MEMO VERDICT (EXACT) — Memo 原文条件或行动</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>{{列名}}</th><th>{{列名}}</th><th>来源</th></tr></thead>
+    <tbody><tr><td>{{Memo 原文}}</td><td>{{Memo 原值}}</td><td><a href="{{真实 URL}}" target="_blank" rel="noopener noreferrer">{{来源名称}}</a></td></tr></tbody>
+  </table>
 </div>
 ```
 
-## 12. 键值对（参数清单）
+外部来源必须可点击。不能把内部文件名当来源名称。
+
+## 7. 状态标签
 
 ```html
-<div class="kv"><span class="kv-k">键</span><span class="kv-v">值</span></div>
+<span class="t tg">通过</span>
+<span class="t ty">待验证</span>
+<span class="t tr">风险</span>
+<span class="t tgr">未知</span>
 ```
 
-## section 顺序参考（跟随 IC memo）
+## 8. 论点与风险提示
 
-1 Executive Summary → 2 Investment Recommendation → 3 Company/Product → 4 AI-native Product Judgment → 5 Market/Competitive → 6 Business Model/Unit Economics → 7 Technical/OSS/Ecosystem Moat → 8 Valuation/Return → 9 Scorecard → 10 Risks/Veto → 11 DD → 12 Thesis/Watch → 13 Sources/Unknowns/Gaps → 14 Artifact Provenance → 15 Completion Record。
+```html
+<blockquote>{{Memo 的核心论点}}</blockquote>
+<div class="ok">{{已验证的正向证据}}</div>
+<div class="warn">{{条件或待验证项}}</div>
+<div class="danger">{{关键风险或一票否决项}}</div>
+```
 
-15 个 Memo 合同章节任一缺失或过薄时必须拒收，不能靠跳过编号继续生成。只可省略 Memo 本身明确标为不适用的非必需展示组件。
+颜色必须跟随 Memo 的语义，不能为了好看改变判断强弱。
+
+## 9. 跟踪触发器
+
+```html
+<div class="tl-i">
+  <div class="tl-d"></div>
+  <div class="tl-c"><div class="tl-dt">{{观察周期}}</div><div class="tl-tx"><strong>{{触发器}}</strong> — {{阈值、证据与行动}}</div></div>
+</div>
+```
+
+## 固定章节顺序
+
+1. 执行摘要
+2. 投资建议
+3. 公司与产品概览
+4. AI 原生性与产品判断
+5. 市场与竞争格局
+6. 商业模式与单位经济
+7. 技术、开源生态与护城河
+8. 估值与回报逻辑
+9. 投资评分卡
+10. 核心风险与一票否决项
+11. 尽调优先级
+12. 投资论点与跟踪触发器
+13. 来源、未知项与核验缺口
+
+任一章节内容不足时，准确指出 Memo 缺少什么；确实无法取得的信息按 Memo 已披露的缺口继续展示。不要增加运行记录章节。

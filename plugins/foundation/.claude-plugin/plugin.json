@@ -1,7 +1,7 @@
 {
   "name": "foundation",
   "displayName": "Foundation",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "元层：架构章程、如何创建新技能/新领域的元技能、principles Agent 操作原则。",
   "author": { "name": "Agent Skill Library Maintainers" }
 }

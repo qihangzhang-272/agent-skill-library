@@ -20,4 +20,4 @@ Record publication date, reporting period, and URL (or document page) for every 
 
 ## Contribution to the Fact Pack
 
-Provide findings under the headings above, separating sourced facts, supplied claims, estimates, and open questions. Insert them into `02-fact-pack.md`; do not invoke product judgment, competitive analysis, financial modeling, or an orchestrator from this method. The current Host owner controls all later routing.
+Provide findings under the headings above, separating sourced facts, supplied claims, estimates, and open questions. Insert them into `02-fact-pack.md`; do not invoke product judgment, competitive analysis, financial modeling, or an orchestrator from this method. Workflow routing remains outside this method.

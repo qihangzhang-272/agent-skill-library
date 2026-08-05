@@ -6,7 +6,7 @@ It must not request outline approval, create slides, invoke another Skill or Age
 
 ## 1. Scope the Analysis
 
-Derive the scope from the accepted fact pack, product judgment, core investment question, and frozen Workflow:
+Derive the scope from the supplied fact pack, product judgment, core investment question, and Workflow:
 
 - target company or multi-company universe;
 - market/category boundary and explicit exclusions;

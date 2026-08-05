@@ -5,75 +5,52 @@ description: Run the library's AI-native product judgment inside the investment 
 
 # Investment AI Product Judgment
 
-This node answers: does the AI product itself make sense?
-
-Standalone use and managed-workflow use MUST execute the same BP logic, AI-native tests, relevant specialist methods, evidence discipline, and counterargument work. Workflow use cannot collapse this Skill into a short opinion.
+Answer whether the AI product itself makes sense. Standalone and workflow use execute the same BP logic, AI-native tests, specialist methods, evidence discipline, and counterargument work.
 
 ## References
 
-Always read as an internal method:
+Always read `references/ai-product-analyzer.md` as an internal method.
 
-- `references/ai-product-analyzer.md`
-
-Read selectively as internal methods:
+Read selectively:
 
 - `references/business-model.md` for pricing, inference cost, revenue quality, subscription vs usage, margin, bundling, or business-model risk.
-- `references/data-agent.md` for data agent, BI, Text-to-SQL, enterprise data workflow, context layer, or analytics agent products.
+- `references/data-agent.md` for data agents, BI, Text-to-SQL, enterprise data workflows, context layers, or analytics agents.
 - `references/narrative-audit.md` for positioning, pitch deck, NOT positioning, narrative line, or old-paradigm packaging risk.
 
-Reference files do not create nested Skill or Agent calls. Apply their methods inside this Skill and record which ones were used.
+References do not create nested Skill or Agent calls. Apply their methods inside this Skill and state which ones were used.
 
-## Managed Workflow Contract
+## Input and rework
 
-When the frozen Workflow binds this node, consume exactly `node-output:fact-pack`, including the accepted `02-fact-pack.md` Artifact and Handoff. Reject a thin, stale, or unsupported fact pack instead of silently performing the missing upstream research.
+In the investment Workflow, read `02-fact-pack.md` and write one independent `03-product-judgment.md`.
 
-Produce exactly one independent node Artifact: `artifacts/03-product-judgment.md`.
-
-The direct consumer is `investment-competitive-landscape`. It must accept every required obligation and handoff section. A rejection returns to this node as `REWORK`; the contract must not be weakened for workflow convenience.
+If the fact pack is materially thin, stale, or unsupported, tell the Host which responsible Skill must add what and why; do not perform missing source research here. If a fact remains unavailable after reasonable checks, explain in business language what is missing, why it is unavailable, how it affects the decision, the conservative treatment, and when to revisit it, then continue without inventing facts.
 
 ## Output
 
 ```text
-Status: READY / READY-WITH-GAPS / REWORK
-AI-native product judgment:
-Reference usage:
-One-sentence positioning:
-Problem validity:
-Solution validity:
-Product form:
-Why now:
-Market fit:
-Business model:
-Competition:
-Traction:
-Team / GTM:
-Financial / ask:
+AI-native product judgment
+Reference usage
+One-sentence positioning
+Problem validity
+Solution validity
+Product form
+Why now
+Market fit
+Business model
+Competition
+Traction
+Team / GTM
+Financial / ask
 Verdict: good case / bad case / watch
-Strongest product argument:
-Weakest product gap:
-Best counterargument and response:
-Narrative line:
-Evidence references:
-Assumptions:
-Unknowns with attempts and decision impact:
-  attemptRefs:
-  boundedAttempts:
-    limit:
-    used:
-    exhausted:
-  reason:
-  decisionImpact:
-  fallback:
-  revisitTrigger:
-Handoff for investment-competitive-landscape:
+Strongest product argument
+Weakest product gap
+Best counterargument and response
+Narrative line
+Evidence references
+Assumptions
+Unknowns and decision impact
 ```
 
-Every material judgment must point to evidence in the accepted fact pack or be labeled as an assumption. Missing evidence must remain unknown; do not manufacture product, traction, pricing, or team facts.
+Every material judgment must point to evidence in the fact pack or be labeled as an assumption. Complete every applicable analytical section; unavailable evidence is a gap, while missing analysis requires correction.
 
-Completion states:
-
-- `READY`: the full product-judgment obligations are met and evidence-backed.
-- `READY-WITH-GAPS`: only a genuinely unavailable external fact may remain; propagate the Plan-frozen limit, used attempts, `exhausted=true`, and its explicit effect on the verdict. Missing analysis is always `REWORK`.
-- `REWORK`: a required analysis section, evidence mapping, counterargument, or applicable internal method is missing but can be completed.
-
-After consumer acceptance, return control to the current Host owner. Do not invoke `investment-competitive-landscape`, any reference as a Skill, or any later node, and do not advance the Workflow yourself.
+Do not invoke the next Skill; finish the Artifact and let the Workflow continue.

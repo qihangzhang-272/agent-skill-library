@@ -6,7 +6,7 @@ Use it when a sector or theme requires one coherent pass across industry structu
 
 ## Inputs
 
-Use only the accepted fact-pack and product-judgment Artifacts, their Handoffs, and sources already authorized for this Skill. Derive:
+Use only the supplied fact-pack and product-judgment Artifacts and sources authorized for this Skill. Derive:
 
 - sector or theme;
 - one-line decision angle;
@@ -45,4 +45,4 @@ Return an integrated set of sections covering:
 - counterevidence, assumptions, and unknowns;
 - source register.
 
-Do not create a research note, slide pack, spreadsheet, or second Artifact. Do not stop for an intermediate analyst review. Return control to the current Host owner after the parent Skill completes its Artifact.
+Do not create a research note, slide pack, spreadsheet, or second Artifact. Do not stop for an intermediate analyst review or decide the next Skill.

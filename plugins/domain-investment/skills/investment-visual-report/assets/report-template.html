@@ -1,218 +1,131 @@
 <!DOCTYPE html>
 <!--
-  投研视觉研报 骨架模板
-  用法：复制本文件作为 11-visual-report.html 的起点。
-  - <style> 已含完整设计系统，直接用，不要引外部 CSS/JS。
-  - 把下面 PLACEHOLDER 区域替换为 memo 内容；15 个必需 section 不得删除。只删非必需展示组件；必需 section 缺失或过薄时返回 REWORK。
-  - 把 VERDICT_CLASS_REQUIRED 替换为 verdict-proceed、verdict-conditional、verdict-watch 或 verdict-pass，且必须与 Memo 原 verdict 一致。
-  - 组件片段见 references/components.md；配色语义见 references/design-system.md。
+  中文投研视觉报告骨架。
+  复制为 11-visual-report.html 后，将全部 {{...}} 替换为 Memo 原文或原值。
+  十三个业务章节必须保留；可选视觉组件在 Memo 没有对应内容时应整块删除。
+  页面只呈现业务正文，运行记录由工作区另存。
 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IC Memo — 标的名</title>
+<title>{{标的名称}}｜投资研究报告</title>
 <style>
-:root{--bg:#f8f9fa;--surface:#fff;--border:#e2e8f0;--text:#1a202c;--text2:#64748b;--accent:#2563eb;--green:#16a34a;--yellow:#d97706;--red:#dc2626;--orange:#ea580c;--purple:#7c3aed;--g100:#f1f5f9;--g200:#e2e8f0;--g500:#64748b;--g700:#334155;--g900:#0f172a}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
-.ct{max-width:1200px;margin:0 auto;padding:24px}
-.hdr{background:var(--g900);color:#fff;padding:48px 40px;border-radius:12px 12px 0 0}
-.hdr-meta{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#94a3b8;margin-bottom:12px}
-.hdr h1{font-size:32px;font-weight:800;margin-bottom:8px}
-.hdr .sub{font-size:16px;color:#cbd5e1;margin-bottom:24px}
-.vstrip{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
-.vbadge{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:18px;font-weight:700}
-.vbadge .dot{width:12px;height:12px;border-radius:50%;background:currentColor}
-.vbadge.verdict-proceed{color:var(--green);background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.3)}
-.vbadge.verdict-conditional,.vbadge.verdict-watch{color:#fbbf24;background:rgba(217,119,6,.15);border:1px solid rgba(217,119,6,.3)}
-.vbadge.verdict-pass{color:var(--red);background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}
-.score-big{font-size:48px;font-weight:800;color:#fff}
-.score-lbl{font-size:13px;color:#94a3b8}
-.sstrip{background:var(--surface);border-bottom:1px solid var(--border);padding:24px 40px;display:flex;gap:0}
-.si{flex:1;text-align:center;padding:12px 8px;border-right:1px solid var(--border)}
-.si:last-child{border-right:none}
-.si .lb{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--g500);margin-bottom:4px}
-.si .vl{font-size:24px;font-weight:700}
-.si .bar{height:4px;background:var(--g200);border-radius:2px;margin-top:6px;overflow:hidden}
-.si .bf{height:100%;border-radius:2px}
-.sec{background:var(--surface);padding:32px 40px;border-bottom:1px solid var(--border)}
-.sec:last-child{border-radius:0 0 12px 12px}
-.st{font-size:20px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.st .n{background:var(--accent);color:#fff;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
-h4{font-size:15px;font-weight:600;color:var(--g700);margin:20px 0 10px}
-p,li{margin-bottom:8px;color:var(--g700)}
-ul,ol{padding-left:20px}
-table{width:100%;border-collapse:collapse;margin:12px 0 20px;font-size:14px}
-th{background:var(--g100);text-align:left;padding:10px 14px;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--g500);border-bottom:2px solid var(--border)}
-td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
-tr:last-child td{border-bottom:none}
-.t{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600}
-.tg{background:#dcfce7;color:var(--green)}.ty{background:#fef3c7;color:var(--yellow)}.tr{background:#fee2e2;color:var(--red)}.tb{background:#dbeafe;color:var(--accent)}.tp{background:#ede9fe;color:var(--purple)}.tgr{background:var(--g100);color:var(--g500)}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.card{background:var(--g100);border-radius:8px;padding:20px}
-.card-t{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--g500);margin-bottom:8px}
-.card-v{font-size:28px;font-weight:800}
-.card-n{font-size:12px;color:var(--g500);margin-top:4px}
-.sc{border-radius:8px;padding:20px;text-align:center}
-.sc-b{background:#f0fdf4;border:1px solid #bbf7d0}
-.sc-a{background:#fffbeb;border:1px solid #fde68a}
-.sc-r{background:#fef2f2;border:1px solid #fecaca}
-.sc-l{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.sc-m{font-size:36px;font-weight:800}
-.sc-d{font-size:13px;margin-top:4px}
-.tl-i{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start}
-.tl-d{width:10px;height:10px;border-radius:50%;margin-top:6px;flex-shrink:0}
-.tl-c{flex:1}
-.tl-dt{font-size:12px;font-weight:600;color:var(--g500)}
-.tl-tx{font-size:14px}
-.pl{display:flex;align-items:center;gap:12px;margin:8px 0}
-.pl-n{width:180px;font-size:13px;font-weight:500}
-.pl-b{flex:1;height:24px;background:var(--g200);border-radius:4px;overflow:hidden}
-.pl-f{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:#fff}
-blockquote{border-left:4px solid var(--accent);background:#f0f7ff;padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0;font-style:italic;color:var(--g700)}
-.warn{border-left:4px solid var(--orange);background:#fff7ed;padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0}
-.danger{border-left:4px solid var(--red);background:#fef2f2;padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0}
-.ok{border-left:4px solid var(--green);background:#f0fdf4;padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0}
-.kv{display:flex;gap:8px;margin:4px 0}
-.kv-k{font-weight:600;min-width:160px;color:var(--g700)}
-.kv-v{color:var(--g700)}
-.code{background:var(--g100);padding:16px 20px;border-radius:8px;font-family:'Fira Code',monospace;font-size:13px;overflow-x:auto;white-space:pre;line-height:1.5}
-hr{border:none;border-top:1px solid var(--border);margin:24px 0}
-@media(max-width:768px){.ct{padding:12px}.hdr{padding:32px 20px}.hdr h1{font-size:24px}.sec{padding:24px 20px}.sstrip{padding:16px 20px;flex-wrap:wrap}.si{min-width:45%}.g2,.g3{grid-template-columns:1fr}.vstrip{flex-direction:column;align-items:flex-start}.score-big{font-size:36px}.sc-m{font-size:28px}.pl-n{width:120px}}
+:root{--bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--text:#1e293b;--muted:#64748b;--accent:#2563eb;--green:#15803d;--yellow:#b45309;--red:#b91c1c;--orange:#c2410c;--g100:#f1f5f9;--g200:#e2e8f0;--g700:#334155;--g900:#0f172a}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;color:var(--text);background:var(--bg);font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+.ct{max-width:1120px;margin:0 auto;padding:24px}
+.hdr{padding:44px 40px;color:#fff;background:var(--g900);border-radius:12px 12px 0 0}
+.hdr-meta{margin-bottom:10px;color:#94a3b8;font-size:12px;letter-spacing:1.5px}
+.hdr h1{margin:0 0 8px;font-size:32px;line-height:1.25}
+.sub{margin-bottom:24px;color:#cbd5e1;font-size:16px}
+.vstrip{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.vbadge{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid currentColor;border-radius:8px;font-size:17px;font-weight:700}
+.dot{width:10px;height:10px;border-radius:50%;background:currentColor}
+.verdict-proceed{color:#4ade80}.verdict-conditional,.verdict-watch{color:#fbbf24}.verdict-pass{color:#f87171}
+.score-big{font-size:42px;font-weight:800;line-height:1.1}.score-lbl{color:#94a3b8;font-size:12px}
+.sstrip{display:flex;padding:20px 32px;background:var(--surface);border-bottom:1px solid var(--border)}
+.si{flex:1;min-width:130px;padding:8px 12px;text-align:center;border-right:1px solid var(--border)}.si:last-child{border-right:0}
+.lb{color:var(--muted);font-size:12px}.vl{font-size:23px;font-weight:750}.bar{height:4px;margin-top:6px;overflow:hidden;background:var(--g200);border-radius:2px}.bf{height:100%;background:var(--yellow)}
+.sec{padding:32px 40px;background:var(--surface);border-bottom:1px solid var(--border)}.sec:last-child{border-radius:0 0 12px 12px}
+.st{display:flex;align-items:center;gap:10px;margin:0 0 20px;color:var(--g900);font-size:20px;font-weight:750;line-height:1.4}
+.n{display:inline-flex;flex:0 0 28px;align-items:center;justify-content:center;width:28px;height:28px;color:#fff;background:var(--accent);border-radius:6px;font-size:13px}
+h3{margin:22px 0 10px;color:var(--g700);font-size:15px}p{margin:0 0 10px}ul,ol{margin:8px 0;padding-left:22px}li{margin-bottom:7px}
+.g2,.g3{display:grid;gap:18px;margin:16px 0}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{padding:18px;background:var(--g100);border-radius:8px}.card-t{color:var(--muted);font-size:12px;font-weight:650}.card-v{margin-top:4px;font-size:26px;font-weight:800}.card-n{margin-top:3px;color:var(--muted);font-size:12px}
+.sc{padding:18px;text-align:center;border-radius:8px}.sc-b{background:#f0fdf4;border:1px solid #bbf7d0}.sc-a{background:#fffbeb;border:1px solid #fde68a}.sc-r{background:#fef2f2;border:1px solid #fecaca}.sc-l{font-size:12px;font-weight:700}.sc-m{font-size:30px;font-weight:800}.sc-d{margin-top:4px;font-size:13px}
+.table-wrap{max-width:100%;margin:14px 0 20px;overflow-x:auto}
+table{width:100%;min-width:620px;border-collapse:collapse;font-size:14px}th{padding:10px 12px;color:var(--muted);background:var(--g100);border-bottom:2px solid var(--border);font-size:12px;text-align:left}td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.t{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:650}.tg{color:var(--green);background:#dcfce7}.ty{color:var(--yellow);background:#fef3c7}.tr{color:var(--red);background:#fee2e2}.tgr{color:var(--muted);background:var(--g100)}
+blockquote,.ok,.warn,.danger{margin:14px 0;padding:15px 18px;border-left:4px solid;border-radius:0 8px 8px 0}blockquote{border-color:var(--accent);background:#eff6ff}.ok{border-color:var(--green);background:#f0fdf4}.warn{border-color:var(--orange);background:#fff7ed}.danger{border-color:var(--red);background:#fef2f2}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}a:hover{text-decoration-thickness:2px}a:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+@media(max-width:768px){.ct{padding:10px}.hdr{padding:30px 20px}.hdr h1{font-size:25px}.sec{padding:25px 20px}.sstrip{padding:14px 10px;flex-wrap:wrap}.si{min-width:50%;border-right:0}.g2,.g3{grid-template-columns:1fr}.vstrip{align-items:flex-start;flex-direction:column}.score-big{font-size:34px}}
+@media print{body,html{background:#fff}.ct{max-width:none;padding:0}.hdr,.sec,.sstrip{break-inside:avoid}.sec{break-inside:auto}a{color:inherit}.table-wrap{overflow:visible}table{min-width:0}}
 </style>
 </head>
 <body>
-<div class="ct">
+<main class="ct">
+  <header class="hdr">
+    <div class="hdr-meta">投资委员会备忘录 &bull; {{报告或估值日期}}</div>
+    <h1>{{公司或项目名称}}</h1>
+    <div class="sub">{{一句话业务定位}}</div>
+    <div class="vstrip">
+      <div class="vbadge {{verdict-class}}"><span class="dot"></span>{{Memo 唯一投资结论}}</div>
+      <div><div class="score-big">{{Memo 综合评分}}</div><div class="score-lbl">投资评分；Memo 无评分时删除本块</div></div>
+    </div>
+  </header>
 
-<!-- ==================== HEADER ==================== -->
-<div class="hdr">
-  <div class="hdr-meta">Investment Committee Memo &bull; YYYY-MM-DD</div>
-  <h1>标的名</h1>
-  <div class="sub">一句话定位 &bull; 地区 &bull; 累计融资 &bull; 最新轮次</div>
-  <div class="vstrip">
-    <div class="vbadge VERDICT_CLASS_REQUIRED"><span class="dot"></span> MEMO VERDICT (EXACT)</div>
-    <div><div class="score-big">0.00</div><div class="score-lbl">/ 10 投资评分</div></div>
+  <!-- Memo 有完整评分卡时保留，否则删除整个评分概览。 -->
+  <div class="sstrip">
+    <div class="si"><div class="lb">{{维度与权重}}</div><div class="vl">{{Memo 分值}}</div><div class="bar"><div class="bf" style="width:{{对应百分比}}"></div></div></div>
   </div>
-</div>
 
-<!-- ==================== 评分条 strip（有评分卡时）==================== -->
-<div class="sstrip">
-  <div class="si"><div class="lb">维度 (权重%)</div><div class="vl" style="color:var(--yellow)">0.0</div><div class="bar"><div class="bf" style="width:0%;background:var(--yellow)"></div></div></div>
-  <!-- 重复各维度 -->
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">1</span>执行摘要</h2>
+    <p>{{核心建议、最强证据、回报逻辑、决定性风险和推进条件}}</p>
+  </section>
 
-<!-- ==================== 1. 执行摘要 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">1</span> Executive Summary</div>
-  <p>核心判断…</p>
-  <div class="g3" style="margin-top:16px">
-    <div class="card"><div class="card-t">最强维度</div><div class="card-v" style="color:var(--green)">0.0</div><div class="card-n">说明</div></div>
-    <div class="card"><div class="card-t">最弱维度</div><div class="card-v" style="color:var(--red)">0.0</div><div class="card-n">说明</div></div>
-    <div class="card"><div class="card-t">加权回报</div><div class="card-v" style="color:var(--yellow)">0x</div><div class="card-n">MOIC / IRR</div></div>
-  </div>
-  <h4>最强论点</h4>
-  <blockquote>…</blockquote>
-  <h4>最弱缺口</h4>
-  <div class="danger">…</div>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">2</span>投资建议</h2>
+    <p>{{Memo 的唯一投资结论、理由、条件与解除条件所需证据}}</p>
+  </section>
 
-<!-- ==================== 2. 投资建议 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">2</span> Investment Recommendation</div>
-  <p>Memo 原文建议、条件与解决证据…</p>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">3</span>公司与产品概览</h2>
+    <div class="table-wrap"><table><thead><tr><th>项目</th><th>Memo 原值</th><th>来源</th></tr></thead><tbody><tr><td>{{业务项目}}</td><td>{{原值与口径}}</td><td><a href="{{真实 URL}}" target="_blank" rel="noopener noreferrer">{{来源名称}}</a></td></tr></tbody></table></div>
+  </section>
 
-<!-- ==================== 3. 公司/产品概览 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">3</span> Company / Product Overview</div>
-  <table><tr><th>项</th><th>值</th><th>来源</th></tr><tr><td>…</td><td>…</td><td>…</td></tr></table>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">4</span>AI 原生性与产品判断</h2>
+    <p>{{产品判断、最强论点、反证、边界与未知项}}</p>
+  </section>
 
-<!-- ==================== 4. AI-native 产品判断 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">4</span> AI-native Product Judgment</div>
-  <p>产品判断、最强论点、最弱缺口与反证…</p>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">5</span>市场与竞争格局</h2>
+    <p>{{市场范围、竞争结构、差异化、可比对象与反证}}</p>
+  </section>
 
-<!-- ==================== 5. 市场与竞争 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">5</span> Market &amp; Competitive Landscape</div>
-  <table><tr><th>竞品</th><th>定位</th><th>对比</th></tr><tr><td>…</td><td>…</td><td>…</td></tr></table>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">6</span>商业模式与单位经济</h2>
+    <p>{{商业模式、单位经济（Unit Economics）、关键指标、口径与限制}}</p>
+  </section>
 
-<!-- ==================== 6. 商业模式与单位经济 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">6</span> Business Model &amp; Unit Economics</div>
-  <table><tr><th>指标</th><th>值</th><th>状态</th></tr><tr><td>…</td><td>…</td><td><span class="t ty">假设</span></td></tr></table>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">7</span>技术、开源生态与护城河</h2>
+    <p>{{技术边界、开源生态、可复制性、护城河证据与反证}}</p>
+  </section>
 
-<!-- ==================== 7. 技术/OSS/生态护城河 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">7</span> Technical / OSS / Ecosystem Moat</div>
-  <p>技术边界、生态证据、可复制性与反证…</p>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">8</span>估值与回报逻辑</h2>
+    <p>{{估值日期、币种、方法、进入价格、回报逻辑与关键假设}}</p>
+    <!-- Memo 有三种情景时可在此加入 components.md 的情景卡。 -->
+  </section>
 
-<!-- ==================== 8. 估值/回报 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">8</span> Valuation / Return Logic</div>
-  <h4>回报情景</h4>
-  <div class="g3">
-    <div class="sc sc-b"><div class="sc-l" style="color:var(--green)">🐂 Bull</div><div class="sc-m" style="color:var(--green)">0x</div><div class="sc-d">…</div></div>
-    <div class="sc sc-a"><div class="sc-l" style="color:var(--yellow)">📊 Base</div><div class="sc-m" style="color:var(--yellow)">0x</div><div class="sc-d">…</div></div>
-    <div class="sc sc-r"><div class="sc-l" style="color:var(--red)">🐻 Bear</div><div class="sc-m" style="color:var(--red)">0x</div><div class="sc-d">…</div></div>
-  </div>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">9</span>投资评分卡</h2>
+    <p>{{各维度分值、权重、加权结果及其业务解释}}</p>
+  </section>
 
-<!-- ==================== 9. 评分卡 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">9</span> Investment Scorecard</div>
-  <div class="pl"><div class="pl-n">A. 维度 (25%)</div><div class="pl-b"><div class="pl-f" style="width:0%;background:var(--yellow)">0.0</div></div></div>
-  <div class="card" style="text-align:center;background:var(--g100);margin-top:16px">
-    <div class="card-t">综合评级</div>
-    <div class="card-v" style="color:var(--yellow);font-size:40px">0.00 / 10</div>
-    <div class="card-n" style="font-size:14px">评级说明</div>
-  </div>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">10</span>核心风险与一票否决项</h2>
+    <p>{{风险、发生条件、影响、缓解措施、剩余不确定性和一票否决项}}</p>
+  </section>
 
-<!-- ==================== 10. 风险/一票否决 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">10</span> Key Risks &amp; One-Vote Veto</div>
-  <table><tr><th>风险</th><th>严重性</th><th>可能性</th><th>缓解</th></tr><tr><td>…</td><td><span class="t tr">高</span></td><td><span class="t ty">中</span></td><td>…</td></tr></table>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">11</span>尽调优先级</h2>
+    <p>{{尽职调查（DD）问题、优先级、验证方法、所需证据和决策用途}}</p>
+  </section>
 
-<!-- ==================== 11. DD 优先级 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">11</span> Due Diligence Priorities</div>
-  <table><tr><th>#</th><th>问题</th><th>验证方式</th></tr><tr><td>1</td><td>…</td><td>…</td></tr></table>
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">12</span>投资论点与跟踪触发器</h2>
+    <p>{{可证伪论点、观察周期、阈值、触发动作与退出条件}}</p>
+  </section>
 
-<!-- ==================== 12. Thesis / Watch Triggers ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">12</span> Thesis Tracking &amp; Watch Triggers</div>
-  <blockquote>可证伪论点…</blockquote>
-  <ul><li>触发条件、阈值与行动…</li></ul>
-</div>
-
-<!-- ==================== 13. 来源/未知项/核验缺口 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">13</span> Sources, Unknowns &amp; Verification Gaps</div>
-  <p style="font-size:13px;color:var(--g500)">来源、反证、未知项、已接受缺口与决策影响…</p>
-</div>
-
-<!-- ==================== 14. Artifact 谱系 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">14</span> Artifact Provenance</div>
-  <table><tr><th>Artifact</th><th>Revision / Digest</th><th>用途</th></tr><tr><td>01–10…</td><td>…</td><td>结论或证据核对…</td></tr></table>
-</div>
-
-<!-- ==================== 15. 完成记录 ==================== -->
-<div class="sec">
-  <div class="st"><span class="n">15</span> Completion Record</div>
-  <p>Status、inputs consumed、obligation results、unknowns、consumer notes…</p>
-</div>
-
-</div>
+  <section class="sec">
+    <h2 class="st"><span class="n">13</span>来源、未知项与核验缺口</h2>
+    <p>{{可点击来源、仍未知的内容、为什么重要、当前保守处理、再核验所需证据或触发条件}}</p>
+  </section>
+</main>
 </body>
 </html>

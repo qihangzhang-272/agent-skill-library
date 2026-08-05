@@ -12,7 +12,7 @@ This is an internal method of `investment-competitive-landscape`, not a standalo
 - **Angle**: Neutral landscape vs. thematic thesis (e.g., "AI infrastructure buildout")
 - **Universe**: Public companies only, or include private?
 
-Use the accepted upstream Artifacts and frozen Workflow. In a managed run, do not stop to ask these questions again; mark a decision-critical ambiguity as `REWORK`, or state a conservative assumption when it does not distort the analysis.
+Use the supplied upstream Artifacts and Workflow. Do not ask questions already answered there; for a decision-critical ambiguity identify the responsible Skill, missing information, and impact, or state a conservative assumption when it does not distort the analysis.
 
 ### Step 2: Market Overview
 

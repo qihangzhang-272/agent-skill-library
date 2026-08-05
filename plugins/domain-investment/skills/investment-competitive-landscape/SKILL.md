@@ -5,76 +5,47 @@ description: Build the market and competitive landscape layer for an AI investme
 
 # Investment Competitive Landscape
 
-Every investment memo needs a competitive landscape layer.
-
-This node answers: what market is this case in, who matters, and why this company can or cannot win?
-
-Standalone use and managed-workflow use MUST apply the same market definition, competitor coverage, data comparability, moat tests, counterevidence, and scenario discipline. A workflow may bind inputs and output path, but it cannot abbreviate the analysis.
+Answer what market the case is in, who matters, and why the company can or cannot win. Standalone and workflow use apply the same market definition, competitor coverage, comparability, moat, counterevidence, and scenario standards.
 
 ## References
 
-Read when relevant as internal methods of this Skill:
+Read as relevant internal methods:
 
-- `references/competitive-analysis.md` for competitor mapping, positioning, moat assessment, and bull/base/bear scenarios.
+- `references/competitive-analysis.md` for mapping, positioning, moat, and bull/base/bear scenarios.
 - `references/frameworks.md` for 2x2 matrix axes.
 - `references/schemas.md` for M&A and scenario tables.
-- `references/sector-overview.md` for sector size, value chain, drivers, and market structure.
-- `references/idea-generation.md` for thematic sweep and idea shortlist logic.
-- `references/market-researcher-agent.md` for integrating sector, landscape, comparable evidence, and thematic-candidate logic inside this Skill. The legacy filename does not denote a separate Agent.
+- `references/sector-overview.md` for sector size, value chain, drivers, and structure.
+- `references/idea-generation.md` for thematic sweep and shortlist logic.
+- `references/market-researcher-agent.md` for integrating sector, landscape, comparable evidence, and thematic candidates. The legacy filename is not a separate Agent.
 
-Do not invoke any reference as a Skill or Agent. Do not call a comps, idea-generation, note-writing, or presentation Skill from this node.
+Do not invoke references or another analytical capability as a Skill from this node.
 
-## Managed Workflow Contract
+## Input and rework
 
-When the frozen Workflow binds this node, consume exactly:
+In the investment Workflow, read `02-fact-pack.md` and `03-product-judgment.md`; write one independent `04-competitive-landscape.md`.
 
-- `node-output:fact-pack` (`02-fact-pack.md`);
-- `node-output:product-judgment` (`03-product-judgment.md`).
-
-Both inputs must already be accepted and current. If source facts or product judgments are insufficient, reject the responsible upstream obligation instead of filling it invisibly here.
-
-Produce exactly one independent node Artifact: `artifacts/04-competitive-landscape.md`.
-
-The direct consumer is `investment-unit-economics`. It must accept all required quality obligations and handoff sections. A rejection returns this node to `REWORK` with the missing obligation and required supplement.
+If source facts or product judgments are materially insufficient, tell the Host which responsible Skill must add what and why; do not invisibly reconstruct the responsible analysis. For unavailable market or competitor facts, explain in business language what is missing, why it is unavailable, how it affects the decision, the conservative treatment, and when to revisit it, then continue.
 
 ## Output
 
 ```text
-Status: READY / READY-WITH-GAPS / REWORK
-Market definition:
-Industry-defining metrics:
-Market size / growth:
-Value chain:
-Competitor universe:
-Competitor grouping:
-Positioning visualization:
-Target company position:
-Moat assessment:
-Bull / base / bear:
-Strategic context:
-Competitive risks:
-Counterevidence and disconfirming cases:
-Evidence references and periods:
-Assumptions:
-Unknowns with attempts and decision impact:
-  attemptRefs:
-  boundedAttempts:
-    limit:
-    used:
-    exhausted:
-  reason:
-  decisionImpact:
-  fallback:
-  revisitTrigger:
-Handoff for investment-unit-economics:
+Market definition
+Industry-defining metrics
+Market size / growth
+Value chain
+Competitor universe and grouping
+Positioning visualization
+Target company position
+Moat assessment
+Bull / base / bear
+Strategic context
+Competitive risks
+Counterevidence and disconfirming cases
+Evidence references and periods
+Assumptions
+Unknowns and decision impact
 ```
 
-Every market number and competitor metric must have a dated source and comparable definition. Missing data must be shown as unknown or estimate with its basis, never left blank or invented.
+Every market number and competitor metric needs a dated source and comparable definition. Show missing data as unknown or a labeled estimate with basis. Market definition, universe construction, moat tests, and scenarios must still be completed.
 
-Completion states:
-
-- `READY`: required market, competitor, positioning, moat, scenario, and evidence obligations are satisfied.
-- `READY-WITH-GAPS`: only external market or competitor data remains unavailable; copy the Plan-frozen limit, used attempts and `exhausted=true`, then record attempts, reason, impact, fallback, and revisit trigger. Market definition, universe construction, moat tests, and scenarios themselves cannot be gaps.
-- `REWORK`: the universe, metric definitions, citations, competing explanations, or required synthesis is incomplete and can still be corrected.
-
-After consumer acceptance, return control to the current Host owner. Do not invoke `investment-unit-economics` or any later Skill, and do not advance the Workflow yourself.
+Do not invoke the next Skill; finish the Artifact and let the Workflow continue.

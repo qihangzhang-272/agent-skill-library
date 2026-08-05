@@ -6,7 +6,7 @@ This is an optional internal method of `investment-competitive-landscape`, not a
 
 ### Step 1: Define Search Criteria
 
-Derive or record the following parameters from accepted inputs:
+Derive or record the following parameters from supplied inputs:
 - **Direction**: Long ideas, short ideas, or both
 - **Market cap**: Large, mid, small, micro
 - **Sector**: Specific sector or cross-sector
@@ -62,7 +62,7 @@ Run screens based on the style:
 
 ### Step 3: Thematic Sweep
 
-For thematic ideas, use only the theme, candidate universe, and evidence already present in the accepted inputs:
+For thematic ideas, use only the theme, candidate universe, and evidence already present in the supplied inputs:
 
 1. Restate the accepted thesis (e.g., "AI infrastructure spending accelerates through 2026").
 2. Map the accepted candidates across the value chain — direct versus indirect exposure.
@@ -70,7 +70,7 @@ For thematic ideas, use only the theme, candidate universe, and evidence already
 4. Assess which accepted names appear priced in versus under-appreciated, with explicit evidence and assumptions.
 5. Identify second-order beneficiaries only when they already appear in the accepted candidate universe.
 
-This method does not research a new theme, search for new names, or expand the universe. If the accepted inputs do not contain enough evidence or candidates, return the missing obligation to `fact-pack` through the current Host owner.
+This method does not research a new theme, search for new names, or expand the universe. If the supplied inputs lack evidence or candidates, identify what `fact-pack` must add.
 
 ### Step 4: Idea Presentation
 
@@ -95,7 +95,7 @@ For each idea that passes the screen, present:
 **Key Risks:**
 - What would make this wrong
 
-**Questions for the Host owner:**
+**Questions for the user:**
 - Which evidence or analysis would be needed before this candidate could enter a later approved workflow?
 
 ### Step 5: Contribution to `04-competitive-landscape.md`

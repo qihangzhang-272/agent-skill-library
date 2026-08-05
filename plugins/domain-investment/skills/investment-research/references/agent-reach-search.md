@@ -79,6 +79,6 @@ Stop and report coverage when:
 - The research question is answered with enough source diversity.
 - Required surfaces have been covered or explicitly failed.
 - Further search is producing duplicates.
-- The fact-collection obligation is complete and any next step belongs to the current Host owner or frozen Workflow.
+- The fact-collection obligation is complete; this internal method never decides the next Skill.
 
 This is an internal search method. It never invokes another Skill or advances the Workflow.

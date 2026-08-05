@@ -123,5 +123,5 @@ Claude Code plugin 既是分发层也是源内容层——三层架构下，源�
 - 改动技能正文后，同步 bump 对应插件 `plugins/<plugin>/.claude-plugin/plugin.json` 的 `version`。
 - 新增技能/领域/链时，用 `skill-architecture` 元技能生成骨架，不要手创建 skill 文件夹。
 - 每次改变可分发插件内容时，运行 `claude plugin validate . --strict` 与 `node scripts/validate-repository.mjs --base HEAD`；两项均通过才允许推送。
-- 每次改变调用链时，同步更新对应 `docs/workflows/` 和 orchestrator 的 `references/chains/`。
+- 调用链的节点顺序、输入和 Artifact 只在 orchestrator 的 `references/chains/` 维护；`docs/workflows/` 只解释用途和边界并链接权威 chain，不复制事实表。
 - 每次改变索引结构时，同步更新 `docs/governance/`。

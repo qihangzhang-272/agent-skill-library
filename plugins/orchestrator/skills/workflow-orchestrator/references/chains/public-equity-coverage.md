@@ -1,5 +1,7 @@
 # Chain: Public Equity Coverage
 
+> 状态：Library-native legacy chain，尚未迁移为 ASL-WEP 稳定 Workflow；迁移前不得冒充已经通过本地 Skill 合同和 Harness 验证的 Profile。
+
 ## 适用
 
 对已上市公司做首次覆盖、深度股票研究、目标价/评级框架、业绩前瞻，或需要机构风格公开市场研究报告时使用。它不替代私募股权 IC memo 链，也不适用于只有泛行业观点而没有明确标的的请求。

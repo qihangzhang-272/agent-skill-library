@@ -11,7 +11,7 @@ Built from: Bessemer Venture Partners Data 3.0 Roadmap, Oxx VC, Basis Set Ventur
 ## Step 1 — Pre-Evaluation Fact Sheet & Macro Gate
 
 ### 1.1 Pre-Evaluation Fact Sheet
-Before scoring, extract the following seven items from the accepted input Artifacts or standalone materials. Each item must cite its source or be marked `not found`; this method does not launch a separate search flow.
+Before scoring, extract the following seven items from supplied Artifacts or standalone materials. Each item must cite its source or be marked `not found`; this method does not launch a separate search flow.
 
 1. **GitHub Metrics:** Stars, Monthly Active Contributors (last 30d), External Contributor %, Dependent Repositories.
 2. **Team Background:** Founders' prior OSS contributions, PMC/Committer status, prior infrastructure company experience.

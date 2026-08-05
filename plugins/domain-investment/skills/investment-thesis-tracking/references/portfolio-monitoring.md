@@ -1,10 +1,10 @@
 # Internal Method: Portfolio and KPI Monitoring
 
-Use this method inside `investment-thesis-tracking` when accepted inputs contain portfolio-company or recurring operating updates. It is not an independent ingestion service, dashboard, or persistent monitoring system.
+Use this method inside `investment-thesis-tracking` when supplied inputs contain portfolio-company or recurring operating updates. It is not an independent ingestion service, dashboard, or persistent monitoring system.
 
 ## Establish the comparison basis
 
-Record company, reporting period, as-of date, currency/units, budget or prior-plan version, actual-data source, prior Artifact revision, and current thesis pillars.
+Record company, reporting period, as-of date, currency/units, budget or prior-plan version, actual-data source, prior Artifact, and current thesis pillars.
 
 ## KPI families
 

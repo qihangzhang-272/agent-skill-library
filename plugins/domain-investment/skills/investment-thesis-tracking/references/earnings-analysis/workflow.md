@@ -1,6 +1,6 @@
 # Detailed Internal Method for Earnings Updates
 
-This method operates only on dated materials already accepted into the Run or supplied for standalone use. It never schedules searches, invokes another capability, or creates a separate office document.
+This method operates only on dated materials supplied as inputs. It never schedules searches, invokes another capability, or creates a separate office document.
 
 ## Phase 1: Verify the evidence set
 
@@ -18,7 +18,7 @@ Stop and return the evidence gap when:
 - consensus lacks a date or definition;
 - prior guidance cannot be established;
 - a key claim relies only on commentary without the underlying figure;
-- the latest required period is not present in accepted inputs.
+- the latest required period is not present in supplied inputs.
 
 ### 3. Extract the source table
 
@@ -97,4 +97,4 @@ Update risks, DD items, catalysts, KPI thresholds, and exit conditions. Preserve
 
 ## Completion result
 
-Integrate the analysis into `09-thesis-tracking.md`. If the evidence set fails the verification gate, return the responsible gap through the current Host owner instead of continuing with stale or mismatched data.
+Integrate the analysis into `09-thesis-tracking.md`. If the evidence set fails verification, identify the responsible gap instead of continuing with stale or mismatched data.

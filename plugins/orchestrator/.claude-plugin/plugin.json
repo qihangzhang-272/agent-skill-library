@@ -1,7 +1,7 @@
 {
   "name": "orchestrator",
   "displayName": "Orchestrator",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "薄路由入口：意图->领域->固定 chain 引用；当前 Host Session 执行，链定义存于 references/chains。",
   "author": { "name": "Agent Skill Library Maintainers" },
   "dependencies": [

@@ -2,96 +2,33 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-ai-product-judgment.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:ff0da587e7b5c07bc0f740cdf56d5f38b1b78a40a34249044cb54fb66a424234
 spec:
-  subject:
-    skillId: investment-ai-product-judgment
-    skillRevision: 1
-    skillContentDigest: sha256:3b30adfa831460e3a14d430aa8793b4e79c8443a62a218cad4659ab220f3c6b5
-  reviewState: approved
-  builtFromFiles:
-    - path: references/ai-product-analyzer.md
-      role: method-reference
-      digest: sha256:28e831c213804099d6b9e4af98fb5ee377a335ef487c550cd7f3ddce9c910cb6
-    - path: references/business-model.md
-      role: method-reference
-      digest: sha256:feaadf283855b6413efc2eb7119c76dea1d8bdcea1d16874c86e805a821d2ecf
-    - path: references/data-agent.md
-      role: method-reference
-      digest: sha256:ed1205a9999545ccd6de29457ec55c1f34629d5811bc16d13e8411d8e3bf88ea
-    - path: references/narrative-audit.md
-      role: method-reference
-      digest: sha256:ea587b0a4cdb243b3e18744f3e4245dcb67e788e0d32a80b6c2526033be1941b
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:91cddd685b1d465ece1110a1d48c548c99e92a7394a9a46e055e79d455c6ea1f
+  builtFrom:
+    - SKILL.md
+    - references/ai-product-analyzer.md
+    - references/business-model.md
+    - references/data-agent.md
+    - references/narrative-audit.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/03-product-judgment.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: applicable-reference-routing
-      requirement: 先判断并读取所有适用内部 reference；managed workflow 至少读取一个适用 reference 并记录选择理由，输入过薄时不得降级为轻量模式
+      requirement: 先判断并读取所有适用内部 reference；投资工作流至少读取一个适用 reference 并记录选择理由，输入过薄时不得降级为轻量意见
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: bp-eleven-part-judgment
       requirement: 完整输出 Purpose、Problem、Solution、Product、Why Now、Market、Business Model、Competition、Traction、Team/GTM、Financials/Ask 十一段判断
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: ai-native-business-narrative
       requirement: 分别检验 AI 原生性、真实业务价值和叙事强度，避免把技术新颖度直接等同投资价值
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: evidence-backed-verdict
       requirement: 每个核心产品结论都连接输入事实、证据或明确假设，禁止无来源补造产品能力
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: counterargument-and-boundaries
       requirement: 给出最强项、最弱项、反方解释、结论边界以及会改变判断的新证据
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得将未知写成零或事实
+      required: true
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 03-product-judgment.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/03-product-judgment.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

@@ -1,12 +1,12 @@
 # Internal Method: Earnings Preview
 
-Use this method inside `investment-thesis-tracking` only when accepted inputs contain the required dated company, consensus, and thesis evidence. It does not launch a search or produce a separate earnings document.
+Use this method inside `investment-thesis-tracking` only when supplied inputs contain the required dated company, consensus, and thesis evidence. It does not launch a search or produce a separate earnings document.
 
 ## Verify the setup
 
 State company/ticker, fiscal quarter and year, expected report date, as-of date, consensus-source date, current recommendation/conviction, and input revisions. Fiscal period must come from supplied company evidence, not inference from the calendar date.
 
-If the relevant period or consensus basis is missing or stale, record the responsible evidence gap and return `REWORK` or a bounded `READY-WITH-GAPS` through the Host.
+If the relevant period or consensus basis is missing or stale, identify the responsible evidence gap; record its impact and a conservative fallback before continuing.
 
 ## Establish expectations
 
@@ -16,7 +16,7 @@ Capture:
 - segment, geography, product, or KPI expectations that matter to the thesis;
 - buy-side or management hurdle when explicitly evidenced;
 - prior guidance and the assumptions embedded in consensus;
-- recent operational signals already present in accepted inputs.
+- recent operational signals already present in supplied inputs.
 
 Date every expectation and keep company guidance, market consensus, and analyst assumption separate.
 

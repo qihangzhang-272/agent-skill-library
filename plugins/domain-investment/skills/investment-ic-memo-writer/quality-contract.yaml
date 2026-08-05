@@ -2,110 +2,41 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-ic-memo-writer.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:3ee6f779b30254de4ec6efb95181c7d5b0d7f2c00596c24af7dbe0be9e80ed11
 spec:
-  subject:
-    skillId: investment-ic-memo-writer
-    skillRevision: 1
-    skillContentDigest: sha256:8ca4c6fe658a00cb790c9d095f4205c6f000eee3e3db573adf6a821e0b59fb1a
-  reviewState: approved
-  builtFromFiles:
-    - path: references/memo-assembly.md
-      role: method-reference
-      digest: sha256:ca27119fa9d1a4ab19f250460ba21c2d4b1edc4d4fd8fa02f358742eddfe7272
-    - path: references/pe-deal-addendum.md
-      role: method-reference
-      digest: sha256:2804306986cfbd9e9d5ea21253647d69415f735ef2056383215299023027110b
-    - path: references/quality-checklist.md
-      role: quality-checklist
-      digest: sha256:4106955ed302c281c9bbca99311bd111ea43144c71c26bce0f7b9aab1777b597
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:0979dd5f0a4ef025fee1336dc14e47c99aa5daa3049ccd33b1426a79d9691178
+  builtFrom:
+    - SKILL.md
+    - references/memo-assembly.md
+    - references/pe-deal-addendum.md
+    - references/quality-checklist.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/10-ic-memo.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
+    - id: no-new-analysis-and-source-fidelity
+      requirement: Memo 只组装 01–09 已有业务内容，不新增搜索、事实、可比对象、评分或估值；数字、日期、币种、单位、期间和情景保持原口径
       required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
-    - id: accepted-input-preflight
-      requirement: 仅在 01–09 Artifact 引用、revision、digest、可接收状态和有效合同结果齐全时组装 Memo
+    - id: thirteen-investor-sections
+      requirement: 完整呈现执行摘要、投资建议、公司与产品概览、AI 原生性与产品判断、市场与竞争格局、商业模式与单位经济、技术开源生态与护城河、估值与回报逻辑、投资评分卡、核心风险与一票否决项、尽调优先级、投资论点与跟踪触发器、来源未知项与核验缺口十三节
       required: true
-      verifier: harness
-      harnessCheck: accepted-input-preflight
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
-    - id: no-new-analysis-and-provenance
-      requirement: Memo 不引入新事实或分析；所有关键结论可追溯到 01–09 的明确 Artifact revision 和位置
+    - id: clickable-external-sources
+      requirement: Memo 中的真实外部来源使用可读名称和可点击的 Markdown URL，不以内部系统文件标识冒充投资人引用
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
-    - id: fifteen-required-sections
-      requirement: 完整保留 Executive Summary、Investment Recommendation、Company/Product、AI-native Product Judgment、Market/Competitive、Business Model/Unit Economics、Technical/OSS/Ecosystem Moat、Valuation/Return、Scorecard、Risks/Veto、DD、Thesis/Watch、Sources/Unknowns/Gaps、Artifact Provenance、Completion Record 十五节
-      required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: conflicts-and-gaps-preserved
-      requirement: 上游冲突、反证、未知项、已接受缺口及其决策影响被忠实保留，不以顺畅叙事掩盖
+      requirement: 前序冲突、反证和未知项被忠实保留；正文写清未知内容、决策影响、保守处理和再核验条件，不以顺畅叙事掩盖
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: decision-consistency
       requirement: 最终建议、评分、估值回报、关键风险、尽调优先级和论点触发条件彼此一致
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: memo-as-sole-conclusion-source
-      requirement: 以 Proceed、Conditional proceed、Watch 或 Pass 结束，并成为视觉报告唯一结论来源，同时保留 01–09 证据谱系
+      requirement: 只保留推进（Proceed）、有条件推进（Conditional proceed）、观察（Watch）或放弃（Pass）中的一个结论，并成为视觉报告唯一业务输入和唯一结论来源
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
+    - id: investor-readable-chinese
+      requirement: 面向中文投资人写作；专业缩写和英文投资术语首次出现时给出准确中文解释，避免用内部工程术语代替业务表达
+      required: true
+    - id: business-body-without-runtime-audit
+      requirement: Memo 只呈现投资业务正文，不展示运行记录或内部检查过程；这些信息由工作区另存
+      required: true
     - id: conditional-private-equity-addendum
-      requirement: 当 private-equity 或交易情境适用时，完整呈现 deal terms、leverage、governance、100-day plan 及 IRR/MOIC drivers；不适用时明确说明原因
+      requirement: 私募股权交易情境适用时，在相应正文章节呈现交易条款、杠杆、治理、百日计划及 IRR/MOIC 驱动并解释术语；不适用时不填充空模板
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 10-ic-memo.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/10-ic-memo.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

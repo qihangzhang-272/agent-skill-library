@@ -51,7 +51,7 @@ Record new or changed risks, catalyst dates/windows, KPI thresholds, financing/g
 
 ## 8. Sources and gaps
 
-List exact supplied materials, dates, covered periods, Artifact revisions, missing items, decision impacts, fallbacks, and revisit triggers.
+List exact supplied materials, dates, covered periods, missing items, decision impacts, fallbacks, and revisit conditions.
 
 ## Writing standard
 

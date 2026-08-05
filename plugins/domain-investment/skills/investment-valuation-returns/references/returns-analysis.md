@@ -68,7 +68,7 @@ For bull, base, and bear cases, show the operating path, exit basis, capital str
 - MOIC and IRR move in the expected direction under sensitivity changes.
 - The downside case does not quietly preserve upside-only assumptions.
 
-## Required method handoff
+## Required method output
 
 ```text
 Entry, financing, operating, and exit assumptions:

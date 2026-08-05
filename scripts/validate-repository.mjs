@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,12 +11,6 @@ const read = (path) => readFileSync(path, "utf8");
 const json = (path) => JSON.parse(read(path));
 const rel = (path) => relative(root, path);
 const posix = (path) => path.replaceAll("\\", "/");
-const sha256 = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
-const textPackageFile = /\.(?:md|html|css|js|mjs|cjs|jsx|ts|tsx|py|toml|json|ya?ml|xml|svg|txt|csv|ini|cfg|sh|ps1)$/i;
-const fileDigest = (path) => {
-  const value = readFileSync(path);
-  return sha256(textPackageFile.test(path) ? value.toString("utf8").replaceAll("\r\n", "\n") : value);
-};
 
 function parseSemVer(value) {
   const match = String(value).match(
@@ -166,30 +159,30 @@ for (const path of runFolderDocs)
     errors.push(`WeChat run folder 未统一为 ${runFolder}: ${path}`);
 
 const investmentChain = [
-  ["01", "source-intake", "topic-research-deposition", "01-source-intake.md"],
-  ["02", "fact-pack", "investment-research", "02-fact-pack.md"],
-  ["03", "product-judgment", "investment-ai-product-judgment", "03-product-judgment.md"],
-  ["04", "competitive-landscape", "investment-competitive-landscape", "04-competitive-landscape.md"],
-  ["05", "unit-economics", "investment-unit-economics", "05-unit-economics.md"],
-  ["06", "investment-scorecard", "investment-scorecard", "06-investment-scorecard.md"],
-  ["07", "valuation-returns", "investment-valuation-returns", "07-valuation-returns.md"],
-  ["08", "dd-questions", "investment-dd", "08-dd-questions.md"],
-  ["09", "thesis-tracking", "investment-thesis-tracking", "09-thesis-tracking.md"],
-  ["10", "ic-memo", "investment-ic-memo-writer", "10-ic-memo.md"],
-  ["11", "visual-report", "investment-visual-report", "11-visual-report.html"],
+  ["01", "topic-research-deposition", "01-source-intake.md"],
+  ["02", "investment-research", "02-fact-pack.md"],
+  ["03", "investment-ai-product-judgment", "03-product-judgment.md"],
+  ["04", "investment-competitive-landscape", "04-competitive-landscape.md"],
+  ["05", "investment-unit-economics", "05-unit-economics.md"],
+  ["06", "investment-scorecard", "06-investment-scorecard.md"],
+  ["07", "investment-valuation-returns", "07-valuation-returns.md"],
+  ["08", "investment-dd", "08-dd-questions.md"],
+  ["09", "investment-thesis-tracking", "09-thesis-tracking.md"],
+  ["10", "investment-ic-memo-writer", "10-ic-memo.md"],
+  ["11", "investment-visual-report", "11-visual-report.html"],
 ];
 const investmentInputRefs = new Map([
-  ["source-intake", []],
-  ["fact-pack", ["source-intake"]],
-  ["product-judgment", ["fact-pack"]],
-  ["competitive-landscape", ["fact-pack", "product-judgment"]],
-  ["unit-economics", ["fact-pack", "product-judgment", "competitive-landscape"]],
-  ["investment-scorecard", ["fact-pack", "product-judgment", "competitive-landscape", "unit-economics"]],
-  ["valuation-returns", ["fact-pack", "product-judgment", "competitive-landscape", "unit-economics", "investment-scorecard"]],
-  ["dd-questions", ["fact-pack", "product-judgment", "competitive-landscape", "unit-economics", "investment-scorecard", "valuation-returns"]],
-  ["thesis-tracking", ["fact-pack", "product-judgment", "competitive-landscape", "unit-economics", "investment-scorecard", "valuation-returns", "dd-questions"]],
-  ["ic-memo", ["source-intake", "fact-pack", "product-judgment", "competitive-landscape", "unit-economics", "investment-scorecard", "valuation-returns", "dd-questions", "thesis-tracking"]],
-  ["visual-report", ["source-intake", "fact-pack", "product-judgment", "competitive-landscape", "unit-economics", "investment-scorecard", "valuation-returns", "dd-questions", "thesis-tracking", "ic-memo"]],
+  ["topic-research-deposition", []],
+  ["investment-research", ["topic-research-deposition"]],
+  ["investment-ai-product-judgment", ["investment-research"]],
+  ["investment-competitive-landscape", ["investment-research", "investment-ai-product-judgment"]],
+  ["investment-unit-economics", ["investment-research", "investment-ai-product-judgment", "investment-competitive-landscape"]],
+  ["investment-scorecard", ["investment-research", "investment-ai-product-judgment", "investment-competitive-landscape", "investment-unit-economics"]],
+  ["investment-valuation-returns", ["investment-research", "investment-ai-product-judgment", "investment-competitive-landscape", "investment-unit-economics", "investment-scorecard"]],
+  ["investment-dd", ["investment-research", "investment-ai-product-judgment", "investment-competitive-landscape", "investment-unit-economics", "investment-scorecard", "investment-valuation-returns"]],
+  ["investment-thesis-tracking", ["investment-research", "investment-ai-product-judgment", "investment-competitive-landscape", "investment-unit-economics", "investment-scorecard", "investment-valuation-returns", "investment-dd"]],
+  ["investment-ic-memo-writer", ["topic-research-deposition", "investment-research", "investment-ai-product-judgment", "investment-competitive-landscape", "investment-unit-economics", "investment-scorecard", "investment-valuation-returns", "investment-dd", "investment-thesis-tracking"]],
+  ["investment-visual-report", ["investment-ic-memo-writer"]],
 ]);
 
 const investmentChainPath = join(
@@ -200,20 +193,20 @@ const investmentWorkflowPath = join(root, "docs/workflows/investment-product-to-
 const investmentChainText = read(investmentChainPath);
 const investmentWorkflowText = read(investmentWorkflowPath);
 const parsedChainRows = [...investmentChainText.matchAll(
-  /^\|\s*(\d{2})(（可选）)?\s*\|\s*`([^`]+)`\s*\|\s*`(?:domain-[a-z-]+:)?([^`]+)`\s*\|\s*([^|\r\n]+?)\s*\|\s*`artifacts\/([^`]+)`\s*\|$/gm,
+  /^\|\s*(\d{2})(（可选）)?\s*\|\s*`(?:domain-[a-z-]+:)?([^`]+)`\s*\|\s*([^|\r\n]+?)\s*\|\s*`([^`/]+)`\s*\|$/gm,
 )];
-const chainRows = parsedChainRows.map((match) => [match[1], match[3], match[4], match[6]]);
+const chainRows = parsedChainRows.map((match) => [match[1], match[3], match[5]]);
 if (JSON.stringify(chainRows) !== JSON.stringify(investmentChain))
   errors.push("investment-icmemo chain 必须精确声明 10 个必选 Skill + 1 个可选 Visual Skill 及其独立 Artifact");
 for (const match of parsedChainRows) {
   const optionalMarkerIsCorrect = match[1] === "11" ? match[2] === "（可选）" : match[2] === undefined;
   if (!optionalMarkerIsCorrect)
     errors.push(`investment-icmemo 的 ${match[1]} 节点必选/可选标记不符合冻结 10+1 拓扑`);
-  const nodeId = match[3];
-  const actualRefs = [...match[5].matchAll(/`node-output:([^`]+)`/g)].map((item) => item[1]);
-  const expectedRefs = investmentInputRefs.get(nodeId);
+  const skillId = match[3];
+  const actualRefs = [...match[4].matchAll(/`node-output:([^`]+)`/g)].map((item) => item[1]);
+  const expectedRefs = investmentInputRefs.get(skillId);
   if (!expectedRefs || JSON.stringify(actualRefs) !== JSON.stringify(expectedRefs))
-    errors.push(`investment-icmemo 的 ${nodeId} 输入绑定与冻结 10+1 拓扑不一致`);
+    errors.push(`investment-icmemo 的 ${skillId} 输入绑定与冻结 10+1 拓扑不一致`);
 }
 
 for (const text of [investmentChainText, investmentWorkflowText]) {
@@ -226,57 +219,12 @@ if (!/visualizationRequested\s*(?:==|=|`)?\s*true/i.test(investmentChainText))
   errors.push("投研 chain 未声明 visualizationRequested=true 的冻结可选条件");
 if (!investmentChainText.includes("唯一执行者") || !investmentChainText.includes("不是第二调度器"))
   errors.push("投研 chain 未明确当前 Host Session 是唯一执行者且不存在第二调度器");
-const frozenGapAttemptLimit = 2;
-for (const [label, text] of [["chain", investmentChainText], ["workflow doc", investmentWorkflowText]]) {
-  if (!text.includes("gapPolicy.boundedAttempts.limit") || !text.includes("exhausted=true"))
-    errors.push(`投研 ${label} 未冻结 accepted-with-gaps 的尝试上限或未要求 exhausted=true`);
-  const declaredLimit = Number(
-    text.match(/gapPolicy\.boundedAttempts\.limit[^\r\n\d]*`?(\d+)`?/i)?.[1],
-  );
-  if (declaredLimit !== frozenGapAttemptLimit)
-    errors.push(`投研 ${label} 的默认 gap attempt limit 必须冻结为 ${frozenGapAttemptLimit}`);
-}
 
 const investmentSkillRoots = new Map([
   ["topic-research-deposition", "plugins/domain-writing/skills/topic-research-deposition"],
-  ...investmentChain.slice(1).map(([, , skill]) => [skill, `plugins/domain-investment/skills/${skill}`]),
+  ...investmentChain.slice(1).map(([, skill]) => [skill, `plugins/domain-investment/skills/${skill}`]),
 ]);
-const artifactBySkill = new Map(investmentChain.map(([, , skill, artifact]) => [skill, artifact]));
-const unknownEligibleObligations = new Map([
-  ["topic-research-deposition", ["external-information-unavailable"]],
-  ["investment-research", ["external-fact-availability"]],
-  ["investment-ai-product-judgment", []],
-  ["investment-competitive-landscape", ["external-market-competitor-data"]],
-  ["investment-unit-economics", ["external-operating-metrics-benchmarks"]],
-  ["investment-scorecard", []],
-  ["investment-valuation-returns", ["external-valuation-inputs"]],
-  ["investment-dd", []],
-  ["investment-thesis-tracking", []],
-  ["investment-ic-memo-writer", []],
-  ["investment-visual-report", []],
-]);
-
-function packageRole(path) {
-  if (path === "SKILL.md") return "instruction";
-  if (path === "references/quality-checklist.md") return "quality-checklist";
-  if (path.startsWith("references/template/")) return "template";
-  if (path.startsWith("references/cases/")) return "example";
-  if (path.startsWith("references/")) return "method-reference";
-  if (path.startsWith("assets/")) return "asset";
-  if (path.startsWith("scripts/")) return "script";
-  return "package-file";
-}
-
-function expectedPackageFiles(skillRoot) {
-  const contractPath = join(skillRoot, "quality-contract.yaml");
-  return walk(skillRoot)
-    .filter((path) => path !== contractPath && !ignoredFiles.has(posix(rel(path))))
-    .map((path) => {
-      const pathFromSkill = posix(relative(skillRoot, path));
-      return { path: pathFromSkill, role: packageRole(pathFromSkill), digest: fileDigest(path) };
-    })
-    .sort((a, b) => a.path.localeCompare(b.path));
-}
+const artifactBySkill = new Map(investmentChain.map(([, skill, artifact]) => [skill, artifact]));
 
 function parseContractList(text, from, to) {
   const start = text.indexOf(from);
@@ -284,11 +232,9 @@ function parseContractList(text, from, to) {
   return start >= 0 && end > start ? text.slice(start + from.length, end) : "";
 }
 
-function parseBuiltFromFiles(text) {
-  const block = parseContractList(text, "  builtFromFiles:\n", "  obligations:\n");
-  return [...block.matchAll(
-    /    - path: ([^\r\n]+)\r?\n      role: ([^\r\n]+)\r?\n      digest: (sha256:[0-9a-f]{64})/g,
-  )].map((match) => ({ path: match[1], role: match[2], digest: match[3] }));
+function parseBuiltFrom(text) {
+  const block = parseContractList(text, "  builtFrom:\n", "  obligations:\n");
+  return [...block.matchAll(/^    - ([^\r\n]+)$/gm)].map((match) => match[1]);
 }
 
 function duplicateYamlMappingKeys(text) {
@@ -326,11 +272,6 @@ function duplicateYamlMappingKeys(text) {
   return duplicates;
 }
 
-function contractResourceDigest(text) {
-  const canonical = text.replaceAll("\r\n", "\n");
-  return sha256(canonical.replace(/^  digest: sha256:[0-9a-f]{64}\n/m, ""));
-}
-
 for (const [skill, skillRootRel] of investmentSkillRoots) {
   const skillRoot = join(root, skillRootRel);
   const skillPath = join(skillRoot, "SKILL.md");
@@ -339,10 +280,8 @@ for (const [skill, skillRootRel] of investmentSkillRoots) {
   const skillText = read(skillPath);
 
   if (!skillText.includes(artifact)) errors.push(`${skill} 未声明独立 Artifact ${artifact}`);
-  if (!/READY-WITH-GAPS/.test(skillText) || !/REWORK/.test(skillText))
-    errors.push(`${skill} 未声明 READY-WITH-GAPS / REWORK 运行语义`);
-  if (!skillText.includes("boundedAttempts:") || !skillText.includes("exhausted:"))
-    errors.push(`${skill} 未在 Artifact 模板中声明 Plan-frozen boundedAttempts`);
+  if (skillText.includes(`artifacts/${artifact}`))
+    errors.push(`${skill} 的 SKILL.md 不得给相对 artifacts/ 的 Artifact 路径重复添加目录前缀`);
   if (!existsSync(contractPath)) {
     errors.push(`投研 Skill 缺少质量合同: ${posix(rel(contractPath))}`);
     continue;
@@ -350,34 +289,17 @@ for (const [skill, skillRootRel] of investmentSkillRoots) {
 
   const contractText = read(contractPath).replaceAll("\r\n", "\n");
   const contractId = contractText.match(/^  id: ([^\r\n]+)$/m)?.[1];
-  const contractRevision = contractText.match(/^  revision: (\d+)$/m)?.[1];
-  const createdAt = contractText.match(/^  createdAt: ([^\r\n]+)$/m)?.[1];
-  const createdBy = contractText.match(/^  createdBy: ([^\r\n]+)$/m)?.[1];
-  const subjectSkill = contractText.match(/^    skillId: ([^\r\n]+)$/m)?.[1];
-  const subjectRevision = contractText.match(/^    skillRevision: (\d+)$/m)?.[1];
-  const subjectDigest = contractText.match(/^    skillContentDigest: (sha256:[0-9a-f]{64})$/m)?.[1];
-  const declaredResourceDigest = contractText.match(/^  digest: (sha256:[0-9a-f]{64})$/m)?.[1];
-  const artifactPath = contractText.match(/^    workflowPath: ([^\r\n]+)$/m)?.[1];
-  const mediaType = contractText.match(/^      - (text\/(?:markdown|html))$/m)?.[1];
-  const expectedFiles = expectedPackageFiles(skillRoot);
-  const declaredFiles = parseBuiltFromFiles(contractText);
-  const manifestPayload = expectedFiles
-    .map((item) => `${item.path}\0${item.role}\0${item.digest}`)
-    .join("\n") + "\n";
-  const expectedContentDigest = sha256(manifestPayload);
+  const artifactPath = contractText.match(/^    path: ([^\r\n]+)$/m)?.[1];
+  const mediaType = contractText.match(/^    mediaType: (text\/(?:markdown|html))$/m)?.[1];
 
   const singletonStructure = [
     /^apiVersion: asl-wep\/v0\.1\.0-draft\.3$/gm,
     /^kind: SkillQualityContract$/gm,
     /^metadata:$/gm,
     /^spec:$/gm,
-    /^  subject:$/gm,
-    /^  reviewState: approved$/gm,
-    /^  builtFromFiles:$/gm,
+    /^  builtFrom:$/gm,
     /^  obligations:$/gm,
     /^  artifact:$/gm,
-    /^  handoff:$/gm,
-    /^    requiredSections:$/gm,
   ];
   const duplicateKeys = duplicateYamlMappingKeys(contractText);
   const unsupportedYamlSyntax = [
@@ -393,72 +315,41 @@ for (const [skill, skillRootRel] of investmentSkillRoots) {
     || unsupportedYamlSyntax
     || /\t|^---$|(?:^|\s)[&*!][A-Za-z0-9_-]+/m.test(contractText))
     errors.push(`${skill} 的质量合同 envelope 不正确`);
-  if (contractId !== `${skill}.quality` || !/^\d{4}-\d{2}-\d{2}T/.test(createdAt ?? "") || !createdBy)
-    errors.push(`${skill} 的质量合同 metadata 不完整`);
-  if (!contractRevision || !subjectRevision || subjectSkill !== skill)
-    errors.push(`${skill} 的质量合同 revision/subject 不正确`);
-  if (!/^  reviewState: approved$/m.test(contractText))
-    errors.push(`${skill} 的质量合同必须处于 approved`);
-  if (JSON.stringify(declaredFiles) !== JSON.stringify(expectedFiles))
-    errors.push(`${skill} 的 builtFromFiles 未精确覆盖当前 package 或 digest/role 已失效`);
-  if (subjectDigest !== expectedContentDigest)
-    errors.push(`${skill} 的 skillContentDigest 与当前 package manifest 不一致`);
-  if (declaredResourceDigest !== contractResourceDigest(contractText))
-    errors.push(`${skill} 的质量合同 resource digest 不一致`);
-  if (artifactPath !== `.asl/runs/<run-id>/artifacts/${artifact}`)
-    errors.push(`${skill} 的质量合同 workflowPath 不正确`);
+  if (contractId !== `${skill}.quality`) errors.push(`${skill} 的质量合同 metadata.id 不正确`);
+
+  const builtFrom = parseBuiltFrom(contractText);
+  if (!builtFrom.includes("SKILL.md") || new Set(builtFrom).size !== builtFrom.length)
+    errors.push(`${skill} 的 builtFrom 必须包含 SKILL.md 且不能重复`);
+  for (const packageFile of builtFrom) {
+    const packagePath = resolve(skillRoot, packageFile);
+    if (relative(skillRoot, packagePath).startsWith("..")
+      || !existsSync(packagePath)
+      || !statSync(packagePath).isFile())
+      errors.push(`${skill} 的 builtFrom 指向不存在的 package 文件: ${packageFile}`);
+  }
+
+  if (artifactPath !== artifact)
+    errors.push(`${skill} 的质量合同 artifact.path 不正确`);
   const expectedMediaType = artifact.endsWith(".html") ? "text/html" : "text/markdown";
   if (mediaType !== expectedMediaType)
-    errors.push(`${skill} 的质量合同 mediaTypes 不正确`);
+    errors.push(`${skill} 的质量合同 artifact.mediaType 不正确`);
   if (!/^    independent: true$/m.test(contractText))
     errors.push(`${skill} 的质量合同必须要求独立 Artifact`);
 
   const obligations = parseContractList(contractText, "  obligations:\n", "  artifact:\n");
   const obligationBlocks = obligations.split(/(?=    - id: )/).filter((item) => item.trim());
   const obligationIds = obligationBlocks.map((item) => item.match(/^    - id: ([^\r\n]+)$/m)?.[1]);
-  if (obligationBlocks.length < 4 || obligationIds.some((id) => !id))
-    errors.push(`${skill} 的质量合同义务过少或缺少 id`);
+  if (!obligationBlocks.length || obligationIds.some((id) => !id))
+    errors.push(`${skill} 的质量合同至少需要一个业务义务`);
   if (new Set(obligationIds).size !== obligationIds.length)
     errors.push(`${skill} 的质量合同 obligation id 重复`);
-  const actualUnknownEligible = obligationBlocks
-    .filter((item) => /^        unknownAllowed: true$/m.test(item))
-    .map((item) => item.match(/^    - id: ([^\r\n]+)$/m)?.[1]);
-  if (JSON.stringify(actualUnknownEligible) !== JSON.stringify(unknownEligibleObligations.get(skill)))
-    errors.push(`${skill} 的 unknownAllowed 必须只用于冻结的外部证据义务`);
-  if (!obligationBlocks.some((item) => /^      verifier: harness$/m.test(item))
-    || !obligationBlocks.some((item) => /^      verifier: consumer$/m.test(item)))
-    errors.push(`${skill} 的质量合同必须同时包含 Harness 结构检查和消费者语义验收`);
+  if (!obligationBlocks.some((block) => /^      required: true$/m.test(block)))
+    errors.push(`${skill} 的质量合同至少需要一个 required 业务义务`);
   for (const block of obligationBlocks) {
     const exactlyOne = (pattern) => [...block.matchAll(pattern)].length === 1;
-    if (!exactlyOne(/^      requirement: .+$/gm) || !exactlyOne(/^      required: true$/gm))
+    if (!exactlyOne(/^      requirement: .+$/gm) || !exactlyOne(/^      required: (?:true|false)$/gm))
       errors.push(`${skill} 的质量合同存在缺失 requirement/required 的义务`);
-    if (!exactlyOne(/^      verifier: (?:harness|consumer)$/gm))
-      errors.push(`${skill} 的质量合同存在非法 verifier`);
-    if (!exactlyOne(/^        answerRefRequired: (?:true|false)$/gm)
-      || !exactlyOne(/^        evidenceRefsRequired: (?:true|false)$/gm)
-      || !exactlyOne(/^        unknownAllowed: (?:true|false)$/gm))
-      errors.push(`${skill} 的质量合同 completion 语义不完整`);
-    if (/^        unknownAllowed: true$/m.test(block)) {
-      const requiredGapFields = [
-        "attemptRefs", "boundedAttempts", "reason", "decisionImpact", "fallback", "revisitTrigger",
-      ];
-      const declaredGapFields = [...block.matchAll(/^          - ([^\r\n]+)$/gm)].map(
-        (match) => match[1],
-      );
-      if (JSON.stringify(declaredGapFields) !== JSON.stringify(requiredGapFields))
-        errors.push(`${skill} 的可留空义务 gap 字段不完整或顺序不规范`);
-    } else if (/^        unknownRequires:$/m.test(block)) {
-      errors.push(`${skill} 的不可留空义务不应声明 unknownRequires`);
-    }
   }
-  const handoffBlock = contractText.slice(contractText.indexOf("    requiredSections:\n") + "    requiredSections:\n".length);
-  const handoffSections = [...handoffBlock.matchAll(/^      - ([^\r\n]+)$/gm)].map((match) => match[1]);
-  const expectedHandoffSections = [
-    "status", "inputsConsumed", "obligationResults", "facts", "judgments", "assumptions",
-    "counterevidence", "unknowns", "evidenceRefs", "consumerNotes",
-  ];
-  if (JSON.stringify(handoffSections) !== JSON.stringify(expectedHandoffSections))
-    errors.push(`${skill} 的 handoff requiredSections 不完整或顺序不规范`);
 }
 
 for (const [, skillRootRel] of investmentSkillRoots) {
@@ -515,9 +406,6 @@ if (base && !/^0+$/.test(base)) {
     else if (compareSemVer(currentSemVer, previousSemVer) <= 0)
       errors.push(`plugin 内容已变化但版本未严格升级: ${name} (${previous} -> ${current})`);
   }
-  const chainChanged = changed.some((path) => path.includes("workflow-orchestrator/references/chains/"));
-  if (chainChanged && !changed.some((path) => path.startsWith("docs/workflows/")))
-    errors.push("chain 已变化，但 docs/workflows/ 没有同步更新");
 }
 
 if (errors.length) {

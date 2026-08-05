@@ -55,7 +55,7 @@ Use only relationship history explicitly supplied as a managed input or approved
 - previously-passed — supplied material records a prior pass and reason;
 - unknown — no authorized relationship data is available.
 
-Do not search Gmail, Slack, CRM, or another private system from this method. Do not ask the user to confirm every company during a managed run. Record missing relationship context as an unknown and let the Host owner decide whether a later authorized workflow should obtain it.
+Do not search Gmail, Slack, CRM, or another private system from this method. Do not ask the user to confirm every company during a Workflow. Record missing relationship context as an unknown; a later user-authorized Workflow may obtain it.
 
 ## 4. Rank the Shortlist
 

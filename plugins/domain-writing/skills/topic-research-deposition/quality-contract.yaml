@@ -2,112 +2,33 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: topic-research-deposition.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:988bcdf95585a8ef7fb3ddf45863b8e76a36ef12fbb1cb3ebe3f604ad8ec7c5c
 spec:
-  subject:
-    skillId: topic-research-deposition
-    skillRevision: 1
-    skillContentDigest: sha256:b66bcf7d03c4b0e9db167985ef7f6bfec3f080de3d0ceb9735c448220aff4571
-  reviewState: approved
-  builtFromFiles:
-    - path: references/agent-reach-search.md
-      role: method-reference
-      digest: sha256:a1ed3c5c415433c8c0af620073520d6add557f9b47ed9715cdba7fb51771fba8
-    - path: references/platform-commands.md
-      role: method-reference
-      digest: sha256:c644d358ecd7457e178bdcede37bb153bdb044907f285941ad48ff0916f5e288
-    - path: references/product-investment-research.md
-      role: method-reference
-      digest: sha256:49c7b554bf4aa7f6016a5fbac1e8409d0af7982fd7fdc27cbfb2ef63b9b56f98
-    - path: references/quality-checklist.md
-      role: quality-checklist
-      digest: sha256:ea7bb1b4d64cb5b7a98239e5275219cc037276ca0c45685f6535a4f3c1d3165b
-    - path: references/wechat-extraction.md
-      role: method-reference
-      digest: sha256:e32a3ccd23179e24fa8bfdc13db98702d416202849b10343963461b091b16b44
-    - path: references/wechat-viral-logic.md
-      role: method-reference
-      digest: sha256:aa620f9b6d969cc30e6b96e74c8aecdf6e4c2cd9d0a7397451c0d0181d78b5a1
-    - path: references/wechat-writing-research.md
-      role: method-reference
-      digest: sha256:acd78fdee0485387a255a2d15ed7b020bc958593c3f68abd1d47f95cbb547f7c
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:3bd7f9187ea634fc53d0b6eb8002c03e50d1f3afbf8ed31a1b4a67c8a7456b31
+  builtFrom:
+    - SKILL.md
+    - references/agent-reach-search.md
+    - references/platform-commands.md
+    - references/product-investment-research.md
+    - references/quality-checklist.md
+    - references/wechat-extraction.md
+    - references/wechat-viral-logic.md
+    - references/wechat-writing-research.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/01-source-intake.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: mode-scope-and-log
-      requirement: 声明本次 mode、研究对象、决策问题、范围与时间边界，并记录实际执行的检索和阅读路径
+      requirement: 声明模式、研究对象、决策问题、范围与时间边界，并记录实际执行的检索和阅读路径
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: source-deposition-provenance
-      requirement: 所有采用来源都沉淀身份、日期、取得位置、用途与可靠性说明，使后续可回查原证据
+      requirement: 所有采用来源都记录身份、日期、取得位置、用途与可靠性，使后续可回查原证据
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: mode-required-coverage
-      requirement: 覆盖所选 mode 的全部适用研究区域；managed investment 覆盖公司、产品、市场、竞争、商业模式、团队、融资和风险，WeChat mode 完成规定截图与归档，任何外部证据缺失都显式标注
+      requirement: 覆盖所选模式的全部适用研究区域；投资研究覆盖公司、产品、市场、竞争、商业模式、团队、融资和风险，微信模式完成规定截图与归档
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: epistemic-separation
       requirement: 事实、来源表述、分析判断、假设、反证和来源冲突被清楚分开，不得以叙事流畅掩盖矛盾
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
-    - id: external-information-unavailable
-      requirement: 只有外部信息在 Plan 冻结的不同来源或验证方法全部耗尽后仍不可得时，才允许记录为 gap，并保留原因、决策影响、保守处理和重新检查条件
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得将未知写成零或事实
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: true
-        unknownRequires:
-          - attemptRefs
-          - boundedAttempts
-          - reason
-          - decisionImpact
-          - fallback
-          - revisitTrigger
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 01-source-intake.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/01-source-intake.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

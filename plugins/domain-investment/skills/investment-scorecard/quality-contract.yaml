@@ -2,110 +2,38 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-scorecard.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:6deab603142752b608da19a7a770ae6983421d5f9d68812d0273f73c6e7214c8
 spec:
-  subject:
-    skillId: investment-scorecard
-    skillRevision: 1
-    skillContentDigest: sha256:842fb8ed17a20ea56e05123da182350cacfa912b144a5d276d43866fe8f10537
-  reviewState: approved
-  builtFromFiles:
-    - path: references/cases/hugging-face.md
-      role: example
-      digest: sha256:fbc3ce5fd0c2662f8372271291fa672e945ff5c1d1aa8746d12c5e12c80c6bfc
-    - path: references/cases/inferact-vllm.md
-      role: example
-      digest: sha256:2913b30371345e3b7fb7d3010267618e60901afebdf69fb589a10c07021b951a
-    - path: references/deal-screening.md
-      role: method-reference
-      digest: sha256:ee94d48774e914fb4d8e489908aac1949be92d58f2ac4e9585221687dec62a07
-    - path: references/oss-investment-scorecard.md
-      role: method-reference
-      digest: sha256:7436b047775cf68dce74e0eceef30283d477931b9ee716694f934369cd44f3ec
-    - path: references/scored-examples.md
-      role: method-reference
-      digest: sha256:9f7fa7818218b993d2c47c7f77d81ed902dce7010415ebaf5241ef1d0d91042b
-    - path: references/template/evaluation-template.md
-      role: template
-      digest: sha256:ad02ae26bfd967b765b09c974969e02c25fd3df465e65b7e256d6a3ce6b9c0a6
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:926b999cb4884a973db95d01341a7e4781fc9da871ab044ad944f9ee7d2c4fac
+  builtFrom:
+    - SKILL.md
+    - references/cases/hugging-face.md
+    - references/cases/inferact-vllm.md
+    - references/deal-screening.md
+    - references/oss-investment-scorecard.md
+    - references/scored-examples.md
+    - references/template/evaluation-template.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/06-investment-scorecard.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: decision-basis-and-adaptation
-      requirement: 声明 as-of 日期、币种和单位、投资问题、阶段、已绑定基金标准，以及 OSS 或非 OSS 的五维框架适配
+      requirement: 声明 as-of 日期、币种和单位、投资问题、阶段、已提供的基金标准，以及 OSS 或非 OSS 的五维框架适配
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: macro-gate
       requirement: 逐项完成 macro gate；Q1/Q2 的 NO 与 Q3 的风险语义不得混淆，并说明是否只保留诊断性评分
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: five-dimension-evidence-matrix
       requirement: 对生态或采用、团队与全球化、技术护城河与定位、商业化与 PMF、资本退出路径五维逐项连接证据和反证
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: weighted-arithmetic
       requirement: 权重、原始分、加权分和总分计算可复核，缺失数据的处理不制造虚假精度
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: vetoes-and-reconciliation
       requirement: 只使用明示的一票否决项，并把否决、重大风险、总分和基金标准显式协调
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: recommendation-dd-watch
-      requirement: 形成一致的建议、DD 优先级和可测量 watch triggers，并列出会改变 verdict 的证据
+      requirement: 形成一致的建议、DD 优先级和可测量跟踪触发器，并列出会改变结论的证据
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；缺失数据不得被写成零或虚假精确分数
+      required: true
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 06-investment-scorecard.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/06-investment-scorecard.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

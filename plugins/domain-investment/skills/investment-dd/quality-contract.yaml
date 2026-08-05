@@ -2,101 +2,35 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-dd.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:f50d99d446ae3369564a625aa6bd5b1cf25956002040fd522e5260959321a874
 spec:
-  subject:
-    skillId: investment-dd
-    skillRevision: 1
-    skillContentDigest: sha256:cbe10f06d811b0c011c2508a465791d44f1d891824d659c2b518e7047c36d608
-  reviewState: approved
-  builtFromFiles:
-    - path: references/datapack-builder.md
-      role: method-reference
-      digest: sha256:e8cac02b02714e3cd9c0d96f7bab72bbdc571d98711f63b2cd591118e735e3d9
-    - path: references/dd-checklist.md
-      role: method-reference
-      digest: sha256:8321e69839d87c8b3f4174a61ce3eac7bbf974c08570e738acea6373b82cc873
-    - path: references/dd-meeting-prep.md
-      role: method-reference
-      digest: sha256:35c7dec67c1615886da12554e670b0eb0aa590a3f7be64e20c6083db38451739
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:2749b6a2b054a7c3882b36b5436c51fb45b3dbff7ca99b1414599747551c2460
+  builtFrom:
+    - SKILL.md
+    - references/datapack-builder.md
+    - references/dd-checklist.md
+    - references/dd-meeting-prep.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/08-dd-questions.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: upstream-unresolved-trace
-      requirement: 尽调问题从 01–07 的未知项、冲突、关键假设、否决风险和估值敏感点追溯生成
+      requirement: 尽调问题从前序材料的未知项、冲突、关键假设、否决风险和估值敏感点追溯生成
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: priority-and-decision-impact
       requirement: 问题按 P0、P1、P2 或等价优先级排序，并说明答案会如何改变投资决策
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: testable-questions-and-proof
       requirement: 每个问题包含待验证命题、所需证据、来源或责任方、合格标准、异常处理和决策影响
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: audience-and-workstream-coverage
       requirement: 覆盖管理层、专家和客户三类适用受众，以及商业、产品技术、财务、法律、团队和运营等适用工作流
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: evidence-request-matrix
-      requirement: 证据请求去重、可执行并与问题一一映射，包含优先级、格式、期间、owner、状态和关闭标准
+      requirement: 证据请求去重、可执行并与问题一一映射，包含优先级、格式、期间、责任人、状态和关闭标准
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: risk-veto-closure
       requirement: 重大风险和否决项具有关闭条件、无法关闭时的决策后果及后续重新检查触发器
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得用宽泛尽调问题掩盖上游分析缺失
+      required: true
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 08-dd-questions.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/08-dd-questions.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

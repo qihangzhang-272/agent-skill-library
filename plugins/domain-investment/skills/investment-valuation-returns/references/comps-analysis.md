@@ -1,13 +1,13 @@
 # Internal Method: Comparable Company Analysis
 
-Use this method inside `investment-valuation-returns` to build an auditable peer comparison from accepted inputs. It is not an independent Skill, Agent, data-provider router, search procedure, or spreadsheet deliverable.
+Use this method inside `investment-valuation-returns` to build an auditable peer comparison from supplied inputs. It is not an independent Skill, Agent, data-provider router, search procedure, or spreadsheet deliverable.
 
 ## Core principles
 
 - Comparability is an analytical claim, not a name list. Explain every inclusion and material exclusion.
 - Keep reported inputs, derived values, assumptions, and estimates distinct.
 - Normalize currency, units, fiscal periods, LTM/NTM convention, accounting basis, and valuation date before comparing.
-- Cite every hard input to an accepted Artifact, supplied document, or approved model handoff.
+- Cite every hard input to a supplied Artifact, document, or approved model.
 - Show formulas for every derived metric. Never paste an unexplained precomputed value.
 - Missing data is `N/A` or an explicit estimate with rationale; it is never zero or blank.
 - Statistics support judgment but do not decide the valuation mechanically.
@@ -123,7 +123,7 @@ Flag:
 - premium/discount unsupported by operating evidence;
 - double-counting growth or risk in both forecast and multiple.
 
-## Required method handoff
+## Required method output
 
 ```text
 Valuation question:

@@ -76,6 +76,6 @@ Stop and report coverage when:
 - The research question is answered with enough source diversity.
 - Required surfaces have been covered or explicitly failed.
 - Further search is producing duplicates.
-- The research obligation is complete and any next step belongs to the current Host owner or frozen Workflow.
+- The research obligation is complete; this internal method never decides the next Skill.
 
 This search method never invokes another Skill. In the managed investment workflow it returns its evidence to `topic-research-deposition`, which writes `01-source-intake.md` without adding an extra approval pause.

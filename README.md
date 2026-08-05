@@ -33,7 +33,7 @@ plugins/
 **Orchestrator + Index**
 
 - `workflow-orchestrator` — 已跑通工作流的统一路由入口。`SKILL.md` 只做路由，具体 chain 压缩在 `references/chains/`。
-- `external-skill-index` — 两层生态索引：本地技能 vs GitHub 外部技能，探测与提示安装。
+- `external-skill-index` — 两层生态索引：本地技能 vs GitHub 外部候选；只在稳定 Run 外发现和沉淀，不在运行中安装。
 
 **Domain**
 
@@ -58,6 +58,8 @@ AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值
 公开公司 → 事实包 → 竞争格局 → 模型 → 估值 → thesis/业绩前瞻 → 图表 → 首次覆盖 → 金融 QC
   chain: public-equity-coverage.md  ·  doc: docs/workflows/public-equity-coverage.md
 ```
+
+当前只有 `investment-icmemo.md` 已迁移为 ASL-WEP v0.1 Profile。公众号与公开市场链仍是 Library-native legacy chain；它们可以保留原生工作方法，但在外部能力全部本地 Skill 化并补齐质量合同前，不得作为 ASL-WEP 稳定 Workflow 运行。
 
 ## 落盘铁律（所有链继承）
 

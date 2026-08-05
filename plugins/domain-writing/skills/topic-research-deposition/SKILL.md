@@ -6,152 +6,102 @@ description: >
 
 # Topic Research Deposition
 
-This skill collects source material before writing, product analysis, investment review, or general research. It deposits evidence; it does not write the final article, product verdict, or investment memo.
+Collect source material before writing, product analysis, investment review, or general research. Deposit evidence; do not write the final article, product verdict, or investment memo.
 
-Standalone use and managed-workflow use MUST apply the same research and evidence-quality standard. A workflow may bind inputs and an Artifact path, but it never permits an abbreviated research pass.
+Standalone and workflow use apply the same research and evidence-quality standard. Workflow position never permits an abbreviated research pass.
 
-## Core Rule
+## Core rule
 
-Default search and access tool: `agent-reach`.
+Use `agent-reach` as the default search and access tool. Treat Twitter/X, Reddit, Exa/web, 微信公众号, GitHub, Hacker News, YouTube, podcasts, papers, and other platforms as reach surfaces, not a mandatory sequence. Use direct platform commands only when `agent-reach` is unavailable or incomplete, or the user asks for one.
 
-Twitter/X, Reddit, Exa/web, 微信公众号, GitHub, Hacker News, YouTube, podcasts, papers, and other platform searches are treated as agent-reach reach surfaces. Do not turn them into a required sequence. Use direct platform commands only as fallback when agent-reach is unavailable, incomplete, or the user explicitly asks for a direct platform command.
+`SKILL.md` is the router. Read only the references required by the selected mode.
 
-`SKILL.md` is the router. Load only the references required by the selected mode. Do not load all WeChat, product, and fallback command references together.
+## Mode selection
 
-## Mode Selection
-
-Choose one mode before creating folders or searching.
-
-| Mode | Use When | Required References |
+| Mode | Use when | Required references |
 | --- | --- | --- |
 | `general-research` | General research, background checks, source collection, concept definition, broad web/social search | `references/agent-reach-search.md`, `references/quality-checklist.md` |
-| `writing-research` | Research for an article that is not necessarily WeChat-specific | `references/agent-reach-search.md`, `references/quality-checklist.md` |
-| `wechat-writing-research` | 公众号选题、第 0 步、需要微信素材、公众号爆款逻辑、图文截图和后续交给 `public-account-writing-style` | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
-| `product-research` | Facts needed before `ai-product-analyzer`: product, company, pricing, customers, competitors, demo, docs, GitHub, traction | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
-| `investment-research` | Facts needed before product-analysis structured output: financing, team, market, OSS metrics, commercial traction, DD evidence; also the first managed investment node | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
+| `writing-research` | Research for a non-WeChat-specific article | `references/agent-reach-search.md`, `references/quality-checklist.md` |
+| `wechat-writing-research` | 公众号选题、第 0 步、爆款逻辑、图文截图 | `references/wechat-writing-research.md`, `references/wechat-viral-logic.md`, `references/wechat-extraction.md`, `references/quality-checklist.md` |
+| `product-research` | Product, company, pricing, customers, competitors, demo, docs, GitHub, traction | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
+| `investment-research` | Financing, team, market, OSS metrics, commercial traction, DD evidence | `references/product-investment-research.md`, `references/agent-reach-search.md`, `references/quality-checklist.md` |
 
-If the user says "公众号", "第 0 步", "爆款", "推草稿箱前", or asks for WeChat screenshots, choose `wechat-writing-research`.
+Choose `wechat-writing-research` for “公众号”、“第 0 步”、“爆款”、“推草稿箱前” or WeChat screenshot requests. Choose `product-research` or `investment-research` before analysis when the relevant facts are missing.
 
-If the user asks for product analysis, product visual report, investment report, or OSS investment and facts are missing, choose `product-research` or `investment-research` before analysis.
-
-## Standard Flow
+## Standard flow
 
 ```text
-clarify research objective
--> choose mode
--> create mode-appropriate research folder
--> search with agent-reach
--> save raw source material by source/platform
--> screenshot or archive evidence according to the selected mode
--> quality check
--> report coverage and stop for next instruction
+clarify objective -> choose mode -> create research folder -> search
+-> save raw material by source/platform -> capture evidence -> quality check
 ```
 
-The final “stop for next instruction” rule applies to standalone and writing modes. In the managed investment workflow, follow the contract below instead: finish the Artifact, return control to the current Host owner, and let the Workflow own its human checkpoint.
+Standalone and writing modes stop after reporting coverage. A Workflow continues to its next Skill after this Artifact is complete.
 
-## Managed Investment Workflow Contract
+## Investment Workflow output
 
-Use this contract only when the frozen Workflow binds this Skill as `topic-research-deposition`.
+Read the research object, supplied materials, and core investment question. Write one independent `01-source-intake.md`; raw captures may remain as cited evidence attachments.
 
-Required inputs:
-
-- `run-input:research-object` — the company, product, project, or security under review;
-- `run-input:supplied-materials` — may be an empty declared collection, but must not be silently assumed;
-- `run-input:core-question` — the investment question that determines relevance and stopping depth.
-
-Produce exactly one node Artifact: `artifacts/01-source-intake.md`. Raw captures may be stored as cited evidence attachments, but they are not additional node Artifacts.
-
-The Artifact must contain:
+Include:
 
 ```text
-Status: READY / READY-WITH-GAPS / REWORK
-Research object:
-Core question:
-Materials consumed:
-Research scope and stop condition:
-Search and capture log:
-Source register:
-Verified source facts:
-Claims present only in supplied materials:
-Contradictions and counterevidence:
-Assumptions:
-Unknowns and failed retrievals:
-  attemptRefs:
-  boundedAttempts:
-    limit:
-    used:
-    exhausted:
-  reason:
-  decisionImpact:
-  fallback:
-  revisitTrigger:
-Evidence references:
-Coverage by required area:
-Handoff for investment-research:
+Research object and core question
+Research scope and stop condition
+Materials consumed
+Search and capture log
+Source register
+Verified source facts
+Claims present only in supplied materials
+Contradictions and counterevidence
+Assumptions
+Unknowns and failed retrievals
+Evidence references
+Coverage by required area
 ```
 
-Each decision-relevant fact must point to a source or evidence reference. Each unknown must copy the limit frozen in the Plan, record used attempts and `exhausted=true`, and include attempt refs, reason, decision impact, fallback, and revisit trigger. Do not turn a company claim into a verified fact merely because it appears in supplied materials.
+Each decision-relevant fact must point to a source. Keep company claims separate from verified facts. For genuinely unavailable information, explain in business language what is missing, why it is unavailable, how it affects the decision, the conservative treatment, and when to revisit it, then continue.
 
-Completion states:
+If supplied scope or evidence is materially incomplete, tell the Host which responsible Skill must add what and why. Do not invoke the next Skill yourself; finish this Artifact and let the Workflow continue.
 
-- `READY`: all required deposition obligations are satisfied.
-- `READY-WITH-GAPS`: a required fact remains unavailable after bounded, recorded attempts, but the gap and its decision impact are explicit and the fact pack can still proceed.
-- `REWORK`: required coverage, provenance, separation of fact from claim, or evidence references are missing because the work is incomplete. Do not label incomplete work as a gap.
-
-The direct consumer is `investment-research`. It must accept the required obligations and handoff sections before this node is complete. On rejection, revise `01-source-intake.md` and return it for acceptance; do not weaken the contract.
-
-After writing the Artifact, return control to the current Host owner. Do not pause inside this Skill for an extra approval, do not invoke `investment-research` or any later Skill, and do not advance the Workflow yourself.
-
-## Output Contract
-
-Every run must end with:
+## Standalone output
 
 ```text
-Mode:
-Research folder:
-Search tool:
-Sources collected:
-Screenshots / archived evidence:
-Coverage:
-Gaps:
-Next suggested handoff:
+Mode
+Research folder
+Search tool
+Sources collected
+Screenshots / archived evidence
+Coverage
+Gaps
+Next suggested step
 ```
 
-Handoff rules:
+For writing work, the next writing Skill first performs editorial judgment (competition explanations, counterevidence, unknowns, temporary conclusion, and discarded material) before selecting a framework. A suggestion never invokes another Skill; wait for the user outside a Workflow.
 
-- In standalone runs, `writing-research` and `wechat-writing-research` can suggest `public-account-writing-style` as a handoff.
-- 交接给 `public-account-writing-style` 后，该 skill 会先做**编辑判断**（竞争解释 / 反证 / 未知项 / 暂时结论 / 删除哪些材料，落盘 `01.5-editorial-judgment.md`），再选框架起草。编辑判断在写作之前完成，比选框架更重要。
-- In standalone runs, `product-research` can suggest product analysis as a handoff.
-- A handoff suggestion never invokes another Skill. The current Host owner decides what runs next.
-- Outside the managed investment workflow, do not continue into the next Skill until the user says to continue.
+## Storage rules
 
-## Storage Rules
+- Use a neutral research folder for general, product, and investment research.
+- Only `wechat-writing-research` uses `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`; place sources and screenshots under `01-topic-research/`.
+- Keep raw source material separate from analysis. Save one source per file when practical, including title, source, date, URL, capture method, search mode, and full text or the full relevant excerpt.
+- Mark partial fetches as `partial` and explain why.
 
-- General/product/investment research should use a neutral research folder, not the WeChat run folder.
-- Only `wechat-writing-research` uses `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`; its source material and screenshots live under `01-topic-research/`.
-- Keep raw source material separate from analysis. Do not turn the deposition folder into a finished article or memo.
-- Save one source per file when practical. Include title, author/source, date, URL, capture method, search mode, and full text or full relevant excerpt.
-- If a source cannot be fully fetched, mark it as `partial` and explain why. Do not hide the failure behind a summary.
-
-## Common Mistakes
+## Common mistakes
 
 | Mistake | Correction |
 | --- | --- |
-| Treating every research task as WeChat writing | Choose mode first; WeChat is only one mode. |
-| Treating a platform list as a required search sequence | Use agent-reach as the default reach layer; platforms are surfaces, not workflow nodes. |
-| Losing existing WeChat experience while generalizing | Load `wechat-writing-research.md` and `wechat-viral-logic.md` when mode is WeChat. |
-| Summarizing sources instead of depositing them | Save raw source material first; analysis belongs to the next skill. |
-| Continuing into writing or product analysis automatically | Return control to the current Host owner; standalone modes wait for the user and managed mode follows the frozen Workflow. |
-| Claiming agent-reach was used when it was not available | State the actual fallback command or tool used. |
+| Treating every task as WeChat writing | Choose the mode first. |
+| Treating platforms as workflow nodes | Use the reach layer; platforms are source surfaces. |
+| Summarizing instead of depositing | Save raw source material first. |
+| Continuing into analysis automatically | Outside a Workflow, wait for the user. |
+| Claiming `agent-reach` was used when unavailable | State the actual fallback. |
 
-## Reference Files
+## Reference files
 
-| File | When to Read |
+| File | Read when |
 | --- | --- |
 | `references/agent-reach-search.md` | Default search behavior, source surfaces, fallback policy |
-| `references/wechat-writing-research.md` | WeChat-specific folder layout, confirmation questions, rounds, screenshot and report format |
-| `references/wechat-viral-logic.md` | WeChat virality and search-to-writing logic; required for `wechat-writing-research` |
+| `references/wechat-writing-research.md` | WeChat folder layout, questions, rounds, screenshots, report format |
+| `references/wechat-viral-logic.md` | WeChat virality and search-to-writing logic |
 | `references/wechat-extraction.md` | WeChat fetch/CAPTCHA fallback details |
 | `references/product-investment-research.md` | Product, company, OSS, investment fact collection |
-| `references/platform-commands.md` | Direct command fallback only when agent-reach cannot cover a platform |
-| `references/quality-checklist.md` | Final quality check for source completeness and deposition discipline |
+| `references/platform-commands.md` | Direct command fallback only |
+| `references/quality-checklist.md` | Source completeness and deposition discipline |

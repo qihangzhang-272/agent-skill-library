@@ -2,116 +2,35 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-unit-economics.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:e6cc34b541e3b3d451c607f27b10c834816845bfadb6b72cdf0e4ec41048a8c3
 spec:
-  subject:
-    skillId: investment-unit-economics
-    skillRevision: 1
-    skillContentDigest: sha256:8409c88ccc4b25ce0846e6c2e6c5b5b379025118be69be9a8b773eced8b49bd2
-  reviewState: approved
-  builtFromFiles:
-    - path: references/ai-readiness.md
-      role: method-reference
-      digest: sha256:4536f465eb5f061dd3908a7d267c9c62f08fffd4908912eb0ba5c00b4211fc4a
-    - path: references/unit-economics.md
-      role: method-reference
-      digest: sha256:db32cc8eedcc225ffd78f1943dd2e20d5b7cf68f32f6d115eca952233bcee09f
-    - path: references/value-creation-plan.md
-      role: method-reference
-      digest: sha256:8fd59f5bb153443f65454ab1e7c6a39be33e42db1e8899ec1f46efecaf6f6a36
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:5998c3538013a700158cad2e3595a2d26fcbea26b90af2ec2dec4d782789540d
+  builtFrom:
+    - SKILL.md
+    - references/ai-readiness.md
+    - references/unit-economics.md
+    - references/value-creation-plan.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/05-unit-economics.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: economics-basis-and-segments
       requirement: 声明业务模式、计价单位、收入确认、成本边界、币种、期间和适用 segment，使经济性计算可复现
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: metric-lineage-and-formulas
       requirement: 每个关键指标提供数值、公式、期间和来源；无法取得时保留未知而非虚构或记零
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: retention-revenue-quality
       requirement: 检查留存、扩张、集中度、回款、毛利和收入可重复性，区分一次性与持续性收入
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: ai-cost-and-readiness
       requirement: 纳入推理、训练、人工审核、实施、支持和基础设施成本，并逐项检查 Data gate、Owner gate 和 30-day pilot gate
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: benchmark-basis-and-comparability
       requirement: 每个 benchmark 说明同业、阶段、期间、定义和可比性限制；无法取得可靠 benchmark 时明确其影响
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: value-creation-and-risk
       requirement: 以 baseline、EBITDA bridge、100-day plan 和 KPI dashboard 把改善杠杆、执行条件、敏感性和下行风险连接到可验证的价值创造路径
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
-    - id: external-operating-metrics-benchmarks
-      requirement: 只有外部经营数值、成本、留存或可靠 benchmark 在 Plan 冻结的来源或验证方法耗尽后仍不可得时，才允许形成 gap；公式、gate 检查和价值创造设计必须完成
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；公式、gate 检查和价值创造设计仍必须完成
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: true
-        unknownRequires:
-          - attemptRefs
-          - boundedAttempts
-          - reason
-          - decisionImpact
-          - fallback
-          - revisitTrigger
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 05-unit-economics.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/05-unit-economics.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

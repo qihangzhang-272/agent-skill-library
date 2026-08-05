@@ -1,6 +1,6 @@
 # Internal Method: Earnings and Dated Results Analysis
 
-Use this method inside `investment-thesis-tracking` for a mature or public-company update when the accepted inputs already contain the relevant dated materials. It is not an independent Skill, search routine, chart package, model updater, or document generator.
+Use this method inside `investment-thesis-tracking` for a mature or public-company update when supplied inputs contain the relevant dated materials. It is not an independent Skill, search routine, chart package, model updater, or document generator.
 
 ## Required evidence basis
 
@@ -12,9 +12,9 @@ Before analysis, identify:
 - prepared remarks or transcript when supplied;
 - dated consensus or prior expectation when beat/miss is claimed;
 - prior guidance and current guidance;
-- current thesis, valuation basis, and input Artifact revisions.
+- current thesis, valuation basis, and supplied input Artifacts.
 
-The fiscal period and source dates must agree. Missing or mismatched primary evidence is a gap to return through the Host, not permission to use memory or launch a hidden search.
+The fiscal period and source dates must agree. Missing or mismatched primary evidence is an explicit gap, not permission to use memory or launch a hidden search.
 
 ## Analytical sequence
 

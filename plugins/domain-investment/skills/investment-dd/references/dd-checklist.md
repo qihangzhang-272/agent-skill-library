@@ -9,7 +9,7 @@ Record:
 - target, sector, business model, stage, and transaction type;
 - current recommendation and the decisions DD must enable;
 - known risks, valuation sensitivities, veto candidates, and timing constraints;
-- accepted upstream Artifact revisions and open evidence gaps.
+- supplied upstream Artifacts and open evidence gaps.
 
 ## Workstream coverage
 

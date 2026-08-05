@@ -2,124 +2,43 @@ apiVersion: asl-wep/v0.1.0-draft.3
 kind: SkillQualityContract
 metadata:
   id: investment-thesis-tracking.quality
-  revision: 1
-  createdAt: 2026-08-04T14:33:20.511Z
-  createdBy: agent:contract-drafter
-  digest: sha256:afbbee4688f50074fa6f04630095a5d2c0a05714cdf4f225e06fc09a115265dd
 spec:
-  subject:
-    skillId: investment-thesis-tracking
-    skillRevision: 1
-    skillContentDigest: sha256:1d319eaeb248edb41b351d1b1a6fafc364b651d67d4075efae9b3b6d7d5d1ddb
-  reviewState: approved
-  builtFromFiles:
-    - path: references/catalyst-calendar.md
-      role: method-reference
-      digest: sha256:9febf4875a99d449515a404615379dc15c7723455ba0bf890870af0ef6726d1f
-    - path: references/earnings-analysis.md
-      role: method-reference
-      digest: sha256:c714be7a1adfecd3a58640d7b9a194dff76c4c43911aca2327097a1922367425
-    - path: references/earnings-analysis/best-practices.md
-      role: method-reference
-      digest: sha256:df8c240905910223a87cf8020c8291e6a0e122d52fa71cbc53ac4f642591002f
-    - path: references/earnings-analysis/report-structure.md
-      role: method-reference
-      digest: sha256:df513beb926adc59aae2c99ee0ba096cad1c1130a0614c6ca620cca911caadc3
-    - path: references/earnings-analysis/workflow.md
-      role: method-reference
-      digest: sha256:e41c600b47f06c6c3ceb4476d57550644c31b4eb9e53b12f5e1ae2167a8b80de
-    - path: references/earnings-preview.md
-      role: method-reference
-      digest: sha256:a86a80a9ec0899e2de562669f47c702703d0b7d25629280b58bf5c03c905df5c
-    - path: references/portfolio-monitoring.md
-      role: method-reference
-      digest: sha256:e29058aa3753fc32d37d45bcba6e125814f55cae3899278c99e69326ba0b4140
-    - path: references/thesis-tracker.md
-      role: method-reference
-      digest: sha256:58b9a172c44ac4eac24e2d0414d142a367d6fa67b5201de1fd2b9eb5c4d463db
-    - path: SKILL.md
-      role: instruction
-      digest: sha256:4bbb3b21e75d2ec5ff95cd044efd8567881c3e88058c02fc8d4aa695d01c1907
+  builtFrom:
+    - SKILL.md
+    - references/catalyst-calendar.md
+    - references/earnings-analysis.md
+    - references/earnings-analysis/best-practices.md
+    - references/earnings-analysis/report-structure.md
+    - references/earnings-analysis/workflow.md
+    - references/earnings-preview.md
+    - references/portfolio-monitoring.md
+    - references/thesis-tracker.md
   obligations:
-    - id: artifact-envelope-and-lineage
-      requirement: 输出唯一独立 Artifact artifacts/09-thesis-tracking.md，并记录状态、输入引用与 revision、质量合同和逐项义务结果
-      required: true
-      verifier: harness
-      harnessCheck: artifact-envelope
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: false
-        unknownAllowed: false
     - id: starting-state
-      requirement: 记录当前投资论点、置信度、观察日期、依据版本和仍未解决的核心不确定性
+      requirement: 记录当前投资论点、置信度、观察日期、依据和仍未解决的核心不确定性
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: falsifiable-pillars
       requirement: 每个论点支柱均可证伪，并同时连接支持证据、反证和关键假设
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: dd-mapping
       requirement: 将尽调问题与论点支柱、风险、估值敏感项及待确认状态建立明确映射
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: kpi-threshold-action
       requirement: 每个关键指标包含定义、数据源、检查频率、阈值和触发后的明确行动
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: catalysts-and-exit-triggers
-      requirement: 催化剂、负面触发器、退出条件带时间窗口并可被后续运行复核
+      requirement: 催化剂、负面触发器、退出条件带时间窗口并可被后续研究复核
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: conviction-transition-rules
       requirement: 明确 upgrade、maintain、downgrade 和 invalidate 的证据门槛，并规定新证据到来时保留历史判断和说明变化原因
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
     - id: period-update-analysis
       requirement: 当对象和期间适用时，核验最新 period，比较 actual 与 expectation 或 plan，分析 variance、guidance 与 estimate 变化，并映射到 thesis pillar 和 conviction transition
       required: true
-      verifier: consumer
-      completion:
-        answerRefRequired: true
-        evidenceRefsRequired: true
-        unknownAllowed: false
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得把未知指标或事件改写为事实
+      required: true
   artifact:
-    mediaTypes:
-      - text/markdown
+    path: 09-thesis-tracking.md
+    mediaType: text/markdown
     independent: true
-    workflowPath: .asl/runs/<run-id>/artifacts/09-thesis-tracking.md
-  handoff:
-    requiredSections:
-      - status
-      - inputsConsumed
-      - obligationResults
-      - facts
-      - judgments
-      - assumptions
-      - counterevidence
-      - unknowns
-      - evidenceRefs
-      - consumerNotes

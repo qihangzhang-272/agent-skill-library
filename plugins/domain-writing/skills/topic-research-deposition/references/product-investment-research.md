@@ -28,7 +28,7 @@ Research object:
 Primary facts:
 Missing facts:
 Source folder:
-Suggested handoff scope: product judgment
+Suggested next scope: product judgment
 ```
 
 In the managed investment workflow, place this material inside the single `01-source-intake.md` Artifact rather than creating a second node Artifact.
@@ -57,10 +57,10 @@ Verified facts:
 Unverified claims:
 Missing facts:
 DD priority candidates:
-Suggested handoff scope: investment fact-pack construction
+Suggested next scope: investment fact-pack construction
 ```
 
-In the managed investment workflow, place this material inside the single `01-source-intake.md` Artifact. Return control to the Host owner; workflow routing is outside this method.
+In the investment Workflow, place this material inside the single `01-source-intake.md` Artifact. Workflow routing is outside this method.
 
 ## Evidence Discipline
 

@@ -2,7 +2,7 @@
 
 This is an internal method of investment-unit-economics, not a standalone Skill. Use it for ARR, cohorts, LTV/CAC, retention, revenue quality, and margin analysis inside 05-unit-economics.md.
 
-Do not create an Excel workbook, dashboard, slide, or separate Artifact. Calculate from accepted inputs when the data supports it; otherwise preserve the missing input as an explicit unknown.
+Do not create an Excel workbook, dashboard, slide, or separate Artifact. Calculate from supplied inputs when the data supports it; otherwise preserve the missing input as an explicit unknown.
 
 ## 1. Identify the Revenue Model
 

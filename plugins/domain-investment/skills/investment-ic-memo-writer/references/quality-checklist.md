@@ -1,14 +1,14 @@
-# Final IC Memo Quality Checklist
+# IC Memo 交付前自检
 
-Before delivery, verify:
+交付前逐项确认：
 
-- accepted revisions of Artifacts 01–09 are all present and listed in provenance;
-- no input is `REWORK`, and every accepted gap preserves its full limitation record;
-- recommendation, valuation date, currency, units, and scenario labels are consistent;
-- tables reconcile to cited upstream Artifact revisions and no financial figure is copied without a source;
-- the memo separates fact, assumption, judgment, and open question;
-- material risks include consequence, mitigation, and remaining uncertainty;
-- all required decision sections, provenance, and completion record are present;
-- no search, new peer selection, rescoring, new valuation, or other missing upstream analysis occurred during assembly;
-- material conflicts in facts, periods, units, scores, or valuation bases were rejected rather than silently resolved;
-- no upstream conclusion is silently changed by editorial rewriting.
+- 已逐份读完 01–09 的业务正文，没有把长链中的本节点缩成摘要任务；
+- 十三个投资人章节均有实质内容，没有遗漏或用空表、占位值代替；
+- 最终只出现一个投资结论，且建议、评分、估值回报、风险、尽调和触发器彼此一致；
+- 估值日期、币种、单位、期间、情景和评分数字与输入保持一致；
+- 事实、假设、判断、反证和未知项边界清楚，重要冲突没有被编辑性地抹平；
+- 真实外部来源均以可读名称呈现并带可点击链接；
+- 专业缩写和英文投资术语首次出现时有中文解释；
+- 无法核验的事项写清未知内容、重要性、保守处理和再核验条件，没有伪造数据；
+- 没有在组装阶段新增搜索、可比对象、评分、估值或其他上游分析；
+- 正文不含任何运行记录或内部检查过程。

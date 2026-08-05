@@ -1,89 +1,52 @@
 ---
 name: investment-ic-memo-writer
-description: Use when accepted investment-workflow Artifacts must be assembled into a decision-ready IC Memo with recommendation, product and market analysis, economics, valuation, scorecard, risks, DD priorities, thesis tracking, and explicit evidence gaps.
+description: Use when completed investment-workflow outputs must be assembled into a decision-ready Chinese IC Memo without adding new research, hiding uncertainty, or placing internal process records in the report.
 ---
 
 # Investment IC Memo Writer
 
-Assemble the accepted investment package into one decision-ready Memo. Standalone and workflow invocations have the same completeness, provenance, contradiction, and editorial quality bar. This is an assembly Skill, not a late research or analysis escape hatch.
+把工作流前九个 Skill 的完整业务产物组装成一份可独立阅读、可直接用于投资决策的中文 IC Memo。无论单独调用还是位于长工作流中，都必须逐份读完输入，并完成同样深度的组装；“只是中间节点”不是缩写、跳项或降低质量的理由。
 
-## Scope and ownership
+这是组装 Skill，不是补研究的逃生口。可以重排、解释和压缩重复内容，但不得搜索新事实、补算缺失模型、另选可比对象、重打分、重做估值，或凭偏好消除上游矛盾。
 
-This Skill may reorganize and clarify accepted upstream work. It must not search, fetch new facts, calculate missing analysis, select new peers, rescore the case, repair valuation, resolve an unsupported contradiction by preference, or invoke another Skill.
+## 输入与运行边界
 
-- **Standalone:** require the equivalent complete source, fact, product, market, economics, scorecard, valuation, DD, and thesis materials from the user.
-- **Managed workflow:** consume every accepted Artifact revision from `01-source-intake.md` through `09-thesis-tracking.md`; all nine inputs are mandatory.
-- **Artifact:** write one independently readable `artifacts/10-ic-memo.md`.
-- `references/memo-assembly.md`, `references/quality-checklist.md`, and the conditional PE addendum are internal writing and review methods, not independent Skills or reviewers.
+- **Standalone：** 使用用户提供的完整事实、产品、市场、单位经济、评分、估值、尽调和论点材料。
+- **Managed workflow：** 业务依赖是 `01-source-intake.md` 至 `09-thesis-tracking.md`。逐份读取正文后再起草，不得只读摘要。
+- **随取随用：** 使用当前工作区中能读到的业务材料。缺少运行上下文时只提醒一次，然后继续；不得因此拒绝运行或要求用户重建上下文。
+- **业务内容缺口：** 能补做时准确说明缺少什么和它影响哪个判断；确实不可获得或不可执行时，按缺口继续成稿，并说明未知内容、决策影响、保守处理和以后需要什么证据。不要让工作流死锁，也不要把缺失写成零、否或已证实事实。
+- **产物：** 只写一份独立业务文件 `10-ic-memo.md`。报告只写业务正文，运行记录由工作区另存。
 
-## Input preflight and rejection
+## 组装方法
 
-Before drafting, verify all nine input Artifacts and their completion records. Check that:
+1. 先给出投资建议、核心理由、回报逻辑、最强证据、决定性风险和推进条件。
+2. 忠实保留上游的估值日期、币种、单位、期间、情景名称、评分与数字；不得在编辑时悄悄改口径。
+3. 清楚区分事实、判断、假设、反证和未知项。上游存在重要分歧时，说明分歧对决策意味着什么，不要为了叙事顺滑而合并成一个答案。
+4. Memo 中出现的真实外部来源必须使用可读名称和可点击链接，例如 `[来源名称](https://example.com)`。不要把内部文件标识当成给投资人看的引用。
+5. 所有专业缩写和英文投资术语首次出现时给出中文解释，例如单位经济（Unit Economics）、尽职调查（DD）、投资回报倍数（MOIC）和内部收益率（IRR）。
+6. 表格只用于真正需要比较的评分、情景、风险、尽调优先级或跟踪触发器；不得用空表、假数字或占位内容制造“完成感”。
+7. 最终投资结论只能有一个：`推进（Proceed）`、`有条件推进（Conditional proceed）`、`观察（Watch）` 或 `放弃（Pass）`。每个条件都要写清由什么证据或行动解除。
 
-- each required Artifact exists at the revision bound by the Host;
-- each is `READY` or accepted `READY-WITH-GAPS`, never `REWORK`;
-- material facts, judgments, assumptions, unknowns, counterevidence, units, periods, and sources remain distinguishable;
-- scorecard arithmetic, valuation ranges, DD priorities, and thesis triggers are present and mutually traceable;
-- accepted gaps include `attemptRefs`, the Plan-frozen `boundedAttempts.limit`, used attempts, `exhausted=true`, reason, decision impact, fallback, and revisit trigger.
-
-If an input is thin, missing, stale, unsupported, or materially contradictory, stop. Name the exact obligation, business impact, responsible nodeId, and required correction; return `REWORK` to the current Host owner. Do not silently patch the gap, and do not default responsibility to the immediately preceding node.
-
-An upstream difference in judgment may be preserved and explained. A conflict in the same material fact, unit, period, score, or valuation basis that prevents a coherent recommendation must be rejected first.
-
-## Assembly method
-
-1. Lead with recommendation, rationale, return logic, strongest evidence, decisive risks, and explicit conditions.
-2. Trace every material figure and conclusion to its originating Artifact revision. Preserve the valuation date, currency, units, and scenario labels.
-3. Keep facts, judgments, assumptions, unknowns, and counterevidence visibly separate.
-4. Preserve material disagreement between upstream nodes and identify the decision it creates; never harmonize it silently.
-5. Propagate all accepted gaps into the relevant section and the final verification-gaps section.
-6. Use tables only where they improve comparison of scenarios, scores, risks, DD priorities, or monitoring triggers.
-7. End with `Proceed`, `Conditional proceed`, `Watch`, or `Pass`; every condition must name the evidence or action that resolves it.
-
-## Required Memo structure
+## 必需的投资人正文结构
 
 ```text
-1. Executive Summary
-2. Investment Recommendation
-3. Company / Product Overview
-4. AI-native Product Judgment
-5. Market & Competitive Landscape
-6. Business Model & Unit Economics
-7. Technical / OSS / Ecosystem Moat
-8. Valuation / Return Logic
-9. Investment Scorecard
-10. Key Risks & One-Vote Veto
-11. Due Diligence Priorities
-12. Thesis Tracking & Watch Triggers
-13. Sources, Unknowns, Verification Gaps
-14. Artifact Provenance
-15. Completion Record
+1. 执行摘要
+2. 投资建议
+3. 公司与产品概览
+4. AI 原生性与产品判断
+5. 市场与竞争格局
+6. 商业模式与单位经济
+7. 技术、开源生态与护城河
+8. 估值与回报逻辑
+9. 投资评分卡
+10. 核心风险与一票否决项
+11. 尽调优先级
+12. 投资论点与跟踪触发器
+13. 来源、未知项与核验缺口
 ```
 
-Completion record:
+第 13 节只写投资人需要理解的内容：来源名称和链接、仍未知什么、为什么重要、当前采取什么保守处理、需要什么证据或触发条件再核验。不要展示任何运行记录或内部检查过程。
 
-```text
-Status: READY | READY-WITH-GAPS | REWORK
-Inputs consumed: accepted revisions of 01 through 09
-Obligations checked:
-Counterevidence preserved:
-Unknowns propagated:
-  attemptRefs:
-  boundedAttempts:
-    limit:
-    used:
-    exhausted:
-  reason:
-  decisionImpact:
-  fallback:
-  revisitTrigger:
-Next consumer notes:
-```
+## 交付原则
 
-`READY-WITH-GAPS` is valid only when every gap was already accepted upstream, remains explicit, and does not make the recommendation internally incoherent. Memo incompleteness is never converted into `READY-WITH-GAPS`; it is `REWORK`.
-
-## Direct consumer acceptance
-
-If the frozen Plan includes visualization, the direct consumer is `investment-visual-report`; otherwise the Workflow final-delivery contract is the consumer. The consumer must be able to verify the recommendation, score, valuation, risks, DD, thesis, and limitations against 01–09 without discovering a third set of conclusions.
-
-Return the Artifact, status, and consumer notes to the current Host owner. **Never call `investment-visual-report` or any other next Skill yourself.**
+十三节应完整、结论一致、来源可读可点。确实无法取得的信息可以保留为公开缺口，但必须写清影响与保守处理。若后续包含 `investment-visual-report`，本 Memo 是它唯一的业务输入和唯一结论来源。**不要自行调用下一个 Skill，也不要把运行记录追加到 Memo 正文。**

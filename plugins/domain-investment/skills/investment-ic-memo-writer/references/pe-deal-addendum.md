@@ -1,12 +1,10 @@
-# PE Deal Addendum
+# 私募股权交易补充要求
 
-Use this reference only when the IC memo evaluates a private-equity transaction.
+只有在 IC Memo 评估私募股权交易时，才把以下内容并入对应的十三个正文章节，不另建技术附录：
 
-Add the following decision content to the applicable memo sections:
+- 交易条款：企业价值、隐含估值倍数、资金来源与用途、融资、杠杆、治理安排和关键法律条件。
+- 价值创造：收入、利润率、营运资金、资本开支、并购或估值倍数扩张的具体抓手，并区分管理层计划与投资测算假设。
+- 百日计划（交割后前 100 天的行动计划）：每项优先事项的负责人、里程碑、所需证据和依赖关系。
+- 回报情景：基准、乐观和悲观情景下的内部收益率（IRR）与投资回报倍数（MOIC），并说明进入价格、经营改善、杠杆、退出和时间假设。
 
-- Deal terms: enterprise value, implied multiples, sources and uses, financing, leverage, governance, and key legal conditions.
-- Value creation: the specific revenue, margin, working-capital, capex, M&A, or multiple-expansion levers; distinguish management plan from underwriting assumption.
-- 100-day plan: owner, milestone, required evidence, and dependency for each priority.
-- Returns: base, upside, and downside IRR/MOIC, with the entry, operational, leverage, exit, and timing assumptions that drive each case.
-
-Do not invent terms or returns. If an item is not in the deal materials or valuation handoff, state it as a missing condition.
+不得创造交易条款或回报数字。材料没有提供的内容要作为投资条件或未知项说明；运行记录由工作区另存。

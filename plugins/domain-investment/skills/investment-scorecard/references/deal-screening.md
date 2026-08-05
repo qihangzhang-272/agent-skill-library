@@ -52,5 +52,5 @@ Integrate the mandate-fit table, verdict, bull case, bear case, and key question
 
 - Be direct about red flags. Don't bury concerns
 - If financials seem inconsistent or incomplete, flag it explicitly
-- Use only criteria bound in the current inputs, including a Personal Workspace mandate only when the Host has bound its exact ref and revision into this Run; if criteria are absent, record the limitation or return `REWORK`
-- Do not write screening criteria to hidden memory or any destination outside the current Run
+- Use only criteria supplied in the current inputs, including a personal mandate only when it is explicit; if criteria are absent, record the limitation or return `REWORK`
+- Do not invent or silently persist screening criteria

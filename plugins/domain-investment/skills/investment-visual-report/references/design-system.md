@@ -5,7 +5,7 @@
 ## 设计哲学
 
 - **投委读物，不是营销页**：克制、信息密度高、专业感。深色 header 压阵，白卡承载内容，语义色传递判断。
-- **一眼看懂结论**：评级和评分放最显眼处（header），评级逐字采用 Memo 的 `Proceed / Conditional proceed / Watch / Pass`，用颜色编码强弱。
+- **一眼看懂结论**：评级和评分放最显眼处（header），评级逐字采用 Memo 的 `推进（Proceed） / 有条件推进（Conditional proceed） / 观察（Watch） / 放弃（Pass）`，用颜色编码强弱。
 - **数据可信感**：表格规整、来源标注、数字右对齐感。让投委信任这份分析。
 
 ## 配色系统（CSS variables）
@@ -40,11 +40,11 @@
 | 风险 / 短板 / 否决 / bear | `--red` | 低分维度、最弱缺口、bear 场景、红旗 |
 | 结构性矛盾 / 悖论 | `--orange` | 商业模式悖论这类"非简单好坏"的提示框 |
 
-评级 badge 的文字和语义颜色跟随 Memo 结论：Proceed→绿，Conditional proceed→黄/金，Watch→黄/金，Pass→红。综合评分只用于核对和展示，不能覆盖 Memo 的 exact verdict；若二者冲突，拒收 Memo 而不是在视觉层选择一个。
+评级 badge 的文字和语义颜色跟随 Memo 结论：推进→绿，有条件推进→黄/金，观察→黄/金，放弃→红。综合评分只用于展示，不能覆盖 Memo 的唯一结论；若二者冲突，准确指出 Memo 需要补正，视觉层不自行选择。
 
 ## 排版
 
-- 字体栈（系统字，不引 CDN）：`font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif`
+- 字体栈（系统字，不引 CDN）：`font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',sans-serif`
 - 正文 `font-size:15px; line-height:1.7`
 - 代码/等宽：`'Fira Code',monospace`（也是系统回退）
 - 标题层级：header h1 `32px/800`；section 标题 `20px/700`（带编号方块）；小标题 h4 `15px/600`
@@ -60,6 +60,7 @@
 
 - **单列**，不要多栏复杂布局——投委线性阅读。
 - **全展开**，section 之间用 `border-bottom` 分隔，圆角只在首尾。
+- 外部来源使用可读名称和明显的链接样式；运行记录不进入页面。
 - header 圆角 `12px 12px 0 0`，最后一个 section 圆角 `0 0 12px 12px`，整体像一张连续的卡。
 
 ## 响应式

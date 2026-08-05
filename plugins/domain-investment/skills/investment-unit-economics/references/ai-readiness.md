@@ -2,7 +2,7 @@
 
 This is an internal method of investment-unit-economics, not a standalone Skill or portfolio Agent. Use it when the case requires a realistic test of whether AI can create measurable economic value and be deployed.
 
-Consume only accepted upstream Artifacts and declared supplied materials. Do not discover or connect to a data room, SharePoint, Drive, portfolio database, MCP server, or private system from this method. Missing access is an explicit input gap for the Host owner, not permission to improvise a connection.
+Use only supplied Artifacts and declared materials. Do not discover or connect to a data room, SharePoint, Drive, portfolio database, MCP server, or private system from this method. Record missing access as an explicit input gap; never improvise a connection.
 
 ## 1. Establish the Operating Baseline
 

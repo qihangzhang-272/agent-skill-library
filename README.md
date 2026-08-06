@@ -12,6 +12,7 @@
 
 ```
 plugins/
+├── workspace-core/      # 个人 Workspace 种子 Skill：目标、发现、培养、演化与整理
 ├── foundation/          # 元层：principles Agent 操作原则 + skill-architecture 元技能
 ├── orchestrator/        # workflow-orchestrator：唯一工作流路由入口
 ├── skill-index/         # external-skill-index：外部 GitHub 技能索引
@@ -34,6 +35,10 @@ plugins/
 
 - `principles` — Agent 操作原则。认知原型 + DO/DON'T + CALIBRATION。被动参考库，不是全局强制规则。
 - `skill-architecture` — 元技能。新增技能/领域/链时生成 spec 合规骨架，更新 marketplace.json。瓦技能可独立存在，chain 是可选主动编排。**不要手创建 skill 文件夹。**
+
+**Workspace Core**
+
+- `discover-capability` — 个人 Workspace 缺能力时，按“当前 Workspace → 现有 Agent Skill Library → 本地候选/上游 → 互联网”寻找来源并沉淀候选；不直接安装或运行。
 
 **Orchestrator + Index**
 

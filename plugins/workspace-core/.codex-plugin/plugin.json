@@ -1,0 +1,23 @@
+{
+  "name": "workspace-core",
+  "version": "0.1.0",
+  "description": "个人能力工作区种子 Skill：从短目标出发，优先复用现有 Agent Skill Library，并把缺失能力培养为本地 Skill。",
+  "author": {
+    "name": "Agent Skill Library Maintainers"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Workspace Core",
+    "shortDescription": "培养和运行个人本地 Skill 工作区。",
+    "longDescription": "提供个人能力工作区的种子 Skill，优先复用现有 Agent Skill Library，再把真实缺口沉淀为候选、本地 Skill 和场景 Workflow。",
+    "developerName": "Agent Skill Library Maintainers",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "检查我的个人工作区缺少什么能力。"
+    ]
+  }
+}

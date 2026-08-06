@@ -1,24 +1,8 @@
----
-name: oss-investment-scorecard
-description: >
-  Evaluate whether an open source project / company is investable by a USD-denominated VC fund in the current AI cycle.
-  ALWAYS use this skill when the user asks any of the following:
-  - "evaluate [project] for investment"
-  - "can we invest in [project]"
-  - "score this open source company"
-  - "投资评估 [项目]"
-  - "这个开源项目值得投吗"
-  - "给 [公司] 打分"
-  - Any request to assess, rate, or rank an open source startup's investability
-  - Any comparison of two or more open source companies from an investment perspective
-  The skill produces a structured 5-dimension weighted scorecard (max 10 pts), a pass/recommend/watch verdict, and an IC-ready one-paragraph thesis. It also flags one-vote-veto conditions that cause an immediate Pass regardless of total score.
----
-
-# Open Source Project Investment Scorecard (V1.2)
+# Internal Method: Open Source Project Investment Scorecard (V1.2)
 
 ## Purpose
 
-Produce a rigorous, consistent, reusable investment evaluation for any open source project/company being considered by a USD VC fund — specifically calibrated for the **AI technology acceleration cycle (2023-onwards)**.
+Use this method inside `investment-scorecard` to produce a rigorous, consistent evaluation of an open-source project or company in the current AI cycle. It is a method, not a separately invocable capability.
 
 Built from: Bessemer Venture Partners Data 3.0 Roadmap, Oxx VC, Basis Set Ventures, Linux Foundation / COSSA, Unusual VC, Matrix VC, and two live case studies (Eigent.AI / CAMEL-AI and Datastrato / Apache Gravitino).
 
@@ -27,7 +11,7 @@ Built from: Bessemer Venture Partners Data 3.0 Roadmap, Oxx VC, Basis Set Ventur
 ## Step 1 — Pre-Evaluation Fact Sheet & Macro Gate
 
 ### 1.1 Pre-Evaluation Fact Sheet
-Before scoring, perform a web search to gather the following 7 items. Each item MUST include a source URL or be marked as "Searched, not found".
+Before scoring, extract the following seven items from supplied Artifacts or standalone materials. Each item must cite its source or be marked `not found`; this method does not launch a separate search flow.
 
 1. **GitHub Metrics:** Stars, Monthly Active Contributors (last 30d), External Contributor %, Dependent Repositories.
 2. **Team Background:** Founders' prior OSS contributions, PMC/Committer status, prior infrastructure company experience.
@@ -38,7 +22,7 @@ Before scoring, perform a web search to gather the following 7 items. Each item 
 7. **Competitive Benchmarking:** Identify 2-3 closest rivals; note their funding, stars, and key distribution partners (e.g., AWS/Azure).
 
 ### 1.2 Macro Gate (Non-Scoring Pre-Check)
-Answer these three binary questions. If any answer is NO, stop and recommend Pass.
+Answer these three binary questions. Questions 1 and 2 are true gates: if either answer is NO, recommend Pass; any retained score is diagnostic only. Question 3 is a cycle-premium check: a NO is a risk factor, not an automatic veto unless another explicit veto is triggered.
 
 1. **Is the sub-sector still in its window-of-opportunity phase?**
    - Yes if: no single open-source project has monopolised the niche yet, OR the target IS that emerging monopolist.
@@ -54,8 +38,9 @@ Answer these three binary questions. If any answer is NO, stop and recommend Pas
 
 **Handling "Not Found" items:**
 "Not Found" does NOT mean "Does not exist". If data is missing:
-- Look for **indirect signals** (e.g., SOC2 certification implies enterprise customers; complex billing implies revenue).
-- Use **range estimates** (e.g., "ARR likely $200K-$1M based on indirect signals").
+- Keep the original field marked `not found`; do not replace it with an inference.
+- List **indirect signals** separately (e.g., SOC2 certification suggests enterprise readiness; complex billing suggests monetisation activity) and label them as proxies.
+- Give an assumption range only when a reproducible method and inputs exist. Label it `assumption`, show scoring sensitivity with and without it, and never present it as reported fact.
 - Mark as a **DD Priority** for verification.
 
 ---
@@ -220,6 +205,6 @@ If SHP is active, apply the following penalties to the raw score of **Dimension 
 3. **Verdict Line:** `🟢/🟡/🟠/🔴 [Decision] — [One sentence rationale]`
 4. **Dimension Narrative:** 2-4 sentences per dimension. *Note: Explicitly mention if scores are based on indirect signals.*
 5. **One-Vote Veto Check:** Confirm if any veto is triggered.
-6. **IC Thesis:** One paragraph, ≤100 words (Why now, Why this, Exit conviction).
+6. **IC Thesis:** A decision-focused synthesis covering why now, why this case, and exit conviction.
 7. **DD Priority List:** Top 3-5 questions to verify (especially "Not Found" items).
 8. **Watch Triggers:** Specific milestones for upgrade.

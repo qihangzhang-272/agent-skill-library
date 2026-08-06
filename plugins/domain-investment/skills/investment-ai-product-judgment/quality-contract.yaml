@@ -1,0 +1,34 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-ai-product-judgment.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/ai-product-analyzer.md
+    - references/business-model.md
+    - references/data-agent.md
+    - references/narrative-audit.md
+  obligations:
+    - id: applicable-reference-routing
+      requirement: 先判断并读取所有适用内部 reference；投资工作流至少读取一个适用 reference 并记录选择理由，输入过薄时不得降级为轻量意见
+      required: true
+    - id: bp-eleven-part-judgment
+      requirement: 完整输出 Purpose、Problem、Solution、Product、Why Now、Market、Business Model、Competition、Traction、Team/GTM、Financials/Ask 十一段判断
+      required: true
+    - id: ai-native-business-narrative
+      requirement: 分别检验 AI 原生性、真实业务价值和叙事强度，避免把技术新颖度直接等同投资价值
+      required: true
+    - id: evidence-backed-verdict
+      requirement: 每个核心产品结论都连接输入事实、证据或明确假设，禁止无来源补造产品能力
+      required: true
+    - id: counterargument-and-boundaries
+      requirement: 给出最强项、最弱项、反方解释、结论边界以及会改变判断的新证据
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得将未知写成零或事实
+      required: true
+  artifact:
+    path: 03-product-judgment.md
+    mediaType: text/markdown
+    independent: true

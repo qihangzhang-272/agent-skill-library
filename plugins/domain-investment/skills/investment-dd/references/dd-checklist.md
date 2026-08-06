@@ -1,117 +1,89 @@
----
-name: dd-checklist
-description: Generate and track comprehensive due diligence checklists tailored to the target company's sector, deal type, and complexity. Covers all major workstreams with request lists, status tracking, and red flag escalation. Use when kicking off diligence, organizing a data room review, or tracking outstanding items. Triggers on "dd checklist", "due diligence tracker", "diligence request list", "what do we still need", or "data room review".
----
+# Internal Method: Due Diligence Workstream Checklist
 
-# Due Diligence Checklist
+Use this method inside `investment-dd` to test coverage and prioritize unresolved claims. It is not an independent tracker or document workflow.
 
-## Workflow
+## Scope the diligence
 
-### Step 1: Scope the Diligence
+Record:
 
-Ask the user for:
-- **Target company**: Name, sector, business model
-- **Deal type**: Platform acquisition, add-on, growth equity, recap, carve-out
-- **Deal size / complexity**: Determines depth of diligence
-- **Key concerns**: Any known issues to prioritize (customer concentration, regulatory, environmental, etc.)
-- **Timeline**: When is LOI / close targeted?
+- target, sector, business model, stage, and transaction type;
+- current recommendation and the decisions DD must enable;
+- known risks, valuation sensitivities, veto candidates, and timing constraints;
+- supplied upstream Artifacts and open evidence gaps.
 
-### Step 2: Generate Workstream Checklists
+## Workstream coverage
 
-Generate a checklist across all major workstreams, tailored to the sector:
+Tailor the following rather than copying every item mechanically.
 
-**Financial Due Diligence**
-- Quality of earnings (QoE) — revenue and EBITDA adjustments
-- Working capital analysis — normalized vs. actual
-- Debt and debt-like items
-- Capital expenditure (maintenance vs. growth)
-- Tax structure and exposure
-- Audit history and accounting policies
-- Pro forma adjustments (run-rate, synergies)
+### Financial
 
-**Commercial Due Diligence**
-- Market size and growth (TAM/SAM/SOM)
-- Competitive positioning and market share
-- Customer analysis — concentration, retention, NPS
-- Pricing power and contract structure
-- Sales pipeline and backlog
-- Go-to-market effectiveness
+- revenue recognition, quality, recurrence, backlog, and adjustments;
+- ARR bridge, retention/cohorts, customer concentration, and pricing;
+- gross margin, hosting/inference cost, contribution margin, and cash conversion;
+- working capital, capex, debt/debt-like items, tax, audit history, and runway;
+- management adjustments, scenario assumptions, and reconciliation to valuation.
 
-**Legal Due Diligence**
-- Corporate structure and org chart
-- Material contracts (customer, supplier, partnership)
-- Litigation history and pending claims
-- IP portfolio and protection
-- Regulatory compliance
-- Employment agreements and non-competes
+### Commercial and market
 
-**Operational Due Diligence**
-- Management team assessment
-- Organizational structure and key person risk
-- IT systems and infrastructure
-- Supply chain and vendor dependencies
-- Facilities and real estate
-- Insurance coverage
+- TAM/SAM/SOM definitions and buyer budget;
+- market growth, adoption constraints, replacement risk, and platform dependency;
+- competition, win/loss evidence, differentiation, pricing power, pipeline, and GTM efficiency;
+- customer references, churn reasons, deployment time, expansion, and satisfaction.
 
-**HR / People Due Diligence**
-- Org chart and headcount trends
-- Compensation benchmarking
-- Benefits and pension obligations
-- Key employee retention risk
-- Culture assessment
-- Union/labor agreements
+### Product, technology, OSS, and data
 
-**IT / Technology Due Diligence** (for tech-enabled businesses)
-- Technology stack and architecture
-- Technical debt assessment
-- Cybersecurity posture
-- Data privacy compliance (GDPR, CCPA, SOC2)
-- Product roadmap and R&D spend
-- Scalability assessment
+- architecture, benchmarks, reliability, scalability, security, and technical debt;
+- model/provider dependency, inference economics, data rights, privacy, and governance;
+- roadmap feasibility, release quality, incident history, and R&D capacity;
+- license, contributor quality, external adoption, governance, fork/platform risk, and monetization.
 
-**Environmental / ESG** (where applicable)
-- Environmental liabilities
-- Regulatory compliance history
-- ESG risks and opportunities
+### Legal, regulatory, and IP
 
-### Step 3: Status Tracking
+- corporate structure, ownership, cap table, options, and related parties;
+- material contracts, change-of-control terms, litigation, compliance, and regulatory approvals;
+- IP ownership, contributor agreements, open-source obligations, trademarks, and data licenses;
+- employment, non-compete/non-solicit, privacy, security certification, and sanctions/export issues.
 
-For each item, track:
+### Team, operations, and financing
 
-| Item | Workstream | Priority | Status | Owner | Notes |
-|------|-----------|----------|--------|-------|-------|
-| QoE report | Financial | P0 | Pending | | |
-| Customer interviews | Commercial | P0 | In Progress | | 3 of 10 complete |
+- founder-market fit, key-person risk, hiring/retention, incentives, and governance;
+- organizational bottlenecks, systems, vendors, facilities, insurance, and business continuity;
+- fundraising history, current runway, financing needs, use of proceeds, and exit constraints.
 
-Status options: Not Started → Requested → Received → In Review → Complete → Red Flag
+## Prioritization and status
 
-### Step 4: Red Flag Summary
+For each item record:
 
-Maintain a running list of red flags discovered during diligence:
-- What was found
-- Which workstream
-- Severity (deal-breaker / significant / manageable)
-- Mitigant or path to resolution
-- Impact on valuation or deal terms
+```text
+Originating claim / Artifact:
+Workstream:
+Priority: P0 | P1 | P2
+Evidence requested:
+Expected source / owner:
+Status: not requested | requested | received | reviewed | closed | red flag
+Finding:
+Decision impact:
+Closure criterion:
+```
 
-### Step 5: Output
+- **P0:** potential deal-breaker, veto, fraud/integrity issue, or recommendation-changing evidence.
+- **P1:** changes valuation, terms, mitigation, sizing, or conviction.
+- **P2:** confirmatory, lower-impact, or post-decision work.
 
-- Excel workbook with tabs per workstream (default)
-- Summary dashboard: % complete by workstream, outstanding items, red flags
-- Weekly status update format for deal team
+Never mark an item closed merely because a file was received; the evidence must answer the claim and reconcile with other inputs.
 
-## Sector-Specific Additions
+## Red-flag escalation
 
-Automatically add relevant items based on sector:
-- **Software/SaaS**: ARR quality, cohort analysis, hosting costs, SOC2
-- **Healthcare**: Regulatory approvals, reimbursement risk, payor mix
-- **Industrial**: Equipment condition, environmental remediation, safety record
-- **Financial services**: Regulatory capital, compliance history, credit quality
-- **Consumer**: Brand health, channel mix, seasonality, inventory management
+For every red flag, state finding, evidence, severity, consequence, mitigant, residual uncertainty, impact on valuation/terms/verdict, and who must resolve it. Slow or evasive responses are signals, not proof of misconduct.
 
-## Important Notes
+## Sector adaptations
 
-- Prioritize P0 items that are gating to LOI or close
-- Flag items where the seller is slow to respond — may indicate issues
-- Cross-reference data room contents against the checklist to identify gaps
-- Update the checklist as diligence progresses — it's a living document
+- **Software/SaaS:** ARR quality, cohorts, hosting/inference cost, security, uptime, implementation, NDR.
+- **Financial services:** regulatory capital, compliance, credit quality, liquidity, model risk.
+- **Healthcare:** approvals, reimbursement, clinical evidence, privacy, concentration.
+- **Industrial:** equipment, safety, environmental liabilities, supply chain, maintenance capex.
+- **Consumer:** brand, channel mix, inventory, cohort/repeat behavior, seasonality.
+
+## Completion test
+
+The DD checklist is complete only when every material upstream unknown or contested claim is either mapped to a testable request with decision impact, explicitly out of scope with a reason, or returned upstream as `REWORK`.

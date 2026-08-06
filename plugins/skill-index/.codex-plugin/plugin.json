@@ -1,7 +1,7 @@
 {
   "name": "skill-index",
-  "version": "0.4.4",
-  "description": "两层生态索引：本地维护技能 vs GitHub 外部技能，探测与提示安装。",
+  "version": "0.4.5",
+  "description": "两层生态索引：本地维护 Skill 与 GitHub 外部候选；只在稳定 Run 外发现和沉淀。",
   "author": {
     "name": "Agent Skill Library Maintainers"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Skill Index",
     "shortDescription": "检索并判断本地技能与外部技能来源。",
-    "longDescription": "维护本地技能和 GitHub 外部技能的来源、状态与安装边界。",
+    "longDescription": "维护本地 Skill 和 GitHub 外部候选的来源、状态与本地化边界；稳定 Run 中不直接安装外部能力。",
     "developerName": "Agent Skill Library Maintainers",
     "category": "Productivity",
     "capabilities": [

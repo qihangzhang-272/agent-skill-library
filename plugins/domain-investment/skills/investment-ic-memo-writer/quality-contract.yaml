@@ -1,0 +1,42 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-ic-memo-writer.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/memo-assembly.md
+    - references/pe-deal-addendum.md
+    - references/quality-checklist.md
+  obligations:
+    - id: no-new-analysis-and-source-fidelity
+      requirement: Memo 只组装 01–09 已有业务内容，不新增搜索、事实、可比对象、评分或估值；数字、日期、币种、单位、期间和情景保持原口径
+      required: true
+    - id: thirteen-investor-sections
+      requirement: 完整呈现执行摘要、投资建议、公司与产品概览、AI 原生性与产品判断、市场与竞争格局、商业模式与单位经济、技术开源生态与护城河、估值与回报逻辑、投资评分卡、核心风险与一票否决项、尽调优先级、投资论点与跟踪触发器、来源未知项与核验缺口十三节
+      required: true
+    - id: clickable-external-sources
+      requirement: Memo 中的真实外部来源使用可读名称和可点击的 Markdown URL，不以内部系统文件标识冒充投资人引用
+      required: true
+    - id: conflicts-and-gaps-preserved
+      requirement: 前序冲突、反证和未知项被忠实保留；正文写清未知内容、决策影响、保守处理和再核验条件，不以顺畅叙事掩盖
+      required: true
+    - id: decision-consistency
+      requirement: 最终建议、评分、估值回报、关键风险、尽调优先级和论点触发条件彼此一致
+      required: true
+    - id: memo-as-sole-conclusion-source
+      requirement: 只保留推进（Proceed）、有条件推进（Conditional proceed）、观察（Watch）或放弃（Pass）中的一个结论，并成为视觉报告唯一业务输入和唯一结论来源
+      required: true
+    - id: investor-readable-chinese
+      requirement: 面向中文投资人写作；专业缩写和英文投资术语首次出现时给出准确中文解释，避免用内部工程术语代替业务表达
+      required: true
+    - id: business-body-without-runtime-audit
+      requirement: Memo 只呈现投资业务正文，不展示运行记录或内部检查过程；这些信息由工作区另存
+      required: true
+    - id: conditional-private-equity-addendum
+      requirement: 私募股权交易情境适用时，在相应正文章节呈现交易条款、杠杆、治理、百日计划及 IRR/MOIC 驱动并解释术语；不适用时不填充空模板
+      required: true
+  artifact:
+    path: 10-ic-memo.md
+    mediaType: text/markdown
+    independent: true

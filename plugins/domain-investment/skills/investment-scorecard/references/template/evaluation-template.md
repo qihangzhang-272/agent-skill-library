@@ -1,6 +1,6 @@
 # OSS Investment Scorecard — Evaluation Template
 
-*Framework version: v1.1 | Fill in all sections, calculate weighted total, submit via GitHub Issue*
+*Framework version: v1.2 | Fill in all applicable sections and calculate the weighted total inside the scorecard Artifact.*
 
 ---
 
@@ -26,7 +26,7 @@
 | 2. Does open-source mode confer structural advantage? | ☐ Yes ☐ No | |
 | 3. Is the AI-cycle value premium applicable? | ☐ Yes ☐ No | |
 
-**Gate result:** ☐ Proceed to scoring ☐ Stop — Pass (reason: ___)
+**Gate result:** Q1/Q2 ☐ Proceed to scoring ☐ Stop — Pass (reason: ___) · Q3 ☐ AI-cycle premium applies ☐ Risk only, not automatic veto
 
 ---
 
@@ -90,7 +90,7 @@ Main risk:
 | Narrative consistency (pivot count: ___) | | |
 
 **Dimension C Score: ___ / 10**
-*(Apply -1 penalty if narrative pivot count ≥ 2)*
+*(Apply -1 penalty if narrative pivot count ≥ 2, excluding evidence-backed market-following pivots such as RAG → Agent Memory)*
 
 Key evidence:
 
@@ -172,15 +172,13 @@ If Dim B ≥ 7.5 AND Dim E ≥ 6.0 AND Weighted Total < 5.5:
 - ☐ External contributor % < 5% (self-directed project)
 - ☐ Zero verifiable engineering contribution outside company repo
 - ☐ Core product is L4 only (prompt engineering / fine-tuning wrapper)
-- ☐ Narrative pivot ≥ 3 times in < 24 months
 - ☐ Revenue entirely LoI/MOU + valuation > 2× sector median
-- ☐ No English documentation + zero international contributors
 
 **Veto triggered:** ☐ Yes (specify: ___) ☐ No
 
 ---
 
-## IC Thesis (≤ 100 words)
+## IC Thesis
 
 *Why now · Why this project · Exit path conviction*
 

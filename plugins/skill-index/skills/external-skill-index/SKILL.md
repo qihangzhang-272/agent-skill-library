@@ -1,9 +1,9 @@
 ---
 name: external-skill-index
 description: >-
-  Use when looking up the library's curated external GitHub skill sources, deciding
-  whether to install an external skill, or replacing vendored external skill
-  folders with lightweight source references.
+  Use outside a stable Run when looking up curated external GitHub skill sources,
+  deciding how to localize one, or replacing vendored external skill folders with
+  lightweight source references.
 ---
 
 # External Skill Index
@@ -17,8 +17,8 @@ It is not a mirror. Do not treat indexed external repositories as local source p
 Use this skill when:
 
 - You need to find a previously collected external skill or source repository.
-- You need to decide whether an external skill should stay as an index, be installed into a target project, or be promoted into a locally maintained skill.
-- A workflow references an external capability such as agent-reach, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
+- You need to decide whether an external source should stay as an index or be imported, forked, wrapped, or absorbed into a locally maintained Skill.
+- You are preparing, outside a stable Run, to localize an external capability such as agent-reach, `baoyu-skills`, GSAP skills, Impeccable, Humanizer-zh, or OSS investment scoring.
 - The repository feels bloated because external skill files were copied into `skills/`.
 
 Do not use this skill to replace locally maintained skills:
@@ -31,7 +31,9 @@ Those are source skills and should remain local.
 
 ## Core Rule
 
-External skills are links first.
+External skills are candidate links first, never direct stable-Workflow nodes.
+
+A stable Workflow can use a capability only after it has been imported, forked, wrapped, or absorbed into a local Skill with origin fields, a quality contract, and an isolated trial.
 
 Only copy an external skill into this repository when all of these are true:
 
@@ -54,9 +56,9 @@ Read `references/github-skill-index.md` for the current curated list. Source URL
 
 1. Identify the domain: writing, publishing, product/investment, frontend/design, or skill discovery.
 2. Find the matching source in the index.
-3. Prefer upstream install or direct GitHub reference in the target project.
-4. If a workflow depends on the source, reference the repo name and expected role instead of copying its files unless the index records a maintainer-approved exact vendoring exception.
-5. If the library maintainers repeatedly rewrite or customize the external skill, create a new locally maintained skill instead of patching the external copy.
+3. Record the repository, version or commit, license, source path, and expected role in the candidate area.
+4. Outside the Run, import, fork, wrap, or absorb it into a local Skill, then record its origin fields, draft its quality contract, and trial it in isolation. A maintainer-approved exact vendoring exception still must meet these local-Skill requirements.
+5. Only after user confirmation may that local Skill enter a stable Workflow. Never install or directly reference an indexed source during the Workflow Run.
 
 ## Maintenance
 

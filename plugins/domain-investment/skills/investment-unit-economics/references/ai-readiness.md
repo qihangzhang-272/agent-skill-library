@@ -1,99 +1,113 @@
----
-name: ai-readiness
-description: Scan the portfolio for the highest-leverage AI opportunities and rank where to deploy operating-partner time. Ingests quarterly updates and financials across multiple portfolio companies, identifies quick wins at each, and stacks them into a single ranked action list. Use during quarterly portfolio reviews, annual planning, or when deciding which companies get AI investment first. Triggers on "AI readiness", "AI opportunity scan", "where should we deploy AI", "AI across the portfolio", "AI quick wins", or "which portcos are ready for AI".
----
+# AI-Readiness and Deployment-Gate Method
 
-# Portfolio AI Readiness
+This is an internal method of investment-unit-economics, not a standalone Skill or portfolio Agent. Use it when the case requires a realistic test of whether AI can create measurable economic value and be deployed.
 
-## Workflow
+Use only supplied Artifacts and declared materials. Do not discover or connect to a data room, SharePoint, Drive, portfolio database, MCP server, or private system from this method. Record missing access as an explicit input gap; never improvise a connection.
 
-### Step 1: Connect to Portfolio Data
+## 1. Establish the Operating Baseline
 
-First, ask the user where the portfolio materials live. Don't assume — offer the options:
+Extract when available:
 
-- **MCP servers** — data room, SharePoint, Google Drive, or a portfolio-ops database if one is connected
-- **Local files** — a folder path on disk with quarterly decks, financials, board packs
-- **File uploads** — drag PDFs, PowerPoint, or Excel directly into the conversation
+- sector, revenue, gross profit, EBITDA, and headcount by function;
+- material workflows and cost pools;
+- technology and data systems mentioned in approved materials;
+- current AI or automation initiatives;
+- remaining hold period or decision horizon;
+- prior pilots and why they worked or failed.
 
-Once connected, pull quarterly updates, board decks, and financials for the portfolio (or a subset). For each company, extract: sector, revenue, headcount by function, tech stack mentioned, and any AI/automation initiatives already in flight.
+For a single-company investment case, assess that company only. If multiple companies are already present in the declared inputs, the same method may rank opportunities across them without widening scope.
 
-If the user provides a single company, still run the scan but skip the cross-portfolio ranking.
+## 2. Apply the Three Deployment Gates
 
-Ask up front if not obvious from materials:
-- Hold period remaining per company (AI payback matters less 12 months from exit)
-- Whether any portco has already deployed something that worked
+All three gates must pass for a near-term Go. Any failure is Wait, with a precise unblocker.
 
-### Step 2: Per-Company Scan
+1. **Data:** Can the team produce a usable input for the workflow without a long foundational data project?
+2. **Owner:** Is there a named operating owner accountable for adoption and results, rather than only an executive sponsor?
+3. **Thirty-day pilot:** Can one team test one workflow with bounded scope and available tooling within roughly 30 days?
 
-For each company, answer three gate questions. All three yes → **Go**. Any no → **Wait** with a note on what unblocks it.
+For each gate show evidence, uncertainty, and what would change the result. A missing answer is Unknown, not Go.
 
-1. **Is the data there?** Can they produce a clean input for the use case — customer list, invoice feed, contract repository — without a 6-month data project first?
-2. **Is there an owner?** Someone on the management team who will drive this, not a sponsor who will "support" it.
-3. **Can we pilot in 30 days?** One team, one workflow, off-the-shelf tooling. If the answer starts with "first we'd need to...", it's not a quick win.
+## 3. Identify Leverage Points
 
-Then identify the top 2-3 leverage points. Look for these patterns in the cost structure and operations:
+Look for concrete workflow economics rather than AI excitement.
 
-**Back Office (usually fastest to pilot)**
-- Invoice processing, AP/AR matching, expense categorization
-- Contract abstraction — vendor agreements, leases, customer MSAs
-- Month-end close: reconciliations, flux commentary, lender reporting first drafts
+### Back office
 
-**Revenue / Front Office**
-- RFP and proposal first drafts — big lever if revenue is project-based
-- Sales call summaries and CRM hygiene
-- Customer support ticket triage and first-response drafting
-- Quoting for configured / complex products
+- invoice processing and AP/AR matching;
+- expense categorization;
+- contract abstraction;
+- reconciliation, flux commentary, and reporting drafts.
 
-**Operations (sector-dependent)**
-- SOP and quality documentation generation
-- Scheduling and dispatch (field services, logistics)
-- Code generation and review (software portcos)
+### Revenue and front office
 
-For each leverage point, capture in one line: what it replaces, FTE-hours/week saved (assume 30-50%, not 100%), and whether it's buy-off-the-shelf or needs a light build.
+- RFP and proposal drafting;
+- sales-call summaries and CRM hygiene;
+- support triage and first-response drafting;
+- quoting for configured or complex products.
 
-### Step 3: Rank Across the Portfolio
+### Operations
 
-Stack every leverage point from every company into one list. Rank by:
+- SOP and quality documentation;
+- scheduling and dispatch;
+- software development and review;
+- other high-volume, measurable workflows supported by case evidence.
 
-1. **Dollar impact** — annualized EBITDA contribution (cost out + revenue lift, net of tool cost)
-2. **Speed to value** — months to first measurable result
-3. **Probability** — discount for data quality, change management risk, management team capability
+For each leverage point capture:
 
-Tiebreaker: favor opportunities with <18 months of hold period remaining — those need to move now or not at all.
+- current workflow and cost base;
+- what work changes rather than a vague “automation” label;
+- feasible time saved, normally stress-tested below 100 percent;
+- tool or implementation cost;
+- data and change-management dependency;
+- owner and pilot design;
+- revenue, gross-profit, or EBITDA mechanism;
+- confidence and evidence.
 
-Output the stack:
+## 4. Rank Opportunities
 
-| Rank | Company | Opportunity | Est. EBITDA ($) | Months to Value | Gate | First Step |
-|---|---|---|---|---|---|---|
-| 1 | | | | | Go | |
-| 2 | | | | | Go | |
-| 3 | | | | | Wait — [blocker] | |
+Rank by:
 
-### Step 4: Find the Replays
+1. annualized economic impact net of tool and implementation cost;
+2. speed to first measurable result;
+3. probability after data, ownership, and change-management discounts.
 
-The highest-leverage move in a portfolio is running one successful play at multiple companies. Scan for:
+Use remaining hold period only as a timing constraint, not as a reason to overstate benefits.
 
-- **Same sector, same function** — two healthcare services portcos with manual prior-auth? One implementation, two deployments.
-- **Same tool, different company** — if one portco already has a working invoice-processing setup, flag every other portco with >$Xm in AP volume as a fast follower.
-- **Shared vendor leverage** — three portcos buying the same tool is a pricing conversation.
+| Rank | Opportunity | Economic impact | Time to value | Data gate | Owner gate | Pilot gate | First measurable step |
+|---:|---|---:|---:|---|---|---|---|
+| 1 | | | | | | | |
 
-List each replay with the lead company (who proves it) and follower companies (who copy it).
+If the evidence cannot support a dollar estimate, provide a range or Unknown and state the required inputs. Do not backsolve an attractive EBITDA number.
 
-### Step 5: Output
+## 5. Identify Replays When Scope Supports It
 
-One page for the operating partner, structured for a portfolio review:
+For multi-company inputs only, test:
 
-1. **Top 5 across the portfolio** — the ranked table from Step 3, with owner and 30-day first step
-2. **Replays** — 2-3 playbooks that hit multiple companies at once
-3. **Go / Wait by company** — one line each; for Waits, what unblocks them
-4. **What we're NOT doing** — the opportunities that looked good on paper but failed a gate; saves the operating partner from relitigating them every quarter
-5. **Aggregate EBITDA contribution** — total portfolio-wide AI opportunity, split Year 1 quick wins vs. Years 2-3 scale
+- same sector and workflow;
+- a proven tool or implementation pattern at another company;
+- shared vendor leverage;
+- common data and ownership constraints.
 
-## Important Notes
+Identify the lead implementation and potential followers. A replay remains a hypothesis until the follower passes its own three gates.
 
-- **Rank by dollars, not excitement.** A boring AP automation that saves $400k at a $40m revenue company beats a flashy customer-facing chatbot every time.
-- **The binding constraint is almost always data, not models.** If a company can't produce a clean customer list, AI isn't the first project — a data cleanup is. Say so plainly.
-- **Off-the-shelf first.** Custom builds are slow, expensive, and fragile for companies without engineering depth. Favor tools they can buy and deploy.
-- **Ownership is the real gate.** A quick win with no internal owner dies in 90 days. If no one on the management team wants it, mark it Wait regardless of the dollar size.
-- **Hold period drives urgency.** A company 3 years from exit can afford a foundational data project. A company 12 months out needs something that shows up in the LTM EBITDA for the CIM — or skip it.
-- **Failed pilots are signal.** If management already tried something and it didn't stick, find out why before proposing the same thing again.
+## Contribution to 05-unit-economics.md
+
+Return:
+
+- operating baseline;
+- Go/Wait/Unknown gate table;
+- ranked leverage points;
+- economic-impact formulas and assumptions;
+- 30-day pilot conditions;
+- replays, only when declared inputs support them;
+- opportunities explicitly not pursued and why;
+- unknowns, decision impact, fallback, and revisit trigger.
+
+## Guardrails
+
+- Rank by measurable economics, not novelty.
+- Data and ownership are usually harder constraints than model capability.
+- Prefer bounded, available implementations over unsupported custom-build assumptions.
+- A failed pilot is evidence; investigate its mechanism before proposing a replay.
+- Do not contact management, vendors, or operating partners.
+- Do not create another Artifact or invoke another Skill, Agent, API workflow, or external write.

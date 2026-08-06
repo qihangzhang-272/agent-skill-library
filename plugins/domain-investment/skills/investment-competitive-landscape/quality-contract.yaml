@@ -1,0 +1,36 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-competitive-landscape.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/competitive-analysis.md
+    - references/frameworks.md
+    - references/idea-generation.md
+    - references/market-researcher-agent.md
+    - references/schemas.md
+    - references/sector-overview.md
+  obligations:
+    - id: market-value-chain-economics
+      requirement: 明确市场边界、规模与增长口径、价值链、利润池、行业经济性、why-now 与适用的行业定义指标
+      required: true
+    - id: competitor-universe
+      requirement: 覆盖直接竞争、间接替代、现状方案、邻近和潜在进入者，并说明纳入或排除依据
+      required: true
+    - id: comparable-evidence
+      requirement: 关键竞品对比采用一致字段、期间、单位和可追溯来源，未知项不得用主观评分伪装为事实
+      required: true
+    - id: positioning-moat-counterevidence
+      requirement: 判断定位、差异化、分发、数据、技术、成本和转换壁垒，同时呈现削弱护城河的反证
+      required: true
+    - id: strategic-scenarios
+      requirement: 形成竞争或经营层面的 bull/base/bear 情景、可观察信号、时间范围和对后续经济性及估值的影响，不在本节点创造估值
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；市场定义、竞争宇宙、护城河检验和情景分析仍必须完成
+      required: true
+  artifact:
+    path: 04-competitive-landscape.md
+    mediaType: text/markdown
+    independent: true

@@ -1,0 +1,35 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-research.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/agent-reach-search.md
+    - references/deal-sourcing.md
+    - references/funding-digest.md
+    - references/public-company-research.md
+    - references/sector-seeds.md
+  obligations:
+    - id: current-source-coverage
+      requirement: Standalone 模式使用当次取得的现行来源；managed Workflow 复用 01-source-intake 的有日期证据，只对其明确缺口、冲突或过期事实定向补查，不重复全量搜索，并写明事实适用期间
+      required: true
+    - id: evidence-per-key-fact
+      requirement: 每项关键事实都有可定位证据、来源日期和事实适用期间；无证据内容不得冒充事实
+      required: true
+    - id: fact-pack-completeness
+      requirement: 事实包覆盖公司、产品、技术与 OSS、市场、客户、商业模式、团队、所有权、融资、竞争、风险和关键时间线等适用区域
+      required: true
+    - id: epistemic-and-conflict-separation
+      requirement: 事实、公司口径、第三方观点、推断、假设、反证和来源冲突分别呈现
+      required: true
+    - id: missing-facts-to-dd
+      requirement: 把缺失事实转成可执行核验方向，并说明其对产品、竞争、经济性、评分和估值判断的影响
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得将未知写成零或事实
+      required: true
+  artifact:
+    path: 02-fact-pack.md
+    mediaType: text/markdown
+    independent: true

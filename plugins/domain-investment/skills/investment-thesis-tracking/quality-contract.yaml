@@ -1,0 +1,44 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-thesis-tracking.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/catalyst-calendar.md
+    - references/earnings-analysis.md
+    - references/earnings-analysis/best-practices.md
+    - references/earnings-analysis/report-structure.md
+    - references/earnings-analysis/workflow.md
+    - references/earnings-preview.md
+    - references/portfolio-monitoring.md
+    - references/thesis-tracker.md
+  obligations:
+    - id: starting-state
+      requirement: 记录当前投资论点、置信度、观察日期、依据和仍未解决的核心不确定性
+      required: true
+    - id: falsifiable-pillars
+      requirement: 每个论点支柱均可证伪，并同时连接支持证据、反证和关键假设
+      required: true
+    - id: dd-mapping
+      requirement: 将尽调问题与论点支柱、风险、估值敏感项及待确认状态建立明确映射
+      required: true
+    - id: kpi-threshold-action
+      requirement: 每个关键指标包含定义、数据源、检查频率、阈值和触发后的明确行动
+      required: true
+    - id: catalysts-and-exit-triggers
+      requirement: 催化剂、负面触发器、退出条件带时间窗口并可被后续研究复核
+      required: true
+    - id: conviction-transition-rules
+      requirement: 明确 upgrade、maintain、downgrade 和 invalidate 的证据门槛，并规定新证据到来时保留历史判断和说明变化原因
+      required: true
+    - id: period-update-analysis
+      requirement: 当对象和期间适用时，核验最新 period，比较 actual 与 expectation 或 plan，分析 variance、guidance 与 estimate 变化，并映射到 thesis pillar 和 conviction transition
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得把未知指标或事件改写为事实
+      required: true
+  artifact:
+    path: 09-thesis-tracking.md
+    mediaType: text/markdown
+    independent: true

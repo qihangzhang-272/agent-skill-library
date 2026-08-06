@@ -1,67 +1,76 @@
----
-name: thesis-tracker
-description: Maintain and update investment theses for portfolio positions and watchlist names. Track key data points, catalysts, and thesis milestones over time. Use when updating a thesis with new information, reviewing position rationale, or checking if a thesis is still intact. Triggers on "update thesis for [company]", "is my thesis still intact", "thesis check", "add data point to [company]", or "review my positions".
----
+# Internal Method: Thesis Formation and Update
 
-# Thesis Tracker
+Use this method inside `investment-thesis-tracking`. It is not an independent Skill, portfolio service, or cross-session state store.
 
-## Workflow
+## Define the thesis
 
-### Step 1: Define or Load Thesis
+Record:
 
-If creating a new thesis:
-- **Company**: Name and ticker
-- **Position**: Long or Short
-- **Thesis statement**: 1-2 sentence core thesis (e.g., "Long ACME — margin expansion from pricing power + operating leverage as mix shifts to software")
-- **Key pillars**: 3-5 supporting arguments
-- **Key risks**: 3-5 risks that would invalidate the thesis
-- **Catalysts**: Upcoming events that could prove/disprove the thesis (earnings, product launches, regulatory decisions)
-- **Target price / valuation**: What's it worth if the thesis plays out
-- **Stop-loss trigger**: What would make you exit
+- object, instrument or case type, and as-of date;
+- current recommendation or conviction and investment horizon;
+- one falsifiable thesis statement;
+- 3–5 supporting pillars;
+- 3–5 material risks or disconfirming conditions;
+- valuation or return condition when applicable;
+- exit, pass, or stop-tracking condition.
 
-If updating an existing thesis, ask the user for the new data point or development.
+Each pillar must have:
 
-### Step 2: Update Log
+```text
+Claim:
+Supporting Artifact evidence:
+Counterevidence:
+Metric or event:
+Baseline and expected direction:
+Time window:
+Strengthening threshold:
+Weakening threshold:
+Falsification condition:
+Action if triggered:
+```
 
-For each new data point or development:
+A statement that cannot be disproved is not a thesis pillar.
 
-- **Date**: When this happened
-- **Data point**: What changed (earnings beat, management departure, competitor move, etc.)
-- **Thesis impact**: Does this strengthen, weaken, or neutralize a specific pillar?
-- **Action**: No change / Increase position / Trim / Exit
-- **Updated conviction**: High / Medium / Low
+## Convert DD gaps into monitoring
 
-### Step 3: Thesis Scorecard
+Map each unresolved P0/P1 DD item to a pillar, trigger, evidence request, owner/source, and decision consequence. An unanswered question remains an unknown; it is never promoted to an assumption or fact simply because monitoring begins.
 
-Maintain a running scorecard:
+## Update logic
 
-| Pillar | Original Expectation | Current Status | Trend |
-|--------|---------------------|----------------|-------|
-| Revenue growth >20% | On track | Q3 was 22% | Stable |
-| Margin expansion | Behind | Margins flat YoY | Concerning |
-| New product launch | Pending | Delayed to Q2 | Watch |
+For each dated development:
 
-### Step 4: Catalyst Calendar
+```text
+Date / period:
+New evidence:
+Source Artifact:
+Affected pillar:
+Impact: strengthens | weakens | neutral | falsifies
+Reason:
+Updated conviction:
+Required action:
+Next verification:
+```
 
-Track upcoming catalysts:
+Compare the new data to the original expectation and baseline. Do not rewrite the original thesis to make every outcome look consistent.
 
-| Date | Event | Expected Impact | Notes |
-|------|-------|-----------------|-------|
-| | | | |
+## Pillar scorecard
 
-### Step 5: Output
+Use a compact matrix:
 
-Thesis summary suitable for:
-- Morning meeting discussion
-- Portfolio review
-- Risk committee presentation
+| Pillar | Original expectation | Current evidence | Counterevidence | Status | Trend | Next trigger |
+| --- | --- | --- | --- | --- | --- | --- |
 
-Format: Concise markdown or Word doc with the scorecard, recent updates, and current conviction level.
+Status may be `on track`, `at risk`, `failed`, or `unknown`. Conviction changes must follow the stated rules rather than sentiment.
 
-## Important Notes
+## Monitoring discipline
 
-- A thesis should be falsifiable — if nothing could disprove it, it's not a thesis
-- Track disconfirming evidence as rigorously as confirming evidence
-- Review theses at least quarterly, even when nothing dramatic has happened
-- If the user manages multiple positions, offer to do a full portfolio thesis review
-- Store thesis data in a structured format so it can be referenced across sessions
+- Track disconfirming evidence as rigorously as confirming evidence.
+- Separate operating performance, valuation, technical progress, governance, and market narrative.
+- Keep metric definitions stable; if a definition changes, show both old and new bases.
+- Date every update and retain its input revision.
+- Use the dated Artifact as the durable record; do not assume hidden memory across sessions.
+- A review cadence is a commitment to inspect evidence, not proof that evidence exists.
+
+## Completion test
+
+The method is complete when each material pillar is falsifiable, each trigger has a threshold and action, DD gaps remain explicit, and exit/stop conditions are concrete enough for another reader to apply.

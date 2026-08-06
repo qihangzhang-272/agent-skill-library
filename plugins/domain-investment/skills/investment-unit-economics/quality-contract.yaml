@@ -1,0 +1,36 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-unit-economics.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/ai-readiness.md
+    - references/unit-economics.md
+    - references/value-creation-plan.md
+  obligations:
+    - id: economics-basis-and-segments
+      requirement: 声明业务模式、计价单位、收入确认、成本边界、币种、期间和适用 segment，使经济性计算可复现
+      required: true
+    - id: metric-lineage-and-formulas
+      requirement: 每个关键指标提供数值、公式、期间和来源；无法取得时保留未知而非虚构或记零
+      required: true
+    - id: retention-revenue-quality
+      requirement: 检查留存、扩张、集中度、回款、毛利和收入可重复性，区分一次性与持续性收入
+      required: true
+    - id: ai-cost-and-readiness
+      requirement: 纳入推理、训练、人工审核、实施、支持和基础设施成本，并逐项检查 Data gate、Owner gate 和 30-day pilot gate
+      required: true
+    - id: benchmark-basis-and-comparability
+      requirement: 每个 benchmark 说明同业、阶段、期间、定义和可比性限制；无法取得可靠 benchmark 时明确其影响
+      required: true
+    - id: value-creation-and-risk
+      requirement: 以 baseline、EBITDA bridge、100-day plan 和 KPI dashboard 把改善杠杆、执行条件、敏感性和下行风险连接到可验证的价值创造路径
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；公式、gate 检查和价值创造设计仍必须完成
+      required: true
+  artifact:
+    path: 05-unit-economics.md
+    mediaType: text/markdown
+    independent: true

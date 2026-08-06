@@ -79,4 +79,6 @@ Stop and report coverage when:
 - The research question is answered with enough source diversity.
 - Required surfaces have been covered or explicitly failed.
 - Further search is producing duplicates.
-- The next step belongs to another skill, such as `investment-ai-product-judgment`, `investment-competitive-landscape`, or `investment-dd`.
+- The fact-collection obligation is complete; this internal method never decides the next Skill.
+
+This is an internal search method. It never invokes another Skill or advances the Workflow.

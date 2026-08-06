@@ -1,7 +1,7 @@
 {
   "name": "domain-investment",
-  "version": "0.5.1",
-  "description": "投资决策领域：研究、产品判断、竞品、单元经济、财务模型、评分、估值、DD、thesis、IC memo、可视化研报瓦片技能。公开市场交付物由 domain-capital-markets 承接。",
+  "version": "0.6.1",
+  "description": "投资决策领域：10+1 独立 Skill、轻量质量合同、逐节点 Artifact、IC memo 与可选可视化研报。公开市场交付物由 domain-capital-markets 承接。",
   "author": {
     "name": "Agent Skill Library Maintainers"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Domain Investment",
     "shortDescription": "投资研究、估值、尽调和 IC memo。",
-    "longDescription": "覆盖投资事实收集、判断、模型、估值、DD、论点跟踪和 IC memo。",
+    "longDescription": "覆盖投资事实收集、判断、模型、估值、DD、论点跟踪、逐节点质量合同和 IC memo。",
     "developerName": "Agent Skill Library Maintainers",
     "category": "Productivity",
     "capabilities": [

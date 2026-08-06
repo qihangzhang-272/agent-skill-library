@@ -1,279 +1,195 @@
----
-name: competitive-analysis
-description: Framework for building competitive landscape decks — market positioning, competitor deep-dives, comparative analysis, strategic synthesis. Use when the user asks for a competitive landscape, competitor analysis, peer comparison, market positioning assessment, strategic review, or investment memo deck. Also triggers on "who are the competitors to X", "benchmark X against peers", "build a market map", or any request to systematically evaluate competitive dynamics across an industry.
----
+# Competitive Landscape Mapping Method
 
-# Competitive Landscape Mapping
+This is an internal method of investment-competitive-landscape, not a standalone Skill and not a presentation workflow. Use it to define a market, build a comparable competitor universe, test positioning and moat, and synthesize bull/base/bear implications inside 04-competitive-landscape.md.
 
-Build a complete competitive analysis deck. This is a two-phase process: gather requirements and get outline approval first, then build.
+It must not request outline approval, create slides, invoke another Skill or Agent, or produce a second Artifact.
 
-## Environment check
+## 1. Scope the Analysis
 
-This skill works in both the PowerPoint add-in and chat. Identify which you're in before starting — the mechanics differ, the workflow doesn't:
+Derive the scope from the supplied fact pack, product judgment, core investment question, and Workflow:
 
-- **Add-in** — the deck is open live; build slides directly into it.
-- **Chat** — generate a `.pptx` file (or build into one the user uploaded).
+- target company or multi-company universe;
+- market/category boundary and explicit exclusions;
+- direct, indirect, status-quo, adjacent, and emerging alternatives;
+- audience-relevant depth;
+- whether valuation context is factual background or belongs to a later valuation node;
+- whether scenario analysis is decision-relevant.
 
-Everything below applies in both.
+In managed workflow use, do not insert another approval pause. If a scope choice is missing, state the conservative choice and its consequences, or mark REWORK when the ambiguity would make the comparison misleading.
 
-## Phase 1 — Scope the analysis
+## 2. Evidence Standards
 
-Competitive analysis means different things to different people. Before any research or slide-building, use `ask_user_question` to pin down what they actually want. Don't guess — a 20-slide peer benchmarking deck and a 5-slide market map are both "competitive analysis" and take completely different shapes.
+Prefer sources in this order when the facts conflict:
 
-Gather in one round if you can (the tool takes up to 4 questions):
+1. audited filings and regulatory records;
+2. earnings materials, investor presentations, and product documentation;
+3. credible analyst or licensed-market data;
+4. dated industry reports;
+5. news for recent events, verified against primary sources when possible.
 
-- **Scope** — Single target company with competitors around it? Or multi-company side-by-side with no protagonist?
-- **Competitor set** — Which companies are in scope? If the user names them, use exactly those. If they say "the usual suspects," propose a set and confirm.
-- **Audience and depth** — Quick read for someone already in the space, or a full primer? This drives whether you need market sizing, industry economics, and history — or can skip to the comparison.
-- **Investment context** — Do they need bull/base/bear scenarios and signposts? That's Step 9 below; skip it if this is a strategic review rather than an investment thesis.
+For every decision-relevant number record source, document date, reporting period, units, currency, and definition.
 
-If they've uploaded an Excel/CSV with competitor data, confirm which columns map to which metrics before you start pulling numbers. Source-file fidelity matters: use values exactly as given, don't recalculate or re-round.
+Comparability rules:
 
-## Phase 2 — Outline, approve, then build
+- use the same fiscal period or flag exceptions;
+- use the same metric definition across companies;
+- preserve source-file values and precision;
+- convert currency only with a recorded rate and date;
+- show missing values as unknown;
+- label estimates and their method;
+- never compare a company-wide metric with a segment metric without saying so.
 
-**Do not create slides until the outline is approved.** Propose slide titles and one-line content notes, present them to the user, get a yes. A competitive deck is 10-20 slides of interlocking content — rebuilding because slide 4 was wrong is expensive. The outline is the cheap iteration point.
+## 3. Select Industry-Defining Metrics
 
-When proposing the outline, `ask_user_question` works well for the structural decisions: which positioning visualization (2×2 matrix / radar / tier diagram — Step 5 below), how to group competitors (by business model / segment / posture — Step 4). These are taste calls the user likely has an opinion on.
+Choose three to five metrics the industry actually operates on and use them consistently.
 
----
-
-## Standards — apply throughout
-
-### Prompt fidelity
-
-When the user specifies something, that's a requirement, not a suggestion:
-- **Slide titles and section names** — exact wording. If they say "Overview and Competitive Scope," don't swap in "FY2024 Competitive Landscape."
-- **Chart vs. table** — not interchangeable. "Embedded chart" means a real chart object with data labels on the bars/slices, not a formatted table.
-- **Complete data series** — if they list 7 competitors, include all 7. If they show 2015-2025, include every year.
-- **Exact values and ratios** — "surpasses DoorDash 4:1, Lyft 8:1" means those ratios, not "7.6x Lyft."
-
-### Source quality, when sources conflict
-
-1. 10-Ks / annual reports (audited)
-2. Earnings calls / investor presentations (management commentary)
-3. Sell-side research (analyst estimates, useful for private company sizing)
-4. Industry reports (McKinsey, Gartner — market sizing, trends)
-5. News (recent developments only; verify against primary sources)
-
-### Data comparability
-
-- All competitor metrics from the same fiscal year; flag exceptions explicitly ("FY24" vs "H1 2024")
-- Same metric definitions across competitors
-- Convert to USD for international; note the exchange rate and date
-- Missing data shows as "-" or "N/A" with an "[E]" flag for estimates — never blank
-- Every number has a citation: "[Company] [Document] ([Date])"
-
-### Design
-
-- **Slide titles are insights, not labels.** "Scale leaders pulling away from niche players" — not "Competitive Analysis."
-- **Signposts are quantified.** "Margin below 40%" — not "margins decline."
-- **Ratings show the actual.** "●●● $160B" — not just "●●●."
-- **Charts are real chart objects** — not text tables dressed up to look like charts.
-
-**Typography** — set explicitly, don't rely on defaults:
-- Slide titles: 28-32pt bold
-- Section headers: 18-20pt bold
-- Body text: 14-16pt (never below 14pt)
-- Table text: 14pt
-- Sources/footnotes: 14pt, gray
-- Same element type = same size throughout the deck
-
-**Charts:**
-- Legend inside the chart boundary, not floating over the plot area
-- Right-side legend for pies (≤6 slices), bottom legend for line/bar (≤4 series)
-- More than 6 series → split into multiple charts or use a table
-- Pie charts show percentages on slices, not just in the legend
-
-**Tables:**
-- Light gray header row, bold
-- Right-align numbers, left-align text
-- Enough cell padding that text doesn't touch borders
-
-**Color:** 2-3 colors max. Muted — navy, gray, one accent. Same color meanings throughout.
-
-### What's strict vs. flexible
-
-| Always | Case-by-case |
-|---|---|
-| Exact titles/sections when user specifies | Creative titles when they don't |
-| Chart when user says chart; table when they say table | Visualization type when unspecified |
-| Every competitor/data point they list | Number of competitors when unspecified |
-| Exact values when specified | Rounding when precision unspecified |
-| Titles fit without overflow | Number of competitor categories |
-| No overlapping elements | Which dimensions to compare |
-
----
-
-## Analysis workflow
-
-### Step 0 — Industry-defining metrics
-
-Before anything else: what 3-5 metrics does this industry actually run on? Use these consistently across every competitor.
-
-| Industry | Key metrics |
+| Industry | Candidate metrics |
 |---|---|
 | SaaS | ARR, NRR, CAC payback, LTV/CAC, Rule of 40 |
 | Payments | GPV, take rate, attach rate, transaction margin |
-| Marketplaces | GMV, take rate, buyer/seller ratio, repeat rate |
-| Retail | Same-store sales, inventory turns, sales per sq ft |
-| Logistics | Volume, cost per unit, on-time delivery %, capacity utilization |
+| Marketplace | GMV, take rate, buyer/seller ratio, repeat rate |
+| Retail | Same-store sales, inventory turns, sales per square foot |
+| Logistics | Volume, unit cost, on-time delivery, capacity utilization |
 
-Industry not listed — pick the metrics investors and operators benchmark on.
+For an unlisted industry, choose metrics used by credible operators and investors and explain why each metric defines competitive performance.
 
-### Step 1 — Market context
+## 4. Establish Market Context
 
-Size, growth, drivers, headwinds. With sources.
+Define:
 
-Correct: "Embedded payments is $80-100B in 2024, growing 20-25% CAGR (McKinsey 2024)"
-Wrong: "The market is large and growing rapidly"
+- market boundary and customer job;
+- market size and dated growth evidence;
+- segmentation by product, customer, geography, or business model;
+- growth drivers and headwinds;
+- regulation and technology shifts;
+- realistic addressable market versus promotional TAM;
+- why-now window and what could close it.
 
-### Step 2 — Industry economics
+Avoid generic statements such as “large and fast-growing.” Quantify only when a source and method exist.
 
-Map how value flows. Approach depends on industry structure:
-- **Vertically structured** — value chain layers, typical margin at each
-- **Platform/network** — ecosystem participants, value flows between them
-- **Fragmented** — consolidation dynamics, margin differences by scale
+## 5. Map Industry Economics
 
-### Step 3 — Target company profile
+Choose the structure that fits:
 
-```
-| Metric | Value |
+- vertical value chain and margin pools;
+- platform/network participants and value flows;
+- fragmented market and consolidation economics;
+- ecosystem dependencies and control points.
+
+Show where value accrues, who controls distribution or data, and which cost or regulatory constraints shape entry.
+
+## 6. Build the Competitor Universe
+
+Group competitors by the lens most useful for the decision:
+
+- business model: platform, vertical, horizontal;
+- segment: enterprise, SMB, consumer;
+- posture: direct, adjacent, emerging, status quo;
+- origin: incumbent, disruptor, new entrant.
+
+Include substitutes and the status quo. Explain every material inclusion and exclusion. Do not restrict the universe to companies named by the target.
+
+For the target and each material competitor capture:
+
+| Category | Coverage |
 |---|---|
-| Revenue | $4.96B |
-| Growth | +26% YoY |
-| Gross Margin | 45% |
-| Profitability | $373M Adj. EBITDA |
-| Customers | 134K |
-| Retention | 92% |
-| Market Share | ~15% |
-```
+| Business | What it sells, to whom, and how it monetizes |
+| Scale | Comparable revenue, customers, usage, or market share |
+| Growth and economics | Industry-defining metrics on a common basis |
+| Product | Workflow, breadth, depth, integration, and constraints |
+| Distribution | Sales motion, channel, ecosystem, and switching path |
+| Strengths | Evidence-backed advantages |
+| Weaknesses | Evidence-backed structural or execution limits |
+| Strategy | Recent moves and trajectory |
 
-Multi-segment companies add a breakdown:
+## 7. Express Positioning
 
-```
-| Segment | Revenue | Rev YoY | Rev % | EBITDA | EBITDA YoY | Margin |
-|---|---|---|---|---|---|---|
-| Seg A | $25.1B | +26% | 57% | $6.5B | +31% | 26% |
-| Seg B | $13.8B | +31% | 31% | $2.5B | +64% | 18% |
-| Seg C | $5.1B | -2% | 12% | -$74M | -16% | -1% |
-| Total | $44.0B | +18% | 100% | $6.5B* | - | 15% |
-```
-*Note corporate costs if applicable
+Choose one representation and explain the axis logic:
 
-### Step 4 — Competitor mapping
-
-Group by whichever lens fits (this is a good `ask_user_question` decision if the user hasn't specified):
-- By business model — platform / vertical / horizontal
-- By segment — enterprise / SMB / consumer
-- By posture — direct / adjacent / emerging
-- By origin — incumbent / disruptor / new entrant
-
-### Step 5 — Positioning visualization
-
-| Type | When |
+| Representation | Use when |
 |---|---|
-| 2×2 matrix | Two dominant competitive factors |
-| Radar/spider | Multi-factor comparison |
-| Tier diagram | Natural clustering into strategic groups |
-| Value chain map | Vertical industries |
-| Ecosystem map | Platform markets |
+| 2x2 matrix | Two factors dominate competition |
+| Radar comparison | Several comparable dimensions matter |
+| Tier diagram | Strategic groups form natural clusters |
+| Value-chain map | Competition is vertically structured |
+| Ecosystem map | Control depends on platform relationships |
 
-See `references/frameworks.md` for 2×2 axis pairs by industry.
+Use frameworks.md for candidate 2x2 axes. The representation may be a Markdown table or described coordinate map inside the Artifact; it is not permission to create a slide or visual-report Artifact.
 
-### Step 6 — Competitor deep-dives
+Every rating must show the underlying actual value or evidence. Do not use unexplained dots, scores, or labels.
 
-Two tables per competitor.
+## 8. Add Strategic Context
 
-**Metrics:**
-```
-| Metric | Value |
+When relevant, include:
+
+- M&A transactions, multiples, and rationale;
+- partnerships and distribution shifts;
+- capital-raising patterns;
+- regulatory developments;
+- entry by adjacent platforms;
+- open-source or model-layer pressure;
+- customer build-versus-buy behavior.
+
+Use schemas.md for the transaction and scenario table shapes. Preserve the boundary between observed events and interpretation.
+
+## 9. Test Moat and Vulnerability
+
+Rate each material moat as Strong, Moderate, Weak, or Unknown, with evidence:
+
+| Moat | Test |
 |---|---|
-| Revenue | $X.XB |
-| Growth | +XX% YoY |
-| Gross Margin | XX% |
-| Market Cap | $X.XB |
-| Profitability | $XXXM EBITDA |
-| Customers | XXK |
-| Retention | XX% |
-| Market Share | ~XX% |
-```
+| Network effects | Cross-side or same-side flywheel and evidence of reinforcement |
+| Switching costs | Integration depth, contractual lock-in, data/state migration, habits |
+| Scale economies | Unit-cost advantage and minimum efficient scale |
+| Intangible assets | Brand, proprietary data, licenses, patents, institutional trust |
+| Distribution | Privileged channel, installed base, workflow ownership |
+| Product/data learning | Whether use creates a durable, private improvement loop |
 
-**Qualitative:**
-```
-| Category | Assessment |
-|---|---|
-| Business | What they do (1 sentence) |
-| Strengths | 2-3 bullets |
-| Weaknesses | 2-3 bullets |
-| Strategy | Current priorities |
-```
+For every claimed advantage ask:
 
-### Step 7 — Comparative analysis
+- Can a platform ship it as a feature?
+- Can a customer reproduce it internally?
+- Does a model improvement commoditize it?
+- Is the advantage current state or improving trajectory?
+- What evidence would falsify the moat claim?
 
-```
-| Dimension | Company A | Company B | Company C |
-|---|---|---|---|
-| Scale | ●●● $160B | ●●○ $45B | ●○○ $8B |
-| Growth | ●●○ +26% | ●●● +35% | ●●○ +22% |
-| Margins | ●●○ 7.5% | ●○○ 3.2% | ●●● 15% |
-```
+Separate durable advantages from temporary execution leads.
 
-### Step 8 — Strategic context
+## 10. Synthesize Scenarios
 
-M&A transactions (multiples, rationale), partnership trends, capital raising patterns, regulatory developments. See `references/schemas.md` for the M&A transaction table format.
+For investment contexts, produce bull/base/bear cases with:
 
-### Step 9 — Synthesis
+- probability or explicitly unweighted status;
+- quantified or observable driver;
+- competitive mechanism;
+- signpost and time horizon;
+- what changes the target’s position;
+- implications passed to later economic and valuation work.
 
-**Moat assessment** — rate each competitor Strong / Moderate / Weak on:
+Probabilities must sum to 100 percent when probabilities are used. Do not invent a valuation inside this node; use an operating or competitive outcome unless valuation evidence is merely being cited as context.
 
-| Moat | What to assess |
-|---|---|
-| Network effects | User/supplier flywheel strength; cross-side vs same-side |
-| Switching costs | Technical integration depth, contractual lock-in, behavioral habits |
-| Scale economies | Unit cost advantages at volume; minimum efficient scale |
-| Intangible assets | Brand, proprietary data, regulatory licenses, patents |
+## Contribution to 04-competitive-landscape.md
 
-**Required synthesis elements:**
-- Durable advantages (hard to replicate) — map to moat categories
-- Structural vulnerabilities (hard to fix)
-- Current state vs. trajectory
+The method must support these sections:
 
-**For investment contexts** (skip if the Phase 1 scoping said no):
+- market definition and industry metrics;
+- market size, growth, value chain, and why now;
+- competitor universe and grouping;
+- target and competitor comparison;
+- positioning representation;
+- moat and vulnerability tests;
+- strategic context;
+- bull/base/bear scenarios and signposts;
+- counterevidence and alternative explanations;
+- evidence references, assumptions, and unknowns.
 
-```
-| Scenario | Probability | Key driver |
-|---|---|---|
-| Bull | 30% | Market share gains, margin expansion |
-| Base | 50% | Current trajectory continues |
-| Bear | 20% | Competitive pressure, margin compression |
-```
+## Quality Checklist
 
----
-
-## Quality checklist
-
-Before finishing:
-
-**Prompt fidelity**
-- Slide titles match what the user specified, verbatim
-- Charts where they said chart; tables where they said table
-- Every competitor/year/data point they listed is present
-- Exact values and formats as specified
-
-**Data consistency**
-- Source-file values extracted directly, not recalculated
-- Same metric shows the same value on every slide it appears
-- Same decimal precision as the source
-
-**Layout**
-- Titles fit without overflow
-- No overlapping elements
-- All text within containers, no clipping
-
-**Content**
-- Every number has a citation
-- All metrics from the same fiscal period (or flagged)
-- Slide titles state insights, not topics
-- Charts are real chart objects
-
-Run standard visual verification checks on every slide — this catches overlaps, overflow, and low-contrast text that don't show up when you're reading back the XML.
+- The universe contains direct, indirect, emerging, and status-quo alternatives where relevant.
+- The same metric has the same definition, period, units, and value everywhere.
+- Every number has a citation and every estimate is labeled.
+- Missing data remains unknown and its impact is stated.
+- Positioning axes explain real competitive trade-offs.
+- Moat claims include disconfirming tests.
+- Scenarios contain observable signposts rather than adjectives.
+- The output remains one Markdown Artifact and no nested Skill, Agent, external write, or approval pause was introduced.

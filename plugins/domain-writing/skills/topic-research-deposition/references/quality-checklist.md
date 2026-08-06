@@ -1,6 +1,6 @@
 # Quality Checklist
 
-Run this checklist after each research pass. Fix failures before handing off.
+Run this checklist after each research pass. Fix failures before finalizing the Artifact.
 
 ## General Checks
 
@@ -14,8 +14,20 @@ Run this checklist after each research pass. Fix failures before handing off.
 | Raw material separated | Raw source files are separate from notes, judgment, article draft, or memo draft | Split files |
 | Folder matches mode | General/product/investment research uses a neutral research folder; only `wechat-writing-research` uses `writing/drafts/` | Move files to the correct folder |
 | Queries are reproducible | Search intents, queries, or agent-reach task prompts are recorded | Add a search log |
-| Gaps are explicit | Missing sources, failed fetches, and weak evidence are listed | Add gaps before handoff |
+| Gaps are explicit | Missing sources, failed fetches, and weak evidence are listed | Add gaps before finishing |
 | No temp leakage | Scratch JSON, debug txt, and tool dumps are either archived intentionally or removed | Clean the folder |
+
+## Managed Investment Checks
+
+Apply these in addition to the general checks when the frozen investment Workflow uses this Skill.
+
+| Check | Standard | If It Fails |
+| --- | --- | --- |
+| Input closure | Research object, supplied-material collection, and core question are all explicitly consumed | Mark `REWORK` and consume the missing input |
+| Single node Artifact | The only node Artifact is `01-source-intake.md`; raw captures are referenced evidence attachments | Merge duplicate node outputs into `01-source-intake.md` |
+| Claim separation | Verified facts, supplied-material claims, assumptions, contradictions, and unknowns are distinct | Mark `REWORK` and separate them |
+| Unknown completeness | Every unavailable required item has missing, reason, impact, fallback, and revisit condition | Add the missing fields before continuing |
+| Routing boundary | The Skill does not invoke the next Skill or create another approval pause | Remove hidden routing or pause behavior |
 
 ## Surface Checks
 
@@ -37,5 +49,5 @@ Only apply when mode is `wechat-writing-research`.
 | Check | Standard | If It Fails |
 | --- | --- | --- |
 | Draft folder | Files live under `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`; evidence lives under `01-topic-research/` | Move files |
-| WeChat logic | `wechat-viral-logic.md` has been considered before writing handoff | Load it before reporting ready |
+| WeChat logic | `wechat-viral-logic.md` has been considered before the research summary | Load it before reporting ready |
 | Screenshot evidence | Every cited key URL has a screenshot under `01-topic-research/screenshots/`, or an explicit `no-screenshot` reason | Capture the screenshot or record why it cannot be captured |

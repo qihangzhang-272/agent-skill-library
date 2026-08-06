@@ -1,60 +1,54 @@
----
-name: portfolio-monitoring
-description: Track and analyze portfolio company performance against plan. Ingests monthly/quarterly financial packages (Excel, PDF), extracts KPIs, flags variances to budget, and produces summary dashboards. Use when reviewing portfolio company financials, preparing board materials, or monitoring covenant compliance. Triggers on "review portfolio company", "monthly financials", "how is [company] performing", "covenant check", or "portfolio update".
----
+# Internal Method: Portfolio and KPI Monitoring
 
-# Portfolio Monitoring
+Use this method inside `investment-thesis-tracking` when supplied inputs contain portfolio-company or recurring operating updates. It is not an independent ingestion service, dashboard, or persistent monitoring system.
 
-## Workflow
+## Establish the comparison basis
 
-### Step 1: Ingest Financial Package
+Record company, reporting period, as-of date, currency/units, budget or prior-plan version, actual-data source, prior Artifact, and current thesis pillars.
 
-- Accept the user's portfolio company financial package (Excel workbook, PDF, or CSV)
-- Extract key financials: Revenue, EBITDA, cash balance, debt outstanding, capex, working capital
-- Identify the reporting period and compare to prior period and budget/plan
+## KPI families
 
-### Step 2: KPI Extraction & Variance Analysis
+Tailor to the business:
 
-Key metrics to track (adapt to the company's sector):
+- financial: revenue, gross profit, EBITDA, cash, burn, runway, working capital, capex;
+- recurring software: ARR, new/expansion/contraction/churn, NDR/GRR, CAC, payback, margin;
+- usage or marketplace: active users, volume, GMV, take rate, repeat rate, contribution margin;
+- AI infrastructure: usage, latency, reliability, utilization, hosting/inference cost, external adoption;
+- commercial: pipeline, bookings, win rate, sales cycle, concentration, renewals;
+- operating and governance: headcount, milestones, security/compliance, incidents, covenants.
 
-**Financial KPIs:**
-- Revenue vs. budget ($ and %)
-- EBITDA and EBITDA margin vs. budget
-- Cash balance and net debt
-- Leverage ratio (Net Debt / LTM EBITDA)
-- Interest coverage ratio
-- Capex vs. budget
-- Free cash flow
+## Variance method
 
-**Operational KPIs** (ask user or infer from data):
-- Customer count / revenue per customer
-- Employee headcount / revenue per employee
-- Backlog / pipeline
-- Churn / retention rates
+For each KPI:
 
-### Step 3: Flag & Summarize
+```text
+Definition:
+Actual:
+Budget / plan / prior expectation:
+Absolute and percentage variance:
+Prior-period comparison:
+Driver:
+Recurring or one-time:
+Affected thesis pillar:
+Management action / owner:
+Threshold and next review:
+```
 
-- **Green**: Within 5% of plan
-- **Yellow**: 5-15% below plan — flag for discussion
-- **Red**: >15% below plan or covenant breach risk — immediate attention
+Do not compare differently defined metrics. Reconcile actuals to the accepted source and distinguish price, volume, mix, FX, acquisition, and timing where relevant.
 
-Output a concise summary:
-1. One-paragraph executive summary ("Company X is tracking [ahead/behind/on] plan...")
-2. KPI table with actual vs. budget vs. prior period
-3. Red/yellow flags with context
-4. Covenant compliance status (if applicable)
-5. Questions for management
+## Escalation
 
-### Step 4: Trend Analysis
+Flag:
 
-If multiple periods are provided:
-- Chart key metrics over time (revenue, EBITDA, cash)
-- Identify trends — accelerating, decelerating, or stable
-- Compare vs. underwriting case
+- runway or covenant pressure;
+- repeated forecast misses or metric-definition changes;
+- deteriorating retention, concentration, margin, or unit cost;
+- delayed product, security, regulatory, or hiring milestones;
+- unexplained plan changes or missing support;
+- evidence that weakens or falsifies a thesis pillar.
 
-## Important Notes
+Every escalation must state consequence, mitigant, residual uncertainty, action, and revisit trigger.
 
-- Always ask for the budget/plan to compare against if not provided
-- Don't assume sector-specific KPIs — ask what matters for this company
-- If covenant levels aren't known, ask the user for the credit agreement terms
-- Output should be board-ready — concise, factual, no fluff
+## Completion test
+
+Monitoring is ready when material KPIs have stable definitions, dated baselines, variance drivers, thesis linkage, thresholds, and actions. Supplied spreadsheets or PDFs may be evidence, but no output file type is required beyond `09-thesis-tracking.md`.

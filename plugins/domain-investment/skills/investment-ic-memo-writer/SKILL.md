@@ -1,44 +1,52 @@
 ---
 name: investment-ic-memo-writer
-description: Write the final library-standard investment committee memo from completed investment workflow node outputs. Use only after fact collection, AI product judgment, competitive landscape, unit economics, scorecard, valuation, DD, and thesis tracking have produced handoffs. This skill does not search or create new analysis.
+description: Use when completed investment-workflow outputs must be assembled into a decision-ready Chinese IC Memo without adding new research, hiding uncertainty, or placing internal process records in the report.
 ---
 
 # Investment IC Memo Writer
 
-This is the final writing node for `domain-investment`.
+把工作流前九个 Skill 的完整业务产物组装成一份可独立阅读、可直接用于投资决策的中文 IC Memo。无论单独调用还是位于长工作流中，都必须逐份读完输入，并完成同样深度的组装；“只是中间节点”不是缩写、跳项或降低质量的理由。
 
-It consumes completed node outputs. It must not search for new facts or invent missing analysis.
+这是组装 Skill，不是补研究的逃生口。可以重排、解释和压缩重复内容，但不得搜索新事实、补算缺失模型、另选可比对象、重打分、重做估值，或凭偏好消除上游矛盾。
 
-## References
+## 输入与运行边界
 
-Read when relevant:
+- **Standalone：** 使用用户提供的完整事实、产品、市场、单位经济、评分、估值、尽调和论点材料。
+- **Managed workflow：** 业务依赖是 `01-source-intake.md` 至 `09-thesis-tracking.md`。逐份读取正文后再起草，不得只读摘要。
+- **随取随用：** 使用当前工作区中能读到的业务材料。缺少运行上下文时只提醒一次，然后继续；不得因此拒绝运行或要求用户重建上下文。
+- **业务内容缺口：** 能补做时准确说明缺少什么和它影响哪个判断；确实不可获得或不可执行时，按缺口继续成稿，并说明未知内容、决策影响、保守处理和以后需要什么证据。不要让工作流死锁，也不要把缺失写成零、否或已证实事实。
+- **产物：** 只写一份独立业务文件 `10-ic-memo.md`。报告只写业务正文，运行记录由工作区另存。
 
-- `references/memo-assembly.md` for final assembly rules.
-- `references/pe-deal-addendum.md` only for PE deal terms, value creation, and 100-day planning.
-- `references/quality-checklist.md` before delivery.
+## 组装方法
 
-## Required Memo Structure
+1. 先给出投资建议、核心理由、回报逻辑、最强证据、决定性风险和推进条件。
+2. 忠实保留上游的估值日期、币种、单位、期间、情景名称、评分与数字；不得在编辑时悄悄改口径。
+3. 清楚区分事实、判断、假设、反证和未知项。上游存在重要分歧时，说明分歧对决策意味着什么，不要为了叙事顺滑而合并成一个答案。
+4. Memo 中出现的真实外部来源必须使用可读名称和可点击链接，例如 `[来源名称](https://example.com)`。不要把内部文件标识当成给投资人看的引用。
+5. 所有专业缩写和英文投资术语首次出现时给出中文解释，例如单位经济（Unit Economics）、尽职调查（DD）、投资回报倍数（MOIC）和内部收益率（IRR）。
+6. 表格只用于真正需要比较的评分、情景、风险、尽调优先级或跟踪触发器；不得用空表、假数字或占位内容制造“完成感”。
+7. 最终投资结论只能有一个：`推进（Proceed）`、`有条件推进（Conditional proceed）`、`观察（Watch）` 或 `放弃（Pass）`。每个条件都要写清由什么证据或行动解除。
+
+## 必需的投资人正文结构
 
 ```text
-1. Executive Summary
-2. Investment Recommendation
-3. Company / Product Overview
-4. AI-native Product Judgment
-5. Market & Competitive Landscape
-6. Business Model & Unit Economics
-7. Technical / OSS / Ecosystem Moat
-8. Valuation / Return Logic
-9. Investment Scorecard
-10. Key Risks & One-Vote Veto
-11. Due Diligence Priorities
-12. Thesis Tracking & Watch Triggers
-13. Sources, Unknowns, Verification Gaps
+1. 执行摘要
+2. 投资建议
+3. 公司与产品概览
+4. AI 原生性与产品判断
+5. 市场与竞争格局
+6. 商业模式与单位经济
+7. 技术、开源生态与护城河
+8. 估值与回报逻辑
+9. 投资评分卡
+10. 核心风险与一票否决项
+11. 尽调优先级
+12. 投资论点与跟踪触发器
+13. 来源、未知项与核验缺口
 ```
 
-## Rules
+第 13 节只写投资人需要理解的内容：来源名称和链接、仍未知什么、为什么重要、当前采取什么保守处理、需要什么证据或触发条件再核验。不要展示任何运行记录或内部检查过程。
 
-- Keep facts, judgments, assumptions, and unknowns visibly separate.
-- Preserve upstream node judgments. Reorganize them, but do not erase contradictions.
-- Do not downgrade the memo into a scorecard-only output.
-- Do not hide weak points. IC memo credibility depends on explicit risks.
-- If a section lacks evidence, write `not enough evidence` and list what is missing.
+## 交付原则
+
+十三节应完整、结论一致、来源可读可点。确实无法取得的信息可以保留为公开缺口，但必须写清影响与保守处理。若后续包含 `investment-visual-report`，本 Memo 是它唯一的业务输入和唯一结论来源。**不要自行调用下一个 Skill，也不要把运行记录追加到 Memo 正文。**

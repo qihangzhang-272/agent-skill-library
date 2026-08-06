@@ -1,0 +1,34 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: topic-research-deposition.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/agent-reach-search.md
+    - references/platform-commands.md
+    - references/product-investment-research.md
+    - references/quality-checklist.md
+    - references/wechat-extraction.md
+    - references/wechat-viral-logic.md
+    - references/wechat-writing-research.md
+  obligations:
+    - id: mode-scope-and-log
+      requirement: 声明模式、研究对象、决策问题、范围与时间边界，并记录实际执行的检索和阅读路径
+      required: true
+    - id: source-deposition-provenance
+      requirement: 所有采用来源都记录身份、日期、取得位置、用途与可靠性，使后续可回查原证据
+      required: true
+    - id: mode-required-coverage
+      requirement: 覆盖所选模式的全部适用研究区域；投资研究覆盖公司、产品、市场、竞争、商业模式、团队、融资和风险，微信模式完成规定截图与归档
+      required: true
+    - id: epistemic-separation
+      requirement: 事实、来源表述、分析判断、假设、反证和来源冲突被清楚分开，不得以叙事流畅掩盖矛盾
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得将未知写成零或事实
+      required: true
+  artifact:
+    path: 01-source-intake.md
+    mediaType: text/markdown
+    independent: true

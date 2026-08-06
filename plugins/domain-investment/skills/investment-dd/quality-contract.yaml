@@ -1,0 +1,36 @@
+apiVersion: asl-wep/v0.1.0-draft.3
+kind: SkillQualityContract
+metadata:
+  id: investment-dd.quality
+spec:
+  builtFrom:
+    - SKILL.md
+    - references/datapack-builder.md
+    - references/dd-checklist.md
+    - references/dd-meeting-prep.md
+  obligations:
+    - id: upstream-unresolved-trace
+      requirement: 尽调问题从前序材料的未知项、冲突、关键假设、否决风险和估值敏感点追溯生成
+      required: true
+    - id: priority-and-decision-impact
+      requirement: 问题按 P0、P1、P2 或等价优先级排序，并说明答案会如何改变投资决策
+      required: true
+    - id: testable-questions-and-proof
+      requirement: 每个问题包含待验证命题、所需证据、来源或责任方、合格标准、异常处理和决策影响
+      required: true
+    - id: audience-and-workstream-coverage
+      requirement: 覆盖管理层、专家和客户三类适用受众，以及商业、产品技术、财务、法律、团队和运营等适用工作流
+      required: true
+    - id: evidence-request-matrix
+      requirement: 证据请求去重、可执行并与问题一一映射，包含优先级、格式、期间、责任人、状态和关闭标准
+      required: true
+    - id: risk-veto-closure
+      requirement: 重大风险和否决项具有关闭条件、无法关闭时的决策后果及后续重新检查触发器
+      required: true
+    - id: missing-information-handling
+      requirement: 经合理查找仍不可得的信息必须用业务语言写清缺失事项、不可得原因、对结论的影响、当前保守处理和重新核验条件后继续；不得用宽泛尽调问题掩盖上游分析缺失
+      required: true
+  artifact:
+    path: 08-dd-questions.md
+    mediaType: text/markdown
+    independent: true

@@ -1,7 +1,7 @@
 {
   "name": "workspace-core",
   "displayName": "Workspace Core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "个人能力工作区种子 Skill：从短目标出发，优先复用现有 Agent Skill Library，并把缺失能力培养为本地 Skill。",
   "author": { "name": "Agent Skill Library Maintainers" }
 }

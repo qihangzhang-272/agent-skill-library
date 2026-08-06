@@ -38,6 +38,7 @@ plugins/
 
 **Workspace Core**
 
+- `initialize-workspace` — 创建最小 Git-backed 个人工作区，记录现有 Library 为第一优先上游；不预装领域能力，不生成索引、缓存或双宿主源树。
 - `discover-capability` — 个人 Workspace 缺能力时，按“当前 Workspace → 现有 Agent Skill Library → 本地候选/上游 → 互联网”寻找来源并沉淀候选；不直接安装或运行。
 - `cultivate-skill` — 完整读取候选包并在个人 Workspace 培养为带来源说明和内嵌完成标准的本地 Trial Skill；不靠额外质量 YAML，也不静默晋升。
 

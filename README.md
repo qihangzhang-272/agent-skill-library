@@ -43,6 +43,7 @@ plugins/
 - `discover-capability` — 个人 Workspace 缺能力时，按“当前 Workspace → 现有 Agent Skill Library → 本地候选/上游 → 互联网”寻找来源并沉淀候选；不直接安装或运行。
 - `cultivate-skill` — 完整读取候选包并在个人 Workspace 培养为带来源说明和内嵌完成标准的本地 Trial Skill；不靠额外质量 YAML，也不静默晋升。
 - `cultivate-workflow` — 把真实 Case 中反复成立的完整 Skill 顺序保存为场景 Skill、极简 Workflow 和最终结果 Benchmark；不创建第二套节点、质量或状态系统。
+- `evolve-workspace` — 只把用户明确反馈或上游候选转成最小可验证改动；区分单次与长期范围，不从行为信号推断偏好，也不自动覆盖本地真源。
 
 **Orchestrator + Index**
 

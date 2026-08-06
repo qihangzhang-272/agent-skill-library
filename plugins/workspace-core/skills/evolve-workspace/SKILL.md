@@ -19,7 +19,7 @@ Turn explicit evidence into the smallest durable improvement. Do not infer prefe
 
 ## Locate Responsibility
 
-1. Compare the feedback with the Goal, final Benchmark evidence, and Artifact chain.
+1. Compare the feedback with the Goal, the stable Benchmark or temporary Case acceptance evidence, and the Artifact chain.
 2. Identify the smallest owner: current Artifact, Profile, one business Skill, one scenario Benchmark, or one Workflow condition. Do not edit all of them to make the decision look important.
 3. Read the complete owner Skill package before changing its method or `## 完成标准`. If the Skill has `SOURCE.md`, preserve upstream identity and record local changes.
 
@@ -28,7 +28,7 @@ Turn explicit evidence into the smallest durable improvement. Do not infer prefe
 1. First repair the current Case at the responsible Artifact and rerun affected downstream Skills.
 2. Make a durable Workspace change only when the feedback scope is lasting or repeated evidence supports it. Case-specific visual density, wording, or layout stays in that Case.
 3. Change the fewest relevant lines. Add no Review Skill, policy engine, preference database, telemetry hook, automatic reward score, or duplicate rule file.
-4. Re-run the Case that produced the feedback and at least one relevant previous Case when the change is durable. Judge the same outcome Benchmark; add a regression example only when it prevents the demonstrated failure.
+4. Re-run the Case that produced the feedback and at least one relevant previous Case when the change is durable. Judge the same stable Benchmark or Case acceptance criteria; add a regression example only when it prevents the demonstrated failure.
 5. Show the user the changed outcome and concise rule diff. If it solves the feedback without degrading the comparison Case, update `SOURCE.md` as needed and save one focused Git commit.
 6. If the change does not improve the evidence, revert only this attempted change and keep the explicit feedback record for a better hypothesis.
 

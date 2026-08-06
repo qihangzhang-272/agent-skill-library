@@ -14,7 +14,7 @@
 plugins/
 ├── workspace-core/      # 个人 Workspace 种子 Skill：目标、发现、培养、演化与整理
 ├── foundation/          # 元层：principles Agent 操作原则 + skill-architecture 元技能
-├── orchestrator/        # workflow-orchestrator：唯一工作流路由入口
+├── orchestrator/        # workflow-orchestrator：Library-native 固定链路由入口
 ├── skill-index/         # external-skill-index：外部 GitHub 技能索引
 ├── domain-writing/      # 公众号写作瓦技能
 ├── domain-investment/   # 投资决策瓦技能（研究、模型、估值、IC memo）
@@ -46,9 +46,25 @@ plugins/
 - `evolve-workspace` — 只把用户明确反馈或上游候选转成最小可验证改动；区分单次与长期范围，不从行为信号推断偏好，也不自动覆盖本地真源。
 - `diagnose-workspace` — 只读检查活动闭包、生命周期边界、来源、投影、Git 与 inbox；不评价业务结论，不读 Secret 值，也不自动整理或删除。
 
+## 从一句目标开始
+
+`workspace-core` 是培养个人能力库的全局种子包，领域插件是可选能力来源，Personal Workspace 则保存已经采用的业务 Skill 与场景 Skill。用户只需先初始化一次，以后每次直接给最终目标；下面的发现、培养和固化由种子 Skill 在需要时接力，不要求用户逐条指挥：
+
+```text
+安装 workspace-core
+→ 首次：initialize-workspace 建立最小 Git Workspace
+→ 日常：pursue-goal 接收一句最终目标
+   → 命中稳定场景：对照 Benchmark 端到端执行和返工
+   → 缺能力：discover-capability → cultivate-skill → 当前 Case 试跑
+      → 用户明确采用后进入 Workspace
+      → 反复成立后 cultivate-workflow 固化场景与 Benchmark
+```
+
+已经培养好的稳定场景可以交给 ASL Harness 投影到 Codex App 或 Claude Code，并生成可续跑的本地 Run。没有稳定场景时，`pursue-goal` 从原始 Goal 得出一次性 Case 验收清单，再用 Workspace 已采用的 Skill 在当前会话临时排链；该清单不是稳定 Benchmark 或新协议文件。这次探索不伪装成已经固化的 Workflow，也不让 Harness 承担第二次调度。
+
 **Orchestrator + Index**
 
-- `workflow-orchestrator` — 已跑通工作流的统一路由入口。`SKILL.md` 只做路由，具体 chain 压缩在 `references/chains/`。
+- `workflow-orchestrator` — 已跑通的 Library-native 固定链路由入口。`SKILL.md` 只做路由，具体 chain 压缩在 `references/chains/`。
 - `external-skill-index` — 两层生态索引：本地技能 vs GitHub 外部候选；只在稳定 Run 外发现和沉淀，不在运行中安装。
 
 **Domain**
@@ -62,7 +78,7 @@ plugins/
 
 ## 运行链
 
-调用链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
+Library-native 固定链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
 
 ```
 公众号选题 → [按需：账号历史/对标账号语料] → agent-reach 搜索 → 公众号编辑判断与深度写作 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → HTML 预览 → 草稿箱发布
@@ -75,13 +91,13 @@ AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值
   chain: public-equity-coverage.md  ·  doc: docs/workflows/public-equity-coverage.md
 ```
 
-当前只有 `investment-icmemo.md` 已迁移为 ASL-WEP v0.1 Profile。公众号与公开市场链仍是 Library-native legacy chain；它们可以保留原生工作方法，但在外部能力全部本地 Skill 化并补齐质量合同前，不得作为 ASL-WEP 稳定 Workflow 运行。
+这些 chain 是 Library 内的能力来源，不是 Personal Workspace 的运行真源。现有投研 Workspace 继续使用 ASL-WEP v0.1 兼容 Profile；公众号 Workspace 已用 v0.2 把所需写作 Skill 本地化为 `wechat-end-to-end` 稳定场景；公开市场链仍是 Library-native chain。任何领域进入新的 Workspace 时，都要先本地化所需 Skill、保留来源、补齐内嵌完成标准并经过真实 Case，不能因为 Library 中已有 chain 就自动成为用户的稳定 Workflow。
 
-## 落盘铁律（所有链继承）
+## 落盘铁律
 
-1. 先建 run folder，不许散落文件。run folder 建在**用户当前工作项目目录**下——绝不写进 `plugins/` 或本仓库。不确定项目根就先问。
-2. 每个有保留价值的中间产物按 chain 定义落盘。
-3. 成品不替代过程包——两者同时存在。
+1. 所有业务材料都进入用户当前 Case，不写进 `plugins/` 或本仓库；不确定 Case 根时先从当前上下文和现有文件判断，确实无法确定再问。
+2. 稳定场景和 Library-native 固定链使用 Case 内的 run folder；临时链没有 Harness Run，过程文件进入 Case 的普通工作目录，不伪造 `.asl/runs/`。
+3. 每个有保留价值的中间产物按场景或 Skill 约定落盘，成品不替代过程包。
 
 ## 双端安装与验证
 
@@ -89,10 +105,10 @@ AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值
 
 ```powershell
 claude plugin marketplace add qihangzhang-272/agent-skill-library
-claude plugin install orchestrator@agent-skill-library
+claude plugin install workspace-core@agent-skill-library --scope user
 ```
 
-Claude Code 读取 `.claude-plugin/`。`orchestrator` 的 Claude manifest 会声明其工作流依赖；`foundation` 与 `domain-product` 可按需单独安装。
+Claude Code 读取 `.claude-plugin/`。培养个人 Workspace 时先安装 `workspace-core`；需要直接运行 Library-native 固定链时再安装 `orchestrator`，它的 Claude manifest 会声明领域依赖。其他领域插件可以按需安装，不要求一开始装满。
 
 ### Codex
 
@@ -100,9 +116,9 @@ Claude Code 读取 `.claude-plugin/`。`orchestrator` 的 Claude manifest 会声
 codex plugin marketplace add qihangzhang-272/agent-skill-library
 ```
 
-Codex 读取 `.agents/plugins/marketplace.json` 与各插件的 `.codex-plugin/plugin.json`。当前 Codex CLI 负责注册 marketplace，单插件安装在 Codex App 的 Plugins 页面完成；安装或升级后新开任务，才会载入新的技能命名空间。项目也可以通过 `.agents/skills/` 直接发现技能，但这只是项目级入口，不替代正式 Codex Plugin 分发。
+Codex 读取 `.agents/plugins/marketplace.json` 与各插件的 `.codex-plugin/plugin.json`。当前 Codex CLI 负责注册 marketplace，单插件安装在 Codex App 的 Plugins 页面完成；培养个人 Workspace 时先安装 `workspace-core`。安装或升级后新开任务，才会载入新的技能命名空间。项目也可以通过 `.agents/skills/` 直接发现稳定场景闭包，但这只是项目级入口，不替代正式 Codex Plugin 分发。
 
-Codex 不读取 Claude manifest 的 `dependencies`。公众号完整链至少同时安装 `orchestrator` 与 `domain-writing`；需要检索外部技能来源时再安装 `skill-index`。要使用整套架构，应在 Plugins 页面安装 marketplace 中全部 7 个插件。Claude Code 安装 `orchestrator` 时则会按其 manifest 解析领域依赖。
+Codex 不读取 Claude manifest 的 `dependencies`。要直接运行 Library-native 公众号链，至少同时安装 `orchestrator` 与 `domain-writing`；需要检索外部技能来源时再安装 `skill-index`。要使用整套 Library，可在 Plugins 页面安装 marketplace 中全部 8 个插件；只培养自己的 Workspace 时不需要全部安装。Claude Code 安装 `orchestrator` 时则会按其 manifest 解析领域依赖。
 
 `domain-writing` 自带统一的 `package.json` 与 `bun.lock`，覆盖迁入脚本的运行依赖；`node_modules` 不进入仓库。Bun 默认会在首次脚本执行时安装缺失依赖，禁用自动安装的环境可在该 plugin 根目录运行 `bun install --frozen-lockfile`。
 
@@ -121,7 +137,7 @@ node scripts/validate-repository.mjs --base HEAD
 - `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
 - `external-skill-index` 是外部技能统一收纳入口。`public-account-writing-style` 是 `wechat-writing` chain 的唯一正文 owner；外部写作技能只保留来源记录，不复制进本库，也不进入运行链。Baoyu 中经过维护者晋升的 10 个公众号及内容视觉技能继续原样迁入 `domain-writing`。`wechat-account-corpus-research` 只维护独立编写的数据与授权契约，外部 exporter、受限参考源和高风险增强服务的 URL、commit、许可证与调用边界只在索引维护。agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等仍保留为外部来源。
 - `oss-investment-scorecard` 已降级为 `investment-scorecard` 的内部 reference，不要直接调用旧入口。
-- 投资与资本市场领域都只放瓦技能；所有固定链都由 `workflow-orchestrator` 路由，不设第二个调度器。
+- 投资与资本市场领域都只放瓦技能；Library-native 固定链由 `workflow-orchestrator` 路由，Personal Workspace 场景则由自己的场景 Skill 与极简 Workflow 表达，两者都不设第二个调度器。
 - 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。
 
 ## 治理文档

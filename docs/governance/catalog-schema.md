@@ -46,7 +46,7 @@
 技能的元数据分散在三处，各司其职：
 
 - **触发与用途**：写在 `SKILL.md` 的 frontmatter（`name` + `description`）和正文。
-- **调用链角色**：写在 orchestrator 的 `references/chains/<chain>.md`。
+- **编排角色**：按材料依赖写在 `references/graphs/<graph>.md`；只有真正线性的流程写入 `references/chains/<chain>.md`。
 - **分发关系**：分别写在 Claude/Codex marketplace 和各 plugin 的双 manifest；两端共享 `skills/`。
 
 例如前端设计来源：
@@ -63,7 +63,7 @@
 - `domain-investment` 是本库的投资决策工作包，包含研究、产品判断、竞争格局、单位经济、财务模型、评分、估值、DD、跟踪、IC Memo 写作和可视化研报节点。
 - `domain-capital-markets` 承接公开市场首次覆盖、股票研究、金融图表、公司资料、投行演示、卖方 M&A 材料与金融交付物 QC；它只提供瓦技能，固定链仍由 orchestrator 路由。
 - `oss-investment-scorecard` 已被 `investment-scorecard` 吸收为 reference，不再作为独立默认运行入口。
-- `workflow-orchestrator` 是已跑通工作流入口，进入 `orchestrator` plugin；`SKILL.md` 只做路由，具体 chain 压缩到 `references/chains/`。
+- `workflow-orchestrator` 是工作流入口，进入 `orchestrator` plugin；`SKILL.md` 只做路由，具体 graph / chain 放在对应 references 目录。
 - Baoyu 中已晋升的 10 个公众号与内容视觉技能随 `domain-writing` 分发，其中 `baoyu-image-gen` 为非 Codex 运行时提供可配置图像生成后端；上游 URL、commit 与许可仍由 `external-skill-index` 记录，`agent-reach` 等其余外部能力继续由索引引用。
 
 ## 验证规则
@@ -75,7 +75,7 @@ claude plugin validate . --strict
 node scripts/validate-repository.mjs --base HEAD
 ```
 
-第一项验证 Claude plugin schema；第二项验证 Claude/Codex 双 marketplace、双 manifest、版本一致、内容变化已 bump、chain 引用、相对链接和废弃路径。Codex 官方 validator 可用时还须逐插件运行。任一失败都不得推送。
+第一项验证 Claude plugin schema；第二项验证 Claude/Codex 双 marketplace、双 manifest、版本一致、内容变化已 bump、workflow 引用、相对链接和废弃路径。Codex 官方 validator 可用时还须逐插件运行。任一失败都不得推送。
 
 ## 禁止事项
 

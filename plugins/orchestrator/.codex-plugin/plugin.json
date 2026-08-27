@@ -1,15 +1,15 @@
 {
   "name": "orchestrator",
-  "version": "0.13.0",
-  "description": "调度路由：意图->领域->固定链；链定义存于本技能 references/chains，端到端落盘铁律。",
+  "version": "0.14.0",
+  "description": "调度路由：按现有材料选择最小技能图；真正线性的流程保留为 chain。",
   "author": {
     "name": "Agent Skill Library Maintainers"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Orchestrator",
-    "shortDescription": "在成熟工作流之间路由并执行端到端交付。",
-    "longDescription": "路由公众号写作、投资研究和公开市场首次覆盖等固定工作流。",
+    "shortDescription": "按材料依赖组合瓦技能并路由成熟工作流。",
+    "longDescription": "为公众号选择最小技能子图，并路由投资研究和公开市场首次覆盖等稳定流程。",
     "developerName": "Agent Skill Library Maintainers",
     "category": "Productivity",
     "capabilities": [

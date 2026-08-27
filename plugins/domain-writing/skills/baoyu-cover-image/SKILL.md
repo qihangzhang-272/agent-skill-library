@@ -260,6 +260,8 @@ Text correction policy:
 - **Characters**: Simplified silhouettes; NO realistic humans
 - **Title**: Use exact title from user/source; never invent
 
+For a WeChat Official Account `2.35:1` cover, read `references/wechat-cover-safety.md`. Keep the title's identifying phrase and essential subject inside the conservative central `1:1` safe area, then verify both the full banner and square crop.
+
 ## Changing Preferences
 
 EXTEND.md lives at the path noted in **Step 0**. Three ways to change it:
@@ -282,6 +284,7 @@ EXTEND.md lives at the path noted in **Step 0**. Three ways to change it:
 **Auto-Selection**: [references/auto-selection.md](references/auto-selection.md)
 **Style Presets**: [references/style-presets.md](references/style-presets.md)
 **Compatibility**: [references/compatibility.md](references/compatibility.md)
+**WeChat cover**: [references/wechat-cover-safety.md](references/wechat-cover-safety.md)
 **Visual Elements**: [references/visual-elements.md](references/visual-elements.md)
 **Workflow**: [confirm-options.md](references/workflow/confirm-options.md) | [prompt-template.md](references/workflow/prompt-template.md) | [reference-images.md](references/workflow/reference-images.md)
 **Config**: [preferences-schema.md](references/config/preferences-schema.md) | [first-time-setup.md](references/config/first-time-setup.md) | [watermark-guide.md](references/config/watermark-guide.md)

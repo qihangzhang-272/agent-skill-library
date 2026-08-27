@@ -4,7 +4,7 @@
 
 `assets/qihang-editorial.json` 是主题 token 真源；`scripts/qihang-layout.ts` 把它编译成微信兼容的内联样式。预览和 Markdown 发布入口都必须调用该脚本，不允许各自维护一份 CSS。
 
-`assets/qihang-studio-catalog.json` 是个人组件样式与默认值真源；`scripts/qihang-layout.ts` 将默认值用于正式 HTML，`scripts/qihang-studio.ts` 将默认值和备选编译成调优工作台。
+`assets/qihang-style-catalog.json` 是个人组件样式与默认值真源；`scripts/qihang-layout.ts` 将默认值用于正式 HTML。目录不再生成独立效果工作台。
 
 ## 职责
 
@@ -31,5 +31,4 @@
 3. API dry-run 生成的发布 HTML 具有同一主题标记和关键样式。
 4. 本地图片保留可上传路径，不转成 Base64 发布源。
 5. 375px 移动端无横向溢出，标题、表格、代码和长链接可换行。
-6. `06-final.studio.html` 保留真实文章，并呈现 11 张已确认样式卡；不得重新加入未确认效果。
-7. 工作台为单文件 HTML，不依赖外部样式表或外部脚本。
+6. 个人样式目录只包含正式可用组件，不包含实验主题、交互控制或预览卡片。

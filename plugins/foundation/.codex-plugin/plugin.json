@@ -1,7 +1,7 @@
 {
   "name": "foundation",
-  "version": "0.6.3",
-  "description": "元层：架构章程、如何创建新技能/新领域的元技能、principles Agent 操作原则。",
+  "version": "0.7.0",
+  "description": "元层：瓦技能接口、技能图与线性 chain 架构、建库规范及 principles Agent 操作原则。",
   "author": {
     "name": "Agent Skill Library Maintainers"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Foundation",
     "shortDescription": "创建、维护和解释可移植技能架构。",
-    "longDescription": "提供技能架构、从零建库规范与跨领域 Agent 操作原则。",
+    "longDescription": "提供瓦技能材料接口、技能图/线性 chain 编排、从零建库规范与跨领域 Agent 操作原则。",
     "developerName": "Agent Skill Library Maintainers",
     "category": "Productivity",
     "capabilities": [

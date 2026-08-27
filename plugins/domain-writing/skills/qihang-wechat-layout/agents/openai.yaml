@@ -1,6 +1,6 @@
 interface:
   display_name: "启航公众号排版"
-  short_description: "统一航的杂谈地图预览与公众号草稿样式"
+  short_description: "用个人样式目录统一公众号预览与草稿排版"
   brand_color: "#2447D8"
   default_prompt: "Use $qihang-wechat-layout to format the finalized Markdown with the shared Qihang WeChat theme."
 policy:

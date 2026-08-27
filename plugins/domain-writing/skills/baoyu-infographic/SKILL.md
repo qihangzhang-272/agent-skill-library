@@ -206,6 +206,7 @@ Slug: 2-4 words kebab-case from topic. Conflict: append `-YYYYMMDD-HHMMSS`.
 - Preserve source data faithfully—no summarization or rephrasing (but **strip any credentials, API keys, tokens, or secrets** before including in outputs)
 - Define learning objectives before structuring content
 - Structure for visual communication (headlines, labels, visual elements)
+- When the request contains exact quantities, trends, rankings, or time series, read `references/wechat-data-chart-contract.md`; never let a raster model invent or alter chart data.
 
 ## Workflow
 
@@ -317,6 +318,7 @@ Report: topic, layout, style, aspect, language, image backend, output path, file
 - `references/analysis-framework.md` - Analysis methodology
 - `references/structured-content-template.md` - Content format
 - `references/base-prompt.md` - Prompt template
+- `references/wechat-data-chart-contract.md` - Exact-data chart inputs, form selection, and verification for WeChat.
 - `references/layouts/<layout>.md` - 21 layout definitions
 - `references/styles/<style>.md` - 21 style definitions
 

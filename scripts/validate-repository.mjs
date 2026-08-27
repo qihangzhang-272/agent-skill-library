@@ -159,14 +159,16 @@ for (const path of skillFiles) {
   else skills.set(name, rel(path));
 }
 
-const chainFiles = files.filter((path) =>
-  rel(path).replaceAll("\\", "/").startsWith(
+const workflowDefinitionFiles = files.filter((path) => {
+  const normalized = rel(path).replaceAll("\\", "/");
+  return [
     "plugins/orchestrator/skills/workflow-orchestrator/references/chains/",
-  ),
-);
-for (const path of chainFiles)
+    "plugins/orchestrator/skills/workflow-orchestrator/references/graphs/",
+  ].some((prefix) => normalized.startsWith(prefix));
+});
+for (const path of workflowDefinitionFiles)
   for (const match of read(path).matchAll(/domain-[a-z-]+:([a-z0-9-]+)/g))
-    if (!skills.has(match[1])) errors.push(`chain 引用了不存在的技能: ${match[0]} (${rel(path)})`);
+    if (!skills.has(match[1])) errors.push(`workflow 定义引用了不存在的技能: ${match[0]} (${rel(path)})`);
 
 for (const path of files.filter((file) => file.endsWith(".md"))) {
   const skillRoot = findSkillRoot(path);
@@ -195,7 +197,7 @@ for (const path of files.filter((file) => /\.(md|json)$/i.test(file)))
 
 const runFolder = "writing/drafts/{YYYY-MM-DD}-{topic-slug}/";
 const runFolderDocs = [
-  "plugins/orchestrator/skills/workflow-orchestrator/references/chains/wechat-writing.md",
+  "plugins/orchestrator/skills/workflow-orchestrator/references/graphs/wechat-writing.md",
   "plugins/domain-writing/skills/topic-research-deposition/SKILL.md",
   "plugins/domain-writing/skills/topic-research-deposition/references/wechat-writing-research.md",
   "plugins/domain-writing/skills/topic-research-deposition/references/quality-checklist.md",
@@ -222,9 +224,11 @@ if (base && !/^0+$/.test(base)) {
     if (previous === json(join(root, path)).version)
       errors.push(`plugin 内容已变化但版本未升级: ${name} (${previous})`);
   }
-  const chainChanged = [...changed].some((path) => path.includes("workflow-orchestrator/references/chains/"));
-  if (chainChanged && ![...changed].some((path) => path.startsWith("docs/workflows/")))
-    errors.push("chain 已变化，但 docs/workflows/ 没有同步更新");
+  const compositionChanged = [...changed].some((path) =>
+    /workflow-orchestrator\/references\/(chains|graphs)\//.test(path),
+  );
+  if (compositionChanged && ![...changed].some((path) => path.startsWith("docs/workflows/")))
+    errors.push("workflow 编排已变化，但 docs/workflows/ 没有同步更新");
 }
 
 if (errors.length) {

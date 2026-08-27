@@ -7,15 +7,18 @@ Create a diagram that a public-account reader can understand on a phone without 
 ## Modeling
 
 1. Write the question above the source file.
-2. Select one view:
-   - actors and main relationship;
-   - stages and main direction;
-   - states and transitions;
-   - decision and outcomes.
+2. Select one relationship grammar:
+   - progression: an ordered path;
+   - flow: a directed graph with optional branch or merge;
+   - cycle: a directed ring with an explicit feedback cause;
+   - hierarchy: a tree or nested set with one containment rule;
+   - comparison: two sets measured on the same dimensions;
+   - matrix: the product of two named dimensions.
 3. Keep 3–5 primary nodes. Split above 6.
 4. Use no more than two subgraphs.
 5. Use one solid main relation; add one dashed feedback relation only when feedback is the article’s point.
 6. Put explanations in the caption, not inside nodes.
+7. Use source phrases for labels. Keep each Chinese label at 10 characters or fewer.
 
 ## Mermaid Source
 
@@ -53,4 +56,3 @@ The palette may inherit an author’s brand, but geometry remains clean. Do not 
 - Does every connector have an unambiguous direction?
 - Could one node be removed without losing the answer? If yes, remove it.
 - Does the diagram preserve source/model files instead of only the exported bitmap?
-

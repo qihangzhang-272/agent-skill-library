@@ -69,3 +69,11 @@
 - Source: `https://reutersagency.com/about/standards-values/`
 - Distilled idea: 图片、图注、来源与实际发生的事情必须一致；AI 协助生成的图注仍需核查事实和归属。
 - Boundary: 本技能只提炼准确、归属和不虚构语境的原则，不复制 Reuters 文案。
+
+## Creator Buddy GZH Skills
+
+- Source: `https://github.com/SpaceZephyr/creator-buddy/tree/main/gzh-Skills`
+- Audited commit: `edf46c567ff54b72ee2157d06f3a02dbd67aaa9c`
+- Distilled ideas: central square crop compatibility for WeChat covers, six relationship grammars, and structured inputs before chart rendering.
+- Not adopted: Claude/OpenAI/Google generic themes, the fixed linear creation chain, external API fallback, concrete templates, or scripts.
+- Boundary: the repository root exposed no license file during the audit, so this library independently implements only the methods and parameters above.

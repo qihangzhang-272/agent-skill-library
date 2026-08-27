@@ -1,0 +1,65 @@
+{
+  "defaults": {
+    "h1": "issue-cover",
+    "h2": "index-rule",
+    "h3": "marker-stroke",
+    "quote": "centered-quote",
+    "strong": "accent",
+    "ordered-list": "leading-zero",
+    "unordered-list": "soft-check",
+    "table": "minimal-lines"
+  },
+  "components": [
+    {
+      "id": "h1",
+      "options": [
+        { "id": "issue-cover", "label": "刊头双线", "marker": "ISSUE 01", "style": "padding:20px 0 16px;border-top:4px double var(--accent);border-bottom:1px solid var(--accent);font-size:28px;font-weight:800;color:var(--ink);", "accentStyle": "display:block;margin-bottom:10px;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.22em;" },
+        { "id": "center-axis", "label": "居中细线", "marker": "ARTICLE", "style": "padding:18px 20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;font-size:27px;font-weight:760;color:var(--ink);", "accentStyle": "display:block;margin-bottom:8px;color:var(--accent);font-size:10px;letter-spacing:.28em;" }
+      ]
+    },
+    {
+      "id": "h2",
+      "options": [
+        { "id": "index-rule", "label": "编号底线", "marker": "01", "style": "padding:0 0 12px;border-bottom:1px solid var(--border);font-size:22px;font-weight:760;color:var(--ink);", "accentStyle": "display:inline-block;margin-right:10px;padding:2px 7px;background:var(--accent);color:#fff;font-size:11px;vertical-align:middle;" },
+        { "id": "center-section", "label": "居中栏目", "marker": "TOPIC", "style": "padding:13px 0;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:21px;font-weight:760;color:var(--ink);", "accentStyle": "display:block;margin-bottom:5px;color:var(--accent);font-size:9px;letter-spacing:.3em;" }
+      ]
+    },
+    {
+      "id": "h3",
+      "options": [
+        { "id": "marker-stroke", "label": "荧光底线", "style": "display:table;padding:0 3px 2px;background:linear-gradient(transparent 62%,var(--pale) 62%);font-size:19px;font-weight:760;color:var(--ink);" }
+      ]
+    },
+    {
+      "id": "quote",
+      "options": [
+        { "id": "centered-quote", "label": "居中金句", "style": "padding:22px 18px;border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);text-align:center;font-family:'Songti SC',SimSun,serif;font-size:18px;line-height:1.8;color:var(--ink);" },
+        { "id": "serif-pull", "label": "衬线大引语", "style": "padding:18px 10px;font-family:'Songti SC',SimSun,serif;font-size:20px;line-height:1.8;color:var(--ink);text-align:center;" }
+      ]
+    },
+    {
+      "id": "strong",
+      "options": [
+        { "id": "accent", "label": "主色强调", "style": "font-weight:760;color:var(--accent);" }
+      ]
+    },
+    {
+      "id": "ordered-list",
+      "options": [
+        { "id": "leading-zero", "label": "双位编号", "marker": "01", "style": "padding:8px 0;border-bottom:1px solid var(--border);color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:800;letter-spacing:.06em;" }
+      ]
+    },
+    {
+      "id": "unordered-list",
+      "options": [
+        { "id": "soft-check", "label": "圆角对勾", "marker": "✓", "style": "padding:8px 0;color:var(--body);", "accentStyle": "display:inline-grid;width:23px;height:23px;margin-right:10px;border-radius:7px;background:var(--pale);place-items:center;color:var(--accent);font-weight:800;" }
+      ]
+    },
+    {
+      "id": "table",
+      "options": [
+        { "id": "minimal-lines", "label": "极简横线", "style": "width:100%;border-collapse:collapse;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);color:var(--body);", "accentStyle": "padding:8px 10px;border-bottom:1px solid var(--accent);color:var(--ink);text-align:left;" }
+      ]
+    }
+  ]
+}

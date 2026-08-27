@@ -77,7 +77,7 @@ interface QihangRenderOptions {
 
 const SKILL_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG_PATH = path.join(SKILL_DIR, "assets", "qihang-editorial.json");
-const CATALOG_PATH = path.join(SKILL_DIR, "assets", "qihang-studio-catalog.json");
+const CATALOG_PATH = path.join(SKILL_DIR, "assets", "qihang-style-catalog.json");
 
 export function isQihangTheme(theme?: string): boolean {
   return theme === QIHANG_THEME;
@@ -95,7 +95,7 @@ export function loadQihangTheme(): QihangThemeConfig {
   return config;
 }
 
-function loadQihangStyleCatalog(): QihangStyleCatalog {
+export function loadQihangStyleCatalog(): QihangStyleCatalog {
   return JSON.parse(fs.readFileSync(CATALOG_PATH, "utf-8")) as QihangStyleCatalog;
 }
 

@@ -15,12 +15,12 @@ plugins/<group>/
 | 层 | 目录 | 放什么 | 不放什么 |
 | --- | --- | --- | --- |
 | Foundation | `plugins/foundation/` | 元技能 + Agent 操作原则 | 领域 know-how、具体 chain |
-| Orchestrator + Index | `plugins/orchestrator/`、`plugins/skill-index/` | 工作流路由 + 外部技能索引 | 技能正文副本、项目产物 |
+| Orchestrator + Index | `plugins/orchestrator/`、`plugins/skill-index/` | workflow graph / chain 路由 + 外部技能索引 | 技能正文副本、项目产物 |
 | Domain | `plugins/domain-*/` | 瓦技能，每个领域一个 plugin | 第二个领域调度器 |
 
 跨领域共享能力不预建空插件。真出现明确的跨领域共享需求时，用本元技能新建一个 `plugins/commons/`（或按需命名）——只在有实际内容时才建，不为"以后可能用"占位。
 
-瓦技能是核心，可独立存在。chain 是可选的主动编排层（见 `chain-authoring.md`），加瓦技能不触发自动改 chain。
+瓦技能是核心，可独立存在。技能图按材料依赖组合瓦技能；chain 只保留真正线性的工作流。加技能不自动修改任何编排。
 
 ## plugin.json
 唯一强制字段 `name`（kebab-case）；建议补 version / displayName / description / author。
@@ -39,7 +39,7 @@ node scripts/validate-repository.mjs --base HEAD
 
 ## 落盘
 - 运行时产物落项目工作区，绝不写进 plugins/ 或本仓库。
-- chain 的落盘协议定义项目夹结构，见 `chain-authoring.md`。
+- graph / chain 只定义跨节点共享和审计所需的落盘结构，见 `graph-authoring.md` 与 `chain-authoring.md`。
 
 ## 禁止
 - 不把 skills/ / agents/ / hooks/ 放进 `.claude-plugin/`。

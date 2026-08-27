@@ -36,7 +36,7 @@ description: >
 
 ### 1. 读取语义源
 
-读取 `01.5-editorial-judgment.md`、`04-revised.md`、`05-formatted.md`、研究截图和项目视觉规范。`04-revised.md` 仍是正文语义源；本技能不得改写观点。
+接受正文、段落、定稿 Markdown 或完整项目包。完整项目优先读取编辑判断、定稿正文、研究截图和视觉规范；单图任务不强迫补齐整套文件。本技能不得改写观点。
 
 ### 2. 写视觉编辑判断
 
@@ -62,9 +62,9 @@ description: >
 
 这些判断不得放在 workflow chain 或下游渲染技能中。
 
-### 5. 生成 `05.5-visual-plan.md`
+### 5. 生成可交接 brief
 
-文件至少包含：
+多图文章生成 `05.5-visual-plan.md`；单图任务生成独立 brief。至少包含：
 
 - `Audience`
 - `Article atmosphere`
@@ -83,6 +83,8 @@ description: >
 - **架构图**：先写一句自然语言问题，再选择一个抽象层级；公众号默认只保留一条主路径。
 - **知识漫画**：分镜必须包含动作、阻力或关系变化；不能只是四个会说结论的方框。
 - **单幅知识漫画解释图**：当读者需要看懂一段逻辑、但架构图过冷或概念插画过虚时，使用“中央逻辑视觉 + 侧边讲解角色”。中央视觉负责关系，角色负责指出阅读入口；不能退化成角色站在流程图旁念结论。
+
+关系图与数据图先读 `references/structured-visual-grammar.md`。递进、流程、循环、层次、对比和矩阵是关系语法，不是六种必须都画的模板；精确数据图必须保留来源、单位、口径和逐字数值。
 
 启航头像角色按“默认公众号角色”自动加载，不需要 plan 或用户再次声明。头像不是泛化风格图：人物、透明眼镜、深蓝乱发和黑色小动物伙伴共同构成可识别角色，不得擅自替换成通用职场人物。逐资产 plan 仍必须写明角色在该图执行什么动作；不能因为角色默认存在，就省略 `Character anchor`。
 
@@ -116,5 +118,6 @@ description: >
 - `references/comic-copy.md` - 让知识漫画具有人物、动作、停顿和真实材料感。
 - `references/qihang-avatar-explainer-system.md` - 启航头像角色与单幅知识漫画解释图的固定视觉语法。
 - `references/diagram-clarity.md` - 面向移动端阅读的低复杂度架构图规则。
+- `references/structured-visual-grammar.md` - 数据图、关系图、漫画解释图的输入契约与六类关系语法。
 - `references/visual-ai-flavor-filter.md` - 信息图、架构图和漫画的 AI 味检查。
 - `references/source-notes.md` - GitHub 开源来源、提炼范围与许可证边界。

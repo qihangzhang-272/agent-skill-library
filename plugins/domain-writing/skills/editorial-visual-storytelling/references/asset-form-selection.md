@@ -16,8 +16,8 @@
 | --- | --- | --- | --- |
 | 产品界面、原文、推文、论文或数据证据 | source | source reuse | 保留来源，不生成模拟证据。 |
 | 单一场景、人物动作、材料状态、章节停顿 | illustration | baoyu-article-illustrator | 不能只是抽象名词的装饰画。 |
-| 多项同时比较、数据总览、矩阵或层级 | infographic | baoyu-infographic | 必须形成独立信息单元；移动端过密就拆。 |
-| 流程、状态、组件关系、数据流或时间顺序 | diagram | baoyu-diagram | 一张图只回答一个问题，默认 3–5 个节点。 |
+| 数量、趋势、精确比较或多项总览 | infographic | baoyu-infographic | 数据必须带来源、单位、口径和逐字值；移动端过密就拆。 |
+| 递进、流程、循环、层次、对比、矩阵或组件关系 | diagram | baoyu-diagram | 一张图只回答一个问题，默认 3–5 个节点。 |
 | 连续动作、人物关系、材料阻力或认知变化 | comic | baoyu-comic | 纯逻辑拆解不自动漫画化。 |
 | 一段逻辑需要亲民解释，且用户明确要求人物讲解 | single-panel explainer comic | baoyu-comic | 中央画逻辑关系，侧边角色只指出阅读入口；不是流程图加人物。 |
 | 文章识别与入口情绪 | cover | baoyu-cover-image | 不与正文视觉竞争。 |
@@ -25,8 +25,8 @@
 
 ## 冲突处理
 
-- 关系必须精确阅读：diagram。
-- 多项需要同时比较：infographic。
+- 数量、趋势或精确数据比较：infographic。
+- 概念与角色之间的关系必须精确阅读：diagram。
 - 人物动作或关系变化本身有阅读价值：comic。
 - 逻辑关系必须看懂，但概念插画太虚、架构图太冷：single-panel explainer comic。
 - 单一瞬间或材料状态：illustration。

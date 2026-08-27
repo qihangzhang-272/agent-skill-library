@@ -6,7 +6,7 @@
 - [ ] 按需加 references/，正文保持紧凑
 - [ ] bump 所在 plugin 的 version，并同步 marketplace version
 - [ ] `claude plugin validate . --strict` 与 `node scripts/validate-repository.mjs --base HEAD` 通过
-- [ ] chain：**可选**。只有当你同时要把它编进某条 chain 时才改 chain（见 `chain-authoring.md`）。加技能不自动触发改 chain。
+- [ ] graph / chain：**可选**。只有用户同时要求改变编排时才改；加技能不自动触发。
 
 ## 建一个新 domain
 - [ ] 建 `plugins/domain-<name>/` + plugin.json
@@ -14,13 +14,15 @@
 - [ ] marketplace.json 注册新 plugin
 - [ ] 初始化或 bump plugin version，并同步 marketplace version
 - [ ] 两项仓库验证通过
-- [ ] chain：**可选**。domain 可以先只有零散瓦技能，chain 等你主动建。
+- [ ] graph / chain：**可选**。domain 可以只有零散瓦技能。
 
 ## 改一个已有瓦技能
 - [ ] 改 SKILL.md 正文 / 加删 references
 - [ ] bump plugin version，并同步 marketplace version
 - [ ] 两项仓库验证通过
-- [ ] 不联动 chain（chain 是主动改的，见 `chain-authoring.md`）
+- [ ] 不自动联动 graph / chain。
 
-## 主动建/改 chain（独立流程）
-见 `chain-authoring.md`。chain 永远是你主动发起，不是加技能的副作用。
+## 主动建/改 graph 或 chain
+
+- 有分支、汇合、可跳过节点或反馈：见 `graph-authoring.md`。
+- 真正不可交换的单路径：见 `chain-authoring.md`。

@@ -29,15 +29,15 @@
 | 层 | 目录 | 责任 / 保存什么 | 约束 / 不保存什么 |
 | --- | --- | --- | --- |
 | `plugins/foundation/` | 元层：`principles` Agent 操作原则 + `skill-architecture` 元技能 | 不放领域专属 know-how 或具体调用链 |
-| `plugins/orchestrator/` | `workflow-orchestrator` 工作流路由入口 | `SKILL.md` 只做路由，具体 chain 压缩到 `references/chains/`；不再创建子调度器技能 |
+| `plugins/orchestrator/` | `workflow-orchestrator` 工作流路由入口 | `SKILL.md` 只做路由，技能图与线性 chain 分别放 `references/graphs/`、`references/chains/`；不再创建子调度器技能 |
 | `plugins/skill-index/` | `external-skill-index` 外部 GitHub 技能索引 | 只做索引，不 vendored 外部仓库正文 |
-| `plugins/domain-*/` | 按领域组织的瓦技能（tile skills） | 每个领域一条 chain，瓦技能只承接一个节点；不放第二个领域调度器 |
+| `plugins/domain-*/` | 按领域组织的瓦技能（tile skills） | 瓦技能声明材料接口并可独立使用；不放第二个领域调度器 |
 | `.claude-plugin/` | 保存 marketplace manifest | 只放 Claude Code marketplace 所需元数据 |
 | `docs/` | 保存治理规则、收录流程、组合搭配和调用链 | 不放具体项目产物或外部来源清单 |
 
 每个 plugin 都有 `.claude-plugin/plugin.json`，技能正文放在 `plugins/<plugin>/skills/<skill>/SKILL.md`（裸 name，三层渐进披露：SKILL.md → references/ → assets/）。
 
-新增或修改架构时不手创建 skill 文件夹，用 `skill-architecture` 元技能生成 spec 合规骨架。瓦技能是核心，可独立存在；chain 是可选的主动编排，加瓦技能不触发自动改 chain。三场景（加瓦技能 / 建新 domain / 主动建 chain）及从零建库路径，见 `plugins/foundation/skills/skill-architecture/SKILL.md`。
+新增或修改架构时不手创建 skill 文件夹，用 `skill-architecture` 元技能生成 spec 合规骨架。瓦技能是核心；默认按材料依赖组成技能图，chain 只用于真正线性的流程。加瓦技能不自动修改编排。
 
 ## 收录判断
 
@@ -76,7 +76,7 @@
 
 调用链比技能数量重要。
 
-瓦技能可独立存在，不要求进任何 chain。进 chain 是可选的主动编排（见 `plugins/foundation/skills/skill-architecture/references/chain-authoring.md`）。当某个瓦技能确实进了某条 chain 时，要能解释它的位置：
+瓦技能可独立存在。进入技能图或 chain 是可选编排；当它进入编排时，要能解释它提供和消费的材料：
 
 - topic -> writing -> Baoyu 配图、排版与草稿箱发布。
 - product-analysis -> AI-native 产品视角 -> domain-investment 投资工作包 -> IC Memo -> 可选可视化。产品、投资、研报和可视化不做成平行分类。
@@ -89,7 +89,7 @@
 索引可以丰富，执行链路必须克制。
 
 - `external-skill-index` 是外部技能和前端库的资产层，不是把所有参考源串起来执行的工作流。
-- `workflow-orchestrator` 是唯一默认工作流调度入口；它的 `SKILL.md` 只保留路由表，具体 chain 必须压缩到 `references/chains/`，不得再创建子调度器技能。
+- `workflow-orchestrator` 是唯一默认工作流调度入口；它的 `SKILL.md` 只保留路由表，具体 graph / chain 放入对应 references 目录，不得再创建子调度器技能。
 - 一条工作流只暴露必要节点；多个外部参考源只能在同一个选择节点里择一使用，不能被机械串成多段调用链。
 - 不为了"管理复杂度"新增包装技能。只有当某个判断经维护者反复使用、已提炼为可稳定复述的判断，并且明显降低后续执行成本时，才允许沉淀为新的本地技能。
 - product-analysis 这类链路应保持：`ai-product-analyzer` 或 `investment-ai-product-judgment` 提供本库的 AI-native 产品视角，`domain-investment` 工作包提供竞争格局、单位经济、投资评分、估值、DD、跟踪和 IC Memo 成稿，最后按需由 `investment-visual-report` 可视化。不要先按"是否准确适用 OSS investment"分类。
@@ -123,5 +123,5 @@ Claude Code plugin 既是分发层也是源内容层——三层架构下，源�
 - 改动技能正文后，同步 bump 对应插件 `plugins/<plugin>/.claude-plugin/plugin.json` 的 `version`。
 - 新增技能/领域/链时，用 `skill-architecture` 元技能生成骨架，不要手创建 skill 文件夹。
 - 每次改变可分发插件内容时，运行 `claude plugin validate . --strict` 与 `node scripts/validate-repository.mjs --base HEAD`；两项均通过才允许推送。
-- 每次改变调用链时，同步更新对应 `docs/workflows/` 和 orchestrator 的 `references/chains/`。
+- 每次改变 workflow graph 或 chain 时，同步更新对应 `docs/workflows/` 和 orchestrator 定义。
 - 每次改变索引结构时，同步更新 `docs/governance/`。

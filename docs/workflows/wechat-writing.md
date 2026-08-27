@@ -1,76 +1,39 @@
-# WeChat Writing Workflow
+# WeChat Writing Skill Graph
 
-权威运行定义：`plugins/orchestrator/skills/workflow-orchestrator/references/chains/wechat-writing.md`
+权威定义：`plugins/orchestrator/skills/workflow-orchestrator/references/graphs/wechat-writing.md`
 
-## 目标
+## 核心变化
 
-从可选的账号语料采集、主题研究、公众号编辑判断与深度写作，走到清晰的视觉叙事、Markdown 排版、HTML 预览与公众号草稿箱。运行时项目夹统一为：
+公众号工作流不再被理解为必须逐步完成的状态机。瓦技能通过材料接口组合：已有定稿可以直接排版，已有完整视觉 brief 可以直接渲染，只要求草稿箱时也不会重跑研究和写作。
+
+## 常用关系
+
+```text
+用户材料 / 账号语料 -> 研究事实包 -> 正文定稿
+正文定稿 -> Markdown 排印 -> 最终 Markdown
+正文或段落 + 视觉偏好 -> 视觉 brief/plan -> 插图 / 数据图 / 关系图 / 漫画 / 封面
+最终 Markdown + 图片 -> 个人样式 HTML
+最终 Markdown + 明确授权 -> 公众号草稿箱
+```
+
+边只表示材料依赖，不表示某个技能有权替另一个技能做判断。视觉渲染器不能改写视觉 brief，排版不能改正文，发布不能扩大为群发。
+
+## 视觉资产
+
+- `editorial-visual-storytelling` 判断是否需要图、选择资产形式并写短文案。
+- 精确数据图交给 `baoyu-infographic`，必须带来源、单位、时间范围和逐字数据。
+- 关系图交给 `baoyu-diagram`，从递进、流程、循环、层次、对比、矩阵等关系中选择一类。
+- 人物讲解与知识漫画交给 `baoyu-comic` 或插图技能，默认加载启航头像身份资产。
+- 封面必须同时验证消息列表可读性和中央方形裁切兼容性。
+
+## 个人排版
+
+`qihang-wechat-layout` 读取 `qihang-style-catalog.json`，直接把已确认默认值编译进正式 HTML。只保留 `06-final.html`；不再生成样式效果卡或 `06-final.studio.html`。
+
+## 落盘
+
+单瓦技能任务只保存自身产物。多资产协作、审计或发布时使用：
 
 `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`
 
-## 主链
-
-```text
-[要求账号历史 / 对标账号语料时] 账号级公开语料采集与规范化
-  -> 研究沉淀
-  -> public-account-writing-style 编辑判断、框架取舍、写作与终审
-  -> Markdown 排版
-  -> 视觉计划（内容判断、Visual Copy Desk、形式与 Render owner）
-  -> 按 05.5-visual-plan.md 选择性调用视觉技能
-  -> 06-final.md
-  -> qihang-editorial 正式 HTML + 启航个人样式工作台
-  -> 公众号草稿箱
-```
-
-## 职责分离
-
-- `workflow-orchestrator` 只选择 chain、依次调用技能并检查 Handoff。
-- `wechat-account-corpus-research` 只在需要账号历史、批量 URL 或对标语料时运行；它输出可审计 corpus，不生成竞品判断。
-- `topic-research-deposition` 消费 corpus manifest，并继续补齐主题、反证和跨平台材料。
-- `public-account-writing-style` 是唯一正文 owner，负责编辑判断、框架、事实、结构、AI-Flavor Filter 与最终修订。
-- `editorial-visual-storytelling` 独立负责视觉内容判断、文案、是否配图、资产形式和 Render owner。
-- `qihang-wechat-layout` 独立负责正文视觉排版，让预览和草稿发布共用已确认的个人默认样式；同时生成只含 11 种保留样式的调优工作台。它不改正文，也不决定配图。
-- 各 Baoyu 技能只负责渲染。
-
-视觉领域技能读取排版后的正文，生成唯一的 `05.5-visual-plan.md`。Orchestrator 只读取其中的 `Render owner` 并分发任务，不自行补写文案或选择形式。
-
-## Visual Copy Desk
-
-- 封面标题、图注、节点标签、漫画旁白和对白分别处理，不使用一套“金句模板”。
-- 文案先描述能确认的事实或动作，再决定需要补时间、语境、声音还是关系。
-- 每项资产写 2–3 个信息角度不同的候选，不做同义改写竞赛。
-- 画面已经表达的动作不由字幕重复；没有文字缺口时允许 `Copy role: none`。
-- 每个画内文本单元优先 4–8 字、硬上限 10 个中文字符；长句与解释移到图外 caption。
-- 生成 prompt 只能使用 brief 里审校后的 `Exact text`，不能临时扩写。
-
-## 公众号架构图
-
-- 默认使用清晰编辑主题，不再固定暗色技术风。
-- 简单关系优先 Mermaid 语义源，经自动布局输出 SVG。
-- 主要节点优先 3–5 个，超过 6 个先拆图。
-- 一张图只回答一个自然语言问题，并保持一个抽象层级。
-- 色调可继承作者头像的暖纸、深海军蓝、钴蓝和暖橙；线条、文字与节点保持清晰。
-
-## 知识漫画
-
-- 漫画文案由 `editorial-visual-storytelling` 先写动作与节奏。
-- 每格先写 `Scene fact`，再选择旁白、对白或无字；对白必须影响下一步动作。
-- `baoyu-comic` 再生成角色表、正式 storyboard、prompt 与页面。
-- 不使用“问题—分析—顿悟—结论”的默认四格闭环。
-- 角色必须与材料、工具或他人发生可见关系；不能只是替作者朗读论纲。
-
-## 发布边界
-
-- `04-revised.md` 是正文语义源。
-- `05.5-visual-plan.md` 是视觉语义、文案、形式和 Render owner 的唯一来源。
-- `06-final.md` 是唯一发布源。
-- `06-final.html` 是正式排版预览，`06-final.studio.html` 是个人样式调优页；二者都不是发布源。
-- 发布仍以 `06-final.md` 为输入，并复用用户在预览阶段最终确认的生产主题；工作台临时切换不会自动进入草稿箱。
-- 发布只进入草稿箱，不自动扩大为群发。
-
-## 账号语料边界
-
-- 对标账号抓取只覆盖获准访问的公开文章与用户给出的 URL；每次运行必须限定账号、日期或数量范围。
-- 账号语料保存到 `01-topic-research/sources/wechat-accounts/`，原始导出、规范化正文和 manifest 分开。
-- 账号历史可使用外部索引登记的 `wechat-article-exporter`；需要后台登录或扫码时由用户完成，并在动作前单独确认。
-- 阅读量、评论、凭据捕获、代理证书和系统代理不属于该可选分支。
+文件按实际调用节点出现。`06-final.md` 仍是发布任务的唯一语义源，`07-publish-receipt.md` 只在草稿箱节点实际执行后生成。

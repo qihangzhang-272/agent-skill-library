@@ -10,7 +10,7 @@
 ├── README.md                          # 架构树 + 定位 + 验证
 └── plugins/
     ├── foundation/          # 元层：skill-architecture 元技能 + principles Agent 操作原则
-    ├── orchestrator/        # 工作流路由入口（SKILL.md 只做路由，chain 压缩在 references/chains/）
+    ├── orchestrator/        # 工作流路由入口（graph / chain 放 references/）
     ├── skill-index/         # 外部 GitHub 技能索引（默认是链接，不收编正文）
     └── domain-*/            # 按需：按领域组织的瓦技能
 ```
@@ -64,10 +64,12 @@ plugins/orchestrator/
 ├── .claude-plugin/plugin.json
 └── skills/workflow-orchestrator/
     ├── SKILL.md              # 只含路由表骨架，先空
-    └── references/chains/    # 空目录，等你主动建 chain
+    └── references/
+        ├── graphs/           # 有分支、汇合或反馈的技能图
+        └── chains/           # 真正线性的工作流
 ```
 
-SKILL.md 骨架（含 frontmatter，先空路由表，建 chain 时加行）：
+SKILL.md 骨架（含 frontmatter，先空路由表，建 graph / chain 时加行）：
 
 ```markdown
 ---
@@ -79,15 +81,16 @@ description: >-
 
 # Workflow Orchestrator
 
-Route to one chain definition, then follow that chain. This file only routes; chain bodies live in `references/chains/`.
+Route to one workflow definition. Graphs live in `references/graphs/`; truly linear workflows remain in `references/chains/`.
 
 ## 路由表
 | 用户意图 | 链定义 |
 | --- | --- |
-| （建 chain 时加行） | `references/chains/<name>.md` |
+| （建图时加行） | `references/graphs/<name>.md` |
+| （线性流程时加行） | `references/chains/<name>.md` |
 ```
 
-plugin.json 按 foundation 格式套用，在 marketplace.json 注册。此时没有任何 chain--合规。chain 等你按 `chain-authoring.md` 主动建。
+plugin.json 按 foundation 格式套用，在 marketplace.json 注册。此时没有任何编排也合规；需要时按 `graph-authoring.md` 或 `chain-authoring.md` 主动建立。
 
 ### 4. 建 skill-index plugin（必须建）
 skill-index 是外部 GitHub 技能的目录收束--对已有技能和不方便 vendored 但有用的 GitHub 技能建立索引结构。默认是链接，不收编正文。
@@ -129,6 +132,6 @@ claude plugin validate . --strict
 
 ## 不做什么
 - 不为"以后可能用"预建跨领域共享插件（如 commons）——真有明确共享能力时再用本元技能建。
-- 不预建 chain（chain 主动建）。
+- 不预建 graph / chain（编排主动建）。
 - 不为"以后可能用"建 plugin。
 - skill-index 索引表不预建分类、不预置条目，登记时再加。

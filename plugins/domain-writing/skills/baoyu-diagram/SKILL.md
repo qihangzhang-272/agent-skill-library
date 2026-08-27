@@ -29,8 +29,10 @@ Create professional diagrams across multiple diagram types. Public-account diagr
 Read `references/editorial-simple.md` before modeling. Core constraints:
 
 - Start with one natural-language question.
+- Select one relationship grammar: progression, flow, cycle, hierarchy, comparison, or matrix.
 - Keep one abstraction level and one reading direction.
 - Prefer 3–5 primary nodes; split above 6.
+- Keep each Chinese node label at 10 characters or fewer; longer explanations belong in the caption.
 - Use Mermaid source and the bundled renderer.
 - Use clean geometry, ample whitespace, warm editorial background, dark ink, cobalt signal and optional orange human-decision accent.
 - Preserve `.mmd`, `.svg`, and `@2x.png`.

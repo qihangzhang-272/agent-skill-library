@@ -137,9 +137,18 @@ test("CLI renders the shared qihang editorial theme", async () => {
       "",
       "正文包含 **关键判断**。",
       "",
+      "### 一个局部判断",
+      "",
       "> 引用只承担补充说明。",
       "",
       "- 列表只显示一个项目符号。",
+      "",
+      "1. 有序列表第一项。",
+      "2. 有序列表第二项。",
+      "",
+      "| 元素 | 作用 |",
+      "| --- | --- |",
+      "| 标题 | 建立层级 |",
       "",
       "![配图](figure.png)",
     ].join("\n"),
@@ -162,9 +171,16 @@ test("CLI renders the shared qihang editorial theme", async () => {
   const html = await fs.readFile(result.htmlPath, "utf-8");
 
   assert.match(html, /data-layout-theme="qihang-editorial"/);
-  assert.match(html, /<h2[^>]*style="[^"]*border-bottom: 1px solid #DCE5FF/);
+  assert.match(html, /<h1[^>]*style="[^"]*border-top: 4px double #2447D8/);
+  assert.match(html, /data-qihang-marker="h1"[^>]*>ISSUE 01<\/span>/);
+  assert.match(html, /<h2[^>]*style="[^"]*border-bottom: 1px solid #D9E0EA/);
+  assert.match(html, /data-qihang-marker="h2"[^>]*>01<\/span>/);
+  assert.match(html, /<h3[^>]*style="[^"]*background: linear-gradient/);
   assert.match(html, /<strong[^>]*style="[^"]*color: #2447D8/);
-  assert.match(html, /<blockquote[^>]*style="[^"]*background: #F7F2E8/);
+  assert.match(html, /<blockquote[^>]*style="[^"]*text-align: center/);
+  assert.match(html, /data-qihang-marker="ordered"[^>]*>01<\/span>/);
+  assert.match(html, /data-qihang-marker="check"[^>]*>✓<\/span>/);
+  assert.match(html, /<table[^>]*style="[^"]*border-top: 2px solid #2447D8/);
   assert.match(html, /<ul[^>]*style="[^"]*list-style: none/);
   assert.match(html, /<img src="figure\.png"[^>]*border-radius: 12px/);
 });

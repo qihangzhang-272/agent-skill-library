@@ -58,7 +58,7 @@ domain-writing:topic-research-deposition
 | 4. 视觉计划 | `editorial-visual-storytelling` | `01.5-editorial-judgment.md`、`04-revised.md`、`05-formatted.md`、研究视觉素材、项目视觉偏好 | `05.5-visual-plan.md` | 视觉判断、文案、最终形式、Render owner、复杂度、来源和目标路径完整。 |
 | 5. 视觉生产 | plan 中列出的 Owner | `05.5-visual-plan.md`、对应原始素材 | 各技能原生过程包、`imgs/` 发布资产 | 所有 `Required=yes` 资产完成；任何内容变化先退回 plan Owner。 |
 | 6. 最终组装 | orchestrator | `05-formatted.md`、`05.5-visual-plan.md`、`imgs/` | `06-final.md` | 图片路径存在；正文无占位符；frontmatter、封面和转载信息完整。 |
-| 7. HTML 与全量工作台预览 | `qihang-wechat-layout` | `06-final.md` | `06-final.html`、`06-final.studio.html`；可选 `06-preview-mobile.png` | 正式 HTML 使用 `qihang-editorial`；工作台完整展示全部主题、组件、图片形态、字体、字重和间距，不做效果筛选。检查主题标记、断图、层级、引用、间距和移动端溢出。 |
+| 7. HTML 与个人样式工作台 | `qihang-wechat-layout` | `06-final.md` | `06-final.html`、`06-final.studio.html`；可选 `06-preview-mobile.png` | 正式 HTML 使用 `qihang-editorial` 的个人默认样式；工作台展示 11 种已确认样式以及主题、字体、字重和间距。检查主题标记、断图、层级、引用、列表、表格、间距和移动端溢出。 |
 | 8. 草稿箱发布 | `baoyu-post-to-wechat` | `06-final.md`、阶段 7 已确认的主题与颜色 | `07-publish-receipt.md` | 使用同一 `qihang-editorial` 生成发布 HTML，只保存草稿；记录方式、主题、图片数和草稿结果。 |
 
 ## 单一来源
@@ -68,7 +68,7 @@ domain-writing:topic-research-deposition
 - `05.5-visual-plan.md`：视觉判断、视觉文案、形式和 Render owner 的唯一来源。
 - `06-final.md`：唯一发布源。
 - `06-final.html`：预览派生产物，不是默认发布输入。
-- `06-final.studio.html`：全量排版调优派生产物；不改正文，也不自动写回生产主题。
+- `06-final.studio.html`：个人样式调优派生产物；不改正文，临时备选也不自动写回默认值。
 - `plugins/domain-writing/skills/qihang-wechat-layout/assets/qihang-editorial.json`：预览和发布共用的排版主题真源；运行时不得复制到单篇文章后分叉维护。
 
 ## 落盘协议
@@ -123,6 +123,6 @@ comic/
 - 下游渲染技能不得改写 `Selected form`、`Exact text`、`Caption outside image`、`Complexity cap` 或 `Target path`。
 - 视觉资产失败且需要改变内容方案时，退回 `editorial-visual-storytelling` 更新 plan；orchestrator 只记录状态并重新分发。
 - `06-final.md` 只引用 `imgs/` 下的规范化发布资产。
-- 阶段 7 必须生成完整工作台；不得以“推荐”“兼容”“安全”为由隐藏目录中的可见效果。
+- 阶段 7 必须生成个人样式工作台；只呈现用户已经确认保留的 11 种样式。
 - 正式 HTML 预览与发布统一使用用户最终确认的主题、主色和引用模式；用户尚未确认工作台试验态时继续使用 `qihang-editorial`。
 - 用户未明确授权草稿箱发布时，在阶段 8 前暂停；发布授权不扩大为群发授权。

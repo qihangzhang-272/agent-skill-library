@@ -25,7 +25,7 @@ test("buildStudioPreview turns an existing Qihang HTML article into a complete s
   const studioHtml = fs.readFileSync(outputPath, "utf-8");
 
   assert.equal(result.studioPath, outputPath);
-  assert.equal(result.variantCount, 75);
+  assert.equal(result.variantCount, 11);
   assert.match(studioHtml, /<title>真实文章标题 · 启航排版工作台<\/title>/);
   assert.match(studioHtml, /原始标题/);
   assert.match(studioHtml, /原始正文/);

@@ -7,7 +7,7 @@ import {
   totalStudioVariants,
 } from "./qihang-studio.ts";
 
-test("studio catalog exposes the complete visual system", () => {
+test("studio catalog exposes only Qihang's confirmed personal style set", () => {
   const catalog = loadQihangStudioCatalog();
 
   assert.equal(catalog.themes.length, 5);
@@ -18,22 +18,45 @@ test("studio catalog exposes the complete visual system", () => {
       "h2",
       "h3",
       "quote",
-      "code",
-      "inline-code",
       "strong",
-      "em",
       "ordered-list",
       "unordered-list",
       "table",
-      "divider",
-      "link",
     ],
   );
-  assert.equal(catalog.imageStyles.length, 7);
-  assert.equal(totalStudioVariants(catalog), 75);
+  assert.deepEqual(
+    Object.fromEntries(
+      catalog.components.map((component) => [
+        component.id,
+        component.options.map((option) => option.id),
+      ]),
+    ),
+    {
+      h1: ["issue-cover", "center-axis"],
+      h2: ["index-rule", "center-section"],
+      h3: ["marker-stroke"],
+      quote: ["centered-quote", "serif-pull"],
+      strong: ["accent"],
+      "ordered-list": ["leading-zero"],
+      "unordered-list": ["soft-check"],
+      table: ["minimal-lines"],
+    },
+  );
+  assert.deepEqual(catalog.defaults, {
+    h1: "issue-cover",
+    h2: "index-rule",
+    h3: "marker-stroke",
+    quote: "centered-quote",
+    strong: "accent",
+    "ordered-list": "leading-zero",
+    "unordered-list": "soft-check",
+    table: "minimal-lines",
+  });
+  assert.deepEqual(catalog.imageStyles.map((style) => style.id), ["theme"]);
+  assert.equal(totalStudioVariants(catalog), 11);
   assert.deepEqual(
     catalog.typography.targets,
-    ["h1", "h2", "h3", "h4", "h5", "h6", "body", "quote", "code", "strong", "em"],
+    ["h1", "h2", "h3", "h4", "h5", "h6", "body", "quote", "strong"],
   );
   assert.deepEqual(
     catalog.spacing.map((item) => item.id),
@@ -41,7 +64,7 @@ test("studio catalog exposes the complete visual system", () => {
   );
 });
 
-test("studio renders every catalog variant without changing article content", () => {
+test("studio renders the confirmed style set without changing article content", () => {
   const catalog = loadQihangStudioCatalog();
   const articleHtml = [
     '<div id="output" data-layout-theme="qihang-editorial">',
@@ -61,14 +84,15 @@ test("studio renders every catalog variant without changing article content", ()
   assert.match(html, /data-studio-control="theme"/);
   assert.match(html, /data-studio-control="typography"/);
   assert.match(html, /data-studio-control="spacing"/);
-  assert.match(html, /data-studio-gallery="all-variants"/);
-  assert.match(html, /<option value="h4">四级标题 H4<\/option>/);
-  assert.match(html, /<option value="h5">五级标题 H5<\/option>/);
-  assert.match(html, /<option value="h6">六级标题 H6<\/option>/);
+  assert.match(html, /data-studio-gallery="selected-variants"/);
+  assert.doesNotMatch(html, /<option value="h4">四级标题 H4<\/option>/);
+  assert.doesNotMatch(html, /<option value="image">图片<\/option>/);
   assert.match(html, /<option value="16" selected>16px<\/option>/);
   assert.match(html, /<option value="400" selected>400<\/option>/);
   assert.match(html, /node\.style\.setProperty\(property,value\+'px'\)/);
-  assert.equal((html.match(/data-preview-variant=/g) ?? []).length, 75);
+  assert.match(html, /启航个人样式集/);
+  assert.doesNotMatch(html, /深色封面/);
+  assert.equal((html.match(/data-preview-variant=/g) ?? []).length, 11);
   assert.doesNotMatch(html, /<link[^>]+rel=["']stylesheet/);
   assert.doesNotMatch(html, /<script[^>]+src=/);
 });

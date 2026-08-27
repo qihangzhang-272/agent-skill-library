@@ -46,7 +46,8 @@ test("publishing renderer uses the shared qihang editorial theme", async () => {
   const html = await fs.readFile(result.htmlPath, "utf-8");
 
   assert.match(html, /data-layout-theme="qihang-editorial"/);
-  assert.match(html, /<h2[^>]*style="[^"]*border-bottom: 1px solid #DCE5FF/);
+  assert.match(html, /<h2[^>]*style="[^"]*border-bottom: 1px solid #D9E0EA/);
+  assert.match(html, /data-qihang-marker="h2"[^>]*>01<\/span>/);
   assert.match(html, /<strong[^>]*style="[^"]*color: #2447D8/);
 });
 

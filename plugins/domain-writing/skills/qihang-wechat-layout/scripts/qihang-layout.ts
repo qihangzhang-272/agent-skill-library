@@ -45,6 +45,21 @@ interface QihangThemeConfig {
   };
 }
 
+interface QihangStyleVariant {
+  id: string;
+  style: string;
+  accentStyle?: string;
+  marker?: string;
+}
+
+interface QihangStyleCatalog {
+  defaults: Record<string, string>;
+  components: Array<{
+    id: string;
+    options: QihangStyleVariant[];
+  }>;
+}
+
 interface RenderedDocument {
   contentHtml: string;
   meta: {
@@ -62,6 +77,7 @@ interface QihangRenderOptions {
 
 const SKILL_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG_PATH = path.join(SKILL_DIR, "assets", "qihang-editorial.json");
+const CATALOG_PATH = path.join(SKILL_DIR, "assets", "qihang-studio-catalog.json");
 
 export function isQihangTheme(theme?: string): boolean {
   return theme === QIHANG_THEME;
@@ -79,6 +95,71 @@ export function loadQihangTheme(): QihangThemeConfig {
   return config;
 }
 
+function loadQihangStyleCatalog(): QihangStyleCatalog {
+  return JSON.parse(fs.readFileSync(CATALOG_PATH, "utf-8")) as QihangStyleCatalog;
+}
+
+function defaultVariant(catalog: QihangStyleCatalog, componentId: string): QihangStyleVariant {
+  const component = catalog.components.find((item) => item.id === componentId);
+  const variant = component?.options.find((item) => item.id === catalog.defaults[componentId]);
+  if (!variant) throw new Error(`Missing default Qihang style: ${componentId}`);
+  return variant;
+}
+
+function resolveVariantStyle(
+  style: string | undefined,
+  config: QihangThemeConfig,
+  accent: string,
+): string {
+  if (!style) return "";
+  const values: Record<string, string> = {
+    accent,
+    warm: config.tokens.warm,
+    ink: config.tokens.ink,
+    body: config.tokens.body,
+    paper: config.tokens.paper,
+    pale: config.tokens.accentPale,
+    border: config.tokens.border,
+  };
+  return style.replace(/var\(--([a-z-]+)\)/g, (match, token: string) => values[token] || match);
+}
+
+function stripGeneratedListPrefix(html: string): string {
+  return html.replace(/^\s*(?:[•●▪◦*-]|\d+[.)])\s*/u, "");
+}
+
+function injectDefaultMarkers(contentHtml: string, catalog: QihangStyleCatalog): string {
+  const h1 = defaultVariant(catalog, "h1");
+  const h2 = defaultVariant(catalog, "h2");
+  const unordered = defaultVariant(catalog, "unordered-list");
+  let h2Index = 0;
+  let marked = contentHtml.replace(
+    /(<h1\b[^>]*>)/gi,
+    `$1<span data-qihang-marker="h1">${h1.marker || ""}</span>`,
+  );
+  marked = marked.replace(/(<h2\b[^>]*>)/gi, (opening) => {
+    h2Index += 1;
+    return `${opening}<span data-qihang-marker="h2">${String(h2Index).padStart(2, "0")}</span>`;
+  });
+  marked = marked.replace(/<ol\b[^>]*>[\s\S]*?<\/ol>/gi, (list) => {
+    let itemIndex = 0;
+    return list.replace(
+      /(<li\b[^>]*>)([\s\S]*?)(<\/li>)/gi,
+      (_match, opening: string, body: string, closing: string) => {
+        itemIndex += 1;
+        return `${opening}<span data-qihang-marker="ordered">${String(itemIndex).padStart(2, "0")}</span>${stripGeneratedListPrefix(body)}${closing}`;
+      },
+    );
+  });
+  return marked.replace(/<ul\b[^>]*>[\s\S]*?<\/ul>/gi, (list) =>
+    list.replace(
+      /(<li\b[^>]*>)([\s\S]*?)(<\/li>)/gi,
+      (_match, opening: string, body: string, closing: string) =>
+        `${opening}<span data-qihang-marker="check">${unordered.marker || "✓"}</span>${stripGeneratedListPrefix(body)}${closing}`,
+    ),
+  );
+}
+
 export function qihangImageStyle(): string {
   const config = loadQihangTheme();
   return [
@@ -92,8 +173,20 @@ export function qihangImageStyle(): string {
   ].join("; ") + ";";
 }
 
-function buildQihangCss(config: QihangThemeConfig, accent: string): string {
+function buildQihangCss(
+  config: QihangThemeConfig,
+  accent: string,
+  catalog: QihangStyleCatalog,
+): string {
   const { tokens, typography, layout } = config;
+  const h1 = defaultVariant(catalog, "h1");
+  const h2 = defaultVariant(catalog, "h2");
+  const h3 = defaultVariant(catalog, "h3");
+  const quote = defaultVariant(catalog, "quote");
+  const strong = defaultVariant(catalog, "strong");
+  const ordered = defaultVariant(catalog, "ordered-list");
+  const unordered = defaultVariant(catalog, "unordered-list");
+  const table = defaultVariant(catalog, "table");
   return `
 body {
   margin: 0;
@@ -131,34 +224,22 @@ body {
 }
 #output h1 {
   margin: 0 0 34px;
-  padding: 0 0 18px;
-  border-bottom: 3px solid ${tokens.ink};
-  color: ${tokens.ink};
-  font-size: 28px;
-  font-weight: 760;
   line-height: 1.38;
   letter-spacing: -0.02em;
   text-align: left;
+  ${resolveVariantStyle(h1.style, config, accent)}
 }
 #output h2 {
   margin: ${layout.sectionGap} 0 22px;
-  padding: 0 0 12px;
-  border-bottom: 1px solid ${tokens.accentSoft};
-  color: ${tokens.ink};
-  font-size: 21px;
-  font-weight: 740;
   line-height: 1.45;
   letter-spacing: -0.01em;
   text-align: left;
+  ${resolveVariantStyle(h2.style, config, accent)}
 }
 #output h3 {
   margin: 34px 0 18px;
-  padding: 2px 0 2px 12px;
-  border-left: 4px solid ${tokens.warm};
-  color: ${tokens.ink};
-  font-size: 19px;
-  font-weight: 720;
   line-height: 1.55;
+  ${resolveVariantStyle(h3.style, config, accent)}
 }
 #output h4, #output h5, #output h6 {
   margin: 28px 0 14px;
@@ -168,8 +249,7 @@ body {
   line-height: 1.55;
 }
 #output strong {
-  color: ${accent};
-  font-weight: 720;
+  ${resolveVariantStyle(strong.style, config, accent)}
 }
 #output em {
   color: ${tokens.body};
@@ -180,29 +260,42 @@ body {
 }
 #output blockquote {
   margin: 4px 0 26px;
-  padding: 17px 18px;
-  border-left: 4px solid ${accent};
-  border-radius: 0 10px 10px 0;
-  background: ${tokens.paper};
-  color: ${tokens.body};
+  ${resolveVariantStyle(quote.style, config, accent)}
 }
 #output blockquote p {
   margin: 0;
-  color: ${tokens.body};
-  font-size: 15px;
-  line-height: 1.82;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
 }
 #output ul, #output ol {
   margin: 0 0 22px;
-  padding-left: 1.5em;
+  padding-left: 0;
   list-style: none;
   color: ${tokens.body};
 }
 #output li {
-  margin: 8px 0;
-  padding-left: 3px;
-  color: ${tokens.body};
+  margin: 0;
   line-height: 1.82;
+}
+#output ol li {
+  ${resolveVariantStyle(ordered.style, config, accent)}
+}
+#output ul li {
+  ${resolveVariantStyle(unordered.style, config, accent)}
+}
+#output [data-qihang-marker="h1"] {
+  ${resolveVariantStyle(h1.accentStyle, config, accent)}
+}
+#output [data-qihang-marker="h2"] {
+  ${resolveVariantStyle(h2.accentStyle, config, accent)}
+}
+#output [data-qihang-marker="ordered"] {
+  ${resolveVariantStyle(ordered.accentStyle, config, accent)}
+}
+#output [data-qihang-marker="check"] {
+  ${resolveVariantStyle(unordered.accentStyle, config, accent)}
 }
 #output a {
   color: ${accent};
@@ -253,15 +346,15 @@ body {
   text-align: center;
 }
 #output table {
-  width: 100%;
   margin: 0 0 26px;
-  border-collapse: collapse;
   table-layout: fixed;
   font-size: 14px;
+  ${resolveVariantStyle(table.style, config, accent)}
 }
 #output th, #output td {
   padding: 10px 11px;
-  border: 1px solid ${tokens.border};
+  border: none;
+  border-bottom: 1px solid ${tokens.border};
   color: ${tokens.body};
   line-height: 1.65;
   text-align: left;
@@ -270,9 +363,8 @@ body {
   overflow-wrap: anywhere;
 }
 #output th {
-  background: ${tokens.accentPale};
-  color: ${tokens.ink};
   font-weight: 700;
+  ${resolveVariantStyle(table.accentStyle, config, accent)}
 }
 #output hr {
   width: 88px;
@@ -309,10 +401,12 @@ export async function renderQihangHtml(
   options: QihangRenderOptions = {},
 ): Promise<string> {
   const config = loadQihangTheme();
+  const catalog = loadQihangStyleCatalog();
   const accent = options.accent || config.tokens.accent;
-  const css = buildQihangCss(config, accent);
+  const css = buildQihangCss(config, accent, catalog);
   const codeThemeCss = loadCodeThemeCss(options.codeTheme || "github");
-  const document = buildHtmlDocument(rendered.meta, css, rendered.contentHtml, codeThemeCss);
+  const contentHtml = injectDefaultMarkers(rendered.contentHtml, catalog);
+  const document = buildHtmlDocument(rendered.meta, css, contentHtml, codeThemeCss);
   const style = {
     ...rendered.style,
     primaryColor: accent,

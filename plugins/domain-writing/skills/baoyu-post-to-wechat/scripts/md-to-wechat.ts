@@ -7,6 +7,7 @@ import {
   cleanSummaryText,
   extractSummaryFromBody,
   extractTitleFromMarkdown,
+  loadExtendConfig,
   parseFrontmatter,
   preprocessMermaidInMarkdown,
   renderMarkdownDocument,
@@ -17,6 +18,12 @@ import {
   stripWrappingQuotes,
 } from "baoyu-md";
 import { closeRenderer, renderMermaidToPng } from "baoyu-chrome-cdp/mermaid";
+import {
+  isQihangTheme,
+  QIHANG_THEME,
+  renderQihangHtml,
+  resolveBaoyuTheme,
+} from "../../qihang-wechat-layout/scripts/qihang-layout.ts";
 
 interface ImageInfo {
   placeholder: string;
@@ -40,6 +47,8 @@ export async function convertMarkdown(
   const baseDir = path.dirname(markdownPath);
   const content = fs.readFileSync(markdownPath, "utf-8");
   const citeStatus = options?.citeStatus ?? true;
+  const requestedTheme = options?.theme ?? loadExtendConfig().default_theme;
+  const primaryColor = resolveColorToken(options?.color);
 
   const { frontmatter, body } = parseFrontmatter(content);
 
@@ -87,16 +96,19 @@ export async function convertMarkdown(
   const htmlPath = path.join(tempDir, "temp-article.html");
 
   console.error(
-    `[md-to-wechat] Rendering markdown with theme: ${options?.theme ?? "default"}${options?.color ? `, color: ${options.color}` : ""}, citeStatus: ${citeStatus}`,
+    `[md-to-wechat] Rendering markdown with theme: ${requestedTheme ?? "default"}${options?.color ? `, color: ${options.color}` : ""}, citeStatus: ${citeStatus}`,
   );
 
-  const { html } = await renderMarkdownDocument(rewrittenMarkdown, {
+  const rendered = await renderMarkdownDocument(rewrittenMarkdown, {
     citeStatus,
     defaultTitle: title,
     keepTitle: false,
-    primaryColor: resolveColorToken(options?.color),
-    theme: options?.theme,
+    primaryColor,
+    theme: resolveBaoyuTheme(requestedTheme),
   });
+  const html = isQihangTheme(requestedTheme)
+    ? await renderQihangHtml(rendered, { accent: primaryColor })
+    : rendered.html;
   fs.writeFileSync(htmlPath, html, "utf-8");
 
   const contentImages = await resolveContentImages(images, baseDir, tempDir, "md-to-wechat");
@@ -118,7 +130,7 @@ Usage:
 
 Options:
   --title <title>     Override title
-  --theme <name>      Theme name (default, grace, simple, modern)
+  --theme <name>      Theme name (default, grace, simple, modern, ${QIHANG_THEME})
   --color <name|hex>  Primary color (blue, green, vermilion, etc. or hex)
   --no-cite           Disable bottom citations for ordinary external links
   --help              Show this help

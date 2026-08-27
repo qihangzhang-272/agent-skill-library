@@ -23,7 +23,7 @@ ${BUN_X} ./scripts/wechat-article.ts --markdown article.md --author "作者名" 
 | Parameter | Description |
 |-----------|-------------|
 | `--markdown <path>` | Markdown file to convert and post |
-| `--theme <name>` | Theme: default, grace, simple, modern |
+| `--theme <name>` | Theme: default, grace, simple, modern, qihang-editorial |
 | `--no-cite` | Keep ordinary external links inline instead of converting them to bottom citations |
 | `--title <text>` | Override title (auto-extracted from markdown) |
 | `--author <name>` | Author name |

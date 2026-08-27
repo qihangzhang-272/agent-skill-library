@@ -44,7 +44,7 @@ plugins/
 
 | 领域 | 瓦技能 |
 | --- | --- |
-| `domain-writing` | `wechat-account-corpus-research` · `topic-research-deposition` · `public-account-writing-style` · `baoyu-format-markdown` · `editorial-visual-storytelling` · `baoyu-image-gen` · `baoyu-article-illustrator` · `baoyu-infographic` · `baoyu-diagram` · `baoyu-comic` · `baoyu-cover-image` · `baoyu-markdown-to-html` · `baoyu-post-to-wechat` · `baoyu-compress-image` |
+| `domain-writing` | `wechat-account-corpus-research` · `topic-research-deposition` · `public-account-writing-style` · `baoyu-format-markdown` · `editorial-visual-storytelling` · `baoyu-image-gen` · `baoyu-article-illustrator` · `baoyu-infographic` · `baoyu-diagram` · `baoyu-comic` · `baoyu-cover-image` · `qihang-wechat-layout` · `baoyu-markdown-to-html` · `baoyu-post-to-wechat` · `baoyu-compress-image` |
 | `domain-investment` | `investment-research` · `investment-ai-product-judgment` · `investment-competitive-landscape` · `investment-unit-economics` · `investment-financial-model-builder` · `investment-scorecard` · `investment-valuation-returns` · `investment-dd` · `investment-thesis-tracking` · `investment-ic-memo-writer` · `investment-visual-report` |
 | `domain-capital-markets` | `public-equity-coverage-writer` · `investment-chart-pack` · `financial-company-profile` · `investment-banking-pitch-deck` · `sell-side-ma-materials` · `financial-artifact-qc` |
 | `domain-product` | `ai-product-analyzer` |
@@ -54,7 +54,7 @@ plugins/
 调用链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
 
 ```
-公众号选题 → [按需：账号历史/对标账号语料] → agent-reach 搜索 → 公众号编辑判断与深度写作 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → HTML 预览 → 草稿箱发布
+公众号选题 → [按需：账号历史/对标账号语料] → agent-reach 搜索 → 公众号编辑判断与深度写作 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → 启航统一排版与 HTML 预览 → 草稿箱发布
   chain: wechat-writing.md
 
 AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报

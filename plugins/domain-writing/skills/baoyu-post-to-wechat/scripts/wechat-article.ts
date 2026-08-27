@@ -435,12 +435,19 @@ async function parseMarkdownWithPlaceholders(
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const mdToWechatScript = path.join(__dirname, 'md-to-wechat.ts');
-  const args = ['-y', 'bun', mdToWechatScript, markdownPath];
+  const isRunningInBun = Boolean(process.versions.bun);
+  const command = isRunningInBun ? process.execPath : 'npx';
+  const args = isRunningInBun
+    ? [mdToWechatScript, markdownPath]
+    : ['-y', 'bun', mdToWechatScript, markdownPath];
   if (theme) args.push('--theme', theme);
   if (color) args.push('--color', color);
   if (!citeStatus) args.push('--no-cite');
 
-  const result = spawnSync('npx', args, { stdio: ['inherit', 'pipe', 'pipe'] });
+  const result = spawnSync(command, args, {
+    stdio: ['inherit', 'pipe', 'pipe'],
+    cwd: path.dirname(markdownPath),
+  });
   if (result.status !== 0) {
     const stderr = result.stderr?.toString() || '';
     throw new Error(`Failed to parse markdown: ${stderr}`);
@@ -1106,7 +1113,7 @@ Options:
   --content <text>   Article content (use with --image)
   --html <path>      HTML file to paste (alternative to --content)
   --markdown <path>  Markdown file to convert and post (recommended)
-  --theme <name>     Theme for markdown (default, grace, simple, modern)
+  --theme <name>     Theme for markdown (default, grace, simple, modern, qihang-editorial)
   --color <name|hex> Primary color (blue, green, vermilion, etc. or hex)
   --no-cite          Disable bottom citations for ordinary external links in markdown mode
   --author <name>    Author name
@@ -1175,6 +1182,8 @@ async function main(): Promise<void> {
   const resolved = resolveAccount(extConfig, accountAlias);
   if (resolved.name) console.log(`[wechat] Account: ${resolved.name} (${resolved.alias})`);
 
+  if (!theme) theme = extConfig.default_theme;
+  if (!color) color = extConfig.default_color;
   if (!author && resolved.default_author) author = resolved.default_author;
 
   if (!profileDir && resolved.alias) {

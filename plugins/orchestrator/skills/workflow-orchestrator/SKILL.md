@@ -1,6 +1,6 @@
 ---
 name: workflow-orchestrator
-description: Route the library's proven workflows. Use when the user asks to run, package, choose, or maintain workflows for agent-reach research to public-account writing, Baoyu layout, visual-plan-driven production, HTML preview and WeChat draft publishing; product-to-investment IC memo / visual report; public-equity initiating coverage; or skill-library maintenance. This skill only routes; workflow details live in references.
+description: Route the library's proven workflows. Use when the user asks to run, package, choose, or maintain workflows for agent-reach research to public-account writing, Qihang WeChat layout, visual-plan-driven production, HTML preview and WeChat draft publishing; product-to-investment IC memo / visual report; public-equity initiating coverage; or skill-library maintenance. This skill only routes; workflow details live in references.
 ---
 
 # Workflow Orchestrator
@@ -13,7 +13,7 @@ Route to one chain definition, then follow that chain. This file only routes; ch
 ## 路由表
 | 用户意图 | 链定义 |
 | --- | --- |
-| 公众号选题、agent-reach 搜索、编辑判断、公众号深度写作、Baoyu 排版、视觉生产、HTML 预览与草稿箱发布 | `references/chains/wechat-writing.md` |
+| 公众号选题、agent-reach 搜索、编辑判断、公众号深度写作、启航统一排版、视觉生产、HTML 预览与草稿箱发布 | `references/chains/wechat-writing.md` |
 | AI case 是否值得投、IC memo、DD、可视化研报 | `references/chains/investment-icmemo.md` |
 | 已上市公司首次覆盖、股票研究、目标价/评级框架、业绩前瞻 | `references/chains/public-equity-coverage.md` |
 

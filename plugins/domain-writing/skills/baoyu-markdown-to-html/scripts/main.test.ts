@@ -24,8 +24,6 @@ test("CLI forwards wrapper title and package render options", async () => {
   const { stdout } = await execFileAsync(
     process.execPath,
     [
-      "--import",
-      "tsx",
       SCRIPT_PATH,
       markdownPath,
       "--theme", "grace",
@@ -78,8 +76,6 @@ test("CLI renders Obsidian wikilink images with alt text and Attachments fallbac
   const { stdout } = await execFileAsync(
     process.execPath,
     [
-      "--import",
-      "tsx",
       SCRIPT_PATH,
       markdownPath,
       "--keep-title",
@@ -126,4 +122,49 @@ test("CLI renders Obsidian wikilink images with alt text and Attachments fallbac
     html,
     /<img src="b\.webp" data-local-path="[^"]+Attachments[^"]+b\.webp" alt="B alt"/,
   );
+});
+
+test("CLI renders the shared qihang editorial theme", async () => {
+  const root = await makeTempDir("qihang-wechat-layout-preview-");
+  const markdownPath = path.join(root, "article.md");
+  await fs.writeFile(path.join(root, "figure.png"), "image", "utf-8");
+  await fs.writeFile(
+    markdownPath,
+    [
+      "# 测试标题",
+      "",
+      "## 一个清楚的判断",
+      "",
+      "正文包含 **关键判断**。",
+      "",
+      "> 引用只承担补充说明。",
+      "",
+      "- 列表只显示一个项目符号。",
+      "",
+      "![配图](figure.png)",
+    ].join("\n"),
+    "utf-8",
+  );
+
+  const { stdout } = await execFileAsync(
+    process.execPath,
+    [
+      SCRIPT_PATH,
+      markdownPath,
+      "--theme", "qihang-editorial",
+      "--color", "#2447D8",
+      "--keep-title",
+    ],
+    { cwd: SCRIPT_DIR },
+  );
+
+  const result = JSON.parse(stdout.trim()) as { htmlPath: string };
+  const html = await fs.readFile(result.htmlPath, "utf-8");
+
+  assert.match(html, /data-layout-theme="qihang-editorial"/);
+  assert.match(html, /<h2[^>]*style="[^"]*border-bottom: 1px solid #DCE5FF/);
+  assert.match(html, /<strong[^>]*style="[^"]*color: #2447D8/);
+  assert.match(html, /<blockquote[^>]*style="[^"]*background: #F7F2E8/);
+  assert.match(html, /<ul[^>]*style="[^"]*list-style: none/);
+  assert.match(html, /<img src="figure\.png"[^>]*border-radius: 12px/);
 });

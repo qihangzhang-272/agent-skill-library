@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import process from "node:process";
 import { fileURLToPath } from "node:url";
 import {
   loadWechatExtendConfig,
@@ -21,6 +22,10 @@ import {
   normalizeRemoteConfig,
   withSshTunnel,
 } from "./wechat-remote-publish.ts";
+import {
+  isQihangTheme,
+  qihangImageStyle,
+} from "../../qihang-wechat-layout/scripts/qihang-layout.ts";
 
 interface AccessTokenResponse {
   access_token?: string;
@@ -238,6 +243,7 @@ async function uploadImagesInHtml(
   articleType: ArticleType = "news",
   collectNewsCoverFallback: boolean = false,
   client: WechatClient = wechatHttp,
+  theme?: string,
 ): Promise<{ html: string; firstCoverMediaId: string; imageMediaIds: string[] }> {
   const imgRegex = /<img[^>]*\ssrc=["']([^"']+)["'][^>]*>/gi;
   const matches = [...html.matchAll(imgRegex)];
@@ -313,7 +319,10 @@ async function uploadImagesInHtml(
         uploadedBySource.set(imagePath, resp);
       }
 
-      const replacementTag = `<img src="${resp.url}" style="display: block; width: 100%; margin: 1.5em auto;">`;
+      const imageStyle = isQihangTheme(theme)
+        ? qihangImageStyle()
+        : "display: block; width: 100%; margin: 1.5em auto;";
+      const replacementTag = `<img src="${resp.url}" style="${imageStyle}">`;
       updatedHtml = replaceAllPlaceholders(updatedHtml, image.placeholder, replacementTag);
       const shouldUploadMaterial = articleType === "newspic" || (collectNewsCoverFallback && !firstCoverMediaId);
       if (shouldUploadMaterial) {
@@ -431,14 +440,18 @@ function renderMarkdownWithPlaceholders(
   const mdToWechatScript = path.join(__dirname, "md-to-wechat.ts");
   const baseDir = path.dirname(markdownPath);
 
-  const args = ["-y", "bun", mdToWechatScript, markdownPath];
+  const isRunningInBun = Boolean(process.versions.bun);
+  const command = isRunningInBun ? process.execPath : "npx";
+  const args = isRunningInBun
+    ? [mdToWechatScript, markdownPath]
+    : ["-y", "bun", mdToWechatScript, markdownPath];
   if (title) args.push("--title", title);
   if (theme) args.push("--theme", theme);
   if (color) args.push("--color", color);
   if (!citeStatus) args.push("--no-cite");
 
   console.error(`[wechat-api] Rendering markdown with placeholders via md-to-wechat: ${theme}${color ? `, color: ${color}` : ""}, citeStatus: ${citeStatus}`);
-  const result = spawnSync("npx", args, {
+  const result = spawnSync(command, args, {
     stdio: ["inherit", "pipe", "pipe"],
     cwd: baseDir,
   });
@@ -482,7 +495,7 @@ Options:
   --author <name>     Author name (max 16 chars)
   --summary <text>    Article summary/digest (max 128 chars)
   --source-url <url>  Original article URL ("阅读原文" link, max 1KB)
-  --theme <name>      Theme name for markdown (default, grace, simple, modern). Default: default
+  --theme <name>      Theme name for markdown (default, grace, simple, modern, qihang-editorial). Default: default
   --color <name|hex>  Primary color (blue, green, vermilion, etc. or hex)
   --cover <path>      Cover image path (local or URL)
   --account <alias>   Select account by alias (for multi-account setups)
@@ -688,6 +701,13 @@ function buildRemoteConfig(args: CliArgs, resolved: ResolvedAccount): RemotePubl
 
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
+  const extConfig = loadWechatExtendConfig();
+  if (args.theme === "default" && extConfig.default_theme) {
+    args.theme = extConfig.default_theme;
+  }
+  if (!args.color && extConfig.default_color) {
+    args.color = extConfig.default_color;
+  }
 
   const filePath = path.resolve(args.filePath);
   if (!fs.existsSync(filePath)) {
@@ -767,7 +787,6 @@ async function main(): Promise<void> {
   if (sourceUrl) console.error(`[wechat-api] Source URL: ${sourceUrl}`);
   console.error(`[wechat-api] Type: ${args.articleType}`);
 
-  const extConfig = loadWechatExtendConfig();
   const resolved = resolveAccount(extConfig, args.account);
   if (resolved.name) console.error(`[wechat-api] Account: ${resolved.name} (${resolved.alias})`);
 
@@ -820,6 +839,7 @@ async function main(): Promise<void> {
       args.articleType,
       needNewsCoverFallback,
       client,
+      args.theme,
     );
     htmlContent = processedHtml;
 

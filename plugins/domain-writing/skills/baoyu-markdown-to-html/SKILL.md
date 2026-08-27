@@ -117,7 +117,7 @@ ${BUN_X} {baseDir}/scripts/main.ts <markdown_file> [options]
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `--theme <name>` | Theme name (default, grace, simple, modern) | default |
+| `--theme <name>` | Theme name (default, grace, simple, modern, qihang-editorial) | default |
 | `--color <name\|hex>` | Primary color: preset name or hex value | theme default |
 | `--font-family <name>` | Font: sans, serif, serif-cjk, mono, or CSS value | theme default |
 | `--font-size <N>` | Font size: 14px, 15px, 16px, 17px, 18px | 16px |
@@ -157,6 +157,9 @@ ${BUN_X} {baseDir}/scripts/main.ts article.md
 
 # With specific theme
 ${BUN_X} {baseDir}/scripts/main.ts article.md --theme grace
+
+# 航的杂谈地图统一排版
+${BUN_X} {baseDir}/scripts/main.ts article.md --theme qihang-editorial --color "#2447D8"
 
 # Theme with custom color
 ${BUN_X} {baseDir}/scripts/main.ts article.md --theme modern --color red
@@ -216,6 +219,7 @@ ${BUN_X} {baseDir}/scripts/main.ts article.md --title "My Article"
 | `grace` | Elegant - text shadow, rounded cards, refined blockquotes (by @brzhang) |
 | `simple` | Minimal - modern minimalist, asymmetric rounded corners, clean whitespace (by @okooo5km) |
 | `modern` | Modern - large radius, pill-shaped titles, relaxed line height (pair with `--color red` for traditional red-gold style) |
+| `qihang-editorial` | 航的杂谈地图 - 编辑蓝、暖纸引用、清晰 H2/H3 层级；预览与草稿发布共享 `qihang-wechat-layout` 真源 |
 
 ## Supported Markdown Features
 

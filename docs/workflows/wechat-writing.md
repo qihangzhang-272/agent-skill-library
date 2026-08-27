@@ -18,7 +18,7 @@
   -> 视觉计划（内容判断、Visual Copy Desk、形式与 Render owner）
   -> 按 05.5-visual-plan.md 选择性调用视觉技能
   -> 06-final.md
-  -> HTML 预览
+  -> qihang-editorial 统一排版与 HTML 预览
   -> 公众号草稿箱
 ```
 
@@ -29,6 +29,7 @@
 - `topic-research-deposition` 消费 corpus manifest，并继续补齐主题、反证和跨平台材料。
 - `public-account-writing-style` 是唯一正文 owner，负责编辑判断、框架、事实、结构、AI-Flavor Filter 与最终修订。
 - `editorial-visual-storytelling` 独立负责视觉内容判断、文案、是否配图、资产形式和 Render owner。
+- `qihang-wechat-layout` 独立负责正文视觉排版，让预览和草稿发布共用 `qihang-editorial`；它不改正文，也不决定配图。
 - 各 Baoyu 技能只负责渲染。
 
 视觉领域技能读取排版后的正文，生成唯一的 `05.5-visual-plan.md`。Orchestrator 只读取其中的 `Render owner` 并分发任务，不自行补写文案或选择形式。
@@ -63,7 +64,7 @@
 - `04-revised.md` 是正文语义源。
 - `05.5-visual-plan.md` 是视觉语义、文案、形式和 Render owner 的唯一来源。
 - `06-final.md` 是唯一发布源。
-- HTML 只用于预览。
+- HTML 只用于预览；发布仍以 `06-final.md` 为输入，但发布渲染必须复用 `qihang-editorial`。
 - 发布只进入草稿箱，不自动扩大为群发。
 
 ## 账号语料边界

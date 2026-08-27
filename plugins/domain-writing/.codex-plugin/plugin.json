@@ -1,15 +1,15 @@
 {
   "name": "domain-writing",
-  "version": "0.11.0",
-  "description": "公众号写作领域：账号语料、素材沉淀、公众号编辑判断与深度写作、AI 味审校、Visual Copy Desk、视觉叙事、Markdown 排版、正文插图、清晰架构图、知识漫画、HTML 预览与草稿箱发布。",
+  "version": "0.12.0",
+  "description": "公众号写作领域：账号语料、素材沉淀、公众号编辑判断与深度写作、AI 味审校、Visual Copy Desk、视觉叙事、Markdown 排版、启航统一排版、正文插图、清晰架构图、知识漫画、HTML 预览与草稿箱发布。",
   "author": {
     "name": "Agent Skill Library Maintainers"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Domain Writing",
-    "shortDescription": "公众号账号语料、研究、深度写作、AI 味审校、视觉叙事、排版与发布。",
-    "longDescription": "从账号历史与批量 URL 语料、素材沉淀、公众号编辑判断与深度写作、AI 味审校、视觉编辑 brief、Visual Copy Desk、漫画文案和清晰图解，到 HTML 预览和公众号草稿箱发布。",
+    "shortDescription": "公众号账号语料、研究、深度写作、AI 味审校、视觉叙事、启航排版与发布。",
+    "longDescription": "从账号历史与批量 URL 语料、素材沉淀、公众号编辑判断与深度写作、AI 味审校、视觉编辑 brief、Visual Copy Desk、漫画文案和清晰图解，到启航统一排版、HTML 预览和公众号草稿箱发布。",
     "developerName": "Agent Skill Library Maintainers",
     "category": "Productivity",
     "capabilities": [

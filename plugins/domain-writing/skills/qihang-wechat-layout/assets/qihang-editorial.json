@@ -1,0 +1,30 @@
+{
+  "id": "qihang-editorial",
+  "name": "航的杂谈地图·编辑蓝",
+  "description": "清晰结构、编辑纸感与人的在场；正文克制，视觉资产承担叙事密度。",
+  "tokens": {
+    "canvas": "#FFFFFF",
+    "paper": "#F7F2E8",
+    "ink": "#101827",
+    "body": "#263246",
+    "muted": "#6B7280",
+    "accent": "#2447D8",
+    "accentSoft": "#DCE5FF",
+    "accentPale": "#EEF2FF",
+    "warm": "#E98A3A",
+    "warmPale": "#FFF4E8",
+    "border": "#D9E0EA",
+    "code": "#101827"
+  },
+  "typography": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": 1.9
+  },
+  "layout": {
+    "maxWidth": "677px",
+    "paragraphGap": "20px",
+    "sectionGap": "48px",
+    "imageRadius": "12px"
+  }
+}

@@ -25,7 +25,7 @@ domain-writing:topic-research-deposition
        └─ domain-writing:baoyu-cover-image
   -> [需要时] domain-writing:baoyu-compress-image
   -> 最终 Markdown 组装
-  -> domain-writing:baoyu-markdown-to-html
+  -> domain-writing:qihang-wechat-layout
   -> domain-writing:baoyu-post-to-wechat
 ```
 
@@ -40,7 +40,8 @@ domain-writing:topic-research-deposition
 | `baoyu-format-markdown` | Markdown 层级与排印 | 不改观点、不做视觉计划 |
 | `editorial-visual-storytelling` | 全部视觉内容判断、Visual Copy Desk、资产取舍、形式选择、Render owner 与 `05.5-visual-plan.md` | 不渲染图片、不发布 |
 | 各 Baoyu 视觉技能 | 严格按 plan 渲染并保留原生过程包 | 不重新选择形式，不临场新增文案或论点 |
-| `baoyu-markdown-to-html` | 从最终 Markdown 生成预览 | 不成为默认发布语义源 |
+| `qihang-wechat-layout` | 使用 `qihang-editorial` 从最终 Markdown 生成预览，并确保发布渲染复用同一主题真源 | 不改正文、不判断配图、不执行发布 |
+| `baoyu-markdown-to-html` | 作为 `qihang-wechat-layout` 的 Markdown/HTML 渲染引擎，保留脚注、引用、Mermaid 与图片解析 | 不拥有本 chain 的主题判断，不成为发布语义源 |
 | `baoyu-post-to-wechat` | 把最终 Markdown 保存到公众号草稿箱 | 不自动群发 |
 
 `workflow-orchestrator` 读取 `05.5-visual-plan.md` 的 `Render owner` 字段进行调用，这只是任务分发，不是内容路由。若 plan 缺少 Owner、文案或目标路径，退回 `editorial-visual-storytelling` 补全，orchestrator 不代填。
@@ -57,8 +58,8 @@ domain-writing:topic-research-deposition
 | 4. 视觉计划 | `editorial-visual-storytelling` | `01.5-editorial-judgment.md`、`04-revised.md`、`05-formatted.md`、研究视觉素材、项目视觉偏好 | `05.5-visual-plan.md` | 视觉判断、文案、最终形式、Render owner、复杂度、来源和目标路径完整。 |
 | 5. 视觉生产 | plan 中列出的 Owner | `05.5-visual-plan.md`、对应原始素材 | 各技能原生过程包、`imgs/` 发布资产 | 所有 `Required=yes` 资产完成；任何内容变化先退回 plan Owner。 |
 | 6. 最终组装 | orchestrator | `05-formatted.md`、`05.5-visual-plan.md`、`imgs/` | `06-final.md` | 图片路径存在；正文无占位符；frontmatter、封面和转载信息完整。 |
-| 7. HTML 预览 | `baoyu-markdown-to-html` | `06-final.md` | `06-final.html`；可选 `06-preview-mobile.png` | 检查断图、层级、引用、间距和移动端溢出。 |
-| 8. 草稿箱发布 | `baoyu-post-to-wechat` | `06-final.md` | `07-publish-receipt.md` | 只保存草稿；记录方式、主题、图片数和草稿结果。 |
+| 7. HTML 预览 | `qihang-wechat-layout` | `06-final.md` | `06-final.html`；可选 `06-preview-mobile.png` | 使用 `qihang-editorial`；检查主题标记、断图、层级、引用、间距和移动端溢出。 |
+| 8. 草稿箱发布 | `baoyu-post-to-wechat` | `06-final.md`、阶段 7 已确认的主题与颜色 | `07-publish-receipt.md` | 使用同一 `qihang-editorial` 生成发布 HTML，只保存草稿；记录方式、主题、图片数和草稿结果。 |
 
 ## 单一来源
 
@@ -67,6 +68,7 @@ domain-writing:topic-research-deposition
 - `05.5-visual-plan.md`：视觉判断、视觉文案、形式和 Render owner 的唯一来源。
 - `06-final.md`：唯一发布源。
 - `06-final.html`：预览派生产物，不是默认发布输入。
+- `plugins/domain-writing/skills/qihang-wechat-layout/assets/qihang-editorial.json`：预览和发布共用的排版主题真源；运行时不得复制到单篇文章后分叉维护。
 
 ## 落盘协议
 
@@ -119,5 +121,5 @@ comic/
 - 下游渲染技能不得改写 `Selected form`、`Exact text`、`Caption outside image`、`Complexity cap` 或 `Target path`。
 - 视觉资产失败且需要改变内容方案时，退回 `editorial-visual-storytelling` 更新 plan；orchestrator 只记录状态并重新分发。
 - `06-final.md` 只引用 `imgs/` 下的规范化发布资产。
-- HTML 预览与发布使用相同主题、颜色和引用模式。
+- HTML 预览与发布统一使用 `qihang-editorial`、同一主色和引用模式；除非用户在当篇文章中明确指定另一主题。
 - 用户未明确授权草稿箱发布时，在阶段 8 前暂停；发布授权不扩大为群发授权。

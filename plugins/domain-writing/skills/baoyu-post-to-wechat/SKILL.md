@@ -84,7 +84,9 @@ chrome_profile_path: /path/to/chrome/profile
 
 Raw `ssh` / `scp` options are intentionally not supported; only the typed keys above are honored. Authentication is SSH key only (no passwords).
 
-**Theme options**: default, grace, simple, modern. **Color presets**: blue, green, vermilion, yellow, purple, sky, rose, olive, black, gray, pink, red, orange (or hex).
+**Theme options**: default, grace, simple, modern, qihang-editorial. **Color presets**: blue, green, vermilion, yellow, purple, sky, rose, olive, black, gray, pink, red, orange (or hex).
+
+`qihang-editorial` 由 `qihang-wechat-layout` 维护；Markdown 预览、API 发布和浏览器发布共用同一主题实现，不在本技能另存 CSS。
 
 **Value priority**: CLI args → frontmatter → EXTEND.md (account-level → global) → skill defaults.
 

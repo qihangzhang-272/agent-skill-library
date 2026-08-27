@@ -11,6 +11,7 @@ import {
   extractSummaryFromBody,
   extractTitleFromMarkdown,
   formatTimestamp,
+  loadExtendConfig,
   parseArgs,
   parseFrontmatter,
   preprocessMermaidInMarkdown,
@@ -22,6 +23,14 @@ import {
 } from "baoyu-md";
 import type { CliOptions } from "baoyu-md";
 import { closeRenderer, renderMermaidToPng } from "baoyu-chrome-cdp/mermaid";
+import {
+  isQihangTheme,
+  QIHANG_BASE_THEME,
+  QIHANG_THEME,
+  qihangImageStyle,
+  renderQihangHtml,
+  resolveBaoyuTheme,
+} from "../../qihang-wechat-layout/scripts/qihang-layout.ts";
 
 interface ImageInfo {
   placeholder: string;
@@ -133,7 +142,7 @@ export async function convertMarkdown(
     `[markdown-to-html] Rendering with theme: ${theme ?? "default"}, keepTitle: ${keepTitle}, citeStatus: ${citeStatus}`,
   );
 
-  const { html } = await renderMarkdownDocument(rewrittenMarkdown, {
+  const rendered = await renderMarkdownDocument(rewrittenMarkdown, {
     codeTheme: options?.codeTheme,
     countStatus: options?.countStatus,
     citeStatus,
@@ -145,8 +154,14 @@ export async function convertMarkdown(
     keepTitle,
     legend: options?.legend,
     primaryColor: options?.primaryColor,
-    theme,
+    theme: resolveBaoyuTheme(theme),
   });
+  const html = isQihangTheme(theme)
+    ? await renderQihangHtml(rendered, {
+        accent: options?.primaryColor,
+        codeTheme: options?.codeTheme,
+      })
+    : rendered.html;
 
   const finalHtmlPath = markdownPath.replace(/\.md$/i, ".html");
   let backupPath: string | undefined;
@@ -168,13 +183,16 @@ export async function convertMarkdown(
   const contentImages = await resolveContentImages(images, baseDir, tempDir, "markdown-to-html");
 
   let finalContent = fs.readFileSync(finalHtmlPath, "utf-8");
+  const imageStyle = isQihangTheme(theme)
+    ? qihangImageStyle()
+    : "display: block; width: 100%; margin: 1.5em auto;";
   for (const image of contentImages) {
     const altAttr = image.alt !== undefined
       ? ` alt="${escapeHtmlAttribute(image.alt)}"`
       : "";
     const imgTag = `<img src="${escapeHtmlAttribute(image.originalPath)}" `
       + `data-local-path="${escapeHtmlAttribute(image.localPath)}"${altAttr} `
-      + `style="display: block; width: 100%; margin: 1.5em auto;">`;
+      + `style="${imageStyle}">`;
     finalContent = finalContent.replace(image.placeholder, imgTag);
   }
   fs.writeFileSync(finalHtmlPath, finalContent, "utf-8");
@@ -207,7 +225,7 @@ Usage:
 
 Options:
   --title <title>         Override title
-  --theme <name>          Theme name (${THEME_NAMES.join(", ")}). Default: default
+  --theme <name>          Theme name (${[...THEME_NAMES, QIHANG_THEME].join(", ")}). Default: default
   --color <name|hex>      Primary color: ${colorNames}
   --font-family <name>    Font: ${fontFamilyNames}, or CSS value
   --font-size <N>         Font size: ${FONT_SIZE_OPTIONS.join(", ")} (default: 16px)
@@ -347,6 +365,43 @@ function extractMermaidArgs(argv: string[]): { renderArgs: string[]; mermaid: Me
   return { renderArgs, mermaid };
 }
 
+function extractQihangThemeArgs(argv: string[]): {
+  renderArgs: string[];
+  layoutTheme?: string;
+} {
+  const renderArgs: string[] = [];
+  let layoutTheme: string | undefined;
+  let hasExplicitTheme = false;
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i]!;
+    if (arg === "--theme" || arg.startsWith("--theme=")) {
+      hasExplicitTheme = true;
+      const value = parseArgValue(argv, i, "--theme");
+      if (!value) {
+        console.error("Missing value for --theme");
+        printUsage(1);
+      }
+      if (value === QIHANG_THEME) {
+        layoutTheme = QIHANG_THEME;
+        renderArgs.push("--theme", QIHANG_BASE_THEME);
+      } else {
+        renderArgs.push("--theme", value);
+      }
+      if (!arg.includes("=")) i += 1;
+      continue;
+    }
+    renderArgs.push(arg);
+  }
+
+  if (!hasExplicitTheme && loadExtendConfig().default_theme === QIHANG_THEME) {
+    layoutTheme = QIHANG_THEME;
+    renderArgs.push("--theme", QIHANG_BASE_THEME);
+  }
+
+  return { renderArgs, layoutTheme };
+}
+
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
@@ -354,10 +409,14 @@ async function main(): Promise<void> {
   }
 
   const { renderArgs: afterTitle, title } = extractTitleArg(args);
-  const { renderArgs, mermaid } = extractMermaidArgs(afterTitle);
+  const { renderArgs: afterMermaid, mermaid } = extractMermaidArgs(afterTitle);
+  const { renderArgs, layoutTheme } = extractQihangThemeArgs(afterMermaid);
   const options = parseArgs(renderArgs);
   if (!options) {
     printUsage(1);
+  }
+  if (layoutTheme) {
+    options.theme = layoutTheme;
   }
 
   const markdownPath = path.resolve(process.cwd(), options.inputPath);

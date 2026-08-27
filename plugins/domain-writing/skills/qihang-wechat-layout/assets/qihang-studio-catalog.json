@@ -1,0 +1,225 @@
+{
+  "themes": [
+    {
+      "id": "editorial-blue",
+      "label": "航·编辑蓝",
+      "description": "墨色正文、钴蓝信号与暖橙转折。",
+      "tokens": { "accent": "#2447D8", "warm": "#E98A3A", "ink": "#101827", "body": "#263246", "paper": "#F7F2E8", "pale": "#EEF2FF", "border": "#D9E0EA" }
+    },
+    {
+      "id": "cloud-blue",
+      "label": "航·云蓝留白",
+      "description": "浅云蓝、冷白纸面与低对比边界。",
+      "tokens": { "accent": "#2F6BFF", "warm": "#F0A64A", "ink": "#12213A", "body": "#34445F", "paper": "#F3F7FF", "pale": "#E9F1FF", "border": "#CAD8EE" }
+    },
+    {
+      "id": "ink-archive",
+      "label": "航·纸墨档案",
+      "description": "石墨、档案纸与克制的红色校记。",
+      "tokens": { "accent": "#3E4654", "warm": "#C75C4A", "ink": "#17191E", "body": "#363A43", "paper": "#F2F0EA", "pale": "#ECEDEF", "border": "#C8CBD0" }
+    },
+    {
+      "id": "warm-journal",
+      "label": "航·暖橙手记",
+      "description": "暖纸、橙黄信号与手记式章节节奏。",
+      "tokens": { "accent": "#D87521", "warm": "#F2B544", "ink": "#2B211B", "body": "#493B31", "paper": "#FFF6E8", "pale": "#FFF0D9", "border": "#E7D2B7" }
+    },
+    {
+      "id": "mist-story",
+      "label": "航·雾紫叙事",
+      "description": "灰紫、雾面纸张与叙事型柔和强调。",
+      "tokens": { "accent": "#7657B7", "warm": "#D88B68", "ink": "#201A2B", "body": "#463D55", "paper": "#F7F2FA", "pale": "#F0EAF7", "border": "#D8CDE4" }
+    }
+  ],
+  "typography": {
+    "fonts": [
+      { "id": "theme", "label": "跟随主题", "value": "inherit" },
+      { "id": "system-sans", "label": "系统无衬线", "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" },
+      { "id": "pingfang", "label": "苹方优先", "value": "'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif" },
+      { "id": "yahei", "label": "微软雅黑优先", "value": "'Microsoft YaHei', 'PingFang SC', sans-serif" },
+      { "id": "serif", "label": "系统宋体 / 衬线", "value": "'Songti SC', SimSun, Georgia, serif" },
+      { "id": "kai", "label": "系统楷体", "value": "KaiTi, 'STKaiti', serif" }
+    ],
+    "targets": ["h1", "h2", "h3", "h4", "h5", "h6", "body", "quote", "code", "strong", "em"],
+    "size": { "min": 10, "max": 40, "step": 1 },
+    "weights": [100, 200, 300, 400, 500, 600, 700, 800, 900]
+  },
+  "spacing": [
+    { "id": "paragraph", "label": "段落间距", "min": 8, "max": 42, "step": 1, "value": 20 },
+    { "id": "heading-top", "label": "标题上间距", "min": 16, "max": 80, "step": 1, "value": 48 },
+    { "id": "heading-bottom", "label": "标题下间距", "min": 8, "max": 48, "step": 1, "value": 22 },
+    { "id": "image-top", "label": "图片上间距", "min": 0, "max": 56, "step": 1, "value": 28 },
+    { "id": "image-bottom", "label": "图片下间距", "min": 0, "max": 56, "step": 1, "value": 10 }
+  ],
+  "components": [
+    {
+      "id": "h1",
+      "label": "一级标题 H1",
+      "sample": "一篇文章的主标题",
+      "options": [
+        { "id": "issue-cover", "label": "刊头双线", "marker": "ISSUE 01", "style": "padding:20px 0 16px;border-top:4px double var(--accent);border-bottom:1px solid var(--accent);font-size:28px;font-weight:800;color:var(--ink);", "accentStyle": "display:block;margin-bottom:10px;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.22em;" },
+        { "id": "center-axis", "label": "居中细线", "marker": "ARTICLE", "style": "padding:18px 20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;font-size:27px;font-weight:760;color:var(--ink);", "accentStyle": "display:block;margin-bottom:8px;color:var(--accent);font-size:10px;letter-spacing:.28em;" },
+        { "id": "ink-banner", "label": "深色封面", "marker": "QIHANG NOTES", "style": "padding:24px 22px;border-radius:2px;background:var(--ink);font-size:28px;font-weight:800;color:#fff;", "accentStyle": "display:block;margin-bottom:12px;color:var(--warm);font-size:10px;letter-spacing:.2em;" },
+        { "id": "receipt-header", "label": "票据刊头", "marker": "NO. 001", "style": "padding:20px;border:1px dashed var(--accent);background:var(--paper);font-size:27px;font-weight:800;color:var(--ink);", "accentStyle": "display:inline-block;margin-bottom:10px;padding:3px 8px;background:var(--accent);color:#fff;font-size:10px;letter-spacing:.12em;" },
+        { "id": "serif-lead", "label": "衬线开篇", "marker": "航的杂谈地图", "style": "padding:18px 0;border-bottom:3px solid var(--ink);font-family:'Songti SC',SimSun,serif;font-size:30px;font-weight:700;color:var(--ink);", "accentStyle": "display:block;margin-bottom:10px;color:var(--warm);font-family:inherit;font-size:11px;letter-spacing:.18em;" }
+      ]
+    },
+    {
+      "id": "h2",
+      "label": "二级标题 H2",
+      "sample": "先把问题讲清楚",
+      "options": [
+        { "id": "index-rule", "label": "编号底线", "marker": "01", "style": "padding:0 0 12px;border-bottom:1px solid var(--border);font-size:22px;font-weight:760;color:var(--ink);", "accentStyle": "display:inline-block;margin-right:10px;padding:2px 7px;background:var(--accent);color:#fff;font-size:11px;vertical-align:middle;" },
+        { "id": "outline-tab", "label": "描边页签", "marker": "SECTION", "style": "padding:10px 12px;border:1px solid var(--accent);font-size:21px;font-weight:760;color:var(--ink);", "accentStyle": "display:inline-block;margin-right:9px;color:var(--accent);font-size:10px;letter-spacing:.12em;" },
+        { "id": "ghost-number", "label": "水印编号", "marker": "02", "style": "padding:20px 0 8px;font-size:22px;font-weight:780;color:var(--ink);background:linear-gradient(90deg,var(--pale),transparent 72%);", "accentStyle": "display:inline-block;margin-right:12px;color:var(--accent);font-size:34px;font-weight:900;opacity:.24;vertical-align:middle;" },
+        { "id": "center-section", "label": "居中栏目", "marker": "TOPIC", "style": "padding:13px 0;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:21px;font-weight:760;color:var(--ink);", "accentStyle": "display:block;margin-bottom:5px;color:var(--accent);font-size:9px;letter-spacing:.3em;" },
+        { "id": "short-rule", "label": "章节短线", "marker": "", "style": "padding:0 0 12px;border-bottom:4px solid var(--accent);font-size:22px;font-weight:780;color:var(--ink);max-width:88%;", "accentStyle": "display:none;" }
+      ]
+    },
+    {
+      "id": "h3",
+      "label": "三级标题 H3",
+      "sample": "一个局部判断",
+      "options": [
+        { "id": "soft-capsule", "label": "浅色胶囊", "marker": "", "style": "display:inline-block;padding:7px 14px;border-radius:999px;background:var(--pale);font-size:18px;font-weight:740;color:var(--ink);", "accentStyle": "display:none;" },
+        { "id": "marker-stroke", "label": "荧光底线", "marker": "", "style": "display:inline;padding:0 3px;background:linear-gradient(transparent 62%,var(--pale) 62%);font-size:19px;font-weight:760;color:var(--ink);", "accentStyle": "display:none;" },
+        { "id": "quiet-frame", "label": "轻量方框", "marker": "", "style": "padding:8px 12px;border:1px solid var(--border);font-size:18px;font-weight:740;color:var(--ink);", "accentStyle": "display:none;" },
+        { "id": "dark-label", "label": "深色标签", "marker": "NOTE", "style": "display:inline-block;padding:8px 12px;background:var(--ink);font-size:18px;font-weight:740;color:#fff;", "accentStyle": "display:inline-block;margin-right:8px;color:var(--warm);font-size:9px;letter-spacing:.12em;" },
+        { "id": "receipt-label", "label": "票据标签", "marker": "MEMO", "style": "display:inline-block;padding:8px 12px;border:1px dashed var(--accent);background:var(--paper);font-size:18px;font-weight:740;color:var(--ink);", "accentStyle": "display:inline-block;margin-right:8px;color:var(--accent);font-size:9px;letter-spacing:.12em;" },
+        { "id": "signal-dot", "label": "圆点胶囊", "marker": "●", "style": "display:inline-block;padding:7px 13px;border-radius:999px;border:1px solid var(--border);font-size:18px;font-weight:740;color:var(--ink);", "accentStyle": "display:inline-block;margin-right:8px;color:var(--warm);font-size:10px;" }
+      ]
+    },
+    {
+      "id": "quote",
+      "label": "引用块",
+      "sample": "真正值得保留的，不是装饰，而是阅读节奏。",
+      "options": [
+        { "id": "paper-card", "label": "浅色卡片", "style": "padding:17px 18px;border-radius:10px;background:var(--paper);color:var(--body);" },
+        { "id": "centered-quote", "label": "居中金句", "style": "padding:22px 18px;border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);text-align:center;font-family:'Songti SC',SimSun,serif;font-size:18px;color:var(--ink);" },
+        { "id": "folded-note", "label": "折角便签", "style": "padding:18px;border:1px solid var(--border);background:linear-gradient(135deg,var(--pale) 0 18px,var(--paper) 18px);color:var(--body);" },
+        { "id": "signal-rail", "label": "侧边强调", "style": "padding:16px 18px;border-left:4px solid var(--accent);background:var(--paper);color:var(--body);" },
+        { "id": "ink-summary", "label": "深色摘要", "style": "padding:20px;border-radius:8px;background:var(--ink);color:#fff;" },
+        { "id": "archive-slip", "label": "票据摘录", "style": "padding:18px;border-top:1px dashed var(--accent);border-bottom:1px dashed var(--accent);background:var(--paper);font-size:15px;color:var(--body);" },
+        { "id": "serif-pull", "label": "衬线大引语", "style": "padding:18px 10px;font-family:'Songti SC',SimSun,serif;font-size:20px;line-height:1.8;color:var(--ink);text-align:center;" },
+        { "id": "dialogue-bubble", "label": "对话卡片", "style": "padding:17px 19px;border:1px solid var(--border);border-radius:14px 14px 14px 3px;background:#fff;box-shadow:4px 5px 0 var(--pale);color:var(--body);" }
+      ]
+    },
+    {
+      "id": "code",
+      "label": "代码块",
+      "sample": ".article {\n  line-height: 1.9;\n}",
+      "options": [
+        { "id": "ink-console", "label": "深色窗口", "style": "padding:18px;border-radius:10px;background:var(--ink);color:#EAF0FF;font-family:Menlo,Consolas,monospace;white-space:pre-wrap;" },
+        { "id": "paper-code", "label": "浅色纸张", "style": "padding:18px;border:1px solid var(--border);background:var(--paper);color:var(--ink);font-family:Menlo,Consolas,monospace;white-space:pre-wrap;" },
+        { "id": "offset-shadow", "label": "硬边阴影", "style": "padding:18px;border:1px solid var(--ink);background:#fff;box-shadow:6px 6px 0 var(--accent);color:var(--ink);font-family:Menlo,Consolas,monospace;white-space:pre-wrap;" },
+        { "id": "terminal", "label": "终端窗口", "style": "padding:32px 18px 18px;border-radius:8px;background:#0B1020;color:#7CE3A1;font-family:Menlo,Consolas,monospace;white-space:pre-wrap;box-shadow:inset 0 20px 0 #222B3B;" },
+        { "id": "notebook", "label": "笔记纸张", "style": "padding:18px 18px 18px 34px;border:1px solid var(--border);background:repeating-linear-gradient(#fff 0 27px,var(--pale) 28px);color:var(--body);font-family:Menlo,Consolas,monospace;white-space:pre-wrap;" },
+        { "id": "archive-code", "label": "票据代码", "style": "padding:18px;border-top:2px dashed var(--accent);border-bottom:2px dashed var(--accent);background:var(--paper);color:var(--ink);font-family:Menlo,Consolas,monospace;white-space:pre-wrap;" }
+      ]
+    },
+    {
+      "id": "inline-code",
+      "label": "行内代码",
+      "sample": "font-size: 16px",
+      "options": [
+        { "id": "neutral-chip", "label": "灰色代码片", "style": "display:inline-block;padding:2px 6px;border:1px solid var(--border);border-radius:4px;background:#F3F4F6;color:var(--ink);font-family:Menlo,Consolas,monospace;" },
+        { "id": "accent-chip", "label": "主色代码片", "style": "display:inline-block;padding:2px 6px;border-radius:4px;background:var(--pale);color:var(--accent);font-family:Menlo,Consolas,monospace;" },
+        { "id": "keyboard-key", "label": "键帽样式", "style": "display:inline-block;padding:2px 7px;border:1px solid var(--border);border-bottom:3px solid var(--border);border-radius:5px;background:#fff;color:var(--ink);font-family:Menlo,Consolas,monospace;" },
+        { "id": "dark-chip", "label": "深色代码片", "style": "display:inline-block;padding:2px 7px;border-radius:4px;background:var(--ink);color:#fff;font-family:Menlo,Consolas,monospace;" }
+      ]
+    },
+    {
+      "id": "strong",
+      "label": "加粗",
+      "sample": "关键判断",
+      "options": [
+        { "id": "marker", "label": "荧光笔", "style": "font-weight:760;color:var(--ink);background:linear-gradient(transparent 58%,var(--pale) 58%);" },
+        { "id": "accent", "label": "主色强调", "style": "font-weight:760;color:var(--accent);" },
+        { "id": "soft-label", "label": "浅色标签", "style": "display:inline-block;padding:2px 7px;border-radius:4px;background:var(--pale);font-weight:760;color:var(--ink);" },
+        { "id": "thick-underline", "label": "粗底线", "style": "font-weight:760;color:var(--ink);border-bottom:3px solid var(--warm);" },
+        { "id": "dark-label", "label": "深色标签", "style": "display:inline-block;padding:2px 7px;background:var(--ink);font-weight:760;color:#fff;" },
+        { "id": "outline-concept", "label": "描边概念", "style": "display:inline-block;padding:1px 6px;border:1px solid var(--accent);font-weight:760;color:var(--accent);" }
+      ]
+    },
+    {
+      "id": "em",
+      "label": "斜体",
+      "sample": "补充语气",
+      "options": [
+        { "id": "accent-italic", "label": "主色斜体", "style": "font-style:italic;color:var(--accent);" },
+        { "id": "serif-note", "label": "衬线旁注", "style": "font-family:'Songti SC',SimSun,serif;font-style:italic;color:var(--body);" },
+        { "id": "soft-underline", "label": "浅色下划线", "style": "font-style:italic;color:var(--body);text-decoration:underline;text-decoration-color:var(--warm);text-underline-offset:4px;" },
+        { "id": "soft-pill", "label": "轻柔旁注", "style": "display:inline-block;padding:2px 8px;border-radius:999px;background:var(--paper);font-style:italic;color:var(--body);" },
+        { "id": "hand-note", "label": "手记强调", "style": "font-family:KaiTi,'STKaiti',serif;font-style:normal;color:var(--warm);font-size:1.08em;" }
+      ]
+    },
+    {
+      "id": "ordered-list",
+      "label": "有序列表",
+      "sample": "把目标和边界讲清楚",
+      "options": [
+        { "id": "decimal", "label": "标准数字", "marker": "1.", "style": "padding:7px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:8px;color:var(--accent);font-weight:760;" },
+        { "id": "leading-zero", "label": "双位编号", "marker": "01", "style": "padding:8px 0;border-bottom:1px solid var(--border);color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:800;letter-spacing:.06em;" },
+        { "id": "roman", "label": "罗马编号", "marker": "I", "style": "padding:7px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;font-family:Georgia,serif;color:var(--warm);font-weight:700;" },
+        { "id": "number-card", "label": "编号卡片", "marker": "1", "style": "padding:10px 12px;border:1px solid var(--border);background:#fff;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;padding:2px 7px;background:var(--accent);color:#fff;font-weight:760;" },
+        { "id": "rounded-number", "label": "圆角编号框", "marker": "1", "style": "padding:8px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;padding:2px 7px;border:1px solid var(--accent);border-radius:5px;color:var(--accent);font-weight:760;" },
+        { "id": "circle-number", "label": "圆形编号", "marker": "1", "style": "padding:8px 0;color:var(--body);", "accentStyle": "display:inline-grid;width:24px;height:24px;margin-right:10px;border-radius:50%;background:var(--accent);place-items:center;color:#fff;font-weight:760;" }
+      ]
+    },
+    {
+      "id": "unordered-list",
+      "label": "无序列表",
+      "sample": "正文适合手机阅读",
+      "options": [
+        { "id": "solid-dot", "label": "实心圆点", "marker": "•", "style": "padding:7px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:900;" },
+        { "id": "hollow-dot", "label": "空心圆点", "marker": "○", "style": "padding:7px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:760;" },
+        { "id": "square", "label": "方形符号", "marker": "■", "style": "padding:7px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--warm);font-size:9px;vertical-align:middle;" },
+        { "id": "separated", "label": "细线分项", "marker": "•", "style": "padding:10px 0;border-bottom:1px solid var(--border);color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:900;" },
+        { "id": "arrow", "label": "箭头符号", "marker": "→", "style": "padding:7px 0;color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:800;" },
+        { "id": "soft-check", "label": "圆角对勾", "marker": "✓", "style": "padding:8px 0;color:var(--body);", "accentStyle": "display:inline-grid;width:23px;height:23px;margin-right:10px;border-radius:7px;background:var(--pale);place-items:center;color:var(--accent);font-weight:800;" }
+      ]
+    },
+    {
+      "id": "table",
+      "label": "表格",
+      "sample": "元素|作用",
+      "options": [
+        { "id": "dark-header", "label": "深色表头", "style": "width:100%;border-collapse:collapse;border:1px solid var(--border);color:var(--body);", "accentStyle": "padding:8px 10px;background:var(--ink);color:#fff;text-align:left;" },
+        { "id": "accent-header", "label": "主色表头", "style": "width:100%;border-collapse:collapse;border:1px solid var(--border);color:var(--body);", "accentStyle": "padding:8px 10px;background:var(--accent);color:#fff;text-align:left;" },
+        { "id": "minimal-lines", "label": "极简横线", "style": "width:100%;border-collapse:collapse;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);color:var(--body);", "accentStyle": "padding:8px 10px;border-bottom:1px solid var(--accent);color:var(--ink);text-align:left;" },
+        { "id": "rounded-grid", "label": "圆角表格", "style": "width:100%;border-spacing:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;color:var(--body);", "accentStyle": "padding:8px 10px;background:var(--pale);color:var(--ink);text-align:left;" }
+      ]
+    },
+    {
+      "id": "divider",
+      "label": "分隔线",
+      "sample": "",
+      "options": [
+        { "id": "fade-line", "label": "渐隐细线", "style": "height:1px;border:0;background:linear-gradient(90deg,transparent,var(--accent),transparent);" },
+        { "id": "editorial-double", "label": "编辑双线", "style": "height:5px;border:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:transparent;" },
+        { "id": "receipt-dash", "label": "票据虚线", "style": "height:0;border:0;border-top:2px dashed var(--accent);background:transparent;" },
+        { "id": "dual-signal", "label": "双色短线", "style": "width:88px;height:4px;border:0;background:linear-gradient(90deg,var(--accent) 0 62%,var(--warm) 62%);" }
+      ]
+    },
+    {
+      "id": "link",
+      "label": "链接",
+      "sample": "查看原始资料",
+      "options": [
+        { "id": "accent-underline", "label": "主色下划线", "style": "color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" },
+        { "id": "soft-link", "label": "浅色链接", "style": "display:inline-block;padding:2px 8px;border-radius:999px;background:var(--pale);color:var(--accent);text-decoration:none;" },
+        { "id": "dotted-link", "label": "点线链接", "style": "color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent);" },
+        { "id": "dark-link", "label": "深色链接", "style": "display:inline-block;padding:2px 8px;background:var(--ink);color:#fff;text-decoration:none;" }
+      ]
+    }
+  ],
+  "imageStyles": [
+    { "id": "theme", "label": "跟随主题", "style": "display:block;width:100%;height:auto;" },
+    { "id": "square", "label": "直角", "style": "display:block;width:100%;height:auto;border-radius:0;" },
+    { "id": "rounded", "label": "圆角", "style": "display:block;width:100%;height:auto;border-radius:14px;" },
+    { "id": "shadow", "label": "阴影", "style": "display:block;width:100%;height:auto;box-shadow:0 14px 36px rgba(16,24,39,.18);" },
+    { "id": "rounded-shadow", "label": "圆角 + 阴影", "style": "display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 14px 36px rgba(16,24,39,.18);" },
+    { "id": "border", "label": "描边", "style": "display:block;width:100%;height:auto;border:1px solid var(--border);" },
+    { "id": "rounded-border", "label": "圆角 + 描边", "style": "display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:14px;" }
+  ]
+}

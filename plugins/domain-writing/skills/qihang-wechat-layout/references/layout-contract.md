@@ -4,6 +4,8 @@
 
 `assets/qihang-editorial.json` 是主题 token 真源；`scripts/qihang-layout.ts` 把它编译成微信兼容的内联样式。预览和 Markdown 发布入口都必须调用该脚本，不允许各自维护一份 CSS。
 
+`assets/qihang-studio-catalog.json` 是全量预览目录真源；`scripts/qihang-studio.ts` 只把目录编译成调优工作台。工作台可以展示和试验所有效果，但没有用户确认时不得替换生产 token。
+
 ## 职责
 
 - `qihang-wechat-layout`：正文排印、标题层级、引用、列表、表格、代码、图注和图片外框。
@@ -28,3 +30,5 @@
 3. API dry-run 生成的发布 HTML 具有同一主题标记和关键样式。
 4. 本地图片保留可上传路径，不转成 Base64 发布源。
 5. 375px 移动端无横向溢出，标题、表格、代码和长链接可换行。
+6. `06-final.studio.html` 保留真实文章，并完整呈现 75 张效果卡；不得按推荐程度或兼容等级删减目录项。
+7. 工作台为单文件 HTML，不依赖外部样式表或外部脚本。

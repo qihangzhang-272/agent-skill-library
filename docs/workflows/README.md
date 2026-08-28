@@ -9,7 +9,7 @@
 - `public-equity-coverage.md`：从公开公司事实包、模型、估值与 thesis，到首次覆盖报告和数值终审的资本市场调用链。
 - `wechat-writing.md`：可选账号语料采集、主题研究、公众号编辑判断与深度写作、领域视觉计划、按计划生产、启航个人样式排版、HTML 预览与草稿箱发布。
 
-公众号定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/graphs/wechat-writing.md`。它按现有材料选择最小子图：既可从主题研究开始，也可从已有草稿、定稿 Markdown 或单张视觉 brief 开始；个人排版只生成普通 HTML，不再生成效果工作台。
+公众号定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/graphs/wechat-writing.md`。它把对话、想法、文件和已有产物作为当前材料，运行时只调用能解决眼前缺口的真实技能；每次产出后重新选择，不预排从研究到发布的完整路线。个人排版保留正式 HTML 与发布前只读预览，不生成调参工作台。
 
 ## 放置标准
 

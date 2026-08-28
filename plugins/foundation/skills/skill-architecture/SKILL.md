@@ -13,7 +13,7 @@ description: >-
 
 ## 核心理念
 - **瓦技能是核心**。每个瓦技能用输入、产物和副作用边界描述能力，可独立存在。
-- **技能图是默认组合方式**。节点是瓦技能，边是材料依赖；只选择完成目标所需的最小子图（见 `graph-authoring.md`）。
+- **技能图是默认组合方式**。节点是瓦技能，边是材料依赖；它不是预先铺好的路线。每轮根据当前对话、已有材料和眼前缺口选择真实可用的技能，拿到新产物后重新判断（见 `graph-authoring.md`）。
 - **chain 是技能图的特殊情况**。只有依赖确实构成一条不可交换的路径时才建线性 chain（见 `chain-authoring.md`）。
 - **本模块自包含**。`assets/` 带完整范本，`references/` 带全部规则，单独拎出即可复现架构。
 
@@ -33,7 +33,7 @@ description: >-
 5. graph / chain 均可选，不自动建。
 
 ## 场景 C：主动建/改技能图
-当多个瓦技能按材料依赖自由组合、允许分支、汇合、并行或回退时，读 `graph-authoring.md`。改 graph 后同步 workflow 文档、bump orchestrator version 并通过两项仓库验证。
+当多个瓦技能需要按当前材料动态组合，或允许分支、汇合、并行、回退与中途换目标时，读 `graph-authoring.md`。改 graph 后同步 workflow 文档、bump orchestrator version 并通过两项仓库验证。
 
 ## 场景 D：主动建/改线性 chain
 只有节点顺序不可交换、没有有意义的旁路时才读 `chain-authoring.md`。chain 不是加技能的副作用。

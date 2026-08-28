@@ -3,8 +3,8 @@
   "description": "Portable Claude Code marketplace for modular agent skills, organized as foundation / orchestrator+index / domains.",
   "owner": { "name": "Agent Skill Library Maintainers" },
   "plugins": [
-    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.7.0", "description": "元层：瓦技能接口 + 技能图/线性 chain 架构 + principles。" },
-    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.15.0", "description": "按材料选择最小技能图，并在公众号发布前接入只读预览闸门；真正线性的流程保留为 chain。" },
+    { "name": "foundation",        "source": "./plugins/foundation",        "version": "0.8.0", "description": "元层：瓦技能接口 + 运行时动态技能图/线性 chain 架构 + principles。" },
+    { "name": "orchestrator",      "source": "./plugins/orchestrator",      "version": "0.16.0", "description": "按当前对话、真实材料与即时缺口增量选择可用技能；真正线性的流程保留为 chain。" },
     { "name": "skill-index",       "source": "./plugins/skill-index",       "version": "0.4.4", "description": "两层生态索引：本地维护技能 vs GitHub 外部技能，探测与提示安装。" },
     { "name": "domain-writing",    "source": "./plugins/domain-writing",    "version": "0.16.0", "description": "公众号研究写作、Visual Copy Desk、数据图/关系图、启航个人样式、只读发布预览与草稿箱瓦技能。" },
     { "name": "domain-investment", "source": "./plugins/domain-investment", "version": "0.5.1", "description": "投资决策领域：事实、判断、模型、估值、DD、IC memo 与可视化研报瓦技能。" },

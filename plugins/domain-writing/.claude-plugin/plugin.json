@@ -1,7 +1,7 @@
 {
   "name": "domain-writing",
   "displayName": "Domain Writing",
-  "version": "0.15.0",
-  "description": "公众号写作领域：研究与写作瓦技能、Visual Copy Desk、数据图与关系图契约、启航个人样式目录、HTML 与草稿箱发布。",
+  "version": "0.16.0",
+  "description": "公众号写作领域：研究与写作瓦技能、Visual Copy Desk、数据图与关系图契约、启航个人样式、只读发布预览与草稿箱发布。",
   "author": { "name": "Agent Skill Library Maintainers" }
 }

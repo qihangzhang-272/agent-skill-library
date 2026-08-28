@@ -13,10 +13,13 @@
 正文定稿 -> Markdown 排印 -> 最终 Markdown
 正文或段落 + 视觉偏好 -> 视觉 brief/plan -> 插图 / 数据图 / 关系图 / 漫画 / 封面
 最终 Markdown + 图片 -> 个人样式 HTML
-最终 Markdown + 明确授权 -> 公众号草稿箱
+个人样式 HTML -> 只读发布前预览
+最终 Markdown + 预览检查 + 明确授权 -> 公众号草稿箱
 ```
 
 边只表示材料依赖，不表示某个技能有权替另一个技能做判断。视觉渲染器不能改写视觉 brief，排版不能改正文，发布不能扩大为群发。
+
+“技能图”指上述瓦技能与材料依赖的编排结构，不是文章里的技术架构图，也不是一种配图形式。
 
 ## 视觉资产
 
@@ -28,7 +31,7 @@
 
 ## 个人排版
 
-`qihang-wechat-layout` 读取 `qihang-style-catalog.json`，直接把已确认默认值编译进正式 HTML。只保留 `06-final.html`；不再生成样式效果卡或 `06-final.studio.html`。
+`qihang-wechat-layout` 读取 `qihang-style-catalog.json`，直接把已确认默认值编译进正式 HTML。保留 `06-final.html` 和发布前只读质检页 `06-final.preview.html`；不再生成样式效果卡或 `06-final.studio.html`。只读预览没有主题、字号、间距或组件切换控件。
 
 ## 落盘
 
@@ -36,4 +39,4 @@
 
 `writing/drafts/{YYYY-MM-DD}-{topic-slug}/`
 
-文件按实际调用节点出现。`06-final.md` 仍是发布任务的唯一语义源，`07-publish-receipt.md` 只在草稿箱节点实际执行后生成。
+文件按实际调用节点出现。`06-final.md` 仍是发布任务的唯一语义源；进入草稿箱前必须生成并查看 `06-final.preview.html`，`07-publish-receipt.md` 只在草稿箱节点实际执行后生成。

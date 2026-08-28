@@ -8,19 +8,21 @@
 
 本图记作 `G=(V,E)`：节点是瓦技能，边是材料依赖。Orchestrator 从用户目标反向选择最小子图，只对真实依赖排序。
 
+这里的“技能图”是工作流编排结构，不是文章里生成的技术架构图：它只说明哪个技能需要哪些材料、交付什么产物和何时必须授权，不负责画公众号配图，也不判断文章内容。
+
 ```text
 账号语料 ─┐
 用户材料 ─┼─> 研究事实包 ───────┐
 已有草稿 ─┘                     ├─> 正文定稿 ─> Markdown 排印 ─┐
-                               │                              ├─> 最终 Markdown ─┬─> 个人样式 HTML
-视觉偏好 + 正文/段落 ─> 视觉 brief/plan ─> 若干渲染资产 ───────┘                  └─> [授权闸门] 草稿箱
+                               │                              ├─> 最终 Markdown ─> 个人样式 HTML + 只读预览 ─> [授权闸门] 草稿箱
+视觉偏好 + 正文/段落 ─> 视觉 brief/plan ─> 若干渲染资产 ───────┘
 ```
 
 允许的反馈边：
 
 - 正文发现事实缺口 → 回到研究，直到缺口被补齐或明确标为未知。
 - 渲染发现 brief 不可执行 → 回到 `editorial-visual-storytelling`，不得由渲染技能代写。
-- HTML 移动端检查失败 → 回到 `qihang-wechat-layout` 或个人样式目录，不回写正文观点。
+- 发布前预览发现主题缺失、断图或移动端溢出 → 回到 `qihang-wechat-layout` 或对应资产 owner，不回写正文观点。
 
 ## 节点接口
 
@@ -37,15 +39,15 @@
 | 漫画渲染 | `domain-writing:baoyu-comic` | 人物、动作、分镜、短文案 | 漫画过程包与图片 | plan 未选择 |
 | 封面渲染 | `domain-writing:baoyu-cover-image` | 标题、视觉 brief、身份资产 | 封面与 prompt | 不需要封面 |
 | 图片压缩 | `domain-writing:baoyu-compress-image` | 发布图片 | 规范化发布资产 | 原图已满足发布要求 |
-| 个人排版 | `domain-writing:qihang-wechat-layout` | 已定稿 Markdown | 微信兼容 HTML | 用户只要 Markdown |
-| 草稿箱 | `domain-writing:baoyu-post-to-wechat` | 已定稿 Markdown、发布授权 | 草稿箱结果与回执 | 未授权或不要求发布 |
+| 个人排版 | `domain-writing:qihang-wechat-layout` | 已定稿 Markdown | 微信兼容 HTML、只读发布前预览 | 用户只要 Markdown |
+| 草稿箱 | `domain-writing:baoyu-post-to-wechat` | 已定稿 Markdown、预览检查、发布授权 | 草稿箱结果与回执 | 未授权或不要求发布 |
 
 `workflow-orchestrator` 只选择节点、检查材料边和组装产物；不拥有正文、视觉文案、图片形式或排版样式判断。
 
 ## 最小子图示例
 
-- 已有终稿，只要查看个人排版：`qihang-wechat-layout`。
-- 已有终稿，直接进草稿箱：按需运行 `qihang-wechat-layout`，授权后运行 `baoyu-post-to-wechat`；不重跑研究和写作。
+- 已有终稿，只要查看个人排版：`qihang-wechat-layout` 生成正式 HTML 与只读预览。
+- 已有终稿，直接进草稿箱：运行 `qihang-wechat-layout` 并通过预览检查，授权后运行 `baoyu-post-to-wechat`；不重跑研究和写作。
 - 只做一张架构解释图：完整 brief → `baoyu-diagram`；brief 不完整时先接 `editorial-visual-storytelling`。
 - 新主题完整文章：研究、写作、排印、按需视觉分支、组装、排版；发布节点仅在授权时接入。
 
@@ -68,13 +70,15 @@
 imgs/                         # 调用视觉生产时
 06-final.md                   # 多资产组装或发布时的唯一发布源
 06-final.html                 # 调用个人排版时
+06-final.preview.html         # 个人排版的只读发布前质检页
 07-publish-receipt.md         # 调用草稿箱发布时
 ```
 
-不再生成 `06-final.studio.html`，也不要求为了编号完整而创建空文件。
+不再生成 `06-final.studio.html`；`06-final.preview.html` 只在个人排版或发布任务中出现，也不要求为了编号完整而创建其他空文件。
 
 ## 授权与停止条件
 
 - 用户未明确授权草稿箱发布时，发布节点不进入子图；草稿箱授权不扩大为群发授权。
+- 发布前预览是发布任务的固定技术闸门；已明确“直接进草稿箱”只免除再次询问，不免除预览检查。
 - 后台登录、扫码或授权层级变化必须在动作前暂停。
 - 反馈循环最多围绕同一缺口重试两次；仍无法解决时记录缺口并请求用户决定，不制造“已完成”状态。

@@ -4,175 +4,236 @@
 
 <p align="center">
   <a href="https://github.com/qihangzhang-272/agent-skill-library/stargazers"><img src="https://img.shields.io/github/stars/qihangzhang-272/agent-skill-library?style=for-the-badge&logo=github&color=F5C542" alt="GitHub Stars" /></a>
-  <a href="https://github.com/qihangzhang-272/asl-harness"><img src="https://img.shields.io/badge/ASL-Mode--native-3159D4?style=for-the-badge" alt="ASL Mode-native" /></a>
+  <a href="https://github.com/qihangzhang-272/asl-harness"><img src="https://img.shields.io/badge/ASL-Harness-3159D4?style=for-the-badge" alt="ASL Harness" /></a>
   <img src="https://img.shields.io/badge/Codex_App-supported-111827?style=for-the-badge" alt="Codex App" />
   <img src="https://img.shields.io/badge/Claude_Code-supported-D97757?style=for-the-badge" alt="Claude Code" />
-  <img src="https://img.shields.io/badge/DeepSeek_Harness-supported-4C6FFF?style=for-the-badge" alt="DeepSeek Harness" />
+  <img src="https://img.shields.io/badge/DeepSeek_Harness-structural_export-4C6FFF?style=for-the-badge" alt="DeepSeek Harness structural export" />
 </p>
 
 <p align="center">
-  一套已经被真实工作养过、可以继续生长的 ASL Environment。<br />
-  Harness 提供空白工作环境；这个仓库装入经过筛选、调教和 Case 验证的 Mode 与 Skill。
+  一套被真实工作养出来、并且可以继续演化的个人 AI 工作环境。<br />
+  Skill 提供能力，Mode 选择当前工作状态，Harness 负责让整个环境不跑偏。
 </p>
 
 ---
 
-## 两个仓库，一种环境
+## 这不是一堆 Skill
 
-[ASL Harness](https://github.com/qihangzhang-272/asl-harness) 和 Agent Skill Library 不是上下两套系统，也不是“框架加插件市场”。它们遵守同一种 Environment 结构，区别只是里面装了什么。迁移完成后，这个仓库本身就是一个可以直接校验和投影的 ASL Environment。
+把 Skill 越装越多，最后通常会得到一个越来越难用的 Agent：写公众号时背着估值模板，做投研时加载排版规则，遇到能力缺口就在任务中途临时接一个 MCP。能力在增加，工作环境却越来越混乱。
 
-| 仓库 | 内容 |
+ASL 想解决的是另一件事：把一个人长期使用 AI 的方法，维护成多个可以切换的 **Mode**。
+
+- **Skill** 是一项完整的本地能力。
+- **Mode** 是完成某类广域工作时需要的能力集合、边界与材料入口。
+- **Case** 是一次具体任务及其输入、过程产物和交付。
+- **Harness** 是系统机制：校验结构、维护能力地图、保护增删改查、生成宿主投影。
+- **Host** 是唯一执行者：Codex App、Claude Code 或 DeepSeek Harness。
+
+Mode 不是 Domain，也不是 Workflow。它不规定第一步做什么、第二步做什么；当前 Host 根据目标和材料，在 Mode 的能力面内动态选择完整 Skill。
+
+## 两个仓库，一种 Environment
+
+| 仓库 | 角色 |
 | --- | --- |
-| `asl-harness` | Harness 实现、空白示例 Environment、宿主投影和确定性校验 |
-| `agent-skill-library` | 已经培养过的 Mode、正式 Skill、来源记录和可继续演化的能力环境 |
+| [asl-harness](https://github.com/qihangzhang-272/asl-harness) | 空白架构、确定性校验、能力地图和三宿主投影 |
+| **agent-skill-library** | 已经筛选、调教并在真实 Case 中使用过的 Mode 与 Skill |
 
-前者像一间刚交付的工作室：空间、门锁和电路已经装好。后者是使用了很久的工作室：桌上是顺手的工具，墙上有经过验证的方法，每个房间都为一种工作状态准备好了能力。
+两者遵守同一种 Environment 结构。前者像一间刚交付的工作室，后者是已经工作了很久的工作室。Harness 不替 Agent 做业务，也不增加第二个调度器；它只守住工作环境的结构边界。
 
-```mermaid
-flowchart LR
-    BLANK["ASL Harness<br/>空白 Environment"] --> CULTIVATE["真实任务、外部来源<br/>明确反馈与反复调教"]
-    CULTIVATE --> LIBRARY["Agent Skill Library<br/>养熟的 Environment"]
-    LIBRARY --> MODE["选择一个 Mode"]
-    MODE --> HOST["Codex App / Claude Code<br/>DeepSeek Harness"]
-    HOST --> RESULT["完成当前目标"]
-    RESULT -->|明确反馈或能力缺口| CULTIVATE
-```
+## 当前项目全景
 
-## Mode，而不是 Domain
-
-Domain 只是在给文件分类；Mode 定义的是 Agent 此刻进入了怎样的工作环境。
-
-一个 Mode 包含完成某类工作所需的本地 Skill、上下文、材料入口、工具边界和交付位置。它不是 Workflow，也不规定“第一步、第二步、第三步”。用户提出目标后，当前 Host 只在这个 Mode 的能力面内选择完整 Skill，并根据材料和任务动态组合。
-
-Mode 的隔离规则很简单：
-
-- 当前 Mode 只能看见自己显式选择的 Skill 及其必要依赖。
-- 不会因为另一个 Mode 中有一个看起来顺手的 Skill，就跨过去临时调用。
-- 一个 Skill 需要被多个 Mode 共用时，必须由这些 Mode 分别明确选择；共享不是隐式继承。
-- 需要另一套工作环境时，切换 Mode，而不是把所有能力永久加载在一起。
-- Mode 中的 Skill 列表是能力集合，不是执行顺序。
+> 状态快照：2026-08-30。绿色为已实现，黄色为部分实现，蓝色虚线为目标，红色为待迁移旧结构。
 
 ```mermaid
 flowchart TB
-    ALL[("Environment 内全部正式 Skills")]
+    USER["用户<br/>提出目标 / 选择或确认 Mode / 明确反馈"]
+    HOST["当前 Host · 唯一执行者<br/>Codex App / Claude Code / DeepSeek Harness"]
 
-    subgraph WRITING["creator-studio"]
-        W1["研究与素材"]
-        W2["写作与编辑"]
-        W3["视觉、排版与发布"]
+    subgraph HARNESS["ASL Harness · 系统机制，不是业务 Mode"]
+        CORE["确定性核心 · 已实现<br/>Environment 校验<br/>Skill 依赖闭包<br/>WORKSPACE 视图<br/>宿主投影与漂移检查"]
+        MAINTAIN["Environment 维护能力 · 待实现<br/>发现候选 / 培养 Trial<br/>Mode 与 Skill 增删改查保护<br/>迁移、合并与退出"]
+        MEMORY["第二大脑访问面 · 部分实现<br/>Profile + 能力地图 + Mode + Skill + Git<br/>Case 与明确反馈的检索仍待补齐"]
     end
 
-    subgraph INVEST["investment-desk"]
-        I1["事实与产品判断"]
-        I2["模型、估值与尽调"]
-        I3["IC memo 与报告"]
+    subgraph ENV["Personal Environment · 本地运行真源"]
+        PROFILE["PROFILE.md<br/>跨 Mode 的精简长期边界"]
+        VIEW["WORKSPACE.md<br/>人机共读的派生能力地图"]
+        SKILLS[("skills/<skill-id><br/>45 个正式 Skill")]
+
+        subgraph MODES["业务 Mode · 目标保留 4 个"]
+            CREATOR["creator-studio<br/>内容、视觉、排版与发布"]
+            PRODUCT["product-lab<br/>AI 产品体验与判断"]
+            INVEST["investment-desk<br/>项目投研与 IC memo"]
+            CAPITAL["capital-markets-desk<br/>公开市场与资本市场材料"]
+        end
+
+        MISCLASS["当前误分类 · 待迁移<br/>skill-foundry / second-brain<br/>应回到 Harness 系统能力"]
+        CULTIVATE["培养区 · 当前状态<br/>4 Candidate / 0 Trial / 0 Feedback / 1 Archive"]
+        CASES["Cases<br/>一次目标、材料、产物与交付"]
+        GIT["Git<br/>Environment 的历史与审计"]
     end
 
-    subgraph FOUNDRY["skill-foundry"]
-        F1["发现能力"]
-        F2["培养 Trial"]
-        F3["诊断与演化 Environment"]
+    subgraph PUBLIC["本公开仓库 · 迁移中"]
+        LEGACY["现有旧结构<br/>plugins/domain-* / foundation<br/>orchestrator / skill-index"]
+        TARGET["目标 Mode-native Environment<br/>skills / modes / candidates<br/>trials / feedback / archive"]
     end
 
-    ALL -->|显式能力闭包| WRITING
-    ALL -->|显式能力闭包| INVEST
-    ALL -->|显式能力闭包| FOUNDRY
-    WRITING -.不隐式跨 Mode.-> INVEST
+    subgraph ADAPTERS["Host 接入状态"]
+        CODEX["Codex App<br/>项目投影已实现"]
+        CLAUDE["Claude Code<br/>项目投影已实现"]
+        DSH["DeepSeek Harness<br/>Preset 结构导出已实现<br/>真实长会话尚未验收"]
+        OLD["部分历史 Case 投影已过期<br/>需要重新生成"]
+    end
+
+    USER --> HOST
+    HOST -->|读取当前能力面| MODES
+    MODES -->|显式 Skill 根 + 依赖闭包| SKILLS
+    PROFILE --> HOST
+    VIEW --> HOST
+    HOST -->|完成任务| CASES
+    CASES -->|普通产物留在 Case| CASES
+    USER -->|只有明确反馈或明确授权| MAINTAIN
+    MAINTAIN -->|先校验，再修改| ENV
+    CORE --> ENV
+    MEMORY --> ENV
+    ENV --> CODEX
+    ENV --> CLAUDE
+    ENV --> DSH
+    CODEX --> HOST
+    CLAUDE --> HOST
+    DSH --> HOST
+    ENV --> GIT
+    LEGACY -.迁移、合并、删除.-> TARGET
+    TARGET -.装填后成为.-> ENV
+    MISCLASS -.回收为系统能力.-> MAINTAIN
+    MISCLASS -.访问能力并入.-> MEMORY
+    OLD -.重新投影.-> ADAPTERS
+
+    classDef done fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    classDef partial fill:#fef3c7,stroke:#d97706,color:#78350f;
+    classDef planned fill:#eff6ff,stroke:#2563eb,color:#1e3a8a,stroke-dasharray:6 4;
+    classDef legacy fill:#fee2e2,stroke:#dc2626,color:#7f1d1d;
+    class CORE,PROFILE,VIEW,SKILLS,CREATOR,PRODUCT,INVEST,CAPITAL,CASES,GIT,CODEX,CLAUDE done;
+    class MEMORY,CULTIVATE,DSH,OLD partial;
+    class MAINTAIN,TARGET planned;
+    class MISCLASS,LEGACY legacy;
 ```
 
-## 当前 Mode
+这张图刻意区分了三种东西：
 
-| Mode | 工作环境 |
-| --- | --- |
-| `creator-studio` | 公众号、长内容、视觉、排版与发布 |
-| `product-lab` | AI 产品体验、机制拆解与产品判断 |
-| `investment-desk` | 私募、项目投研、模型、估值、尽调与 IC memo |
-| `capital-markets-desk` | 公开市场研究、公司覆盖、图表和投行材料 |
-| `second-brain` | 搜集、整理、检索和沉淀个人知识材料 |
-| `skill-foundry` | 寻找、培养、合并、诊断和演化能力环境 |
+1. **Harness 系统能力**始终存在，负责维护 Environment，不被用户当作业务 Mode 切换。
+2. **业务 Mode**只描述当前要进入的广域工作状态，不拥有 Harness 的管理权限。
+3. **普通 Case 内容**默认留在 Case；它不会因为出现过一次，就自动改写 Mode 或 Skill。
 
-这里没有一个覆盖所有事情的 `personal` Mode。一个人的工作环境由多个 Mode 共同组成，但每次只激活真正需要的那一个。
+## Mode 的边界
 
-## 能力是怎么长出来的
+当前目标只保留业务 Mode：
 
-Harness 不负责替 Agent 执行业务，也不添加第二个 Agent 循环。当前 Codex、Claude Code 或 DeepSeek Harness 始终是唯一执行者。
+| Mode | 解决什么 | 不包含什么 |
+| --- | --- | --- |
+| `creator-studio` | 公众号、长内容、视觉、排版与发布 | 投研模型、资本市场材料 |
+| `product-lab` | AI 产品体验、机制拆解与产品判断 | 内容发布链、估值链 |
+| `investment-desk` | 私募项目研究、模型、估值、尽调与 IC memo | 公众号发布环境 |
+| `capital-markets-desk` | 公开市场研究、公司覆盖和资本市场材料 | 私募项目的完整尽调环境 |
 
-原来 `orchestrator` 和 `skill-index` 中有价值的部分，被收敛为 `skill-foundry` Mode 里的维护判断：
+`skill-foundry` 和 `second-brain` 不应继续作为 Mode：
 
-```text
-当前 Mode 已有合适能力？
-├─ 有：直接使用，不搜索
-└─ 没有：说清楚缺口
-   ├─ 已有 Candidate 或 Trial 能补上：继续培养
-   └─ 没有：从可信渠道发现候选
-      ├─ 值得测试：进入 Candidate → Trial
-      └─ 不值得：记录原因，继续使用现有替代方案
+- 能力发现、Candidate、Trial、正式 Skill 的增删改查，是 Harness 自身的维护能力。
+- 第二大脑不是一个房间，而是整个 Environment 的可读、可检索和可追溯能力。
 
-Trial 通过真实 Case，且用户明确采用
-└─ 晋升为正式 Skill
-   ├─ 只是补强现有能力：合并进原 Skill
-   ├─ 是独立能力：保留新 Skill
-   └─ 改变一整套长期工作环境：再调整 Mode
+创建一个新 Mode 的条件也不应该是一条任务变复杂了。只有当一种工作状态会反复出现、需要独立的能力边界，而且现有 Mode 无法清楚表达时，才由用户确认创建。
+
+## Harness 与普通内容如何分开
+
+| 层 | 可以改变什么 | 谁来决定 | 是否可被普通任务自动改写 |
+| --- | --- | --- | --- |
+| Harness 确定性核心 | 结构、引用、依赖、投影和安全边界 | CLI 按规则执行 | 否 |
+| Harness 维护能力 | Candidate、Trial、Skill、Mode 和能力地图 | 当前 Host 起草，用户对关键变更授权，CLI 校验 | 否 |
+| 业务 Mode | 当前工作状态可见的正式 Skill 与边界 | 用户与当前 Host | 否 |
+| Skill | 一项完整本地能力及完成标准 | 当前 Host 在真实 Case 中培养 | 否 |
+| Case | 本次目标、材料、运行产物和交付 | 当前 Host | 是，但只影响当前 Case |
+| Feedback | 用户明确说出的修改意见 | 用户 | 只成为演化候选，不自动落库 |
+
+点击、停留、沉默、重复修改和其他含义不明确的行为都不会被猜成偏好。只有用户明确反馈、明确采用或明确授权删除，才能触发 Environment 变更。
+
+## Mode 与 Skill 的增删改查
+
+Harness 不需要数据库式 CRUD API。文件和 Git 就是真源；CLI 负责在变更前后守住引用完整性。
+
+| 对象 | 创建 | 更新 | 删除或退出 | 读取 |
+| --- | --- | --- | --- | --- |
+| Skill | 具体能力缺口 → Candidate → 完整 Trial → 真实 Case → 用户明确采用 | 复制到 Trial 修改，跑回归 Case，通过后替换正式 Skill | 检查 Skill 依赖和 Mode 引用；取得用户确认；移除活动引用后归档或删除 | 先读能力摘要，实际调用时读完整 Skill 包 |
+| Mode | 反复出现的广域工作状态无法由现有 Mode 表达；用户确认 | 只做最小能力差异，重新计算闭包并投影 | 确认没有活动投影；取得用户确认；归档或删除 | 读取 Mode 边界、Skill 根和完整依赖闭包 |
+
+外部 Prompt、MCP、Agent、API、脚本或开源仓库也不能绕开这条边界。它们先作为来源进入 Candidate，经过本地化和真实 Case，最后才能成为正式本地 Skill。任务中途不会临时裸接一个外部能力。
+
+## CLI 应该硬到什么程度
+
+现在的 Harness 已经会拒绝结构错误、缺失或循环依赖、路径逃逸、旧 Workflow 回流和宿主文件覆盖，但 Mode/Skill 维护门禁还没有完成。
+
+目标原则是：**确定事实硬阻断，语义判断不硬编码。**
+
+### 必须拒绝
+
+- Skill 缺少合法名称、描述、完成标准或必需来源记录；
+- Skill 依赖缺失或形成循环；
+- Mode 引用 Candidate、Trial 或不存在的正式 Skill；
+- 删除仍被其他 Skill 或 Mode 引用的正式 Skill；
+- 删除或替换仍在活动投影中的 Mode；
+- 目录、链接或投影越出当前 Environment / Project；
+- 投影覆盖无法证明由 ASL 生成的用户文件；
+- `.env`、密钥、缓存、Git 元数据或可重建依赖进入发行投影；
+- 旧 `workspace.yaml`、固定 Workflow、Run 状态树或第二调度器重新进入活动 Environment。
+
+### 只提醒
+
+- `WORKSPACE.md` 能力地图过期；
+- 当前宿主投影落后于 Environment；
+- 上游能力出现新版本；
+- Candidate 尚未跑 Trial；
+- 两个 Skill 可能语义重合。
+
+### 交给当前 Host 判断
+
+- 是否真的需要新 Mode；
+- 外部能力是否值得培养；
+- 两个 Skill 应该合并还是并存；
+- 当前 Case 应该组合哪些 Skill；
+- 内容质量、业务判断和最终交付是否合格。
+
+这样 Harness 会在能证明错误的地方足够硬，但不会因为一个 key 缺失、视图过期或系统无法理解语义，就阻断用户正常工作。
+
+## 能力如何被发现和吸收
+
+能力发现属于 Harness 维护能力，不属于某个业务 Mode，也不是一份巨型 Skill Index。
+
+```mermaid
+flowchart LR
+    GAP["真实 Case 暴露具体能力缺口"] --> LOCAL{"Environment 已有能力？"}
+    LOCAL -->|有| USE["直接使用或补强现有 Skill"]
+    LOCAL -->|没有| DISCOVER["从可信来源发现候选"]
+    DISCOVER --> X["X / Twitter<br/>KOL 真实使用、截图与踩坑"]
+    DISCOVER --> GH["GitHub<br/>stars、维护状态、issues、许可证"]
+    DISCOVER --> ECO["已安装生态、官方文档<br/>本地仓库与 Agent Reach"]
+    X --> CANDIDATE["Candidate<br/>保存来源、缺口与风险"]
+    GH --> CANDIDATE
+    ECO --> CANDIDATE
+    CANDIDATE --> TRIAL["Trial<br/>本地完整 Skill + 真实 Case"]
+    TRIAL --> DECIDE{"用户明确采用？"}
+    DECIDE -->|补强已有能力| MERGE["合并进现有 Skill"]
+    DECIDE -->|独立能力| FORMAL["进入正式 skills/"]
+    DECIDE -->|不采用| ARCHIVE["拒绝或归档，保留原因"]
+    MERGE --> MODE["显式加入需要它的 Mode"]
+    FORMAL --> MODE
 ```
 
-这不是一个运行时调度器。它不维护隐藏状态、不执行固定链、不在业务任务中途安装能力，也不靠一份巨大的路由脚本控制 Agent。
+我们借鉴 [yichen-skills](https://github.com/mcncarl/yichen-skills) 对多来源搜索、个人选择和能力缝合的重视，但不会复制它的大型统一路由器、超长脚本和高耦合配置。KOL 推荐和 GitHub stars 负责帮助发现，完整阅读、来源检查和真实 Case 才决定是否进入本地 Environment。
 
-## 怎么发现值得培养的能力
-
-寻找 Skill 不是在搜索框里输入一个词，然后安装排名第一的结果。真正有价值的线索通常来自两类地方。
-
-### X / Twitter 上的真实使用者
-
-长期使用 Agent 的 KOL 会发布自己刚试过的 Skill、仓库、Prompt、MCP 或工具。带真实任务、截图、踩坑、对比和复盘的推荐，通常比项目自己的宣传更有信息量。
-
-`skill-foundry` 使用 [Agent Reach](https://github.com/Panniantong/Agent-Reach) 读取指定 KOL 的公开时间线、单条推文、长文和讨论，把原帖与使用情境保存为来源证据。转发数、收藏数和 KOL 身份是发现信号，不是采用结论。
-
-### GitHub 上的真实仓库
-
-GitHub stars 是重要参考，因为它能帮助我们先看到被大量开发者注意和使用的项目。但 stars 不能代替检查。
-
-候选进入 Trial 前至少要看：
-
-| 判断 | 要回答的问题 |
-| --- | --- |
-| 能力匹配 | 它是否真的补上当前 Mode 的具体缺口？ |
-| 真实使用 | 是否有 KOL、维护者或用户展示过真实 Case？ |
-| 社区信号 | stars、forks、issues 和讨论是否支持它的实际价值？ |
-| 维护状态 | 最近是否仍在更新，文档和发布是否可用？ |
-| 来源边界 | 许可证、版本、原始路径和作者是否清楚？ |
-| 集成成本 | 是否包含超长脚本、重型依赖、危险权限或隐藏外部调用？ |
-| 重复关系 | 应该引入、包装、吸收进现有 Skill，还是直接拒绝？ |
-
-搜索由 Agent Reach 和 GitHub CLI 辅助完成。KOL 推荐帮助发现，stars 帮助排序，完整阅读和真实 Case 决定是否采用。
-
-我们借鉴 [yichen-skills](https://github.com/mcncarl/yichen-skills) 对多来源搜索、来源保留和候选验证的重视，但不会复制它的大型统一路由器、超长脚本和复杂字段系统。ASL 只保留足够完成判断的最小记录。
-
-## Candidate、Trial 和 Skill
-
-```text
-外部 Skill / Prompt / MCP / Agent / API / 脚本
-                    │
-                    ▼
-Candidate：只记录来源、缺口和风险，不可正式调用
-                    │
-                    ▼
-Trial：完整本地化，在隔离环境跑真实 Case
-                    │
-             用户明确采用
-                    ▼
-Skill：当前 Environment 的正式本地能力
-                    │
-                    ▼
-显式加入一个或多个 Mode，再重新投影到 Host
-```
-
-外部能力不会在任务中途被裸调用。来源不同的能力都先变成本地可检查的完整 Skill；正式采用后，本地 Environment 才是运行真源。
-
-## 目标仓库结构
+## 目标目录
 
 ```text
 agent-skill-library/
-├── WORKSPACE.md                 # 人与 Agent 共读的当前能力地图
+├── WORKSPACE.md                 # 自动生成的人机共读能力地图
 ├── PROFILE.md                   # 跨 Mode 的精简长期边界
 ├── skills/
 │   └── <skill-id>/
@@ -183,19 +244,25 @@ agent-skill-library/
 │       └── assets/
 ├── modes/
 │   └── <mode-id>/
-│       ├── MODE.md              # 工作环境目标、边界与使用语义
-│       └── mode.yaml            # 只保存 Skill 根与环境修改权
-├── candidates/                  # 尚未采用的外部候选
+│       ├── MODE.md              # 工作状态、边界和使用语义
+│       └── mode.yaml            # 只保存显式 Skill 根
+├── candidates/                  # 找到但尚未采用的能力
 ├── trials/                      # 已本地化、等待真实 Case 验证
 ├── feedback/                    # 只记录用户明确反馈
 └── archive/                     # 退出活动面的历史材料
 ```
 
-`WORKSPACE.md` 是自动生成的可读视图，不是第二份 Skill Index。来源真相保留在各个 `SOURCE.md` 中；Harness 负责校验并生成总览。
+`WORKSPACE.md` 是从真源生成的可读视图，不是第二份手写 Skill Index。Skill 来源保存在各自的 `SOURCE.md`；Mode 只声明能力根，Harness 计算依赖闭包。
 
-## 接入三个 Host
+## 接入 Codex、Claude Code 与 DeepSeek Harness
 
-Mode-native 目录迁移完成后，同一个 Environment 可以投影到 Codex App、Claude Code 和 DeepSeek Harness。宿主只会获得当前 Mode 的能力闭包。下面是迁移后的原生使用方式，不是对当前旧 `plugins/` 目录的兼容命令。
+同一份 Environment 通过投影进入宿主，不复制成三份业务真源：
+
+| Host | 原生投影 | 当前状态 |
+| --- | --- | --- |
+| Codex App | `.agents/skills/` + `AGENTS.md` | 项目投影和校验已实现 |
+| Claude Code | `.claude/skills/` + `CLAUDE.md` | 项目投影和校验已实现 |
+| DeepSeek Harness | `.dsh/skills/` 或 Mode Agent Preset | 结构导出已实现，真实长会话待验收 |
 
 ```powershell
 asl-harness workspace.validate --workspace C:\path\to\agent-skill-library
@@ -207,29 +274,28 @@ asl-harness host.project `
   --host-id claude-code
 ```
 
-Codex App 使用 `.agents/skills/`，Claude Code 使用 `.claude/skills/`，DeepSeek Harness 使用 `.dsh/skills/` 或 Mode 专属 Agent Preset。投影只是可删除、可重建的宿主视图，Agent Skill Library 本身仍是能力真源。
+宿主投影可以删除和重建；Environment 才是运行真源。当前 Host 仍然负责理解目标、选择 Skill 和完成任务，Harness 不接管它的 Agent 循环。
 
-## 当前迁移状态
+## 迁移状态
 
-Mode-only Harness、三宿主投影和个人 Environment 已经可以运行。这个公开仓库仍保留上一版 `plugins/domain-*`、`foundation`、`orchestrator` 和 `skill-index` 目录，尚未完成 Mode-native 目录迁移。
+| 项目 | 当前状态 | 下一步 |
+| --- | --- | --- |
+| ASL Harness 核心 | 已实现 5 个确定性命令与 17 项测试 | 增加 Mode/Skill 维护前后校验，不增加第二调度器 |
+| Personal Environment | 45 个正式 Skill、6 个 Mode 记录，校验通过 | 将 `skill-foundry`、`second-brain` 从 Mode 回收到 Harness 系统能力 |
+| 本公开仓库 | 仍是 `plugins/domain-*`、`foundation`、`orchestrator`、`skill-index` 旧结构 | 迁移到唯一 `skills/` 与业务 `modes/`，再删除旧入口 |
+| Codex / Claude 投影 | 新项目投影能力已实现 | 刷新仍使用旧格式的历史 Case |
+| DeepSeek Harness | Preset 结构导出已实现 | 在真实 DSH 进程和长会话中验收 |
+| 培养闭环 | Candidate 目录可识别 | 补齐 Trial、Feedback、引用完整性和退出门禁 |
 
-这些旧目录只代表当前尚未清理完的发行结构，不再代表目标架构。接下来的迁移会：
-
-- 把正式 Skill 收敛到唯一的 `skills/`；
-- 用 `modes/` 代替 Domain 和固定 Workflow；
-- 把通用确定性能力放进 ASL Harness；
-- 把需要 AI 判断的发现、培养和演化能力留在 `skill-foundry` Mode；
-- 删除独立的 `orchestrator`、`foundation` 和 `skill-index` 运行入口；
-- 用同一份 Environment 原生接入三个 Host，不维护兼容发行层。
-
-在这次迁移完成前，不应把旧 `plugins/` 目录理解为新的 Mode 架构，也不把尚未完成的直接下载体验描述成已经交付。
+在这些迁移完成前，不把公开仓库描述成已经完成的 Mode-native 成品，也不把目标能力冒充为当前 CLI 已实现功能。
 
 ## 设计底线
 
-- Skill 是最小能力单位，不继续拆成运行时碎片。
-- Mode 是隔离的工作环境，不是 Domain，也不是 Workflow。
-- 当前 Host 是唯一执行者；Harness 不路由业务步骤。
-- 外部推荐和 stars 负责发现，完整阅读和真实 Case 负责采用。
-- Candidate、Trial、正式 Skill 和 Mode 不混用。
-- 用户明确反馈才进入长期演化，普通行为不被猜成偏好。
-- 删除、合并和复用优先于新增脚本、字段和调度层。
+- 当前 Host 是唯一执行者，Harness 不成为第二个 Agent 或业务调度器。
+- Skill 是最小完整能力单位，不再拆成运行时碎片。
+- Mode 是广域工作状态，不是 Domain、固定 Workflow 或个人能力全集。
+- Harness 系统机制与业务 Mode 分离；业务内容不能直接改写系统结构。
+- 确定事实用 CLI 硬校验，语义判断留给当前 Host 和用户。
+- 只记录用户明确反馈，不从含义不明的行为推断偏好。
+- Candidate、Trial、正式 Skill、Mode、Case 和 Archive 不混用。
+- 删除、合并和复用优先于新增字段、脚本、配置和隐藏层。

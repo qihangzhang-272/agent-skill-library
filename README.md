@@ -15,7 +15,7 @@
 </p>
 
 > [!IMPORTANT]
-> 这不是一组等待手工拼接的插件，而是一份可以直接交给 ASL Harness 的 Mode-native Environment。37 个正式 Skill 只保留一个活动真源，由四个业务 Mode 按工作场选择。
+> 这不是一组等待手工拼接的插件，而是一份可以直接交给 ASL Harness 的 Mode-native Environment。正式 Skill 只保留一个活动真源，由业务 Mode 按工作场选择。
 
 ## 为什么不是再建一个 Skill 清单
 
@@ -122,6 +122,9 @@ pip install -e ./asl-harness
 asl-harness workspace.validate \
   --workspace ./agent-skill-library
 
+asl-harness state \
+  --workspace ./agent-skill-library
+
 asl-harness host.project \
   --workspace ./agent-skill-library \
   --project /path/to/current-project \
@@ -133,7 +136,7 @@ asl-harness host.project \
 
 ## Skill 从哪里来
 
-外部 Prompt、MCP、Agent、API、模型、脚本或开源仓库不会在任务中途被裸调用。
+外部 Prompt、MCP、Agent、API、Plugin、模型、脚本或开源仓库不会在任务中途被裸调用。
 
 用户明确说“寻找某个外部技能并融入”时，当前 Host 直接获取并完整读取来源，检查与现有能力的关系，然后吸收、合并、建立依赖、保留变体/Adapter、Clean-room 重构，或作为新的完整正式 Skill 纳入。这个路径不强制 Candidate、Trial、示例或效果测试；如果用户同时指定要在哪个 Mode 使用，就在静态结构校验后直接更新该 Mode。
 
@@ -141,13 +144,15 @@ asl-harness host.project \
 
 只有来源、许可、安全、重合关系、运行方式或是否采用仍不确定时，才进入 Candidate 或 Trial。公开推荐和仓库关注度帮助发现，但 Host 主动发现的来源不会因此自动采用。
 
-## 当前仓库状态
+需要 MCP、API、Agent、Plugin 或工具的正式 Skill，可以在自己的 package 内携带 portable 或宿主专用 binding 资产。它们跟随完整 Skill 被同步和投影；真正的安装、登录、权限和激活仍由 Codex、Claude Code 或 DeepSeek Harness 的原生 Adapter 完成。
+
+## 仓库结构
 
 ```mermaid
 flowchart LR
     PROFILE["PROFILE.md<br/>精简长期边界"]
-    SKILLS["skills/<br/>37 个正式 Skill"]
-    MODES["modes/<br/>4 个业务 Mode"]
+    SKILLS["skills/<br/>正式 Skill 真源"]
+    MODES["modes/<br/>业务工作场"]
     VIEW["WORKSPACE.md<br/>实时能力地图"]
     HOSTS["Codex / Claude / DeepSeek<br/>按 Mode 生成投影"]
     ARCHIVE["archive/<br/>冻结旧插件结构"]
@@ -162,10 +167,10 @@ flowchart LR
     class ARCHIVE frozen;
 ```
 
-| 区域 | 当前事实 | 约束 |
+| 区域 | 角色 | 约束 |
 | --- | --- | --- |
-| `skills/` | 37 个可公开、完整、带来源的正式 Skill | 不再按 Domain 复制发行 |
-| `modes/` | Creator、Product、Investment、Capital Markets 四个工作场 | 只保存 Skill 选择，不保存 Workflow |
+| `skills/` | 可公开、完整、带来源的正式 Skill | 不再按 Domain 复制发行 |
+| `modes/` | Creator、Product、Investment、Capital Markets 等业务工作场 | 只保存 Skill 选择，不保存 Workflow |
 | `WORKSPACE.md` | Harness 从当前真源生成的能力地图 | 不手写第二份 Skill Index |
 | `archive/` | 旧插件布局、系统 Skill 与历史规则 | 冻结追溯，不参与运行 |
 | 三宿主接入 | 同一 Environment 可投影到 Codex、Claude Code 与 DeepSeek | 投影可重建，不成为真源 |
@@ -184,7 +189,8 @@ agent-skill-library/
 │       ├── SOURCE.md
 │       ├── references/
 │       ├── scripts/
-│       └── assets/
+│       ├── assets/
+│       └── bindings/            # 可选宿主接线资产
 ├── modes/
 │   └── <mode-id>/
 │       ├── MODE.md
@@ -209,4 +215,4 @@ agent-skill-library/
 
 ## 当前阶段
 
-Mode-native 迁移已经完成：活动根目录只包含 Profile、37 个正式 Skill、4 个业务 Mode、四个培养/追溯区和 Harness 生成的能力地图。旧插件结构保存在 `archive/legacy-plugin-layout/`，不会被任何 Mode 或宿主投影加载。
+动态数量、迁移状态、三宿主投影版本和验证证据不在本 README 重复维护，统一查看 [ASL Architecture Views · View 9](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前状态与迁移图)。

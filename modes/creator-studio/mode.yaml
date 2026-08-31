@@ -1,0 +1,25 @@
+apiVersion: asl-wep/v0.3.0
+kind: ModeProjection
+metadata:
+  id: creator-studio
+spec:
+  skills:
+    - agent-reach
+    - known-content-archive
+    - topic-research-deposition
+    - reference-video-analysis
+    - wechat-account-corpus-research
+    - public-account-writing-style
+    - editorial-visual-storytelling
+    - baoyu-article-illustrator
+    - baoyu-comic
+    - baoyu-cover-image
+    - baoyu-diagram
+    - baoyu-infographic
+    - baoyu-image-gen
+    - baoyu-format-markdown
+    - qihang-wechat-layout
+    - baoyu-markdown-to-html
+    - baoyu-compress-image
+    - baoyu-post-to-wechat
+    - x-post-card-studio

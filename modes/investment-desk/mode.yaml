@@ -1,0 +1,19 @@
+apiVersion: asl-wep/v0.3.0
+kind: ModeProjection
+metadata:
+  id: investment-desk
+spec:
+  skills:
+    - agent-reach
+    - investment-research
+    - investment-ai-product-judgment
+    - investment-competitive-landscape
+    - investment-unit-economics
+    - investment-scorecard
+    - investment-financial-model-builder
+    - investment-valuation-returns
+    - investment-dd
+    - investment-thesis-tracking
+    - investment-ic-memo-writer
+    - investment-chart-pack
+    - investment-visual-report

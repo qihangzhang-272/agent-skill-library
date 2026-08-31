@@ -10,31 +10,25 @@ permissions:
 
 jobs:
   validate:
-    name: 严格验证
+    name: ASL Environment 验证
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Checkout ASL Harness
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          repository: qihangzhang-272/asl-harness
+          path: .asl-harness-runtime
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: 22
+          python-version: "3.11"
 
-      - name: Install Claude Code
-        run: npm install --global @anthropic-ai/claude-code@2.1.210
+      - name: Install ASL Harness
+        run: python -m pip install ./.asl-harness-runtime
 
-      - name: Validate Claude plugins
-        run: claude plugin validate . --strict
-
-      - name: Validate repository contracts
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
-        run: |
-          if [ -n "$BASE_SHA" ] && ! [[ "$BASE_SHA" =~ ^0+$ ]]; then
-            node scripts/validate-repository.mjs --base "$BASE_SHA" --head HEAD
-          else
-            node scripts/validate-repository.mjs
-          fi
+      - name: Validate Mode-native Environment
+        run: asl-harness workspace.validate --workspace .

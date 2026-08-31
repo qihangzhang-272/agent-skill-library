@@ -1,153 +1,212 @@
-# Agent Skill Library
+<p align="center">
+  <img src="https://raw.githubusercontent.com/qihangzhang-272/agent-skill-library/main/docs/assets/agent-skill-library-cover.png" alt="Agent Skill Library" width="100%" />
+</p>
 
-不是 prompt 收藏夹。不是知识库附属目录。
+<h1 align="center">Agent Skill Library</h1>
 
-是 Agent 的运行能力库——给 Codex / Claude / 后续 agent 用的、可调用、可组合、可配置的工作能力。
+<p align="center">
+  <strong>一套在真实写作、产品分析和投资研究中反复使用、筛选和修改过的个人 AI 工作环境。</strong>
+</p>
 
-本库面向需要维护和调用 Agent 技能的使用者。外部技能默认只做索引（URL + 来源 + 调用方式），只有许可证、边界、复用价值都清楚时才 vendored 进 `plugins/`。网页 prompt、UI 库源码、项目资料、一次性实验——不进正式库。
+<p align="center">
+  <a href="https://github.com/qihangzhang-272/agent-skill-library/stargazers"><img src="https://img.shields.io/github/stars/qihangzhang-272/agent-skill-library?style=for-the-badge&logo=github&color=F5C542" alt="GitHub Stars" /></a>
+  <a href="https://github.com/qihangzhang-272/asl-harness"><img src="https://img.shields.io/badge/built_with-ASL_Harness-3159D4?style=for-the-badge" alt="Built with ASL Harness" /></a>
+  <img src="https://img.shields.io/badge/status-Mode--native-16A34A.svg?style=for-the-badge" alt="Mode native" />
+</p>
 
-## 架构：三层 plugins
+> [!IMPORTANT]
+> 这不是一组等待手工拼接的插件，而是一份可以直接交给 ASL Harness 的 Mode-native Environment。37 个正式 Skill 只保留一个活动真源，由四个业务 Mode 按工作场选择。
 
-源技能直接维护在 `plugins/` 下，按角色分层。没有独立的 `skills/` 源目录，没有 `catalog/` 总账，没有"先生成再分发"的两步流程——`plugins/` 既是源也是分发。
+## 为什么不是再建一个 Skill 清单
 
+真正的问题不是找不到 Skill，而是找到以后怎么处理：哪些值得留下，哪些只适合一次任务，哪些应该合并进已有能力，以及写作时为什么不应该同时加载投研和资本市场上下文。
+
+Agent Skill Library 把这些取舍保存为一个可以继续维护的 Environment：
+
+- 正式 Skill 是已经本地化的完整能力；
+- Mode 选择一种工作状态真正需要的 Skill；
+- 用户明确指定的外部能力在完整读取后直接本地化；Candidate 与 Trial 只处理仍然存在的不确定性；
+- 来源、版本和本地变化留在 Skill 自己的 `SOURCE.md`；
+- 当前 Host 负责工作，ASL Harness 负责让环境不跑偏。
+
+## 和 ASL Harness 的关系
+
+| 项目 | 里面有什么 | 用法 |
+| --- | --- | --- |
+| [ASL Harness](https://github.com/qihangzhang-272/asl-harness) | 空白框架、校验和三宿主投影 | 从零培养自己的 Environment |
+| **Agent Skill Library** | 已经筛选和培养过的业务 Skill 与 Mode | 直接使用，再按自己的工作方式增删 |
+
+这不是“框架仓库 + 技能市场”。Agent Skill Library 本身就是一份装入内容的 ASL Environment；它与空白 Harness 使用同一套目录、同一套约束和同一套宿主接入方式。
+
+## 能力如何组成工作环境
+
+```mermaid
+flowchart TB
+    SYSTEM["ASL Harness System<br/>维护、访问、校验与宿主投影<br/>不是业务 Mode"]
+    PROFILE["PROFILE.md<br/>跨 Mode 的精简长期边界"]
+    POOL[("唯一正式 Skill Pool<br/>完整本地能力 · 来源记录 · 显式依赖")]
+    CREATOR["creator-studio<br/>公众号与长内容工作场"]
+    PRODUCT["product-lab<br/>AI 产品体验与判断工作场"]
+    INVESTMENT["investment-desk<br/>私募项目研究工作场"]
+    CAPITAL["capital-markets-desk<br/>公开市场工作场"]
+    LEARNING["candidates / trials / feedback / archive<br/>培养与追溯证据，不进入活动能力面"]
+    HOST["当前 Host<br/>只看到 Profile + 当前 Mode + 对应 Skill 闭包"]
+    VIEW["WORKSPACE.md<br/>确定性生成的总体能力地图"]
+
+    SYSTEM --> PROFILE
+    SYSTEM --> POOL
+    SYSTEM --> LEARNING
+    CREATOR -->|显式选择| POOL
+    PRODUCT -->|显式选择| POOL
+    INVESTMENT -->|显式选择| POOL
+    CAPITAL -->|显式选择| POOL
+    PROFILE --> HOST
+    CREATOR -.一次只激活当前 Mode.-> HOST
+    PRODUCT -.一次只激活当前 Mode.-> HOST
+    INVESTMENT -.一次只激活当前 Mode.-> HOST
+    CAPITAL -.一次只激活当前 Mode.-> HOST
+    PROFILE -.摘要.-> VIEW
+    POOL -.能力地图.-> VIEW
+    CREATOR -.Mode 地图.-> VIEW
+    PRODUCT -.Mode 地图.-> VIEW
+    INVESTMENT -.Mode 地图.-> VIEW
+    CAPITAL -.Mode 地图.-> VIEW
+    LEARNING -.培养状态.-> VIEW
+
+    classDef locked fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef done fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    classDef optimize fill:#ffedd5,stroke:#ea580c,color:#7c2d12;
+    class SYSTEM,PROFILE,CREATOR,PRODUCT,INVESTMENT,CAPITAL,HOST locked;
+    class POOL,VIEW,LEARNING optimize;
 ```
-plugins/
-├── workspace-core/      # 个人 Workspace 种子 Skill：目标、发现、培养、演化与整理
-├── foundation/          # 元层：principles Agent 操作原则 + skill-architecture 元技能
-├── orchestrator/        # workflow-orchestrator：Library-native 固定链路由入口
-├── skill-index/         # external-skill-index：外部 GitHub 技能索引
-├── domain-writing/      # 公众号写作瓦技能
-├── domain-investment/   # 投资决策瓦技能（研究、模型、估值、IC memo）
-├── domain-capital-markets/ # 公开市场研究、首次覆盖与投行交付物瓦技能
-└── domain-product/      # AI 产品分析瓦技能
+
+空白 Harness 与装填版 Environment 的复杂总图、运行时序、外部能力生命周期和三宿主投影，统一维护在 [ASL Harness 的架构文档](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md)。
+
+这不是业务流程图。四个 Mode 是四个广域工作场，它们可以显式选择同一个正式 Skill，但不会互相继承、互相调用，也不会把执行顺序写进 Mode。
+
+Mode 不是固定 Workflow。它不规定“先搜索、再分析、再写作”，只限制当前 Host 能看见哪些正式能力。普通任务在 Goal / Case 循环中完成；能力缺口、Mode 边界变化和宿主投影变化分别进入另外三个独立循环。
+
+## 当前业务 Mode
+
+### Creator Studio
+
+面向公众号和长内容生产，覆盖素材研究、文章编辑、视觉叙事、配图、排版、HTML 和发布准备。它不会加载估值、尽调或资本市场材料。
+
+### Product Lab
+
+面向 AI 产品体验、机制拆解和产品判断。它可以调用研究和信息图能力，但不自动进入公众号发布链。
+
+### Investment Desk
+
+面向私募项目研究，从事实、产品判断、竞争格局和单位经济，延伸到评分、估值、尽调、IC memo 和可视化报告。Skill 之间可以声明完整能力依赖，但 Mode 本身不保存固定执行顺序。
+
+### Capital Markets Desk
+
+面向公开市场、公司覆盖、资本市场材料、估值模型、图表和金融文档质检，与私募项目尽调保持边界。
+
+能力发现、培养、Mode/Skill 增删改查和第二大脑访问不属于第五个业务 Mode。它们是 ASL Harness 对整个 Environment 提供的系统能力。
+
+## 直接使用
+
+先下载空白 Harness 和这份装填版 Environment：
+
+```bash
+git clone https://github.com/qihangzhang-272/asl-harness.git
+git clone https://github.com/qihangzhang-272/agent-skill-library.git
+pip install -e ./asl-harness
 ```
 
-每个 plugin 共用一份 `skills/` 正文，同时带有 `.claude-plugin/plugin.json` 和 `.codex-plugin/plugin.json`。Claude Code 与 Codex 只读取各自的分发元数据，不复制第二份技能正文。技能正文放 `plugins/<plugin>/skills/<skill>/SKILL.md`，三层渐进披露：`SKILL.md` → `references/` → `assets/`。
+校验当前能力地图，再把需要的 Mode 投影到正在工作的项目：
 
-| 运行时 | Marketplace | Plugin manifest | 技能正文 |
-| --- | --- | --- | --- |
-| Claude Code | `.claude-plugin/marketplace.json` | `plugins/<plugin>/.claude-plugin/plugin.json` | `plugins/<plugin>/skills/` |
-| Codex | `.agents/plugins/marketplace.json` | `plugins/<plugin>/.codex-plugin/plugin.json` | 同一份 `plugins/<plugin>/skills/` |
+```bash
+asl-harness workspace.validate \
+  --workspace ./agent-skill-library
 
-## 技能清单
+asl-harness host.project \
+  --workspace ./agent-skill-library \
+  --project /path/to/current-project \
+  --mode creator-studio \
+  --host-id claude-code
+```
 
-**Foundation**
+把 `host-id` 改成 `codex-app` 或 `deepseek-harness` 即可生成另外两个宿主的项目投影。DeepSeek Agent Preset 使用 Harness 的 `deepseek.preset.export` 单独导出，业务内容仍然只来自这份 Environment。
 
-- `principles` — Agent 操作原则。认知原型 + DO/DON'T + CALIBRATION。被动参考库，不是全局强制规则。
-- `skill-architecture` — 元技能。新增技能/领域/链时生成 spec 合规骨架，更新 marketplace.json。瓦技能可独立存在，chain 是可选主动编排。**不要手创建 skill 文件夹。**
+## Skill 从哪里来
 
-**Workspace Core**
+外部 Prompt、MCP、Agent、API、模型、脚本或开源仓库不会在任务中途被裸调用。
 
-- `initialize-workspace` — 创建最小 Git-backed 个人工作区，记录现有 Library 为第一优先上游；不预装领域能力，不生成索引、缓存或双宿主源树。
-- `pursue-goal` — 从用户一句最终目标匹配场景 Skill，按 Benchmark 连续执行和返工；缺能力时先培养本地 Trial，最终成品不暴露内部协议术语。
-- `discover-capability` — 个人 Workspace 缺能力时，按“当前 Workspace → 现有 Agent Skill Library → 本地候选/上游 → 互联网”寻找来源并沉淀候选；不直接安装或运行。
-- `cultivate-skill` — 完整读取候选包并在个人 Workspace 培养为带来源说明和内嵌完成标准的本地 Trial Skill；不靠额外质量 YAML，也不静默晋升。
-- `cultivate-workflow` — 把真实 Case 中反复成立的完整 Skill 顺序保存为场景 Skill、极简 Workflow 和最终结果 Benchmark；不创建第二套节点、质量或状态系统。
-- `evolve-workspace` — 只把用户明确反馈或上游候选转成最小可验证改动；区分单次与长期范围，不从行为信号推断偏好，也不自动覆盖本地真源。
-- `diagnose-workspace` — 只读检查活动闭包、生命周期边界、来源、投影、Git 与 inbox；不评价业务结论，不读 Secret 值，也不自动整理或删除。
+用户明确说“寻找某个外部技能并融入”时，当前 Host 直接获取并完整读取来源，检查与现有能力的关系，然后吸收、合并、建立依赖、保留变体/Adapter、Clean-room 重构，或作为新的完整正式 Skill 纳入。这个路径不强制 Candidate、Trial、示例或效果测试；如果用户同时指定要在哪个 Mode 使用，就在静态结构校验后直接更新该 Mode。
 
-## 从一句目标开始
+真正使用了上游文字、代码、脚本、模板或独特资产时保留来源与许可；如果个人仓库只提供了需求和整理思路，则不复制实现，按本地契约和许可清楚的公共基础能力独立重构。
 
-`workspace-core` 是培养个人能力库的全局种子包，领域插件是可选能力来源，Personal Workspace 则保存已经采用的业务 Skill 与场景 Skill。用户只需先初始化一次，以后每次直接给最终目标；下面的发现、培养和固化由种子 Skill 在需要时接力，不要求用户逐条指挥：
+只有来源、许可、安全、重合关系、运行方式或是否采用仍不确定时，才进入 Candidate 或 Trial。公开推荐和仓库关注度帮助发现，但 Host 主动发现的来源不会因此自动采用。
+
+## 当前仓库状态
+
+```mermaid
+flowchart LR
+    PROFILE["PROFILE.md<br/>精简长期边界"]
+    SKILLS["skills/<br/>37 个正式 Skill"]
+    MODES["modes/<br/>4 个业务 Mode"]
+    VIEW["WORKSPACE.md<br/>实时能力地图"]
+    HOSTS["Codex / Claude / DeepSeek<br/>按 Mode 生成投影"]
+    ARCHIVE["archive/<br/>冻结旧插件结构"]
+
+    PROFILE --> MODES
+    SKILLS --> MODES --> VIEW --> HOSTS
+    ARCHIVE -.不进入活动能力面.-> VIEW
+
+    classDef done fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    classDef frozen fill:#f3f4f6,stroke:#6b7280,color:#374151;
+    class PROFILE,SKILLS,MODES,VIEW,HOSTS done;
+    class ARCHIVE frozen;
+```
+
+| 区域 | 当前事实 | 约束 |
+| --- | --- | --- |
+| `skills/` | 37 个可公开、完整、带来源的正式 Skill | 不再按 Domain 复制发行 |
+| `modes/` | Creator、Product、Investment、Capital Markets 四个工作场 | 只保存 Skill 选择，不保存 Workflow |
+| `WORKSPACE.md` | Harness 从当前真源生成的能力地图 | 不手写第二份 Skill Index |
+| `archive/` | 旧插件布局、系统 Skill 与历史规则 | 冻结追溯，不参与运行 |
+| 三宿主接入 | 同一 Environment 可投影到 Codex、Claude Code 与 DeepSeek | 投影可重建，不成为真源 |
+
+旧 `foundation`、`orchestrator`、`skill-index`、`workspace-core` 与 `plugins/domain-*` 均已退出活动根目录。确定性维护职责由 ASL Harness 提供，业务能力只在 `skills/` 保存。
+
+## 当前目录
 
 ```text
-安装 workspace-core
-→ 首次：initialize-workspace 建立最小 Git Workspace
-→ 日常：pursue-goal 接收一句最终目标
-   → 命中稳定场景：对照 Benchmark 端到端执行和返工
-   → 缺能力：discover-capability → cultivate-skill → 当前 Case 试跑
-      → 用户明确采用后进入 Workspace
-      → 反复成立后 cultivate-workflow 固化场景与 Benchmark
+agent-skill-library/
+├── WORKSPACE.md
+├── PROFILE.md
+├── skills/
+│   └── <skill-id>/
+│       ├── SKILL.md
+│       ├── SOURCE.md
+│       ├── references/
+│       ├── scripts/
+│       └── assets/
+├── modes/
+│   └── <mode-id>/
+│       ├── MODE.md
+│       └── mode.yaml
+├── candidates/
+├── trials/
+├── feedback/
+└── archive/
 ```
 
-已经培养好的稳定场景可以交给 ASL Harness 投影到 Codex App 或 Claude Code，并生成可续跑的本地 Run。没有稳定场景时，`pursue-goal` 从原始 Goal 得出一次性 Case 验收清单，再用 Workspace 已采用的 Skill 在当前会话临时排链；该清单不是稳定 Benchmark 或新协议文件。这次探索不伪装成已经固化的 Workflow，也不让 Harness 承担第二次调度。
+`WORKSPACE.md` 是自动生成的人机共读能力地图，不是第二份手写 Skill Index。Mode 只保存显式 Skill 根；Harness 计算正式依赖闭包。
 
-**Orchestrator + Index**
+## 维护边界
 
-- `workflow-orchestrator` — 已跑通的 Library-native 固定链路由入口。`SKILL.md` 只做路由，具体 chain 压缩在 `references/chains/`。
-- `external-skill-index` — 两层生态索引：本地技能 vs GitHub 外部候选；只在稳定 Run 外发现和沉淀，不在运行中安装。
+- 当前 Host 是唯一执行者，Harness 不接管业务任务。
+- Skill 是最小完整能力单位，不拆成运行时碎片。
+- Mode 是业务工作状态，不是 Domain、Workflow 或个人能力全集。
+- 普通 Case 不自动修改 Skill 或 Mode。
+- 只使用用户明确反馈，不从点击、沉默或其他模糊行为推断偏好。
+- Candidate、Trial、正式 Skill、Mode、Case 和 Archive 不混用。
+- 删除、合并和复用优先于增加脚本、字段、配置和隐藏层。
 
-**Domain**
+## 当前阶段
 
-| 领域 | 瓦技能 |
-| --- | --- |
-| `domain-writing` | `wechat-account-corpus-research` · `topic-research-deposition` · `public-account-writing-style` · `baoyu-format-markdown` · `editorial-visual-storytelling` · `baoyu-image-gen` · `baoyu-article-illustrator` · `baoyu-infographic` · `baoyu-diagram` · `baoyu-comic` · `baoyu-cover-image` · `baoyu-markdown-to-html` · `baoyu-post-to-wechat` · `baoyu-compress-image` |
-| `domain-investment` | `investment-research` · `investment-ai-product-judgment` · `investment-competitive-landscape` · `investment-unit-economics` · `investment-financial-model-builder` · `investment-scorecard` · `investment-valuation-returns` · `investment-dd` · `investment-thesis-tracking` · `investment-ic-memo-writer` · `investment-visual-report` |
-| `domain-capital-markets` | `public-equity-coverage-writer` · `investment-chart-pack` · `financial-company-profile` · `investment-banking-pitch-deck` · `sell-side-ma-materials` · `financial-artifact-qc` |
-| `domain-product` | `ai-product-analyzer` |
-
-## 运行链
-
-Library-native 固定链由 `workflow-orchestrator` 路由，chain 定义在 `plugins/orchestrator/skills/workflow-orchestrator/references/chains/`。
-
-```
-公众号选题 → [按需：账号历史/对标账号语料] → agent-reach 搜索 → 公众号编辑判断与深度写作 → Markdown 排版 → 视觉路由（截图/插图/信息图/SVG 图解/知识漫画）与封面 → HTML 预览 → 草稿箱发布
-  chain: wechat-writing.md
-
-AI case → 产品判断 → 竞争格局 → 单位经济 → 评分 → 估值 → DD → 论点追踪 → IC memo → 可视化研报
-  chain: investment-icmemo.md  ·  doc: docs/workflows/investment-product-to-research-report.md
-
-公开公司 → 事实包 → 竞争格局 → 模型 → 估值 → thesis/业绩前瞻 → 图表 → 首次覆盖 → 金融 QC
-  chain: public-equity-coverage.md  ·  doc: docs/workflows/public-equity-coverage.md
-```
-
-这些 chain 是 Library 内的能力来源，不是 Personal Workspace 的运行真源。现有投研 Workspace 继续使用 ASL-WEP v0.1 兼容 Profile；公众号 Workspace 已用 v0.2 把所需写作 Skill 本地化为 `wechat-end-to-end` 稳定场景；公开市场链仍是 Library-native chain。任何领域进入新的 Workspace 时，都要先本地化所需 Skill、保留来源、补齐内嵌完成标准并经过真实 Case，不能因为 Library 中已有 chain 就自动成为用户的稳定 Workflow。
-
-## 落盘铁律
-
-1. 所有业务材料都进入用户当前 Case，不写进 `plugins/` 或本仓库；不确定 Case 根时先从当前上下文和现有文件判断，确实无法确定再问。
-2. 稳定场景和 Library-native 固定链使用 Case 内的 run folder；临时链没有 Harness Run，过程文件进入 Case 的普通工作目录，不伪造 `.asl/runs/`。
-3. 每个有保留价值的中间产物按场景或 Skill 约定落盘，成品不替代过程包。
-
-## 双端安装与验证
-
-### Claude Code
-
-```powershell
-claude plugin marketplace add qihangzhang-272/agent-skill-library
-claude plugin install workspace-core@agent-skill-library --scope user
-```
-
-Claude Code 读取 `.claude-plugin/`。培养个人 Workspace 时先安装 `workspace-core`；需要直接运行 Library-native 固定链时再安装 `orchestrator`，它的 Claude manifest 会声明领域依赖。其他领域插件可以按需安装，不要求一开始装满。
-
-### Codex
-
-```powershell
-codex plugin marketplace add qihangzhang-272/agent-skill-library
-```
-
-Codex 读取 `.agents/plugins/marketplace.json` 与各插件的 `.codex-plugin/plugin.json`。当前 Codex CLI 负责注册 marketplace，单插件安装在 Codex App 的 Plugins 页面完成；培养个人 Workspace 时先安装 `workspace-core`。安装或升级后新开任务，才会载入新的技能命名空间。项目也可以通过 `.agents/skills/` 直接发现稳定场景闭包，但这只是项目级入口，不替代正式 Codex Plugin 分发。
-
-Codex 不读取 Claude manifest 的 `dependencies`。要直接运行 Library-native 公众号链，至少同时安装 `orchestrator` 与 `domain-writing`；需要检索外部技能来源时再安装 `skill-index`。要使用整套 Library，可在 Plugins 页面安装 marketplace 中全部 8 个插件；只培养自己的 Workspace 时不需要全部安装。Claude Code 安装 `orchestrator` 时则会按其 manifest 解析领域依赖。
-
-`domain-writing` 自带统一的 `package.json` 与 `bun.lock`，覆盖迁入脚本的运行依赖；`node_modules` 不进入仓库。Bun 默认会在首次脚本执行时安装缺失依赖，禁用自动安装的环境可在该 plugin 根目录运行 `bun install --frozen-lockfile`。
-
-### 仓库门禁
-
-```powershell
-# 在本仓库根目录；提交和推送前必须两项都通过
-claude plugin validate . --strict
-node scripts/validate-repository.mjs --base HEAD
-```
-
-第一项验证 Claude Code schema；第二项同时检查 Claude/Codex 双 manifest、两个 marketplace、版本一致性、技能发现、chain 引用和相对链接。改动 plugin 内容后，Claude 与 Codex manifest 必须使用同一版本，并同步 Claude marketplace。本仓库已启用 `.githooks/pre-push` 与 GitHub Actions 双门禁；首次 clone 后执行 `git config core.hooksPath .githooks`。
-
-## 边界
-
-- `ai-product-analyzer` 是跨环境复用例外，随包携带 `references/`，可独立复制到项目或用户级 skills 目录。
-- `external-skill-index` 是外部技能统一收纳入口。`public-account-writing-style` 是 `wechat-writing` chain 的唯一正文 owner；外部写作技能只保留来源记录，不复制进本库，也不进入运行链。Baoyu 中经过维护者晋升的 10 个公众号及内容视觉技能继续原样迁入 `domain-writing`。`wechat-account-corpus-research` 只维护独立编写的数据与授权契约，外部 exporter、受限参考源和高风险增强服务的 URL、commit、许可证与调用边界只在索引维护。agent-reach、humanizer-zh、frontend-design、GSAP、TypeUI、Taste Skill、Impeccable 等仍保留为外部来源。
-- `oss-investment-scorecard` 已降级为 `investment-scorecard` 的内部 reference，不要直接调用旧入口。
-- 投资与资本市场领域都只放瓦技能；Library-native 固定链由 `workflow-orchestrator` 路由，Personal Workspace 场景则由自己的场景 Skill 与极简 Workflow 表达，两者都不设第二个调度器。
-- 本仓库和 Product Hunter 没有长期关系。历史借用只算导入 provenance。
-
-## 治理文档
-
-- [docs/governance/library-constitution.md](docs/governance/library-constitution.md) — 长期约束、三层架构、收录判断、引用策略与复制边界
-- [docs/governance/catalog-schema.md](docs/governance/catalog-schema.md) — 插件内技能记录方式
-- [docs/workflows/](docs/workflows/) — 跨技能工作流说明
-
-## 仓库工作规则
-
-- **永远在 main 分支操作**。不新开 git worktree，不开长期特性分支——直接在 main 上改、验证、提交。需要隔离试验时用 `git stash` 或另起 clone，不在仓库里维护并行分支。
-- **commit 格式统一为** `YYYY-MM-DD HH:mm｜中文变更描述`，不使用 `feat()` / `fix()` / `merge:` 等其他格式。示例：`2026-07-07 14:30｜修复 principles 描述滞后并 bump version`。
-- 正文改动后的 version bump 与 validate 见「安装与验证」节。
+Mode-native 迁移已经完成：活动根目录只包含 Profile、37 个正式 Skill、4 个业务 Mode、四个培养/追溯区和 Harness 生成的能力地图。旧插件结构保存在 `archive/legacy-plugin-layout/`，不会被任何 Mode 或宿主投影加载。

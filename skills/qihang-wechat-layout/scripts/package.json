@@ -1,0 +1,8 @@
+{
+  "name": "qihang-wechat-layout-scripts",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "baoyu-md": "^0.1.1"
+  }
+}

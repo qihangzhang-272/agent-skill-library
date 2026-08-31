@@ -1,0 +1,12 @@
+apiVersion: asl-wep/v0.3.0
+kind: ModeProjection
+metadata:
+  id: product-lab
+spec:
+  skills:
+    - agent-reach
+    - known-content-archive
+    - topic-research-deposition
+    - ai-product-analyzer
+    - baoyu-diagram
+    - baoyu-infographic

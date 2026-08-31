@@ -1,0 +1,16 @@
+apiVersion: asl-wep/v0.3.0
+kind: ModeProjection
+metadata:
+  id: capital-markets-desk
+spec:
+  skills:
+    - agent-reach
+    - financial-company-profile
+    - investment-banking-pitch-deck
+    - sell-side-ma-materials
+    - public-equity-coverage-writer
+    - investment-chart-pack
+    - financial-artifact-qc
+    - investment-financial-model-builder
+    - investment-valuation-returns
+    - investment-thesis-tracking

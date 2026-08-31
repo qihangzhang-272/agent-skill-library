@@ -3,6 +3,9 @@ Thumbs.db
 *.tmp
 *.log
 node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
 
 # 运行产物（不该进技能库）
 research/

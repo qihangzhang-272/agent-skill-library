@@ -1,3 +1,7 @@
+<p align="right">
+  <strong>简体中文</strong> · <a href="README_EN.md">English</a>
+</p>
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/qihangzhang-272/agent-skill-library/main/docs/assets/agent-skill-library-cover.png" alt="Agent Skill Library" width="100%">
 </p>

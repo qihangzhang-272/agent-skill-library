@@ -17,7 +17,7 @@
 
 - 正式业务 Skills：37
 - 业务 Modes：4
-- 确定性提醒：无
+- 确定性提醒：GENERATED_CONTENT_PRESENT：skills/known-content-archive/scripts/__pycache__, skills/known-content-archive/tests/__pycache__, skills/reference-video-analysis/scripts/__pycache__, skills/reference-video-analysis/tests/__pycache__, skills/x-post-card-studio/scripts/__pycache__, skills/x-post-card-studio/tests/__pycache__
 
 ### 正式 Skills
 
@@ -53,15 +53,15 @@ NOT for: 写报告/数据分析/翻译等内容加工（本 skill 只负责从�
 - `investment-unit-economics`：Analyze business model quality, revenue quality, customer economics, AI readiness, and value creation for AI investment cases. Use when an IC memo needs ARR, NDR, LTV/CAC, CAC payback, gross margin, inference cost, pricing, revenue concentration, pilot readiness, or value creation logic.
 - `investment-valuation-returns`：Use when the user needs valuation framing, comps, DCF or LBO result interpretation, price-target logic, return scenarios, IRR/MOIC sensitivity, entry or exit assumptions, or valuation red flags. Use investment-financial-model-builder instead when the requested deliverable is an XLSX workbook.
 - `investment-visual-report`：Use when turning a completed investment IC memo into a polished, single-file HTML visual research report (投资研报/可视化研报/IC memo 可视化/前端展示/网页版研报). Triggers whenever the user wants to visualize, present, or make a webpage/HTML out of investment analysis — scorecards, valuation, competitive landscape, DD, bull/base/bear scenarios. This is the visual-report node of the investment chain; it consumes the memo's text, never re-researches. Always use this skill for investment report visualization so the house style stays consistent.
-- `known-content-archive`：Archive URLs, local files, or an explicitly named collection that the user has already supplied. Use when the task is to read, download, normalize, or preserve known content without expanding into keyword search, account discovery, recommendations, or private collections.
+- `known-content-archive`：Retrieve and archive explicit URLs, local files, URL lists, or precisely named collections as immutable local source packages. Use when the user already knows what should be preserved; do not use for open-ended discovery, recommendations, account crawling, or private collections without current-turn authorization.
 - `public-account-writing-style`：Use when drafting or revising Chinese public-account essays in the library's editorial style. Triggers on: "公众号文章", "不像我的风格", "按我的节奏改", "写一篇产品分析", "写 Skill 相关文章", "写一篇深度文章", "帮我分析一下这个选题", or when a draft feels too slogan-like, too AI-polished, overuses short punchy sentences, or uses "不是…而是…" / "如果…那么…" patterns. Also triggers when the user wants structured thinking around a topic before writing.
 - `public-equity-coverage-writer`：Use when the user needs an institutional public-equity initiating-coverage report, stock rating and price target, or final equity-research report assembled from completed research, model, valuation, thesis, and chart handoffs. Do not use for private-company IC memos or to perform upstream research and modeling inside the writer.
 - `qihang-wechat-layout`：Apply the confirmed “航的杂谈地图” personal typography catalog to finalized Markdown, generate WeChat-compatible HTML, and create the read-only pre-publication preview used before draft publishing. Use when the user asks for 启航排版、个人公众号风格、个人样式目录、HTML 预览 or wants to replace generic Baoyu themes. Do not use it to rewrite content or decide illustrations.
-- `reference-video-analysis`：Use when the user provides a benchmark video, transcript, or short-form creator sample and wants to understand its audience promise, narrative structure, pacing, evidence, transferable mechanisms, and concrete improvement opportunities without copying the creator's wording or identity.
+- `reference-video-analysis`：Analyze a supplied benchmark video, transcript, subtitle file, or creator sample at title, opening, sentence-role, narrative, pacing, evidence, cognitive-load, material, and creation-workflow levels. Use to explain why a video works and how to build an original piece with equivalent communication strength without copying the creator's identity or wording.
 - `sell-side-ma-materials`：Use when the user needs a sell-side M&A confidential information memorandum, anonymous teaser, or buyer-facing transaction material based on approved company, financial, and transaction inputs.
 - `topic-research-deposition`：Use when the user asks to 搜一下、调研、找资料、沉淀素材、补截图、做产品事实收集、投资/OSS research、公众号选题搜索、写作前第 0 步，或需要在写作/产品分析前建立可复查的 evidence folder.
 - `wechat-account-corpus-research`：Use when the user asks to 批量抓取或导出微信公众号历史文章、建立对标账号语料库、按日期或原创标记筛选公众号内容、批量处理 mp.weixin.qq.com URL，或把账号级素材交给公众号选题研究。该技能只采集并规范化获准访问的公开文章语料，不写文章、不推断私有指标、不发布内容。
-- `x-post-card-studio`：Turn an explicitly supplied public X post or same-author thread into readable 1080×1440 image cards and, when requested, a silent slideshow MP4. Use for X content cards, thread slices, social carousels, or visual preservation after the source has been retrieved; do not use for X discovery, rewriting, narration, or publishing.
+- `x-post-card-studio`：Turn one explicitly supplied public X post, quote post, or same-author direct thread into source-faithful 1080×1440 cards, a ZIP, contact sheet, and optional MP4 with native video and source audio in place. Use for X card publications and visual archives; do not use for discovery, rewriting, narration, or publishing.
 
 ### Modes
 

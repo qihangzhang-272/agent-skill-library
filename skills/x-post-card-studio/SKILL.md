@@ -1,34 +1,42 @@
 ---
 name: x-post-card-studio
-description: Turn an explicitly supplied public X post or same-author thread into readable 1080×1440 image cards and, when requested, a silent slideshow MP4. Use for X content cards, thread slices, social carousels, or visual preservation after the source has been retrieved; do not use for X discovery, rewriting, narration, or publishing.
+description: Turn one explicitly supplied public X post, quote post, or same-author direct thread into source-faithful 1080×1440 cards, a ZIP, contact sheet, and optional MP4 with native video and source audio in place. Use for X card publications and visual archives; do not use for discovery, rewriting, narration, or publishing.
 ---
 
 # X Post Card Studio
 
-Render already retrieved X content as a small visual publication. This Skill owns card composition, not source discovery or editorial rewriting.
+Create a readable visual edition of a known X source. Preserve what the selected author posted and make source selection auditable; do not smuggle unrelated replies, quoted bodies, editorial copy, or synthetic media into the result.
 
 ## Boundary
 
-- Accept normalized data for one supplied public post or one same-author thread.
-- Retrieve the source first with the current Mode's installed retrieval capability. Do not add another X client, search route, login system, or browser scraper.
-- Preserve the selected author's sequence. Exclude quote-post bodies and unrelated replies unless the user explicitly includes them.
-- Do not invent connective copy, commentary, narration, music, or calls to action.
-- Native videos remain separately listed source assets. The renderer does not pretend a frozen thumbnail is the original video.
-- Creating files is allowed; publishing or saving an external draft requires a separate explicit request.
+- Accept one public X status URL or normalized JSON for one focus post.
+- A thread contains the focus post plus direct reply descendants from the same author. Other-author replies are excluded.
+- A quote post keeps the focus author's own text and media. The quoted post body/media remain excluded and are recorded in the selection manifest.
+- Do not invent connective copy, commentary, narration, music, TTS, calls to action, or missing media.
+- The command may read a public supplied URL through the Mode's installed `opencli` X adapter. Authentication and private access remain the Host's responsibility.
+- Creating files is allowed. Publishing or saving an external draft requires a separate explicit request.
 
-## Input
+## Run from a public X URL
 
-Prepare UTF-8 JSON:
+```bash
+python scripts/render_x_cards.py \
+  "https://x.com/example/status/123" \
+  --output ./artifacts/x-cards
+```
+
+The script uses `opencli twitter thread` for this exact URL, keeps the focus/same-author chain, downloads selected X CDN media into the output, and renders the cards. This is a direct retrieval adapter, not a discovery engine.
+
+For a pre-retrieved source, pass normalized JSON instead. Local media paths are resolved relative to that JSON.
 
 ```json
 {
   "source_url": "https://x.com/example/status/123",
-  "title": "Optional collection title",
   "author": {"name": "Example", "handle": "@example", "avatar": "./avatar.png"},
   "posts": [
     {
+      "id": "123",
       "text": "Post text",
-      "created_at": "2026-08-31",
+      "created_at": "2026-09-01",
       "media": [
         {"type": "image", "path": "./image.png"},
         {"type": "video", "path": "./clip.mp4"}
@@ -38,32 +46,49 @@ Prepare UTF-8 JSON:
 }
 ```
 
-Paths are resolved relative to the JSON file. Missing optional fields are allowed; missing post text is not.
+## Choose a visual treatment
 
-## Render
-
-Run:
+List the eleven built-in treatments:
 
 ```bash
-python scripts/render_x_cards.py source.json --output ./artifacts/x-cards
+python scripts/render_x_cards.py --list-styles
 ```
 
-The renderer creates card HTML, PNG screenshots when Chrome or Edge is available, and `cards.json`. Add `--video` for a silent slideshow MP4 when `ffmpeg` is installed. Use `--html-only` only for diagnosis or hosts without a browser.
+Select one with `--style`. The treatments change palette and typographic character while retaining the same source-selection and readability rules. The default is `blue-paper`.
 
-The default blue-orange paper treatment is intentionally simple. Adjust content density before adding decorative elements. A card must remain understandable on a phone without knowledge of the surrounding Case.
+## Delivery formats
 
-## Check
+With Chrome or Edge available, the output contains:
 
-- Read every card in order at phone width.
-- Confirm no sentence was cut between cards without enough continuation context.
-- Confirm author, handle, source URL and order are correct.
-- Confirm image assets belong to the selected post.
-- If the source contains video, state that the video remains a separate asset unless another approved media-composition capability was used.
+```text
+x-cards/
+├── card-01.html / card-01.png ...
+├── contact-sheet.png
+├── cards.json
+├── source-assets/             # only when public X media was downloaded
+└── x-cards.zip
+```
+
+Add `--video` when `ffmpeg` is installed. Still cards remain silent. On a card containing native video, the source video plays inside the card and only its original audio is retained; silence resumes on other cards. The Skill never adds BGM, TTS, or synthetic sound.
+
+Use `--html-only` only for diagnosis. It intentionally skips PNG, contact-sheet, and MP4 production.
+
+## Quality check
+
+Read the contact sheet, then every card in order. Inspect `cards.json` for:
+
+- focus ID, included IDs, and excluded reply/quote IDs;
+- card order and source media ownership;
+- style, 1080×1440 target, hashes, file sizes, and image dimensions;
+- MP4 timeline showing exactly where source video/audio appears.
+
+If any source item is inaccessible, stop or use user-supplied normalized JSON. Do not replace it with a screenshot, paraphrase, or model memory.
 
 ## 完成标准
 
-- `cards.json` lists every generated card and every source media asset.
-- Image cards are 1080×1440 when browser rendering is available.
-- The output contains only the selected post or same-author thread.
-- No source text was rewritten merely to fit the template.
-- No publication, login reuse, music, TTS, or hidden discovery occurred.
+- The result contains only the selected focus post and its same-author direct thread descendants.
+- Quote bodies/media and other-author replies are excluded and visible in the selection record.
+- Source text is not rewritten merely to fit a card.
+- PNG cards are 1080×1440; the ZIP, contact sheet, and quality manifest are present.
+- Native video is embedded in the MP4 and source audio exists only for its corresponding segment.
+- No discovery, private-login reuse, publishing, BGM, TTS, narration, or invented content occurred.

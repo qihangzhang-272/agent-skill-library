@@ -1,69 +1,94 @@
 ---
 name: known-content-archive
-description: Archive URLs, local files, or an explicitly named collection that the user has already supplied. Use when the task is to read, download, normalize, or preserve known content without expanding into keyword search, account discovery, recommendations, or private collections.
+description: Retrieve and archive explicit URLs, local files, URL lists, or precisely named collections as immutable local source packages. Use when the user already knows what should be preserved; do not use for open-ended discovery, recommendations, account crawling, or private collections without current-turn authorization.
 ---
 
 # Known Content Archive
 
-Turn already identified material into a local, auditable source package. This Skill owns archiving, not discovery.
+Turn material the user has already identified into a bounded, auditable local archive. The current Host performs retrieval; this Skill defines the handoff and owns durable preservation.
 
 ## Boundary
 
-- Accept explicit URLs, local files, a URL list, or a collection the user has named precisely.
-- Do not add related links, search by keyword, crawl an account, export bookmarks, or infer a larger collection.
-- Use the current Host and an existing local retrieval Skill for platform access. Do not add another cross-platform router or duplicate platform login logic here.
-- Ask for current-turn authorization before reading private, logged-in, or user-specific data. Public URLs supplied by the user do not require a separate adoption Trial.
-- Preserve source identity and retrieval facts. Archiving content does not grant permission to republish it.
+- Accept explicit URLs, local files, a supplied URL list, or a collection named precisely enough to enumerate.
+- Do not expand the scope with keyword search, related links, account history, bookmarks, recommendations, or model memory.
+- Use the current Mode's installed retrieval route. Prefer Agent Reach/opencli when present; do not create another cross-platform router or duplicate login storage.
+- Ask for current-turn authorization before accessing logged-in or user-specific content. A public URL supplied by the user needs no extra adoption Trial.
+- An inaccessible item is a recorded result, not permission to substitute a different source.
 
-## Retrieve
+## End-to-end operation
 
-Choose the smallest available route that can read the supplied item:
+### Retrieve
 
-- ordinary web pages and public platform URLs: use the current Mode's installed retrieval capability;
-- local files: read them directly;
-- media: download only when the user asked for the media or it is necessary to preserve the supplied item;
-- inaccessible content: record the failure honestly instead of replacing it with search results or model memory.
+Read or download each supplied item with the smallest available Host capability:
 
-Keep retrieval output in the current Case or a temporary directory until it is normalized. Do not write a second global cache.
+- ordinary pages and public platform URLs: the Host's browser, web reader, or installed retrieval Skill;
+- X, video, podcast, social, and creator-platform URLs: the corresponding Agent Reach/opencli route already available in the Mode;
+- local files: direct local read;
+- media: download only when requested or necessary to preserve the supplied item.
 
-## Normalize
+Keep intermediate retrieval files inside the current Case or a temporary run directory. Do not create a second global cache.
 
-For each item, run `scripts/archive_item.py` with the retrieved text or HTML and any downloaded assets. The script creates one immutable package:
+### Record the retrieval handoff
 
-```text
-<output-root>/<slug>/
-├── source.json
-├── receipt.md
-├── content.<ext>       # when text or HTML was retrieved
-└── assets/             # when media was explicitly preserved
+For multiple items, write one UTF-8 JSON receipt. Paths are relative to the receipt:
+
+```json
+{
+  "collection": "the exact collection requested by the user",
+  "items": [
+    {
+      "source": "https://example.com/article",
+      "title": "Article title",
+      "status": "ready",
+      "content_file": "retrieved/article.md",
+      "assets": ["retrieved/cover.jpg"],
+      "retrieved_at": "2026-09-01T00:00:00+00:00",
+      "access": "public-or-local"
+    },
+    {
+      "source": "https://example.com/private",
+      "title": "Unavailable item",
+      "status": "unavailable",
+      "reason": "login required"
+    }
+  ]
+}
 ```
 
-Example:
+Do not mark an item `ready` until its referenced files actually exist.
+
+### Preserve
+
+For one item, run `scripts/archive_item.py`. For a list or collection, run:
 
 ```bash
-python scripts/archive_item.py \
-  --source "https://example.com/article" \
-  --title "Article title" \
-  --text-file ./retrieved.md \
-  --output-root ./inputs/source-archive
+python scripts/archive_batch.py retrieval.json --output ./inputs/source-archive/run-name
 ```
 
-The script never performs network access and refuses to overwrite an existing package. Retrieve first; archive second.
+The batch output is immutable and contains:
+
+```text
+run-name/
+├── <item-slug>/
+│   ├── source.json
+│   ├── receipt.md
+│   ├── content.<ext>
+│   └── assets/
+├── archive-manifest.jsonl
+├── failures.json
+└── run-summary.json
+```
+
+Successful items remain available even when another item fails. Existing run and item paths are never overwritten.
 
 ## Handoff
 
-Return:
-
-- the package path;
-- the original source and retrieval time;
-- what was preserved and what was unavailable;
-- whether access used a public route or current-turn private authorization;
-- the exact downstream Case or Skill that should consume the package, if one is already known.
+Return the run path, exact requested scope, archived/unavailable/failed counts, access method, and any unavailable reason. Name the downstream Case or Skill only when it is already known; do not invent a workflow.
 
 ## 完成标准
 
-- Every archived item came from an explicit user input or precisely named collection.
-- `source.json` contains hashes for preserved files and enough metadata to trace the source.
-- No discovery result, recommendation, private collection, or adjacent account content was silently added.
-- Existing packages were not overwritten.
-- Platform access remains owned by the current Host and installed retrieval Skills.
+- Every archived item traces to the user's explicit input or precisely named collection.
+- Preserved files have hashes and source identities; batch outcomes have a manifest and honest failure list.
+- Public and authorized-private access remain distinguishable.
+- No adjacent account content, inferred collection, recommendation, or substitute source was silently added.
+- Retrieval used the Host's existing capability; this package did not create a competing router or credential store.

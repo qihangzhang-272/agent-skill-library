@@ -1,8 +1,8 @@
 ---
 name: baoyu-post-to-wechat
 description: Posts content to WeChat Official Account (微信公众号) via API or Chrome CDP. Supports article posting (文章) with HTML, markdown, or plain text input, and image-text posting (贴图, formerly 图文) with multiple images. Markdown article workflows default to converting ordinary external links into bottom citations for WeChat-friendly output. Use when user mentions "发布公众号", "post to wechat", "微信公众号", or "贴图/图文/文章".
-version: 1.118.2
 metadata:
+  version: 1.118.2
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-post-to-wechat
     requires:
@@ -298,6 +298,13 @@ Files created:
 ## Extension Support
 
 Custom configurations via EXTEND.md. See "Preferences" for paths and supported options.
+
+## 运行依赖
+
+- 所有发布脚本需要 `bun`，没有 Bun 时使用 `npx -y bun`。
+- 浏览器方式需要 Chrome/Chromium/Edge 和用户已经建立或现场完成的微信公众号登录；可用 `WECHAT_BROWSER_CHROME_PATH` 指定浏览器。API 方式需要本地账户配置中的 AppID、AppSecret 与微信 IP 白名单；远程 API 方式还需要宿主可用的 `ssh`。
+- 登录、二维码、AppSecret、Cookie 和 Chrome Profile 只由宿主原生授权与用户本地配置管理，不进入 Environment 或 Git。缺少运行条件时停在可检查 HTML，不伪造“草稿已保存”。
+- 写入公众号草稿箱始终属于外部写入，只有用户明确授权后才能执行。
 
 ## 完成标准
 

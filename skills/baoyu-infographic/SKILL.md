@@ -1,8 +1,8 @@
 ---
 name: baoyu-infographic
 description: Generate professional infographics with 21 layout types and 22 visual styles. Analyzes content, recommends layout×style combinations, and generates publication-ready infographics. Use when user asks to create "infographic", "信息图", "visual summary", "可视化", or "高密度信息大图".
-version: 1.117.4
 metadata:
+  version: 1.117.4
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-infographic
 ---
@@ -334,6 +334,11 @@ EXTEND.md lives at the first matching path in Step 1.1. Three ways to change it:
   - `preferred_image_backend: baoyu-image-gen` — pin to the baoyu-image-gen skill.
   - `preferred_image_backend: ask` — confirm backend every run.
   - `preferred_layout: dense-modules`, `preferred_style: morandi-journal`, `preferred_aspect: portrait`, `language: zh` — shift the Step-3 recommendations and Step-4 defaults (per [Confirmation Policy](#confirmation-policy), these never bypass Step 4).
+
+## 运行依赖
+
+- 必须有一个可用的位图生成后端：Codex 原生 `imagegen`、目标宿主原生图像工具，或已配置 Provider 的 `baoyu-image-gen`。
+- 只有选择 `codex-cli` 回退时才需要 `codex` 命令和有效登录。后端不可用时保留信息结构、画内文字和生成 Prompt，明确没有生成最终位图。
 
 ## 完成标准
 

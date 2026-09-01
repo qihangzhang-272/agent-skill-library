@@ -130,9 +130,17 @@ asl-harness host.project \
   --project /path/to/current-project \
   --mode creator-studio \
   --host-id claude-code
+
+asl-harness host.verify \
+  --workspace ./agent-skill-library \
+  --project /path/to/current-project \
+  --mode creator-studio \
+  --host-id claude-code
 ```
 
 把 `host-id` 改成 `codex-app` 或 `deepseek-harness` 即可生成另外两个宿主的项目投影。DeepSeek Agent Preset 使用 Harness 的 `deepseek.preset.export` 单独导出，业务内容仍然只来自这份 Environment。
+
+`host.project` 返回的 `activation` 会告诉当前 Agent：打开哪个项目、读取哪个宿主规则文件、哪些 Skill 还有 MCP / 命令 / 登录等运行依赖，以及自动 Hook 是否需要安装。Mode 投影本身完成后即可工作；Hook 不作为硬前置条件。
 
 ## Skill 从哪里来
 
@@ -144,7 +152,7 @@ asl-harness host.project \
 
 只有来源、许可、安全、重合关系、运行方式或是否采用仍不确定时，才进入 Candidate 或 Trial。公开推荐和仓库关注度帮助发现，但 Host 主动发现的来源不会因此自动采用。
 
-需要 MCP、API、Agent、Plugin 或工具的正式 Skill，可以在自己的 package 内携带 portable 或宿主专用 binding 资产。它们跟随完整 Skill 被同步和投影；真正的安装、登录、权限和激活仍由 Codex、Claude Code 或 DeepSeek Harness 的原生 Adapter 完成。
+需要 MCP、命令、环境变量或确有必要的宿主插件时，正式 Skill 在自己的 `SKILL.md` 中按需写清运行依赖、检查方式和缺失时的处理；当前真实依赖外部运行能力的研究、图像、渲染和微信发布 Skill 已补充这些说明。可复用脚本直接放在同一 Skill 的 `scripts/`。没有依赖时不创建空章节或空目录。真正的安装、登录、权限和激活仍由 Codex、Claude Code 或 DeepSeek Harness 的原生机制完成；宿主已经提供的 Tool、Agent、模型和沙箱不再被 ASL 包装一层。
 
 ## 仓库结构
 
@@ -189,8 +197,7 @@ agent-skill-library/
 │       ├── SOURCE.md
 │       ├── references/
 │       ├── scripts/
-│       ├── assets/
-│       └── bindings/            # 可选宿主接线资产
+│       └── assets/
 ├── modes/
 │   └── <mode-id>/
 │       ├── MODE.md
@@ -215,4 +222,4 @@ agent-skill-library/
 
 ## 当前阶段
 
-动态数量、迁移状态、三宿主投影版本和验证证据不在本 README 重复维护，统一查看 [ASL Architecture Views · View 9](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前状态与迁移图)。
+动态数量、迁移状态、三宿主投影版本和验证证据不在本 README 重复维护，统一查看 [ASL Architecture Views · View 9](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态)。

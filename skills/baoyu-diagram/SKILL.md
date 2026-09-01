@@ -1,7 +1,8 @@
 ---
 name: baoyu-diagram
 description: Create clear, reproducible diagrams for architecture, flow, sequence, structure, state, and conceptual relationships. Use whenever the user asks for 架构图、流程图、关系图、状态图、decision tree、diagram or any visual representation of structure/logic/process. For public-account and non-technical audiences, default to a low-complexity editorial theme with Mermaid source plus SVG/PNG; use the legacy dark technical SVG style only when the user explicitly wants it.
-version: 1.117.3
+metadata:
+  version: 1.117.3
 ---
 
 # Diagram Generator
@@ -280,6 +281,11 @@ The `.mmd` file is the semantic source. Do not edit the generated SVG by hand un
 5. `technical-dark` or unsupported layout: write SVG following the legacy layering rules, then convert to @2x PNG
 6. Verify no overlaps, no clipped labels, no crossing main-path connectors, and mobile readability
 7. Present the semantic source (when present), SVG, and PNG
+
+## 运行依赖
+
+- Mermaid 渲染脚本需要 `bun`，没有 Bun 时使用 `npx -y bun`；检查方式依次为 `bun --version`、`npx --version`。
+- 当前宿主若有原生 Mermaid/浏览器渲染能力可以直接使用。所有渲染路径都不可用时仍保存可复查的 `.mmd` 语义源，并明确 SVG/PNG 尚未生成。
 
 ## 完成标准
 

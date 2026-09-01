@@ -1,8 +1,8 @@
 ---
 name: baoyu-image-gen
 description: AI image generation with OpenAI GPT Image 2, Azure OpenAI, Google, OpenRouter, DashScope, Z.AI GLM-Image, MiniMax, Jimeng, Seedream, Replicate and Agnes APIs. Supports text-to-image, reference images, aspect ratios, and batch generation from saved prompt files. Sequential by default; use batch parallel generation when the user already has multiple prompts or wants stable multi-image throughput. Use when user asks to generate, create, or draw images.
-version: 2.1.0
 metadata:
+  version: 2.1.0
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-image-gen
     requires:
@@ -289,6 +289,12 @@ If `--provider openai --model gpt-image-2` fails because `OPENAI_API_KEY` is mis
 ## Extension Support
 
 Custom configurations via EXTEND.md. See Step 0 for paths and schema.
+
+## 运行依赖
+
+- 脚本运行需要 `bun`，没有 Bun 时使用 `npx -y bun`。
+- 必须满足一种图像后端：Codex 原生 `imagegen`；已登录的 `codex` CLI；或本 Skill `Environment Variables` 表中任一 Provider 的凭据。凭据只放宿主环境或用户本地配置，不写入 Skill、Mode 或 Git。
+- 先检查宿主原生工具，再检查 `bun` / `npx` 和所选 Provider 的环境变量名称。没有任何可用后端时停止生成并列出缺项，不要求用户把密钥粘贴进对话或仓库。
 
 ## 完成标准
 

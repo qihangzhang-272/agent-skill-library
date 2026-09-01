@@ -1,8 +1,8 @@
 ---
 name: baoyu-cover-image
 description: Generates article cover images with 5 dimensions (type, palette, rendering, text, mood) combining 11 color palettes and 7 rendering styles. Supports cinematic (2.35:1), widescreen (16:9), and square (1:1) aspects. Use when user asks to "generate cover image", "create article cover", or "make cover".
-version: 1.117.5
 metadata:
+  version: 1.117.5
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-cover-image
 ---
@@ -288,6 +288,11 @@ EXTEND.md lives at the path noted in **Step 0**. Three ways to change it:
 **Visual Elements**: [references/visual-elements.md](references/visual-elements.md)
 **Workflow**: [confirm-options.md](references/workflow/confirm-options.md) | [prompt-template.md](references/workflow/prompt-template.md) | [reference-images.md](references/workflow/reference-images.md)
 **Config**: [preferences-schema.md](references/config/preferences-schema.md) | [first-time-setup.md](references/config/first-time-setup.md) | [watermark-guide.md](references/config/watermark-guide.md)
+
+## 运行依赖
+
+- 必须有一个可用的位图生成后端：Codex 优先使用原生 `imagegen`；其他宿主使用自己的原生图像工具，或已配置 Provider 的 `baoyu-image-gen`。
+- 只有选择 `codex-cli` 回退时才需要 `codex` 命令和有效登录。没有后端时保留封面 Prompt、构图和安全区说明，不用 SVG/HTML 冒充封面成品。
 
 ## 完成标准
 

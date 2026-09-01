@@ -53,6 +53,12 @@ description: Apply the confirmed “航的杂谈地图” personal typography ca
 - `references/publish-preview.md` - 发布前只读预览页的边界、用法和停止条件。
 - `references/provenance.md` - 外部项目启发、许可证边界和独立实现说明。
 
+## 运行依赖
+
+- 个人主题渲染和发布前预览脚本需要 `bun`，没有 Bun 时使用 `npx -y bun`。
+- 正式 Markdown 转 HTML 还需要同一 Mode 中可用的 `baoyu-markdown-to-html`；进入草稿箱时再使用 `baoyu-post-to-wechat` 的浏览器或 API 运行条件。
+- 缺少发布依赖不影响生成和检查本地 HTML；必须停在本地预览，不声称已经进入草稿箱。
+
 ## 完成标准
 
 - 只接收已经定稿的 Markdown；排版过程不得擅自改写正文、补观点或制造新事实。

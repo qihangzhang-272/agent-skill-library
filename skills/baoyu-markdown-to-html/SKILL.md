@@ -1,8 +1,8 @@
 ---
 name: baoyu-markdown-to-html
 description: Converts Markdown to styled HTML with WeChat-compatible themes. Supports code highlighting, math, Mermaid (rendered to PNG via headless Chrome), PlantUML, footnotes, alerts, infographics, and optional bottom citations for external links. Use when user asks for "markdown to html", "convert md to html", "md 转 html", "微信外链转底部引用", or needs styled HTML output from markdown.
-version: 1.117.3
 metadata:
+  version: 1.117.3
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-markdown-to-html
     requires:
@@ -257,6 +257,12 @@ If no title is found, extracts from first H1/H2 heading or uses filename.
 ## Extension Support
 
 Custom configurations via EXTEND.md. See **Preferences** section for paths and supported options.
+
+## 运行依赖
+
+- Markdown 转换脚本需要 `bun`，没有 Bun 时使用 `npx -y bun`。
+- Mermaid 转 PNG 额外需要本机 Chrome、Chromium 或 Edge；缺少浏览器时普通 HTML 仍可生成，Mermaid 按正文约定退化为代码块并明确提示。
+- 检查方式：依次检查 `bun --version`、`npx --version`，只有文章含 Mermaid 时再检查可用浏览器。
 
 ## 完成标准
 

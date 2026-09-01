@@ -1,8 +1,8 @@
 ---
 name: baoyu-format-markdown
 description: Formats plain text or markdown files with frontmatter, titles, summaries, headings, bold, lists, and code blocks. Use when user asks to "format markdown", "beautify article", "add formatting", or improve article layout. Outputs to {filename}-formatted.md.
-version: 1.57.0
 metadata:
+  version: 1.57.0
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-format-markdown
     requires:
@@ -353,6 +353,11 @@ Adjust the report to reflect actual changes — omit categories where no changes
 ## Extension Support
 
 Custom configurations via EXTEND.md. See **Preferences** section for paths and supported options.
+
+## 运行依赖
+
+- 包内格式化脚本需要 `bun`，没有 Bun 时使用 `npx -y bun`；检查方式依次为 `bun --version`、`npx --version`。
+- 两者都不可用时不得声称已经运行确定性格式化脚本；可以继续人工格式化，但必须说明没有执行脚本检查。
 
 ## 完成标准
 

@@ -1,8 +1,8 @@
 ---
 name: baoyu-article-illustrator
 description: Analyzes article structure, identifies positions requiring visual aids, generates illustrations with Type × Style × Palette three-dimension approach. Use when user asks to "illustrate article", "add images", "generate images for article", or "为文章配图".
-version: 1.117.4
 metadata:
+  version: 1.117.4
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-article-illustrator
 ---
@@ -269,6 +269,11 @@ EXTEND.md lives at the first matching path listed in Step 1.5. Three ways to cha
   - `generation_batch_size: 4` — default number of images to render concurrently when the runtime supports parallel generation calls.
   - `preferred_type: infographic`, `preferred_style: notion`, `preferred_palette: macaron`, `language: zh`.
   - `default_output_dir: imgs-subdir` — where to write generated images relative to the article.
+
+## 运行依赖
+
+- 必须有一个可用的位图生成后端：Codex 优先使用原生 `imagegen`；其他宿主使用自己的原生图像工具，或已配置 Provider 的 `baoyu-image-gen`。
+- 只有选择 `codex-cli` 回退时才需要 `codex` 命令和有效登录；后端不可用时保留已完成的视觉计划和 Prompt，明确停止在生成前，不用 SVG/HTML 假装位图成品。
 
 ## 完成标准
 

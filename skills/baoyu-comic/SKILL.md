@@ -1,8 +1,8 @@
 ---
 name: baoyu-comic
 description: Knowledge comic creator supporting multiple art styles and tones. Creates original educational comics with detailed panel layouts and batch-capable image generation. Use when user asks to create "知识漫画", "教育漫画", "biography comic", "tutorial comic", or "Logicomix-style comic".
-version: 1.117.4
 metadata:
+  version: 1.117.4
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-comic
     requires:
@@ -350,6 +350,12 @@ EXTEND.md lives at `.baoyu-skills/baoyu-comic/EXTEND.md` (project) or `~/.baoyu-
   - `preferred_image_backend: ask` — confirm backend every run.
   - `generation_batch_size: 4` — default number of page images to render concurrently when the backend/runtime supports batch or parallel generation.
   - `watermark.enabled: true`, `preferred_art`, `preferred_tone`, `preferred_layout`, `language` — shift the auto-selection defaults and cosmetic choices.
+
+## 运行依赖
+
+- 必须有一个可用的位图生成后端：Codex 原生 `imagegen`、目标宿主原生图像工具，或已配置 Provider 的 `baoyu-image-gen`。
+- 合并 PDF 或运行包内 TypeScript 时需要 `bun`；没有 Bun 时允许使用 `npx -y bun`。只有选择 `codex-cli` 图像回退时才需要 `codex` 命令和有效登录。
+- 图像后端不可用时交付完整分镜与 Prompt 并说明缺口，不生成 SVG/HTML 替代漫画成品。
 
 ## 完成标准
 

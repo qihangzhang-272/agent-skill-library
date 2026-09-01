@@ -19,7 +19,8 @@ description: >
 
   【路由方式】SKILL.md 包含路由表和常用命令，复杂场景需按需阅读对应分类的 references/*.md。
   分类：search / social (小红书/推特/B站/V2EX/Reddit/Facebook/Instagram) / career(LinkedIn) / dev(github) / web(网页/文章/RSS) / video(YouTube/B站/播客) / finance(雪球)。
-triggers:
+metadata:
+  triggers:
   - research: 调研/全网调研/帮我调研/研究一下/research/深入了解
   - search: 搜/查/找/search/搜索/查一下/帮我搜/看看大家怎么说
   - social:
@@ -35,7 +36,6 @@ triggers:
   - web: 网页/链接/文章/rss/读一下/打开这个
   - video: youtube/视频/播客/字幕/小宇宙/转录/yt
   - finance: 雪球/股票/stock/xueqiu/行情/基金
-metadata:
   openclaw:
     homepage: https://github.com/Panniantong/Agent-Reach
 ---
@@ -141,6 +141,12 @@ agent-reach doctor --json
 https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 
 用户只需提供 cookies，其他配置由 agent 完成。
+
+## 运行依赖
+
+- 命令：`agent-reach`，先用 `agent-reach doctor --json` 检查当前平台对应的可用后端。
+- 按需后端：零配置网页读取通常使用 `curl` / Jina Reader；GitHub 使用 `gh`；Exa 使用当前宿主可用的 MCP/`mcporter`；登录态平台使用 doctor 返回的 OpenCLI 或平台 CLI。
+- 登录与 Cookie 继续由当前宿主和对应平台原生机制管理，不写入 Environment。目标平台没有可用后端时如实报告，不能用搜索摘要伪装已经读取原文。
 
 ## 完成标准
 

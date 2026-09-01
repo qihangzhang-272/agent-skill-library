@@ -1,8 +1,8 @@
 ---
 name: baoyu-compress-image
 description: Compresses images to WebP (default) or PNG with automatic tool selection. Use when user asks to "compress image", "optimize image", "convert to webp", or reduce image file size.
-version: 1.56.1
 metadata:
+  version: 1.56.1
   openclaw:
     homepage: https://github.com/JimLiu/baoyu-skills#baoyu-compress-image
     requires:
@@ -79,6 +79,11 @@ image.png → image.webp (245KB → 89KB, 64% reduction)
 ## Extension Support
 
 Custom configurations via EXTEND.md. See **Preferences** section for paths and supported options.
+
+## 运行依赖
+
+- 包内压缩脚本需要 `bun`，没有 Bun 时使用 `npx -y bun`；两者都不存在时只报告缺失，不改写原图。
+- 检查方式：运行 `bun --version`，失败后再检查 `npx --version`。
 
 ## 完成标准
 

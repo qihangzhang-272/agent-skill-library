@@ -25,7 +25,6 @@ Local archive without GitHub source:
 | Source | Role | Status | Domain | Notes |
 | --- | --- | --- | --- | --- |
 | `https://github.com/JimLiu/baoyu-skills` | 公众号排版、图像生成、插图、封面、信息图、SVG 图解、知识漫画、HTML 与发布 | migrated reference source | writing | 经维护者明确晋升，MIT；从 commit `6b7a2e417500561a5ecdd0b168332f4142584617` 原样迁入 `domain-writing`：`baoyu-format-markdown`、`baoyu-image-gen`、`baoyu-article-illustrator`、`baoyu-infographic`、`baoyu-diagram`、`baoyu-comic`、`baoyu-cover-image`、`baoyu-markdown-to-html`、`baoyu-post-to-wechat`、`baoyu-compress-image`。保留上游许可证，排除 `node_modules` 与个人配置；项目偏好继续放 `.baoyu-skills/`。 |
-| `https://github.com/mcncarl/yichen-skills` | 公众号账号级批量语料工作流参考 | reference | - | 自定义 Personal Learning and Non-Commercial Use License：未经书面许可，不得商业或业务运营使用，不得作为公开技能集合、商业交付或公司内部 toolkit 再打包。本库未复制 `yichen-wechat-mp-batch-exporter`；只在独立需求分析后编写本地 corpus contract。核验 commit `28066c9f91cecd819784fc70bf882473a4fd29fa`。 |
 | `https://github.com/wechat-article/wechat-article-exporter` | 公众号搜索、历史同步、正文批量采集和多格式导出的外部运行时 | reference | writing | MIT；作为 `wechat-account-corpus-research` 的可选外部适配器，保持外置，不复制实现。2026-08-04 已通过公开 endpoint 的 API 可达与已知 URL HTML smoke；账号历史仍需用户登录后另验。公共端点的登录、格式、会员与频率限制会变化，运行时读取当前官方文档。核验 commit `47da63edfd5c7e7aabaf44c96faf88e0f6b8290f`。 |
 | `https://github.com/wechat-article/wxdown-service` | 阅读量与评论增强采集所需的本地凭据辅助服务 | reference | - | 当前源码仓库没有 LICENSE；不得 vendoring。涉及 mitmproxy 根证书、系统代理和明文短期凭据，已明确排除出 `wechat-account-corpus-research` 默认能力。核验 commit `28feff2095359acb158f856c40b357e77b686d2c`。 |
 

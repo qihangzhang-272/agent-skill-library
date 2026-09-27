@@ -1,4 +1,4 @@
-apiVersion: asl-wep/v0.3.0
+apiVersion: asl-wep/v0.4.0
 kind: ModeProjection
 metadata:
   id: creator-studio
@@ -23,3 +23,79 @@ spec:
     - baoyu-compress-image
     - baoyu-post-to-wechat
     - x-post-card-studio
+  architecture:
+    nodes:
+      - skill: agent-reach
+        title: "网络检索与读取"
+        note: "从公开网络获取资料，按平台选择读取与查证方式。"
+      - skill: known-content-archive
+        title: "材料归档"
+        note: "保存已有链接、内容与来源，方便后续复用。"
+      - skill: topic-research-deposition
+        title: "主题研究与材料沉淀"
+        note: "围绕主题补材料，整理证据、线索和仍需核查的问题。"
+      - skill: reference-video-analysis
+        title: "参考视频分析"
+        note: "提取参考视频的表达结构、关键画面与可借鉴方法。"
+      - skill: wechat-account-corpus-research
+        title: "公众号语料研究"
+        note: "研究目标公众号的语料、选题与表达特征。"
+      - skill: public-account-writing-style
+        title: "写作与编辑"
+        note: "根据写作情境组织文章，并进行表达与事实审校。"
+      - skill: editorial-visual-storytelling
+        title: "视觉叙事设计"
+        note: "决定图的任务、视觉文案与表现形式，再交给渲染技能。"
+      - skill: baoyu-article-illustrator
+        title: "文章配图"
+        note: "选择文章配图位置，生成与内容对应的插图。"
+      - skill: baoyu-comic
+        title: "知识漫画"
+        note: "将知识或故事转成有分镜与人物的漫画。"
+      - skill: baoyu-cover-image
+        title: "封面设计"
+        note: "为文章生成符合主题、风格与比例的封面。"
+      - skill: baoyu-diagram
+        title: "结构图解"
+        note: "把机制、关系与结构画成清晰的图解。"
+      - skill: baoyu-infographic
+        title: "信息图"
+        note: "把比较、摘要与重点信息组织成信息图。"
+      - skill: baoyu-image-gen
+        title: "图像生成"
+        note: "按提示词或参考图调用图像生成服务。"
+      - skill: baoyu-format-markdown
+        title: "Markdown 整理"
+        note: "整理标题、段落与强调，形成规范 Markdown。"
+      - skill: qihang-wechat-layout
+        title: "公众号排版"
+        note: "按账号视觉约定安排微信文章的阅读节奏。"
+      - skill: baoyu-markdown-to-html
+        title: "微信 HTML"
+        note: "将 Markdown 转成微信可用的 HTML。"
+      - skill: baoyu-compress-image
+        title: "图像压缩"
+        note: "压缩或转换图片，控制交付文件大小。"
+      - skill: baoyu-post-to-wechat
+        title: "公众号交付"
+        note: "在用户授权范围内将审定内容提交到公众号。"
+      - skill: x-post-card-studio
+        title: "X 分享卡片"
+        note: "把适合分享的内容制作成 X 图文卡片。"
+    shared: ["agent-reach","known-content-archive","baoyu-image-gen","baoyu-compress-image"]
+    paradigms:
+      - id: research-writing
+        title: "从材料到文章"
+        description: "围绕选题补齐材料；视频与账号语料是可选研究分支，不是每次必跑。已有材料可以直接编辑，编辑发现缺口再回到主题研究；正文由用户指定的写作 Agent 承担。"
+        skills: ["topic-research-deposition","reference-video-analysis","wechat-account-corpus-research","public-account-writing-style"]
+        edges: [{"from":"reference-video-analysis","to":"topic-research-deposition","label":"视频线索与可核查材料"},{"from":"wechat-account-corpus-research","to":"public-account-writing-style","label":"账号表达与读者参考"},{"from":"topic-research-deposition","to":"public-account-writing-style","label":"研究材料与选题依据"},{"from":"public-account-writing-style","to":"topic-research-deposition","label":"反馈待补证据"}]
+      - id: visual-storytelling
+        title: "围绕内容做视觉"
+        description: "从已有正文或单个解释目标出发，先设计视觉任务，再按内容选封面、插画、漫画、关系图或信息图。各形式可以单独使用；X 卡片也可直接复用已有素材，不要求重写文章。"
+        skills: ["editorial-visual-storytelling","baoyu-article-illustrator","baoyu-comic","baoyu-cover-image","baoyu-diagram","baoyu-infographic","x-post-card-studio"]
+        edges: [{"from":"editorial-visual-storytelling","to":"baoyu-article-illustrator","label":"按画面任务选择形式"},{"from":"editorial-visual-storytelling","to":"baoyu-comic","label":"按画面任务选择形式"},{"from":"editorial-visual-storytelling","to":"baoyu-cover-image","label":"按画面任务选择形式"},{"from":"editorial-visual-storytelling","to":"baoyu-diagram","label":"按画面任务选择形式"},{"from":"editorial-visual-storytelling","to":"baoyu-infographic","label":"按画面任务选择形式"},{"from":"editorial-visual-storytelling","to":"x-post-card-studio","label":"按画面任务选择形式"}]
+      - id: format-deliver
+        title: "已有成稿的排版与交付"
+        description: "接受已确认的文章和图片；仅整理格式，不擅自改写正文。按需生成微信兼容 HTML，检查后在获得当次授权的范围内提交草稿。已有合格 HTML 可直接进入交付。"
+        skills: ["baoyu-format-markdown","qihang-wechat-layout","baoyu-markdown-to-html","baoyu-post-to-wechat"]
+        edges: [{"from":"baoyu-format-markdown","to":"qihang-wechat-layout","label":"规范化的正文"},{"from":"qihang-wechat-layout","to":"baoyu-markdown-to-html","label":"排版稿与图片"},{"from":"baoyu-markdown-to-html","to":"baoyu-post-to-wechat","label":"审阅后的 HTML"}]

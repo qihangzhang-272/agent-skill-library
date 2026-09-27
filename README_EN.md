@@ -47,6 +47,8 @@ Agent Skill Library is a runnable answer to those questions. It is not a collect
 
 You can use the existing Modes immediately or treat them as a cultivated starting point: remove capabilities that do not fit, replace the writing style, add research tools, and turn recurring work into new Modes.
 
+The four Modes now use ASL-WEP v0.4: 11 recurring work patterns describe how Skills cooperate, with shared capabilities listed separately. Each node is a complete Skill; branches and feedback describe relationships, not mandatory execution. Humans and Agents edit the same `mode.yaml`. Use ASL Workspace 0.3.0 / Harness 0.4.0 or later to validate and display these definitions. See the [architecture document](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md) for verified implementation status.
+
 ## Why This Repository Exists
 
 Most Skill repositories optimize for discovering more capabilities. Long-term use shifts the problem from discovery to governance.

@@ -47,6 +47,8 @@ Agent Skill Library 是这些问题的一份可运行答案。它不是一个尽
 
 你可以直接使用现有 Mode，也可以把它当作一个已经长出真实内容的起点：删除不适合自己的能力，替换写作方式，加入新的研究工具，再把反复出现的工作培养成新的 Mode。
 
+当前 4 个 Mode 使用 ASL-WEP v0.4：11 个常用工作范式描述技能如何配合，通用检索等能力单独列出。每个节点都是完整技能；关系可分支、汇合或反馈，不强制执行顺序。定义保存在各 Mode 的 `mode.yaml`，可由人或 Agent 编辑，并由 ASL Workspace 0.3.0 / Harness 0.4.0 及以上版本校验和呈现。完整实现状态以[总架构文档](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md)为准。
+
 ## Why This Repository Exists
 
 大多数技能仓库优化的是“发现更多能力”。但真正使用一段时间以后，问题会从发现转向治理。

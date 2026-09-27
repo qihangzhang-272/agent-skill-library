@@ -1,4 +1,4 @@
-apiVersion: asl-wep/v0.3.0
+apiVersion: asl-wep/v0.4.0
 kind: ModeProjection
 metadata:
   id: capital-markets-desk
@@ -14,3 +14,52 @@ spec:
     - investment-financial-model-builder
     - investment-valuation-returns
     - investment-thesis-tracking
+  architecture:
+    nodes:
+      - skill: agent-reach
+        title: "网络检索与读取"
+        note: "从公开网络获取资料，按平台选择读取与查证方式。"
+      - skill: financial-company-profile
+        title: "公司画像"
+        note: "从获准资料整理一页公司介绍或事实卡片。"
+      - skill: investment-banking-pitch-deck
+        title: "投行推介材料"
+        note: "围绕客户与交易目标组织投行推介材料。"
+      - skill: sell-side-ma-materials
+        title: "卖方并购材料"
+        note: "根据获准披露口径制作卖方并购介绍材料。"
+      - skill: public-equity-coverage-writer
+        title: "公开市场覆盖"
+        note: "组织公司覆盖、投资论点、评级和估值解释。"
+      - skill: investment-chart-pack
+        title: "投资图表"
+        note: "生成来源明确、口径一致的投资图表。"
+      - skill: financial-artifact-qc
+        title: "金融交付质检"
+        note: "检查金融交付物的数字、口径、版面与来源一致性。"
+      - skill: investment-financial-model-builder
+        title: "财务模型"
+        note: "以有依据的输入构建可审计的财务模型。"
+      - skill: investment-valuation-returns
+        title: "估值与回报"
+        note: "解释估值、回报区间及关键假设的影响。"
+      - skill: investment-thesis-tracking
+        title: "论点跟踪"
+        note: "维护可证伪的论点、观察指标与变化触发项。"
+    shared: ["agent-reach","financial-artifact-qc"]
+    paradigms:
+      - id: company-pitch
+        title: "公司介绍与推介"
+        description: "公司画像建立统一口径，按读者与目标组织推介材料。现有审定材料可以直接进入图表或版面；金融交付质检作为通用能力在交付前按需调用。"
+        skills: ["financial-company-profile","investment-banking-pitch-deck","investment-chart-pack"]
+        edges: [{"from":"financial-company-profile","to":"investment-banking-pitch-deck","label":"公司事实与定位"},{"from":"investment-chart-pack","to":"investment-banking-pitch-deck","label":"审定图表"}]
+      - id: public-coverage
+        title: "公开市场覆盖与跟踪"
+        description: "围绕覆盖对象与核心论点选择模型、估值、报告或跟踪能力。已有模型可直接估值；论点跟踪暴露变化时只更新相关假设和报告。"
+        skills: ["public-equity-coverage-writer","investment-financial-model-builder","investment-valuation-returns","investment-thesis-tracking","investment-chart-pack"]
+        edges: [{"from":"investment-financial-model-builder","to":"investment-valuation-returns","label":"预测与假设"},{"from":"investment-valuation-returns","to":"public-equity-coverage-writer","label":"估值解释"},{"from":"investment-chart-pack","to":"public-equity-coverage-writer","label":"研究图表"},{"from":"public-equity-coverage-writer","to":"investment-thesis-tracking","label":"论点与观察项"},{"from":"investment-thesis-tracking","to":"investment-financial-model-builder","label":"变化后的假设"}]
+      - id: sell-side
+        title: "卖方交易材料"
+        description: "在获准披露的公司事实、模型和交易口径内组织卖方材料。缺少关键口径时返回公司画像补充，不以通用模板替代确认。"
+        skills: ["financial-company-profile","sell-side-ma-materials","investment-valuation-returns"]
+        edges: [{"from":"financial-company-profile","to":"sell-side-ma-materials","label":"可披露公司资料"},{"from":"investment-valuation-returns","to":"sell-side-ma-materials","label":"审定估值口径"}]

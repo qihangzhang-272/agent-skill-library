@@ -1,4 +1,4 @@
-apiVersion: asl-wep/v0.3.0
+apiVersion: asl-wep/v0.4.0
 kind: ModeProjection
 metadata:
   id: product-lab
@@ -10,3 +10,35 @@ spec:
     - ai-product-analyzer
     - baoyu-diagram
     - baoyu-infographic
+  architecture:
+    nodes:
+      - skill: agent-reach
+        title: "网络检索与读取"
+        note: "从公开网络获取资料，按平台选择读取与查证方式。"
+      - skill: known-content-archive
+        title: "材料归档"
+        note: "保存已有链接、内容与来源，方便后续复用。"
+      - skill: topic-research-deposition
+        title: "主题研究与材料沉淀"
+        note: "围绕主题补材料，整理证据、线索和仍需核查的问题。"
+      - skill: ai-product-analyzer
+        title: "AI 产品拆解"
+        note: "从用户问题、产品机制与商业逻辑评估 AI 产品。"
+      - skill: baoyu-diagram
+        title: "结构图解"
+        note: "把机制、关系与结构画成清晰的图解。"
+      - skill: baoyu-infographic
+        title: "信息图"
+        note: "把比较、摘要与重点信息组织成信息图。"
+    shared: ["agent-reach","known-content-archive"]
+    paradigms:
+      - id: product-study
+        title: "体验与产品判断"
+        description: "围绕具体用户问题沉淀体验和外部证据，再拆解机制与产品价值。已有材料直接分析；发现默认上下文或证据缺口时返回主题研究。"
+        skills: ["topic-research-deposition","ai-product-analyzer"]
+        edges: [{"from":"topic-research-deposition","to":"ai-product-analyzer","label":"体验与研究材料"},{"from":"ai-product-analyzer","to":"topic-research-deposition","label":"待补体验或依据"}]
+      - id: product-explain
+        title: "把产品逻辑讲清楚"
+        description: "从产品判断中选择值得解释的关系。结构图适合机制与边界，信息图适合归纳和比较；两者按读者任务选择，不把每段分析都转成图。"
+        skills: ["ai-product-analyzer","baoyu-diagram","baoyu-infographic"]
+        edges: [{"from":"ai-product-analyzer","to":"baoyu-diagram","label":"机制与关系"},{"from":"ai-product-analyzer","to":"baoyu-infographic","label":"比较与重点"}]

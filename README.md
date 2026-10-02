@@ -96,6 +96,8 @@ asl-harness workspace.validate \
 
 内容版共用 ASL Harness CLI，不内嵌另一份实现。使用已安装的当前 Harness，或 Windows App 随包的 `resources/core/asl-harness.exe`；不必打开 App 窗口。
 
+[下载共用的 Windows App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.7)。解压整个文件夹后打开 App，在「发现」选择这个本地库；不需要复制第二套程序。更新 App 不会替换你本地培养的 Skills 和 Modes。
+
 ```bash
 asl-harness cli.describe
 asl-harness environment.catalog --workspace ./agent-skill-library

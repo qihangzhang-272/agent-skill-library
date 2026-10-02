@@ -92,6 +92,21 @@ asl-harness workspace.validate \
 
 `state` 提供紧凑的能力概览；`workspace.validate` 检查 Skill、来源、依赖、Mode 和目录边界。
 
+### Agent 管理入口
+
+内容版共用 ASL Harness CLI，不内嵌另一份实现。使用已安装的当前 Harness，或 Windows App 随包的 `resources/core/asl-harness.exe`；不必打开 App 窗口。
+
+```bash
+asl-harness cli.describe
+asl-harness environment.catalog --workspace ./agent-skill-library
+asl-harness mode.files --workspace ./agent-skill-library --mode creator-studio
+asl-harness skill.files --workspace ./agent-skill-library --skill agent-reach
+```
+
+Agent 读取真实文件及指纹，通过 `environment.edit --check` 预览，再提交同一 JSON 请求。多文件新增在库外草稿中保存完整包，验收后重新导出并采用；不要手改带指纹清单的导出快照。正式写入失败会反馈定位，修正重提，不覆盖有效内容。含图验收依赖随包离线渲染器；普通 Python 安装不冒称包含它。
+
+本地 Mode 独立演进，上游更新不直接覆盖。框架/内容版的统一性与验收只见[总览](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态)，专项设计在[架构目录](https://github.com/qihangzhang-272/asl-harness/tree/main/docs/architecture)。
+
 ### Activate a Mode in Codex
 
 ```bash

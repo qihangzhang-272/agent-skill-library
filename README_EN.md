@@ -92,6 +92,23 @@ asl-harness workspace.validate \
 
 `state` returns a compact capability overview. `workspace.validate` checks Skills, provenance, dependencies, Modes, and directory boundaries.
 
+### Agent management interface
+
+Agents and ASL Workspace share the existing Harness CLI; this content Environment does not contain a second backend.
+
+```bash
+asl-harness cli.describe
+asl-harness environment.catalog --workspace ./agent-skill-library
+asl-harness mode.files --workspace ./agent-skill-library --mode creator-studio
+asl-harness skill.files --workspace ./agent-skill-library --skill agent-reach
+```
+
+`environment.edit` accepts a JSON request through stdin. Changes must pass the shared structure, path, fingerprint and actual Mermaid rendering checks before adoption. Failure returns a nonzero exit code with repair details for the calling Agent; it does not start another model. The Windows package includes the offline renderer; a Python-only installation is not a complete rendering runtime.
+
+For new package files or multi-file changes, prepare a complete Environment draft outside the working library, validate it, then export a fresh Mode package and preview its import. Do not edit a previously exported fingerprint manifest to bypass validation. Adopted local Modes remain locally authoritative; upstream repositories remain separate sources for comparison.
+
+See the [CLI architecture](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/architecture/02g-agent-cli.md) and [current verified status](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态).
+
 ### Activate a Mode in Codex
 
 ```bash

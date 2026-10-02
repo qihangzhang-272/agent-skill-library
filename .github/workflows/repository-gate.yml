@@ -28,7 +28,26 @@ jobs:
           python-version: "3.11"
 
       - name: Install ASL Harness
-        run: python -m pip install ./.asl-harness-runtime
+        run: python -m pip install -e ./.asl-harness-runtime
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: .asl-harness-runtime/desktop/package-lock.json
+
+      - name: Prepare shared offline renderer
+        working-directory: .asl-harness-runtime/desktop
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          node node_modules/electron/install.js
+          npm run build
+
+      - name: Prepare renderer sandbox
+        run: |
+          sudo chown root:root .asl-harness-runtime/desktop/node_modules/electron/dist/chrome-sandbox
+          sudo chmod 4755 .asl-harness-runtime/desktop/node_modules/electron/dist/chrome-sandbox
 
       - name: Validate Mode-native Environment
-        run: asl-harness workspace.validate --workspace .
+        run: xvfb-run -a asl-harness workspace.validate --workspace .

@@ -96,7 +96,7 @@ asl-harness workspace.validate \
 
 Agents and ASL Workspace share the existing Harness CLI; this content Environment does not contain a second backend.
 
-[Download the shared Windows App and CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.9). Extract the whole folder, open the App, and select this local library in Discover. No second program is needed; updating the App does not replace locally cultivated Skills or Modes.
+[Download the shared Windows App and CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.10). Extract the whole folder, open the App, and select this local library in Discover. No second program is needed; updating the App does not replace locally cultivated Skills or Modes.
 
 ```bash
 asl-harness cli.describe

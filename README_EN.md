@@ -47,7 +47,7 @@ Agent Skill Library is a runnable answer to those questions. It is not a collect
 
 You can use the existing Modes immediately or treat them as a cultivated starting point: remove capabilities that do not fit, replace the writing style, add research tools, and turn recurring work into new Modes.
 
-The four Modes now use ASL-WEP v0.4: 11 recurring work patterns describe how Skills cooperate, with shared capabilities listed separately. Each node is a complete Skill; branches and feedback describe relationships, not mandatory execution. Humans and Agents edit the same `mode.yaml`. Use ASL Workspace 0.3.0 / Harness 0.4.0 or later to validate and display these definitions. See the [architecture document](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md) for verified implementation status.
+Modes use ASL-WEP v0.4: work patterns describe Skill collaboration, with shared capabilities listed separately. Every Skill node refers to a complete package; branches and feedback are relationships, not mandatory execution. Membership and categories live in `mode.yaml`; authored Mermaid in `MODE.md` takes precedence over YAML-generated views. Humans and Agents share the Harness CLI write gate. See [WORKSPACE.md](WORKSPACE.md) for content and the [architecture document](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md) for verified capabilities and delivery status.
 
 ## Why This Repository Exists
 
@@ -96,11 +96,14 @@ asl-harness workspace.validate \
 
 Agents and ASL Workspace share the existing Harness CLI; this content Environment does not contain a second backend.
 
-[Download the shared Windows App and CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.10). Extract the whole folder, open the App, and select this local library in Discover. No second program is needed; updating the App does not replace locally cultivated Skills or Modes.
+[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.12/Agent-Skill-Library-0.5.12-Windows-x64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.12) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.12). Extract everything and open `Start.cmd` to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
+
+macOS packages are offered only after native acceptance, with an explicit CPU architecture. They are not publisher-signed or Apple-notarized. The bundled CLI is `ASL Workspace.app/Contents/Resources/core/asl-harness`. The public snapshot contains no personal Git history; subsequent Mode history requires local Git and repository/author configuration.
 
 ```bash
 asl-harness cli.describe
 asl-harness environment.catalog --workspace ./agent-skill-library
+asl-harness environment.guide --workspace ./agent-skill-library
 asl-harness mode.files --workspace ./agent-skill-library --mode creator-studio
 asl-harness skill.files --workspace ./agent-skill-library --skill agent-reach
 ```
@@ -108,6 +111,8 @@ asl-harness skill.files --workspace ./agent-skill-library --skill agent-reach
 `environment.edit` accepts a JSON request through stdin. Changes must pass the shared structure, path, fingerprint and actual Mermaid rendering checks before adoption. Failure returns a nonzero exit code with repair details for the calling Agent; it does not start another model. The Windows package includes the offline renderer; a Python-only installation is not a complete rendering runtime.
 
 For new package files or multi-file changes, prepare a complete Environment draft outside the working library, validate it, then export a fresh Mode package and preview its import. Do not edit a previously exported fingerprint manifest to bypass validation. Adopted local Modes remain locally authoritative; upstream repositories remain separate sources for comparison.
+
+An ordinary Skill repository needs no Mode first: choose Organize Skills, read individual packages, drag them onto the existing canvas and save. Agents obtain the shared organization method from `cli.describe.organization` and `environment.guide`, using the user's goals and complete Skill content. Adoption and adding a node are separate; matching names do not prove matching versions. Editing Skill instructions, scripts or materials still requires explicit user consent.
 
 See the [CLI architecture](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/architecture/02g-agent-cli.md) and [current verified status](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态).
 
@@ -241,7 +246,7 @@ If you do not perform investment research, remove the Mode and, after confirming
 
 ### Change a Mode's Capability Surface
 
-Edit the Skill roots in `modes/<mode-id>/mode.yaml`, then validate and re-project. You do not need to list dependency Skills; Harness resolves the closure.
+Use the Harness CLI to update membership and categories in `modes/<mode-id>/mode.yaml` and Mermaid organization in `MODE.md`. Write only after validation, then update Host projections when needed. Harness resolves dependency Skills without repeating them as roots. Organize Modes by default; an Agent must obtain explicit user consent before editing Skill instructions, descriptions, scripts or material.
 
 ```yaml
 apiVersion: asl-wep/v0.3.0

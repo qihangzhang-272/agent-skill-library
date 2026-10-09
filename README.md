@@ -47,7 +47,7 @@ Agent Skill Library 是这些问题的一份可运行答案。它不是一个尽
 
 你可以直接使用现有 Mode，也可以把它当作一个已经长出真实内容的起点：删除不适合自己的能力，替换写作方式，加入新的研究工具，再把反复出现的工作培养成新的 Mode。
 
-当前 4 个 Mode 使用 ASL-WEP v0.4：11 个常用工作范式描述技能如何配合，通用检索等能力单独列出。每个节点都是完整技能；关系可分支、汇合或反馈，不强制执行顺序。定义保存在各 Mode 的 `mode.yaml`，可由人或 Agent 编辑，并由 ASL Workspace 0.3.0 / Harness 0.4.0 及以上版本校验和呈现。完整实现状态以[总架构文档](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md)为准。
+Mode 使用 ASL-WEP v0.4：工作范式描述技能如何配合，通用检索等能力单独列出。每个技能节点对应完整包；关系可分支、汇合或反馈，不强制执行顺序。`mode.yaml` 保存成员与分类，`MODE.md` 的作者 Mermaid 图优先呈现；没有作者图才回退到 YAML 关系。人和 Agent 共用 Harness CLI 校验与写入。当前内容看 [WORKSPACE.md](WORKSPACE.md)，已验收能力及交付版本以[总架构文档](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md)为准。
 
 ## Why This Repository Exists
 
@@ -96,16 +96,21 @@ asl-harness workspace.validate \
 
 内容版共用 ASL Harness CLI，不内嵌另一份实现。使用已安装的当前 Harness，或 Windows App 随包的 `resources/core/asl-harness.exe`；不必打开 App 窗口。
 
-[下载共用的 Windows App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.10)。解压整个文件夹后打开 App，在「发现」选择这个本地库；不需要复制第二套程序。更新 App 不会替换你本地培养的 Skills 和 Modes。
+[下载带公开技能的 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.12/Agent-Skill-Library-0.5.12-Windows-x64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.12) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.12)。完整解压后打开 `Start.cmd`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
+
+macOS 包只在原生验收通过后提供，按 CPU 架构标注；未开发者签名或 Apple 公证。随包 CLI 位于 `ASL Workspace.app/Contents/Resources/core/asl-harness`。内容快照不携带个人 Git 历史；Mode 演进记录需要本机 Git 与仓库／作者配置。
 
 ```bash
 asl-harness cli.describe
 asl-harness environment.catalog --workspace ./agent-skill-library
+asl-harness environment.guide --workspace ./agent-skill-library
 asl-harness mode.files --workspace ./agent-skill-library --mode creator-studio
 asl-harness skill.files --workspace ./agent-skill-library --skill agent-reach
 ```
 
 Agent 读取真实文件及指纹，通过 `environment.edit --check` 预览，再提交同一 JSON 请求。多文件新增在库外草稿中保存完整包，验收后重新导出并采用；不要手改带指纹清单的导出快照。正式写入失败会反馈定位，修正重提，不覆盖有效内容。含图验收依赖随包离线渲染器；普通 Python 安装不冒称包含它。
+
+普通技能仓库无需先写 Mode：App 中从「组织技能」进入画板，逐项阅读、拖入并保存；Agent 从 `cli.describe.organization` 与 `environment.guide` 获取同一整理方法，围绕用户目标选择完整技能并构建协作关系。采用不等于上图，同名不等于相同版本；修改 Skill 正文、说明、脚本或资料仍须用户明确同意。
 
 本地 Mode 独立演进，上游更新不直接覆盖。框架/内容版的统一性与验收只见[总览](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态)，专项设计在[架构目录](https://github.com/qihangzhang-272/asl-harness/tree/main/docs/architecture)。
 
@@ -241,7 +246,7 @@ clone 或 Fork 以后，可以从下面几种修改开始。
 
 ### Change a Mode's Capability Surface
 
-编辑 `modes/<mode-id>/mode.yaml` 中的 Skill 根，然后重新校验和投影。Mode 不需要列出依赖 Skill，Harness 会自动解析闭包。
+通过 Harness CLI 修改 `modes/<mode-id>/mode.yaml` 的成员和分类，以及 `MODE.md` 的 Mermaid 组织图；实际校验通过后写入，再按需更新宿主投影。Mode 不需要重复列出依赖 Skill，Harness 会解析闭包。默认只组织 Mode；修改 Skill 正文、说明、脚本或资料前，Agent 必须先取得用户明确同意。
 
 ```yaml
 apiVersion: asl-wep/v0.3.0

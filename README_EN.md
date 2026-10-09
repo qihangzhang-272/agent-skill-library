@@ -96,7 +96,7 @@ asl-harness workspace.validate \
 
 Agents and ASL Workspace share the existing Harness CLI; this content Environment does not contain a second backend.
 
-[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.12/Agent-Skill-Library-0.5.12-Windows-x64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.12) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.12). Extract everything and open `Start.cmd` to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
+[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.13/Agent-Skill-Library-0.5.13-Windows-x64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.13) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.13). Extract everything and open `Start.cmd` to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
 
 macOS packages are offered only after native acceptance, with an explicit CPU architecture. They are not publisher-signed or Apple-notarized. The bundled CLI is `ASL Workspace.app/Contents/Resources/core/asl-harness`. The public snapshot contains no personal Git history; subsequent Mode history requires local Git and repository/author configuration.
 

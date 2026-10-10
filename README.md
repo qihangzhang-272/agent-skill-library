@@ -96,9 +96,9 @@ asl-harness workspace.validate \
 
 内容版共用 ASL Harness CLI，不内嵌另一份实现。使用已安装的当前 Harness，或 Windows App 随包的 `resources/core/asl-harness.exe`；不必打开 App 窗口。
 
-[下载带公开技能的 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.13/Agent-Skill-Library-0.5.13-Windows-x64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.13) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.13)。完整解压后打开 `Start.cmd`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
+[下载 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.14/Agent-Skill-Library-0.5.14-Windows-x64.zip) · [下载 Mac 内容版（Apple Silicon）](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.14/Agent-Skill-Library-0.5.14-macOS-arm64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.14) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.14)。完整解压后，Windows 打开 `Start.cmd`，Mac 打开 `Start.command`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
 
-macOS 包只在原生验收通过后提供，按 CPU 架构标注；未开发者签名或 Apple 公证。随包 CLI 位于 `ASL Workspace.app/Contents/Resources/core/asl-harness`。内容快照不携带个人 Git 历史；Mode 演进记录需要本机 Git 与仓库／作者配置。
+Mac 包适用于 Apple Silicon（arm64），不是 Intel 或 Universal 版；未开发者签名或 Apple 公证，不要求关闭系统防护。随包 CLI 位于 `ASL Workspace.app/Contents/Resources/core/asl-harness`。内容快照不携带个人 Git 历史；Mode 演进记录需要本机 Git 与仓库／作者配置。
 
 ```bash
 asl-harness cli.describe

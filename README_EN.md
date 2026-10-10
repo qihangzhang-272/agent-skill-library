@@ -96,9 +96,9 @@ asl-harness workspace.validate \
 
 Agents and ASL Workspace share the existing Harness CLI; this content Environment does not contain a second backend.
 
-[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.13/Agent-Skill-Library-0.5.13-Windows-x64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.13) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.13). Extract everything and open `Start.cmd` to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
+[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.14/Agent-Skill-Library-0.5.14-Windows-x64.zip) · [Download for Mac (Apple Silicon)](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.14/Agent-Skill-Library-0.5.14-macOS-arm64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.14) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.14). Extract everything and open `Start.cmd` on Windows or `Start.command` on Mac to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
 
-macOS packages are offered only after native acceptance, with an explicit CPU architecture. They are not publisher-signed or Apple-notarized. The bundled CLI is `ASL Workspace.app/Contents/Resources/core/asl-harness`. The public snapshot contains no personal Git history; subsequent Mode history requires local Git and repository/author configuration.
+The Mac package is for Apple Silicon (arm64), not Intel or Universal. It is not publisher-signed or Apple-notarized; disabling system protection is not required. The bundled CLI is `ASL Workspace.app/Contents/Resources/core/asl-harness`. The public snapshot contains no personal Git history; subsequent Mode history requires local Git and repository/author configuration.
 
 ```bash
 asl-harness cli.describe

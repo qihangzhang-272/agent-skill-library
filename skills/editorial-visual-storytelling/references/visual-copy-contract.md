@@ -35,7 +35,7 @@
 | `Scene fact` | 画面和文章能确认的具体事实或动作是什么？ |
 | `Copy role` | title / caption / label / narration / dialogue / none |
 | `Copy candidates` | 2–3 个从不同角度写出的候选；不是同义改写。 |
-| `Exact text` | 文案审校后允许出现的全部文字及逐条字符数；单个文本单元默认不超过 10 个中文字符。 |
+| `Exact text` | 文案审校后允许出现的全部文字及逐条字符数；密度按 `visual-copy-desk.md` 的资产形式分支处理。 |
 | `Caption outside image` | 不适合写进图片、但应随图出现的说明与来源。 |
 | `Form candidates` | 评估过的 cover / source / illustration / infographic / diagram / comic / none |
 | `Selected form` | 最终选择的唯一形式。 |
@@ -48,13 +48,13 @@
 ## 文案规则
 
 1. 先写 `Scene fact`，再写文案；禁止从文章小标题直接生成 `Exact text`。
-2. 画内文字不能代替正文，也不能复述已经看得见的动作。
+2. 短文案资产的文字不代替正文，也不复述已经看得见的动作；文字主导的教学或问答解释图保留理解所必需的图内正文。
 3. 标题、标签、旁白和气泡只写画面无法表达的那一层。
 4. 同一张图不同时承担标题、摘要、结论和行动号召。
-5. 复杂中文、来源和解释优先留在 `Caption outside image`。
+5. 必要来源优先放正文可点击链接，制作过程与改编记录放非画面清单；教学解释图的正文、问答和材料依据不因长于短文案而被移走。
 6. 下游 prompt 的 `Text (verbatim)` 必须来自本文件，不得临场扩写。
 7. `Exact text` 必须通过朗读、去图和反复述检查；具体方法见 `visual-copy-desk.md`。
-8. 画内文字优先 4–8 字，硬上限 10 个中文字符；长解释必须移到 `Caption outside image`。
+8. 文字密度统一按 `visual-copy-desk.md` 判断；不把短文案的 10 字限制套到文字主导的教学或问答解释图。
 9. 单幅知识漫画必须分别写清 `Character anchor` 与 `Central logic visual`；禁止只写“角色讲解该概念”。
 
 ## 合格示例

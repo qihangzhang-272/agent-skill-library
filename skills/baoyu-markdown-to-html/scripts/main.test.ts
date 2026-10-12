@@ -137,6 +137,10 @@ test("CLI renders the shared qihang editorial theme", async () => {
       "",
       "正文包含 **关键判断**。",
       "",
+      '<span data-qihang-emphasis="highlight">理解受众</span>，保留<span data-qihang-emphasis="wave">可能</span>。',
+      "",
+      "---",
+      "",
       "### 一个局部判断",
       "",
       "> 引用只承担补充说明。",
@@ -177,6 +181,9 @@ test("CLI renders the shared qihang editorial theme", async () => {
   assert.match(html, /data-qihang-marker="h2"[^>]*>01<\/span>/);
   assert.match(html, /<h3[^>]*style="[^"]*background: linear-gradient/);
   assert.match(html, /<strong[^>]*style="[^"]*color: #2447D8/);
+  assert.match(html, /data-qihang-emphasis="highlight"[^>]*background-color:\s*#EEF2FF/);
+  assert.match(html, /data-qihang-emphasis="wave"[^>]*text-decoration-style:\s*wavy/);
+  assert.match(html, /<hr[^>]*border-top:\s*1px dashed #2447D8/);
   assert.match(html, /<blockquote[^>]*style="[^"]*text-align: center/);
   assert.match(html, /data-qihang-marker="ordered"[^>]*>01<\/span>/);
   assert.match(html, /data-qihang-marker="check"[^>]*>✓<\/span>/);

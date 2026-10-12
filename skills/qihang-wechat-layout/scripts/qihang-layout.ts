@@ -184,6 +184,9 @@ function buildQihangCss(
   const h3 = defaultVariant(catalog, "h3");
   const quote = defaultVariant(catalog, "quote");
   const strong = defaultVariant(catalog, "strong");
+  const highlight = defaultVariant(catalog, "highlight");
+  const wave = defaultVariant(catalog, "wave");
+  const divider = defaultVariant(catalog, "divider");
   const ordered = defaultVariant(catalog, "ordered-list");
   const unordered = defaultVariant(catalog, "unordered-list");
   const table = defaultVariant(catalog, "table");
@@ -250,6 +253,12 @@ body {
 }
 #output strong {
   ${resolveVariantStyle(strong.style, config, accent)}
+}
+#output [data-qihang-emphasis="highlight"] {
+  ${resolveVariantStyle(highlight.style, config, accent)}
+}
+#output [data-qihang-emphasis="wave"] {
+  ${resolveVariantStyle(wave.style, config, accent)}
 }
 #output em {
   color: ${tokens.body};
@@ -367,11 +376,7 @@ body {
   ${resolveVariantStyle(table.accentStyle, config, accent)}
 }
 #output hr {
-  width: 88px;
-  height: 3px;
-  margin: 42px auto 34px;
-  border: none;
-  background: linear-gradient(90deg, ${accent} 0 62%, ${tokens.warm} 62% 100%);
+  ${resolveVariantStyle(divider.style, config, accent)}
 }
 #output .markdown-alert-note,
 #output .markdown-alert-tip,

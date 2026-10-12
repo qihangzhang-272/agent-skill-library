@@ -6,3 +6,4 @@
 - Relation: migrated from GitHub latest upstream into this Environment
 - License: inherit from the user-owned Agent Skill Library repository
 - Local changes: completion standards are embedded in SKILL.md; the original writing-plugin root dependency on `baoyu-md` is declared inside this Skill; legacy sidecars and upstream schedulers are not imported.
+- 2026-10-05 user-confirmed local customization: the approved article v5's editorial presentation is recorded in `references/editorial-presentation.md`; pale-blue highlighting, cobalt wavy underlining, and dashed dividers are compiled by the existing shared renderer from the personal component catalog. The upstream commit above remains provenance, not a byte-identical claim for these locally maintained files.

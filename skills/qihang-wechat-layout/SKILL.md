@@ -1,6 +1,6 @@
 ---
 name: qihang-wechat-layout
-description: Apply the confirmed “航的杂谈地图” personal typography catalog to finalized Markdown, generate WeChat-compatible HTML, and create the read-only pre-publication preview used before draft publishing. Use when the user asks for 启航排版、个人公众号风格、个人样式目录、HTML 预览 or wants to replace generic Baoyu themes. Do not use it to rewrite content or decide illustrations.
+description: Apply the confirmed “航的杂谈地图” typography and editorial emphasis to finalized Markdown, render shared WeChat HTML, and generate read-only publishing previews. Use for 公众号排版、公众号重点标记（粗体／高亮／波浪线）、个人公众号风格 or 微信HTML预览. Preserve author wording; do not rewrite articles or decide illustrations.
 ---
 
 # 启航公众号排版
@@ -15,11 +15,11 @@ description: Apply the confirmed “航的杂谈地图” personal typography ca
 
 ## Core Rule
 
-本技能只拥有视觉排版，不拥有正文和配图判断。不得改写句子、标题层级、引用内容、图片顺序或 `05.5-visual-plan.md`；发布仍由 `baoyu-post-to-wechat` 负责。
+本技能拥有视觉排版与重点呈现，不拥有作者观点和配图判断。可以在定稿原词上添加强调标记和段落分隔；不得改写句子、标题层级、引用内容、图片顺序或 `05.5-visual-plan.md`；发布仍由 `baoyu-post-to-wechat` 负责。
 
 ## How To Apply
 
-1. 接受任意已定稿 Markdown；在完整公众号项目中通常是 `06-final.md`。
+1. 接受任意已定稿 Markdown；在完整公众号项目中通常是 `06-final.md`。阅读 [编辑呈现约定](references/editorial-presentation.md)，主动选择正文重点、适用样式与段落停顿，在原词上加标记，不等待作者逐个指定组件。
 2. 检查图片路径和 frontmatter，再用主题 `qihang-editorial`、默认主色 `#2447D8` 调用 `baoyu-markdown-to-html` 生成同名 HTML。
 3. 用 `scripts/build-publish-preview.ts` 从正式 HTML 生成同目录的 `06-final.preview.html`，只读检查 677px 与 375px 阅读宽度、断图、层级和横向溢出。
 4. 进入草稿箱前必须查看这份发布前预览；用户已经明确授权“直接进草稿箱”时，可以省略再次确认，但不能省略预览与技术检查。
@@ -29,7 +29,7 @@ description: Apply the confirmed “航的杂谈地图” personal typography ca
 ## Personal Style Rule
 
 - `assets/qihang-style-catalog.json` 是个人组件样式与默认值真源；只服务正式渲染，不向预览页提供交互控制。
-- 默认发布样式：H1 刊头双线、H2 编号底线、H3 荧光底线、引用居中金句、重点标签主色强调、有序列表双位编号、无序列表圆角对勾、表格极简横线。
+- 默认发布样式：H1 刊头双线、H2 编号底线、H3 荧光底线、引用居中金句、正文钴蓝粗体、淡蓝高亮、钴蓝波浪下划线、虚线分隔、有序列表双位编号、无序列表行内对勾、表格极简横线。按文意搭配，不要求每篇用满组件。
 - 可切换备选：H1 居中细线、H2 居中栏目、引用衬线大引语。
 - 未确认的组件效果、主题实验、字体滑杆和间距滑杆不进入目录。
 
@@ -49,6 +49,7 @@ description: Apply the confirmed “航的杂谈地图” personal typography ca
 
 ## References
 
+- `references/editorial-presentation.md` - 公众号排版时读取：作者已确认的重点样式、主动标记职责、成品文案与检查点。
 - `references/layout-contract.md` - 主题真源、组件职责和验收标准。
 - `references/publish-preview.md` - 发布前只读预览页的边界、用法和停止条件。
 - `references/provenance.md` - 外部项目启发、许可证边界和独立实现说明。
@@ -62,6 +63,7 @@ description: Apply the confirmed “航的杂谈地图” personal typography ca
 ## 完成标准
 
 - 只接收已经定稿的 Markdown；排版过程不得擅自改写正文、补观点或制造新事实。
+- 重点标记与段落分隔已按文意安排；实际HTML包含所选样式，成品中没有给执行者看的制作备注。不能用“主题已加载”代替重点呈现检查。
 - 正式 HTML 与发布前预览必须来自同一份样式真源，标题、引用、列表、表格、图片和重点标记均能在微信编辑器约束下稳定呈现。
 - 所有本地图片已解析并可见，图片顺序、题注和正文引用一致；缺图时明确指出位置，不用空白装饰假装完成。
 - 发布前预览必须完成可读性、溢出、图片加载、移动端节奏和微信兼容性检查；不依赖会被公众号过滤的脚本或动效维持核心表达。

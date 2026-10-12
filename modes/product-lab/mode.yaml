@@ -30,13 +30,13 @@ spec:
       - skill: baoyu-infographic
         title: "信息图"
         note: "把比较、摘要与重点信息组织成信息图。"
-    shared: ["agent-reach","known-content-archive"]
+    shared: ["agent-reach"]
     paradigms:
       - id: product-study
         title: "体验与产品判断"
         description: "围绕具体用户问题沉淀体验和外部证据，再拆解机制与产品价值。已有材料直接分析；发现默认上下文或证据缺口时返回主题研究。"
-        skills: ["topic-research-deposition","ai-product-analyzer"]
-        edges: [{"from":"topic-research-deposition","to":"ai-product-analyzer","label":"体验与研究材料"},{"from":"ai-product-analyzer","to":"topic-research-deposition","label":"待补体验或依据"}]
+        skills: ["known-content-archive","topic-research-deposition","ai-product-analyzer"]
+        edges: [{"from":"known-content-archive","to":"topic-research-deposition","label":"已保存的材料"},{"from":"topic-research-deposition","to":"ai-product-analyzer","label":"体验与研究材料"},{"from":"ai-product-analyzer","to":"topic-research-deposition","label":"待补体验或依据"}]
       - id: product-explain
         title: "把产品逻辑讲清楚"
         description: "从产品判断中选择值得解释的关系。结构图适合机制与边界，信息图适合归纳和比较；两者按读者任务选择，不把每段分析都转成图。"

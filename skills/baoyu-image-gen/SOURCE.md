@@ -5,5 +5,5 @@
 - Commit: a5389a4f9a9b7e01cdb878e3445069b71e7e908a
 - Relation: migrated from GitHub latest upstream into this Environment
 - License: inherit from the user-owned Agent Skill Library repository
-- Local changes: completion standards are embedded in SKILL.md; legacy sidecars and upstream schedulers are not imported.
+- Local changes: completion standards are embedded in SKILL.md; legacy sidecars and upstream schedulers are not imported. On 2026-09-06, explicit positive user feedback authorized adding the independently authored contextual-illustration prompt reference and correcting multi-reference role guidance. This documents observed local generation and refinement; no external templates, artwork or runtime were copied.
 

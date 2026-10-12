@@ -52,13 +52,17 @@ Legacy compatibility: if `.baoyu-skills/baoyu-imagine/EXTEND.md` exists and the 
 
 Minimum working examples — see `references/usage-examples.md` for the full set including per-provider invocations and batch mode.
 
+### Article-context illustration prompts
+
+When a fixed character appears in an article illustration, execute the paragraph, insertion position and scene relationships supplied by the editorial brief before staging the character. Read [references/contextual-illustration.md](references/contextual-illustration.md) for the user-validated contextual prompt structure, reference-role separation and local refinement method. Do not turn one visual task into a mandatory single-character composition, or parallel situations into sequential steps.
+
 ### Identity-preserving reference prompts
 
 When the user wants a real person/character/object preserved from reference images, do **not** replace the reference with a long generic description. Prefer short, hard identity-preservation language:
 
 - "Use the person/object in the reference image(s) as the same identity. Do not redesign it or create a similar-looking new subject."
 - "Only change scene, clothing, pose, lighting, rendering style, and composition. Keep the face/proportions/hair/key accessories/overall identity from the references."
-- If using multiple references, state that they are the same subject and should jointly define identity.
+- If multiple references depict the same subject, state that they jointly define identity. If they have different roles, label them separately: original identity, composition to preserve, or content reference. Never imply that every person in a multi-scene reference is the same character.
 
 Pitfall: long descriptions like "young East Asian woman, oval face, clear eyes..." can cause the model to synthesize a new person matching the description instead of preserving the referenced person.
 
@@ -98,7 +102,7 @@ When the user wants a person/object preserved from reference images:
 
 - Prefer a small curated set of existing source references (usually 2–4) over many images; large multi-megabyte refs can destabilize streaming providers.
 - Make the prompt say the references are the same subject and the output must use that identity. Avoid long generic facial-feature descriptions that can cause the model to synthesize a new similar-looking person.
-- Do not use newly generated outputs as references unless the user explicitly asks; generated refs compound drift.
+- Do not replace the original identity source with newly generated outputs. An explicitly approved composition or the current edit target may be included as a separate composition reference alongside the original; identify both roles to avoid compounding identity drift.
 - If results become too polished or influencer-like, reduce stylized refs and add explicit anti-beautification constraints (no face slimming, eye enlargement, heavy makeup, commercial travel shoot, over-smoothing).
 - If the subject should look younger/older, preserve the face and express age through clothing, posture, scene, and styling; do not ask the model to change facial identity.
 
@@ -274,6 +278,7 @@ If `--provider openai --model gpt-image-2` fails because `OPENAI_API_KEY` is mis
 
 | File | Content |
 |------|---------|
+| `references/contextual-illustration.md` | User-validated article-context prompts: concrete scenes, parallel vs sequential relations, fixed identity and targeted edits |
 | `references/usage-examples.md` | Extended CLI examples across providers and batch mode |
 | `references/codex-oauth-vs-openai-api-key.md` | Why Codex/ChatGPT OAuth image2 entitlement is not usable through baoyu-image-gen's standard OpenAI API-key provider |
 | `references/codex-image2-fallback.md` | Practical fallback behavior when OpenAI API credentials are absent but Codex/native image generation is available |

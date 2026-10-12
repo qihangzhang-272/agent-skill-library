@@ -28,6 +28,10 @@ test("publishing renderer uses the shared qihang editorial theme", async () => {
       "## 从预览到草稿箱",
       "",
       "正文包含 **同一套排版**。",
+      "",
+      '<span data-qihang-emphasis="highlight">理解受众</span>，保留<span data-qihang-emphasis="wave">可能</span>。',
+      "",
+      "---",
     ].join("\n"),
     "utf-8",
   );
@@ -49,6 +53,9 @@ test("publishing renderer uses the shared qihang editorial theme", async () => {
   assert.match(html, /<h2[^>]*style="[^"]*border-bottom: 1px solid #D9E0EA/);
   assert.match(html, /data-qihang-marker="h2"[^>]*>01<\/span>/);
   assert.match(html, /<strong[^>]*style="[^"]*color: #2447D8/);
+  assert.match(html, /data-qihang-emphasis="highlight"[^>]*background-color:\s*#EEF2FF/);
+  assert.match(html, /data-qihang-emphasis="wave"[^>]*text-decoration-style:\s*wavy/);
+  assert.match(html, /<hr[^>]*border-top:\s*1px dashed #2447D8/);
 });
 
 test("API dry-run inherits the project qihang theme", async () => {
@@ -76,6 +83,10 @@ test("API dry-run inherits the project qihang theme", async () => {
       "## 默认主题",
       "",
       "正文包含 **统一排版**。",
+      "",
+      '<span data-qihang-emphasis="highlight">理解受众</span>，保留<span data-qihang-emphasis="wave">可能</span>。',
+      "",
+      "---",
     ].join("\n"),
     "utf-8",
   );
@@ -90,4 +101,7 @@ test("API dry-run inherits the project qihang theme", async () => {
 
   assert.match(html, /data-layout-theme="qihang-editorial"/);
   assert.match(html, /<strong[^>]*style="[^"]*color: #2447D8/);
+  assert.match(html, /data-qihang-emphasis="highlight"[^>]*background-color:\s*#EEF2FF/);
+  assert.match(html, /data-qihang-emphasis="wave"[^>]*text-decoration-style:\s*wavy/);
+  assert.match(html, /<hr[^>]*border-top:\s*1px dashed #2447D8/);
 });

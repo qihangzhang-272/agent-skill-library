@@ -17,7 +17,7 @@ This skill should run before the investment package when the materials are incom
 - Mark every key fact with source URL or `not found`.
 - Do not write the IC memo here.
 - Do not decide invest / pass here.
-- Hand off a fact pack to `investment-ai-product-judgment` through the `workflow-orchestrator` product-investment workflow.
+- When further analysis is requested, the current Host can pass this fact pack to `investment-ai-product-judgment` if it is available in the current Mode.
 
 ## References
 
@@ -48,7 +48,7 @@ Ready for next node: yes/no
 
 ## 完成标准
 
-- Standalone 模式使用当次取得的现行来源；Mode 内连续调用 复用 01-source-intake 的有日期证据，只对其明确缺口、冲突或过期事实定向补查，不重复全量搜索，并写明事实适用期间
+- Standalone 模式使用当次取得的现行来源；Mode 内连续调用复用当前任务已有的有日期证据，只对其明确缺口、冲突或过期事实定向补查，不重复全量搜索，并写明事实适用期间
 - 每项关键事实都有可定位证据、来源日期和事实适用期间；无证据内容不得冒充事实
 - 事实包覆盖公司、产品、技术与 OSS、市场、客户、商业模式、团队、所有权、融资、竞争、风险和关键时间线等适用区域
 - 事实、公司口径、第三方观点、推断、假设、反证和来源冲突分别呈现

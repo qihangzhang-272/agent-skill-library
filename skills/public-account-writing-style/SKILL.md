@@ -6,10 +6,18 @@ description: >
   "帮我分析一下这个选题", or when a draft feels too slogan-like, too AI-polished,
   overuses short punchy sentences, or uses "不是…而是…" / "如果…那么…" patterns.
   Also triggers when the user wants structured thinking around a topic before
-  writing.
+  writing, account positioning, editorial series, post-publication content review,
+  or adapting an existing article for another platform. Account-data collection
+  and external publishing remain with their respective tools and authorization.
 ---
 
 # Public Account Writing Style
+
+## 按任务进入
+
+在 `creator-studio` 中，先遵守该 Mode 的作者主导边界：用户负责核心灵感、详实大纲和最终改稿，AI 不自行起草或代拟论点。仅在用户详实大纲范围内扩充；缺少大纲时提供素材、截图、风格与视觉支持，不运行生成核心论点的起草步骤。内部核查不要求在文章中呈现逻辑编号或框架。中文已有文本可按需交给 `humanizer-zh` 润色，优先保留作者声音、语义与文体，不机械改写自然的排比、连接词或标点。其他任务仍按其已明确的作者分工和编辑范围执行。
+
+账号定位、栏目规划、对标拆解、多平台改编或发布后复盘时，先读 `references/account-editorial-practice.md`，交付对应判断与下一步验证，不强制起草一篇文章。起草、改稿沿用下文适用步骤；已有成稿或授权转载只补当前缺口，不因新增账号方法重写已确认的正文。
 
 ## 核心结构：两层
 
@@ -29,6 +37,7 @@ Framework 改可选：不同题材需要不同结构自由度。探索型 essay 
 ### Step 0: 理解写作场景
 
 读用户给的题材、原始诉求、已有材料。
+同时从已有上下文确定主要读者、本文在账号中的作用和读完能获得什么；简记在已有编辑判断中即可，不另造表单。区分吸引合适读者、建立信任、解释问题和商业转化的主要目标。已确认的信息直接复用，不反复提问；不为了流量擅自改变账号方向。
 如果用户只给了一个话题但没有任何材料，先做一轮澄清问答，不要直接开写。澄清要问：
 - 是什么题材类型？（产品分析 / 复杂概念解释 / 探索型 essay / 新闻资讯 / ...）
 - 用户自己有没有论点？还是想边写边发现？
@@ -43,6 +52,8 @@ Framework 改可选：不同题材需要不同结构自由度。探索型 essay 
 3. **未知项** -- 哪些东西我其实不知道、素材也没覆盖？是继续查还是带着未知写？
 4. **暂时结论** -- 基于现在的素材，我敢说到什么程度？哪里是判断、哪里是猜测？
 5. **删除哪些材料** -- 收集到的素材里，哪些不进最终文章？（素材是原料，不是装饰品。大多数收集到的材料永远不应该在最终草稿中被命名。）
+
+在“暂时结论”中说清本文的信息增量与依据：真实试用、可核查案例、新的比较或推理，哪一项让读者有理由读本篇。原创分析与授权转载分开评估；转载可以凭选材和编排服务读者，保留署名和授权边界，不强塞作者未说过的观点。
 
 这一步在"素材"和"成稿"之间加一层判断，避免素材直接堆进文章变成综述，也避免带着预设结论找证据。这层判断比选框架更重要。
 
@@ -69,6 +80,10 @@ Framework 改可选：不同题材需要不同结构自由度。探索型 essay 
 - 人物身份和时间是否对
 - 引用语是否忠实（不为了对偶或排比而曲解源材料）
 - 英文引用是否给了中文翻译（见下方翻译规则）
+- 标题、封面与开头的承诺是否在正文兑现；开头尽早交代具体问题和阅读价值，后文要继续提供证据、解释或应用，不靠故意藏答案延长阅读。
+- 涉及同质化时检查观点、证据和用途是否只是重复已有内容，不能把换词比例或“AI 率”当成原创与质量结论。第三方报告按 `references/account-editorial-practice.md` 核对具体问题后取舍。
+
+如果用户明确要求外部审稿，在事实审校后先落一份短的 `review-brief.md`：写清文章作用、目标读者、核心论点、数字来源、视觉计划、已知限制和希望审稿人回答的 3–5 个问题。再通过当前 Host 已发现的原生审稿宿主发送；审稿宿主不可用时记录“未执行”和原因，不把准备好的 brief 说成已完成审稿。外部意见只作为编辑输入，不能覆盖用户的核心立场、来源边界或 ContentAny 发布门禁，也不把一次审稿自动升级为全局 Mode 规则。
 
 ### Step 5: AI-Flavor Filter 三层审校（强制）
 
@@ -122,6 +137,7 @@ The translation should be natural Chinese -- capture meaning and tone, not gramm
 | `references/frameworks/<name>.md` | 选定框架后按需加载，可只读需要的部分 |
 | `references/ai-flavor-filter/checklist.md` | Step 5 强制扫描 |
 | `references/skill-methodology-writing.md` | 题材是 agent skills / context engineering / prompt workflows / writing systems 时按需加载 |
+| `references/account-editorial-practice.md` | 账号定位、栏目规划、对标拆解、标题与开头优化、多平台改编、内容复盘或第三方检测报告评估 |
 
 ## 完成标准
 

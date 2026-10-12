@@ -15,7 +15,7 @@
 
 ## Runtime Configuration And Probe
 
-`wechat-article-exporter` 不随本技能打包。运行前从 `external-skill-index` 解析当前上游，再由以下运行时配置提供实例：
+`wechat-article-exporter` 不随本技能打包。来源与历史核验记录见本技能 `SOURCE.md` 的 Runtime dependencies；运行时读取上游当前说明，再由以下配置提供实例：
 
 - `WECHAT_ARTICLE_EXPORTER_BASE_URL`：用户认可的公开实例或自托管实例，优先使用。未设置时只能从当前上游官方文档解析其公开实例，并在调用前说明；不得静默猜测第三方 endpoint。
 - `WECHAT_ARTICLE_EXPORTER_AUTH_KEY`：仅账号搜索/历史接口需要，由用户在上游完成登录后放入当前进程环境；不得回显或落盘。
@@ -51,7 +51,7 @@
 
 适用于对标账号历史、最近 N 篇、日期区间或原创内容集合。
 
-首选外部运行时为 `wechat-article-exporter`。通过 `external-skill-index` 解析当前来源、许可证和核验版本；本技能不重复维护 URL 或 commit。
+首选外部运行时为 `wechat-article-exporter`。来源、许可证记录和历史核验版本统一见本技能 `SOURCE.md`；历史记录不证明当前实例已就绪。
 
 执行顺序：
 

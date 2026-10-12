@@ -68,9 +68,9 @@ Handoff rules:
 - `writing-research` and `wechat-writing-research` can hand off to `public-account-writing-style`.
 - 交接后由 `public-account-writing-style` 先完成编辑判断，再决定是否使用框架并完成起草与终审；本技能只提供研究过程包。
 - `product-research` can hand off to `ai-product-analyzer`.
-- `investment-research` can hand off to `workflow-orchestrator` product-analysis chain for OSS investment structured and visual output.
+- For investment research, deliver the fact pack to the current Host; it selects the next available skill in the current Mode only when the user's requested task includes further analysis.
 - 独立调用本技能时，完成 coverage report 后停止，等待用户决定是否继续。
-- 用户已明确要求运行完整 `wechat-writing` chain 时，由 chain 管理交接；只读研究门禁通过后不额外暂停，但新增登录、扩范围或发布授权仍必须单独确认。
+- 用户已明确要求端到端公众号任务时，由当前 Host 在所选 Mode 内交接；只读研究门禁通过后不额外暂停，但新增登录、扩范围或发布授权仍必须单独确认。
 
 ## Storage Rules
 

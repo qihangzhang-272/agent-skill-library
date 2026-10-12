@@ -25,10 +25,10 @@ description: >
 2. 选择模式并执行授权门禁：
    - `known-url-batch`：只读取用户提供的公开文章 URL，不需要微信登录。
    - `account-history`：通过已登记的外部运行时获取账号公开历史；若运行时要求用户自己的公众号后台登录或扫码，先说明动作与数据用途，并等待当轮明确同意。
-3. 按 `references/acquisition-modes.md` 选择可用适配器。账号历史通过 `external-skill-index` 解析当前获准使用的 `wechat-article-exporter` 来源，但运行时保持外置；不得把增强指标服务混入默认路径。
+3. 按 `references/acquisition-modes.md` 选择可用适配器。账号历史使用的 `wechat-article-exporter` 来源见本技能 `SOURCE.md` 的 Runtime dependencies；运行时保持外置，不得把增强指标服务混入默认路径。
 4. 把原始导出保存到账号目录的 `raw/`，随后按 `references/corpus-contract.md` 去重、规范化正文和元数据。失败项必须保留 URL、状态和失败原因。
 5. 为每个账号生成 `manifest.json` 与 `export-report.md`，区分发布批次、展开后的文章条目、显式标记原创的条目和成功取得完整正文的条目；拿不到的统计值写 `null`，不能写 `0`。
-6. 独立调用时，汇报范围、覆盖、失败和目标路径后停止。若用户已明确要求运行完整 `wechat-writing` chain，且本阶段没有新增授权或缺口，则把语料 manifest 交给 `topic-research-deposition`，不额外制造一次确认。
+6. 独立调用时，汇报范围、覆盖、失败和目标路径后停止。若用户已明确要求端到端公众号任务，且本阶段没有新增授权或缺口，则由当前 Host 把语料 manifest 交给当前 Mode 内的 `topic-research-deposition`，不额外制造一次确认。
 
 ## 何时不该用
 
@@ -45,7 +45,7 @@ description: >
 
 ## Maintenance
 
-外部运行时的 URL、commit 与许可证状态只在 `external-skill-index` 维护。这里保持稳定的输入、输出和授权契约，不镜像上游实现，也不新增第二个研究调度器。
+外部运行时的来源、历史核验版本与许可证记录只在本技能 `SOURCE.md` 的 Runtime dependencies 维护。这里保持稳定的输入、输出和授权契约，不镜像上游实现。
 
 ## 完成标准
 

@@ -20,4 +20,4 @@ Record publication date, reporting period, and URL (or document page) for every 
 
 ## Handoff
 
-Provide a compact fact pack grouped by the headings above, separating sourced facts from open questions. Hand off product evidence to `investment-ai-product-judgment`, competitive evidence to `investment-competitive-landscape`, and approved historical data to `investment-financial-model-builder` through the orchestrator.
+Provide a compact fact pack grouped by the headings above, separating sourced facts from open questions. When the requested task needs further analysis, the current Host can pass product evidence to `investment-ai-product-judgment`, competitive evidence to `investment-competitive-landscape`, or approved historical data to `investment-financial-model-builder`, using only the skills available in the current Mode.

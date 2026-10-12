@@ -2,7 +2,7 @@
 
 ## 文件位置
 
-读取 `04-revised.md` 与 `05-formatted.md` 后生成：
+读取当前确认的正文后生成；优先使用本次明确的定稿路径，不强制要求 `04-revised.md` 或 `05-formatted.md`：
 
 `05.5-visual-plan.md`
 
@@ -27,15 +27,15 @@
 | 字段 | 回答的问题 |
 | --- | --- |
 | `ID` | 如何在 plan、prompt 和发布资产间追踪？ |
-| `Position` | 图片插在哪里，前后读者刚读到什么？ |
-| `Viewer job` | 读者看完这张图只需要得到什么？ |
-| `Human/material anchor` | 谁在做什么，或哪种材料状态承载内容？ |
-| `Character anchor` | 生成型公众号视觉默认使用启航头像角色；写清角色在画面里的解释动作。若例外不用，记录原因。 |
-| `Central logic visual` | 如果是单幅知识漫画，中央用什么可见关系让读者看懂逻辑？ |
+| `Position` | 图片插在哪里，前后论述是什么，为什么此处需要理解、比较、推进或停顿？ |
+| `Viewer job` | 哪一句段落意思需要被看见？一个任务可以由多个情境共同表达。 |
+| `Human/material anchor` | 哪些人、环境、动作或材料承载意思？情境是并列、先后还是因果？ |
+| `Character anchor` | 场景确定后，头像参考哪张原图，在其中担任什么角色、动作、景别与尺度？其他人物如何区分？ |
+| `Central logic visual` | 如果是单幅知识漫画，用什么可见关系让读者看懂逻辑？不要求固定居中。 |
 | `Scene fact` | 画面和文章能确认的具体事实或动作是什么？ |
-| `Copy role` | title / caption / label / narration / dialogue / none |
-| `Copy candidates` | 2–3 个从不同角度写出的候选；不是同义改写。 |
-| `Exact text` | 文案审校后允许出现的全部文字及逐条字符数；单个文本单元默认不超过 10 个中文字符。 |
+| `Copy role` | title / caption / label / narration / dialogue / none；解释图可组合标题、正文和证据标注。 |
+| `Copy candidates` | 需要比较表达角度时写 2–3 个候选；不是同义改写。 |
+| `Exact text` | 经 Humanizer-ZH 审校的全部定稿文字及对应原文／素材；短标签记录字符数，解释图保留必要正文，不套短标签字数上限。 |
 | `Caption outside image` | 不适合写进图片、但应随图出现的说明与来源。 |
 | `Form candidates` | 评估过的 cover / source / illustration / infographic / diagram / comic / none |
 | `Selected form` | 最终选择的唯一形式。 |
@@ -47,14 +47,14 @@
 
 ## 文案规则
 
-1. 先写 `Scene fact`，再写文案；禁止从文章小标题直接生成 `Exact text`。
-2. 画内文字不能代替正文，也不能复述已经看得见的动作。
-3. 标题、标签、旁白和气泡只写画面无法表达的那一层。
-4. 同一张图不同时承担标题、摘要、结论和行动号召。
-5. 复杂中文、来源和解释优先留在 `Caption outside image`。
+1. 先确定本图问题和材料，再写文案；场景插图先写 `Scene fact`，解释图选取原文所需背景、判断、依据、顺序与条件，不能只把小标题当作完整图内稿。
+2. 场景插图避免复述已经看得见的动作；解释图允许完整正文，使读者能在图内理解问题、依据和结论。
+3. 场景插图的标题、标签、旁白和气泡补充画面无法表达的那一层；解释图的文字与素材共同讲清必要关系。
+4. 装饰封面不同时塞入摘要、结论和行动号召；解释图可用标题、展开和收束共同回答同一问题。
+5. 图外补充和来源链接留在 `Caption outside image`；解释图的必要正文保留在图内，精确长中文可用原生文字组装。
 6. 下游 prompt 的 `Text (verbatim)` 必须来自本文件，不得临场扩写。
-7. `Exact text` 必须通过朗读、去图和反复述检查；具体方法见 `visual-copy-desk.md`。
-8. 画内文字优先 4–8 字，硬上限 10 个中文字符；长解释必须移到 `Caption outside image`。
+7. `Exact text` 必须通过对应媒介的语义与可读性检查；场景插图做朗读、去图和反复述检查，解释图逐项核对背景、判断、依据、关系和限定，具体方法见 `visual-copy-desk.md`。
+8. 短场景插图的标签、旁白和气泡优先简短；解释图按阅读任务、画幅和已认可基准决定正文密度，不能为凑字数移走定义、例子、关系和边界。
 9. 单幅知识漫画必须分别写清 `Character anchor` 与 `Central logic visual`；禁止只写“角色讲解该概念”。
 
 ## 合格示例

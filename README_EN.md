@@ -13,13 +13,13 @@
 </p>
 
 <p align="center">
-  37 local Skills organized into 4 isolated work Modes, ready to project into Codex, Claude Code, and DeepSeek Harness.
+  60 local Skills organized into 4 isolated work Modes, ready to project into Codex, Claude Code, and DeepSeek Harness.
 </p>
 
 <p align="center">
   <a href="https://github.com/qihangzhang-272/agent-skill-library/stargazers"><img src="https://img.shields.io/github/stars/qihangzhang-272/agent-skill-library?style=for-the-badge&logo=github&color=F5C542" alt="GitHub Stars"></a>
   <a href="https://github.com/qihangzhang-272/asl-harness"><img src="https://img.shields.io/badge/powered_by-ASL_Harness-3159D4?style=for-the-badge" alt="Powered by ASL Harness"></a>
-  <img src="https://img.shields.io/badge/37-Skills-16A34A?style=for-the-badge" alt="37 Skills">
+  <img src="https://img.shields.io/badge/60-Skills-16A34A?style=for-the-badge" alt="60 Skills">
   <img src="https://img.shields.io/badge/4-Modes-EA580C?style=for-the-badge" alt="4 Modes">
 </p>
 
@@ -38,7 +38,7 @@ Agent Skills make professional capabilities portable, but a durable AI work envi
 
 Agent Skill Library is a runnable answer to those questions. It is not a collection trying to include as many projects as possible. It is a reference [ASL Environment](https://github.com/qihangzhang-272/asl-harness) with real content already organized:
 
-- each formal Skill has one local active source of truth;
+- GitHub's committed version is the shared source of truth; Windows and Mac each keep one working copy;
 - external capabilities carry provenance, version, and local-change records;
 - Modes organize capabilities into distinct work contexts and isolate their Host projections;
 - the current Agent sees only the active Mode's Skill closure;
@@ -96,7 +96,7 @@ asl-harness workspace.validate \
 
 Agents and ASL Workspace share the existing Harness CLI; this content Environment does not contain a second backend.
 
-[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.15/Agent-Skill-Library-0.5.15-Windows-x64.zip) · [Download for Mac (Apple Silicon)](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.15/Agent-Skill-Library-0.5.15-macOS-arm64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.15) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.15). Extract everything and open `Start.cmd` on Windows or `Start.command` on Mac to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
+[Download the Windows content edition](https://github.com/qihangzhang-272/agent-skill-library/releases/download/content-2026.10.12/Agent-Skill-Library-0.5.15-content-20261012-Windows-x64.zip) · [Download for Mac (Apple Silicon)](https://github.com/qihangzhang-272/agent-skill-library/releases/download/content-2026.10.12/Agent-Skill-Library-0.5.15-content-20261012-macOS-arm64.zip) · [Platforms and checksums](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/content-2026.10.12) · [App and CLI only](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.15). Extract everything and open `Start.cmd` on Windows or `Start.command` on Mac to enter the bundled library. Select an existing local library in Discover. Both editions share the same App; updating it never replaces locally cultivated Skills or Modes.
 
 The Mac package is for Apple Silicon (arm64), not Intel or Universal. It is not publisher-signed or Apple-notarized; disabling system protection is not required. The bundled CLI is `ASL Workspace.app/Contents/Resources/core/asl-harness`. The public snapshot contains no personal Git history; subsequent Mode history requires local Git and repository/author configuration.
 
@@ -110,11 +110,17 @@ asl-harness skill.files --workspace ./agent-skill-library --skill agent-reach
 
 `environment.edit` accepts a JSON request through stdin. Changes must pass the shared structure, path, fingerprint and actual Mermaid rendering checks before adoption. Failure returns a nonzero exit code with repair details for the calling Agent; it does not start another model. The Windows package includes the offline renderer; a Python-only installation is not a complete rendering runtime.
 
-For new package files or multi-file changes, prepare a complete Environment draft outside the working library, validate it, then export a fresh Mode package and preview its import. Do not edit a previously exported fingerprint manifest to bypass validation. Adopted local Modes remain locally authoritative; upstream repositories remain separate sources for comparison.
+For new package files or multi-file changes, prepare a complete Environment draft outside the working library, validate it, then export a fresh Mode package and preview its import. Do not edit a previously exported fingerprint manifest to bypass validation. Validated, committed and pushed changes form the shared GitHub baseline for Windows and Mac; uncommitted local edits remain drafts. Upstream repositories remain separate sources for comparison.
 
 An ordinary Skill repository needs no Mode first: choose Organize Skills, read individual packages, drag them onto the existing canvas and save. Agents obtain the shared organization method from `cli.describe.organization` and `environment.guide`, using the user's goals and complete Skill content. Adoption and adding a node are separate; matching names do not prove matching versions. Editing Skill instructions, scripts or materials still requires explicit user consent.
 
 See the [CLI architecture](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/architecture/02g-agent-cli.md) and [current verified status](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态).
+
+### One working library across Windows and Mac
+
+Clone the same GitHub repository on both computers. Validate changes with Harness before committing and pushing. On the other computer, check `git status` and use `git pull --ff-only` when the worktree is clean; preserve and resolve drafts or conflicts instead of forcing an overwrite. Keep credentials, tokens and personal articles local.
+
+Download bundles are fixed content snapshots without Git history; use a Git clone for ongoing cross-computer maintenance. This content release reuses App 0.5.15 / CLI 0.4.9 with 60 complete Skills, four Modes and reviewed public adoption records, excluding maintenance archives, caches and actual accounts. Individual Mode exports still exclude root feedback and personal Profile by default.
 
 ### Activate a Mode in Codex
 
@@ -138,7 +144,7 @@ Changing `host-id` to `claude-code` or `deepseek-harness` generates the correspo
 
 ## What's Inside
 
-The repository currently contains 37 formal Skills and 4 business Modes. Mode counts overlap: a general research, charting, or valuation capability may be selected by several Modes, while its active source remains unique.
+The repository currently contains 60 formal Skills and 4 business Modes. Mode counts overlap: a general research, charting, or valuation capability may be selected by several Modes, while its active source remains unique.
 
 | Capability group | Representative capabilities | Purpose |
 | --- | --- | --- |
@@ -158,7 +164,7 @@ A Mode is a broad working state, not a Domain label or fixed Workflow. It change
 
 ```mermaid
 flowchart TB
-    POOL["37 formal Skills<br/>One source each"]
+    POOL["60 formal Skills<br/>One source each"]
     CREATOR["Creator Studio<br/>19 Skills"]
     PRODUCT["Product Lab<br/>6 Skills"]
     INVESTMENT["Investment Desk<br/>13 Skills"]
@@ -359,7 +365,7 @@ agent-skill-library/
 | | [ASL Harness](https://github.com/qihangzhang-272/asl-harness) | Agent Skill Library |
 | --- | --- | --- |
 | Purpose | Blank Harness for creating and maintaining personal Environments | Filled reference Environment that can run immediately |
-| Includes | CLI, constraints, Host Adapters, Hooks, and minimal examples | 37 formal Skills, 4 Modes, and provenance records |
+| Includes | CLI, constraints, Host Adapters, Hooks, and minimal examples | 60 formal Skills, 4 Modes, and provenance records |
 | How to start | Build the capability library from scratch | Fork, run, then prune and cultivate |
 | What drives change | Protocol, validation, or Host integration changes | Real Cases, external capabilities, and explicit user feedback |
 
@@ -375,7 +381,7 @@ No. Keep one, remove three, or create entirely different Modes. A Mode should co
 </details>
 
 <details>
-<summary><strong>Why not install all 37 Skills globally?</strong></summary>
+<summary><strong>Why not install all 60 Skills globally?</strong></summary>
 
 A global installation makes every capability a discovery candidate. A Mode narrows the capability surface by context before the Host performs specific Skill recall, which scales better for a growing personal library.
 

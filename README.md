@@ -13,13 +13,13 @@
 </p>
 
 <p align="center">
-  37 个本地 Skill，组织成 4 个相互隔离的工作 Mode，可投影到 Codex、Claude Code 与 DeepSeek Harness。
+  60 个本地 Skill，组织成 4 个相互隔离的工作 Mode，可投影到 Codex、Claude Code 与 DeepSeek Harness。
 </p>
 
 <p align="center">
   <a href="https://github.com/qihangzhang-272/agent-skill-library/stargazers"><img src="https://img.shields.io/github/stars/qihangzhang-272/agent-skill-library?style=for-the-badge&logo=github&color=F5C542" alt="GitHub Stars"></a>
   <a href="https://github.com/qihangzhang-272/asl-harness"><img src="https://img.shields.io/badge/powered_by-ASL_Harness-3159D4?style=for-the-badge" alt="Powered by ASL Harness"></a>
-  <img src="https://img.shields.io/badge/37-Skills-16A34A?style=for-the-badge" alt="37 Skills">
+  <img src="https://img.shields.io/badge/60-Skills-16A34A?style=for-the-badge" alt="60 Skills">
   <img src="https://img.shields.io/badge/4-Modes-EA580C?style=for-the-badge" alt="4 Modes">
 </p>
 
@@ -38,7 +38,7 @@ Agent Skills 让专业能力可以被封装和复用，但一个长期工作的 
 
 Agent Skill Library 是这些问题的一份可运行答案。它不是一个尽可能收录更多项目的 Skill 合集，而是一份已经按 [ASL Harness](https://github.com/qihangzhang-272/asl-harness) 组织好的参考 Environment：
 
-- 正式 Skill 只保留一份本地真源；
+- GitHub 已提交版本是唯一共享真源；Windows／Mac 各保留一份工作副本；
 - 每项外部能力都带有来源、版本和本地变化记录；
 - Mode 把能力组织成不同工作场景，并在宿主投影中相互隔离；
 - 当前 Agent 只看到当前 Mode 的 Skill 闭包；
@@ -96,7 +96,7 @@ asl-harness workspace.validate \
 
 内容版共用 ASL Harness CLI，不内嵌另一份实现。使用已安装的当前 Harness，或 Windows App 随包的 `resources/core/asl-harness.exe`；不必打开 App 窗口。
 
-[下载 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.15/Agent-Skill-Library-0.5.15-Windows-x64.zip) · [下载 Mac 内容版（Apple Silicon）](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.15/Agent-Skill-Library-0.5.15-macOS-arm64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.15) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.15)。完整解压后，Windows 打开 `Start.cmd`，Mac 打开 `Start.command`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
+[下载 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/content-2026.10.12/Agent-Skill-Library-0.5.15-content-20261012-Windows-x64.zip) · [下载 Mac 内容版（Apple Silicon）](https://github.com/qihangzhang-272/agent-skill-library/releases/download/content-2026.10.12/Agent-Skill-Library-0.5.15-content-20261012-macOS-arm64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/content-2026.10.12) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.15)。完整解压后，Windows 打开 `Start.cmd`，Mac 打开 `Start.command`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
 
 Mac 包适用于 Apple Silicon（arm64），不是 Intel 或 Universal 版；未开发者签名或 Apple 公证，不要求关闭系统防护。随包 CLI 位于 `ASL Workspace.app/Contents/Resources/core/asl-harness`。内容快照不携带个人 Git 历史；Mode 演进记录需要本机 Git 与仓库／作者配置。
 
@@ -113,6 +113,12 @@ Agent 读取真实文件及指纹，通过 `environment.edit --check` 预览，�
 普通技能仓库无需先写 Mode：App 中从「组织技能」进入画板，逐项阅读、拖入并保存；Agent 从 `cli.describe.organization` 与 `environment.guide` 获取同一整理方法，围绕用户目标选择完整技能并构建协作关系。采用不等于上图，同名不等于相同版本；修改 Skill 正文、说明、脚本或资料仍须用户明确同意。
 
 本地 Mode 独立演进，上游更新不直接覆盖。框架/内容版的统一性与验收只见[总览](https://github.com/qihangzhang-272/asl-harness/blob/main/docs/asl-architecture-views.md#view-9--当前项目状态)，专项设计在[架构目录](https://github.com/qihangzhang-272/asl-harness/tree/main/docs/architecture)。
+
+### Windows／Mac 共用同一工作库
+
+两台电脑从同一 GitHub 仓库 clone 工作副本。修改通过 Harness 校验后提交、推送；另一台先检查 `git status`，工作区干净时用 `git pull --ff-only` 更新。遇到未提交内容或冲突先保留并处理，不用强制覆盖。账号、令牌和个人文章留在本机，不提交到公开仓库。
+
+下载包是固定内容快照，不携带 Git 历史；长期跨机维护优先使用 Git clone。此次内容发行沿用 App 0.5.15／CLI 0.4.9，携带 60 个完整技能、四个 Mode 和已审查的公开接入记录，不包含维护归档、缓存或真实账号。单独分享 Mode 仍默认不携带根目录反馈及个人 Profile。
 
 ### Activate a Mode in Codex
 
@@ -136,7 +142,7 @@ asl-harness host.verify \
 
 ## What's Inside
 
-当前仓库包含 37 个正式 Skill 和 4 个业务 Mode。Skill 数量与 Mode 能力面并不相加：一项通用研究、图表或估值能力可以被多个 Mode 显式选择，但活动真源始终只有一份。
+当前仓库包含 60 个正式 Skill 和 4 个业务 Mode。Skill 数量与 Mode 能力面并不相加：一项通用研究、图表或估值能力可以被多个 Mode 显式选择，但活动真源始终只有一份。
 
 | 能力组 | 代表能力 | 用来解决什么 |
 | --- | --- | --- |
@@ -156,7 +162,7 @@ Mode 是一种广域工作状态，不是 Domain 标签，也不是固定 Workfl
 
 ```mermaid
 flowchart TB
-    POOL["37 个正式 Skill<br/>每项只保存一份"]
+    POOL["60 个正式 Skill<br/>每项只保存一份"]
     CREATOR["Creator Studio<br/>19 Skills"]
     PRODUCT["Product Lab<br/>6 Skills"]
     INVESTMENT["Investment Desk<br/>13 Skills"]
@@ -359,7 +365,7 @@ agent-skill-library/
 | | [ASL Harness](https://github.com/qihangzhang-272/asl-harness) | Agent Skill Library |
 | --- | --- | --- |
 | 定位 | 创建和维护个人 Environment 的空白 Harness | 已装填、可以直接运行的参考 Environment |
-| 内容 | CLI、约束、Host Adapter、Hook 和最小示例 | 37 个正式 Skill、4 个 Mode 与来源记录 |
+| 内容 | CLI、约束、Host Adapter、Hook 和最小示例 | 60 个正式 Skill、4 个 Mode 与来源记录 |
 | 使用方式 | 从零建立自己的能力库 | Fork 后先使用，再裁剪和培养 |
 | 变化来源 | 协议、校验或宿主接入变化 | 真实 Case、外部能力与用户明确反馈 |
 
@@ -375,7 +381,7 @@ agent-skill-library/
 </details>
 
 <details>
-<summary><strong>为什么不把 37 个 Skill 全局安装？</strong></summary>
+<summary><strong>为什么不把 60 个 Skill 全局安装？</strong></summary>
 
 全局安装让所有能力同时进入宿主的发现候选。Mode 先根据场景收窄能力面，再让宿主做具体 Skill 召回，更适合长期增长的技能库。
 

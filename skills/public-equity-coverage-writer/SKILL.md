@@ -9,7 +9,7 @@ Assemble the final initiating-coverage report without redoing upstream analysis.
 
 ## Core Rule
 
-The workflow orchestrator owns end-to-end sequencing. The full migrated source references retain their original single-task workflow for fidelity, but those dispatch instructions are subordinate when this skill is called from a chain.
+The current Host selects skills according to the user's task and the current Mode. This skill assembles completed handoffs; the reference's research, modeling, valuation, and chart requirements describe its inputs, not an additional dispatcher.
 
 ## How To Apply
 
@@ -44,7 +44,7 @@ Report path:
 
 ## References
 
-- `references/initiating-coverage.md` — complete migrated initiating-coverage specification and original workflow rules.
+- `references/initiating-coverage.md` — coverage specification, prerequisite deliverables, and source task descriptions.
 - `references/task5-report-assembly.md` — complete migrated final report assembly workflow.
 
 ## 完成标准

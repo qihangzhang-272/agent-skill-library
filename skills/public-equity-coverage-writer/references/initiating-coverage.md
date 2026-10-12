@@ -1,13 +1,13 @@
 ---
 name: initiating-coverage
-description: Create institutional-quality equity research initiation reports through a 5-task workflow. Tasks must be executed individually with verified prerequisites - (1) company research, (2) financial modeling, (3) valuation analysis, (4) chart generation, (5) final report assembly. Each task produces specific deliverables (markdown docs, Excel models, charts, or DOCX reports). Tasks 3-5 have dependencies on earlier tasks.
+description: Reference requirements for institutional equity research, including company research, financial modeling, valuation, charts, and final report assembly. Describes deliverables and input dependencies; skill selection and task scope belong to the current Host.
 ---
 
 # Initiating Coverage
 
-> **Library migration compatibility:** This full source is preserved without content reduction. When used through `workflow-orchestrator`, the orchestrator chain owns task order and prerequisite checks. The original single-task and “wait for user” instructions below apply only to standalone/manual execution and must not create a second runtime scheduler.
+> **Reference scope:** Use this document for coverage requirements and prerequisite deliverables. The current Host chooses the skills needed for the user's task within the current Mode. This writer consumes completed handoffs; it does not independently launch the research and modeling tasks described below.
 
-Create institutional-quality equity research initiation reports through a structured 5-task workflow. Each task must be executed separately with verified inputs.
+Create institutional-quality equity research initiation reports from verified research, model, valuation, and chart inputs.
 
 ## Overview
 
@@ -16,61 +16,6 @@ This skill produces comprehensive first-time coverage reports following institut
 **Default Font**: Times New Roman throughout all documents (unless user specifies otherwise).
 
 ---
-
-## ⚠️ CRITICAL: One Task at a Time
-
-**THIS SKILL OPERATES IN SINGLE-TASK MODE ONLY.**
-
-### If User Requests Full Pipeline
-
-When user requests:
-- "Create a coverage initiation report for [Company]"
-- "Write an initiation report for [Company]"
-- "Do the entire equity research process for [Company]"
-- "Complete all 5 tasks for [Company]"
-- Any request that implies running multiple tasks or the entire workflow
-
-**REQUIRED RESPONSE:**
-
-1. **Ask which specific task to perform:**
-   ```
-   I can help you create an equity research initiation report for [Company].
-   This involves 5 separate tasks that need to be completed individually:
-
-   1. Company Research - Research business, management, industry
-   2. Financial Modeling - Build projection model
-   3. Valuation Analysis - DCF and comparable companies
-   4. Chart Generation - Create 25-35 charts
-   5. Report Assembly - Compile final report
-
-   Which task would you like to start with?
-   ```
-
-2. **When user explicitly requests all tasks together:**
-   ```
-   I understand you'd like to complete the entire initiation report pipeline.
-   Currently, this skill supports executing one task at a time, which allows
-   for better quality control and review at each stage.
-
-   We're working on a seamless end-to-end workflow that will make this process
-   more automated, but for now, we'll need to complete each task separately.
-
-   Would you like to start with Task 1 (Company Research)?
-   ```
-
-3. **Never automatically assume which task to start** - always ask user to confirm.
-
-4. **Never execute multiple tasks in sequence** - complete one task, deliver outputs, then wait for next user request.
-
-### Task Execution Rules
-
-- ✅ Execute exactly ONE task per user request
-- ✅ Always verify prerequisites before starting a task
-- ✅ Deliver task outputs and confirm completion
-- ✅ Wait for user to explicitly request the next task
-- ❌ Never chain multiple tasks together automatically
-- ❌ Never assume user wants to proceed to next task
-- ❌ Never execute Tasks 3-5 without verifying required inputs exist
 
 ### ⚠️ Deliverables Policy: NO SHORTCUTS
 
@@ -111,66 +56,11 @@ Select which task to execute:
 
 ---
 
-## How to Use This Skill
+## How to Use This Reference
 
-### User Request Patterns and Responses
+For report assembly, reuse the completed research, model, valuation, and chart handoffs and read Task 5. Missing inputs are returned to the current Host, which decides the next action within the authorized task and current Mode. Do not load another Mode implicitly or require separate user requests merely because this reference numbers the deliverables.
 
-**Pattern 1: User specifies a specific task**
-```
-User: "Use initiating-coverage, Task 1 for Tesla"
-Response: ✅ Execute Task 1 immediately
-```
-
-**Pattern 2: User asks for "initiation report" or "full pipeline"**
-```
-User: "Create a coverage initiation report for Tesla"
-Response: ❌ DO NOT start any task automatically
-         ✅ Ask which task to start with (see template above)
-```
-
-**Pattern 3: User wants to do "all tasks" or "entire workflow"**
-```
-User: "I want to complete all 5 tasks for Tesla"
-Response: ❌ DO NOT chain tasks together
-         ✅ Explain one-at-a-time limitation (see template above)
-         ✅ Ask if they want to start with Task 1
-```
-
-### Correct Usage Examples
-
-**Executing a single task:**
-```
-"Use initiating-coverage skill, Task 1 for Tesla"
-"Do Task 2 of initiating-coverage for Tesla"
-"Run Task 3 for Tesla using the initiating-coverage skill"
-```
-
-**Completing full report (requires 5 separate requests):**
-```
-Request 1: "Do Task 1 for Tesla" → Complete → Deliver outputs
-Request 2: "Do Task 2 for Tesla" → Complete → Deliver outputs
-Request 3: "Do Task 3 for Tesla" → Complete → Deliver outputs
-Request 4: "Do Task 4 for Tesla" → Complete → Deliver outputs
-Request 5: "Do Task 5 for Tesla" → Complete → Deliver outputs
-```
-
-### Task Execution Order
-
-For a complete initiation report, tasks must be executed in separate user requests following this order:
-
-```
-Request 1: Task 1 - Company Research (independent)
-           ↓ [User reviews outputs and requests next task]
-Request 2: Task 2 - Financial Modeling (independent)
-           ↓ [User reviews outputs and requests next task]
-Request 3: Task 3 - Valuation Analysis (requires Task 2 output)
-           ↓ [User reviews outputs and requests next task]
-Request 4: Task 4 - Chart Generation (requires Tasks 2 & 3 outputs)
-           ↓ [User reviews outputs and requests next task]
-Request 5: Task 5 - Report Assembly (requires ALL previous task outputs)
-```
-
-**Note**: Tasks 1 and 2 can be run in any order. Tasks 3-5 have strict dependencies and must verify inputs before proceeding.
+The following task descriptions document the required inputs and their original production methods; they are not a second execution loop.
 
 ---
 
@@ -183,7 +73,7 @@ Request 5: Task 5 - Report Assembly (requires ALL previous task outputs)
 
 **Process**:
 1. Verify company name/ticker provided
-2. Load detailed instructions from `domain-investment:investment-research`
+2. Use `investment-research` when it is available in the current Mode, or consume an existing company research handoff.
 3. Execute qualitative research workflow
 4. Deliver research document
 
@@ -241,7 +131,7 @@ Optional:
 
 **Process**:
 1. Verify access to financial data
-2. Load detailed instructions from `domain-investment:investment-financial-model-builder`
+2. Load detailed instructions from `investment-financial-model-builder` when available in the current Mode.
 3. **Step 1**: Extract historical financials (if needed)
 4. **Step 2+**: Build projection model with 6 essential tabs
 5. Deliver Excel model
@@ -313,7 +203,7 @@ Required from model:
 
 **Process**:
 1. Verify financial model is accessible
-2. Load detailed instructions from `domain-investment:investment-valuation-returns`
+2. Load detailed instructions from `investment-valuation-returns` when available in the current Mode.
 3. Execute valuation workflow
 4. Deliver valuation analysis
 
@@ -426,7 +316,7 @@ Required from External Sources:
 
 **Process**:
 1. Verify model and valuation outputs are accessible
-2. Load detailed instructions from `domain-capital-markets:investment-chart-pack`
+2. Load detailed instructions from `investment-chart-pack` when available in the current Mode.
 3. Execute chart generation workflow
 4. Package all charts into a zip file
 5. Deliver zip file
@@ -694,13 +584,13 @@ Would you like to start with Task 1 first?"
 
 Detailed instructions for each task are in separate reference files to keep this skill lean:
 
-- **domain-investment:investment-research** - Company research workflow
-- **domain-investment:investment-financial-model-builder** - Financial modeling workflow
-- **domain-investment:investment-valuation-returns** - Valuation methodology and DCF/comps interpretation
-- **domain-capital-markets:investment-chart-pack** - Chart generation workflow
+- **investment-research** - Company research, when available in the current Mode
+- **investment-financial-model-builder** - Financial modeling
+- **investment-valuation-returns** - Valuation methodology and DCF/comps interpretation
+- **investment-chart-pack** - Chart generation
 - **references/task5-report-assembly.md** - Complete report writing, structure, and quality workflow
 
-**When to load reference files**: In standalone/manual mode, load only the skill or reference associated with the specific task. In an orchestrated run, consume each completed handoff and load `references/task5-report-assembly.md` only for final assembly.
+**When to load reference files**: Load only the skill or reference needed for the requested work. For final assembly, consume completed handoffs and load `references/task5-report-assembly.md`.
 
 ---
 
@@ -755,18 +645,6 @@ ProjectFolder/
 └── Task5_Report/
     └── [Company]_Initiation_Report.docx
 ```
-
-### No End-to-End Execution
-
-This skill does **NOT** support running all tasks automatically in sequence. Each task must be explicitly requested and verified.
-
-**Why**: This ensures:
-- Quality control at each stage
-- Ability to review outputs before proceeding
-- Flexibility to pause/resume workflow
-- Clear verification of prerequisites
-
----
 
 ## Success Criteria
 

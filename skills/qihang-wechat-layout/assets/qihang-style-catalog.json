@@ -5,6 +5,9 @@
     "h3": "marker-stroke",
     "quote": "centered-quote",
     "strong": "accent",
+    "highlight": "pale-blue",
+    "wave": "cobalt-wave",
+    "divider": "dashed",
     "ordered-list": "leading-zero",
     "unordered-list": "soft-check",
     "table": "minimal-lines"
@@ -44,6 +47,24 @@
       ]
     },
     {
+      "id": "highlight",
+      "options": [
+        { "id": "pale-blue", "label": "淡蓝高亮", "style": "background-color:var(--pale);color:var(--accent);font-weight:700;padding:1px 3px;" }
+      ]
+    },
+    {
+      "id": "wave",
+      "options": [
+        { "id": "cobalt-wave", "label": "钴蓝波浪下划线", "style": "color:var(--accent);text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--accent);text-underline-offset:4px;" }
+      ]
+    },
+    {
+      "id": "divider",
+      "options": [
+        { "id": "dashed", "label": "钴蓝虚线分隔", "style": "width:100%;background:none;border:0;border-top:1px dashed var(--accent);height:0;margin:40px 0;" }
+      ]
+    },
+    {
       "id": "ordered-list",
       "options": [
         { "id": "leading-zero", "label": "双位编号", "marker": "01", "style": "padding:8px 0;border-bottom:1px solid var(--border);color:var(--body);", "accentStyle": "display:inline-block;margin-right:10px;color:var(--accent);font-weight:800;letter-spacing:.06em;" }
@@ -52,7 +73,7 @@
     {
       "id": "unordered-list",
       "options": [
-        { "id": "soft-check", "label": "圆角对勾", "marker": "✓", "style": "padding:8px 0;color:var(--body);", "accentStyle": "display:inline-grid;width:23px;height:23px;margin-right:10px;border-radius:7px;background:var(--pale);place-items:center;color:var(--accent);font-weight:800;" }
+        { "id": "soft-check", "label": "行内对勾", "marker": "✓", "style": "padding:8px 0;color:var(--body);", "accentStyle": "display:inline;margin-right:6px;color:var(--accent);font-weight:800;" }
       ]
     },
     {

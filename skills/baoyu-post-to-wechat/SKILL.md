@@ -106,6 +106,16 @@ ${BUN_X} {baseDir}/scripts/check-permissions.ts
 
 Checks: Chrome, profile isolation, Bun, Accessibility, clipboard, paste keystroke, API credentials, Chrome conflicts.
 
+此处 Optional 仅指环境诊断。下述内容质量门禁和发布授权不可据此跳过。
+
+## ContentAny 发布前质量门禁（必须）
+
+本 Environment 的公众号发布准备必须读取并完成 `references/contentany-gate.md`：对拟发布的标题与正文取得 ContentAny 真实报告，逐项做有依据的编辑判断，保存最终版本对应的报告与复核结论。用户 2026-09-06 明确要求它作为硬性参考，并澄清不要求逐条照改。不能以模拟报告、工具首页演示数据、自己的评分或其他检测工具代替。
+
+该门禁适用于 API、远程 API、浏览器文章和贴图方式，在向公众号上传素材、保存/更新草稿或执行公开发布前完成。缺报告或存在尚未解决的实质质量问题时，继续本地准备并报告缺口，不调用外部写入；常规“直接推送”授权不等于取消门禁。此规则不追溯改动已完成的历史发布。
+
+用户指定最终整稿的 ContentAny AI 指数必须在 0%–20%（含 20%）内；超过 20% 或没有有效实测指数时禁止发布，不能用正文节选分数、手写身份或编辑判断豁免。其他合理质量问题修改，误报、题材不适用或与已确认表达冲突的建议记录理由后可不采纳；不得编造经历或破坏原意压分。排版预览、授权和平台规则检查仍独立执行。
+
 | Check fails | Fix |
 |-------------|-----|
 | Chrome | Install Chrome or set `WECHAT_BROWSER_CHROME_PATH` |
@@ -135,6 +145,7 @@ Details: `references/image-text-posting.md`.
 - [ ] Step 1: Determine input type
 - [ ] Step 2: Select method and configure credentials
 - [ ] Step 3: Resolve theme/color and validate metadata
+- [ ] Step 3.5: Final full-text ContentAny AI index 0%–20% inclusive + actual quality report + editorial review; verify final-version match and layout preview
 - [ ] Step 4: Publish to WeChat
 - [ ] Step 5: Report completion
 ```
@@ -189,6 +200,8 @@ Auto-generation: title = first H1/H2 or first sentence; summary = first paragrap
 4. **Cover image** (required for API `article_type=news`): CLI `--cover` → frontmatter (`coverImage` / `featureImage` / `cover` / `image`) → `imgs/cover.png` → first inline image → stop and request one if still missing.
 
 ### Step 4: Publish
+
+进入本步骤前核对 `qa/contentany-review.md` 及其原始报告，状态须为“已送检且编辑复核通过”，最终标题、正文和内容型图注应与送检版本一致。不要仅凭回执文字而不检查报告内容。改动内容后按门禁契约复检。
 
 **Important — never pre-convert markdown to HTML.** Publishing scripts handle the conversion internally and the two methods render images differently: API renders `<img>` tags for upload, browser uses placeholders for paste-and-replace. Passing a pre-converted HTML breaks one or the other.
 
@@ -294,6 +307,7 @@ Files created:
 | `references/multi-account.md` | Multi-account compatibility, credentials, Chrome profiles, CLI |
 | `references/api-setup.md` | Guided credential setup |
 | `references/config/first-time-setup.md` | First-time EXTEND.md setup |
+| `references/contentany-gate.md` | Mandatory actual ContentAny report, evidence and editorial review before external writes |
 
 ## Extension Support
 

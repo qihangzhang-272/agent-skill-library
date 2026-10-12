@@ -1,6 +1,6 @@
 # Asset Form Selection
 
-本文件属于 `editorial-visual-storytelling`。是否配图、选择什么形式和交给哪个渲染技能，都是视觉编辑判断，不属于 workflow orchestrator。
+本文件属于 `editorial-visual-storytelling`。是否配图、选择什么形式和交给哪个渲染技能，都是本技能负责的视觉编辑判断。
 
 ## 判断顺序
 
@@ -15,11 +15,11 @@
 | 内容需要 | Selected form | Render owner | 判断边界 |
 | --- | --- | --- | --- |
 | 产品界面、原文、推文、论文或数据证据 | source | source reuse | 保留来源，不生成模拟证据。 |
-| 单一场景、人物动作、材料状态、章节停顿 | illustration | baoyu-article-illustrator | 不能只是抽象名词的装饰画。 |
+| 具体场景、多个学习或生活情境的并置、材料状态、章节停顿 | illustration | baoyu-article-illustrator | 一个论点可由多个场景共同表达；并列情境不自动变成流程或数据图。 |
 | 数量、趋势、精确比较或多项总览 | infographic | baoyu-infographic | 数据必须带来源、单位、口径和逐字值；移动端过密就拆。 |
 | 递进、流程、循环、层次、对比、矩阵或组件关系 | diagram | baoyu-diagram | 一张图只回答一个问题，默认 3–5 个节点。 |
 | 连续动作、人物关系、材料阻力或认知变化 | comic | baoyu-comic | 纯逻辑拆解不自动漫画化。 |
-| 一段逻辑需要亲民解释，且用户明确要求人物讲解 | single-panel explainer comic | baoyu-comic | 中央画逻辑关系，侧边角色只指出阅读入口；不是流程图加人物。 |
+| 一段逻辑需要由人物动作帮助理解 | single-panel explainer comic | baoyu-comic | 角色参与关系或材料操作，位置随语义决定；不能只是站在流程图旁。 |
 | 文章识别与入口情绪 | cover | baoyu-cover-image | 不与正文视觉竞争。 |
 | 正文已经更清楚，或没有真实锚点 | none | none | 不生成图片不是失败。 |
 
@@ -29,9 +29,9 @@
 - 概念与角色之间的关系必须精确阅读：diagram。
 - 人物动作或关系变化本身有阅读价值：comic。
 - 逻辑关系必须看懂，但概念插画太虚、架构图太冷：single-panel explainer comic。
-- 单一瞬间或材料状态：illustration。
+- 单一瞬间、材料状态或共同说明一个论点的并列情境：illustration。
 - 证据已经存在：source。
-- 形式之间仍然无法明确选择：先减少 `Viewer job`，不要并行生成多个形式赌效果。
+- 形式之间仍然无法明确选择：先核对段落意思、场景关系与插入位置，不因形式难选就删掉论点必需的情境。试效果时比较同一位置的具体讲述方案，并放回正文联读；候选不等于全部入稿。
 
 ## 复杂度边界
 
@@ -44,4 +44,4 @@
 
 ## 输出要求
 
-所有判断写入 `05.5-visual-plan.md`。Orchestrator 只读取 `Render owner` 并调用对应技能，不得自行修改形式、文案、复杂度或目标路径。
+所有判断写入 `05.5-visual-plan.md`。当前 Host 根据 `Render owner` 调用当前 Mode 内对应技能，交接时不得自行修改形式、文案、复杂度或目标路径。

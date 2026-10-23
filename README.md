@@ -96,7 +96,7 @@ asl-harness workspace.validate \
 
 内容版共用 ASL Harness CLI，不内嵌另一份实现。使用已安装的当前 Harness，或 Windows App 随包的 `resources/core/asl-harness.exe`；不必打开 App 窗口。
 
-[下载 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/content-2026.10.12/Agent-Skill-Library-0.5.15-content-20261012-Windows-x64.zip) · [下载 Mac 内容版（Apple Silicon）](https://github.com/qihangzhang-272/agent-skill-library/releases/download/content-2026.10.12/Agent-Skill-Library-0.5.15-content-20261012-macOS-arm64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/content-2026.10.12) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.15)。完整解压后，Windows 打开 `Start.cmd`，Mac 打开 `Start.command`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
+[下载 Windows 内容版](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.18/Agent-Skill-Library-0.5.18-Windows-x64.zip) · [下载 Mac 内容版（Apple Silicon）](https://github.com/qihangzhang-272/agent-skill-library/releases/download/app-v0.5.18/Agent-Skill-Library-0.5.18-macOS-arm64.zip) · [各平台与校验值](https://github.com/qihangzhang-272/agent-skill-library/releases/tag/app-v0.5.18) · [仅 App 与 CLI](https://github.com/qihangzhang-272/asl-harness/releases/tag/app-v0.5.18)。完整解压后，Windows 打开 `Start.cmd`，Mac 打开 `Start.command`，直接进入随包工作库；已有本地库可在「发现」选择。内容版使用已公开技能版本，与框架版共用同一程序，更新 App 不会替换本地培养的 Skills 和 Modes。
 
 Mac 包适用于 Apple Silicon（arm64），不是 Intel 或 Universal 版；未开发者签名或 Apple 公证，不要求关闭系统防护。随包 CLI 位于 `ASL Workspace.app/Contents/Resources/core/asl-harness`。内容快照不携带个人 Git 历史；Mode 演进记录需要本机 Git 与仓库／作者配置。
 
@@ -118,7 +118,7 @@ Agent 读取真实文件及指纹，通过 `environment.edit --check` 预览，�
 
 两台电脑从同一 GitHub 仓库 clone 工作副本。修改通过 Harness 校验后提交、推送；另一台先检查 `git status`，工作区干净时用 `git pull --ff-only` 更新。遇到未提交内容或冲突先保留并处理，不用强制覆盖。账号、令牌和个人文章留在本机，不提交到公开仓库。
 
-下载包是固定内容快照，不携带 Git 历史；长期跨机维护优先使用 Git clone。此次内容发行沿用 App 0.5.15／CLI 0.4.9，携带 60 个完整技能、四个 Mode 和已审查的公开接入记录，不包含维护归档、缓存或真实账号。单独分享 Mode 仍默认不携带根目录反馈及个人 Profile。
+下载包是固定内容快照，不携带 Git 历史；长期跨机维护优先使用 Git clone。此次内容发行使用 App 0.5.18／CLI 0.4.11，内容固定为公开提交 `e925ac2`：60 个完整技能、四个 Mode 和已审查的公开接入记录，技能与 Mode 原文未改，不包含维护归档、缓存或真实账号。包内 README 属于该历史快照，最新下载入口以本页为准。单独分享 Mode 仍默认不携带根目录反馈及个人 Profile。
 
 ### Activate a Mode in Codex
 
